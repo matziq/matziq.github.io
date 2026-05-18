@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Linger Longer Potluck Sign-Up Sheet</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <style>
+        :root {
+            --bg: #fff8ef;
+            --paper: #ffffff;
+            --ink: #263238;
+            --muted: #62727b;
+            --line: #eadfce;
+            --primary: #8b4513;
+            --primary-dark: #6f360f;
+            --primary-soft: #f5dfc5;
+            --accent: #2e7d6f;
+            --accent-soft: #e2f4ef;
+            --danger: #a93535;
+            --danger-soft: #ffe8e8;
+            --success: #2d7a3f;
+            --success-soft: #e9f7ec;
+            --shadow: 0 18px 45px rgba(97, 62, 28, 0.14);
+            --radius: 18px;
+            --font: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, rgba(245, 191, 119, 0.28), transparent 36rem),
+                linear-gradient(135deg, #fffdf8 0%, var(--bg) 56%, #f2e6d6 100%);
+            color: var(--ink);
+            font-family: var(--font);
+            line-height: 1.5;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            border: 0;
+            border-radius: 999px;
+            padding: 0.72rem 1rem;
+            background: var(--primary);
+            color: #fff;
+            cursor: pointer;
+            font-weight: 700;
+            box-shadow: 0 8px 18px rgba(111, 54, 15, 0.18);
+            transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+        }
+
+        button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            cursor: not-allowed;
+            opacity: 0.52;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: var(--primary-dark);
+            border: 1px solid var(--line);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: #fff7ed;
+        }
+
+        .btn-accent {
+            background: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background: #245f55;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background: #842929;
+        }
+
+        .btn-small {
+            padding: 0.45rem 0.7rem;
+            font-size: 0.86rem;
+        }
+
+        .btn-icon {
+            min-width: 2.35rem;
+            padding-inline: 0.65rem;
+        }
+
+        .page {
+            width: min(1180px, calc(100% - 28px));
+            margin: 20px auto 42px;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.94), rgba(46, 125, 111, 0.9));
+            color: #fff;
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+            min-height: 270px;
+        }
+
+        .hero.has-image::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: var(--hero-image);
+            background-position: center;
+            background-size: cover;
+            filter: saturate(1.05);
+            opacity: 0.72;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(20, 45, 42, 0.62), rgba(20, 45, 42, 0.18));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: clamp(1.45rem, 4vw, 3.2rem);
+            display: grid;
+            gap: 1rem;
+            align-content: center;
+            min-height: 270px;
+        }
+
+        .eyebrow {
+            margin: 0;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 800;
+            opacity: 0.88;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2.2rem, 7vw, 5.2rem);
+            line-height: 0.95;
+            letter-spacing: -0.06em;
+            max-width: 860px;
+        }
+
+        .hero-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 0.25rem;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.5rem 0.82rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.26);
+            backdrop-filter: blur(8px);
+            font-weight: 700;
+        }
+
+        .hero-note {
+            margin: 0;
+            max-width: 760px;
+            font-size: clamp(1rem, 2vw, 1.17rem);
+            opacity: 0.95;
+        }
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            align-items: center;
+            justify-content: space-between;
+            margin: 18px 0;
+        }
+
+        .toolbar-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .notice {
+            flex: 1 1 320px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.94rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: minmax(280px, 390px) 1fr;
+            gap: 18px;
+            align-items: start;
+        }
+
+        .panel,
+        .category-card {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(234, 223, 206, 0.9);
+            border-radius: var(--radius);
+            box-shadow: 0 10px 28px rgba(97, 62, 28, 0.08);
+        }
+
+        .panel {
+            padding: 1rem;
+        }
+
+        .panel+.panel {
+            margin-top: 14px;
+        }
+
+        .panel h2,
+        .panel h3 {
+            margin: 0 0 0.8rem;
+            color: var(--primary-dark);
+            letter-spacing: -0.02em;
+        }
+
+        .panel h2 {
+            font-size: 1.16rem;
+        }
+
+        .panel h3 {
+            font-size: 1rem;
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 0.78rem;
+        }
+
+        .two-col {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        label {
+            display: grid;
+            gap: 0.28rem;
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 0.74rem 0.82rem;
+            background: #fffdf9;
+            color: var(--ink);
+            outline: none;
+            text-transform: none;
+            letter-spacing: normal;
+            font-weight: 600;
+        }
+
+        textarea {
+            min-height: 82px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(46, 125, 111, 0.12);
+        }
+
+        .hint {
+            margin: 0.4rem 0 0;
+            color: var(--muted);
+            font-size: 0.86rem;
+        }
+
+        .settings-area {
+            display: none;
+        }
+
+        .settings-area.open {
+            display: block;
+        }
+
+        .category-editor {
+            display: grid;
+            gap: 0.65rem;
+            max-height: 440px;
+            overflow: auto;
+            padding-right: 0.2rem;
+        }
+
+        .category-edit-row {
+            display: grid;
+            grid-template-columns: 3.5rem 1fr 5rem auto;
+            gap: 0.45rem;
+            align-items: end;
+            padding: 0.55rem;
+            background: #fffaf2;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+        }
+
+        .category-edit-row label {
+            font-size: 0.68rem;
+        }
+
+        .category-edit-row input {
+            padding: 0.55rem;
+            border-radius: 10px;
+        }
+
+        .signup-status {
+            margin: 0.85rem 0 0;
+            padding: 0.75rem 0.85rem;
+            border-radius: 14px;
+            background: var(--accent-soft);
+            color: #1e5d52;
+            font-weight: 700;
+            display: none;
+        }
+
+        .signup-status.error {
+            background: var(--danger-soft);
+            color: var(--danger);
+        }
+
+        .signup-status.success {
+            background: var(--success-soft);
+            color: var(--success);
+        }
+
+        .signup-status.visible {
+            display: block;
+        }
+
+        .summary-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .stat {
+            padding: 0.9rem;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.86);
+            border: 1px solid var(--line);
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.55rem;
+            color: var(--primary-dark);
+            line-height: 1;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-weight: 700;
+            font-size: 0.86rem;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 14px;
+        }
+
+        .category-card {
+            overflow: hidden;
+        }
+
+        .category-head {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 0.75rem;
+            align-items: center;
+            padding: 1rem;
+            background: linear-gradient(135deg, #fff8ec, #ffffff);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .cat-icon {
+            width: 3.1rem;
+            height: 3.1rem;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            background: var(--primary-soft);
+            font-size: 1.8rem;
+            box-shadow: inset 0 0 0 1px rgba(139, 69, 19, 0.08);
+        }
+
+        .category-head h3 {
+            margin: 0;
+            font-size: 1.12rem;
+            color: var(--primary-dark);
+        }
+
+        .category-head p {
+            margin: 0.12rem 0 0;
+            color: var(--muted);
+            font-size: 0.88rem;
+            font-weight: 700;
+        }
+
+        .count-badge {
+            border-radius: 999px;
+            padding: 0.45rem 0.7rem;
+            background: var(--accent-soft);
+            color: #1f5f55;
+            font-size: 0.84rem;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .count-badge.full {
+            background: var(--success-soft);
+            color: var(--success);
+        }
+
+        .slots {
+            padding: 0.8rem;
+            display: grid;
+            gap: 0.55rem;
+        }
+
+        .slot {
+            display: grid;
+            grid-template-columns: 2rem 1fr auto;
+            gap: 0.65rem;
+            align-items: center;
+            padding: 0.68rem;
+            border: 1px dashed #d8c5aa;
+            border-radius: 14px;
+            background: #fffdf9;
+            min-height: 72px;
+        }
+
+        .slot.filled {
+            border-style: solid;
+            background: #fffaf0;
+        }
+
+        .slot-number {
+            width: 2rem;
+            height: 2rem;
+            display: grid;
+            place-items: center;
+            border-radius: 999px;
+            background: #f1e4d3;
+            color: var(--primary-dark);
+            font-weight: 900;
+        }
+
+        .slot-empty {
+            color: var(--muted);
+            font-weight: 800;
+        }
+
+        .slot-name {
+            font-weight: 900;
+            color: var(--ink);
+        }
+
+        .slot-item {
+            color: var(--primary-dark);
+            font-weight: 800;
+        }
+
+        .slot-contact {
+            color: var(--muted);
+            font-size: 0.84rem;
+            word-break: break-word;
+        }
+
+        .slot-actions {
+            display: flex;
+            gap: 0.35rem;
+        }
+
+        .empty-state {
+            padding: 2rem;
+            text-align: center;
+            color: var(--muted);
+            border: 2px dashed var(--line);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .file-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            align-items: center;
+        }
+
+        .file-row input[type="file"] {
+            display: none;
+        }
+
+        .footer-note {
+            margin: 22px 0 0;
+            color: var(--muted);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .panel-stack {
+                order: 2;
+            }
+
+            .summary-strip {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .page {
+                width: min(100% - 18px, 1180px);
+                margin-top: 9px;
+            }
+
+            .hero {
+                border-radius: 20px;
+            }
+
+            .hero-content {
+                min-height: 235px;
+            }
+
+            .toolbar {
+                align-items: stretch;
+            }
+
+            .toolbar-actions,
+            .toolbar-actions button {
+                width: 100%;
+            }
+
+            .two-col,
+            .category-edit-row {
+                grid-template-columns: 1fr;
+            }
+
+            .slot {
+                grid-template-columns: 1.8rem 1fr;
+            }
+
+            .slot-actions {
+                grid-column: 2;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            @page {
+                margin: 0.45in;
+            }
+
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .page {
+                width: 100%;
+                margin: 0;
+            }
+
+            .hero {
+                color: #000;
+                background: #fff;
+                box-shadow: none;
+                border: 2px solid #000;
+                border-radius: 0;
+                min-height: auto;
+                break-inside: avoid;
+            }
+
+            .hero::before,
+            .hero::after {
+                display: none;
+            }
+
+            .hero-content {
+                min-height: auto;
+                padding: 0.35in;
+            }
+
+            h1 {
+                font-size: 34pt;
+                letter-spacing: -0.03em;
+            }
+
+            .pill {
+                color: #000;
+                background: #fff;
+                border: 1px solid #000;
+            }
+
+            .toolbar,
+            .panel-stack,
+            .slot-actions,
+            .footer-note,
+            .notice {
+                display: none !important;
+            }
+
+            .grid {
+                display: block;
+            }
+
+            .summary-strip {
+                grid-template-columns: repeat(3, 1fr);
+                margin: 0.18in 0;
+            }
+
+            .stat,
+            .category-card {
+                box-shadow: none;
+                border: 1px solid #222;
+                background: #fff;
+            }
+
+            .cards {
+                display: block;
+            }
+
+            .category-card {
+                margin: 0 0 0.18in;
+                break-inside: avoid;
+                border-radius: 0;
+            }
+
+            .category-head {
+                background: #fff;
+                border-bottom: 1px solid #222;
+                padding: 0.12in;
+            }
+
+            .cat-icon {
+                background: #fff;
+                border: 1px solid #222;
+                box-shadow: none;
+            }
+
+            .count-badge {
+                color: #000;
+                background: #fff;
+                border: 1px solid #222;
+            }
+
+            .slots {
+                padding: 0;
+                gap: 0;
+            }
+
+            .slot {
+                border: 0;
+                border-bottom: 1px solid #bbb;
+                border-radius: 0;
+                min-height: 0.48in;
+                padding: 0.08in 0.12in;
+                background: #fff;
+            }
+
+            .slot-number {
+                background: #fff;
+                border: 1px solid #222;
+                color: #000;
+            }
+
+            .slot-empty {
+                color: #222;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page">
+        <section id="hero" class="hero" aria-label="Potluck sign-up header">
+            <div class="hero-content">
+                <p class="eyebrow" id="event-eyebrow">Linger Longer Potluck</p>
+                <h1 id="event-title-display">Linger Longer Potluck Sign-Up</h1>
+                <p class="hero-note" id="event-note-display">Please sign up to bring something to share. Thank you for
+                    helping make this a warm, welcoming meal!</p>
+                <div class="hero-details">
+                    <span class="pill" id="event-date-display">📅 Date TBD</span>
+                    <span class="pill" id="event-time-display">🕑 2 PM</span>
+                    <span class="pill" id="event-location-display">📍 Location TBD</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="toolbar no-print">
+            <p class="notice" id="mode-notice"><strong>Static page note:</strong> GitHub Pages cannot save shared
+                sign-ups by itself.
+                This page saves entries in this browser/device and includes export/import/print tools for low-traffic
+                coordination.</p>
+            <div class="toolbar-actions">
+                <button type="button" id="settings-toggle" class="btn-secondary" data-owner-control>Customize</button>
+                <button type="button" id="export-json" class="btn-secondary" data-owner-control>Export JSON</button>
+                <button type="button" id="export-csv" class="btn-secondary" data-owner-control>Export CSV</button>
+                <button type="button" id="import-json" class="btn-secondary" data-owner-control>Import</button>
+                <button type="button" id="print-sheet" class="btn-accent">Print</button>
+            </div>
+        </div>
+
+        <section id="settings-area" class="settings-area no-print" aria-label="Customize sign-up sheet">
+            <div class="grid" style="margin-bottom: 18px;">
+                <div class="panel">
+                    <h2>Event details</h2>
+                    <div class="form-grid">
+                        <label>Title <input id="event-title" type="text" /></label>
+                        <label>Subtitle / note <textarea id="event-note"></textarea></label>
+                        <div class="two-col form-grid">
+                            <label>Date <input id="event-date" type="text" placeholder="June 7, 2026" /></label>
+                            <label>Time <input id="event-time" type="text" placeholder="2 PM" /></label>
+                        </div>
+                        <div class="two-col form-grid">
+                            <label>Location <input id="event-location" type="text"
+                                    placeholder="Cultural Hall" /></label>
+                            <label>Hero image URL <input id="event-hero-image" type="text"
+                                    placeholder="lingerlonger.png or https://..." /></label>
+                        </div>
+                        <label>Organizer email (optional, for mailto reminders) <input id="organizer-email" type="email"
+                                placeholder="name@example.com" /></label>
+                        <div class="file-row">
+                            <label for="hero-image-upload" class="btn-secondary"
+                                style="display:inline-flex; cursor:pointer;">Add top image</label>
+                            <input id="hero-image-upload" type="file" accept="image/*" />
+                            <button type="button" id="clear-hero-image" class="btn-secondary">Clear image</button>
+                        </div>
+                        <button type="button" id="save-event-settings">Save event details</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h2>Categories &amp; needed sign-ups</h2>
+                    <div id="category-editor" class="category-editor"></div>
+                    <div class="toolbar-actions" style="margin-top: 0.8rem;">
+                        <button type="button" id="add-category" class="btn-secondary">Add category</button>
+                        <button type="button" id="reset-categories" class="btn-danger">Reset defaults</button>
+                    </div>
+                    <p class="hint">Icons can be emoji or short text. Increase/decrease needed sign-ups anytime;
+                        existing names are preserved.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid" aria-label="Potluck sign-up form and list">
+            <aside class="panel-stack no-print">
+                <div class="panel">
+                    <h2>Sign up</h2>
+                    <form id="signup-form" class="form-grid">
+                        <label>Category <select id="signup-category" required></select></label>
+                        <label>Your name <input id="signup-name" type="text" autocomplete="name" required /></label>
+                        <label>Email <input id="signup-email" type="email" autocomplete="email" required /></label>
+                        <label>Phone <input id="signup-phone" type="tel" autocomplete="tel" required /></label>
+                        <label>What are you bringing? <input id="signup-item" type="text"
+                                placeholder="e.g., rolls, green salad, brownies" required /></label>
+                        <button type="submit" id="signup-submit">Add my sign-up</button>
+                    </form>
+                    <div id="signup-status" class="signup-status" role="status" aria-live="polite"></div>
+                    <p class="hint">When a category is full, it will no longer be available in the category dropdown.
+                    </p>
+                </div>
+
+                <div class="panel">
+                    <h3>Low-traffic workflow</h3>
+                    <p class="hint" id="workflow-note">For a shared online list, export the JSON after collecting
+                        entries and upload the
+                        updated file, or use this at a signup table/kiosk. Static GitHub Pages does not provide a shared
+                        database.</p>
+                </div>
+            </aside>
+
+            <section aria-label="Current sign-ups">
+                <div class="summary-strip" id="summary-strip"></div>
+                <div id="category-cards" class="cards"></div>
+            </section>
+        </section>
+
+        <p class="footer-note">Made for a Linger Longer Potluck • Printable, responsive, and ready for GitHub Pages.</p>
+    </main>
+
+    <input id="import-file" type="file" accept="application/json,.json" hidden />
+
+    <script>
+        const STORAGE_KEY = "linger-longer-potluck-signup-v1";
+        // Paste your deployed Google Apps Script Web app /exec URL here to enable shared Google Sheet sign-ups.
+        // Example: const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycb.../exec";
+        const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwZt-lr6VcrglwwyfHsqIW_an3_NZe9gaUHWm1UunIfuLGkAevqTMYvRll18W9KAq87GQ/exec";
+
+        const DEFAULT_STATE = {
+            event: {
+                eyebrow: "Linger Longer Potluck",
+                title: "Linger Longer Potluck Sign-Up",
+                note: "Please sign up to bring something to share. Thank you for helping make this a warm, welcoming meal!",
+                date: "Date TBD",
+                time: "2 PM",
+                location: "Location TBD",
+                organizerEmail: "",
+                heroImage: "lingerlonger.png"
+            },
+            categories: [
+                { id: "appetizer", name: "Appetizer", needed: 5, icon: "🥨" },
+                { id: "salad", name: "Salad", needed: 5, icon: "🥗" },
+                { id: "side-dish", name: "Side Dish", needed: 6, icon: "🍲" },
+                { id: "main-dish", name: "Main Dish", needed: 6, icon: "🍛" },
+                { id: "dessert", name: "Dessert", needed: 5, icon: "🧁" },
+                { id: "beverage", name: "Beverage", needed: 4, icon: "🥤" },
+                { id: "clean-up-help", name: "Clean-Up Help", needed: 4, icon: "🧹" }
+            ],
+            signups: []
+        };
+
+        let state = isSharedMode() ? cloneDefaultState() : loadState();
+
+        const $ = (id) => document.getElementById(id);
+        const els = {
+            hero: $("hero"),
+            eventTitleDisplay: $("event-title-display"),
+            eventNoteDisplay: $("event-note-display"),
+            eventDateDisplay: $("event-date-display"),
+            eventTimeDisplay: $("event-time-display"),
+            eventLocationDisplay: $("event-location-display"),
+            eventTitle: $("event-title"),
+            eventNote: $("event-note"),
+            eventDate: $("event-date"),
+            eventTime: $("event-time"),
+            eventLocation: $("event-location"),
+            eventHeroImage: $("event-hero-image"),
+            organizerEmail: $("organizer-email"),
+            signupCategory: $("signup-category"),
+            signupForm: $("signup-form"),
+            signupName: $("signup-name"),
+            signupEmail: $("signup-email"),
+            signupPhone: $("signup-phone"),
+            signupItem: $("signup-item"),
+            signupSubmit: $("signup-submit"),
+            signupStatus: $("signup-status"),
+            categoryCards: $("category-cards"),
+            categoryEditor: $("category-editor"),
+            summaryStrip: $("summary-strip"),
+            modeNotice: $("mode-notice"),
+            workflowNote: $("workflow-note"),
+            settingsArea: $("settings-area"),
+            importFile: $("import-file")
+        };
+
+        function cloneDefaultState() {
+            return JSON.parse(JSON.stringify(DEFAULT_STATE));
+        }
+
+        function loadState() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return cloneDefaultState();
+                const saved = JSON.parse(raw);
+                return normalizeState(saved);
+            } catch (error) {
+                console.warn("Could not load saved sign-up sheet:", error);
+                return cloneDefaultState();
+            }
+        }
+
+        function normalizeState(input) {
+            const base = cloneDefaultState();
+            const next = { ...base, ...(input || {}) };
+            next.event = { ...base.event, ...(input && input.event ? input.event : {}) };
+            next.event.time = String(next.event.time || base.event.time).trim() || base.event.time;
+            if (/^time\s+tbd$/i.test(next.event.time)) next.event.time = base.event.time;
+            next.event.heroImage = String(next.event.heroImage || base.event.heroImage).trim() || base.event.heroImage;
+            next.categories = Array.isArray(next.categories) && next.categories.length ? next.categories : base.categories;
+            next.signups = Array.isArray(next.signups) ? next.signups : [];
+            next.categories = next.categories.map((cat, index) => ({
+                id: cat.id || slugify(cat.name || `category-${index + 1}`),
+                name: String(cat.name || `Category ${index + 1}`).trim() || `Category ${index + 1}`,
+                needed: Math.max(0, parseInt(cat.needed, 10) || 0),
+                icon: String(cat.icon || "🍽️").trim() || "🍽️"
+            }));
+            next.signups = next.signups.map((entry) => ({
+                id: entry.id || cryptoId(),
+                categoryId: entry.categoryId,
+                name: String(entry.name || "").trim(),
+                email: String(entry.email || "").trim(),
+                phone: String(entry.phone || "").trim(),
+                item: String(entry.item || "").trim(),
+                createdAt: entry.createdAt || new Date().toISOString()
+            })).filter((entry) => entry.categoryId && entry.name && entry.item);
+            return next;
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            } catch (error) {
+                console.warn("Could not save sign-up sheet locally:", error);
+            }
+        }
+
+        function isSharedMode() {
+            return /^https:\/\//i.test(SHARED_BACKEND_URL.trim());
+        }
+
+        function slugify(value) {
+            const slug = String(value || "")
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-+|-+$/g, "");
+            return slug || `category-${Date.now()}`;
+        }
+
+        function cryptoId() {
+            if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
+            return `id-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#39;");
+        }
+
+        function formatEventDate(value) {
+            const text = String(value || "").trim();
+            if (!text || /^date\s+tbd$/i.test(text)) return "Date TBD";
+            const parsed = new Date(text);
+            if (!Number.isNaN(parsed.getTime()) && /\b\d{4}\b/.test(text)) {
+                return parsed.toLocaleDateString(undefined, {
+                    weekday: "short",
+                    month: "short",
+                    day: "2-digit",
+                    year: "numeric"
+                });
+            }
+            return text;
+        }
+
+        function signupsFor(categoryId) {
+            return state.signups.filter((entry) => entry.categoryId === categoryId);
+        }
+
+        function openSlots(category) {
+            return Math.max(0, Number(category.needed || 0) - signupsFor(category.id).length);
+        }
+
+        function render() {
+            setControlsForMode();
+            renderEvent();
+            renderSummary();
+            renderSignupCategoryOptions();
+            renderCategoryCards();
+            renderCategoryEditor();
+        }
+
+        function setControlsForMode() {
+            const shared = isSharedMode();
+            if (els.modeNotice) {
+                els.modeNotice.innerHTML = shared
+                    ? `<strong>Shared mode:</strong> Visitors can add sign-ups, but only the organizer can customize the page from the private Google Sheet. Public view shows name and item only; email and phone stay private in the sheet.`
+                    : `<strong>Static page note:</strong> GitHub Pages cannot save shared sign-ups by itself. This page saves entries in this browser/device and includes export/import/print tools for low-traffic coordination.`;
+            }
+
+            if (els.workflowNote) {
+                els.workflowNote.textContent = shared
+                    ? "Organizer-only settings live in the private Google Sheet. Visitors can only add sign-ups and print the public sheet."
+                    : "For a shared online list, export the JSON after collecting entries and upload the updated file, or use this at a signup table/kiosk. Static GitHub Pages does not provide a shared database.";
+            }
+
+            document.querySelectorAll("[data-owner-control]").forEach((element) => {
+                element.hidden = shared;
+            });
+
+            if (shared) {
+                els.settingsArea.classList.remove("open");
+                $("settings-toggle").textContent = "Customize";
+            }
+
+            ["add-category", "reset-categories", "import-json", "save-event-settings", "clear-hero-image"].forEach((id) => {
+                const element = $(id);
+                if (element) element.disabled = shared;
+            });
+            [els.eventTitle, els.eventNote, els.eventDate, els.eventTime, els.eventLocation, els.eventHeroImage, els.organizerEmail, $("hero-image-upload")]
+                .filter(Boolean)
+                .forEach((element) => { element.disabled = shared; });
+        }
+
+        function renderEvent() {
+            const event = state.event;
+            els.eventTitleDisplay.textContent = event.title || DEFAULT_STATE.event.title;
+            els.eventNoteDisplay.textContent = event.note || DEFAULT_STATE.event.note;
+            els.eventDateDisplay.textContent = `📅 ${formatEventDate(event.date)}`;
+            els.eventTimeDisplay.textContent = `🕑 ${event.time || DEFAULT_STATE.event.time}`;
+            els.eventLocationDisplay.textContent = `📍 ${event.location || "Location TBD"}`;
+            els.eventTitle.value = event.title || "";
+            els.eventNote.value = event.note || "";
+            els.eventDate.value = event.date || "";
+            els.eventTime.value = event.time || "";
+            els.eventLocation.value = event.location || "";
+            els.eventHeroImage.value = event.heroImage || "";
+            els.organizerEmail.value = event.organizerEmail || "";
+
+            if (event.heroImage) {
+                els.hero.classList.add("has-image");
+                els.hero.style.setProperty("--hero-image", `url(${event.heroImage})`);
+            } else {
+                els.hero.classList.remove("has-image");
+                els.hero.style.removeProperty("--hero-image");
+            }
+        }
+
+        function renderSummary() {
+            const totalNeeded = state.categories.reduce((sum, cat) => sum + Number(cat.needed || 0), 0);
+            const filled = state.signups.length;
+            const remaining = Math.max(0, totalNeeded - filled);
+            els.summaryStrip.innerHTML = `
+				<div class="stat"><strong>${filled}</strong><span>Signed up</span></div>
+				<div class="stat"><strong>${remaining}</strong><span>Open slots</span></div>
+				<div class="stat"><strong>${state.categories.length}</strong><span>Categories</span></div>
+			`;
+        }
+
+        function renderSignupCategoryOptions() {
+            const available = state.categories.filter((cat) => openSlots(cat) > 0);
+            if (!available.length) {
+                els.signupCategory.innerHTML = `<option value="">All categories are full</option>`;
+                els.signupSubmit.disabled = true;
+                return;
+            }
+            els.signupSubmit.disabled = false;
+            const current = els.signupCategory.value;
+            els.signupCategory.innerHTML = available
+                .map((cat) => `<option value="${escapeHtml(cat.id)}">${escapeHtml(cat.icon)} ${escapeHtml(cat.name)} (${openSlots(cat)} open)</option>`)
+                .join("");
+            if (available.some((cat) => cat.id === current)) els.signupCategory.value = current;
+        }
+
+        function renderCategoryCards() {
+            if (!state.categories.length) {
+                els.categoryCards.innerHTML = `<div class="empty-state">Add categories to begin building the sign-up sheet.</div>`;
+                return;
+            }
+
+            els.categoryCards.innerHTML = state.categories.map((cat) => {
+                const entries = signupsFor(cat.id);
+                const needed = Number(cat.needed || 0);
+                const isFull = entries.length >= needed && needed > 0;
+                const slots = [];
+                for (let index = 0; index < Math.max(needed, entries.length); index += 1) {
+                    const entry = entries[index];
+                    slots.push(renderSlot(cat, entry, index));
+                }
+                return `
+					<article class="category-card">
+						<header class="category-head">
+							<div class="cat-icon" aria-hidden="true">${escapeHtml(cat.icon)}</div>
+							<div>
+								<h3>${escapeHtml(cat.name)}</h3>
+								<p>${needed} sign-up${needed === 1 ? "" : "s"} needed</p>
+							</div>
+							<span class="count-badge ${isFull ? "full" : ""}">${entries.length}/${needed}${isFull ? " Full" : ""}</span>
+						</header>
+						<div class="slots">${slots.join("") || `<div class="slot"><span class="slot-number">–</span><span class="slot-empty">No slots configured.</span></div>`}</div>
+					</article>
+				`;
+            }).join("");
+
+            els.categoryCards.querySelectorAll("[data-delete]").forEach((button) => {
+                button.addEventListener("click", () => deleteSignup(button.dataset.delete));
+            });
+            els.categoryCards.querySelectorAll("[data-email]").forEach((button) => {
+                button.addEventListener("click", () => emailSignup(button.dataset.email));
+            });
+        }
+
+        function renderSlot(cat, entry, index) {
+            if (!entry) {
+                return `
+					<div class="slot">
+						<span class="slot-number">${index + 1}</span>
+						<span class="slot-empty">Open slot for ${escapeHtml(cat.name)}</span>
+					</div>
+				`;
+            }
+            const contact = [entry.email, entry.phone].filter(Boolean).map(escapeHtml).join(" • ");
+            const actions = isSharedMode() ? "" : `
+                    <div class="slot-actions no-print">
+                        <button type="button" class="btn-secondary btn-small btn-icon" title="Email this sign-up" data-email="${escapeHtml(entry.id)}">✉</button>
+                        <button type="button" class="btn-danger btn-small btn-icon" title="Remove this sign-up" data-delete="${escapeHtml(entry.id)}">×</button>
+                    </div>
+            `;
+            return `
+				<div class="slot filled">
+					<span class="slot-number">${index + 1}</span>
+					<div>
+						<div class="slot-name">${escapeHtml(entry.name)}</div>
+						<div class="slot-item">${escapeHtml(entry.item)}</div>
+                        ${contact ? `<div class="slot-contact">${contact}</div>` : ""}
+					</div>
+                    ${actions}
+				</div>
+			`;
+        }
+
+        function renderCategoryEditor() {
+            const shared = isSharedMode();
+            els.categoryEditor.innerHTML = state.categories.map((cat) => `
+				<div class="category-edit-row" data-category-row="${escapeHtml(cat.id)}">
+                    <label>Icon <input type="text" value="${escapeHtml(cat.icon)}" data-cat-field="icon" maxlength="8" ${shared ? "disabled" : ""} /></label>
+                    <label>Name <input type="text" value="${escapeHtml(cat.name)}" data-cat-field="name" ${shared ? "disabled" : ""} /></label>
+                    <label>Needed <input type="number" min="0" max="99" value="${Number(cat.needed || 0)}" data-cat-field="needed" ${shared ? "disabled" : ""} /></label>
+                    ${shared ? `<span class="hint">Sheet-managed</span>` : `<button type="button" class="btn-danger btn-small" data-remove-category="${escapeHtml(cat.id)}">Remove</button>`}
+				</div>
+            `).join("") + (shared ? `<p class="hint"><strong>Shared mode:</strong> categories and limits are managed in the Google Sheet's <em>Categories</em> tab.</p>` : "");
+
+            els.categoryEditor.querySelectorAll("[data-cat-field]").forEach((input) => {
+                input.addEventListener("change", handleCategoryChange);
+            });
+            els.categoryEditor.querySelectorAll("[data-remove-category]").forEach((button) => {
+                button.addEventListener("click", () => removeCategory(button.dataset.removeCategory));
+            });
+        }
+
+        function handleCategoryChange(event) {
+            const row = event.target.closest("[data-category-row]");
+            const cat = state.categories.find((item) => item.id === row.dataset.categoryRow);
+            if (!cat) return;
+            const field = event.target.dataset.catField;
+            if (field === "needed") {
+                cat.needed = Math.max(0, Math.min(99, parseInt(event.target.value, 10) || 0));
+            } else if (field === "name") {
+                cat.name = event.target.value.trim() || cat.name;
+            } else if (field === "icon") {
+                cat.icon = event.target.value.trim() || "🍽️";
+            }
+            saveState();
+            render();
+        }
+
+        function showStatus(message, type = "success") {
+            els.signupStatus.textContent = message;
+            els.signupStatus.className = `signup-status visible ${type}`;
+            window.clearTimeout(showStatus.timer);
+            showStatus.timer = window.setTimeout(() => {
+                els.signupStatus.classList.remove("visible");
+            }, 5200);
+        }
+
+        function addSignup(event) {
+            event.preventDefault();
+            const categoryId = els.signupCategory.value;
+            const category = state.categories.find((cat) => cat.id === categoryId);
+            if (!category) return showStatus("Please choose a category.", "error");
+            if (openSlots(category) <= 0) return showStatus(`${category.name} is full. Please choose another category.`, "error");
+
+            const entry = {
+                id: cryptoId(),
+                categoryId,
+                name: els.signupName.value.trim(),
+                email: els.signupEmail.value.trim(),
+                phone: els.signupPhone.value.trim(),
+                item: els.signupItem.value.trim(),
+                createdAt: new Date().toISOString()
+            };
+            if (!entry.name || !entry.email || !entry.phone || !entry.item) {
+                return showStatus("Please fill in name, email, phone, and item.", "error");
+            }
+
+            if (isSharedMode()) {
+                submitSharedSignup(entry);
+                return;
+            }
+
+            state.signups.push(entry);
+            saveState();
+            els.signupForm.reset();
+            render();
+            showStatus(`Thanks, ${entry.name}! You are signed up for ${category.name}.`, "success");
+            if (state.event.organizerEmail) emailSignup(entry.id, true);
+        }
+
+        function deleteSignup(id) {
+            const entry = state.signups.find((item) => item.id === id);
+            if (!entry) return;
+            if (!confirm(`Remove ${entry.name}'s sign-up for ${entry.item}?`)) return;
+            state.signups = state.signups.filter((item) => item.id !== id);
+            saveState();
+            render();
+            showStatus("Sign-up removed.", "success");
+        }
+
+        function emailSignup(id, optional = false) {
+            const entry = state.signups.find((item) => item.id === id);
+            if (!entry) return;
+            const category = state.categories.find((cat) => cat.id === entry.categoryId);
+            const to = state.event.organizerEmail || "";
+            if (!to && optional) return;
+            const subject = encodeURIComponent(`${state.event.title}: ${entry.name} signed up`);
+            const body = encodeURIComponent([
+                `${entry.name} signed up for ${category ? category.name : "Potluck"}.`,
+                "",
+                `Item: ${entry.item}`,
+                `Email: ${entry.email}`,
+                `Phone: ${entry.phone}`,
+                `Event: ${state.event.title}`,
+                `Date: ${state.event.date}`,
+                `Time: ${state.event.time}`,
+                `Location: ${state.event.location}`
+            ].join("\n"));
+            window.location.href = `mailto:${encodeURIComponent(to)}?subject=${subject}&body=${body}`;
+        }
+
+        function removeCategory(id) {
+            const cat = state.categories.find((item) => item.id === id);
+            if (!cat) return;
+            const existing = signupsFor(id).length;
+            const warning = existing ? ` This will also remove ${existing} sign-up${existing === 1 ? "" : "s"}.` : "";
+            if (!confirm(`Remove category "${cat.name}"?${warning}`)) return;
+            state.categories = state.categories.filter((item) => item.id !== id);
+            state.signups = state.signups.filter((entry) => entry.categoryId !== id);
+            saveState();
+            render();
+        }
+
+        function addCategory() {
+            const baseName = "New Category";
+            const id = `${slugify(baseName)}-${Date.now()}`;
+            state.categories.push({ id, name: baseName, needed: 3, icon: "🍽️" });
+            saveState();
+            render();
+        }
+
+        function resetCategories() {
+            if (!confirm("Reset categories to the defaults? Existing sign-ups will be kept only where category names still match.")) return;
+            const oldSignups = state.signups;
+            const defaults = cloneDefaultState().categories;
+            state.categories = defaults;
+            state.signups = oldSignups.filter((entry) => defaults.some((cat) => cat.id === entry.categoryId));
+            saveState();
+            render();
+        }
+
+        function saveEventSettings() {
+            state.event.title = els.eventTitle.value.trim() || DEFAULT_STATE.event.title;
+            state.event.note = els.eventNote.value.trim() || DEFAULT_STATE.event.note;
+            state.event.date = els.eventDate.value.trim() || "Date TBD";
+            state.event.time = els.eventTime.value.trim() || DEFAULT_STATE.event.time;
+            state.event.location = els.eventLocation.value.trim() || "Location TBD";
+            state.event.heroImage = els.eventHeroImage.value.trim();
+            state.event.organizerEmail = els.organizerEmail.value.trim();
+            saveState();
+            render();
+            showStatus("Event details saved.", "success");
+        }
+
+        function handleHeroImage(file) {
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                state.event.heroImage = reader.result;
+                saveState();
+                render();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function exportJson() {
+            downloadFile("linger-longer-signup.json", JSON.stringify(state, null, 2), "application/json");
+        }
+
+        function exportCsv() {
+            const rows = [["Category", "Name", "Email", "Phone", "Item", "Signed Up At"]];
+            state.signups.forEach((entry) => {
+                const cat = state.categories.find((item) => item.id === entry.categoryId);
+                rows.push([cat ? cat.name : entry.categoryId, entry.name, entry.email, entry.phone, entry.item, entry.createdAt]);
+            });
+            const csv = rows.map((row) => row.map((cell) => `"${String(cell ?? "").replace(/"/g, '""')}"`).join(",")).join("\n");
+            downloadFile("linger-longer-signups.csv", csv, "text/csv");
+        }
+
+        function downloadFile(filename, content, type) {
+            const blob = new Blob([content], { type });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            URL.revokeObjectURL(url);
+        }
+
+        function importJsonFile(file) {
+            if (isSharedMode()) {
+                showStatus("Import is disabled in shared mode. Edit the Google Sheet directly instead.", "error");
+                return;
+            }
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                try {
+                    state = normalizeState(JSON.parse(reader.result));
+                    saveState();
+                    render();
+                    showStatus("Imported sign-up sheet data.", "success");
+                } catch (error) {
+                    showStatus("Could not import that JSON file.", "error");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function buildSharedUrl(params = {}) {
+            const url = new URL(SHARED_BACKEND_URL.trim());
+            Object.entries(params).forEach(([key, value]) => url.searchParams.set(key, value));
+            return url.toString();
+        }
+
+        function loadSharedData(options = {}) {
+            if (!isSharedMode()) return;
+            const callbackName = `lingerLongerShared_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+            const script = document.createElement("script");
+
+            window[callbackName] = (response) => {
+                delete window[callbackName];
+                script.remove();
+
+                if (!response || response.success === false) {
+                    showStatus(response && response.error ? response.error : "Could not load shared sign-ups.", "error");
+                    return;
+                }
+
+                applySharedPayload(response);
+                if (!options.quiet) showStatus("Loaded shared sign-ups from Google Sheets.", "success");
+            };
+
+            script.onerror = () => {
+                delete window[callbackName];
+                script.remove();
+                showStatus("Could not reach the Google Sheets backend. Local fallback data is still visible.", "error");
+            };
+
+            script.src = buildSharedUrl({ action: "list", callback: callbackName, _: Date.now() });
+            document.body.appendChild(script);
+        }
+
+        function applySharedPayload(payload) {
+            state = normalizeState({
+                event: payload.event || DEFAULT_STATE.event,
+                categories: payload.categories || DEFAULT_STATE.categories,
+                signups: payload.signups || []
+            });
+            render();
+        }
+
+        function appendHiddenInput(form, name, value) {
+            const input = document.createElement("input");
+            input.type = "hidden";
+            input.name = name;
+            input.value = value == null ? "" : String(value);
+            form.appendChild(input);
+        }
+
+        function cleanupSharedSubmitForms() {
+            document.querySelectorAll("[data-shared-submit]").forEach((element) => element.remove());
+        }
+
+        function submitSharedSignup(entry) {
+            cleanupSharedSubmitForms();
+            showStatus("Submitting your shared sign-up...", "success");
+            els.signupSubmit.disabled = true;
+
+            const frameName = `shared-signup-frame-${Date.now()}`;
+            const iframe = document.createElement("iframe");
+            iframe.name = frameName;
+            iframe.hidden = true;
+            iframe.dataset.sharedSubmit = "true";
+
+            const form = document.createElement("form");
+            form.method = "POST";
+            form.action = SHARED_BACKEND_URL.trim();
+            form.target = frameName;
+            form.hidden = true;
+            form.dataset.sharedSubmit = "true";
+
+            appendHiddenInput(form, "action", "signup");
+            appendHiddenInput(form, "categoryId", entry.categoryId);
+            appendHiddenInput(form, "name", entry.name);
+            appendHiddenInput(form, "email", entry.email);
+            appendHiddenInput(form, "phone", entry.phone);
+            appendHiddenInput(form, "item", entry.item);
+            appendHiddenInput(form, "userAgent", navigator.userAgent || "");
+
+            document.body.appendChild(iframe);
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        function handleSharedMessage(event) {
+            let data = event.data;
+            if (typeof data === "string") {
+                try { data = JSON.parse(data); } catch (error) { return; }
+            }
+            if (!data || data.source !== "linger-longer-potluck") return;
+
+            cleanupSharedSubmitForms();
+            els.signupSubmit.disabled = false;
+
+            if (data.success) {
+                els.signupForm.reset();
+                if (data.payload) applySharedPayload(data.payload);
+                else loadSharedData({ quiet: true });
+                showStatus(data.message || "Your shared sign-up was saved.", "success");
+            } else {
+                if (data.payload) applySharedPayload(data.payload);
+                else loadSharedData({ quiet: true });
+                showStatus(data.error || "Could not save that sign-up.", "error");
+            }
+        }
+
+        $("settings-toggle").addEventListener("click", () => {
+            els.settingsArea.classList.toggle("open");
+            $("settings-toggle").textContent = els.settingsArea.classList.contains("open") ? "Hide customize" : "Customize";
+        });
+        $("save-event-settings").addEventListener("click", saveEventSettings);
+        $("hero-image-upload").addEventListener("change", (event) => handleHeroImage(event.target.files[0]));
+        $("clear-hero-image").addEventListener("click", () => { state.event.heroImage = ""; saveState(); render(); });
+        $("add-category").addEventListener("click", addCategory);
+        $("reset-categories").addEventListener("click", resetCategories);
+        $("export-json").addEventListener("click", exportJson);
+        $("export-csv").addEventListener("click", exportCsv);
+        $("import-json").addEventListener("click", () => els.importFile.click());
+        els.importFile.addEventListener("change", (event) => importJsonFile(event.target.files[0]));
+        $("print-sheet").addEventListener("click", () => window.print());
+        els.signupForm.addEventListener("submit", addSignup);
+        window.addEventListener("message", handleSharedMessage);
+
+        render();
+        loadSharedData({ quiet: true });
+    </script>
+</body>
+
+</html>
