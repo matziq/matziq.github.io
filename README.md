@@ -1,5 +1,7 @@
 # matziq.github.io
 
-Public GitHub Pages site for the Sundance 1st Ward Linger Longer Potluck sign-up page.
+Public GitHub Pages site.
 
-Visitor link: https://matziq.github.io/
+- Linger Longer Potluck signup: https://matziq.github.io/linger_longer/
+
+Root page: https://matziq.github.io/
