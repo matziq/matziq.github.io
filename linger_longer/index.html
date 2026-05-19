@@ -242,6 +242,36 @@
             font-size: 0.94rem;
         }
 
+        .dismissible-notice {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 0.7rem;
+            min-width: 0;
+        }
+
+        .notice-dismiss {
+            flex: 0 0 auto;
+            padding: 0.38rem 0.62rem;
+            background: #ffffff;
+            color: var(--primary-dark);
+            border: 1px solid var(--line);
+            box-shadow: none;
+            font-size: 0.8rem;
+        }
+
+        .panel-heading-row {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 0.7rem;
+        }
+
+        .panel-heading-row h2,
+        .panel-heading-row h3 {
+            margin-bottom: 0;
+        }
+
         .needs-banner {
             display: grid;
             gap: 0.75rem;
@@ -815,6 +845,15 @@
                 width: 100%;
             }
 
+            .dismissible-notice,
+            .panel-heading-row {
+                display: grid;
+            }
+
+            .notice-dismiss {
+                width: 100%;
+            }
+
             .needs-banner-head {
                 display: grid;
             }
@@ -1086,7 +1125,7 @@
         <section id="hero" class="hero" aria-label="Potluck sign-up header">
             <div class="hero-content">
                 <p class="eyebrow" id="event-eyebrow">Linger Longer Potluck</p>
-                <h1 id="event-title-display">Linger Longer Potluck Sign-Up</h1>
+                <h1 id="event-title-display">June Linger Longer Potluck Sign-Up</h1>
                 <p class="hero-note" id="event-note-display">Please sign up to bring something to share. Thank you for
                     helping make this a warm, welcoming meal!</p>
                 <div class="hero-details">
@@ -1097,13 +1136,17 @@
             </div>
         </section>
 
-        <section id="needs-banner" class="needs-banner no-print" aria-label="Remaining dish type needs" aria-live="polite" hidden></section>
+        <section id="needs-banner" class="needs-banner no-print" aria-label="Remaining dish type needs"
+            aria-live="polite" hidden></section>
 
         <div class="toolbar no-print">
-            <p class="notice" id="mode-notice"><strong>Static page note:</strong> GitHub Pages cannot save shared
-                sign-ups by itself.
-                This page saves entries in this browser/device and includes export/import/print tools for low-traffic
-                coordination.</p>
+            <div class="notice dismissible-notice" id="mode-notice">
+                <span id="mode-notice-text"><strong>Static page note:</strong> GitHub Pages cannot save shared
+                    sign-ups by itself.
+                    This page saves entries in this browser/device and includes export/import/print tools for low-traffic
+                    coordination.</span>
+                <button type="button" class="notice-dismiss" data-dismiss-mode-notice>Dismiss</button>
+            </div>
             <div class="toolbar-actions">
                 <button type="button" id="settings-toggle" class="btn-secondary" data-owner-control>Customize</button>
                 <button type="button" id="export-json" class="btn-secondary" data-owner-control>Export JSON</button>
@@ -1174,8 +1217,11 @@
                     </p>
                 </div>
 
-                <div class="panel">
-                    <h3>Low-traffic workflow</h3>
+                <div class="panel" id="workflow-panel">
+                    <div class="panel-heading-row">
+                        <h3>Low-traffic workflow</h3>
+                        <button type="button" class="notice-dismiss no-print" data-dismiss-workflow-notice>Dismiss</button>
+                    </div>
                     <p class="hint" id="workflow-note">For a shared online list, export the JSON after collecting
                         entries and upload the
                         updated file, or use this at a signup table/kiosk. Static GitHub Pages does not provide a shared
@@ -1198,6 +1244,8 @@
         const STORAGE_KEY = "linger-longer-potluck-signup-v1";
         const SHARED_CACHE_KEY = "linger-longer-potluck-shared-cache-v1";
         const REMAINING_BANNER_DISMISS_KEY = "linger-longer-remaining-banner-dismissed-v1";
+        const MODE_NOTICE_DISMISS_KEY = "linger-longer-mode-notice-dismissed-v1";
+        const WORKFLOW_NOTICE_DISMISS_KEY = "linger-longer-workflow-notice-dismissed-v1";
         // Paste your deployed Google Apps Script Web app /exec URL here to enable shared Google Sheet sign-ups.
         // Example: const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycb.../exec";
         const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwZt-lr6VcrglwwyfHsqIW_an3_NZe9gaUHWm1UunIfuLGkAevqTMYvRll18W9KAq87GQ/exec";
@@ -1256,6 +1304,8 @@
             categoryEditor: $("category-editor"),
             summaryStrip: $("summary-strip"),
             modeNotice: $("mode-notice"),
+            modeNoticeText: $("mode-notice-text"),
+            workflowPanel: $("workflow-panel"),
             workflowNote: $("workflow-note"),
             settingsArea: $("settings-area"),
             importFile: $("import-file")
@@ -1388,12 +1438,49 @@
             return text;
         }
 
+        function eventMonthName(value) {
+            const text = String(value || "").trim();
+            if (!text || /^date\s+tbd$/i.test(text)) return "";
+            const parsed = new Date(text);
+            if (Number.isNaN(parsed.getTime())) return "";
+            return parsed.toLocaleDateString(undefined, { month: "long" });
+        }
+
+        function titleWithEventMonth(title, dateValue) {
+            const baseTitle = String(title || DEFAULT_STATE.event.title).trim() || DEFAULT_STATE.event.title;
+            const month = eventMonthName(dateValue);
+            if (!month) return baseTitle;
+            const titleWithoutMonth = baseTitle.replace(/^(January|February|March|April|May|June|July|August|September|October|November|December)\s+/i, "");
+            return `${month} ${titleWithoutMonth}`;
+        }
+
         function signupsFor(categoryId) {
             return state.signups.filter((entry) => entry.categoryId === categoryId);
         }
 
         function openSlots(category) {
             return Math.max(0, Number(category.needed || 0) - signupsFor(category.id).length);
+        }
+
+        function noticeModeKey() {
+            return isSharedMode() ? "shared" : "static";
+        }
+
+        function isNoticeDismissed(storageKey, value = noticeModeKey()) {
+            try {
+                return localStorage.getItem(storageKey) === value;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        function dismissNotice(storageKey, element, value = noticeModeKey()) {
+            try {
+                localStorage.setItem(storageKey, value);
+            } catch (error) {
+                console.warn("Could not save notice dismissal:", error);
+            }
+            if (element) element.hidden = true;
         }
 
         function render() {
@@ -1408,16 +1495,25 @@
 
         function setControlsForMode() {
             const shared = isSharedMode();
-            if (els.modeNotice) {
-                els.modeNotice.innerHTML = shared
+            const modeKey = shared ? "shared" : "static";
+            if (els.modeNoticeText) {
+                els.modeNoticeText.innerHTML = shared
                     ? `<strong>Shared mode:</strong> Visitors can add sign-ups, but only the organizer can customize the page from the private Google Sheet. Public view shows name and item only; email and phone stay private in the sheet.`
                     : `<strong>Static page note:</strong> GitHub Pages cannot save shared sign-ups by itself. This page saves entries in this browser/device and includes export/import/print tools for low-traffic coordination.`;
+            }
+
+            if (els.modeNotice) {
+                els.modeNotice.hidden = isNoticeDismissed(MODE_NOTICE_DISMISS_KEY, modeKey);
             }
 
             if (els.workflowNote) {
                 els.workflowNote.textContent = shared
                     ? "Organizer-only settings live in the private Google Sheet. Visitors can only add sign-ups and print the public sheet."
                     : "For a shared online list, export the JSON after collecting entries and upload the updated file, or use this at a signup table/kiosk. Static GitHub Pages does not provide a shared database.";
+            }
+
+            if (els.workflowPanel) {
+                els.workflowPanel.hidden = isNoticeDismissed(WORKFLOW_NOTICE_DISMISS_KEY, modeKey);
             }
 
             document.querySelectorAll("[data-owner-control]").forEach((element) => {
@@ -1440,7 +1536,7 @@
 
         function renderEvent() {
             const event = state.event;
-            els.eventTitleDisplay.textContent = event.title || DEFAULT_STATE.event.title;
+            els.eventTitleDisplay.textContent = titleWithEventMonth(event.title, event.date);
             els.eventNoteDisplay.textContent = event.note || DEFAULT_STATE.event.note;
             els.eventDateDisplay.textContent = `📅 ${formatEventDate(event.date)}`;
             els.eventTimeDisplay.textContent = `🕑 ${event.time || DEFAULT_STATE.event.time}`;
@@ -1985,6 +2081,12 @@
         $("print-sheet").addEventListener("click", () => window.print());
         els.needsBanner.addEventListener("click", (event) => {
             if (event.target.closest("[data-dismiss-needs-banner]")) dismissRemainingBanner();
+        });
+        els.modeNotice.addEventListener("click", (event) => {
+            if (event.target.closest("[data-dismiss-mode-notice]")) dismissNotice(MODE_NOTICE_DISMISS_KEY, els.modeNotice);
+        });
+        els.workflowPanel.addEventListener("click", (event) => {
+            if (event.target.closest("[data-dismiss-workflow-notice]")) dismissNotice(WORKFLOW_NOTICE_DISMISS_KEY, els.workflowPanel);
         });
         els.signupCategory.addEventListener("change", () => {
             updateSignupFieldState();
