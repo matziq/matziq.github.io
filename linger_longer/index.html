@@ -242,6 +242,103 @@
             font-size: 0.94rem;
         }
 
+        .needs-banner {
+            display: grid;
+            gap: 0.75rem;
+            margin: 18px 0;
+            padding: 0.95rem;
+            border: 1px solid rgba(234, 223, 206, 0.95);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 10px 28px rgba(97, 62, 28, 0.08);
+        }
+
+        .needs-banner[hidden] {
+            display: none;
+        }
+
+        .needs-banner-head {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .needs-banner-title {
+            margin: 0;
+            color: var(--primary-dark);
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: -0.01em;
+        }
+
+        .needs-banner-note {
+            margin: 0.15rem 0 0;
+            color: var(--muted);
+            font-size: 0.86rem;
+            font-weight: 700;
+        }
+
+        .needs-dismiss {
+            flex: 0 0 auto;
+            padding: 0.42rem 0.7rem;
+            background: #fff7ed;
+            color: var(--primary-dark);
+            border: 1px solid var(--line);
+            box-shadow: none;
+            font-size: 0.84rem;
+        }
+
+        .needs-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .need-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.38rem;
+            min-width: 0;
+            padding: 0.44rem 0.62rem;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: #fffdf9;
+            color: var(--muted);
+            font-weight: 900;
+            font-size: 0.9rem;
+            line-height: 1.2;
+        }
+
+        .need-chip strong {
+            color: inherit;
+            font-size: 1.02em;
+        }
+
+        .need-chip.need-high {
+            color: #b3261e;
+            border-color: rgba(179, 38, 30, 0.28);
+            background: #fff3f1;
+        }
+
+        .need-chip.need-medium {
+            color: #b45309;
+            border-color: rgba(180, 83, 9, 0.3);
+            background: #fff7ed;
+        }
+
+        .need-chip.need-low {
+            color: #a16207;
+            border-color: rgba(161, 98, 7, 0.34);
+            background: #fffbeb;
+        }
+
+        .need-chip.need-full {
+            color: var(--success);
+            border-color: rgba(45, 122, 63, 0.24);
+            background: var(--success-soft);
+        }
+
         .grid {
             display: grid;
             grid-template-columns: minmax(280px, 390px) 1fr;
@@ -718,6 +815,24 @@
                 width: 100%;
             }
 
+            .needs-banner-head {
+                display: grid;
+            }
+
+            .needs-dismiss {
+                width: 100%;
+            }
+
+            .needs-list {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+
+            .need-chip {
+                border-radius: 14px;
+                justify-content: space-between;
+            }
+
             .toolbar-actions button,
             .file-row button,
             .file-row label.btn-secondary {
@@ -883,6 +998,7 @@
             }
 
             .toolbar,
+            .needs-banner,
             .panel-stack,
             .slot-actions,
             .footer-note,
@@ -980,6 +1096,8 @@
                 </div>
             </div>
         </section>
+
+        <section id="needs-banner" class="needs-banner no-print" aria-label="Remaining dish type needs" aria-live="polite" hidden></section>
 
         <div class="toolbar no-print">
             <p class="notice" id="mode-notice"><strong>Static page note:</strong> GitHub Pages cannot save shared
@@ -1079,6 +1197,7 @@
     <script>
         const STORAGE_KEY = "linger-longer-potluck-signup-v1";
         const SHARED_CACHE_KEY = "linger-longer-potluck-shared-cache-v1";
+        const REMAINING_BANNER_DISMISS_KEY = "linger-longer-remaining-banner-dismissed-v1";
         // Paste your deployed Google Apps Script Web app /exec URL here to enable shared Google Sheet sign-ups.
         // Example: const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycb.../exec";
         const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwZt-lr6VcrglwwyfHsqIW_an3_NZe9gaUHWm1UunIfuLGkAevqTMYvRll18W9KAq87GQ/exec";
@@ -1132,6 +1251,7 @@
             signupItem: $("signup-item"),
             signupSubmit: $("signup-submit"),
             signupStatus: $("signup-status"),
+            needsBanner: $("needs-banner"),
             categoryCards: $("category-cards"),
             categoryEditor: $("category-editor"),
             summaryStrip: $("summary-strip"),
@@ -1280,6 +1400,7 @@
             setControlsForMode();
             renderEvent();
             renderSummary();
+            renderRemainingBanner();
             renderSignupCategoryOptions();
             renderCategoryCards();
             renderCategoryEditor();
@@ -1350,6 +1471,73 @@
 				<div class="stat"><strong>${remaining}</strong><span>Open slots</span></div>
 				<div class="stat"><strong>${state.categories.length}</strong><span>Categories</span></div>
 			`;
+        }
+
+        function remainingBannerSignature() {
+            return state.categories.map((cat) => `${cat.id}:${openSlots(cat)}`).join("|");
+        }
+
+        function isRemainingBannerDismissed(signature) {
+            try {
+                return localStorage.getItem(REMAINING_BANNER_DISMISS_KEY) === signature;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        function needToneClass(remaining) {
+            if (remaining <= 0) return "need-full";
+            if (remaining <= 2) return "need-low";
+            if (remaining <= 4) return "need-medium";
+            return "need-high";
+        }
+
+        function renderRemainingBanner() {
+            if (!els.needsBanner) return;
+            if (!state.categories.length) {
+                els.needsBanner.hidden = true;
+                els.needsBanner.innerHTML = "";
+                return;
+            }
+
+            const signature = remainingBannerSignature();
+            if (isRemainingBannerDismissed(signature)) {
+                els.needsBanner.hidden = true;
+                return;
+            }
+
+            const chips = state.categories.map((cat) => {
+                const remaining = openSlots(cat);
+                const label = remaining === 0 ? "Full" : `${remaining} item${remaining === 1 ? "" : "s"} left`;
+                return `
+                    <span class="need-chip ${needToneClass(remaining)}" title="${escapeHtml(cat.name)}: ${escapeHtml(label)}">
+                        <span>${escapeHtml(cat.icon)} ${escapeHtml(cat.name)}</span>
+                        <strong>${escapeHtml(label)}</strong>
+                    </span>
+                `;
+            }).join("");
+
+            els.needsBanner.hidden = false;
+            els.needsBanner.innerHTML = `
+                <div class="needs-banner-head">
+                    <div>
+                        <p class="needs-banner-title">Still needed for the potluck</p>
+                        <p class="needs-banner-note">Red = 5+ open, orange = 3–4 open, yellow = 1–2 open.</p>
+                    </div>
+                    <button type="button" class="needs-dismiss" data-dismiss-needs-banner>Dismiss</button>
+                </div>
+                <div class="needs-list">${chips}</div>
+            `;
+        }
+
+        function dismissRemainingBanner() {
+            const signature = remainingBannerSignature();
+            try {
+                localStorage.setItem(REMAINING_BANNER_DISMISS_KEY, signature);
+            } catch (error) {
+                console.warn("Could not save banner dismissal:", error);
+            }
+            if (els.needsBanner) els.needsBanner.hidden = true;
         }
 
         function renderSignupCategoryOptions() {
@@ -1795,6 +1983,9 @@
         $("import-json").addEventListener("click", () => els.importFile.click());
         els.importFile.addEventListener("change", (event) => importJsonFile(event.target.files[0]));
         $("print-sheet").addEventListener("click", () => window.print());
+        els.needsBanner.addEventListener("click", (event) => {
+            if (event.target.closest("[data-dismiss-needs-banner]")) dismissRemainingBanner();
+        });
         els.signupCategory.addEventListener("change", () => {
             updateSignupFieldState();
             if (els.signupCategory.value) {
