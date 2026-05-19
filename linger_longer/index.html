@@ -148,17 +148,18 @@
             position: absolute;
             inset: 0;
             background-image: var(--hero-image);
-            background-position: center;
+            background-position: center bottom;
             background-size: cover;
-            filter: saturate(1.05);
-            opacity: 0.72;
+            filter: saturate(0.95) blur(1px);
+            opacity: 0.34;
+            transform: scale(1.04);
         }
 
         .hero::after {
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg, rgba(20, 45, 42, 0.62), rgba(20, 45, 42, 0.18));
+            background: linear-gradient(90deg, rgba(18, 35, 32, 0.94), rgba(18, 35, 32, 0.82) 48%, rgba(18, 35, 32, 0.55));
         }
 
         .hero-content {
@@ -169,6 +170,7 @@
             gap: 1rem;
             align-content: center;
             min-height: 270px;
+            text-shadow: 0 2px 16px rgba(0, 0, 0, 0.38);
         }
 
         .eyebrow {
@@ -606,11 +608,14 @@
             }
 
             .hero.has-image::before {
-                opacity: 0.46;
+                background-position: center bottom;
+                filter: saturate(0.8) blur(2px);
+                opacity: 0.08;
+                transform: scale(1.08);
             }
 
             .hero::after {
-                background: linear-gradient(180deg, rgba(20, 45, 42, 0.76), rgba(20, 45, 42, 0.46));
+                background: linear-gradient(180deg, rgba(18, 35, 32, 0.97), rgba(18, 35, 32, 0.9));
             }
 
             .hero-content {
