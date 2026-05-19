@@ -974,9 +974,9 @@
                 <p class="hero-note" id="event-note-display">Please sign up to bring something to share. Thank you for
                     helping make this a warm, welcoming meal!</p>
                 <div class="hero-details">
-                    <span class="pill" id="event-date-display">📅 Date TBD</span>
+                    <span class="pill" id="event-date-display">📅 Sun, Jun 07, 2026</span>
                     <span class="pill" id="event-time-display">🕑 2 PM</span>
-                    <span class="pill" id="event-location-display">📍 Location TBD</span>
+                    <span class="pill" id="event-location-display">📍 Sundance 1st Ward Cultural Hall</span>
                 </div>
             </div>
         </section>
@@ -1051,7 +1051,8 @@
                         <button type="submit" id="signup-submit">Add my sign-up</button>
                     </form>
                     <div id="signup-status" class="signup-status" role="status" aria-live="polite"></div>
-                    <p class="hint">Choose a dish type first, then fill out your name, contact info, and what you are bringing. Full dish types are hidden from the dropdown.
+                    <p class="hint">Choose a dish type first, then fill out your name, contact info, and what you are
+                        bringing. Full dish types are hidden from the dropdown.
                     </p>
                 </div>
 
@@ -1077,6 +1078,7 @@
 
     <script>
         const STORAGE_KEY = "linger-longer-potluck-signup-v1";
+        const SHARED_CACHE_KEY = "linger-longer-potluck-shared-cache-v1";
         // Paste your deployed Google Apps Script Web app /exec URL here to enable shared Google Sheet sign-ups.
         // Example: const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycb.../exec";
         const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwZt-lr6VcrglwwyfHsqIW_an3_NZe9gaUHWm1UunIfuLGkAevqTMYvRll18W9KAq87GQ/exec";
@@ -1086,9 +1088,9 @@
                 eyebrow: "Linger Longer Potluck",
                 title: "Linger Longer Potluck Sign-Up",
                 note: "Please sign up to bring something to share. Thank you for helping make this a warm, welcoming meal!",
-                date: "Date TBD",
+                date: "June 7, 2026",
                 time: "2 PM",
-                location: "Location TBD",
+                location: "Sundance 1st Ward Cultural Hall",
                 organizerEmail: "",
                 heroImage: "lingerlonger.png"
             },
@@ -1104,7 +1106,7 @@
             signups: []
         };
 
-        let state = isSharedMode() ? cloneDefaultState() : loadState();
+        let state = loadInitialState();
         const expandedCategories = new Set();
 
         const $ = (id) => document.getElementById(id);
@@ -1152,6 +1154,41 @@
             } catch (error) {
                 console.warn("Could not load saved sign-up sheet:", error);
                 return cloneDefaultState();
+            }
+        }
+
+        function loadInitialState() {
+            if (!isSharedMode()) return loadState();
+            return loadSharedCache() || cloneDefaultState();
+        }
+
+        function loadSharedCache() {
+            try {
+                const raw = localStorage.getItem(SHARED_CACHE_KEY);
+                if (!raw) return null;
+                const cached = JSON.parse(raw);
+                return normalizeState({
+                    event: cached.event || DEFAULT_STATE.event,
+                    categories: cached.categories || DEFAULT_STATE.categories,
+                    signups: cached.signups || []
+                });
+            } catch (error) {
+                console.warn("Could not load cached shared sign-up sheet:", error);
+                return null;
+            }
+        }
+
+        function saveSharedCache(nextState) {
+            if (!isSharedMode()) return;
+            try {
+                localStorage.setItem(SHARED_CACHE_KEY, JSON.stringify({
+                    cachedAt: new Date().toISOString(),
+                    event: nextState.event,
+                    categories: nextState.categories,
+                    signups: nextState.signups
+                }));
+            } catch (error) {
+                console.warn("Could not cache shared sign-up sheet:", error);
             }
         }
 
@@ -1675,6 +1712,7 @@
                 categories: payload.categories || DEFAULT_STATE.categories,
                 signups: payload.signups || []
             });
+            saveSharedCache(state);
             render();
         }
 
