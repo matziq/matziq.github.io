@@ -250,6 +250,23 @@
             min-width: 0;
         }
 
+        .signup-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .signup-top {
+            order: -1;
+        }
+
+        .signup-top #signup-form {
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            align-items: end;
+        }
+
+        .signup-top #signup-form button[type="submit"] {
+            min-height: 3rem;
+        }
+
         .grid>* {
             min-width: 0;
         }
@@ -444,6 +461,13 @@
             padding: 1rem;
             background: linear-gradient(135deg, #fff8ec, #ffffff);
             border-bottom: 1px solid var(--line);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .category-head:focus-visible {
+            outline: 3px solid rgba(46, 125, 111, 0.28);
+            outline-offset: -3px;
         }
 
         .cat-icon {
@@ -487,10 +511,35 @@
             color: var(--success);
         }
 
+        .category-meta {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.45rem;
+            min-width: 0;
+        }
+
+        .collapse-indicator {
+            width: 1.85rem;
+            height: 1.85rem;
+            display: inline-grid;
+            place-items: center;
+            border-radius: 999px;
+            background: #fffaf2;
+            border: 1px solid var(--line);
+            color: var(--primary-dark);
+            font-weight: 900;
+            line-height: 1;
+        }
+
         .slots {
             padding: 0.8rem;
             display: grid;
             gap: 0.55rem;
+        }
+
+        .category-card.collapsed .slots {
+            display: none;
         }
 
         .slot {
@@ -584,7 +633,7 @@
             }
 
             .panel-stack {
-                order: 2;
+                order: -1;
             }
 
             .summary-strip {
@@ -677,6 +726,10 @@
                 text-align: center;
             }
 
+            .signup-top #signup-form {
+                grid-template-columns: 1fr;
+            }
+
             .panel {
                 padding: 0.9rem;
                 border-radius: 16px;
@@ -714,10 +767,15 @@
             }
 
             .count-badge {
-                grid-column: 1 / -1;
                 justify-self: start;
                 white-space: normal;
                 text-align: center;
+            }
+
+            .category-meta {
+                grid-column: 1 / -1;
+                justify-content: flex-start;
+                flex-wrap: wrap;
             }
 
             .slots {
@@ -852,6 +910,10 @@
                 display: block;
             }
 
+            .category-card.collapsed .slots {
+                display: grid;
+            }
+
             .category-card {
                 margin: 0 0 0.18in;
                 break-inside: avoid;
@@ -975,12 +1037,12 @@
             </div>
         </section>
 
-        <section class="grid" aria-label="Potluck sign-up form and list">
-            <aside class="panel-stack no-print">
+        <section class="grid signup-layout" aria-label="Potluck sign-up form and list">
+            <aside class="panel-stack signup-top no-print">
                 <div class="panel">
                     <h2>Sign up</h2>
                     <form id="signup-form" class="form-grid">
-                        <label>Category <select id="signup-category" required></select></label>
+                        <label>Dish type <select id="signup-category" required></select></label>
                         <label>Your name <input id="signup-name" type="text" autocomplete="name" required /></label>
                         <label>Email <input id="signup-email" type="email" autocomplete="email" required /></label>
                         <label>Phone <input id="signup-phone" type="tel" autocomplete="tel" required /></label>
@@ -989,7 +1051,7 @@
                         <button type="submit" id="signup-submit">Add my sign-up</button>
                     </form>
                     <div id="signup-status" class="signup-status" role="status" aria-live="polite"></div>
-                    <p class="hint">When a category is full, it will no longer be available in the category dropdown.
+                    <p class="hint">Choose a dish type first, then fill out your name, contact info, and what you are bringing. Full dish types are hidden from the dropdown.
                     </p>
                 </div>
 
@@ -1043,6 +1105,7 @@
         };
 
         let state = isSharedMode() ? cloneDefaultState() : loadState();
+        const expandedCategories = new Set();
 
         const $ = (id) => document.getElementById(id);
         const els = {
@@ -1257,14 +1320,23 @@
             if (!available.length) {
                 els.signupCategory.innerHTML = `<option value="">All categories are full</option>`;
                 els.signupSubmit.disabled = true;
+                updateSignupFieldState();
                 return;
             }
-            els.signupSubmit.disabled = false;
             const current = els.signupCategory.value;
-            els.signupCategory.innerHTML = available
+            els.signupCategory.innerHTML = `<option value="">Choose a dish type...</option>` + available
                 .map((cat) => `<option value="${escapeHtml(cat.id)}">${escapeHtml(cat.icon)} ${escapeHtml(cat.name)} (${openSlots(cat)} open)</option>`)
                 .join("");
-            if (available.some((cat) => cat.id === current)) els.signupCategory.value = current;
+            els.signupCategory.value = available.some((cat) => cat.id === current) ? current : "";
+            updateSignupFieldState();
+        }
+
+        function updateSignupFieldState() {
+            const hasCategory = Boolean(els.signupCategory.value);
+            [els.signupName, els.signupEmail, els.signupPhone, els.signupItem].forEach((field) => {
+                field.disabled = !hasCategory;
+            });
+            els.signupSubmit.disabled = !hasCategory;
         }
 
         function renderCategoryCards() {
@@ -1277,25 +1349,39 @@
                 const entries = signupsFor(cat.id);
                 const needed = Number(cat.needed || 0);
                 const isFull = entries.length >= needed && needed > 0;
+                const isExpanded = expandedCategories.has(cat.id);
+                const cardClass = isExpanded ? "category-card" : "category-card collapsed";
                 const slots = [];
                 for (let index = 0; index < Math.max(needed, entries.length); index += 1) {
                     const entry = entries[index];
                     slots.push(renderSlot(cat, entry, index));
                 }
                 return `
-					<article class="category-card">
-						<header class="category-head">
+					<article class="${cardClass}">
+						<header class="category-head" role="button" tabindex="0" aria-expanded="${isExpanded ? "true" : "false"}" data-toggle-category="${escapeHtml(cat.id)}">
 							<div class="cat-icon" aria-hidden="true">${escapeHtml(cat.icon)}</div>
 							<div>
 								<h3>${escapeHtml(cat.name)}</h3>
-								<p>${needed} sign-up${needed === 1 ? "" : "s"} needed</p>
+								<p>${needed} sign-up${needed === 1 ? "" : "s"} needed • ${isExpanded ? "Tap to collapse" : "Tap to expand"}</p>
 							</div>
-							<span class="count-badge ${isFull ? "full" : ""}">${entries.length}/${needed}${isFull ? " Full" : ""}</span>
+							<div class="category-meta">
+								<span class="count-badge ${isFull ? "full" : ""}">${entries.length}/${needed}${isFull ? " Full" : ""}</span>
+								<span class="collapse-indicator" aria-hidden="true">${isExpanded ? "−" : "+"}</span>
+							</div>
 						</header>
 						<div class="slots">${slots.join("") || `<div class="slot"><span class="slot-number">–</span><span class="slot-empty">No slots configured.</span></div>`}</div>
 					</article>
 				`;
             }).join("");
+
+            els.categoryCards.querySelectorAll("[data-toggle-category]").forEach((header) => {
+                header.addEventListener("click", () => toggleCategory(header.dataset.toggleCategory));
+                header.addEventListener("keydown", (event) => {
+                    if (event.key !== "Enter" && event.key !== " ") return;
+                    event.preventDefault();
+                    toggleCategory(header.dataset.toggleCategory);
+                });
+            });
 
             els.categoryCards.querySelectorAll("[data-delete]").forEach((button) => {
                 button.addEventListener("click", () => deleteSignup(button.dataset.delete));
@@ -1303,6 +1389,13 @@
             els.categoryCards.querySelectorAll("[data-email]").forEach((button) => {
                 button.addEventListener("click", () => emailSignup(button.dataset.email));
             });
+        }
+
+        function toggleCategory(id) {
+            if (!id) return;
+            if (expandedCategories.has(id)) expandedCategories.delete(id);
+            else expandedCategories.add(id);
+            renderCategoryCards();
         }
 
         function renderSlot(cat, entry, index) {
@@ -1664,6 +1757,13 @@
         $("import-json").addEventListener("click", () => els.importFile.click());
         els.importFile.addEventListener("change", (event) => importJsonFile(event.target.files[0]));
         $("print-sheet").addEventListener("click", () => window.print());
+        els.signupCategory.addEventListener("change", () => {
+            updateSignupFieldState();
+            if (els.signupCategory.value) {
+                expandedCategories.add(els.signupCategory.value);
+                renderCategoryCards();
+            }
+        });
         els.signupForm.addEventListener("submit", addSignup);
         window.addEventListener("message", handleSharedMessage);
 
