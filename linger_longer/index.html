@@ -194,8 +194,27 @@
         .hero-details {
             display: flex;
             flex-wrap: wrap;
+            align-items: center;
             gap: 0.7rem;
             margin-top: 0.25rem;
+        }
+
+        .hero-print-btn {
+            margin-left: auto;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.96);
+            color: var(--primary-dark, #5b2f12);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .hero-print-btn:hover {
+            background: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
         }
 
         .pill {
@@ -248,6 +267,10 @@
             justify-content: space-between;
             gap: 0.7rem;
             min-width: 0;
+        }
+
+        .dismissible-notice[hidden] {
+            display: none;
         }
 
         .notice-dismiss {
@@ -1132,6 +1155,7 @@
                     <span class="pill" id="event-date-display">📅 Sun, Jun 07, 2026</span>
                     <span class="pill" id="event-time-display">🕑 2 PM</span>
                     <span class="pill" id="event-location-display">📍 Sundance 1st Ward Cultural Hall</span>
+                    <button type="button" id="print-sheet" class="hero-print-btn no-print">🖨️ Print</button>
                 </div>
             </div>
         </section>
@@ -1152,7 +1176,6 @@
                 <button type="button" id="export-json" class="btn-secondary" data-owner-control>Export JSON</button>
                 <button type="button" id="export-csv" class="btn-secondary" data-owner-control>Export CSV</button>
                 <button type="button" id="import-json" class="btn-secondary" data-owner-control>Import</button>
-                <button type="button" id="print-sheet" class="btn-accent">Print</button>
             </div>
         </div>
 
