@@ -191,6 +191,30 @@
             overflow-wrap: anywhere;
         }
 
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: clamp(0.5rem, 2vw, 1.1rem);
+            flex-wrap: wrap;
+        }
+
+        .title-flag {
+            flex: 0 0 auto;
+            width: clamp(2rem, 5vw, 3.4rem);
+            height: clamp(1.33rem, 3.33vw, 2.27rem);
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            display: block;
+        }
+
+        .title-flag svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border-radius: inherit;
+        }
+
         .hero-details {
             display: flex;
             flex-wrap: wrap;
@@ -1148,7 +1172,11 @@
         <section id="hero" class="hero" aria-label="Potluck sign-up header">
             <div class="hero-content">
                 <p class="eyebrow" id="event-eyebrow">Linger Longer Potluck</p>
-                <h1 id="event-title-display">June Linger Longer Potluck Sign-Up</h1>
+                <div class="title-row">
+                    <span class="title-flag" aria-hidden="true" title="Italian flag"><svg viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="2" x="0" fill="#008C45"/><rect width="1" height="2" x="1" fill="#F4F5F0"/><rect width="1" height="2" x="2" fill="#CD212A"/></svg></span>
+                    <h1 id="event-title-display">June Linger Longer Potluck Sign-Up</h1>
+                    <span class="title-flag" aria-hidden="true" title="Italian flag"><svg viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="2" x="0" fill="#008C45"/><rect width="1" height="2" x="1" fill="#F4F5F0"/><rect width="1" height="2" x="2" fill="#CD212A"/></svg></span>
+                </div>
                 <p class="hero-note" id="event-note-display">Please sign up to bring something to share. Thank you for
                     helping make this a warm, welcoming meal!</p>
                 <div class="hero-details">
@@ -1167,7 +1195,8 @@
             <div class="notice dismissible-notice" id="mode-notice">
                 <span id="mode-notice-text"><strong>Static page note:</strong> GitHub Pages cannot save shared
                     sign-ups by itself.
-                    This page saves entries in this browser/device and includes export/import/print tools for low-traffic
+                    This page saves entries in this browser/device and includes export/import/print tools for
+                    low-traffic
                     coordination.</span>
                 <button type="button" class="notice-dismiss" data-dismiss-mode-notice>Dismiss</button>
             </div>
@@ -1243,7 +1272,8 @@
                 <div class="panel" id="workflow-panel">
                     <div class="panel-heading-row">
                         <h3>Low-traffic workflow</h3>
-                        <button type="button" class="notice-dismiss no-print" data-dismiss-workflow-notice>Dismiss</button>
+                        <button type="button" class="notice-dismiss no-print"
+                            data-dismiss-workflow-notice>Dismiss</button>
                     </div>
                     <p class="hint" id="workflow-note">For a shared online list, export the JSON after collecting
                         entries and upload the
@@ -1282,7 +1312,7 @@
                 time: "2 PM",
                 location: "Sundance 1st Ward Cultural Hall",
                 organizerEmail: "",
-                heroImage: "lingerlonger.png"
+                heroImage: "June_Hero_Image.jpg"
             },
             categories: [
                 { id: "appetizer", name: "Appetizer", needed: 5, icon: "🥨" },
@@ -1392,6 +1422,8 @@
             next.event.time = String(next.event.time || base.event.time).trim() || base.event.time;
             if (/^time\s+tbd$/i.test(next.event.time)) next.event.time = base.event.time;
             next.event.heroImage = String(next.event.heroImage || base.event.heroImage).trim() || base.event.heroImage;
+            // Migrate cached state from previous default hero image to the current Italian-themed image.
+            if (next.event.heroImage === "lingerlonger.png") next.event.heroImage = base.event.heroImage;
             next.categories = Array.isArray(next.categories) && next.categories.length ? next.categories : base.categories;
             next.signups = Array.isArray(next.signups) ? next.signups : [];
             next.categories = next.categories.map((cat, index) => ({
