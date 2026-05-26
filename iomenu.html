@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>matziq.github.io — Everything Menu</title>
+    <meta name="description" content="Comprehensive index of everything matziq hosts on GitHub Pages, organized by category." />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0b1022" />
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300d4ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230b1022'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='ui-sans-serif,system-ui,sans-serif' font-size='34' font-weight='800' fill='url(%23g)'%3Em%3C/text%3E%3C/svg%3E" />
+
+    <style>
+        :root {
+            --bg0: #070a12;
+            --bg1: #0b1022;
+            --card: rgba(255, 255, 255, .06);
+            --card2: rgba(255, 255, 255, .10);
+            --border: rgba(255, 255, 255, .12);
+            --text: rgba(255, 255, 255, .92);
+            --muted: rgba(255, 255, 255, .70);
+            --shadow: 0 14px 40px rgba(0, 0, 0, .35);
+            --accent: #7c5cff;
+            --accent2: #00d4ff;
+            --accent3: #ffb800;
+            --radius: 18px;
+            --gap: 18px;
+            --max: 1180px;
+        }
+
+        * { box-sizing: border-box; }
+        html, body { height: 100%; }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(1000px 600px at 20% 10%, rgba(124, 92, 255, .22), transparent 55%),
+                radial-gradient(900px 520px at 85% 20%, rgba(0, 212, 255, .18), transparent 55%),
+                radial-gradient(900px 520px at 50% 110%, rgba(255, 184, 0, .12), transparent 55%),
+                linear-gradient(180deg, var(--bg0), var(--bg1));
+            overflow-x: hidden;
+        }
+
+        .wrap {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 34px 20px 60px;
+        }
+
+        header {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--muted);
+            font-size: 14px;
+            letter-spacing: .2px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            box-shadow: 0 0 0 4px rgba(124, 92, 255, .12);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(28px, 4.4vw, 46px);
+            letter-spacing: -0.6px;
+            line-height: 1.05;
+        }
+
+        .sub {
+            margin: 0;
+            max-width: 72ch;
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.55;
+        }
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 18px 0 4px;
+        }
+
+        .search {
+            flex: 1 1 280px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 10px 16px;
+        }
+
+        .search input {
+            flex: 1;
+            background: transparent;
+            border: 0;
+            outline: 0;
+            color: var(--text);
+            font: inherit;
+            font-size: 15px;
+        }
+
+        .search input::placeholder { color: rgba(255, 255, 255, .45); }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .chip {
+            cursor: pointer;
+            user-select: none;
+            font-size: 13px;
+            color: var(--muted);
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 8px 14px;
+            transition: background 140ms ease, color 140ms ease, border-color 140ms ease;
+        }
+
+        .chip:hover { color: var(--text); border-color: rgba(255, 255, 255, .25); }
+        .chip[aria-pressed="true"] {
+            background: linear-gradient(90deg, var(--accent2), var(--accent));
+            color: rgba(0, 0, 0, .9);
+            border-color: transparent;
+            font-weight: 700;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--gap);
+            margin-top: 22px;
+        }
+
+        .section-title {
+            grid-column: span 12;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 18px 0 -4px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .60);
+        }
+
+        .section-title::before,
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .18), transparent);
+        }
+
+        .card {
+            grid-column: span 6;
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            gap: 14px;
+            align-items: center;
+            padding: 16px;
+            border-radius: var(--radius);
+            background: linear-gradient(180deg, var(--card), rgba(255, 255, 255, .03));
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0);
+            transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            opacity: 0;
+            background:
+                radial-gradient(450px 130px at 20% 0%, rgba(124, 92, 255, .25), transparent 55%),
+                radial-gradient(420px 130px at 90% 40%, rgba(0, 212, 255, .22), transparent 60%);
+            transition: opacity 140ms ease;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, .22);
+            background: linear-gradient(180deg, var(--card2), rgba(255, 255, 255, .04));
+        }
+
+        .card:hover::before { opacity: 1; }
+
+        .card:focus-visible {
+            outline: 2px solid var(--accent2);
+            outline-offset: 3px;
+        }
+
+        .icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .12);
+        }
+
+        .icon svg { width: 34px; height: 34px; display: block; }
+
+        .grad {
+            fill: none;
+            stroke-width: 2.6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .meta {
+            display: grid;
+            gap: 6px;
+            z-index: 1;
+            min-width: 0;
+        }
+
+        .name {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .name h2 {
+            margin: 0;
+            font-size: 18px;
+            letter-spacing: -0.2px;
+        }
+
+        .pill {
+            font-size: 11px;
+            color: rgba(0, 0, 0, .85);
+            background: linear-gradient(90deg, var(--accent2), var(--accent));
+            padding: 5px 9px;
+            border-radius: 999px;
+            font-weight: 700;
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+
+        .desc {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.45;
+        }
+
+        .url {
+            margin: 0;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            color: rgba(255, 255, 255, .45);
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .empty {
+            grid-column: span 12;
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--muted);
+            border: 1px dashed var(--border);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, .03);
+        }
+
+        footer {
+            margin-top: 32px;
+            color: rgba(255, 255, 255, .55);
+            font-size: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 18px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        footer a { color: rgba(255, 255, 255, .75); }
+
+        .hint {
+            display: inline-flex;
+            gap: 10px;
+            align-items: center;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .10);
+            border-radius: 999px;
+            padding: 8px 12px;
+        }
+
+        kbd {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, .18);
+            background: rgba(0, 0, 0, .25);
+            color: rgba(255, 255, 255, .85);
+        }
+
+        @media (max-width: 900px) {
+            .card { grid-column: span 12; }
+            .name { flex-wrap: wrap; }
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .float {
+                position: absolute;
+                right: -80px;
+                top: -70px;
+                width: 220px;
+                height: 220px;
+                border-radius: 999px;
+                background:
+                    radial-gradient(circle at 30% 30%, rgba(124, 92, 255, .25), transparent 55%),
+                    radial-gradient(circle at 60% 60%, rgba(0, 212, 255, .18), transparent 55%);
+                filter: blur(1px);
+                opacity: .75;
+                animation: drift 10s ease-in-out infinite;
+                pointer-events: none;
+            }
+
+            @keyframes drift {
+                0%, 100% { transform: translate(0, 0) scale(1); }
+                50% { transform: translate(-14px, 10px) scale(1.02); }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="float" aria-hidden="true"></div>
+
+        <header>
+            <div class="kicker"><span class="dot"></span> Comprehensive site index</div>
+            <h1>Everything on matziq.github.io</h1>
+            <p class="sub">
+                A one-stop menu of every public site I host on GitHub Pages — apps, dashboards,
+                training docs, reference pages, and games — organized by category. Use the search
+                box or filter chips to narrow things down.
+            </p>
+        </header>
+
+        <div class="toolbar" role="search">
+            <label class="search">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+                    <path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <input id="q" type="search" placeholder="Search sites by name, tag, or category…"
+                    autocomplete="off" spellcheck="false" />
+            </label>
+            <div class="filters" role="group" aria-label="Filter by category">
+                <button class="chip" data-cat="all" aria-pressed="true">All</button>
+                <button class="chip" data-cat="apps">Apps &amp; Tools</button>
+                <button class="chip" data-cat="dashboards">Data &amp; Dashboards</button>
+                <button class="chip" data-cat="docs">Docs &amp; Training</button>
+                <button class="chip" data-cat="reference">Reference</button>
+                <button class="chip" data-cat="food">Recipes &amp; Food</button>
+                <button class="chip" data-cat="games">Games</button>
+            </div>
+        </div>
+
+        <section id="grid" class="grid" aria-label="All sites">
+
+            <!-- ===== APPS & TOOLS ===== -->
+            <h2 class="section-title" data-cat="apps">Apps &amp; Tools</h2>
+
+            <a class="card" data-cat="apps" data-tags="audio pwa soundboard mobile"
+                href="https://matziq.github.io/soundboard/" target="_blank" rel="noopener">
+                <div class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <defs>
+                            <linearGradient id="g-sb" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#4fd1c5" />
+                                <stop offset="1" stop-color="#63b3ed" />
+                            </linearGradient>
+                        </defs>
+                        <path class="grad" stroke="url(#g-sb)" d="M5 10v4h3l4 3V7L8 10H5z" />
+                        <path class="grad" stroke="url(#g-sb)" d="M16 9c1 1 1 5 0 6" />
+                        <path class="grad" stroke="url(#g-sb)" d="M18.5 7c2 2 2 8 0 10" />
+                    </svg>
+                </div>
+                <div class="meta">
+                    <div class="name">
+                        <h2>Soundboard</h2>
+                        <span class="pill">App</span>
+                    </div>
+                    <p class="desc">Touch-friendly soundboard PWA — tap clips grouped by source. Installable on phone or desktop.</p>
+                    <p class="url">matziq.github.io/soundboard/</p>
+                </div>
+            </a>
+
+            <a class="card" data-cat="apps" data-tags="ai images gallery casting whatif"
+                href="https://matziq.github.io/imagine-fun/" target="_blank" rel="noopener">
+                <div class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <defs>
+                            <linearGradient id="g-if" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#a855f7" />
+                                <stop offset="1" stop-color="#ec4899" />
+                            </linearGradient>
+                        </defs>
+                        <rect class="grad" stroke="url(#g-if)" x="3" y="5" width="18" height="14" rx="2" />
+                        <circle class="grad" stroke="url(#g-if)" cx="9" cy="11" r="1.5" />
+                        <path class="grad" stroke="url(#g-if)" d="M5 18l5-5 4 4 2-2 3 3" />
+                    </svg>
+                </div>
+                <div class="meta">
+                    <div class="name">
+                        <h2>AI Image Fun</h2>
+                        <span class="pill">App</span>
+                    </div>
+                    <p class="desc">Galleries of fun AI-generated images and themed sets — alternate-cast picks, what-ifs, and more.</p>
+                    <p class="url">matziq.github.io/imagine-fun/</p>
+                </div>
+            </a>
+
+            <!-- ===== DATA & DASHBOARDS ===== -->
+            <h2 class="section-title" data-cat="dashboards">Data &amp; Dashboards</h2>
+
+            <a class="card" data-cat="dashboards" data-tags="tesla supercharger ev charging analytics"
+                href="https://matziq.github.io/tesla-charging-dashboard/" target="_blank" rel="noopener">
+                <div class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <defs>
+                            <linearGradient id="g-tc" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#4fd1c5" />
+                                <stop offset="1" stop-color="#f6ad55" />
+                            </linearGradient>
+                        </defs>
+                        <path class="grad" stroke="url(#g-tc)" d="M13 3L5 14h6l-1 7 8-11h-6l1-7z" />
+                    </svg>
+                </div>
+                <div class="meta">
+                    <div class="name">
+                        <h2>Tesla Charging Dashboard</h2>
+                        <span class="pill">Dashboard</span>
+                    </div>
+                    <p class="desc">Supercharger usage, work-vs-travel splits, and routing insights for Aurora &amp; Cherry Bomb.</p>
+                    <p class="url">matziq.github.io/tesla-charging-dashboard/</p>
+                </div>
+            </a>
+
+            <!-- ===== DOCS & TRAINING ===== -->
+            <h2 class="section-title" data-cat="docs">Docs &amp; Training</h2>
+
+            <a class="card" data-cat="docs" data-tags="copilot microsoft365 training enablement"
+                href="https://matziq.github.io/copilot-training-docs/" target="_blank" rel="noopener">
+                <div class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <defs>
+                            <linearGradient id="g-cp" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#63b3ed" />
+                                <stop offset="1" stop-color="#7c5cff" />
+                            </linearGradient>
+                        </defs>
+                        <path class="grad" stroke="url(#g-cp)" d="M7 4h7l4 4v12H7z" />
+                        <path class="grad" stroke="url(#g-cp)" d="M14 4v4h4" />
+                        <path class="grad" stroke="url(#g-cp)" d="M9.5 14.5l2 2 3.5-4" />
+                    </svg>
+                </div>
+                <div class="meta">
+                    <div class="name">
+                        <h2>Copilot Training Docs</h2>
+                        <span class="pill">Docs</span>
+                    </div>
+                    <p class="desc">Training material and demo prompts for Microsoft 365 Copilot enablement sessions — trainer + user views.</p>
+                    <p class="url">matziq.github.io/copilot-training-docs/</p>
+                </div>
+            </a>
+
+            <!-- ===== REFERENCE ===== -->
+            <h2 class="section-title" data-cat="reference">Reference</h2>
+
+            <a class="card" data-cat="reference" data-tags="religion comparison study reference"
+                href="./religion/religion-comparison.html" target="_blank" rel="noopener">
+                <div class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <defs>
+                            <linearGradient id="g-rl" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#ffb800" />
+                                <stop offset="1" stop-color="#ec4899" />
+                            </linearGradient>
+                        </defs>
+                        <path class="grad" stroke="url(#g-rl)" d="M5 4h10l4 4v12H5z" />
+                        <path class="grad" stroke="url(#g-rl)" d="M9 12h6" />
+                        <path class="grad" stroke="url(#g-rl)" d="M12 9v6" />
+                    </svg>
+                </div>
+                <div class="meta">
+                    <div class="name">
+                        <h2>Religion Comparison</h2>
+                        <span class="pill">Reference</span>
+                    </div>
+                    <p class="desc">Side-by-side comparison of major world religions — beliefs, practices, and historical context.</p>
+                    <p class="url">matziq.github.io/religion/religion-comparison.html</p>
+                </div>
+            </a>
+
+            <!-- ===== RECIPES & FOOD ===== -->
+            <h2 class="section-title" data-cat="food">Recipes &amp; Food</h2>
+
+            <a class="card" data-cat="food" data-tags="recipes cooking family kitchen food"
+                href="https://matziq.github.io/recipes/" target="_blank" rel="noopener">
+                <div class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <defs>
+                            <linearGradient id="g-rc" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#ff9966" />
+                                <stop offset="1" stop-color="#ff5e62" />
+                            </linearGradient>
+                        </defs>
+                        <path class="grad" stroke="url(#g-rc)" d="M6 4h9a3 3 0 0 1 3 3v13H6z" />
+                        <path class="grad" stroke="url(#g-rc)" d="M9 8h6" />
+                        <path class="grad" stroke="url(#g-rc)" d="M9 11h6" />
+                        <path class="grad" stroke="url(#g-rc)" d="M9 14h4" />
+                    </svg>
+                </div>
+                <div class="meta">
+                    <div class="name">
+                        <h2>Family Recipes</h2>
+                        <span class="pill">App</span>
+                    </div>
+                    <p class="desc">Browsable family recipe collection — searchable, mobile-friendly, straight from the kitchen.</p>
+                    <p class="url">matziq.github.io/recipes/</p>
+                </div>
+            </a>
+
+            <a class="card" data-cat="food" data-tags="potluck signup linger longer event"
+                href="./linger_longer/" target="_blank" rel="noopener">
+                <div class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <defs>
+                            <linearGradient id="g-ll" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#7cf7c4" />
+                                <stop offset="1" stop-color="#63b3ed" />
+                            </linearGradient>
+                        </defs>
+                        <path class="grad" stroke="url(#g-ll)" d="M4 7h16M6 7v12h12V7" />
+                        <path class="grad" stroke="url(#g-ll)" d="M8 4v4M16 4v4" />
+                        <path class="grad" stroke="url(#g-ll)" d="M9 12h6M9 15h4" />
+                    </svg>
+                </div>
+                <div class="meta">
+                    <div class="name">
+                        <h2>Linger Longer Potluck</h2>
+                        <span class="pill">Signup</span>
+                    </div>
+                    <p class="desc">Monthly potluck signup sheet — who's bringing what, hero image, and dish notes.</p>
+                    <p class="url">matziq.github.io/linger_longer/</p>
+                </div>
+            </a>
+
+            <!-- ===== GAMES ===== -->
+            <h2 class="section-title" data-cat="games">Games</h2>
+
+            <a class="card" data-cat="games" data-tags="games hub collection arcade puzzle"
+                href="https://matziq.github.io/games/" target="_blank" rel="noopener">
+                <div class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <defs>
+                            <linearGradient id="g-gh" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#7c5cff" />
+                                <stop offset="1" stop-color="#00d4ff" />
+                            </linearGradient>
+                        </defs>
+                        <rect class="grad" stroke="url(#g-gh)" x="3" y="7" width="18" height="11" rx="3" />
+                        <path class="grad" stroke="url(#g-gh)" d="M8 12h2M9 11v2" />
+                        <circle class="grad" stroke="url(#g-gh)" cx="16" cy="11" r="0.8" />
+                        <circle class="grad" stroke="url(#g-gh)" cx="16" cy="14" r="0.8" />
+                    </svg>
+                </div>
+                <div class="meta">
+                    <div class="name">
+                        <h2>Matziq Hub (Games)</h2>
+                        <span class="pill">Hub</span>
+                    </div>
+                    <p class="desc">Collection of browser-based single-file games — 2048, fruit pile, aztec, betris, and more.</p>
+                    <p class="url">matziq.github.io/games/</p>
+                </div>
+            </a>
+
+            <a class="card" data-cat="games" data-tags="dice match-3 puzzle domino"
+                href="https://matziq.github.io/domino-combo/" target="_blank" rel="noopener">
+                <div class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <defs>
+                            <linearGradient id="g-dc" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#ffffff" />
+                                <stop offset="1" stop-color="#ff4444" />
+                            </linearGradient>
+                        </defs>
+                        <rect class="grad" stroke="url(#g-dc)" x="4" y="8" width="16" height="8" rx="2" />
+                        <path class="grad" stroke="url(#g-dc)" d="M12 8v8" />
+                        <circle class="grad" stroke="url(#g-dc)" cx="8" cy="12" r="1" />
+                        <circle class="grad" stroke="url(#g-dc)" cx="16" cy="11" r="0.8" />
+                        <circle class="grad" stroke="url(#g-dc)" cx="16" cy="13" r="0.8" />
+                    </svg>
+                </div>
+                <div class="meta">
+                    <div class="name">
+                        <h2>Domino Combo</h2>
+                        <span class="pill">Game</span>
+                    </div>
+                    <p class="desc">Match-3 dice placement game with domino-like pieces. Merge matching tiles to upgrade them!</p>
+                    <p class="url">matziq.github.io/domino-combo/</p>
+                </div>
+            </a>
+
+        </section>
+
+        <div id="empty" class="empty" hidden>No sites match your search. Try a different keyword or clear the filter.</div>
+
+        <footer>
+            <span class="hint">
+                <kbd>/</kbd> to focus search · <kbd>Esc</kbd> to clear
+            </span>
+            <span>
+                <a href="./">Home</a> ·
+                <a href="https://github.com/matziq" target="_blank" rel="noopener">github.com/matziq</a>
+            </span>
+        </footer>
+    </div>
+
+    <script>
+        (function () {
+            const input = document.getElementById('q');
+            const chips = document.querySelectorAll('.chip');
+            const cards = document.querySelectorAll('.card[data-cat]');
+            const sections = document.querySelectorAll('.section-title[data-cat]');
+            const empty = document.getElementById('empty');
+            let activeCat = 'all';
+
+            function applyFilter() {
+                const q = (input.value || '').trim().toLowerCase();
+                let visibleCount = 0;
+                const visibleByCat = {};
+
+                cards.forEach(card => {
+                    const cat = card.dataset.cat;
+                    const text = (card.textContent + ' ' + (card.dataset.tags || '')).toLowerCase();
+                    const matchesCat = activeCat === 'all' || cat === activeCat;
+                    const matchesQ = !q || text.includes(q);
+                    const show = matchesCat && matchesQ;
+                    card.style.display = show ? '' : 'none';
+                    if (show) {
+                        visibleCount++;
+                        visibleByCat[cat] = (visibleByCat[cat] || 0) + 1;
+                    }
+                });
+
+                sections.forEach(s => {
+                    const cat = s.dataset.cat;
+                    const matchesCat = activeCat === 'all' || cat === activeCat;
+                    s.style.display = matchesCat && (visibleByCat[cat] || 0) > 0 ? '' : 'none';
+                });
+
+                empty.hidden = visibleCount !== 0;
+            }
+
+            chips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    chips.forEach(c => c.setAttribute('aria-pressed', 'false'));
+                    chip.setAttribute('aria-pressed', 'true');
+                    activeCat = chip.dataset.cat;
+                    applyFilter();
+                });
+            });
+
+            input.addEventListener('input', applyFilter);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === '/' && document.activeElement !== input) {
+                    e.preventDefault();
+                    input.focus();
+                    input.select();
+                } else if (e.key === 'Escape' && document.activeElement === input) {
+                    input.value = '';
+                    applyFilter();
+                    input.blur();
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>
