@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Top 20 Criticisms of the Church &amp; Latter-day Saint Responses</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../religion/favicon.svg" />
+    <style>
+        :root {
+            --lds-blue: #003366;
+            --lds-gold: #c9a961;
+            --bg: #f5f3ee;
+            --panel: #ffffff;
+            --ink: #1f1f1f;
+            --muted: #555;
+            --rule: #d8d3c4;
+            --accent: #0b3d91;
+            --highlight: #fff7d6;
+            --header-grad-start: #003366;
+            --header-grad-end: #1a4d8c;
+            --header-ink: #ffffff;
+            --card-grad-start: #fafaf6;
+            --card-grad-end: #ffffff;
+            --lds-card-bg: #fdf8e7;
+            --lds-distinct-ink: #5a4a14;
+            --lds-name-ink: #6b5318;
+            --lds-h3-ink: #8a6d1b;
+            --tooltip-bg: #222;
+            --tooltip-ink: #ffffff;
+            --crit-bg: #fbeaea;
+            --crit-border: #c0392b;
+            --crit-ink: #7c2018;
+            --resp-bg: #e8f3ec;
+            --resp-border: #2e7d4f;
+            --resp-ink: #1c4a30;
+            --chip-bg: #eef2fb;
+            --chip-ink: #0b3d91;
+            --chip-border: #c7d6f3;
+            --btn-bg: rgba(255, 255, 255, 0.15);
+            --btn-bg-hover: rgba(255, 255, 255, 0.28);
+            --btn-ink: #ffffff;
+            --btn-border: rgba(255, 255, 255, 0.35);
+        }
+
+        [data-theme="dark"] {
+            --lds-blue: #4a7bb5;
+            --lds-gold: #d4b870;
+            --bg: #14171c;
+            --panel: #20242b;
+            --ink: #e8e8e8;
+            --muted: #a8a8a8;
+            --rule: #3a3f47;
+            --accent: #6ba3ff;
+            --highlight: #4a4020;
+            --header-grad-start: #0d1a2e;
+            --header-grad-end: #1a2c4a;
+            --header-ink: #ffffff;
+            --card-grad-start: #232831;
+            --card-grad-end: #20242b;
+            --lds-card-bg: #2c2820;
+            --lds-distinct-ink: #d4b870;
+            --lds-name-ink: #e3c478;
+            --lds-h3-ink: #d4b870;
+            --tooltip-bg: #f0f0f0;
+            --tooltip-ink: #111;
+            --crit-bg: #3a201d;
+            --crit-border: #c0392b;
+            --crit-ink: #f0b3aa;
+            --resp-bg: #1c3226;
+            --resp-border: #4caf7d;
+            --resp-ink: #b6e6c8;
+            --chip-bg: #232d40;
+            --chip-ink: #9cc2ff;
+            --chip-border: #38486a;
+            --btn-bg: rgba(255, 255, 255, 0.10);
+            --btn-bg-hover: rgba(255, 255, 255, 0.22);
+            --btn-ink: #ffffff;
+            --btn-border: rgba(255, 255, 255, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.5;
+            transition: background 0.25s, color 0.25s;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--header-grad-start), var(--header-grad-end));
+            color: var(--header-ink);
+            padding: 24px 32px;
+            border-bottom: 4px solid var(--lds-gold);
+            position: relative;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 260px;
+        }
+
+        header h1 {
+            margin: 0 0 6px 0;
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        header p {
+            margin: 0;
+            opacity: 0.85;
+            font-size: 14px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .icon-btn {
+            background: var(--btn-bg);
+            color: var(--btn-ink);
+            border: 1px solid var(--btn-border);
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.15s;
+        }
+
+        .icon-btn:hover {
+            background: var(--btn-bg-hover);
+        }
+
+        .icon-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .tap-hint {
+            display: none;
+        }
+
+        body.touch-mode .hover-hint {
+            display: none;
+        }
+
+        body.touch-mode .tap-hint {
+            display: inline;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .controls {
+            background: var(--panel);
+            color: var(--ink);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            border-top: 3px solid var(--lds-gold);
+            transition: background 0.25s;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .control-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: end;
+        }
+
+        .control-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .control-group.grow {
+            flex: 2;
+            min-width: 240px;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        select,
+        input[type="search"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--rule);
+            border-radius: 6px;
+            font-size: 14px;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: inherit;
+        }
+
+        select:focus,
+        input[type="search"]:focus {
+            outline: 2px solid var(--accent);
+        }
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            margin-top: 14px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .toolbar .spacer {
+            flex: 1;
+        }
+
+        .text-btn {
+            background: none;
+            border: 1px solid var(--rule);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: inherit;
+        }
+
+        .text-btn:hover {
+            background: var(--highlight);
+        }
+
+        #count {
+            font-weight: 600;
+        }
+
+        .legend {
+            margin: 10px 0 0;
+            font-size: 12px;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .crit-card {
+            background: linear-gradient(180deg, var(--card-grad-start), var(--card-grad-end));
+            border-radius: 10px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--rule);
+            border-top: 3px solid var(--lds-gold);
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: background 0.25s;
+        }
+
+        .card-head {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            padding: 16px 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .card-head:hover {
+            background: var(--highlight);
+        }
+
+        .num-badge {
+            flex-shrink: 0;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--lds-blue);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        [data-theme="dark"] .num-badge {
+            background: var(--lds-gold);
+            color: #1a1505;
+        }
+
+        .head-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .head-text h2 {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .cat-tag {
+            display: inline-block;
+            margin-top: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--lds-name-ink);
+            background: var(--lds-card-bg);
+            border: 1px solid var(--lds-gold);
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+
+        .chevron {
+            flex-shrink: 0;
+            transition: transform 0.2s;
+            color: var(--muted);
+        }
+
+        .crit-card.open .chevron {
+            transform: rotate(180deg);
+        }
+
+        .card-body {
+            display: none;
+            padding: 0 20px 20px;
+        }
+
+        .crit-card.open .card-body {
+            display: block;
+        }
+
+        .block {
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin-bottom: 14px;
+            font-size: 14.5px;
+        }
+
+        .block .block-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            margin: 0 0 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .block p {
+            margin: 0 0 8px;
+        }
+
+        .block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .block.criticism {
+            background: var(--crit-bg);
+            border-left: 4px solid var(--crit-border);
+        }
+
+        .block.criticism .block-label {
+            color: var(--crit-ink);
+        }
+
+        .block.response {
+            background: var(--resp-bg);
+            border-left: 4px solid var(--resp-border);
+        }
+
+        .block.response .block-label {
+            color: var(--resp-ink);
+        }
+
+        .block.response ul {
+            margin: 6px 0 0;
+            padding-left: 20px;
+        }
+
+        .block.response li {
+            margin-bottom: 5px;
+        }
+
+        .refs {
+            margin-top: 10px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--rule);
+        }
+
+        .refs-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .chip {
+            display: inline-block;
+            font-size: 12.5px;
+            font-weight: 600;
+            background: var(--chip-bg);
+            color: var(--chip-ink);
+            border: 1px solid var(--chip-border);
+            padding: 3px 10px;
+            border-radius: 20px;
+            text-decoration: none;
+        }
+
+        .chip:hover {
+            filter: brightness(0.96);
+            text-decoration: underline;
+        }
+
+        .sources {
+            font-size: 13px;
+        }
+
+        .sources a {
+            color: var(--accent);
+        }
+
+        .sources .src-item {
+            margin-bottom: 3px;
+        }
+
+        /* Glossary tooltip */
+        .term {
+            border-bottom: 1px dotted var(--accent);
+            cursor: help;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .term:hover {
+            background: var(--highlight);
+        }
+
+        #glossary-tooltip {
+            position: fixed;
+            background: var(--tooltip-bg);
+            color: var(--tooltip-ink);
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: normal;
+            line-height: 1.45;
+            width: 320px;
+            max-width: calc(100vw - 24px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+            pointer-events: none;
+            white-space: normal;
+            text-align: left;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.15s, visibility 0.15s;
+        }
+
+        #glossary-tooltip.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #glossary-tooltip::after {
+            content: '';
+            position: absolute;
+            left: var(--arrow-x, 50%);
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+        }
+
+        #glossary-tooltip.above::after {
+            top: 100%;
+            border-top-color: var(--tooltip-bg);
+        }
+
+        #glossary-tooltip.below::after {
+            bottom: 100%;
+            border-bottom-color: var(--tooltip-bg);
+        }
+
+        .tooltip-close {
+            display: none;
+            margin-top: 6px;
+            text-align: right;
+            font-size: 11px;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        body.touch-mode #glossary-tooltip {
+            pointer-events: auto;
+        }
+
+        body.touch-mode .tooltip-close {
+            display: block;
+        }
+
+        .empty {
+            background: var(--panel);
+            border: 2px dashed var(--rule);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--muted);
+            font-size: 13px;
+            border-top: 1px solid var(--rule);
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="header-text">
+                <h1>Top 20 Criticisms of the Church &amp; Latter-day Saint Responses</h1>
+                <p>Each common objection paired with a faithful, sourced answer — <span
+                        class="hover-hint">hover</span><span class="tap-hint">tap</span> any underlined term for a
+                    definition.</p>
+            </div>
+            <div class="header-actions">
+                <button id="home-btn" class="icon-btn" type="button" title="Reset filters and scroll to top"
+                    aria-label="Home — reset view">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z" />
+                    </svg>
+                    <span>Home</span>
+                </button>
+                <button id="theme-btn" class="icon-btn" type="button" title="Toggle dark mode"
+                    aria-label="Toggle dark mode">
+                    <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                    <span id="theme-label">Dark</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="controls">
+            <div class="control-row">
+                <div class="control-group grow">
+                    <label for="search-input">Search criticisms</label>
+                    <input type="search" id="search-input" placeholder="e.g. DNA, Nahom, polygamy, Book of Abraham…"
+                        autocomplete="off" />
+                </div>
+                <div class="control-group">
+                    <label for="cat-select">Filter by category</label>
+                    <select id="cat-select"></select>
+                </div>
+            </div>
+            <div class="toolbar">
+                <span id="count"></span>
+                <span class="spacer"></span>
+                <button id="expand-all" class="text-btn" type="button">Expand all</button>
+                <button id="collapse-all" class="text-btn" type="button">Collapse all</button>
+            </div>
+            <p class="legend">Tip: hover (or tap) any <span class="term"
+                    data-def="Words with this style have hover-definitions. Try hovering!">underlined term</span> for a
+                popup definition. Click a card to open or close its response.</p>
+        </div>
+
+        <div id="cards"></div>
+    </div>
+
+    <footer>
+        Written from a believing Latter-day Saint perspective. Criticisms are stated as critics frame them; responses
+        summarize mainstream apologetic and scholarly answers. For authoritative teaching, consult the Church's <a
+            href="https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays?lang=eng" target="_blank"
+            rel="noopener">Gospel Topics Essays</a>, <a href="https://scripturecentral.org/" target="_blank"
+            rel="noopener">Scripture Central</a>, and <a href="https://www.fairlatterdaysaints.org/" target="_blank"
+            rel="noopener">FAIR</a>.
+    </footer>
+
+    <div id="glossary-tooltip" role="tooltip" aria-hidden="true"></div>
+
+    <script>
+        // =============================
+        // GLOSSARY
+        // =============================
+        const glossary = {
+            "Nahom": "A burial place named in 1 Nephi 16:34 along Lehi's route through Arabia. Three limestone altars discovered at the ancient Bar'an temple in Marib, Yemen (dated c. 8th–7th century BC) bear the tribal name 'NHM' — the only confirmed Book of Mormon place-name found archaeologically in the right location.",
+            "NHM": "The three Semitic consonants (Nehem/Nihm/Nahom) inscribed on ancient South Arabian altars near Marib, Yemen, matching the Book of Mormon place 'Nahom' and lying due west of a fertile coastal region fitting 'Bountiful.'",
+            "Bountiful": "The fertile coastal place 'with much fruit and wild honey' where Nephi built a ship (1 Nephi 17:5–6). Candidate sites at Khor Kharfot / Wadi Sayq in Dhofar, Oman — directly eastward of Nahom — match the description critics once said could not exist in Arabia.",
+            "Chiasmus": "An ancient Hebrew poetic structure (A-B-C-…-C'-B'-A') in which ideas are stated, then repeated in reverse. Long passages of the Book of Mormon (e.g., Alma 36) display tight chiasmus, an authentic Near-Eastern literary form Joseph Smith is unlikely to have known in 1829.",
+            "Limited geography": "The mainstream scholarly view that Book of Mormon events occurred within a relatively small region (often Mesoamerica), not across both American continents — meaning Lehite peoples were a small group among far larger existing populations.",
+            "Loan-shifting": "When settlers apply familiar names to unfamiliar things (e.g., Spanish explorers calling bison 'cows'). Proposed for Book of Mormon 'horses,' 'cattle,' etc., where a known word may label a New-World animal.",
+            "Catalyst theory": "One faithful explanation of the Book of Abraham: the Egyptian papyri prompted (catalyzed) revelation to Joseph Smith rather than being a literal letter-for-letter translation, so the recovered fragments need not match the English text word-for-word.",
+            "Seer stone": "A stone Joseph Smith placed in a hat to block light while translating; he read the English text by the 'gift and power of God.' The Church publicly displayed photographs of the stone in 2015 (Joseph Smith Papers).",
+            "Urim and Thummim": "Biblical instruments of revelation (Exodus 28:30); the term Joseph used for the divine interpreters (and later the seer stone) by which the Book of Mormon was translated (Mosiah 8:13).",
+            "Theosis": "The ancient Christian doctrine (held by the Eastern Orthodox and early Church Fathers like Athanasius and Irenaeus) that the faithful can 'become partakers of the divine nature' (2 Peter 1:4) — the closest historic parallel to the Latter-day Saint doctrine of exaltation.",
+            "Exaltation": "The Latter-day Saint doctrine of the highest salvation — becoming a 'joint-heir with Christ' (Romans 8:17), inheriting eternal life and family relationships in God's presence, growing in Christlikeness forever.",
+            "Gospel Topics Essays": "A series of carefully sourced essays published by the Church (2013–2015) on its official website addressing difficult historical and doctrinal questions candidly.",
+            "Apologetics": "The reasoned defense and explanation of a religious belief. Latter-day Saint apologetics is carried out by independent organizations such as FAIR and Scripture Central.",
+            "Anachronism": "Something appearing in a text before it historically existed — e.g., the charge that 'horses' or 'steel' in the Book of Mormon are out of place for the ancient Americas.",
+            "Deutero-Isaiah": "The scholarly theory that Isaiah chapters 40–66 were written by a later author after 600 BC. Critics note the Book of Mormon (set c. 600 BC) quotes these chapters; defenders dispute the dating and note the unity of Isaiah.",
+            "Brass plates": "The ancient record of scripture (including writings of Isaiah) that Lehi's family carried from Jerusalem (1 Nephi 5), the source of Old Testament quotations in the Book of Mormon.",
+            "Book of Mormon witnesses": "Eleven men (the Three and the Eight Witnesses) who signed published testimonies that they saw the gold plates. None ever denied his testimony, even those who left the Church.",
+            "Restoration": "The Latter-day Saint belief that the original Church, priesthood authority, and ordinances were restored through the prophet Joseph Smith beginning in 1820, following a Great Apostasy.",
+            "Great Apostasy": "The falling away from the fulness of the gospel after the death of Christ's apostles, which Latter-day Saints believe necessitated a restoration rather than a reformation.",
+            "Official Declaration 2": "The 1978 revelation to President Spencer W. Kimball extending the priesthood and temple blessings to all worthy male members regardless of race.",
+            "Freemasonry": "A fraternal order with ritual and symbolism. Joseph Smith became a Mason months before introducing the temple endowment; defenders argue both preserve fragments of far older sacred forms, while the temple's meaning is uniquely Christian.",
+            "Endowment": "A Latter-day Saint temple ordinance in which adults receive instruction about the plan of salvation and make covenants with God.",
+            "Open canon": "The Latter-day Saint belief that scripture is not closed and God may reveal more (Amos 3:7; Articles of Faith 9), contrasting with the Protestant closed-canon view.",
+            "Grace": "God's saving and enabling power through Jesus Christ. Latter-day Saints teach salvation is by grace, made effective through faith, repentance, and covenant obedience (2 Nephi 25:23; Ephesians 2:8–10).",
+            "Ensign Peak": "The Church's investment reserve arm, whose size became public in 2019, held against future needs and times of difficulty.",
+            "Mountain Meadows Massacre": "An 1857 atrocity in southern Utah in which local militia members killed about 120 emigrants. The Church has repeatedly condemned it and issued a formal expression of regret in 2007."
+        };
+
+        function markupTerms(html) {
+            if (!html) return '';
+            const terms = Object.keys(glossary).sort((a, b) => b.length - a.length);
+            let out = html;
+            const placeholders = [];
+            terms.forEach(term => {
+                const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const re = new RegExp('(?<![\\w>])(' + escaped + ')(?![\\w<])', 'i');
+                const match = out.match(re);
+                if (match) {
+                    const def = glossary[term].replace(/"/g, '&quot;');
+                    const matchedText = match[1];
+                    const placeholder = `@@TERM${placeholders.length}@@`;
+                    placeholders.push(`<span class="term" tabindex="0" data-def="${def}">${matchedText}</span>`);
+                    out = out.replace(re, placeholder);
+                }
+            });
+            placeholders.forEach((repl, i) => {
+                out = out.split(`@@TERM${i}@@`).join(repl);
+            });
+            return out;
+        }
+
+        // =============================
+        // SCRIPTURE / SOURCE HELPERS
+        // =============================
+        const SCRIPT_BASE = "https://www.churchofjesuschrist.org/study/scriptures/";
+        function sc(ref, path) { return { ref, url: SCRIPT_BASE + path + "?lang=eng" }; }
+
+        // =============================
+        // CRITICISMS DATA
+        // =============================
+        const criticisms = [
+            {
+                cat: "Archaeology & Geography",
+                title: "There is no archaeological evidence for the Book of Mormon",
+                criticism: "Critics long argued that nothing in the Book of Mormon — no cities, names, routes, or peoples — could be located on the map, and that the Old World portion of Lehi's journey through Arabia described places (a burial site called Nahom, a lush coastal Bountiful) that simply do not exist.",
+                response: [
+                    "The single most striking confirmation is <strong>Nahom</strong>. The Book of Mormon names a place 'Nahom' where Ishmael was buried (1 Nephi 16:34). Beginning in the 1990s, archaeologists documented limestone altars at the ancient Bar'an temple near Marib, Yemen, inscribed with the tribal name <strong>NHM</strong> and dated to roughly the 7th century BC — the right name in the right place at the right time.",
+                    "From Nahom the text says the family turned 'nearly eastward' (1 Nephi 17:1) to a fertile coast called <strong>Bountiful</strong>. Travel due east of Nahom and you reach the Dhofar coast of Oman, where candidate sites such as Khor Kharfot match the description of fruit, timber, honey, and ore for shipbuilding — features critics insisted did not exist anywhere in Arabia."
+                ],
+                bullets: [
+                    "The ancient incense/spice trail Lehi would have followed runs south-southeast from Jerusalem exactly as the text describes.",
+                    "Tight <strong>chiasmus</strong> (e.g., Alma 36) is an authentic Hebrew literary form unlikely to be faked by a young farmer in 1829.",
+                    "New-World archaeology favors a <strong>limited geography</strong>: a small people leaving a faint material trace, not a hemisphere-spanning empire."
+                ],
+                scriptures: [
+                    sc("1 Nephi 16:34 (Nahom)", "bofm/1-ne/16"),
+                    sc("1 Nephi 17:5–6 (Bountiful)", "bofm/1-ne/17"),
+                    sc("Alma 36 (chiasmus)", "bofm/alma/36")
+                ],
+                sources: [
+                    { label: "Scripture Central — “Nahom and the ‘Eastward’ Turn”", url: "https://scripturecentral.org/" },
+                    { label: "Warren Aston, “Lehi and Sariah in Arabia”", url: "https://www.fairlatterdaysaints.org/answers/Book_of_Mormon/Geography/Arabian_Peninsula" }
+                ]
+            },
+            {
+                cat: "Science",
+                title: "DNA proves Native Americans came from Asia, not Israel",
+                criticism: "Genetic studies show that Indigenous peoples of the Americas descend overwhelmingly from Asian populations, with no detectable 'Israelite' or Middle-Eastern DNA. Critics say this disproves the Book of Mormon's claim that its peoples were of Israelite descent.",
+                response: [
+                    "The Church's Gospel Topics essay 'Book of Mormon and DNA Studies' addresses this directly. The Book of Mormon never claims Lehi's family were the <em>only</em> or even the principal ancestors of all Native Americans — and Jacob's olive-tree allegory (Jacob 5) pictures Israel scattered and grafted among many peoples.",
+                    "Under a <strong>limited geography</strong>, a small founding family arriving c. 600 BC among large established populations would leave DNA that is statistically almost impossible to detect today, because of founder effect, genetic drift, and population bottlenecks. You cannot find a needle that the math predicts would have dissolved into the haystack."
+                ],
+                bullets: [
+                    "Population genetics: founder lineages routinely vanish from the detectable record over a few thousand years.",
+                    "We don't even know which ancient marker would count as 'Lehi's DNA,' so there is nothing fixed to test against.",
+                    "The book is a religious record of a covenant people, not a genetic census of two continents."
+                ],
+                scriptures: [
+                    sc("Jacob 5 (allegory of the olive tree)", "bofm/jacob/5"),
+                    sc("1 Nephi 13 (other peoples in the land)", "bofm/1-ne/13"),
+                    sc("2 Nephi 1:5–9 (a land for others too)", "bofm/2-ne/1")
+                ],
+                sources: [
+                    { label: "Gospel Topics Essay — “Book of Mormon and DNA Studies”", url: "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/book-of-mormon-and-dna-studies?lang=eng" },
+                    { label: "FAIR — “DNA and the Book of Mormon”", url: "https://www.fairlatterdaysaints.org/answers/Book_of_Mormon/DNA" }
+                ]
+            },
+            {
+                cat: "Science",
+                title: "The Book of Mormon contains anachronisms — horses, steel, wheels, barley",
+                criticism: "The text mentions horses, cattle, elephants, steel, chariots, silk, and barley in pre-Columbian America, where critics say none of these existed before European contact.",
+                response: [
+                    "Several supposed anachronisms have quietly resolved as evidence accumulated. Domesticated <strong>barley</strong> — long said to be absent from the pre-Columbian Americas — was confirmed at Hohokam archaeological sites in Arizona in the 1980s. Pre-Columbian use of metal and even meteoric/​worked iron is also attested.",
+                    "Others may reflect <strong>loan-shifting</strong>: when peoples meet new animals they often reuse familiar words (Spanish explorers called bison 'cows'). 'Horse' could label a deer or tapir; 'cattle' an indigenous beast. The Book of Mormon is a translation, so it uses the closest available English words."
+                ],
+                bullets: [
+                    "Barley: documented at Hohokam sites (1983) after the criticism was first raised.",
+                    "Steel: the Old-World 'steel' bow (1 Nephi 16:18) and Nephite metalworking fit Near-Eastern usage of the term.",
+                    "Absence of evidence isn't evidence of absence — categories once 'impossible' keep turning up."
+                ],
+                scriptures: [
+                    sc("1 Nephi 16:18 (a bow of fine steel)", "bofm/1-ne/16"),
+                    sc("Jarom 1:8 (tools of iron, steel, etc.)", "bofm/jarom/1"),
+                    sc("Ether 9:18–19 (animals named)", "bofm/ether/9")
+                ],
+                sources: [
+                    { label: "Scripture Central — “Animals & Metals in the Book of Mormon”", url: "https://scripturecentral.org/" },
+                    { label: "FAIR — “Anachronisms”", url: "https://www.fairlatterdaysaints.org/answers/Book_of_Mormon/Anachronisms" }
+                ]
+            },
+            {
+                cat: "Scripture & Translation",
+                title: "The Book of Mormon has been changed thousands of times since 1830",
+                criticism: "Critics point out that there are thousands of differences between the 1830 first edition and modern printings, arguing the text is unstable and therefore not the unchangeable 'most correct book.'",
+                response: [
+                    "Royal Skousen's decades-long Book of Mormon Critical Text Project catalogued the changes: the overwhelming majority are spelling, punctuation, capitalization, and grammar corrections to a text that was dictated aloud and first set in type by a non-Mormon printer with no chapter punctuation in the original manuscript.",
+                    "The doctrinal substance is stable. A handful of clarifying edits (e.g., wording in 1 Nephi 11 about the Son of God) sharpen, rather than reverse, the original meaning — exactly what you would expect from normal editing of a dictated manuscript."
+                ],
+                bullets: [
+                    "Most 'changes' are commas, spelling, and grammar — not doctrine.",
+                    "The original and printer's manuscripts survive and let scholars track every edit.",
+                    "Comparable editing exists for the King James Bible across its print history."
+                ],
+                scriptures: [
+                    sc("Title Page of the Book of Mormon", "bofm/bofm-title"),
+                    sc("1 Nephi 11 (a frequently cited example)", "bofm/1-ne/11")
+                ],
+                sources: [
+                    { label: "Royal Skousen, Critical Text Project (Maxwell Institute)", url: "https://mi.byu.edu/" },
+                    { label: "FAIR — “Changes to the Book of Mormon”", url: "https://www.fairlatterdaysaints.org/answers/Book_of_Mormon/Textual_changes" }
+                ]
+            },
+            {
+                cat: "Scripture & Translation",
+                title: "Joseph translated with a stone in a hat, not the gold plates",
+                criticism: "Critics highlight that for much of the translation Joseph Smith looked at a <strong>seer stone</strong> placed in his hat — sometimes with the plates covered or in another room — and ask why the plates were even needed.",
+                response: [
+                    "The Church has openly acknowledged and even <em>published photographs</em> of the seer stone (Joseph Smith Papers, 2015). Multiple firsthand witnesses described this method, so it is not a hidden embarrassment but a documented part of how revelation came.",
+                    "Scripturally, seers using divine instruments is ancient: the biblical <strong>Urim and Thummim</strong> (Exodus 28:30) and the Book of Mormon's own description of 'interpreters' (Mosiah 8:13) frame the stone as a God-given aid. The plates anchored the reality of an ancient record; the translation came 'by the gift and power of God.'"
+                ],
+                bullets: [
+                    "The method is corroborated by Emma Smith, David Whitmer, and others.",
+                    "A physical object focusing faith parallels the biblical Urim and Thummim and the brass serpent (Numbers 21).",
+                    "Revelation 'line upon line' (D&C 9) describes an active, effortful process, not mechanical reading."
+                ],
+                scriptures: [
+                    sc("Mosiah 8:13 (a seer and interpreters)", "bofm/mosiah/8"),
+                    sc("D&C 9:7–9 (study it out in your mind)", "dc-testament/dc/9"),
+                    sc("Exodus 28:30 (Urim and Thummim)", "ot/ex/28")
+                ],
+                sources: [
+                    { label: "Gospel Topics Essay — “Book of Mormon Translation”", url: "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/book-of-mormon-translation?lang=eng" },
+                    { label: "Joseph Smith Papers — seer stone photographs", url: "https://www.josephsmithpapers.org/" }
+                ]
+            },
+            {
+                cat: "Scripture & Translation",
+                title: "The Book of Abraham doesn't match the surviving Egyptian papyri",
+                criticism: "Surviving fragments of the papyri Joseph Smith owned are ordinary Egyptian funerary texts (the 'Book of Breathings'), not the narrative of Abraham. Egyptologists say his interpretations of the facsimiles are wrong, so critics call the Book of Abraham a fabrication.",
+                response: [
+                    "The Church's Gospel Topics essay notes that most of the original scrolls are <em>lost</em> — eyewitnesses described a long roll, while only fragments survived a museum fire. We cannot compare the English text to papyri we no longer have.",
+                    "Many scholars favor a <strong>catalyst theory</strong>: the papyri prompted revelation about Abraham rather than serving as a word-for-word source. On that view the value of the Book of Abraham rests on its doctrine and revealed content, and notably it contains authentic ancient details (e.g., the name and setting of Abraham's near-sacrifice) that Joseph could not have known in 1842."
+                ],
+                bullets: [
+                    "Eyewitness accounts describe far more papyri than the surviving fragments.",
+                    "Ancient 'Abraham' traditions unknown in 1842 align with details in the text.",
+                    "Egyptian facsimiles were reused and reinterpreted across cultures — multiple meanings were normal."
+                ],
+                scriptures: [
+                    sc("Abraham 1 (Abraham's near-sacrifice)", "pgp/abr/1"),
+                    sc("Abraham 3 (cosmology / Kolob)", "pgp/abr/3")
+                ],
+                sources: [
+                    { label: "Gospel Topics Essay — “Translation and Historicity of the Book of Abraham”", url: "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/translation-and-historicity-of-the-book-of-abraham?lang=eng" },
+                    { label: "FAIR — “Book of Abraham”", url: "https://www.fairlatterdaysaints.org/answers/Book_of_Abraham" }
+                ]
+            },
+            {
+                cat: "Church History",
+                title: "There are multiple, contradictory First Vision accounts",
+                criticism: "Joseph Smith left several accounts of the First Vision (1832, 1835, 1838, 1842) that differ in details — how many divine beings appeared, his age, his motives — which critics say proves he invented and revised the story over time.",
+                response: [
+                    "The Church published all the accounts in the Gospel Topics essay 'First Vision Accounts' and in the Joseph Smith Papers. The differences are differences of <em>emphasis and audience</em>, not contradiction: the 1832 account stresses forgiveness of sins; the 1838 canonical account stresses which church to join.",
+                    "Multiple tellings of one true experience are normal — even scriptural. The Apostle Paul's Damascus-road vision is recounted three different ways in Acts 9, 22, and 26 with varying detail, yet no one doubts the event. Growth and added detail over time is a mark of authentic memory, not fabrication."
+                ],
+                bullets: [
+                    "All known accounts agree on the core: God answered Joseph's prayer in a vision.",
+                    "Paul's conversion is likewise told three ways in Acts.",
+                    "The Church itself published and analyzed every account."
+                ],
+                scriptures: [
+                    sc("Joseph Smith—History 1:14–20", "pgp/js-h/1"),
+                    sc("James 1:5 (the verse that prompted the prayer)", "nt/james/1"),
+                    sc("Acts 26:12–18 (Paul retells his vision)", "nt/acts/26")
+                ],
+                sources: [
+                    { label: "Gospel Topics Essay — “First Vision Accounts”", url: "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/first-vision-accounts?lang=eng" },
+                    { label: "Joseph Smith Papers — First Vision documents", url: "https://www.josephsmithpapers.org/" }
+                ]
+            },
+            {
+                cat: "Church History",
+                title: "Joseph Smith practiced polygamy and polyandry",
+                criticism: "Joseph Smith secretly married dozens of women, including some already married to living men and some as young as their mid-teens, while publicly denying the practice. Critics view this as predatory deception.",
+                response: [
+                    "The Church's three essays on plural marriage address this candidly. The practice was understood as a commanded restoration of an Old-Testament order (Abraham, Jacob), explicitly tied in scripture to 'raising up seed' to the Lord (Jacob 2:30; D&C 132).",
+                    "Context matters on the difficult points: many of the 'polyandrous' sealings appear to have been eternity-only, dynastic sealings rather than conjugal marriages, and age-at-marriage in the 1840s American frontier differed sharply from modern norms. These facts neither erase the difficulty nor require pretending it doesn't exist — they place it in its historical and covenantal setting."
+                ],
+                bullets: [
+                    "Plural marriage was framed as a divine command, not personal license (D&C 132).",
+                    "Several sealings were eternal-only, not marital in the ordinary sense.",
+                    "The practice was ended by revelation in 1890 (Official Declaration 1)."
+                ],
+                scriptures: [
+                    sc("Jacob 2:30 (to raise up seed)", "bofm/jacob/2"),
+                    sc("D&C 132 (the revelation on marriage)", "dc-testament/dc/132"),
+                    sc("Official Declaration 1 (the 1890 end)", "dc-testament/od/1")
+                ],
+                sources: [
+                    { label: "Gospel Topics Essays — “Plural Marriage in Kirtland and Nauvoo”", url: "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/plural-marriage-in-kirtland-and-nauvoo?lang=eng" },
+                    { label: "FAIR — “Joseph Smith and plural marriage”", url: "https://www.fairlatterdaysaints.org/answers/Joseph_Smith/Polygamy" }
+                ]
+            },
+            {
+                cat: "Church History",
+                title: "The Church banned Black members from the priesthood until 1978",
+                criticism: "From the mid-1800s until 1978, men of Black African descent could not hold the priesthood and Black members could not receive temple ordinances, and Church leaders taught racial explanations for the ban. Critics call this evidence of an uninspired, racist institution.",
+                response: [
+                    "The 2013 Gospel Topics essay 'Race and the Priesthood' is unusually direct: it states the Church 'disavows the theories advanced in the past' that Black skin was a sign of divine disfavor or of less valiance in a premortal life. Those folk explanations are repudiated.",
+                    "The restriction was lifted by revelation in 1978 (<strong>Official Declaration 2</strong>), restoring the New-Testament principle that 'God is no respecter of persons' (Acts 10:34–35) and the Book of Mormon teaching that 'all are alike unto God' (2 Nephi 26:33). Latter-day Saints see this as the gospel's universal reach reasserting itself."
+                ],
+                bullets: [
+                    "The Church formally disavows the old racial justifications.",
+                    "Founding scripture already taught racial equality (2 Nephi 26:33).",
+                    "The 1978 revelation opened all ordinances to all worthy members."
+                ],
+                scriptures: [
+                    sc("2 Nephi 26:33 (all are alike unto God)", "bofm/2-ne/26"),
+                    sc("Acts 10:34–35 (no respecter of persons)", "nt/acts/10"),
+                    sc("Official Declaration 2 (1978)", "dc-testament/od/2")
+                ],
+                sources: [
+                    { label: "Gospel Topics Essay — “Race and the Priesthood”", url: "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/race-and-the-priesthood?lang=eng" },
+                    { label: "FAIR — “Blacks and the priesthood”", url: "https://www.fairlatterdaysaints.org/answers/Blacks_and_the_priesthood" }
+                ]
+            },
+            {
+                cat: "Scripture & Translation",
+                title: "Joseph copied the Book of Mormon from ‘View of the Hebrews’ (or the Spalding manuscript)",
+                criticism: "Critics claim Joseph plagiarized Ethan Smith's 1823 'View of the Hebrews' (which proposed Hebrew origins for Native Americans) or Solomon Spalding's unpublished novel, rather than translating an ancient record.",
+                response: [
+                    "When B. H. Roberts catalogued the parallels with 'View of the Hebrews,' he found the differences vastly outweigh the similarities — the two books share a broad 19th-century theme but diverge in structure, names, theology, and narrative entirely. There is no evidence Joseph ever read it before 1830.",
+                    "The Spalding theory collapsed when Spalding's actual manuscript was rediscovered in 1884: it bears no meaningful resemblance to the Book of Mormon. Meanwhile, eyewitnesses uniformly describe Joseph dictating the text aloud with no manuscript or book in front of him — the opposite of copying."
+                ],
+                bullets: [
+                    "The recovered Spalding manuscript does not match the Book of Mormon.",
+                    "Witnesses saw Joseph dictate with his face in a hat and no source text.",
+                    "Shared 'Hebraic origins' was a common idea of the era, not a smoking gun."
+                ],
+                scriptures: [
+                    sc("2 Nephi 27 (a sealed book brought forth)", "bofm/2-ne/27"),
+                    sc("Isaiah 29:11–14 (the prophesied book)", "ot/isa/29")
+                ],
+                sources: [
+                    { label: "FAIR — “View of the Hebrews”", url: "https://www.fairlatterdaysaints.org/answers/Book_of_Mormon/Plagiarism_accusations/View_of_the_Hebrews" },
+                    { label: "FAIR — “Spalding manuscript theory”", url: "https://www.fairlatterdaysaints.org/answers/Book_of_Mormon/Plagiarism_accusations/Spalding_manuscript" }
+                ]
+            },
+            {
+                cat: "Church History",
+                title: "The Kinderhook plates show Joseph would ‘translate’ forgeries",
+                criticism: "In 1843 some men produced fake engraved 'Kinderhook plates' to entrap Joseph Smith, and critics claim he began translating them, proving his gift was fraudulent.",
+                response: [
+                    "Joseph never produced a revelatory translation of the Kinderhook plates. The only contemporary evidence is a clerk's note that Joseph compared a character to his Egyptian alphabet and offered a secular guess about lineage — an attempt at ordinary comparison, not revelation.",
+                    "He never dictated scripture from them, never canonized anything, and the project simply stopped. The episode shows the opposite of what critics claim: when there was no genuine ancient record and no revelation, nothing came forth."
+                ],
+                bullets: [
+                    "No scriptural 'translation' of the plates was ever produced.",
+                    "The single source is a non-revelatory comparison to his Egyptian alphabet.",
+                    "Modern testing later confirmed the plates were a 19th-century forgery — which Joseph's silence is consistent with."
+                ],
+                scriptures: [
+                    sc("D&C 9:7–9 (revelation requires real effort and confirmation)", "dc-testament/dc/9")
+                ],
+                sources: [
+                    { label: "FAIR — “Kinderhook plates”", url: "https://www.fairlatterdaysaints.org/answers/Kinderhook_Plates" },
+                    { label: "BYU Studies — “Kinderhook Plates and the Translation Question”", url: "https://byustudies.byu.edu/" }
+                ]
+            },
+            {
+                cat: "Doctrine & Theology",
+                title: "The temple ceremony was copied from Freemasonry",
+                criticism: "Joseph Smith became a Freemason in March 1842 and introduced the temple endowment weeks later, sharing signs, tokens, and ritual gestures with Masonry. Critics conclude the endowment is borrowed, not revealed.",
+                response: [
+                    "Latter-day Saints don't deny formal similarities. The faithful explanation is that <strong>Freemasonry</strong> preserves fragments of very ancient ritual forms, and that Joseph used some familiar forms as a vehicle for a wholly Christ-centered <strong>endowment</strong> with entirely different meaning and purpose.",
+                    "Form is not substance. A wedding ring and a championship ring share a shape but mean different things. The temple's content — the Creation, the Fall, the Atonement of Jesus Christ, and covenants leading back to God's presence — has no parallel in Masonry, whose ritual is not a plan of salvation centered on Christ."
+                ],
+                bullets: [
+                    "Shared gestures, radically different meaning and theology.",
+                    "Joseph taught he was restoring ancient ordinances, of which Masonry kept echoes.",
+                    "The endowment is explicitly about Christ and the plan of salvation; Masonry is not."
+                ],
+                scriptures: [
+                    sc("Exodus 28–29 (ancient priestly ordinances)", "ot/ex/28"),
+                    sc("D&C 124:40–41 (ordinances to be revealed in the temple)", "dc-testament/dc/124")
+                ],
+                sources: [
+                    { label: "FAIR — “Temple and Freemasonry”", url: "https://www.fairlatterdaysaints.org/answers/Mormonism_and_Freemasonry" },
+                    { label: "Maxwell Institute — temple studies", url: "https://mi.byu.edu/" }
+                ]
+            },
+            {
+                cat: "Scripture & Translation",
+                title: "The Book of Mormon witnesses later recanted",
+                criticism: "Critics claim the Three and Eight Witnesses to the gold plates were unreliable, fell away from the Church, and took back their testimonies.",
+                response: [
+                    "This is simply not true on the central point: not one of the eleven <strong>Book of Mormon witnesses</strong> ever denied his published testimony — even the several who became estranged from Joseph Smith and left the Church.",
+                    "Oliver Cowdery, David Whitmer, and Martin Harris each reaffirmed the experience throughout their lives; some left the Church yet still insisted they had seen the plates and the angel. Hostile separation actually strengthens the testimony: men with every motive to expose a fraud refused to recant."
+                ],
+                bullets: [
+                    "Zero of the eleven witnesses ever denied seeing the plates.",
+                    "Several reaffirmed it on their deathbeds, some outside the Church.",
+                    "Their estrangement from Joseph removes the 'they were just loyal followers' explanation."
+                ],
+                scriptures: [
+                    sc("The Testimony of Three Witnesses", "bofm/three"),
+                    sc("The Testimony of Eight Witnesses", "bofm/eight"),
+                    sc("2 Corinthians 13:1 (established by witnesses)", "nt/2-cor/13")
+                ],
+                sources: [
+                    { label: "FAIR — “Witnesses of the Book of Mormon”", url: "https://www.fairlatterdaysaints.org/answers/Book_of_Mormon/Witnesses" },
+                    { label: "Richard L. Anderson, “Investigating the Book of Mormon Witnesses”", url: "https://rsc.byu.edu/" }
+                ]
+            },
+            {
+                cat: "Scripture & Translation",
+                title: "Revelation 22:18–19 forbids adding any more scripture",
+                criticism: "Critics cite 'if any man shall add unto these things…' (Revelation 22:18–19) to argue the Bible is complete and the Book of Mormon is a forbidden addition.",
+                response: [
+                    "That warning applies to the book of Revelation, which John wrote decades before the New Testament was compiled into one volume — so it cannot mean 'no more scripture ever,' or it would condemn the very act of binding the New Testament together. A nearly identical warning appears in Deuteronomy 4:2, yet most of the Old Testament was written afterward.",
+                    "The Latter-day Saint <strong>open canon</strong> rests on the principle that 'the Lord God will do nothing, but he revealeth his secret unto his servants the prophets' (Amos 3:7). God has always added scripture as He calls new prophets; the Restoration continues that pattern."
+                ],
+                bullets: [
+                    "The warning is about Revelation specifically, written before the Bible was assembled.",
+                    "Deuteronomy 4:2 says the same thing — long before later scripture was written.",
+                    "Amos 3:7 establishes ongoing prophetic revelation as God's pattern."
+                ],
+                scriptures: [
+                    sc("Amos 3:7 (revealed to His prophets)", "ot/amos/3"),
+                    sc("Deuteronomy 4:2 (the same warning, early)", "ot/deut/4"),
+                    sc("Ezekiel 37:15–17 (two records, Judah and Joseph)", "ot/ezek/37")
+                ],
+                sources: [
+                    { label: "FAIR — “Revelation 22 and the canon”", url: "https://www.fairlatterdaysaints.org/answers/Bible/Adding_to_the_Bible" },
+                    { label: "Scripture Central — open canon", url: "https://scripturecentral.org/" }
+                ]
+            },
+            {
+                cat: "Doctrine & Theology",
+                title: "Latter-day Saints teach salvation by works, not grace",
+                criticism: "Critics say the emphasis on ordinances, commandments, and 'all we can do' means Latter-day Saints try to earn heaven, contradicting the biblical teaching that salvation is by grace through faith alone.",
+                response: [
+                    "Latter-day Saints teach that salvation is by the <strong>grace</strong> of Christ — no one can save themselves. The often-quoted phrase 'by grace that we are saved, after all we can do' (2 Nephi 25:23) means grace is operative <em>regardless</em> of our efforts, not that we earn the remainder.",
+                    "This matches the New Testament's own balance: 'by grace are ye saved through faith… not of works' (Ephesians 2:8–9) stands alongside 'faith, if it hath not works, is dead' (James 2:17). Works are the fruit and evidence of saving faith, not its purchase price — exactly what Article of Faith 3 affirms."
+                ],
+                bullets: [
+                    "Grace is primary; works are the response of a changed heart (Ephesians 2:8–10).",
+                    "James 2 insists living faith produces works.",
+                    "Ordinances are covenants of faith in Christ, not transactions buying salvation."
+                ],
+                scriptures: [
+                    sc("2 Nephi 25:23 (saved by grace, after all we can do)", "bofm/2-ne/25"),
+                    sc("Ephesians 2:8–10 (grace through faith, unto good works)", "nt/eph/2"),
+                    sc("James 2:17–26 (faith without works is dead)", "nt/james/2")
+                ],
+                sources: [
+                    { label: "Brad Wilcox, “His Grace Is Sufficient” (BYU devotional)", url: "https://speeches.byu.edu/talks/brad-wilcox/his-grace-is-sufficient/" },
+                    { label: "FAIR — “Grace and works”", url: "https://www.fairlatterdaysaints.org/answers/Grace_and_works" }
+                ]
+            },
+            {
+                cat: "Doctrine & Theology",
+                title: "Believing humans can become gods is polytheism / blasphemy",
+                criticism: "The teaching that faithful people may attain <strong>exaltation</strong> and 'become like God' strikes critics as polytheistic and a denial of the uniqueness of God.",
+                response: [
+                    "This idea is not a 19th-century novelty — it is the ancient Christian doctrine of <strong>theosis</strong> (deification), taught by early Fathers such as Athanasius ('God became man that man might become God') and Irenaeus, and still held in Eastern Orthodoxy. C. S. Lewis described much the same hope in 'Mere Christianity.'",
+                    "Scripture grounds it: the faithful are 'joint-heirs with Christ' (Romans 8:16–17), called to 'be partakers of the divine nature' (2 Peter 1:4); Jesus quoted Psalm 82:6, 'ye are gods' (John 10:34). Latter-day Saints worship only God the Father in the name of Jesus Christ — exalted beings remain forever subordinate to and worshipful of Him."
+                ],
+                bullets: [
+                    "Theosis is the historic teaching of the early and Eastern Church.",
+                    "Romans 8:17; 2 Peter 1:4; John 10:34 all point this direction.",
+                    "Worship is reserved for the Father through the Son — this is not many rival gods."
+                ],
+                scriptures: [
+                    sc("Romans 8:16–17 (joint-heirs with Christ)", "nt/rom/8"),
+                    sc("2 Peter 1:4 (partakers of the divine nature)", "nt/2-pet/1"),
+                    sc("John 10:34 (ye are gods)", "nt/john/10")
+                ],
+                sources: [
+                    { label: "Gospel Topics Essay — “Becoming Like God”", url: "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/becoming-like-god?lang=eng" },
+                    { label: "FAIR — “Deification of man”", url: "https://www.fairlatterdaysaints.org/answers/Deification_of_man" }
+                ]
+            },
+            {
+                cat: "Church History",
+                title: "Joseph Smith was a money-digger and convicted con man",
+                criticism: "Before founding the Church, Joseph Smith hunted for buried treasure using a seer stone and was reportedly brought before a court in 1826, which critics say marks him a fraud and disqualifies him as a prophet.",
+                response: [
+                    "Treasure-seeking with stones was a common, even respectable, folk practice in 1820s rural New York; many religious families took part. The Church's essay on Book of Mormon translation openly acknowledges Joseph's early use of a seer stone in that cultural context.",
+                    "The 1826 'trial' records are fragmentary and disputed, and there is no reliable evidence of a conviction for fraud. More importantly, scripture shows God calling imperfect people and reshaping them: Joseph was sharply chastened (D&C 3) and grew from a rural youth into a prophet — a transformation, not a disqualification."
+                ],
+                bullets: [
+                    "Seer-stone treasure seeking was an ordinary cultural practice of the time.",
+                    "The 1826 court records are ambiguous; no solid evidence of a fraud conviction.",
+                    "God calls and refines flawed instruments throughout scripture (Moses, Peter, Paul)."
+                ],
+                scriptures: [
+                    sc("D&C 3 (Joseph rebuked, yet called)", "dc-testament/dc/3"),
+                    sc("1 Corinthians 1:27 (God chooses the weak)", "nt/1-cor/1")
+                ],
+                sources: [
+                    { label: "Gospel Topics — “Book of Mormon Translation”", url: "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/book-of-mormon-translation?lang=eng" },
+                    { label: "FAIR — “1826 trial / money digging”", url: "https://www.fairlatterdaysaints.org/answers/Joseph_Smith/Legal_issues/1826_trial" }
+                ]
+            },
+            {
+                cat: "Scripture & Translation",
+                title: "The Book of Mormon quotes ‘Deutero-Isaiah,’ written after Lehi left Jerusalem",
+                criticism: "The Book of Mormon (set c. 600 BC) quotes Isaiah chapters 40–66, which many scholars assign to a <strong>Deutero-Isaiah</strong> writing after 600 BC. Critics say those chapters couldn't have been on Lehi's plates, exposing a 19th-century forgery.",
+                response: [
+                    "The multiple-Isaiah theory is a scholarly hypothesis, not a fact, and a substantial body of scholarship still argues for the unity of Isaiah. The Book of Mormon's use of those chapters is itself a data point against a hard split.",
+                    "Lehi's family carried the <strong>brass plates</strong>, an ancient record of scripture (1 Nephi 5) that could well have contained Isaiah's writings as a whole. And prophecy by definition speaks of the future, so the presence of later-fulfilled material does not require a later author."
+                ],
+                bullets: [
+                    "Unity-of-Isaiah scholarship remains a live, respectable position.",
+                    "The brass plates predate and could contain the full Isaiah corpus.",
+                    "Prophetic foresight, not late authorship, can explain forward-looking content."
+                ],
+                scriptures: [
+                    sc("1 Nephi 5:10–14 (the brass plates of scripture)", "bofm/1-ne/5"),
+                    sc("2 Nephi 12–24 (Isaiah quoted at length)", "bofm/2-ne/12"),
+                    sc("3 Nephi 23:1 (search the words of Isaiah)", "bofm/3-ne/23")
+                ],
+                sources: [
+                    { label: "FAIR — “Isaiah in the Book of Mormon”", url: "https://www.fairlatterdaysaints.org/answers/Book_of_Mormon/Anachronisms/Isaiah" },
+                    { label: "Scripture Central — Isaiah studies", url: "https://scripturecentral.org/" }
+                ]
+            },
+            {
+                cat: "Church History",
+                title: "The Church hoards wealth and isn't financially transparent",
+                criticism: "After the 2019–2020 disclosure of the Church's large investment reserve (<strong>Ensign Peak</strong>), critics charged that the Church hoards tens of billions, isn't transparent, and shouldn't ask members for tithing.",
+                response: [
+                    "Tithing is voluntary and ancient — Abraham paid it (Genesis 14:20) and Malachi 3:8–10 frames it as a covenant with promised blessings. Funds support a worldwide, almost entirely <em>unpaid</em> lay ministry, plus tens of thousands of meetinghouses, temples, education, and humanitarian aid.",
+                    "Reserves exist to sustain the Church's mission during future downturns and to fund long-term growth — a prudent steward 'provident' principle the Church has taught for generations. Reasonable people can debate disclosure practices, but holding reserves for the future is not the same as wrongdoing."
+                ],
+                bullets: [
+                    "No paid local clergy; donations fund global operations and aid.",
+                    "Tithing is a voluntary covenant, taught in scripture (Malachi 3).",
+                    "Reserves are a hedge for future needs, not personal enrichment."
+                ],
+                scriptures: [
+                    sc("Malachi 3:8–10 (tithing and the windows of heaven)", "ot/mal/3"),
+                    sc("Genesis 14:20 (Abraham paid tithes)", "ot/gen/14"),
+                    sc("D&C 119 (the law of tithing)", "dc-testament/dc/119")
+                ],
+                sources: [
+                    { label: "Church Newsroom — “Church Finances”", url: "https://newsroom.churchofjesuschrist.org/article/church-finances" },
+                    { label: "FAIR — “Church finances and Ensign Peak”", url: "https://www.fairlatterdaysaints.org/answers/Church_finances" }
+                ]
+            },
+            {
+                cat: "Church History",
+                title: "The Mountain Meadows Massacre proves the early Church was violent",
+                criticism: "In 1857 Latter-day Saint militiamen in southern Utah killed about 120 emigrants in the <strong>Mountain Meadows Massacre</strong>. Critics say this exposes the violence of early Mormonism and implicate Brigham Young.",
+                response: [
+                    "The Church does not minimize this. It has repeatedly and unequivocally condemned the massacre as a horrific crime, and in 2007 — its 150th anniversary — issued a formal expression of profound regret at the site itself.",
+                    "The most thorough scholarship, including the Church-supported volume 'Massacre at Mountain Meadows' (Oxford University Press, 2008), concludes the atrocity was committed by local leaders acting wrongly under wartime hysteria and a chain of bad decisions — and finds no credible evidence that Brigham Young ordered it; his recovered message actually directed that the emigrants be allowed to pass."
+                ],
+                bullets: [
+                    "The Church condemns the massacre and expressed formal regret (2007).",
+                    "Careful, Church-supported history places blame on local perpetrators, not a directive from Brigham Young.",
+                    "Wartime fear and local rationalization — not doctrine — drove the crime."
+                ],
+                scriptures: [
+                    sc("Doctrine & Covenants 98 (renounce war, proclaim peace)", "dc-testament/dc/98"),
+                    sc("Matthew 7:20 (by their fruits — and the duty to repent)", "nt/matt/7")
+                ],
+                sources: [
+                    { label: "Gospel Topics — “Peace and Violence among 19th-Century Latter-day Saints”", url: "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/peace-and-violence-among-19th-century-latter-day-saints?lang=eng" },
+                    { label: "Walker, Turley & Leonard, “Massacre at Mountain Meadows” (Oxford, 2008)", url: "https://global.oup.com/" }
+                ]
+            }
+        ];
+
+        // =============================
+        // RENDERING
+        // =============================
+        const cardsEl = document.getElementById('cards');
+        const searchInput = document.getElementById('search-input');
+        const catSelect = document.getElementById('cat-select');
+        const countEl = document.getElementById('count');
+        const expandAllBtn = document.getElementById('expand-all');
+        const collapseAllBtn = document.getElementById('collapse-all');
+        const homeBtn = document.getElementById('home-btn');
+        const themeBtn = document.getElementById('theme-btn');
+        const themeIcon = document.getElementById('theme-icon');
+        const themeLabel = document.getElementById('theme-label');
+
+        const CHEVRON = '<svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
+        const ICON_CRIT = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+        const ICON_RESP = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+
+        function buildCategories() {
+            const cats = Array.from(new Set(criticisms.map(c => c.cat))).sort();
+            catSelect.innerHTML = '<option value="">All categories</option>' +
+                cats.map(c => `<option value="${c}">${c}</option>`).join('');
+        }
+
+        function cardHtml(c, index) {
+            const respParas = c.response.map(p => `<p>${markupTerms(p)}</p>`).join('');
+            const bullets = (c.bullets && c.bullets.length)
+                ? `<ul>${c.bullets.map(b => `<li>${markupTerms(b)}</li>`).join('')}</ul>` : '';
+            const chips = (c.scriptures && c.scriptures.length)
+                ? `<div class="chips">${c.scriptures.map(s => `<a class="chip" href="${s.url}" target="_blank" rel="noopener">${s.ref}</a>`).join('')}</div>` : '';
+            const sources = (c.sources && c.sources.length)
+                ? `<div class="sources">${c.sources.map(s => `<div class="src-item">↗ <a href="${s.url}" target="_blank" rel="noopener">${s.label}</a></div>`).join('')}</div>` : '';
+            const refs = (chips || sources)
+                ? `<div class="refs"><div class="refs-title">Scriptures &amp; further reading</div>${chips}${sources}</div>` : '';
+
+            return `
+  <div class="crit-card" data-cat="${c.cat}" data-index="${index}">
+    <div class="card-head" role="button" tabindex="0" aria-expanded="false">
+      <div class="num-badge">${c.num}</div>
+      <div class="head-text">
+        <h2>${markupTerms(c.title)}</h2>
+        <span class="cat-tag">${c.cat}</span>
+      </div>
+      ${CHEVRON}
+    </div>
+    <div class="card-body">
+      <div class="block criticism">
+        <p class="block-label">${ICON_CRIT} The Criticism</p>
+        <p>${markupTerms(c.criticism)}</p>
+      </div>
+      <div class="block response">
+        <p class="block-label">${ICON_RESP} The Latter-day Saint Response</p>
+        ${respParas}
+        ${bullets}
+      </div>
+      ${refs}
+    </div>
+  </div>`;
+        }
+
+        function render() {
+            const q = searchInput.value.trim().toLowerCase();
+            const cat = catSelect.value;
+            let shown = 0;
+            const html = criticisms.map((c, i) => {
+                const hay = (c.title + ' ' + c.criticism + ' ' + c.response.join(' ') + ' ' +
+                    (c.bullets || []).join(' ') + ' ' + c.cat + ' ' +
+                    (c.scriptures || []).map(s => s.ref).join(' ')).toLowerCase();
+                const matchQ = !q || hay.includes(q);
+                const matchCat = !cat || c.cat === cat;
+                if (matchQ && matchCat) { shown++; return cardHtml(c, i); }
+                return '';
+            }).join('');
+
+            cardsEl.innerHTML = html || '<div class="empty">No criticisms match your search. Try a different term or clear the filters.</div>';
+            countEl.textContent = `Showing ${shown} of ${criticisms.length} criticisms`;
+        }
+
+        // number the criticisms 1..20
+        criticisms.forEach((c, i) => c.num = i + 1);
+
+        buildCategories();
+        render();
+
+        // Card open/close (event delegation)
+        cardsEl.addEventListener('click', (e) => {
+            if (e.target.closest('.term') || e.target.closest('a')) return;
+            const head = e.target.closest('.card-head');
+            if (!head) return;
+            const card = head.closest('.crit-card');
+            const open = card.classList.toggle('open');
+            head.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        cardsEl.addEventListener('keydown', (e) => {
+            if ((e.key === 'Enter' || e.key === ' ') && e.target.closest('.card-head')) {
+                e.preventDefault();
+                e.target.closest('.card-head').click();
+            }
+        });
+
+        searchInput.addEventListener('input', render);
+        catSelect.addEventListener('change', render);
+
+        expandAllBtn.addEventListener('click', () => {
+            document.querySelectorAll('.crit-card').forEach(card => {
+                card.classList.add('open');
+                card.querySelector('.card-head').setAttribute('aria-expanded', 'true');
+            });
+        });
+        collapseAllBtn.addEventListener('click', () => {
+            document.querySelectorAll('.crit-card').forEach(card => {
+                card.classList.remove('open');
+                card.querySelector('.card-head').setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        homeBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            catSelect.value = '';
+            render();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // =============================
+        // DARK MODE
+        // =============================
+        const SUN_ICON = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
+        const MOON_ICON = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.innerHTML = SUN_ICON;
+                themeLabel.textContent = 'Light';
+                themeBtn.setAttribute('title', 'Switch to light mode');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                themeIcon.innerHTML = MOON_ICON;
+                themeLabel.textContent = 'Dark';
+                themeBtn.setAttribute('title', 'Switch to dark mode');
+            }
+        }
+
+        let savedTheme = null;
+        try { savedTheme = localStorage.getItem('lds-criticisms-theme'); } catch (e) { }
+        if (savedTheme === 'dark' || savedTheme === 'light') {
+            applyTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            applyTheme('dark');
+        } else {
+            applyTheme('light');
+        }
+
+        themeBtn.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const next = isDark ? 'light' : 'dark';
+            applyTheme(next);
+            try { localStorage.setItem('lds-criticisms-theme', next); } catch (e) { }
+        });
+
+        // =============================
+        // TOOLTIP (hover on desktop, tap on touch)
+        // =============================
+        const tooltip = document.getElementById('glossary-tooltip');
+        const MARGIN = 12;
+        const GAP = 10;
+
+        const isTouchDevice = (window.matchMedia && (
+            window.matchMedia('(hover: none)').matches ||
+            window.matchMedia('(pointer: coarse)').matches
+        )) || ('ontouchstart' in window);
+
+        if (isTouchDevice) {
+            document.body.classList.add('touch-mode');
+        }
+
+        let activeTerm = null;
+
+        function showTooltip(termEl) {
+            const def = termEl.getAttribute('data-def');
+            if (!def) return;
+            activeTerm = termEl;
+            let html = def;
+            if (isTouchDevice) {
+                html += '<div class="tooltip-close">Tap anywhere to close</div>';
+            }
+            tooltip.innerHTML = html;
+            tooltip.classList.add('visible');
+            tooltip.setAttribute('aria-hidden', 'false');
+            positionTooltip(termEl);
+        }
+
+        function positionTooltip(termEl) {
+            const rect = termEl.getBoundingClientRect();
+            const tipRect = tooltip.getBoundingClientRect();
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+
+            const termCenter = rect.left + rect.width / 2;
+            let left = termCenter - tipRect.width / 2;
+            left = Math.max(MARGIN, Math.min(left, vw - tipRect.width - MARGIN));
+
+            const spaceAbove = rect.top;
+            const spaceBelow = vh - rect.bottom;
+            let top;
+            let placeAbove = spaceAbove >= tipRect.height + GAP + MARGIN;
+            if (!placeAbove && spaceBelow >= tipRect.height + GAP + MARGIN) {
+                placeAbove = false;
+            } else if (!placeAbove && spaceBelow < spaceAbove) {
+                placeAbove = true;
+            }
+
+            if (placeAbove) {
+                top = rect.top - tipRect.height - GAP;
+                tooltip.classList.add('above');
+                tooltip.classList.remove('below');
+            } else {
+                top = rect.bottom + GAP;
+                tooltip.classList.add('below');
+                tooltip.classList.remove('above');
+            }
+            top = Math.max(MARGIN, Math.min(top, vh - tipRect.height - MARGIN));
+
+            const arrowX = Math.max(12, Math.min(termCenter - left, tipRect.width - 12));
+            tooltip.style.setProperty('--arrow-x', arrowX + 'px');
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+        }
+
+        function hideTooltip() {
+            tooltip.classList.remove('visible');
+            tooltip.setAttribute('aria-hidden', 'true');
+            activeTerm = null;
+        }
+
+        document.addEventListener('mouseover', (e) => {
+            if (isTouchDevice) return;
+            const t = e.target.closest('.term');
+            if (t) showTooltip(t);
+        });
+        document.addEventListener('mouseout', (e) => {
+            if (isTouchDevice) return;
+            const t = e.target.closest('.term');
+            if (t) hideTooltip();
+        });
+        document.addEventListener('focusin', (e) => {
+            const t = e.target.closest('.term');
+            if (t) showTooltip(t);
+        });
+        document.addEventListener('focusout', (e) => {
+            const t = e.target.closest('.term');
+            if (t && !isTouchDevice) hideTooltip();
+        });
+        document.addEventListener('click', (e) => {
+            const t = e.target.closest('.term');
+            if (t) {
+                e.preventDefault();
+                if (activeTerm === t) {
+                    hideTooltip();
+                } else {
+                    showTooltip(t);
+                }
+                return;
+            }
+            if (isTouchDevice && activeTerm) hideTooltip();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && activeTerm) hideTooltip();
+        });
+        window.addEventListener('scroll', hideTooltip, true);
+        window.addEventListener('resize', hideTooltip);
+    </script>
+</body>
+
+</html>
