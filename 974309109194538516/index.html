@@ -697,7 +697,7 @@
             "Jarom": "bofm/jarom", "Omni": "bofm/omni", "Mosiah": "bofm/mosiah", "Alma": "bofm/alma",
             "Helaman": "bofm/hel", "3 Nephi": "bofm/3-ne", "4 Nephi": "bofm/4-ne", "Ether": "bofm/ether", "Moroni": "bofm/moro",
             "Doctrine and Covenants": "dc-testament/dc", "D&C": "dc-testament/dc", "Official Declaration": "dc-testament/od",
-            "Moses": "pgp/moses", "Abraham": "pgp/abr", "Articles of Faith": "pgp/a-of-f"
+            "Moses": "pgp/moses", "Abraham": "pgp/abr", "Articles of Faith": "pgp/a-of-f", "Article of Faith": "pgp/a-of-f"
         };
         const SCRIP_RE = new RegExp(
             '\\b(' +
@@ -720,11 +720,50 @@
             { re: /Critical Text Project/g, url: "https://criticaltext.byustudies.byu.edu/" }
         ];
 
-        function markupTerms(html) {
+        // ----- per-card proof / point-of-info links (most-appropriate LDS source) -----
+        // Indexed to match the criticisms array order. Each is [exact phrase, url];
+        // the first occurrence in that card's narrative is linked (new tab).
+        const E = "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/";
+        const F = "https://www.fairlatterdaysaints.org/answers/";
+        const CARD_LINKS = [
+            [["Bar'an temple", "https://scripturecentral.org/"], ["Khor Kharfot", F + "Book_of_Mormon/Geography/Arabian_Peninsula"]],
+            [["Book of Mormon and DNA Studies", E + "book-of-mormon-and-dna-studies?lang=eng"]],
+            [["Hohokam", "https://scripturecentral.org/"]],
+            [["Book of Mormon Critical Text Project", "https://criticaltext.byustudies.byu.edu/"]],
+            [],
+            [["Gospel Topics essay", E + "translation-and-historicity-of-the-book-of-abraham?lang=eng"]],
+            [["First Vision Accounts", E + "first-vision-accounts?lang=eng"]],
+            [["essays on plural marriage", E + "plural-marriage-in-kirtland-and-nauvoo?lang=eng"]],
+            [["Race and the Priesthood", E + "race-and-the-priesthood?lang=eng"]],
+            [["B. H. Roberts", F + "Book_of_Mormon/Plagiarism_accusations/View_of_the_Hebrews"], ["Spalding theory", F + "Book_of_Mormon/Plagiarism_accusations/Spalding_manuscript"]],
+            [["Kinderhook plates", F + "Kinderhook_Plates"]],
+            [],
+            [["Oliver Cowdery, David Whitmer, and Martin Harris", F + "Book_of_Mormon/Witnesses"]],
+            [],
+            [],
+            [["deification", F + "Deification_of_man"]],
+            [["essay on Book of Mormon translation", E + "book-of-mormon-translation?lang=eng"]],
+            [["unity of Isaiah", F + "Book_of_Mormon/Anachronisms/Isaiah"]],
+            [["investment reserve", "https://newsroom.churchofjesuschrist.org/article/church-finances"]],
+            [["Massacre at Mountain Meadows", E + "peace-and-violence-among-19th-century-latter-day-saints?lang=eng"]]
+        ];
+
+
+        function markupTerms(html, cardLinks) {
             if (!html) return '';
             const store = [];
             const stash = (h) => { store.push(h); return '\u0001' + (store.length - 1) + '\u0001'; };
+            const rxEsc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             let out = html;
+
+            // 0) card-specific proof / point-of-info phrases -> most-appropriate LDS link (new tab)
+            (cardLinks || []).forEach(pair => {
+                const phrase = pair[0], url = pair[1];
+                const re = new RegExp(rxEsc(phrase));
+                if (re.test(out)) {
+                    out = out.replace(re, stash('<a class="src-inline" href="' + url + '" target="_blank" rel="noopener">' + phrase + '</a>'));
+                }
+            });
 
             // 1) inline scripture references -> Gospel Library links (new tab)
             out = out.replace(SCRIP_RE, (m, book, chap, verse) =>
@@ -1242,9 +1281,10 @@
         }
 
         function cardHtml(c, index) {
-            const respParas = c.response.map(p => `<p>${markupTerms(p)}</p>`).join('');
+            const links = CARD_LINKS[index] || [];
+            const respParas = c.response.map(p => `<p>${markupTerms(p, links)}</p>`).join('');
             const bullets = (c.bullets && c.bullets.length)
-                ? `<ul>${c.bullets.map(b => `<li>${markupTerms(b)}</li>`).join('')}</ul>` : '';
+                ? `<ul>${c.bullets.map(b => `<li>${markupTerms(b, links)}</li>`).join('')}</ul>` : '';
             const chips = (c.scriptures && c.scriptures.length)
                 ? `<div class="chips">${c.scriptures.map(s => `<a class="chip" href="${s.url}" target="_blank" rel="noopener">${s.ref}</a>`).join('')}</div>` : '';
             const sources = (c.sources && c.sources.length)
@@ -1265,7 +1305,7 @@
     <div class="card-body">
       <div class="block criticism">
         <p class="block-label">${ICON_CRIT} The Criticism</p>
-        <p>${markupTerms(c.criticism)}</p>
+        <p>${markupTerms(c.criticism, links)}</p>
       </div>
       <div class="block response">
         <p class="block-label">${ICON_RESP} The Latter-day Saint Response</p>
