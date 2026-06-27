@@ -466,6 +466,21 @@
             margin-bottom: 3px;
         }
 
+        /* Inline links inside the narrative (scripture refs + LDS sources) */
+        .block a.scrip-link,
+        .block a.src-inline {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid var(--chip-border);
+        }
+
+        .block a.scrip-link:hover,
+        .block a.src-inline:hover {
+            background: var(--highlight);
+            border-bottom-color: var(--accent);
+        }
+
         /* Glossary tooltip */
         .term {
             border-bottom: 1px dotted var(--accent);
@@ -664,26 +679,77 @@
             "Mountain Meadows Massacre": "An 1857 atrocity in southern Utah in which local militia members killed about 120 emigrants. The Church has repeatedly condemned it and issued a formal expression of regret in 2007."
         };
 
+        // ----- Gospel Library scripture auto-linker -----
+        // Inline scripture references in the narrative are turned into links to
+        // the official LDS Gospel Library (churchofjesuschrist.org), opening in
+        // a new tab. Matching is case-sensitive (book names are proper nouns)
+        // and requires a chapter number, so possessives like "Jacob's" are skipped.
+        const SCRIP_BASE = "https://www.churchofjesuschrist.org/study/scriptures/";
+        const SCRIP_BOOKS = {
+            "Genesis": "ot/gen", "Exodus": "ot/ex", "Leviticus": "ot/lev", "Numbers": "ot/num", "Deuteronomy": "ot/deut",
+            "Joshua": "ot/josh", "Psalm": "ot/ps", "Psalms": "ot/ps", "Proverbs": "ot/prov", "Isaiah": "ot/isa",
+            "Jeremiah": "ot/jer", "Ezekiel": "ot/ezek", "Daniel": "ot/dan", "Amos": "ot/amos", "Malachi": "ot/mal",
+            "Matthew": "nt/matt", "Mark": "nt/mark", "Luke": "nt/luke", "John": "nt/john", "Acts": "nt/acts",
+            "Romans": "nt/rom", "1 Corinthians": "nt/1-cor", "2 Corinthians": "nt/2-cor", "Galatians": "nt/gal",
+            "Ephesians": "nt/eph", "Philippians": "nt/philip", "Colossians": "nt/col", "Hebrews": "nt/heb",
+            "James": "nt/james", "1 Peter": "nt/1-pet", "2 Peter": "nt/2-pet", "1 John": "nt/1-jn", "Revelation": "nt/rev",
+            "1 Nephi": "bofm/1-ne", "2 Nephi": "bofm/2-ne", "Jacob": "bofm/jacob", "Enos": "bofm/enos",
+            "Jarom": "bofm/jarom", "Omni": "bofm/omni", "Mosiah": "bofm/mosiah", "Alma": "bofm/alma",
+            "Helaman": "bofm/hel", "3 Nephi": "bofm/3-ne", "4 Nephi": "bofm/4-ne", "Ether": "bofm/ether", "Moroni": "bofm/moro",
+            "Doctrine and Covenants": "dc-testament/dc", "D&C": "dc-testament/dc", "Official Declaration": "dc-testament/od",
+            "Moses": "pgp/moses", "Abraham": "pgp/abr", "Articles of Faith": "pgp/a-of-f"
+        };
+        const SCRIP_RE = new RegExp(
+            '\\b(' +
+            Object.keys(SCRIP_BOOKS).sort((a, b) => b.length - a.length)
+                .map(b => b.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') +
+            ')\\s+(\\d+)(?::(\\d+))?', 'g'
+        );
+        function scriptureUrl(book, chap, verse) {
+            let path = SCRIP_BOOKS[book], ch = chap, v = verse || null;
+            if (book === "Articles of Faith") { ch = "1"; v = chap; } // one chapter; the number is the verse
+            let url = SCRIP_BASE + path + '/' + ch + '?lang=eng';
+            if (v) url += '&id=p' + v + '#p' + v;
+            return url;
+        }
+
+        // ----- preferred LDS source phrases, linked inline (new tab) -----
+        const SOURCE_LINKS = [
+            { re: /Gospel Topics essays?/g, url: "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays?lang=eng" },
+            { re: /Joseph Smith Papers/g, url: "https://www.josephsmithpapers.org/" },
+            { re: /Critical Text Project/g, url: "https://criticaltext.byustudies.byu.edu/" }
+        ];
+
         function markupTerms(html) {
             if (!html) return '';
-            const terms = Object.keys(glossary).sort((a, b) => b.length - a.length);
+            const store = [];
+            const stash = (h) => { store.push(h); return '\u0001' + (store.length - 1) + '\u0001'; };
             let out = html;
-            const placeholders = [];
+
+            // 1) inline scripture references -> Gospel Library links (new tab)
+            out = out.replace(SCRIP_RE, (m, book, chap, verse) =>
+                stash('<a class="scrip-link" href="' + scriptureUrl(book, chap, verse) + '" target="_blank" rel="noopener">' + m + '</a>'));
+
+            // 2) named LDS sources -> links (new tab)
+            SOURCE_LINKS.forEach(s => {
+                out = out.replace(s.re, (m) =>
+                    stash('<a class="src-inline" href="' + s.url + '" target="_blank" rel="noopener">' + m + '</a>'));
+            });
+
+            // 3) glossary terms -> hover-definition spans
+            const terms = Object.keys(glossary).sort((a, b) => b.length - a.length);
             terms.forEach(term => {
                 const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
                 const re = new RegExp('(?<![\\w>])(' + escaped + ')(?![\\w<])', 'i');
                 const match = out.match(re);
                 if (match) {
                     const def = glossary[term].replace(/"/g, '&quot;');
-                    const matchedText = match[1];
-                    const placeholder = `@@TERM${placeholders.length}@@`;
-                    placeholders.push(`<span class="term" tabindex="0" data-def="${def}">${matchedText}</span>`);
-                    out = out.replace(re, placeholder);
+                    out = out.replace(re, stash('<span class="term" tabindex="0" data-def="' + def + '">' + match[1] + '</span>'));
                 }
             });
-            placeholders.forEach((repl, i) => {
-                out = out.split(`@@TERM${i}@@`).join(repl);
-            });
+
+            // 4) restore stashed markup
+            out = out.replace(/\u0001(\d+)\u0001/g, (m, i) => store[i]);
             return out;
         }
 
