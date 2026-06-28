@@ -8,21 +8,21 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <style>
         :root {
-            --bg: #fff8ef;
+            --bg: #f4f7ff;
             --paper: #ffffff;
-            --ink: #263238;
-            --muted: #62727b;
-            --line: #eadfce;
-            --primary: #8b4513;
-            --primary-dark: #6f360f;
-            --primary-soft: #f5dfc5;
-            --accent: #2e7d6f;
-            --accent-soft: #e2f4ef;
+            --ink: #1c2440;
+            --muted: #5b6680;
+            --line: #dfe4f2;
+            --primary: #c8102e;
+            --primary-dark: #9c0c24;
+            --primary-soft: #fbdfe3;
+            --accent: #1d3461;
+            --accent-soft: #dce6f7;
             --danger: #a93535;
             --danger-soft: #ffe8e8;
             --success: #2d7a3f;
             --success-soft: #e9f7ec;
-            --shadow: 0 18px 45px rgba(97, 62, 28, 0.14);
+            --shadow: 0 18px 45px rgba(29, 52, 97, 0.16);
             --radius: 18px;
             --font: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
         }
@@ -45,8 +45,9 @@
             margin: 0;
             min-height: 100vh;
             background:
-                radial-gradient(circle at top left, rgba(245, 191, 119, 0.28), transparent 36rem),
-                linear-gradient(135deg, #fffdf8 0%, var(--bg) 56%, #f2e6d6 100%);
+                radial-gradient(circle at top left, rgba(91, 141, 255, 0.20), transparent 36rem),
+                radial-gradient(circle at top right, rgba(200, 16, 46, 0.16), transparent 34rem),
+                linear-gradient(135deg, #ffffff 0%, var(--bg) 56%, #e7edff 100%);
             color: var(--ink);
             font-family: var(--font);
             line-height: 1.5;
@@ -136,7 +137,7 @@
         .hero {
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, rgba(139, 69, 19, 0.94), rgba(46, 125, 111, 0.9));
+            background: linear-gradient(135deg, rgba(200, 16, 46, 0.94), rgba(29, 52, 97, 0.92));
             color: #fff;
             border-radius: 28px;
             box-shadow: var(--shadow);
@@ -150,8 +151,8 @@
             background-image: var(--hero-image);
             background-position: center bottom;
             background-size: cover;
-            filter: saturate(0.95) blur(1px);
-            opacity: 0.34;
+            filter: saturate(1.05);
+            opacity: 0.42;
             transform: scale(1.04);
         }
 
@@ -159,7 +160,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg, rgba(18, 35, 32, 0.94), rgba(18, 35, 32, 0.82) 48%, rgba(18, 35, 32, 0.55));
+            background: linear-gradient(90deg, rgba(12, 22, 48, 0.94), rgba(16, 28, 60, 0.82) 48%, rgba(120, 16, 36, 0.5));
         }
 
         .hero-content {
@@ -838,7 +839,7 @@
             }
 
             .hero::after {
-                background: linear-gradient(180deg, rgba(18, 35, 32, 0.97), rgba(18, 35, 32, 0.9));
+                background: linear-gradient(180deg, rgba(12, 22, 48, 0.97), rgba(12, 22, 48, 0.9));
             }
 
             .hero-content {
@@ -1173,14 +1174,14 @@
             <div class="hero-content">
                 <p class="eyebrow" id="event-eyebrow">Linger Longer Potluck</p>
                 <div class="title-row">
-                    <span class="title-flag" aria-hidden="true" title="Italian flag"><svg viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="2" x="0" fill="#008C45"/><rect width="1" height="2" x="1" fill="#F4F5F0"/><rect width="1" height="2" x="2" fill="#CD212A"/></svg></span>
-                    <h1 id="event-title-display">June Linger Longer Potluck Sign-Up</h1>
-                    <span class="title-flag" aria-hidden="true" title="Italian flag"><svg viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="2" x="0" fill="#008C45"/><rect width="1" height="2" x="1" fill="#F4F5F0"/><rect width="1" height="2" x="2" fill="#CD212A"/></svg></span>
+                    <span class="title-flag" aria-hidden="true" title="American flag"><svg viewBox="0 0 38 20" xmlns="http://www.w3.org/2000/svg"><rect width="38" height="20" fill="#fff"/><g fill="#c8102e"><rect width="38" height="1.54" y="0"/><rect width="38" height="1.54" y="3.08"/><rect width="38" height="1.54" y="6.16"/><rect width="38" height="1.54" y="9.24"/><rect width="38" height="1.54" y="12.32"/><rect width="38" height="1.54" y="15.4"/><rect width="38" height="1.54" y="18.46"/></g><rect width="16" height="10.77" fill="#1d3461"/><g fill="#fff"><circle cx="3" cy="2" r="0.9"/><circle cx="7" cy="2" r="0.9"/><circle cx="11" cy="2" r="0.9"/><circle cx="5" cy="4.2" r="0.9"/><circle cx="9" cy="4.2" r="0.9"/><circle cx="13" cy="4.2" r="0.9"/><circle cx="3" cy="6.4" r="0.9"/><circle cx="7" cy="6.4" r="0.9"/><circle cx="11" cy="6.4" r="0.9"/><circle cx="5" cy="8.6" r="0.9"/><circle cx="9" cy="8.6" r="0.9"/><circle cx="13" cy="8.6" r="0.9"/></g></svg></span>
+                    <h1 id="event-title-display">July Linger Longer Potluck Sign-Up</h1>
+                    <span class="title-flag" aria-hidden="true" title="American flag"><svg viewBox="0 0 38 20" xmlns="http://www.w3.org/2000/svg"><rect width="38" height="20" fill="#fff"/><g fill="#c8102e"><rect width="38" height="1.54" y="0"/><rect width="38" height="1.54" y="3.08"/><rect width="38" height="1.54" y="6.16"/><rect width="38" height="1.54" y="9.24"/><rect width="38" height="1.54" y="12.32"/><rect width="38" height="1.54" y="15.4"/><rect width="38" height="1.54" y="18.46"/></g><rect width="16" height="10.77" fill="#1d3461"/><g fill="#fff"><circle cx="3" cy="2" r="0.9"/><circle cx="7" cy="2" r="0.9"/><circle cx="11" cy="2" r="0.9"/><circle cx="5" cy="4.2" r="0.9"/><circle cx="9" cy="4.2" r="0.9"/><circle cx="13" cy="4.2" r="0.9"/><circle cx="3" cy="6.4" r="0.9"/><circle cx="7" cy="6.4" r="0.9"/><circle cx="11" cy="6.4" r="0.9"/><circle cx="5" cy="8.6" r="0.9"/><circle cx="9" cy="8.6" r="0.9"/><circle cx="13" cy="8.6" r="0.9"/></g></svg></span>
                 </div>
-                <p class="hero-note" id="event-note-display">Please sign up to bring something to share. Thank you for
-                    helping make this a warm, welcoming meal!</p>
+                <p class="hero-note" id="event-note-display">Bring a favorite dish to share at our Independence Day
+                    picnic potluck. Thanks for helping make it a fun, festive meal!</p>
                 <div class="hero-details">
-                    <span class="pill" id="event-date-display">📅 Sun, Jun 07, 2026</span>
+                    <span class="pill" id="event-date-display">📅 Sun, Jul 05, 2026</span>
                     <span class="pill" id="event-time-display">🕑 2 PM</span>
                     <span class="pill" id="event-location-display">📍 Sundance 1st Ward Cultural Hall</span>
                     <button type="button" id="print-sheet" class="hero-print-btn no-print">🖨️ Print</button>
@@ -1216,7 +1217,7 @@
                         <label>Title <input id="event-title" type="text" /></label>
                         <label>Subtitle / note <textarea id="event-note"></textarea></label>
                         <div class="two-col form-grid">
-                            <label>Date <input id="event-date" type="text" placeholder="June 7, 2026" /></label>
+                            <label>Date <input id="event-date" type="text" placeholder="July 5, 2026" /></label>
                             <label>Time <input id="event-time" type="text" placeholder="2 PM" /></label>
                         </div>
                         <div class="two-col form-grid">
@@ -1307,12 +1308,12 @@
             event: {
                 eyebrow: "Linger Longer Potluck",
                 title: "Linger Longer Potluck Sign-Up",
-                note: "Please sign up to bring something to share. Thank you for helping make this a warm, welcoming meal!",
-                date: "June 7, 2026",
+                note: "Bring a favorite dish to share at our Independence Day picnic potluck. Thanks for helping make it a fun, festive meal!",
+                date: "July 5, 2026",
                 time: "2 PM",
                 location: "Sundance 1st Ward Cultural Hall",
                 organizerEmail: "",
-                heroImage: "June_Hero_Image.jpg"
+                heroImage: "July_Hero_Image.svg"
             },
             categories: [
                 { id: "appetizer", name: "Appetizer", needed: 5, icon: "🥨" },
@@ -1422,8 +1423,8 @@
             next.event.time = String(next.event.time || base.event.time).trim() || base.event.time;
             if (/^time\s+tbd$/i.test(next.event.time)) next.event.time = base.event.time;
             next.event.heroImage = String(next.event.heroImage || base.event.heroImage).trim() || base.event.heroImage;
-            // Migrate cached state from previous default hero image to the current Italian-themed image.
-            if (next.event.heroImage === "lingerlonger.png") next.event.heroImage = base.event.heroImage;
+            // Migrate cached state from previous default hero images to the current Independence Day picnic image.
+            if (next.event.heroImage === "lingerlonger.png" || next.event.heroImage === "June_Hero_Image.jpg") next.event.heroImage = base.event.heroImage;
             next.categories = Array.isArray(next.categories) && next.categories.length ? next.categories : base.categories;
             next.signups = Array.isArray(next.signups) ? next.signups : [];
             next.categories = next.categories.map((cat, index) => ({
