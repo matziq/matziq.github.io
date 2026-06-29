@@ -1,0 +1,733 @@
+.3
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Latter-day Saint Responses to Creedal Christian Criticisms</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="googlebot" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="../religion/favicon.svg" />
+    <script>
+        (() => {
+            const param = new URLSearchParams(window.location.search).get("scoutTheme");
+            const theme =
+                param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+            document.documentElement.setAttribute("data-theme", theme);
+        })();
+    </script>
+    <style>
+        :root {
+            color-scheme: light;
+            --cp-bg: #f7f4ef;
+            --cp-bg-elevated: #fcfbf8;
+            --cp-surface: #ffffff;
+            --cp-surface-soft: #f5f5f5;
+            --cp-border: #dedede;
+            --cp-border-strong: #919191;
+            --cp-text: #242424;
+            --cp-text-muted: #5c5c5c;
+            --cp-text-soft: #6f6f6f;
+            --cp-accent: #b11f4b;
+            --cp-accent-hover: #9a1a41;
+            --cp-accent-soft: rgba(177, 31, 75, 0.08);
+            --cp-accent-fg: #ffffff;
+            --cp-success: #16a34a;
+            --cp-danger: #dc2626;
+            --cp-warning: #f59e0b;
+            --cp-link: #0078d4;
+            --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+            --cp-overlay: rgba(255, 255, 255, 0.8);
+            --cp-panel: rgba(255, 255, 255, 0.86);
+            --cp-panel-strong: rgba(255, 255, 255, 0.96);
+            --cp-sheen: rgba(255, 255, 255, 0.55);
+            --cp-highlight: rgba(177, 31, 75, 0.12);
+        }
+
+        html[data-theme="dark"] {
+            color-scheme: dark;
+            --cp-bg: #3d3b3a;
+            --cp-bg-elevated: #343231;
+            --cp-surface: #292929;
+            --cp-surface-soft: #2e2e2e;
+            --cp-border: #474747;
+            --cp-border-strong: #5f5f5f;
+            --cp-text: #dedede;
+            --cp-text-muted: #919191;
+            --cp-text-soft: #b0b0b0;
+            --cp-accent: #fd8ea1;
+            --cp-accent-hover: #fb7b91;
+            --cp-accent-soft: rgba(253, 142, 161, 0.14);
+            --cp-accent-fg: #1a1a1a;
+            --cp-success: #4ade80;
+            --cp-danger: #f87171;
+            --cp-warning: #fbbf24;
+            --cp-link: #4da6ff;
+            --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+            --cp-overlay: rgba(41, 41, 41, 0.88);
+            --cp-panel: rgba(41, 41, 41, 0.72);
+            --cp-panel-strong: rgba(41, 41, 41, 0.96);
+            --cp-sheen: rgba(255, 255, 255, 0.04);
+            --cp-highlight: rgba(253, 142, 161, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cp-bg);
+            color: var(--cp-text);
+            line-height: 1.55;
+        }
+
+        a {
+            color: var(--cp-link);
+        }
+
+        a:hover {
+            color: var(--cp-accent-hover);
+        }
+
+        header {
+            background: var(--cp-bg-elevated);
+            border-bottom: 1px solid var(--cp-border);
+            box-shadow: var(--cp-shadow);
+        }
+
+        .header-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 28px 24px 20px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            align-items: start;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: clamp(1.65rem, 3vw, 2.4rem);
+            line-height: 1.12;
+        }
+
+        .subtitle {
+            margin: 0;
+            color: var(--cp-text-muted);
+            max-width: 860px;
+        }
+
+        .header-actions,
+        .toolbar,
+        .nav-links,
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        button,
+        select,
+        input {
+            font: inherit;
+        }
+
+        .icon-btn,
+        .text-btn,
+        .nav-links a {
+            border: 1px solid var(--cp-border);
+            background: var(--cp-surface);
+            color: var(--cp-text);
+            border-radius: 0.625rem;
+            padding: 9px 12px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 650;
+        }
+
+        .icon-btn:hover,
+        .text-btn:hover,
+        .nav-links a:hover {
+            background: var(--cp-accent-soft);
+            color: var(--cp-accent-hover);
+        }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .notice,
+        .controls,
+        .topic-card,
+        footer {
+            background: var(--cp-surface);
+            border: 1px solid var(--cp-border);
+            border-radius: 16px;
+            box-shadow: var(--cp-shadow);
+        }
+
+        .notice {
+            padding: 16px 18px;
+            margin-bottom: 18px;
+        }
+
+        .notice strong {
+            color: var(--cp-accent);
+        }
+
+        .controls {
+            padding: 16px;
+            margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .control-row {
+            display: grid;
+            grid-template-columns: minmax(240px, 1fr) minmax(180px, 260px);
+            gap: 12px;
+            align-items: end;
+        }
+
+        label {
+            display: block;
+            color: var(--cp-text-muted);
+            font-size: .78rem;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            font-weight: 750;
+            margin-bottom: 6px;
+        }
+
+        input[type="search"],
+        select {
+            width: 100%;
+            border: 1px solid var(--cp-border);
+            background: var(--cp-bg-elevated);
+            color: var(--cp-text);
+            border-radius: 0.625rem;
+            padding: 10px 12px;
+        }
+
+        input[type="search"]:focus,
+        select:focus {
+            outline: 2px solid var(--cp-accent);
+            outline-offset: 2px;
+        }
+
+        .toolbar {
+            margin-top: 12px;
+            color: var(--cp-text-muted);
+        }
+
+        .toolbar .spacer {
+            flex: 1;
+        }
+
+        .nav {
+            margin: 18px 0 22px;
+        }
+
+        .nav-title {
+            color: var(--cp-text-muted);
+            font-weight: 750;
+            font-size: .85rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .topic-card {
+            margin-bottom: 16px;
+            overflow: hidden;
+            scroll-margin-top: 150px;
+        }
+
+        .card-head {
+            width: 100%;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 14px;
+            align-items: center;
+            border: 0;
+            background: var(--cp-surface);
+            color: var(--cp-text);
+            padding: 16px 18px;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .card-head:hover {
+            background: var(--cp-accent-soft);
+        }
+
+        .num {
+            width: 38px;
+            height: 38px;
+            border-radius: 0.625rem;
+            background: var(--cp-accent);
+            color: var(--cp-accent-fg);
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+        }
+
+        .head-text h2 {
+            margin: 0;
+            font-size: 1.12rem;
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 5px;
+        }
+
+        .tag,
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            border: 1px solid var(--cp-border);
+            background: var(--cp-surface-soft);
+            color: var(--cp-text-muted);
+            border-radius: 999px;
+            padding: 3px 9px;
+            font-size: .78rem;
+            font-weight: 650;
+            text-decoration: none;
+        }
+
+        .chip {
+            color: var(--cp-link);
+            background: var(--cp-bg-elevated);
+        }
+
+        .chev {
+            transition: transform .18s ease;
+            color: var(--cp-text-muted);
+        }
+
+        .topic-card.open .chev {
+            transform: rotate(180deg);
+        }
+
+        .card-body {
+            display: none;
+            padding: 0 18px 18px;
+        }
+
+        .topic-card.open .card-body {
+            display: block;
+        }
+
+        details {
+            border: 1px solid var(--cp-border);
+            background: var(--cp-bg-elevated);
+            border-radius: 0.625rem;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        summary {
+            cursor: pointer;
+            padding: 11px 13px;
+            font-weight: 760;
+            color: var(--cp-text);
+        }
+
+        summary:hover {
+            background: var(--cp-highlight);
+        }
+
+        .detail-body {
+            padding: 0 13px 13px;
+            color: var(--cp-text);
+        }
+
+        .detail-body p {
+            margin: 8px 0;
+        }
+
+        ul {
+            margin: 8px 0 0;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        .quote {
+            border-left: 4px solid var(--cp-accent);
+            padding-left: 12px;
+            color: var(--cp-text-muted);
+        }
+
+        .sources {
+            display: grid;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .source-item {
+            font-size: .94rem;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 32px;
+            color: var(--cp-text-muted);
+        }
+
+        footer {
+            margin: 32px auto 0;
+            padding: 18px;
+            color: var(--cp-text-muted);
+            font-size: .92rem;
+        }
+
+        @media (max-width: 760px) {
+            .header-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .control-row {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                position: static;
+            }
+
+            .card-head {
+                grid-template-columns: auto 1fr;
+            }
+
+            .chev {
+                grid-column: 2;
+                justify-self: end;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-inner">
+            <div>
+                <h1>Latter-day Saint Responses to Creedal Christian Criticisms</h1>
+                <p class="subtitle">A searchable, scripture-heavy response guide for objections commonly raised by
+                    Evangelical, Catholic, and Orthodox Christians: the Trinity, open canon, angels, grace, authority,
+                    temples, theosis, and more.</p>
+            </div>
+            <div class="header-actions">
+                <button id="homeBtn" class="icon-btn" type="button">Home</button>
+                <button id="themeBtn" class="icon-btn" type="button">Toggle theme</button>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <section class="notice">
+            <strong>Perspective note:</strong> This page is written from a believing Latter-day Saint perspective while
+            trying to state creedal Christian objections fairly. Scripture links point primarily to the official Gospel
+            Library. The requested RESTORED TRUTH YouTube channel could not be scraped directly in this environment
+            because YouTube returned HTTP 403, so it is included as a linked resource rather than quoted or paraphrased
+            transcript content.
+        </section>
+
+        <section class="controls" aria-label="Search and filters">
+            <div class="control-row">
+                <div>
+                    <label for="searchInput">Search topics, claims, scriptures, sources</label>
+                    <input id="searchInput" type="search"
+                        placeholder="Try: Trinity, Galatians, Revelation 22, grace, baptism for the dead…"
+                        autocomplete="off" />
+                </div>
+                <div>
+                    <label for="traditionSelect">Filter by objection source</label>
+                    <select id="traditionSelect"></select>
+                </div>
+            </div>
+            <div class="toolbar">
+                <span id="count"></span>
+                <span class="spacer"></span>
+                <button id="expandAll" class="text-btn" type="button">Expand all</button>
+                <button id="collapseAll" class="text-btn" type="button">Collapse all</button>
+            </div>
+        </section>
+
+        <nav class="nav" aria-label="Topic navigation">
+            <div class="nav-title">Jump to topic</div>
+            <div id="navLinks" class="nav-links"></div>
+        </nav>
+
+        <section id="cards" aria-live="polite"></section>
+    </main>
+    <footer class="container">
+        Sources are linked for further study. For official Latter-day Saint teaching, compare the scriptures with <a
+            href="https://www.churchofjesuschrist.org/study/manual/gospel-topics?lang=eng" target="_blank"
+            rel="noopener">Gospel Topics</a>, <a
+            href="https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays?lang=eng" target="_blank"
+            rel="noopener">Gospel Topics Essays</a>, and the <a
+            href="https://www.churchofjesuschrist.org/study/scriptures?lang=eng" target="_blank" rel="noopener">standard
+            works</a>.
+    </footer>
+    <script>
+        const SCRIPT_BASE = "https://www.churchofjesuschrist.org/study/scriptures/";
+        const BOOKS = {
+            "Genesis": "ot/gen", "Exodus": "ot/ex", "Deuteronomy": "ot/deut", "Psalms": "ot/ps", "Psalm": "ot/ps", "Proverbs": "ot/prov", "Isaiah": "ot/isa", "Jeremiah": "ot/jer", "Ezekiel": "ot/ezek", "Daniel": "ot/dan", "Amos": "ot/amos", "Malachi": "ot/mal",
+            "Matthew": "nt/matt", "Mark": "nt/mark", "Luke": "nt/luke", "John": "nt/john", "Acts": "nt/acts", "Romans": "nt/rom", "1 Corinthians": "nt/1-cor", "2 Corinthians": "nt/2-cor", "Galatians": "nt/gal", "Ephesians": "nt/eph", "Philippians": "nt/philip", "Colossians": "nt/col", "1 Thessalonians": "nt/1-thes", "2 Thessalonians": "nt/2-thes", "1 Timothy": "nt/1-tim", "2 Timothy": "nt/2-tim", "Hebrews": "nt/heb", "James": "nt/james", "1 Peter": "nt/1-pet", "2 Peter": "nt/2-pet", "1 John": "nt/1-jn", "Jude": "nt/jude", "Revelation": "nt/rev",
+            "1 Nephi": "bofm/1-ne", "2 Nephi": "bofm/2-ne", "Mosiah": "bofm/mosiah", "Alma": "bofm/alma", "3 Nephi": "bofm/3-ne", "Ether": "bofm/ether", "Moroni": "bofm/moro", "Doctrine and Covenants": "dc-testament/dc", "D&C": "dc-testament/dc", "Joseph Smith—History": "pgp/js-h", "Moses": "pgp/moses", "Abraham": "pgp/abr", "Articles of Faith": "pgp/a-of-f"
+        };
+        const REF_RE = new RegExp("\\b(" + Object.keys(BOOKS).sort((a, b) => b.length - a.length).map(x => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|") + ")\\s+(\\d+)(?::(\\d+)(?:[–-](\\d+))?)?", "g");
+        function scriptureUrl(ref) {
+            const m = ref.match(new RegExp("^(" + Object.keys(BOOKS).sort((a, b) => b.length - a.length).map(x => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|") + ")\\s+(\\d+)(?::(\\d+))?"));
+            if (!m) return "#";
+            let book = m[1], chapter = m[2], verse = m[3];
+            if (book === "Articles of Faith") { verse = chapter; chapter = "1"; }
+            let url = SCRIPT_BASE + BOOKS[book] + "/" + chapter + "?lang=eng";
+            if (verse) url += "&id=p" + verse + "#p" + verse;
+            return url;
+        }
+        function linkRefs(text) {
+            return text.replace(REF_RE, m => `<a href="${scriptureUrl(m)}" target="_blank" rel="noopener">${m}</a>`);
+        }
+        function s(ref) { return { ref, url: scriptureUrl(ref) }; }
+        const RESTORED_TRUTH = "https://www.youtube.com/@RESTORED_TRUTH";
+        const topics = [
+            {
+                id: "trinity", tradition: "Evangelical, Catholic, Orthodox", title: "Why Latter-day Saints reject the post-biblical Trinity but worship Father, Son, and Holy Ghost",
+                claim: "Creedal Christians often argue that rejecting the Nicene or Athanasian formulation of one immaterial substance in three co-equal, co-eternal persons means Latter-day Saints reject Christianity itself.",
+                response: [
+                    "Latter-day Saints affirm the Father, the Son, and the Holy Ghost as one Godhead, perfectly one in glory, will, love, power, and saving purpose. The disagreement is not over whether the Father, Son, and Holy Ghost are divine; it is over later creedal metaphysics such as one substance, without body, parts, or passions.",
+                    "The Bible repeatedly distinguishes the Father and the Son as real persons: Jesus prays to the Father in John 17:3, is baptized while the Father speaks and the Spirit descends in Matthew 3:16, stands at the right hand of God in Acts 7:55, and calls the Father 'the only true God' while identifying Himself as the sent Messiah in John 17:3.",
+                    "Latter-day Saints read passages about oneness, such as John 10:30 and John 17:21, through Jesus's own prayer that believers may be one as He and the Father are one—not collapsed into one substance, but united in covenant love and purpose."
+                ],
+                bullets: ["The word Trinity is not in the Bible; the doctrine was formalized through later councils.", "Jesus distinguishes Himself from the Father while fully revealing the Father.", "Biblical oneness can mean unity of will and glory, not numerical identity of person."],
+                scriptures: [s("Matthew 3:16"), s("John 1:1"), s("John 10:30"), s("John 14:28"), s("John 17:3"), s("John 17:21"), s("Acts 7:55"), s("1 Corinthians 8:6"), s("Hebrews 1:3"), s("Joseph Smith—History 1:17")],
+                sources: [
+                    ["Gospel Topics — Godhead", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/godhead?lang=eng"],
+                    ["BibleProject — God video/theme resources", "https://bibleproject.com/explore/video/god-video/"],
+                    ["Catholic Encyclopedia — Trinity", "https://www.newadvent.org/cathen/15047a.htm"],
+                    ["RESTORED TRUTH YouTube channel", RESTORED_TRUTH]
+                ]
+            },
+            {
+                id: "add-scripture", tradition: "Evangelical", title: "Does Revelation 22 forbid adding the Book of Mormon or modern revelation?",
+                claim: "A common Protestant objection cites Revelation 22:18–19: if anyone adds to 'these things,' God will add the plagues written in the book. Critics apply this to the whole Bible and say additional scripture is forbidden.",
+                response: [
+                    "The warning in Revelation refers to the book of Revelation itself. John wrote before the New Testament existed as a bound collection. If Revelation 22:18–19 meant 'no scripture after this book in the printed Bible,' it would depend on a later table of contents, not on John's immediate context.",
+                    "A similar warning appears in Deuteronomy 4:2 and Deuteronomy 12:32, yet Joshua, Samuel, Kings, Isaiah, Jeremiah, the Gospels, and Revelation itself came afterward. The warning forbids corrupting God's word, not God speaking again.",
+                    "The Bible's pattern is open revelation: God reveals His secrets to prophets in Amos 3:7, Jesus says He has other sheep in John 10:16, and Ezekiel 37:15–17 pictures the stick of Judah and the stick of Joseph becoming one in the Lord's hand."
+                ],
+                bullets: ["Closed-canon arguments are theological conclusions, not an explicit biblical table of contents.", "The Book of Mormon presents itself as another witness of Christ, not a replacement Bible.", "The question should be whether God has spoken, not whether He is allowed to."],
+                scriptures: [s("Deuteronomy 4:2"), s("Deuteronomy 12:32"), s("Proverbs 30:6"), s("Amos 3:7"), s("John 10:16"), s("John 21:25"), s("2 Timothy 3:16"), s("Revelation 22:18"), s("Ezekiel 37:15")],
+                sources: [["FAIR — Adding to the Bible", "https://www.fairlatterdaysaints.org/answers/Bible/Adding_to_the_Bible"], ["Gospel Topics — Book of Mormon", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/book-of-mormon?lang=eng"], ["Scripture Central — Bible and Book of Mormon", "https://scripturecentral.org/"]]
+            },
+            {
+                id: "galatians", tradition: "Evangelical", title: "Does Galatians 1 condemn Moroni or angelic restoration?",
+                claim: "Critics quote Galatians 1:8—'though we, or an angel from heaven, preach any other gospel'—and argue that Moroni delivering the Book of Mormon is automatically condemned.",
+                response: [
+                    "Paul's warning is against a different gospel that distorts Christ's grace. Latter-day Saints claim Moroni did not bring a rival gospel but pointed Joseph Smith to another witness of the same Jesus Christ: His atonement, resurrection, repentance, baptism, covenant discipleship, and judgment.",
+                    "Angelic messengers are biblical. Gabriel announces Christ's birth in Luke 1:26, angels minister after the Resurrection in Matthew 28:5, an angel directs Cornelius in Acts 10:3, and Revelation 14:6 explicitly describes an angel having the everlasting gospel to preach to the earth.",
+                    "The right test is not 'angel equals false.' The test is whether the message turns people from Christ or toward Christ, whether it confesses Jesus Christ, and whether its fruits are godly. See Matthew 7:16, 1 John 4:2, and Moroni 10:3–5."
+                ],
+                bullets: ["Galatians condemns a different gospel, not all angelic messages.", "The Book of Mormon's title page says its purpose is to convince Jew and Gentile that Jesus is the Christ.", "Revelation 14:6 makes room for an angel involved in proclaiming the everlasting gospel."],
+                scriptures: [s("Galatians 1:6"), s("Galatians 1:8"), s("Luke 1:26"), s("Matthew 28:5"), s("Acts 10:3"), s("Revelation 14:6"), s("Matthew 7:16"), s("1 John 4:2"), s("Moroni 10:3")],
+                sources: [["FAIR — Moroni and Galatians 1:8", "https://www.fairlatterdaysaints.org/answers/Moroni%27s_visit/Galatians_1:8"], ["Book of Mormon Title Page", "https://www.churchofjesuschrist.org/study/scriptures/bofm/bofm-title?lang=eng"], ["RESTORED TRUTH YouTube channel", RESTORED_TRUTH]]
+            },
+            {
+                id: "grace", tradition: "Evangelical, Catholic", title: "Are Latter-day Saints saved by works instead of grace?",
+                claim: "Evangelicals often say Latter-day Saints deny grace because they emphasize commandments, ordinances, covenants, and 2 Nephi 25:23: 'after all we can do.'",
+                response: [
+                    "Latter-day Saints teach that salvation is possible only through the grace, merits, mercy, and blood of Jesus Christ. No person earns resurrection, forgiveness, or eternal life by unaided effort.",
+                    "Ephesians 2:8–10 says we are saved by grace through faith, not of works, and then immediately says we are created in Christ Jesus unto good works. James 2:17 says faith without works is dead. Latter-day Saint covenant obedience is the fruit of faith, not the purchase price of grace.",
+                    "2 Nephi 25:23 is often read as if grace begins only after human effort is exhausted. A more faithful reading is that we are saved by grace despite and after everything we can offer; Christ's grace is the enabling power before, during, and after discipleship."
+                ],
+                bullets: ["Grace is the source; faith receives; works witness and embody living faith.", "Ordinances are covenant responses to Christ, not attempts to bypass Christ.", "The New Testament itself joins grace, faith, repentance, baptism, endurance, and obedience."],
+                scriptures: [s("Ephesians 2:8"), s("Ephesians 2:10"), s("James 2:17"), s("Titus 3:5"), s("Romans 6:3"), s("Philippians 2:12"), s("2 Nephi 25:23"), s("Mosiah 3:17"), s("Moroni 10:32")],
+                sources: [["Brad Wilcox — His Grace Is Sufficient", "https://speeches.byu.edu/talks/brad-wilcox/his-grace-is-sufficient/"], ["Gospel Topics — Grace", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/grace?lang=eng"], ["FAIR — Grace and works", "https://www.fairlatterdaysaints.org/answers/Grace_and_works"]]
+            },
+            {
+                id: "authority", tradition: "Catholic, Orthodox, Evangelical", title: "Was there really an apostasy requiring a restoration?",
+                claim: "Catholics and Orthodox usually claim apostolic continuity through bishops, councils, sacraments, and holy tradition. Evangelicals often claim the Bible preserved the essential gospel without requiring restored priesthood authority.",
+                response: [
+                    "Latter-day Saints do not claim all truth vanished. We claim priesthood keys, authorized ordinances, and the fulness of apostolic organization were lost and needed divine restoration.",
+                    "The New Testament anticipates a falling away: Paul warns of grievous wolves in Acts 20:29, a coming apostasy before the day of Christ in 2 Thessalonians 2:3, some departing from the faith in 1 Timothy 4:1, and people turning from sound doctrine in 2 Timothy 4:3.",
+                    "Restoration is also biblical: Peter speaks of 'the times of restitution of all things' in Acts 3:21, and Ephesians 4:11–14 says apostles and prophets are given until the Saints come to unity of faith—not just for the first generation."
+                ],
+                bullets: ["The Restoration claim is not that God abandoned Christians, but that God restored authority and fulness.", "Apostles and prophets are presented as Christ's church foundation in Ephesians 2:20.", "Claims of continuity should be weighed against New Testament warnings of corruption and loss."],
+                scriptures: [s("Matthew 16:18"), s("Acts 3:21"), s("Acts 20:29"), s("Ephesians 2:20"), s("Ephesians 4:11"), s("2 Thessalonians 2:3"), s("1 Timothy 4:1"), s("2 Timothy 4:3"), s("Amos 8:11")],
+                sources: [["Gospel Topics — Apostasy", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/apostasy?lang=eng"], ["Gospel Topics — Restoration of the Church", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/restoration-of-the-church?lang=eng"], ["Joseph Smith—History", "https://www.churchofjesuschrist.org/study/scriptures/pgp/js-h/1?lang=eng"]]
+            },
+            {
+                id: "book-of-mormon", tradition: "Evangelical, Catholic, Orthodox", title: "Is the Book of Mormon a rival to the Bible or another witness of Christ?",
+                claim: "Many creedal Christians view the Book of Mormon as an unauthorized rival scripture that distracts from the Bible and changes Christian doctrine.",
+                response: [
+                    "The Book of Mormon explicitly presents itself as a second witness of Jesus Christ. Its title page says it is written to convince Jew and Gentile that Jesus is the Christ, the Eternal God, manifesting himself unto all nations.",
+                    "The Bible supports the principle of multiple witnesses. Deuteronomy 19:15 and 2 Corinthians 13:1 establish matters by two or three witnesses. Ezekiel 37:15–17 speaks of the stick of Judah and the stick of Joseph becoming one. Jesus speaks of other sheep in John 10:16, and 3 Nephi presents His ministry among another covenant people.",
+                    "The core invitation is not to abandon the Bible but to read both witnesses together and ask God, through the Holy Ghost, whether the witness is true."
+                ],
+                bullets: ["A second witness can strengthen, not weaken, the first.", "The Book of Mormon repeatedly teaches faith in Christ, repentance, baptism, receiving the Holy Ghost, and enduring to the end.", "Its claims should be tested spiritually and scripturally, not dismissed because God is assumed to be silent."],
+                scriptures: [s("Deuteronomy 19:15"), s("Ezekiel 37:15"), s("John 10:16"), s("2 Corinthians 13:1"), s("3 Nephi 11:10"), s("2 Nephi 31:20"), s("Moroni 10:3")],
+                sources: [["Book of Mormon Title Page", "https://www.churchofjesuschrist.org/study/scriptures/bofm/bofm-title?lang=eng"], ["Gospel Topics — Book of Mormon", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/book-of-mormon?lang=eng"], ["Scripture Central", "https://scripturecentral.org/"]]
+            },
+            {
+                id: "theosis", tradition: "Orthodox, Catholic, Evangelical", title: "Is exaltation blasphemous, or is it biblical theosis?",
+                claim: "Critics object that Latter-day Saints teach humans can become like God, calling this polytheism or blasphemy. Orthodox Christians may recognize the word theosis but reject LDS implications about divine embodiment and eternal families.",
+                response: [
+                    "The Bible uses breathtaking language for human destiny in Christ: believers are children and heirs of God in Romans 8:16–17, partakers of the divine nature in 2 Peter 1:4, and promised to sit with Christ on His throne in Revelation 3:21.",
+                    "Jesus Himself quotes Psalm 82:6 in John 10:34—'Ye are gods'—in a debate about divine sonship. Latter-day Saints do not teach that exalted beings replace or rival the Father. All glory, worship, and salvation remain through the Father and the Son.",
+                    "Early Christian language about deification, especially in Eastern Christianity, shows that becoming like God is not automatically anti-Christian. The real disagreement is over how literally to understand divine inheritance, embodiment, family, and eternal increase."
+                ],
+                bullets: ["LDS exaltation is Christ-centered and dependent on grace.", "Theosis is ancient Christian vocabulary, even where LDS conclusions differ from Orthodox theology.", "The scriptural inheritance language is stronger than many critics allow."],
+                scriptures: [s("Psalm 82:6"), s("John 10:34"), s("Romans 8:16"), s("2 Peter 1:4"), s("Revelation 3:21"), s("1 John 3:2"), s("Doctrine and Covenants 76:58"), s("Doctrine and Covenants 132:20")],
+                sources: [["Gospel Topics Essay — Becoming Like God", "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/becoming-like-god?lang=eng"], ["FAIR — Deification of man", "https://www.fairlatterdaysaints.org/answers/Deification_of_man"], ["CCEL — Athanasius, On the Incarnation", "https://ccel.org/ccel/athanasius/incarnation/incarnation"]]
+            },
+            {
+                id: "baptism-dead", tradition: "Evangelical, Catholic, Orthodox", title: "Is baptism for the dead unbiblical?",
+                claim: "Many Christians see proxy baptism as a strange LDS invention and argue that ordinances after death undermine the urgency of accepting Christ now.",
+                response: [
+                    "Paul refers to baptism for the dead in 1 Corinthians 15:29 while defending resurrection. Whatever one's interpretation, the passage shows the idea was not foreign to early Christian discourse.",
+                    "The New Testament also teaches that Christ preached to spirits in prison in 1 Peter 3:18–20 and that the gospel was preached to the dead in 1 Peter 4:6. Latter-day Saints connect these passages with God's justice: all must come to Christ, but all must also receive a real opportunity.",
+                    "Proxy baptism does not erase agency. The living perform the ordinance; the dead may accept or reject it. It upholds John 3:5 while trusting that God's mercy reaches beyond mortal accident, geography, and history."
+                ],
+                bullets: ["The practice is tied to resurrection, not reincarnation or universalism.", "It preserves both the necessity of ordinances and the mercy of God.", "It answers the question of billions who never heard Christ's name in mortality."],
+                scriptures: [s("John 3:5"), s("1 Corinthians 15:29"), s("1 Peter 3:18"), s("1 Peter 4:6"), s("Malachi 4:5"), s("Doctrine and Covenants 128:15")],
+                sources: [["Gospel Topics — Baptisms for the Dead", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/baptisms-for-the-dead?lang=eng"], ["FAIR — Baptism for the dead", "https://www.fairlatterdaysaints.org/answers/Baptism_for_the_dead"], ["Joseph Smith Papers — D&C 128 context", "https://www.josephsmithpapers.org/"]]
+            },
+            {
+                id: "creeds", tradition: "Catholic, Orthodox, Evangelical", title: "Are creeds the test of Christianity?",
+                claim: "Creedal Christians often define Christianity by the Nicene Creed, Chalcedon, or later confessional formulas, then exclude Latter-day Saints because LDS theology does not fit those boundaries.",
+                response: [
+                    "Latter-day Saints respect sincere Christians who use creeds, but we do not accept post-apostolic councils as the final authority over God's nature. The New Testament testifies of Christ before Nicaea and Chalcedon existed.",
+                    "The scriptural tests of discipleship emphasize confession of Christ, covenant faithfulness, love, fruit, and doing the Father's will: Matthew 7:21, John 13:35, Romans 10:9, 1 Corinthians 12:3, and 1 John 4:2.",
+                    "The Restoration critique is not that every creedal sentence is false, but that creeds can freeze philosophical conclusions in place of living prophets, apostles, and revelation."
+                ],
+                bullets: ["Creeds are historically important but not themselves the Bible.", "The earliest Christian confession is centered on Jesus as Lord and Christ.", "A person can affirm Father, Son, Holy Ghost, incarnation, atonement, and resurrection while rejecting later metaphysical vocabulary."],
+                scriptures: [s("Matthew 7:21"), s("John 13:35"), s("Romans 10:9"), s("1 Corinthians 12:3"), s("1 John 4:2"), s("Ephesians 4:5"), s("Joseph Smith—History 1:19")],
+                sources: [["Nicene Creed — Britannica overview", "https://www.britannica.com/topic/Nicene-Creed"], ["Gospel Topics — Godhead", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/godhead?lang=eng"], ["RESTORED TRUTH YouTube channel", RESTORED_TRUTH]]
+            },
+            {
+                id: "temples", tradition: "Evangelical, Catholic, Orthodox", title: "Are LDS temples and priesthood ordinances unnecessary after Christ?",
+                claim: "Critics say Jesus fulfilled the temple, so modern temples, priesthood offices, sacred ordinances, and covenants are a return to obsolete ritualism.",
+                response: [
+                    "Jesus fulfills sacrifice and the law of Moses, but fulfillment does not mean God no longer uses sacred space, priesthood, covenant, or ordinance. The earliest Christians continued temple worship for a time in Acts 2:46 and Acts 3:1, and Revelation is filled with heavenly temple imagery.",
+                    "Latter-day Saint temples are not a return to animal sacrifice. They center on Christ's atonement, covenant discipleship, family sealing, and the promise of entering God's presence.",
+                    "The Bible's temple arc begins in Eden, continues through tabernacle and temple, appears in Christ's body and church, and culminates in God's presence with His people. LDS temples participate in that covenant pattern through restored authority."
+                ],
+                bullets: ["Christ fulfilled sacrifice; He did not abolish covenant discipleship.", "Modern LDS temples are Christ-centered, not Levitical animal-sacrifice centers.", "Sealing, holiness, and entering God's presence are deeply biblical themes."],
+                scriptures: [s("Malachi 3:1"), s("Acts 2:46"), s("Acts 3:1"), s("1 Corinthians 3:16"), s("Hebrews 8:5"), s("Revelation 7:15"), s("Revelation 11:19"), s("Doctrine and Covenants 124:40")],
+                sources: [["Gospel Topics — Temples", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/temples?lang=eng"], ["Gospel Topics — Priesthood", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/priesthood?lang=eng"], ["BibleProject — Temple theme", "https://bibleproject.com/explore/video/temple/"]]
+            },
+            {
+                id: "bible-alone", tradition: "Evangelical", title: "Does sola scriptura defeat LDS claims?",
+                claim: "Evangelical critics often say the Bible alone is the final authority, so modern prophets, priesthood keys, and additional scripture are ruled out from the start.",
+                response: [
+                    "Latter-day Saints love and use the Bible, but the Bible itself points to living apostolic authority, prophecy, and the Holy Ghost—not to a future Bible-alone system as the only authority after the apostles.",
+                    "2 Timothy 3:16 says scripture is profitable for doctrine, reproof, correction, and instruction. Latter-day Saints agree. But profitable and inspired does not mean exhaustive, closed, or independent of prophets and apostles.",
+                    "In Acts 15, the early church resolves a major doctrinal dispute through apostles, elders, council deliberation, scripture, and the Holy Ghost. That pattern looks more like living authority than scripture-alone individual interpretation."
+                ],
+                bullets: ["The Bible is inspired and authoritative; the dispute is whether it is the only authority God may use.", "The New Testament church had living apostles before it had a compiled New Testament.", "Restoration claims ask whether God restored that living pattern."],
+                scriptures: [s("Acts 15:6"), s("Acts 15:28"), s("Ephesians 2:20"), s("Ephesians 4:11"), s("2 Timothy 3:16"), s("2 Peter 1:20"), s("2 Peter 3:16")],
+                sources: [["Gospel Topics — Bible", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/bible?lang=eng"], ["Gospel Topics — Revelation", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/revelation?lang=eng"], ["FAIR — Bible", "https://www.fairlatterdaysaints.org/answers/Bible"]]
+            },
+            {
+                id: "mary-saints", tradition: "Catholic, Orthodox", title: "How do LDS responses differ from Catholic and Orthodox appeals to tradition, Mary, saints, and councils?",
+                claim: "Catholic and Orthodox critics may argue that LDS authority claims are unnecessary because apostolic tradition, bishops, sacraments, councils, saints, and liturgy already preserve the Church.",
+                response: [
+                    "Latter-day Saints share many concerns with Catholics and Orthodox that Evangelical minimalism can miss: embodied ordinances, priesthood, sacred tradition, holiness, sacraments/ordinances, and a visible church matter. The disagreement is where binding authority resides and whether priesthood keys were restored by heavenly messengers.",
+                    "Latter-day Saints honor Mary as the mother of the Son of God and honor ancient Saints as faithful witnesses, but prayer and worship are directed to the Father in the name of Jesus Christ. We do not treat later tradition or councils as equal to living revelation from God.",
+                    "The biblical pattern honors past witnesses while still requiring present revelation: Moses, prophets, Christ, apostles, angels, and the Holy Ghost all appear as active divine witnesses, not merely historical memories."
+                ],
+                bullets: ["Catholic/Orthodox objections often turn on authority and continuity more than Bible proof-texts alone.", "LDS belief agrees that Christianity is visible, covenantal, sacramental/ordinance-centered, and communal.", "The Restoration claim is that God reopened apostolic authority rather than merely reforming doctrine."],
+                scriptures: [s("Luke 1:28"), s("Luke 1:48"), s("John 14:26"), s("John 16:13"), s("Acts 1:24"), s("Acts 10:3"), s("Ephesians 2:20"), s("Hebrews 12:1")],
+                sources: [["Catechism of the Catholic Church", "https://www.vatican.va/archive/ENG0015/_INDEX.HTM"], ["Orthodox Church in America — The Symbol of Faith", "https://www.oca.org/orthodoxy/the-orthodox-faith/doctrine-scripture/the-symbol-of-faith"], ["Gospel Topics — Restoration of the Priesthood", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/restoration-of-the-priesthood?lang=eng"]]
+            }
+        ];
+        const cards = document.getElementById("cards");
+        const searchInput = document.getElementById("searchInput");
+        const traditionSelect = document.getElementById("traditionSelect");
+        const count = document.getElementById("count");
+        const navLinks = document.getElementById("navLinks");
+        const chevron = '<svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+        function topicText(t) {
+            return [t.title, t.tradition, t.claim, ...t.response, ...(t.bullets || []), ...(t.scriptures || []).map(x => x.ref), ...(t.sources || []).map(x => x[0])].join(" ").toLowerCase();
+        }
+        function renderCard(t, i) {
+            return `<article id="${t.id}" class="topic-card" data-tradition="${t.tradition}">
+    <button class="card-head" type="button" aria-expanded="false">
+      <span class="num">${i + 1}</span>
+      <span class="head-text"><h2>${linkRefs(t.title)}</h2><span class="meta"><span class="tag">${t.tradition}</span></span></span>
+      ${chevron}
+    </button>
+    <div class="card-body">
+      <details open><summary>The claim / criticism</summary><div class="detail-body"><p class="quote">${linkRefs(t.claim)}</p></div></details>
+      <details open><summary>Latter-day Saint response</summary><div class="detail-body">${t.response.map(p => `<p>${linkRefs(p)}</p>`).join("")}<ul>${t.bullets.map(b => `<li>${linkRefs(b)}</li>`).join("")}</ul></div></details>
+      <details><summary>Scripture links</summary><div class="detail-body"><div class="chips">${t.scriptures.map(x => `<a class="chip" href="${x.url}" target="_blank" rel="noopener">${x.ref}</a>`).join("")}</div></div></details>
+      <details><summary>Sources and further study</summary><div class="detail-body"><div class="sources">${t.sources.map(x => `<div class="source-item">↗ <a href="${x[1]}" target="_blank" rel="noopener">${x[0]}</a></div>`).join("")}</div></div></details>
+    </div>
+  </article>`;
+        }
+        function buildFilters() {
+            const traditions = Array.from(new Set(topics.flatMap(t => t.tradition.split(", ")))).sort();
+            traditionSelect.innerHTML = '<option value="">All sources</option>' + traditions.map(t => `<option value="${t}">${t}</option>`).join("");
+            navLinks.innerHTML = topics.map((t, i) => `<a href="#${t.id}">${i + 1}. ${t.title.replace(/<[^>]+>/g, "")}</a>`).join("");
+        }
+        function render() {
+            const q = searchInput.value.trim().toLowerCase();
+            const tr = traditionSelect.value;
+            let shown = 0;
+            const html = topics.map((t, i) => {
+                const matchQ = !q || topicText(t).includes(q);
+                const matchT = !tr || t.tradition.includes(tr);
+                if (matchQ && matchT) { shown++; return renderCard(t, i); }
+                return "";
+            }).join("");
+            cards.innerHTML = html || '<div class="notice empty">No matching topics. Try clearing the search or source filter.</div>';
+            count.textContent = `Showing ${shown} of ${topics.length} topics`;
+        }
+        buildFilters();
+        render();
+        cards.addEventListener("click", e => {
+            const btn = e.target.closest(".card-head");
+            if (!btn) return;
+            const card = btn.closest(".topic-card");
+            const open = card.classList.toggle("open");
+            btn.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+        searchInput.addEventListener("input", render);
+        traditionSelect.addEventListener("change", render);
+        document.getElementById("expandAll").addEventListener("click", () => {
+            document.querySelectorAll(".topic-card").forEach(c => { c.classList.add("open"); c.querySelector(".card-head").setAttribute("aria-expanded", "true"); c.querySelectorAll("details").forEach(d => d.open = true); });
+        });
+        document.getElementById("collapseAll").addEventListener("click", () => {
+            document.querySelectorAll(".topic-card").forEach(c => { c.classList.remove("open"); c.querySelector(".card-head").setAttribute("aria-expanded", "false"); c.querySelectorAll("details").forEach(d => d.open = false); });
+        });
+        document.getElementById("homeBtn").addEventListener("click", () => { searchInput.value = ""; traditionSelect.value = ""; render(); window.scrollTo({ top: 0, behavior: "smooth" }); });
+        document.getElementById("themeBtn").addEventListener("click", () => {
+            const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", next);
+            try { localStorage.setItem("lds-creedal-theme", next); } catch (e) { }
+        });
+        try {
+            const saved = localStorage.getItem("lds-creedal-theme");
+            if (saved === "light" || saved === "dark") document.documentElement.setAttribute("data-theme", saved);
+        } catch (e) { }
+    </script>
+</body>
+
+</html>
