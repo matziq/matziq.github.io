@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>The King Follett Discourse — A Four-Account Comparative Study</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Side-by-side comparison of the four contemporaneous eyewitness accounts of Joseph Smith's King Follett discourse (April 7, 1844), with topic filtering, cross-highlighting, a reading view, and sourced definitions." />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23003366'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23c9a961'%3EK%3C/text%3E%3C/svg%3E" />
+    <style>
+        :root {
+            --lds-blue: #003366;
+            --lds-blue-dk: #00264d;
+            --lds-gold: #c9a961;
+            --bg: #f5f3ee;
+            --panel: #ffffff;
+            --ink: #232323;
+            --muted: #5a5a5a;
+            --rule: #d9d3c3;
+            --accent: #0b3d91;
+            --highlight: #fff2b0;
+            --linked: #fff7e0;
+            --linked-ring: #c9a961;
+            --header-a: #003366;
+            --header-b: #1a4d8c;
+            --header-ink: #ffffff;
+            --card-a: #fbfaf6;
+            --card-b: #ffffff;
+            --tooltip-bg: #1c1c1c;
+            --tooltip-ink: #fff;
+            --btn-bg: rgba(255, 255, 255, .15);
+            --btn-bg-h: rgba(255, 255, 255, .28);
+            --btn-ink: #fff;
+            --btn-border: rgba(255, 255, 255, .35);
+            --shadow: 0 1px 4px rgba(0, 0, 0, .10);
+            --serif: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
+            --sans: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+            --c-opening: #0b3d91;
+            --c-prophets: #a65d1e;
+            --c-elohim: #2f6b3a;
+            --c-onceaman: #8a1f2d;
+            --c-eternalprogress: #5b3a8e;
+            --c-intelligence: #146b78;
+        }
+
+        [data-theme="dark"] {
+            --bg: #11151b;
+            --panel: #1b212b;
+            --ink: #e9e7e0;
+            --muted: #a9a49a;
+            --rule: #333b46;
+            --accent: #7fb0ff;
+            --highlight: #4a4020;
+            --linked: #3a331c;
+            --linked-ring: #d4b870;
+            --header-a: #08182c;
+            --header-b: #132846;
+            --header-ink: #f2ede0;
+            --card-a: #20262f;
+            --card-b: #1b212b;
+            --tooltip-bg: #f0ede4;
+            --tooltip-ink: #151515;
+            --btn-bg: rgba(255, 255, 255, .08);
+            --btn-bg-h: rgba(255, 255, 255, .18);
+            --btn-ink: #f2ede0;
+            --btn-border: rgba(255, 255, 255, .22);
+            --lds-gold: #d4b870;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.5;
+            transition: background .25s, color .25s;
+        }
+
+        a {
+            color: var(--accent);
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: var(--serif);
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            white-space: nowrap;
+        }
+
+        /* ---------- Top bar ---------- */
+        .topbar {
+            background: linear-gradient(135deg, var(--header-a), var(--header-b));
+            color: var(--header-ink);
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 500;
+            border-bottom: 3px solid var(--lds-gold);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .25);
+        }
+
+        .topbar-inner {
+            max-width: 1500px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--serif);
+            font-weight: 700;
+            font-size: 17px;
+            margin-right: auto;
+        }
+
+        .brand .crest {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: var(--lds-gold);
+            color: var(--lds-blue-dk);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--serif);
+            font-weight: 800;
+        }
+
+        .nav-guide {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .nav-guide a,
+        .icon-btn {
+            background: var(--btn-bg);
+            color: var(--btn-ink);
+            border: 1px solid var(--btn-border);
+            padding: 7px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background .15s;
+            font-family: var(--sans);
+        }
+
+        .nav-guide a:hover,
+        .icon-btn:hover {
+            background: var(--btn-bg-h);
+        }
+
+        /* ---------- Help panel ---------- */
+        #help-panel {
+            max-width: 1500px;
+            margin: 12px auto 0;
+            background: var(--panel);
+            border: 1px solid var(--rule);
+            border-left: 5px solid var(--lds-gold);
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow);
+        }
+
+        #help-panel h2 {
+            margin: 0 0 8px;
+            font-size: 16px;
+            color: var(--accent);
+        }
+
+        #help-panel ol {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 14px;
+        }
+
+        #help-panel li {
+            margin-bottom: 6px;
+        }
+
+        #help-panel[hidden] {
+            display: none;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            min-height: 340px;
+            display: flex;
+            align-items: flex-end;
+            background-image:
+                linear-gradient(180deg, rgba(0, 20, 45, .35) 0%, rgba(0, 20, 45, .55) 55%, rgba(0, 20, 45, .92) 100%),
+                url('https://mormonismexplained.org/wp-content/uploads/2025/09/joseph-smith-ces-letter-claims-debunked.jpeg');
+            background-size: cover;
+            background-position: center top;
+            color: #fdfaf2;
+            border-bottom: 4px solid var(--lds-gold);
+        }
+
+        .hero-inner {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 40px 24px 22px;
+            width: 100%;
+        }
+
+        .hero-kicker {
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            font-size: 12.5px;
+            color: var(--lds-gold);
+            font-weight: 700;
+        }
+
+        .hero h1 {
+            margin: 6px 0 8px;
+            font-size: clamp(28px, 4.4vw, 46px);
+            line-height: 1.05;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, .5);
+        }
+
+        .hero p.lede {
+            max-width: 70ch;
+            font-size: 15.5px;
+            opacity: .95;
+            margin: 0 0 4px;
+        }
+
+        .hero .credit {
+            font-size: 11.5px;
+            opacity: .75;
+            margin-top: 10px;
+        }
+
+        .hero .credit a {
+            color: #e8dcc0;
+        }
+
+        main {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 20px 20px 60px;
+        }
+
+        /* ---------- Controls ---------- */
+        .controls {
+            background: var(--panel);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 16px 20px;
+            margin-bottom: 18px;
+            border-top: 3px solid var(--lds-gold);
+        }
+
+        .control-row {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            align-items: end;
+        }
+
+        .control-group {
+            flex: 1;
+            min-width: 230px;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--muted);
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 15px;
+            border: 1px solid var(--rule);
+            border-radius: 6px;
+            background: var(--panel);
+            color: var(--ink);
+            cursor: pointer;
+        }
+
+        select:focus {
+            outline: 2px solid var(--accent);
+        }
+
+        .btn {
+            background: var(--panel);
+            color: var(--ink);
+            border: 1px solid var(--rule);
+            border-radius: 6px;
+            padding: 9px 14px;
+            font-size: 13.5px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 14px;
+            margin-top: 14px;
+            font-size: 12.5px;
+            color: var(--muted);
+        }
+
+        .legend .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend .dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        #topicLinks {
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--muted);
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        #topicLinks a {
+            font-weight: 600;
+        }
+
+        /* ---------- Compare status bar ---------- */
+        #compareStatus {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            background: var(--linked);
+            border: 1px solid var(--linked-ring);
+            border-radius: 8px;
+            padding: 10px 16px;
+            margin-bottom: 14px;
+            font-size: 13.5px;
+            font-weight: 600;
+        }
+
+        #compareStatus.show {
+            display: flex;
+        }
+
+        #compareStatus button {
+            margin-left: auto;
+        }
+
+        /* ---------- Grid of 4 versions ---------- */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        @media (max-width:1150px) {
+            .compare-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width:640px) {
+            .compare-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .version-column {
+            background: var(--panel);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border-top: 3px solid var(--accent);
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .version-head {
+            padding: 14px 16px 12px;
+            background: linear-gradient(180deg, var(--card-a), var(--card-b));
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .version-head .vname {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--lds-blue);
+            font-family: var(--serif);
+        }
+
+        [data-theme="dark"] .version-head .vname {
+            color: var(--lds-gold);
+        }
+
+        .version-head .vrole {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .version-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .version-actions button,
+        .version-actions a {
+            font-size: 11.5px;
+            padding: 5px 9px;
+            border-radius: 5px;
+            border: 1px solid var(--rule);
+            background: var(--panel);
+            color: var(--ink);
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .version-actions button:hover,
+        .version-actions a:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .version-body {
+            padding: 12px 14px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-y: auto;
+        }
+
+        /* ---------- Passage cards ---------- */
+        .passage {
+            border-left: 4px solid var(--rule);
+            background: var(--panel);
+            border-radius: 0 6px 6px 0;
+            padding: 10px 12px 10px 12px;
+            cursor: pointer;
+            transition: background .18s, box-shadow .18s, border-color .18s;
+            position: relative;
+        }
+
+        .passage:hover {
+            background: rgba(11, 61, 145, .05);
+        }
+
+        [data-theme="dark"] .passage:hover {
+            background: rgba(127, 176, 255, .08);
+        }
+
+        .passage[data-topic="opening"] {
+            border-left-color: var(--c-opening);
+        }
+
+        .passage[data-topic="prophets"] {
+            border-left-color: var(--c-prophets);
+        }
+
+        .passage[data-topic="elohim"] {
+            border-left-color: var(--c-elohim);
+        }
+
+        .passage[data-topic="onceaman"] {
+            border-left-color: var(--c-onceaman);
+        }
+
+        .passage[data-topic="eternalprogress"] {
+            border-left-color: var(--c-eternalprogress);
+        }
+
+        .passage[data-topic="intelligence"] {
+            border-left-color: var(--c-intelligence);
+        }
+
+        .passage.linked-active {
+            background: var(--linked);
+            box-shadow: 0 0 0 2px var(--linked-ring) inset;
+        }
+
+        .passage.user-highlighted {
+            background: var(--highlight);
+        }
+
+        .passage.hidden-by-filter {
+            display: none;
+        }
+
+        .passage.flash-pulse {
+            animation: pulse 1.4s ease;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(201, 169, 97, .9);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(201, 169, 97, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(201, 169, 97, 0);
+            }
+        }
+
+        .passage .ptopic-tag {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            font-weight: 700;
+            color: var(--muted);
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .passage .ptext {
+            font-family: var(--serif);
+            font-size: 15px;
+            line-height: 1.55;
+        }
+
+        .passage .pcite {
+            font-size: 11.5px;
+            color: var(--muted);
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .passage .pcite a {
+            font-weight: 600;
+        }
+
+        .passage .hl-btn {
+            border: 1px solid var(--rule);
+            background: var(--panel);
+            border-radius: 5px;
+            font-size: 11px;
+            padding: 3px 7px;
+            cursor: pointer;
+            color: var(--muted);
+        }
+
+        .passage .hl-btn[aria-pressed="true"] {
+            background: var(--lds-gold);
+            color: #2a2205;
+            border-color: var(--lds-gold);
+            font-weight: 700;
+        }
+
+        .passage.placeholder {
+            border-left-style: dashed;
+            opacity: .85;
+            cursor: default;
+        }
+
+        .passage.placeholder .ptext {
+            font-style: italic;
+            color: var(--muted);
+            font-family: var(--sans);
+            font-size: 13.5px;
+        }
+
+        /* glossary term */
+        .term {
+            border-bottom: 1px dotted var(--accent);
+            cursor: help;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .term:hover,
+        .term:focus {
+            background: var(--highlight);
+        }
+
+        /* ---------- Reading (full-screen) mode ---------- */
+        body.reading-mode {
+            overflow: hidden;
+        }
+
+        body.reading-mode .compare-grid {
+            display: block;
+        }
+
+        body.reading-mode .version-column {
+            display: none;
+        }
+
+        body.reading-mode .version-column[data-expanded="true"] {
+            display: flex;
+            position: fixed;
+            inset: 0;
+            z-index: 900;
+            border-radius: 0;
+            max-height: 100vh;
+        }
+
+        .reading-toolbar {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--header-a), var(--header-b));
+            color: var(--header-ink);
+            border-bottom: 3px solid var(--lds-gold);
+        }
+
+        .version-column[data-expanded="true"] .reading-toolbar {
+            display: flex;
+        }
+
+        .reading-toolbar strong {
+            font-family: var(--serif);
+            font-size: 16px;
+            margin-right: auto;
+        }
+
+        .version-column[data-expanded="true"] .version-body {
+            max-width: 820px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 24px 20px 80px;
+        }
+
+        .version-column[data-expanded="true"] .ptext {
+            font-size: 17.5px;
+        }
+
+        /* ---------- Sources / Glossary sections ---------- */
+        .section-card {
+            background: var(--panel);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--lds-gold);
+            padding: 18px 22px;
+            margin-top: 22px;
+        }
+
+        .section-card h2 {
+            margin: 0 0 6px;
+            font-size: 19px;
+            color: var(--accent);
+        }
+
+        .section-card .sub {
+            color: var(--muted);
+            font-size: 13.5px;
+            margin-bottom: 14px;
+        }
+
+        .source-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px 24px;
+        }
+
+        @media (max-width:700px) {
+            .source-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .source-grid h3 {
+            margin: 0 0 6px;
+            font-size: 13.5px;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--muted);
+        }
+
+        .source-grid ul {
+            margin: 0 0 14px;
+            padding-left: 18px;
+            font-size: 13.5px;
+        }
+
+        .source-grid li {
+            margin-bottom: 5px;
+        }
+
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width:900px) {
+            .glossary-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width:560px) {
+            .glossary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .gloss-card {
+            border: 1px solid var(--rule);
+            border-radius: 6px;
+            padding: 10px 12px;
+            background: linear-gradient(180deg, var(--card-a), var(--card-b));
+        }
+
+        .gloss-card h4 {
+            margin: 0 0 4px;
+            font-size: 14px;
+            color: var(--lds-blue);
+        }
+
+        [data-theme="dark"] .gloss-card h4 {
+            color: var(--lds-gold);
+        }
+
+        .gloss-card p {
+            margin: 0 0 6px;
+            font-size: 12.8px;
+            color: var(--ink);
+        }
+
+        .gloss-card a {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        footer {
+            max-width: 1500px;
+            margin: 24px auto 40px;
+            padding: 0 20px;
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        footer a {
+            color: var(--muted);
+            text-decoration: underline;
+        }
+
+        /* tooltip */
+        #glossary-tooltip {
+            position: fixed;
+            background: var(--tooltip-bg);
+            color: var(--tooltip-ink);
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            line-height: 1.45;
+            width: 300px;
+            max-width: calc(100vw - 24px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .35);
+            z-index: 2000;
+            display: none;
+            font-family: var(--sans);
+        }
+
+        #glossary-tooltip a {
+            color: #9fd0ff;
+            font-weight: 700;
+        }
+
+        #glossary-tooltip .gt-title {
+            font-weight: 700;
+            margin-bottom: 4px;
+            font-size: 13.5px;
+        }
+
+        #glossary-tooltip .gt-close {
+            position: absolute;
+            top: 4px;
+            right: 6px;
+            cursor: pointer;
+            background: none;
+            border: 0;
+            color: inherit;
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="brand"><span class="crest">K</span> The King Follett Discourse</div>
+            <nav class="nav-guide" aria-label="Navigation guide">
+                <a href="#hero-top">① Overview</a>
+                <a href="#controls">② Choose a Topic</a>
+                <a href="#compareGrid">③ Compare Passages</a>
+                <a href="#sources">④ Sources</a>
+                <a href="#glossary-list">⑤ Glossary</a>
+                <button class="icon-btn" id="helpToggle" aria-expanded="false" aria-controls="help-panel">❔ How to
+                    Use</button>
+                <button class="icon-btn" id="themeToggle" aria-pressed="false">🌙 Dark Mode</button>
+            </nav>
+        </div>
+    </header>
+
+    <section id="help-panel" hidden>
+        <h2>How to use this page</h2>
+        <ol>
+            <li><strong>Click any passage</strong> in one column to highlight the same, comparable, or closest-matching
+                passage in the other three accounts.</li>
+            <li><strong>Choose a topic</strong> from the dropdown to filter every column down to just that theme of the
+                discourse.</li>
+            <li><strong>Expand ⤢</strong> a column's header button to open that reporter's full account in a
+                distraction-free, full-screen reading view (with Prev/Next to switch reporters).</li>
+            <li><strong>Highlight</strong> any passage for yourself with the 🖊 button — your highlights are saved in
+                this browser.</li>
+            <li><strong>Tap or hover</strong> any underlined term for a pop-up definition and a link to a faithful
+                source for further reading.</li>
+        </ol>
+    </section>
+
+    <section class="hero" id="hero-top">
+        <div class="hero-inner">
+            <div class="hero-kicker">Nauvoo, Illinois · April 7, 1844</div>
+            <h1>The King&nbsp;Follett Discourse</h1>
+            <p class="lede">Delivered by Joseph Smith at the funeral of Elder King Follett during the Church's April
+                1844 general conference, this sermon on the nature of God, the eternity of the mind, and becoming like
+                God is among the most studied — and most debated — discourses in Latter-day Saint history. No single
+                official transcript exists; instead, four Church clerks and leaders took their own notes as they
+                listened. This page lets you read and compare those four eyewitness accounts side by side.</p>
+            <div class="credit">Illustration: Joseph Smith preaching, via <a href="https://mormonismexplained.org/"
+                    target="_blank" rel="noopener">mormonismexplained.org</a> — an artistic modern depiction; no
+                photograph of the 1844 event exists.</div>
+        </div>
+    </section>
+
+    <main>
+
+        <section class="controls" id="controls">
+            <div class="control-row">
+                <div class="control-group">
+                    <label for="topicSelect">Filter by topic discussed</label>
+                    <select id="topicSelect">
+                        <option value="all">— All topics (show everything) —</option>
+                        <option value="opening">Opening: In Memory of Elder King Follett</option>
+                        <option value="prophets">Every Man's Right to Speak — True and False Prophets</option>
+                        <option value="elohim">The Great Elohim and the Council of the Gods</option>
+                        <option value="onceaman">"God Himself Was Once as We Are Now"</option>
+                        <option value="eternalprogress">Learn to Be Gods Yourselves — Eternal Progression</option>
+                        <option value="intelligence">Mind and Intelligence Co-Eternal with God</option>
+                    </select>
+                </div>
+                <button class="btn" id="clearFilterBtn">Reset Topic Filter</button>
+                <button class="btn" id="clearHighlightsBtn">Clear My Highlights</button>
+            </div>
+            <div class="legend" aria-hidden="true">
+                <span class="chip"><span class="dot" style="background:var(--c-opening)"></span>Opening</span>
+                <span class="chip"><span class="dot" style="background:var(--c-prophets)"></span>Prophetic
+                    Authority</span>
+                <span class="chip"><span class="dot" style="background:var(--c-elohim)"></span>Elohim / Council of
+                    Gods</span>
+                <span class="chip"><span class="dot" style="background:var(--c-onceaman)"></span>God Once a Man</span>
+                <span class="chip"><span class="dot" style="background:var(--c-eternalprogress)"></span>Eternal
+                    Progression</span>
+                <span class="chip"><span class="dot" style="background:var(--c-intelligence)"></span>Intelligence</span>
+            </div>
+            <div id="topicLinks"></div>
+        </section>
+
+        <div id="compareStatus">
+            <span id="compareStatusText"></span>
+            <button class="btn" id="clearCompareBtn">Clear Comparison</button>
+        </div>
+
+        <section class="compare-grid" id="compareGrid">
+
+            <!-- ================= BULLOCK ================= -->
+            <article class="version-column" data-version="bullock">
+                <div class="reading-toolbar">
+                    <strong>Thomas Bullock</strong>
+                    <button class="icon-btn" data-prev>‹ Prev</button>
+                    <button class="icon-btn" data-next>Next ›</button>
+                    <button class="icon-btn" data-close>✕ Close</button>
+                </div>
+                <div class="version-head">
+                    <h3 class="vname">Thomas Bullock</h3>
+                    <div class="vrole">General Church Clerk — the account later used as the base text for <em>History of
+                            the Church</em>, vol. 6.</div>
+                    <div class="version-actions">
+                        <button class="expand-btn" data-target="bullock">⤢ Full-Screen Reading View</button>
+                        <a href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-thomas-bullock/1"
+                            target="_blank" rel="noopener">View Manuscript ↗</a>
+                    </div>
+                </div>
+                <div class="version-body">
+
+                    <div class="passage" data-topic="opening" data-group="opening" id="bullock-opening" tabindex="0"
+                        role="button">
+                        <span class="ptopic-tag">Opening</span>
+                        <div class="ptext">"The Prophet — while I address you on the subject which in the fore part of
+                            the conference was contemplated — as the wind blows very hard, it will be hardly possible
+                            for me to make you all hear. It is of the greatest importance, and the most solemn of any
+                            that could occupy our attention, and that is the subject of the dead: on the decease of our
+                            brother Follet[t] [<span class="term" data-term="kingfollett">King Follett</span>], who was
+                            crushed to death in a well. And inasmuch as there are a great many in this congregation who
+                            live in this city, and who have lost friends, I shall speak in general, and offer you my
+                            ideas so far as I have ability, and so far as I shall be inspired by the Holy Spirit to
+                            dwell on this subject. I want your prayer, faith, and instruction of Almighty God, to say
+                            things that are true, and shall carry the testimony to your hearts; and pray that he may
+                            strengthen my lungs, stay the winds, and let the prayers of the Saints to heaven appear —
+                            for the prayers of the righteous avail much — and I verily believe that your prayers shall
+                            be heard, before I enter fully into the investigation of the subject that is lying before
+                            us. I wish to make a few preliminar[y remarks]."</div>
+                        <div class="pcite"><span>Thomas Bullock, JSP p. 14</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-thomas-bullock/1"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                    <div class="passage" data-topic="prophets" data-group="prophets" id="bullock-prophets" tabindex="0"
+                        role="button">
+                        <span class="ptopic-tag">Prophetic Authority</span>
+                        <div class="ptext">"I do not calculate to please your ears with oratory or with much learning,
+                            but I calculate to edify you with simple truths from Heaven... Ninety-nine of a hundred [who
+                            claim revelation falsely] are <span class="term" data-term="falseprophet">false
+                                prophets</span>, and [to try to put down every one of them by force] would deluge the
+                            whole world with blood. I want you all to know God, to be familiar with him; and if I can
+                            bring you to him, all persecution against me will cease, and [you will] know that I am his
+                            servant, for I speak as one having authority, and not as a scribe. Open your ears and eyes,
+                            all ye ends of the earth, and hear; for I am going to prove it to you with the Bible, and I
+                            am going to tell you the designs of God to the human race, and why he interferes with the
+                            affairs of man."</div>
+                        <div class="pcite"><span>Thomas Bullock, JSP pp. 15–16</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-thomas-bullock/2"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                    <div class="passage" data-topic="elohim" data-group="elohim" id="bullock-elohim" tabindex="0"
+                        role="button">
+                        <span class="ptopic-tag">Elohim / Council of Gods</span>
+                        <div class="ptext">"I shall turn commentator today. I shall go to the first Hebrew word in the
+                            Bible — the first sentence: 'In the beginning.' Berosheet — [that is] 'in,' 'by,' 'through,'
+                            and everything else. Rosh, the head. When the inspired man wrote it, he did not put the
+                            first point to it — a man, a Jew, without any authority, thought it too bad to begin to talk
+                            about the head of any man, [so it would not read]: 'The Head One of the <span class="term"
+                                data-term="elohim">Gods</span> brought forth [the Gods].'"</div>
+                        <div class="pcite"><span>Thomas Bullock, JSP pp. 16–17</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-thomas-bullock/3"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                    <div class="passage placeholder" data-topic="onceaman" data-group="onceaman" id="bullock-onceaman">
+                        <span class="ptopic-tag">God Once a Man</span>
+                        <div class="ptext">Bullock's notes reach this same doctrine only after first laying the Hebrew
+                            groundwork above (the "Head One of the Gods"). His fuller statement continues a little
+                            further into the manuscript than this excerpt set goes.</div>
+                        <div class="pcite"><span>Continues near JSP p. 18</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-thomas-bullock/5"
+                                target="_blank" rel="noopener">Read on ↗</a></div>
+                    </div>
+
+                    <div class="passage" data-topic="eternalprogress" data-group="eternalprogress"
+                        id="bullock-eternalprogress" tabindex="0" role="button">
+                        <span class="ptopic-tag">Eternal Progression</span>
+                        <div class="ptext">"They shall be heirs of God, and joint heirs of Jesus Christ, to inherit the
+                            same power [and] <span class="term" data-term="exaltation">exaltation</span>, until you
+                            ascend the throne of eternal power, the same as those who are gone before. What [Jesus] did,
+                            I do the things I saw my Father do, before worlds came rolled into existence. I saw my
+                            Father work out his kingdom with fear and trembling, and I must do the same — when I shall
+                            give my kingdom to the Father, so that he obtains kingdom rolling upon kingdom, so that
+                            Jesus treads in his tracks, as he had gone before."</div>
+                        <div class="pcite"><span>Thomas Bullock, JSP p. 17</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-thomas-bullock/4"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                    <div class="passage" data-topic="intelligence" data-group="intelligence" id="bullock-intelligence"
+                        tabindex="0" role="button">
+                        <span class="ptopic-tag">Mind &amp; Intelligence</span>
+                        <div class="ptext">"So — I am going to tell of things more noble. We say that God himself is a
+                            self-existing God — who told you so? How did it get into your head? Who told you that man
+                            did not exist in like manner? How does it read in the Hebrew — that God made man, and put
+                            into him Adam's spirit, and so he became a living spirit? The mind of man is as immortal as
+                            God himself. Hence, while I talk to these mourners — [know that] they are only separated
+                            from their bodies for a short period; their spirits coexisted with God, and now converse
+                            with one another the same as we do... I take my ring from my finger and liken it unto the
+                            mind of man."</div>
+                        <div class="pcite"><span>Thomas Bullock, JSP p. 18</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-thomas-bullock/5"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                </div>
+            </article>
+
+            <!-- ================= RICHARDS ================= -->
+            <article class="version-column" data-version="richards">
+                <div class="reading-toolbar">
+                    <strong>Willard Richards</strong>
+                    <button class="icon-btn" data-prev>‹ Prev</button>
+                    <button class="icon-btn" data-next>Next ›</button>
+                    <button class="icon-btn" data-close>✕ Close</button>
+                </div>
+                <div class="version-head">
+                    <h3 class="vname">Willard Richards</h3>
+                    <div class="vrole">Church Historian and Recorder — kept a compressed, telegraphic outline in his
+                        personal journal/"pocket companion."</div>
+                    <div class="version-actions">
+                        <button class="expand-btn" data-target="richards">⤢ Full-Screen Reading View</button>
+                        <a href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-willard-richards/1"
+                            target="_blank" rel="noopener">View Manuscript ↗</a>
+                    </div>
+                </div>
+                <div class="version-body">
+
+                    <div class="passage" data-topic="opening" data-group="opening" id="richards-opening" tabindex="0"
+                        role="button">
+                        <span class="ptopic-tag">Opening</span>
+                        <div class="ptext">"Joseph commenced speaking on the subject of the Dead — relative to the death
+                            of Elder <span class="term" data-term="kingfollett">King Follett</span>, who was crushed [to
+                            death] in a well by the falling of a tub of rock on him."</div>
+                        <div class="pcite"><span>Willard Richards, JSP p. [67]</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-willard-richards/1"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                    <div class="passage" data-topic="prophets" data-group="prophets" id="richards-prophets" tabindex="0"
+                        role="button">
+                        <span class="ptopic-tag">Prophetic Authority</span>
+                        <div class="ptext">"If I am so fortunate as to comprehend and explain [this] — let every one sit
+                            in silence, and never lift your voice against the servants of God again. Every man has a
+                            right to be a <span class="term" data-term="falseprophet">false prophet</span> as well
+                            as..."</div>
+                        <div class="pcite"><span>Willard Richards, JSP pp. [67]–[68]</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-willard-richards/1"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                    <div class="passage" data-topic="elohim" data-group="elohim" id="richards-elohim" tabindex="0"
+                        role="button">
+                        <span class="ptopic-tag">Elohim / Council of Gods</span>
+                        <div class="ptext">"The head — the head one. The head one of the <span class="term"
+                                data-term="elohim">Gods</span> brought forth the Gods. [Let the] doctor and lawyer that
+                            have persecuted [take note]: the head one called the Gods together in grand council, to
+                            bring forth the world."</div>
+                        <div class="pcite"><span>Willard Richards, JSP p. [68]</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-willard-richards/2"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                    <div class="passage" data-topic="onceaman" data-group="onceaman" id="richards-onceaman" tabindex="0"
+                        role="button">
+                        <span class="ptopic-tag">God Once a Man</span>
+                        <div class="ptext">"If men do not comprehend the character of God, they do not comprehend
+                            themselves. What kind of a being is God? <span class="term" data-term="eternallife">Eternal
+                                life</span> is to know God. If man does not know God, he has not eternal life."</div>
+                        <div class="pcite"><span>Willard Richards, JSP p. [67]</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-willard-richards/1"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                    <div class="passage" data-topic="eternalprogress" data-group="eternalprogress"
+                        id="richards-eternalprogress" tabindex="0" role="button">
+                        <span class="ptopic-tag">Eternal Progression</span>
+                        <div class="ptext">"...and ascend a throne, as those who have gone before. I saw the Father work
+                            out his kingdom with fear and trembling. God is gratified in [the] salvation [and] <span
+                                class="term" data-term="exaltation">exaltation</span> of his creations — not all to be
+                            comprehended in this world."</div>
+                        <div class="pcite"><span>Willard Richards, JSP p. [68]</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-willard-richards/2"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                    <div class="passage" data-topic="intelligence" data-group="intelligence" id="richards-intelligence"
+                        tabindex="0" role="button">
+                        <span class="ptopic-tag">Mind &amp; Intelligence</span>
+                        <div class="ptext">"Who told you God was self-existent? Correct enough — in Hebrew [it reads
+                            that he] put into him his spirit, which was created before. Mind of man co-equal with God
+                            himself. Friends separated for a small moment from their spirits [are] co-equal with God,
+                            and hold conversation when they are one with another. If man had a beginning, he must have
+                            an end... <span class="term" data-term="intelligence">Intelligence</span> exists upon a
+                            self-existent principle — no creation about it."</div>
+                        <div class="pcite"><span>Willard Richards, JSP p. [69]</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-willard-richards/3"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                </div>
+            </article>
+
+            <!-- ================= CLAYTON ================= -->
+            <article class="version-column" data-version="clayton">
+                <div class="reading-toolbar">
+                    <strong>William Clayton</strong>
+                    <button class="icon-btn" data-prev>‹ Prev</button>
+                    <button class="icon-btn" data-next>Next ›</button>
+                    <button class="icon-btn" data-close>✕ Close</button>
+                </div>
+                <div class="version-head">
+                    <h3 class="vname">William Clayton</h3>
+                    <div class="vrole">Temple Recorder and personal clerk to Joseph Smith — kept a private diary account
+                        of the sermon.</div>
+                    <div class="version-actions">
+                        <button class="expand-btn" data-target="clayton">⤢ Full-Screen Reading View</button>
+                        <a href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-william-clayton/1"
+                            target="_blank" rel="noopener">View Manuscript ↗</a>
+                    </div>
+                </div>
+                <div class="version-body">
+
+                    <div class="passage" data-topic="opening" data-group="opening" id="clayton-opening" tabindex="0"
+                        role="button">
+                        <span class="ptopic-tag">Opening</span>
+                        <div class="ptext">"President J[oseph] Smith called the attention of the conference upon the
+                            subject contemplated in the fore part of the conference — as the wind blows hard it will be
+                            impossible to make [all] hear unless [with] profound attention. Subject of the greatest
+                            importance, and most solemn that could occupy our attention: the subject of the dead. [I]
+                            have been requested to speak on the subject, on the decease of Brother Follet[t] [<span
+                                class="term" data-term="kingfollett">King Follett</span>], who was crushed to death,
+                            &amp;c. I have been requested to speak by his friends and relatives, and inasmuch as [there
+                            are a] great many here in [the] congregation who live in this city as well as elsewhere who
+                            have deceased friends, [I] feel disposed to speak on the subject in general, and offer my
+                            ideas as far as [my] ability [allows]."</div>
+                        <div class="pcite"><span>William Clayton, JSP p. 11</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-william-clayton/1"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                    <div class="passage" data-topic="prophets" data-group="prophets" id="clayton-prophets" tabindex="0"
+                        role="button">
+                        <span class="ptopic-tag">Prophetic Authority</span>
+                        <div class="ptext">"If I comprehend [it] so that the Spirit seal[s] it upon your hearts, let
+                            every man and woman put his hand on his mouth and never say anything against the man of God
+                            again. But if I fail, it becomes my duty to renounce all my pretensions to inspiration,
+                            &amp;c. — and if I should do so, should I not be as bad as all the rest of the world? Not a
+                            man would breathe anathema if they knew I was a <span class="term"
+                                data-term="falseprophet">false prophet</span>; some would take my life. If any man is
+                            authorized to take my life because I am a false teacher, then upon the same principle am I
+                            authorized to take the life of every false teacher..."</div>
+                        <div class="pcite"><span>William Clayton, JSP p. 13</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-william-clayton/3"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                    <div class="passage" data-topic="elohim" data-group="elohim" id="clayton-elohim" tabindex="0"
+                        role="button">
+                        <span class="ptopic-tag">Elohim / Council of Gods</span>
+                        <div class="ptext">"I will go to the old Bible, the very Berosheit — [and] make a comment on the
+                            first sentence of the history of creation. Berosheit, Ba — [I] want to analyze the word. Ba:
+                            in, by, through, and everything else. Rosh: next, the head. Sheet: where does it come from?
+                            When the inspired man wrote it, he did not put the Ba there, but a Jew put it there. It
+                            read, in the first: 'The Head One of the <span class="term" data-term="elohim">Gods</span>
+                            brought forth the Gods' — is the true meaning. Rosheit signifies to bring forth the Elohim."
+                        </div>
+                        <div class="pcite"><span>William Clayton, JSP p. 15</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-william-clayton/5"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                    <div class="passage placeholder" data-topic="onceaman" data-group="onceaman" id="clayton-onceaman">
+                        <span class="ptopic-tag">God Once a Man</span>
+                        <div class="ptext">Clayton's diary works through the Hebrew word-study first (see "Elohim /
+                            Council of Gods," left) before restating this doctrine plainly — that portion isn't included
+                            in this excerpt set. Read on in the full manuscript.</div>
+                        <div class="pcite"><span>Continues near JSP p. 16</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-william-clayton/6"
+                                target="_blank" rel="noopener">Read on ↗</a></div>
+                    </div>
+
+                    <div class="passage" data-topic="eternalprogress" data-group="eternalprogress"
+                        id="clayton-eternalprogress" tabindex="0" role="button">
+                        <span class="ptopic-tag">Eternal Progression</span>
+                        <div class="ptext">"Said Jesus (mark it, Brother [Sidney] Rigdon) — what did Jesus say? As the
+                            Father hath power in himself, even so hath the Son power, to do what? Why, what the Father
+                            did: to lay down his body and take it up again. Jesus, what are you going to do? To lay down
+                            my life as my Father did, that I might take it up again. If you deny it, you deny the
+                            Bible... You have got to learn how to be a god yourself, in order to save yourself — to be
+                            priests and kings..."</div>
+                        <div class="pcite"><span>William Clayton, JSP p. 14</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-william-clayton/4"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                    <div class="passage placeholder" data-topic="intelligence" data-group="intelligence"
+                        id="clayton-intelligence">
+                        <span class="ptopic-tag">Mind &amp; Intelligence</span>
+                        <div class="ptext">Clayton's diary entry for this part of the discourse is brief; the fuller
+                            statement on the eternity of intelligence is best compared using the Bullock and Richards
+                            accounts (left). Read on in the full manuscript.</div>
+                        <div class="pcite"><span>Full manuscript</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-william-clayton/6"
+                                target="_blank" rel="noopener">Read on ↗</a></div>
+                    </div>
+
+                </div>
+            </article>
+
+            <!-- ================= WOODRUFF ================= -->
+            <article class="version-column" data-version="woodruff">
+                <div class="reading-toolbar">
+                    <strong>Wilford Woodruff</strong>
+                    <button class="icon-btn" data-prev>‹ Prev</button>
+                    <button class="icon-btn" data-next>Next ›</button>
+                    <button class="icon-btn" data-close>✕ Close</button>
+                </div>
+                <div class="version-head">
+                    <h3 class="vname">Wilford Woodruff</h3>
+                    <div class="vrole">Apostle and lifelong diarist — recorded a shorter, more condensed summary in his
+                        personal journal.</div>
+                    <div class="version-actions">
+                        <button class="expand-btn" data-target="woodruff">⤢ Full-Screen Reading View</button>
+                        <a href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-wilford-woodruff/1"
+                            target="_blank" rel="noopener">View Manuscript ↗</a>
+                    </div>
+                </div>
+                <div class="version-body">
+
+                    <div class="passage" data-topic="opening" data-group="opening" id="woodruff-opening" tabindex="0"
+                        role="button">
+                        <span class="ptopic-tag">Opening</span>
+                        <div class="ptext">"I now call the attention of this congregation while I address you upon the
+                            subject of the dead. The case of our beloved brother <span class="term"
+                                data-term="kingfollett">King Follett</span>, who was crushed to death in a well, as well
+                            as many others who have lost friends, will be had in mind this afternoon, and [I] shall
+                            speak upon the subject in general, as far as I shall be inspired by the Holy Spirit to treat
+                            upon the subject. I want the prayers and faith of the Saints that I may have the Holy Ghost,
+                            that the testimony may carry conviction to your minds of the truth of what I shall say, and
+                            pray that the Lord may strengthen my lungs — there is strength here, your prayers will be
+                            heard. Before I enter upon an investigation of this subject..."</div>
+                        <div class="pcite"><span>Wilford Woodruff, JSP p. [133]</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-wilford-woodruff/1"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                    <div class="passage placeholder" data-topic="prophets" data-group="prophets" id="woodruff-prophets">
+                        <span class="ptopic-tag">Prophetic Authority</span>
+                        <div class="ptext">Woodruff's condensed minutes move directly from the opening prayer into the
+                            doctrine of God (right), without recording this passage on prophetic authority — typical of
+                            his account, roughly a third the length of Bullock's. Compare the other three columns for
+                            this topic.</div>
+                        <div class="pcite"><span>Not recorded at this point</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-wilford-woodruff/2"
+                                target="_blank" rel="noopener">Read on ↗</a></div>
+                    </div>
+
+                    <div class="passage" data-topic="elohim" data-group="elohim" id="woodruff-elohim" tabindex="0"
+                        role="button">
+                        <span class="ptopic-tag">Elohim / Council of Gods</span>
+                        <div class="ptext">"Barasheet, in the beginning. Analyze the word — in and through the head. An
+                            old Jew added the word [aleph]; it read the Head One of the <span class="term"
+                                data-term="elohim">Gods</span>, brought forth the Gods... The grand council sat at the
+                            head, and contemplated the creation of the world."</div>
+                        <div class="pcite"><span>Wilford Woodruff, JSP p. [136]</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-wilford-woodruff/4"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                    <div class="passage" data-topic="onceaman" data-group="onceaman" id="woodruff-onceaman" tabindex="0"
+                        role="button">
+                        <span class="ptopic-tag">God Once a Man</span>
+                        <div class="ptext">"...this is all man knows about God or his existence, except what is given by
+                            the inspiration of the Almighty. Go then to the beginning, that you may understand. I ask
+                            this congregation: what kind of a being is God? Turn your thoughts in your hearts, and say —
+                            have any of you seen or heard him, or communed with him?... <span class="term"
+                                data-term="eternallife">The scriptures inform us that this is eternal life</span> — to
+                            know the only wise God and Jesus Christ whom he has sent... In order to understand the dead,
+                            for the consolation of those that mourn, I want you to understand God, and how he comes to
+                            be God. We suppose that God was God from eternity; I will refute that idea... It is the
+                            first principle [for us] to know, that we may converse with him, and that he once was a man
+                            like us, and the Father was once on an earth like us."</div>
+                        <div class="pcite"><span>Wilford Woodruff, JSP pp. [134]–[135]</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-wilford-woodruff/2"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                    <div class="passage" data-topic="eternalprogress" data-group="eternalprogress"
+                        id="woodruff-eternalprogress" tabindex="0" role="button">
+                        <span class="ptopic-tag">Eternal Progression</span>
+                        <div class="ptext">"The scriptures inform us — mark it — that Jesus Christ said: as the Father
+                            hath power in himself, so hath the Son power in himself, to do what the..."</div>
+                        <div class="pcite"><span>Wilford Woodruff, JSP p. [135]</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-wilford-woodruff/3"
+                                target="_blank" rel="noopener">Source ↗</a><button class="hl-btn"
+                                aria-pressed="false">🖊 Highlight</button></div>
+                    </div>
+
+                    <div class="passage placeholder" data-topic="intelligence" data-group="intelligence"
+                        id="woodruff-intelligence">
+                        <span class="ptopic-tag">Mind &amp; Intelligence</span>
+                        <div class="ptext">Woodruff's abbreviated notes do not separately restate the "mind co-equal
+                            with God" teaching within this excerpt set — compare the Bullock and Richards columns, which
+                            record it directly.</div>
+                        <div class="pcite"><span>Not recorded at this point</span><a
+                                href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-wilford-woodruff/4"
+                                target="_blank" rel="noopener">Read on ↗</a></div>
+                    </div>
+
+                </div>
+            </article>
+
+        </section>
+
+        <section class="section-card" id="sources">
+            <h2>Sources &amp; Further Reading</h2>
+            <p class="sub">This page presents six representative, aligned passages — not the complete ~2½-hour
+                discourse. Spelling and punctuation have been lightly regularized for readability; bracketed words
+                clarify the original manuscript abbreviations. All four excerpts are transcribed from the original
+                manuscripts by <strong>The Joseph Smith Papers Project</strong>. Read the complete accounts and the
+                surrounding historical context there.</p>
+            <div class="source-grid">
+                <div>
+                    <h3>The Four Complete Manuscripts</h3>
+                    <ul>
+                        <li><a href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-thomas-bullock/1"
+                                target="_blank" rel="noopener">Discourse, 7 April 1844, as Reported by Thomas Bullock
+                                ↗</a></li>
+                        <li><a href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-willard-richards/1"
+                                target="_blank" rel="noopener">Discourse, 7 April 1844, as Reported by Willard Richards
+                                ↗</a></li>
+                        <li><a href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-william-clayton/1"
+                                target="_blank" rel="noopener">Discourse, 7 April 1844, as Reported by William Clayton
+                                ↗</a></li>
+                        <li><a href="https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-wilford-woodruff/1"
+                                target="_blank" rel="noopener">Discourse, 7 April 1844, as Reported by Wilford Woodruff
+                                ↗</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Church &amp; Independent Study Resources</h3>
+                    <ul>
+                        <li><a href="https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/becoming-like-god?lang=eng"
+                                target="_blank" rel="noopener">Gospel Topics Essay: "Becoming Like God" ↗</a></li>
+                        <li><a href="https://www.churchofjesuschrist.org/study/manual/teachings-joseph-smith/chapter-45-the-prophet-joseph-smith-teaches-the-doctrine-of-eternal-progression?lang=eng"
+                                target="_blank" rel="noopener">Teachings of Presidents of the Church: Joseph Smith, ch.
+                                45 ↗</a></li>
+                        <li><a href="https://www.churchofjesuschrist.org/study/scriptures/bd/prophets?lang=eng"
+                                target="_blank" rel="noopener">Bible Dictionary: "Prophets" ↗</a></li>
+                        <li><a href="https://mormonr.org/qnas/vhBxbh/prophetic_fallibility" target="_blank"
+                                rel="noopener">Mormonr: "Prophetic Fallibility" (independent historical analysis) ↗</a>
+                        </li>
+                        <li><a href="https://mormonr.org/categories" target="_blank" rel="noopener">Mormonr: Browse all
+                                topics ↗</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-card" id="glossary-list">
+            <h2>Glossary of Terms</h2>
+            <p class="sub">Every underlined term in the passages above links to one of these definitions. Tap or hover a
+                term inline, or browse the full list here.</p>
+            <div class="glossary-grid" id="glossaryGrid"></div>
+        </section>
+
+    </main>
+
+    <footer>
+        This independent study page is not produced by, endorsed by, or affiliated with The Church of Jesus Christ of
+        Latter-day Saints, mormonismexplained.org, or Mormonr / the B. H. Roberts Foundation. Manuscript excerpts are
+        transcribed by The Joseph Smith Papers Project (© Intellectual Reserve, Inc.) and are reproduced here in brief,
+        cited, educational excerpts for comparative study; please consult josephsmithpapers.org for the complete
+        manuscripts and full scholarly apparatus. Hero illustration courtesy of mormonismexplained.org.
+    </footer>
+
+    <div id="glossary-tooltip" role="tooltip"></div>
+
+    <script>
+        (function () {
+            "use strict";
+
+            var GLOSSARY = {
+                elohim: {
+                    term: "Elohim",
+                    def: "A Hebrew name-title for God, grammatically plural in form (from \u2018El,\u2019 god, plus the plural ending \u2018-im\u2019). Joseph Smith pointed to this plural form in Genesis 1:1 as evidence of a \u201ccouncil of the Gods\u201d organizing the creation.",
+                    link: "https://www.churchofjesuschrist.org/study/scriptures/gs/elohim?lang=eng",
+                    linkLabel: "Guide to the Scriptures: Elohim"
+                },
+                eternallife: {
+                    term: "Eternal Life",
+                    def: "Not merely unending existence, but a specific quality of life \u2014 to live as God lives, in his presence and with his kind of glory. The discourse ties it directly to a personal, experiential knowledge of God.",
+                    link: "https://www.churchofjesuschrist.org/study/scriptures/bd/eternal-life?lang=eng",
+                    linkLabel: "Bible Dictionary: Eternal Life"
+                },
+                intelligence: {
+                    term: "Intelligence",
+                    def: "The uncreated, self-existent core of a person\u2019s mind or spirit. Joseph Smith taught that \u201cintelligence\u201d never had a beginning and cannot be destroyed \u2014 distinct from the spirit body it inhabits.",
+                    link: "https://www.churchofjesuschrist.org/study/scriptures/gs/intelligence?lang=eng",
+                    linkLabel: "Guide to the Scriptures: Intelligence"
+                },
+                exaltation: {
+                    term: "Exaltation",
+                    def: "The doctrine that faithful, covenant-keeping individuals may, through Christ, inherit the same glory, powers, and kind of life that God possesses \u2014 becoming \u201cjoint heirs\u201d with Christ.",
+                    link: "https://www.churchofjesuschrist.org/study/scriptures/bd/exaltation?lang=eng",
+                    linkLabel: "Bible Dictionary: Exaltation"
+                },
+                kingfollett: {
+                    term: "King Follett",
+                    def: "A Latter-day Saint elder in Nauvoo, Illinois, who died on March 9, 1844, from injuries sustained while digging a well. His funeral, held during the Church\u2019s April 1844 general conference, was the occasion for this discourse.",
+                    link: "https://www.josephsmithpapers.org/paper-summary/discourse-7-april-1844-as-reported-by-thomas-bullock/1",
+                    linkLabel: "Joseph Smith Papers: Discourse Overview"
+                },
+                falseprophet: {
+                    term: "\u201cA Right to Be a False Prophet\u201d",
+                    def: "Joseph Smith\u2019s provocative claim that every person has the agency to claim revelation truly or falsely, and that only God \u2014 not human violence \u2014 has the right to judge and punish a false claim to prophecy.",
+                    link: "https://www.churchofjesuschrist.org/study/scriptures/bd/prophets?lang=eng",
+                    linkLabel: "Bible Dictionary: Prophets"
+                }
+            };
+
+            var TOPICS = {
+                opening: {
+                    label: "Opening: In Memory of Elder King Follett", links: [
+                        { label: "Bible Dictionary: Death", href: "https://www.churchofjesuschrist.org/study/scriptures/bd/death?lang=eng" },
+                        { label: "Mormonr: Browse topics", href: "https://mormonr.org/categories" }
+                    ]
+                },
+                prophets: {
+                    label: "Every Man's Right to Speak \u2014 True and False Prophets", links: [
+                        { label: "Bible Dictionary: Prophets", href: "https://www.churchofjesuschrist.org/study/scriptures/bd/prophets?lang=eng" },
+                        { label: "Mormonr: Prophetic Fallibility", href: "https://mormonr.org/qnas/vhBxbh/prophetic_fallibility" }
+                    ]
+                },
+                elohim: {
+                    label: "The Great Elohim and the Council of the Gods", links: [
+                        { label: "Guide to Scriptures: Elohim", href: "https://www.churchofjesuschrist.org/study/scriptures/gs/elohim?lang=eng" },
+                        { label: "Mormonr: Browse topics", href: "https://mormonr.org/categories" }
+                    ]
+                },
+                onceaman: {
+                    label: "\u201cGod Himself Was Once as We Are Now\u201d", links: [
+                        { label: "Gospel Topics Essay: Becoming Like God", href: "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/becoming-like-god?lang=eng" },
+                        { label: "Mormonr: Browse topics", href: "https://mormonr.org/categories" }
+                    ]
+                },
+                eternalprogress: {
+                    label: "Learn to Be Gods Yourselves \u2014 Eternal Progression", links: [
+                        { label: "Teachings of Presidents: Joseph Smith, ch. 45", href: "https://www.churchofjesuschrist.org/study/manual/teachings-joseph-smith/chapter-45-the-prophet-joseph-smith-teaches-the-doctrine-of-eternal-progression?lang=eng" },
+                        { label: "Gospel Topics Essay: Becoming Like God", href: "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/becoming-like-god?lang=eng" }
+                    ]
+                },
+                intelligence: {
+                    label: "Mind and Intelligence Co-Eternal with God", links: [
+                        { label: "Guide to Scriptures: Intelligence", href: "https://www.churchofjesuschrist.org/study/scriptures/gs/intelligence?lang=eng" },
+                        { label: "Mormonr: Browse topics", href: "https://mormonr.org/categories" }
+                    ]
+                }
+            };
+
+            var VERSIONS = ["bullock", "richards", "clayton", "woodruff"];
+
+            /* ---------- Theme toggle ---------- */
+            var themeBtn = document.getElementById("themeToggle");
+            function applyTheme(t) {
+                document.documentElement.setAttribute("data-theme", t);
+                themeBtn.setAttribute("aria-pressed", t === "dark" ? "true" : "false");
+                themeBtn.textContent = t === "dark" ? "\u2600\ufe0f Light Mode" : "\ud83c\udf19 Dark Mode";
+                try { localStorage.setItem("kfd-theme", t); } catch (e) { }
+            }
+            (function initTheme() {
+                var saved;
+                try { saved = localStorage.getItem("kfd-theme"); } catch (e) { }
+                if (!saved) { saved = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light"; }
+                applyTheme(saved);
+            })();
+            themeBtn.addEventListener("click", function () {
+                var cur = document.documentElement.getAttribute("data-theme");
+                applyTheme(cur === "dark" ? "light" : "dark");
+            });
+
+            /* ---------- Help panel toggle ---------- */
+            var helpBtn = document.getElementById("helpToggle");
+            var helpPanel = document.getElementById("help-panel");
+            helpBtn.addEventListener("click", function () {
+                var isHidden = helpPanel.hasAttribute("hidden");
+                if (isHidden) { helpPanel.removeAttribute("hidden"); helpBtn.setAttribute("aria-expanded", "true"); helpPanel.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
+                else { helpPanel.setAttribute("hidden", ""); helpBtn.setAttribute("aria-expanded", "false"); }
+            });
+
+            function pulse(el) {
+                if (!el) return;
+                el.classList.remove("flash-pulse");
+                void el.offsetWidth;
+                el.classList.add("flash-pulse");
+                setTimeout(function () { el.classList.remove("flash-pulse"); }, 1500);
+            }
+            document.querySelectorAll('.nav-guide a[href^="#"]').forEach(function (a) {
+                a.addEventListener("click", function () {
+                    var id = a.getAttribute("href").slice(1);
+                    setTimeout(function () {
+                        if (id === "compareGrid") { pulse(document.getElementById("bullock-opening")); }
+                        if (id === "controls") { pulse(document.getElementById("topicSelect")); }
+                    }, 400);
+                });
+            });
+
+            /* ---------- Topic filter ---------- */
+            var topicSelect = document.getElementById("topicSelect");
+            var topicLinksEl = document.getElementById("topicLinks");
+            var allPassages = Array.prototype.slice.call(document.querySelectorAll(".passage"));
+
+            function renderTopicLinks(topicId) {
+                topicLinksEl.innerHTML = "";
+                if (topicId === "all") { return; }
+                var t = TOPICS[topicId];
+                if (!t) return;
+                var label = document.createElement("strong");
+                label.textContent = "Faithful sources for this topic: ";
+                topicLinksEl.appendChild(label);
+                t.links.forEach(function (l) {
+                    var a = document.createElement("a");
+                    a.href = l.href; a.target = "_blank"; a.rel = "noopener";
+                    a.textContent = l.label + " \u2197";
+                    topicLinksEl.appendChild(a);
+                });
+            }
+
+            function applyTopicFilter() {
+                var val = topicSelect.value;
+                allPassages.forEach(function (p) {
+                    if (val === "all" || p.getAttribute("data-topic") === val) {
+                        p.classList.remove("hidden-by-filter");
+                    } else {
+                        p.classList.add("hidden-by-filter");
+                    }
+                });
+                renderTopicLinks(val);
+            }
+            topicSelect.addEventListener("change", applyTopicFilter);
+            document.getElementById("clearFilterBtn").addEventListener("click", function () {
+                topicSelect.value = "all";
+                applyTopicFilter();
+            });
+            renderTopicLinks("all");
+
+            /* ---------- Cross-highlight on click ---------- */
+            var compareStatus = document.getElementById("compareStatus");
+            var compareStatusText = document.getElementById("compareStatusText");
+
+            function clearLinked() {
+                document.querySelectorAll(".passage.linked-active").forEach(function (p) { p.classList.remove("linked-active"); });
+                compareStatus.classList.remove("show");
+            }
+            function activateGroup(group) {
+                clearLinked();
+                var matches = document.querySelectorAll('.passage[data-group="' + group + '"]');
+                matches.forEach(function (p) {
+                    p.classList.add("linked-active");
+                    var col = p.closest(".version-column");
+                    if (col && col.getAttribute("data-expanded") !== "true") {
+                        // only auto-scroll within a normally-sized column, not while in reading mode elsewhere
+                    }
+                    var body = p.closest(".version-body");
+                    if (body) { p.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
+                });
+                var t = TOPICS[group];
+                compareStatusText.textContent = "\ud83d\udd17 Comparing: " + (t ? t.label : group) + " \u2014 shown highlighted in all four accounts.";
+                compareStatus.classList.add("show");
+            }
+            allPassages.forEach(function (p) {
+                if (p.classList.contains("placeholder")) return;
+                p.addEventListener("click", function (e) {
+                    if (e.target.closest(".hl-btn") || e.target.closest("a")) return;
+                    activateGroup(p.getAttribute("data-group"));
+                });
+                p.addEventListener("keydown", function (e) {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        activateGroup(p.getAttribute("data-group"));
+                    }
+                });
+            });
+            document.getElementById("clearCompareBtn").addEventListener("click", clearLinked);
+
+            /* ---------- User highlighting (persisted) ---------- */
+            var HL_KEY = "kfd-highlights";
+            function getHighlights() {
+                try { return JSON.parse(localStorage.getItem(HL_KEY) || "[]"); } catch (e) { return []; }
+            }
+            function saveHighlights(arr) {
+                try { localStorage.setItem(HL_KEY, JSON.stringify(arr)); } catch (e) { }
+            }
+            function initHighlights() {
+                var arr = getHighlights();
+                arr.forEach(function (id) {
+                    var el = document.getElementById(id);
+                    if (el) {
+                        el.classList.add("user-highlighted");
+                        var btn = el.querySelector(".hl-btn");
+                        if (btn) { btn.setAttribute("aria-pressed", "true"); btn.textContent = "\u2605 Highlighted"; }
+                    }
+                });
+            }
+            document.querySelectorAll(".hl-btn").forEach(function (btn) {
+                btn.addEventListener("click", function (e) {
+                    e.stopPropagation();
+                    var passage = btn.closest(".passage");
+                    var id = passage.id;
+                    var arr = getHighlights();
+                    var idx = arr.indexOf(id);
+                    if (idx === -1) {
+                        arr.push(id);
+                        passage.classList.add("user-highlighted");
+                        btn.setAttribute("aria-pressed", "true");
+                        btn.textContent = "\u2605 Highlighted";
+                    } else {
+                        arr.splice(idx, 1);
+                        passage.classList.remove("user-highlighted");
+                        btn.setAttribute("aria-pressed", "false");
+                        btn.textContent = "\ud83d\udd8a Highlight";
+                    }
+                    saveHighlights(arr);
+                });
+            });
+            document.getElementById("clearHighlightsBtn").addEventListener("click", function () {
+                saveHighlights([]);
+                document.querySelectorAll(".passage.user-highlighted").forEach(function (p) {
+                    p.classList.remove("user-highlighted");
+                    var btn = p.querySelector(".hl-btn");
+                    if (btn) { btn.setAttribute("aria-pressed", "false"); btn.textContent = "\ud83d\udd8a Highlight"; }
+                });
+            });
+            initHighlights();
+
+            /* ---------- Full-screen reading view ---------- */
+            var body = document.body;
+            function setExpanded(version) {
+                document.querySelectorAll(".version-column").forEach(function (col) {
+                    col.removeAttribute("data-expanded");
+                });
+                var target = document.querySelector('.version-column[data-version="' + version + '"]');
+                if (target) {
+                    target.setAttribute("data-expanded", "true");
+                    body.classList.add("reading-mode");
+                    target.querySelector(".version-body").scrollTop = 0;
+                    window.scrollTo(0, 0);
+                }
+            }
+            function closeReading() {
+                body.classList.remove("reading-mode");
+                document.querySelectorAll(".version-column").forEach(function (col) { col.removeAttribute("data-expanded"); });
+            }
+            document.querySelectorAll(".expand-btn").forEach(function (btn) {
+                btn.addEventListener("click", function () {
+                    setExpanded(btn.getAttribute("data-target"));
+                });
+            });
+            document.querySelectorAll("[data-close]").forEach(function (btn) {
+                btn.addEventListener("click", closeReading);
+            });
+            document.querySelectorAll("[data-prev]").forEach(function (btn) {
+                btn.addEventListener("click", function () {
+                    var col = btn.closest(".version-column");
+                    var v = col.getAttribute("data-version");
+                    var idx = VERSIONS.indexOf(v);
+                    var prevIdx = (idx - 1 + VERSIONS.length) % VERSIONS.length;
+                    setExpanded(VERSIONS[prevIdx]);
+                });
+            });
+            document.querySelectorAll("[data-next]").forEach(function (btn) {
+                btn.addEventListener("click", function () {
+                    var col = btn.closest(".version-column");
+                    var v = col.getAttribute("data-version");
+                    var idx = VERSIONS.indexOf(v);
+                    var nextIdx = (idx + 1) % VERSIONS.length;
+                    setExpanded(VERSIONS[nextIdx]);
+                });
+            });
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Escape" && body.classList.contains("reading-mode")) { closeReading(); }
+            });
+
+            /* ---------- Glossary tooltips ---------- */
+            var tooltip = document.getElementById("glossary-tooltip");
+            var tooltipTimer = null;
+            function showTooltip(termEl) {
+                var key = termEl.getAttribute("data-term");
+                var g = GLOSSARY[key];
+                if (!g) return;
+                tooltip.innerHTML = '<button class="gt-close" aria-label="Close">\u2715</button>' +
+                    '<div class="gt-title">' + g.term + '</div>' +
+                    '<div>' + g.def + '</div>' +
+                    (g.link ? '<div style="margin-top:8px;"><a href="' + g.link + '" target="_blank" rel="noopener">' + g.linkLabel + ' \u2197</a></div>' : '');
+                tooltip.style.display = "block";
+                var rect = termEl.getBoundingClientRect();
+                var top = rect.bottom + 8;
+                var left = rect.left;
+                var maxLeft = window.innerWidth - 312;
+                if (left > maxLeft) left = Math.max(8, maxLeft);
+                if (top + 160 > window.innerHeight) top = rect.top - 168;
+                tooltip.style.top = top + "px";
+                tooltip.style.left = left + "px";
+                tooltip.querySelector(".gt-close").addEventListener("click", function () { tooltip.style.display = "none"; });
+            }
+            document.querySelectorAll(".term").forEach(function (termEl) {
+                termEl.setAttribute("tabindex", "0");
+                termEl.addEventListener("mouseenter", function () { clearTimeout(tooltipTimer); showTooltip(termEl); });
+                termEl.addEventListener("mouseleave", function () { tooltipTimer = setTimeout(function () { tooltip.style.display = "none"; }, 300); });
+                termEl.addEventListener("focus", function () { showTooltip(termEl); });
+                termEl.addEventListener("click", function (e) { e.stopPropagation(); showTooltip(termEl); });
+            });
+            tooltip.addEventListener("mouseenter", function () { clearTimeout(tooltipTimer); });
+            tooltip.addEventListener("mouseleave", function () { tooltipTimer = setTimeout(function () { tooltip.style.display = "none"; }, 300); });
+            document.addEventListener("click", function (e) {
+                if (!e.target.closest(".term") && !e.target.closest("#glossary-tooltip")) {
+                    tooltip.style.display = "none";
+                }
+            });
+
+            /* ---------- Glossary list section ---------- */
+            var glossaryGrid = document.getElementById("glossaryGrid");
+            Object.keys(GLOSSARY).forEach(function (key) {
+                var g = GLOSSARY[key];
+                var card = document.createElement("div");
+                card.className = "gloss-card";
+                card.innerHTML = "<h4>" + g.term + "</h4><p>" + g.def + "</p>" +
+                    (g.link ? '<a href="' + g.link + '" target="_blank" rel="noopener">' + g.linkLabel + " \u2197</a>" : "");
+                glossaryGrid.appendChild(card);
+            });
+
+        })();
+    </script>
+</body>
+
+</html>
