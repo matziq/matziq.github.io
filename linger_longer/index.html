@@ -1232,10 +1232,10 @@
                             </g>
                         </svg></span>
                 </div>
-                <p class="hero-note" id="event-note-display">The theme is picnic-style foods — think fried
-                    chicken, burgers and hot dogs, potato salad, coleslaw, watermelon, corn on the cob, baked beans,
-                    and berry pies. Bring a favorite dish to share at our end-of-summer picnic potluck. Thanks for
-                    helping make it a fun, festive meal!</p>
+                <p class="hero-note" id="event-note-display">The theme is picnic-style, finger-food dishes —
+                    think sandwiches and wraps, pasta or potato salad, fresh fruit and veggie trays, chips and dips,
+                    and cookies or bars that travel well. Bring a favorite dish to share at our end-of-summer picnic
+                    potluck. Thanks for helping make it a fun, festive meal!</p>
                 <div class="hero-details">
                     <span class="pill" id="event-date-display">📅 Sun, Aug 02, 2026</span>
                     <span class="pill" id="event-time-display">🕑 2 PM</span>
@@ -1317,7 +1317,7 @@
                         <label>Email <input id="signup-email" type="email" autocomplete="email" required /></label>
                         <label>Phone <input id="signup-phone" type="tel" autocomplete="tel" required /></label>
                         <label>What are you bringing? <input id="signup-item" type="text"
-                                placeholder="e.g., rolls, green salad, brownies" required /></label>
+                                placeholder="e.g., turkey wraps, pasta salad, veggie tray, lemon bars" required /></label>
                         <button type="submit" id="signup-submit">Add my sign-up</button>
                     </form>
                     <div id="signup-status" class="signup-status" role="status" aria-live="polite"></div>
@@ -1364,7 +1364,7 @@
             event: {
                 eyebrow: "Linger Longer Potluck",
                 title: "Linger Longer Potluck Sign-Up",
-                note: "The theme is picnic-style foods — think fried chicken, burgers and hot dogs, potato salad, coleslaw, watermelon, corn on the cob, baked beans, and berry pies. Bring a favorite dish to share at our end-of-summer picnic potluck. Thanks for helping make it a fun, festive meal!",
+                note: "The theme is picnic-style, finger-food dishes — think sandwiches and wraps, pasta or potato salad, fresh fruit and veggie trays, chips and dips, and cookies or bars that travel well. Bring a favorite dish to share at our end-of-summer picnic potluck. Thanks for helping make it a fun, festive meal!",
                 date: "August 2, 2026",
                 time: "2 PM",
                 location: "Sundance 1st Ward Cultural Hall",
@@ -1372,12 +1372,13 @@
                 heroImage: "August_Hero_Image.svg"
             },
             categories: [
-                { id: "appetizer", name: "Appetizer", needed: 5, icon: "🥨" },
-                { id: "salad", name: "Salad", needed: 5, icon: "🥗" },
-                { id: "side-dish", name: "Side Dish", needed: 6, icon: "🍲" },
-                { id: "main-dish", name: "Main Dish", needed: 6, icon: "🍛" },
-                { id: "dessert", name: "Dessert", needed: 5, icon: "🧁" },
-                { id: "beverage", name: "Beverage", needed: 4, icon: "🥤" },
+                { id: "sandwiches-wraps", name: "Sandwiches & Wraps", needed: 6, icon: "🥪" },
+                { id: "finger-foods", name: "Finger Foods & Appetizers", needed: 6, icon: "🥨" },
+                { id: "salads", name: "Salads (Pasta, Potato, Fruit)", needed: 5, icon: "🥗" },
+                { id: "chips-dips", name: "Chips, Crackers & Dips", needed: 5, icon: "🧀" },
+                { id: "fresh-fruit-veggies", name: "Fresh Fruit & Veggie Trays", needed: 5, icon: "🍉" },
+                { id: "cookies-bars", name: "Cookies & Bar Desserts", needed: 5, icon: "🍪" },
+                { id: "beverages", name: "Beverages", needed: 4, icon: "🥤" },
                 { id: "clean-up-help", name: "Clean-Up Help", needed: 4, icon: "🧹" }
             ],
             signups: []
