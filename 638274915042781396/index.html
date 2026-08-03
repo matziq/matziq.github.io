@@ -73,6 +73,8 @@
   </style>
   <link rel="stylesheet" href="./styles.css">
   <script src="./data.js" defer></script>
+  <script src="./consistency-catalog.js" defer></script>
+  <script src="./chiasmus-catalog.js" defer></script>
   <script src="./app.js" defer></script>
 </head>
 <body>
@@ -131,10 +133,10 @@
     </section>
 
     <section class="stat-strip" aria-label="Text statistics">
-      <div><strong id="stat-books">15</strong><span>books</span></div>
-      <div><strong id="stat-chapters">239</strong><span>chapters</span></div>
+      <div><strong id="stat-consistencies">120</strong><span>documented consistency sets</span></div>
+      <div><strong id="stat-diagrams">8</strong><span>detailed chiasms</span></div>
+      <div><strong id="stat-proposals">2,316</strong><span>indexed proposals</span></div>
       <div><strong id="stat-verses">6,598</strong><span>verses searchable</span></div>
-      <div><strong>1,000+</strong><span>years of narrative</span></div>
     </section>
 
     <section class="view-section is-active" id="threads" data-view-panel="threads">
@@ -195,21 +197,48 @@
           </div>
         </article>
       </div>
+      <section class="catalog-panel consistency-catalog-panel" aria-labelledby="consistency-catalog-title">
+        <div class="catalog-heading">
+          <div>
+            <p class="eyebrow"><span></span> Documented catalog</p>
+            <h3 id="consistency-catalog-title"><span id="consistency-total">120</span> internally consistent reference sets</h3>
+            <p>Every numbered reference set from FAIR’s fifteen-part survey is indexed here. Thirty-eight representative connections above receive the full animated treatment.</p>
+          </div>
+          <a id="consistency-source" href="https://www.fairlatterdaysaints.org/blog/2020/06/25/a-detailed-look-at-internally-consistent-references-in-the-book-of-mormon-text" target="_blank" rel="noopener noreferrer">Open source series</a>
+        </div>
+        <div class="catalog-controls">
+          <label class="search-field">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
+            <input id="consistency-search" type="search" placeholder="Search any reference set…" autocomplete="off">
+          </label>
+          <label>
+            <span>Source part</span>
+            <select id="consistency-part"></select>
+          </label>
+        </div>
+        <div class="catalog-summary" id="consistency-summary"></div>
+        <div class="catalog-results" id="consistency-results"></div>
+      </section>
     </section>
 
     <section class="view-section" id="chiasmus" data-view-panel="chiasmus">
       <div class="section-heading">
         <div>
           <p class="eyebrow"><span></span> Inverted parallelism</p>
-          <h2>Alma 36 folds toward its center</h2>
+          <h2 id="chiasm-heading">Chiasms fold toward their centers</h2>
         </div>
-        <p>Matching ideas move inward in reverse order. Select a pair to illuminate both halves and read the corresponding verses.</p>
+        <p>Explore detailed diagrams, then search every unique passage proposal indexed by Chiasmus Resources. Proposals are labeled rather than presented as equally certain.</p>
       </div>
+      <div class="chiasm-selector" id="chiasm-selector" aria-label="Select a detailed chiasm"></div>
       <div class="chiasm-layout">
         <aside class="chiasm-intro">
-          <span class="chapter-badge">ALMA<br><strong>36</strong></span>
-          <h3>A testimony shaped as a journey</h3>
-          <p>Alma’s account descends from counsel into torment, turns on his cry to Jesus Christ, then rises through joy and deliverance.</p>
+          <span class="chapter-badge"><span id="chiasm-book">ALMA</span><br><strong id="chiasm-chapter">36</strong></span>
+          <h3 id="chiasm-title">A testimony shaped as a journey</h3>
+          <p id="chiasm-description"></p>
+          <div class="evidence-meta">
+            <span id="chiasm-status"></span>
+            <small id="chiasm-source"></small>
+          </div>
           <div class="chiasm-key">
             <span>Beginning</span><i></i><span>Center</span><i></i><span>Return</span>
           </div>
@@ -224,6 +253,28 @@
           <div id="pair-verses"></div>
         </aside>
       </div>
+      <section class="catalog-panel" aria-labelledby="catalog-title">
+        <div class="catalog-heading">
+          <div>
+            <p class="eyebrow"><span></span> Research index</p>
+            <h3 id="catalog-title"><span id="catalog-total">2,316</span> unique proposed passages</h3>
+            <p>The catalog preserves the distinction between a documented proposal and a demonstrated structure. Repeated analyses of the same reference are grouped.</p>
+          </div>
+          <a id="catalog-source" href="https://chiasmusresources.org/index-chiasm-book-mormon" target="_blank" rel="noopener noreferrer">Open source index</a>
+        </div>
+        <div class="catalog-controls">
+          <label class="search-field">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
+            <input id="catalog-search" type="search" placeholder="Search a book or passage…" autocomplete="off">
+          </label>
+          <label>
+            <span>Book</span>
+            <select id="catalog-book"></select>
+          </label>
+        </div>
+        <div class="catalog-summary" id="catalog-summary"></div>
+        <div class="catalog-results" id="catalog-results"></div>
+      </section>
     </section>
 
     <section class="view-section" id="reader" data-view-panel="reader">

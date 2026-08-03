@@ -2,11 +2,19 @@
   "use strict";
 
   const DATA = window.BOM_DATA;
+  const CATALOG = window.BOM_CHIASM_CATALOG;
+  const CONSISTENCIES = window.BOM_CONSISTENCY_CATALOG;
   const state = {
     activeView: "threads",
     activeThread: DATA.threads[0],
     activeFilter: "All",
-    activePair: DATA.chiasm[0],
+    activeChiasm: DATA.chiasms[0],
+    activePair: DATA.chiasms[0].pairs[0],
+    catalogBook: "All",
+    catalogQuery: "",
+    catalogLimit: 120,
+    consistencyPart: "All",
+    consistencyQuery: "",
     scripture: null,
     resizeTimer: null
   };
@@ -105,6 +113,8 @@
       renderReaderChapter("1 Nephi", 1);
       renderThread(state.activeThread);
       renderPair(state.activePair);
+      renderCatalog();
+      renderConsistencyCatalog();
     } catch (error) {
       $("#scripture-reader").innerHTML = `<div class="reader-error"><strong>The text could not be loaded.</strong><p>${escapeHtml(error.message)}</p></div>`;
       $$("#origin-text, #return-text, #pair-verses").forEach((node) => {
@@ -144,7 +154,7 @@
     $("#thread-list").innerHTML = visible.map((thread, index) => `
       <button type="button" class="thread-item${thread.id === state.activeThread.id ? " is-active" : ""}" data-thread="${thread.id}">
         <span class="thread-number">${String(index + 1).padStart(2, "0")}</span>
-        <span><small>${escapeHtml(thread.category)}</small><strong>${escapeHtml(thread.title)}</strong><em>${escapeHtml(thread.start)} → ${escapeHtml(thread.end)}</em></span>
+        <span><small>${escapeHtml(thread.category)} · ${escapeHtml(thread.strength || "Direct")}</small><strong>${escapeHtml(thread.title)}</strong><em>${escapeHtml(thread.start)} → ${escapeHtml(thread.end)}</em></span>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
       </button>`).join("");
   }
@@ -152,7 +162,7 @@
   function renderThread(thread) {
     state.activeThread = thread;
     renderThreadList();
-    $("#thread-category").textContent = thread.category;
+    $("#thread-category").textContent = `${thread.category} · ${thread.strength || "Direct"}`;
     $("#thread-distance").textContent = thread.distance;
     $("#thread-title").textContent = thread.title;
     $("#thread-summary").textContent = thread.summary;
@@ -199,7 +209,8 @@
 
   function renderChiasm() {
     const rows = [];
-    for (const pair of DATA.chiasm.slice(0, -1)) {
+    const pairs = state.activeChiasm.pairs;
+    for (const pair of pairs.filter((item) => !item.center)) {
       rows.push(`
         <button class="chiasm-row tone-${pair.tone}${pair.key === state.activePair.key ? " is-active" : ""}" type="button" data-pair="${pair.key}" style="--depth:${pair.key.charCodeAt(0) - 64}">
           <span class="chiasm-side left"><b>${pair.key}</b><span><small>${escapeHtml(pair.left)}</small>${escapeHtml(pair.theme)}</span></span>
@@ -207,13 +218,37 @@
           <span class="chiasm-side right"><span><small>${escapeHtml(pair.right)}</small>${escapeHtml(pair.theme)}</span><b>${pair.key}′</b></span>
         </button>`);
     }
-    const center = DATA.chiasm.at(-1);
-    rows.push(`
-      <button class="chiasm-center tone-${center.tone}${center.key === state.activePair.key ? " is-active" : ""}" type="button" data-pair="${center.key}">
-        <b>${center.key}</b>
-        <span><small>${escapeHtml(center.center)}</small>${escapeHtml(center.theme)}</span>
-      </button>`);
+    const center = pairs.find((item) => item.center);
+    if (center) {
+      rows.push(`
+        <button class="chiasm-center tone-${center.tone}${center.key === state.activePair.key ? " is-active" : ""}" type="button" data-pair="${center.key}">
+          <b>${center.key}</b>
+          <span><small>${escapeHtml(center.center)}</small>${escapeHtml(center.theme)}</span>
+        </button>`);
+    }
     $("#chiasm-stack").innerHTML = rows.join("");
+  }
+
+  function renderChiasmSelector() {
+    $("#chiasm-selector").innerHTML = DATA.chiasms.map((chiasm) => `
+      <button type="button" class="chiasm-select-button${chiasm.id === state.activeChiasm.id ? " is-active" : ""}" data-chiasm="${chiasm.id}">
+        <small>${escapeHtml(chiasm.reference)}</small>
+        <strong>${escapeHtml(chiasm.title)}</strong>
+        <span>${escapeHtml(chiasm.status)}</span>
+      </button>`).join("");
+  }
+
+  function selectChiasm(chiasm) {
+    state.activeChiasm = chiasm;
+    state.activePair = chiasm.pairs[0];
+    $("#chiasm-book").textContent = chiasm.book.toUpperCase();
+    $("#chiasm-chapter").textContent = chiasm.chapter;
+    $("#chiasm-title").textContent = chiasm.title;
+    $("#chiasm-description").textContent = chiasm.description;
+    $("#chiasm-status").textContent = chiasm.status;
+    $("#chiasm-source").textContent = `Diagram source: ${chiasm.source}`;
+    renderChiasmSelector();
+    renderPair(state.activePair);
   }
 
   function renderPair(pair) {
@@ -231,9 +266,100 @@
   }
 
   function updateStats() {
-    $("#stat-books").textContent = state.scripture.books.length.toLocaleString();
-    $("#stat-chapters").textContent = state.scripture.chapters.size.toLocaleString();
+    $("#stat-consistencies").textContent = CONSISTENCIES.entries.length.toLocaleString();
+    $("#stat-diagrams").textContent = DATA.chiasms.length.toLocaleString();
+    $("#stat-proposals").textContent = CATALOG.entries.length.toLocaleString();
     $("#stat-verses").textContent = state.scripture.verseList.length.toLocaleString();
+  }
+
+  function firstConsistencyReference(referenceSet) {
+    for (const book of [...DATA.books].sort((a, b) => b.length - a.length)) {
+      const match = referenceSet.match(new RegExp(`${book.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s+(\\d+):(\\d+)`, "i"));
+      if (match) return `${book} ${Number(match[1])}:${Number(match[2])}`;
+    }
+    return "";
+  }
+
+  function populateConsistencyParts() {
+    const counts = new Map();
+    for (const entry of CONSISTENCIES.entries) counts.set(entry.part, (counts.get(entry.part) || 0) + 1);
+    $("#consistency-part").innerHTML = [
+      `<option value="All">All 15 parts (${CONSISTENCIES.entries.length})</option>`,
+      ...CONSISTENCIES.source.sources.map((source) =>
+        `<option value="${source.part}">Part ${source.part} (${counts.get(source.part) || 0})</option>`
+      )
+    ].join("");
+    $("#consistency-total").textContent = CONSISTENCIES.entries.length.toLocaleString();
+    $("#consistency-source").href = CONSISTENCIES.source.sources[0].url;
+  }
+
+  function renderConsistencyCatalog() {
+    const query = state.consistencyQuery.toLowerCase();
+    const matches = CONSISTENCIES.entries.filter((entry) => {
+      const inPart = state.consistencyPart === "All" || entry.part === Number(state.consistencyPart);
+      const inQuery = !query || `item ${entry.number} ${entry.reference}`.toLowerCase().includes(query);
+      return inPart && inQuery;
+    });
+    $("#consistency-summary").textContent = `${matches.length.toLocaleString()} documented reference set${matches.length === 1 ? "" : "s"}`;
+    $("#consistency-results").innerHTML = `
+      <div class="catalog-grid">
+        ${matches.map((entry) => {
+          const reference = firstConsistencyReference(entry.reference);
+          return `
+            <article class="catalog-item consistency-item">
+              <span>Item ${entry.number} · Part ${entry.part}</span>
+              <strong>${escapeHtml(entry.reference)}</strong>
+              <div class="catalog-actions">
+                ${reference && getVerse(reference) ? `<button type="button" data-reference="${escapeHtml(reference)}">Read passage</button>` : ""}
+                <a href="${escapeHtml(entry.url)}" target="_blank" rel="noopener noreferrer">Source</a>
+              </div>
+            </article>`;
+        }).join("")}
+      </div>
+      ${matches.length ? "" : `<div class="no-results"><strong>No documented reference sets match</strong><p>Try a book, chapter, or item number.</p></div>`}`;
+  }
+
+  function firstCatalogReference(item) {
+    const normalized = item.reference.replace(/[–—]/g, "-");
+    const match = normalized.match(/(\d+):(\d+)/);
+    return match ? `${item.book} ${Number(match[1])}:${Number(match[2])}` : "";
+  }
+
+  function populateCatalogBooks() {
+    const counts = new Map();
+    for (const entry of CATALOG.entries) counts.set(entry.book, (counts.get(entry.book) || 0) + 1);
+    $("#catalog-book").innerHTML = [
+      `<option value="All">All books (${CATALOG.entries.length.toLocaleString()})</option>`,
+      ...DATA.books.map((book) => `<option value="${escapeHtml(book)}">${escapeHtml(book)} (${(counts.get(book) || 0).toLocaleString()})</option>`)
+    ].join("");
+    $("#catalog-total").textContent = CATALOG.entries.length.toLocaleString();
+    $("#catalog-source").href = CATALOG.source.url;
+  }
+
+  function renderCatalog() {
+    const query = state.catalogQuery.toLowerCase();
+    const matches = CATALOG.entries.filter((entry) => {
+      const inBook = state.catalogBook === "All" || entry.book === state.catalogBook;
+      const inQuery = !query || `${entry.book} ${entry.reference}`.toLowerCase().includes(query);
+      return inBook && inQuery;
+    });
+    const visible = matches.slice(0, state.catalogLimit);
+    $("#catalog-summary").textContent = `${matches.length.toLocaleString()} unique proposal${matches.length === 1 ? "" : "s"} · ${visible.length.toLocaleString()} shown`;
+    $("#catalog-results").innerHTML = `
+      <div class="catalog-grid">
+        ${visible.map((entry) => {
+          const reference = firstCatalogReference(entry);
+          return `
+            <article class="catalog-item">
+              <span>${escapeHtml(entry.book)}</span>
+              <strong>${escapeHtml(entry.reference)}</strong>
+              <small>${entry.analyses > 1 ? `${entry.analyses} indexed analyses` : "1 indexed analysis"}</small>
+              ${reference && getVerse(reference) ? `<button type="button" data-reference="${escapeHtml(reference)}">Read passage</button>` : ""}
+            </article>`;
+        }).join("")}
+      </div>
+      ${visible.length < matches.length ? `<button class="load-more-button" type="button" data-load-catalog>Show ${Math.min(120, matches.length - visible.length).toLocaleString()} more</button>` : ""}
+      ${matches.length ? "" : `<div class="no-results"><strong>No indexed proposals match</strong><p>Try a chapter number or another book.</p></div>`}`;
   }
 
   function populateReaderControls(book = "1 Nephi", chapter = 1) {
@@ -342,7 +468,15 @@
       if (threadButton) renderThread(DATA.threads.find((thread) => thread.id === threadButton.dataset.thread));
 
       const pairButton = event.target.closest("[data-pair]");
-      if (pairButton) renderPair(DATA.chiasm.find((pair) => pair.key === pairButton.dataset.pair));
+      if (pairButton) renderPair(state.activeChiasm.pairs.find((pair) => pair.key === pairButton.dataset.pair));
+
+      const chiasmButton = event.target.closest("[data-chiasm]");
+      if (chiasmButton) selectChiasm(DATA.chiasms.find((chiasm) => chiasm.id === chiasmButton.dataset.chiasm));
+
+      if (event.target.closest("[data-load-catalog]")) {
+        state.catalogLimit += 120;
+        renderCatalog();
+      }
 
       const referenceButton = event.target.closest("[data-reference]");
       if (referenceButton) openReference(referenceButton.dataset.reference);
@@ -365,6 +499,30 @@
       clearTimeout(event.target.searchTimer);
       event.target.searchTimer = setTimeout(() => searchReader(event.target.value), 180);
     });
+    $("#catalog-book").addEventListener("change", (event) => {
+      state.catalogBook = event.target.value;
+      state.catalogLimit = 120;
+      renderCatalog();
+    });
+    $("#catalog-search").addEventListener("input", (event) => {
+      clearTimeout(event.target.searchTimer);
+      event.target.searchTimer = setTimeout(() => {
+        state.catalogQuery = event.target.value.trim();
+        state.catalogLimit = 120;
+        renderCatalog();
+      }, 140);
+    });
+    $("#consistency-part").addEventListener("change", (event) => {
+      state.consistencyPart = event.target.value;
+      renderConsistencyCatalog();
+    });
+    $("#consistency-search").addEventListener("input", (event) => {
+      clearTimeout(event.target.searchTimer);
+      event.target.searchTimer = setTimeout(() => {
+        state.consistencyQuery = event.target.value.trim();
+        renderConsistencyCatalog();
+      }, 140);
+    });
 
     window.addEventListener("resize", () => {
       clearTimeout(state.resizeTimer);
@@ -375,7 +533,12 @@
   renderFilters();
   renderThreadList();
   renderThread(state.activeThread);
-  renderPair(state.activePair);
+  renderChiasmSelector();
+  selectChiasm(state.activeChiasm);
+  populateCatalogBooks();
+  renderCatalog();
+  populateConsistencyParts();
+  renderConsistencyCatalog();
   bindEvents();
   loadScripture();
 })();
