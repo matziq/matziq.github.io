@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="referrer" content="no-referrer">
+  <title>One Record · Many Threads</title>
+  <link rel="icon" href="data:,">
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+      --cp-transparent: transparent;
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+  </style>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./data.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to the explorer</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#threads" aria-label="One Record, Many Threads home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M8 12h12c4 0 7 3 7 7v20c0-4-3-7-7-7H8V12Zm32 0H28c-4 0-7 3-7 7v20c0-4 3-7 7-7h12V12Z"/></svg>
+        </span>
+        <span><strong>One Record</strong><small>Many Threads</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <button class="nav-button is-active" data-view="threads">Connections</button>
+        <button class="nav-button" data-view="chiasmus">Chiasmus</button>
+        <button class="nav-button" data-view="reader">Full text</button>
+      </nav>
+      <button class="icon-button" id="theme-toggle" type="button" aria-label="Toggle color theme">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6 7 7m10 10 1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/><circle cx="12" cy="12" r="4"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> A visual scripture study</p>
+        <h1>See the record<br><em>remember itself.</em></h1>
+        <p class="hero-lede">Trace promises, people, records, and precise time markers as they reappear across a narrative spanning centuries.</p>
+        <div class="hero-actions">
+          <button class="primary-button" type="button" data-jump="thread-workspace">Trace a connection
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 14 0m-5-5 5 5-5 5"/></svg>
+          </button>
+          <button class="text-button" type="button" data-switch="chiasmus">Explore Alma 36</button>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Animated map connecting distant passages">
+        <svg class="hero-lines" viewBox="0 0 600 430" role="img">
+          <title>Threads connecting distant books in the Book of Mormon</title>
+          <path class="hero-thread thread-one" d="M90 82 C290 40 310 360 518 312"/>
+          <path class="hero-thread thread-two" d="M92 210 C248 302 358 80 520 142"/>
+          <path class="hero-thread thread-three" d="M92 344 C280 390 355 235 520 248"/>
+          <g class="hero-node node-a"><circle cx="90" cy="82" r="10"/><circle cx="90" cy="82" r="4"/></g>
+          <g class="hero-node node-b"><circle cx="518" cy="312" r="10"/><circle cx="518" cy="312" r="4"/></g>
+          <g class="hero-node node-c"><circle cx="92" cy="210" r="10"/><circle cx="92" cy="210" r="4"/></g>
+          <g class="hero-node node-d"><circle cx="520" cy="142" r="10"/><circle cx="520" cy="142" r="4"/></g>
+          <g class="hero-node node-e"><circle cx="92" cy="344" r="10"/><circle cx="92" cy="344" r="4"/></g>
+          <g class="hero-node node-f"><circle cx="520" cy="248" r="10"/><circle cx="520" cy="248" r="4"/></g>
+        </svg>
+        <div class="hero-label label-a"><small>Promise</small><strong>1 Nephi 10:4</strong></div>
+        <div class="hero-label label-b"><small>Fulfillment</small><strong>3 Nephi 1:13</strong></div>
+        <div class="hero-label label-c"><small>Record found</small><strong>Mosiah 8:9</strong></div>
+        <div class="hero-label label-d"><small>Record opened</small><strong>Ether 1:2</strong></div>
+        <div class="hero-seal"><span>63</span><small>working<br>days</small></div>
+      </div>
+    </section>
+
+    <section class="stat-strip" aria-label="Text statistics">
+      <div><strong id="stat-books">15</strong><span>books</span></div>
+      <div><strong id="stat-chapters">239</strong><span>chapters</span></div>
+      <div><strong id="stat-verses">6,598</strong><span>verses searchable</span></div>
+      <div><strong>1,000+</strong><span>years of narrative</span></div>
+    </section>
+
+    <section class="view-section is-active" id="threads" data-view-panel="threads">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow"><span></span> Narrative continuity</p>
+          <h2>Follow a thread across the record</h2>
+        </div>
+        <p>Select a connection. The animated trace joins the first passage to its later return, with the full verses shown in context.</p>
+      </div>
+
+      <div class="thread-workspace" id="thread-workspace">
+        <aside class="thread-sidebar">
+          <div class="filter-row" id="thread-filters" aria-label="Filter connections"></div>
+          <div class="thread-list" id="thread-list" aria-label="Connections"></div>
+        </aside>
+        <article class="thread-stage" id="thread-stage" aria-live="polite">
+          <div class="stage-topline">
+            <span class="category-pill" id="thread-category"></span>
+            <span class="distance-label" id="thread-distance"></span>
+          </div>
+          <h3 id="thread-title"></h3>
+          <p class="thread-summary" id="thread-summary"></p>
+
+          <div class="connection-canvas" id="connection-canvas">
+            <svg class="connection-svg" id="connection-svg" aria-hidden="true">
+              <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L9,3 z"/>
+                </marker>
+              </defs>
+              <path id="connection-shadow"/>
+              <path id="connection-path" marker-end="url(#arrowhead)"/>
+            </svg>
+            <div class="verse-card verse-origin" id="origin-card">
+              <div class="verse-card-head">
+                <span class="endpoint-dot" id="origin-dot"></span>
+                <div><small>First mention</small><button class="reference-link" id="origin-ref"></button></div>
+              </div>
+              <blockquote id="origin-text"></blockquote>
+            </div>
+            <div class="chapter-distance" aria-hidden="true">
+              <span class="distance-rule"></span>
+              <span id="distance-count"></span>
+            </div>
+            <div class="verse-card verse-return" id="return-card">
+              <div class="verse-card-head">
+                <span class="endpoint-dot" id="return-dot"></span>
+                <div><small>Later return</small><button class="reference-link" id="return-ref"></button></div>
+              </div>
+              <blockquote id="return-text"></blockquote>
+            </div>
+          </div>
+
+          <div class="thread-notes">
+            <strong>Why the connection matters</strong>
+            <p id="thread-note"></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="view-section" id="chiasmus" data-view-panel="chiasmus">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow"><span></span> Inverted parallelism</p>
+          <h2>Alma 36 folds toward its center</h2>
+        </div>
+        <p>Matching ideas move inward in reverse order. Select a pair to illuminate both halves and read the corresponding verses.</p>
+      </div>
+      <div class="chiasm-layout">
+        <aside class="chiasm-intro">
+          <span class="chapter-badge">ALMA<br><strong>36</strong></span>
+          <h3>A testimony shaped as a journey</h3>
+          <p>Alma’s account descends from counsel into torment, turns on his cry to Jesus Christ, then rises through joy and deliverance.</p>
+          <div class="chiasm-key">
+            <span>Beginning</span><i></i><span>Center</span><i></i><span>Return</span>
+          </div>
+        </aside>
+        <div class="chiasm-panel">
+          <div class="chiasm-axis" aria-hidden="true"><span>OUTER</span><i></i><span>CENTER</span><i></i><span>OUTER</span></div>
+          <div class="chiasm-stack" id="chiasm-stack"></div>
+        </div>
+        <aside class="pair-inspector" id="pair-inspector" aria-live="polite">
+          <span class="pair-letter" id="pair-letter">A</span>
+          <p class="pair-theme" id="pair-theme"></p>
+          <div id="pair-verses"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="view-section" id="reader" data-view-panel="reader">
+      <div class="section-heading reader-heading">
+        <div>
+          <p class="eyebrow"><span></span> Public-domain text</p>
+          <h2>Search the complete record</h2>
+        </div>
+        <p>Search every verse or open any chapter. Connection and chiasmus references can send you directly here.</p>
+      </div>
+      <div class="reader-shell">
+        <div class="reader-controls">
+          <label class="search-field">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
+            <input id="reader-search" type="search" placeholder="Search words or a reference…" autocomplete="off">
+          </label>
+          <label>
+            <span>Book</span>
+            <select id="book-select"></select>
+          </label>
+          <label>
+            <span>Chapter</span>
+            <select id="chapter-select"></select>
+          </label>
+        </div>
+        <div class="reader-status" id="reader-status"></div>
+        <article class="scripture-reader" id="scripture-reader" aria-live="polite">
+          <div class="reader-loading"><span></span><p>Preparing the complete text…</p></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <strong>One Record · Many Threads</strong>
+      <p>Text: Project Gutenberg eBook #17, public-domain edition. Visual connections are study aids, not claims that every relationship has one exclusive interpretation.</p>
+    </div>
+    <button class="text-button" type="button" data-switch="reader">Open full text</button>
+  </footer>
+
+  <noscript>This interactive study requires JavaScript.</noscript>
+</body>
+</html>
