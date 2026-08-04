@@ -1,17 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <style>
     :root {
-      --cp-bg: #f7f4ef;
+      --cp-bg: #f3f0e6;
       --cp-surface: #ffffff;
-      --cp-text: #242424;
-      --cp-accent: #b11f4b;
+      --cp-text: #0f2d45;
+      --cp-accent: #b38a1f;
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --cp-bg: #3d3b3a;
-        --cp-surface: #292929;
-        --cp-text: #dedede;
-        --cp-accent: #fd8ea1;
+        --cp-bg: #071b2b;
+        --cp-surface: #0f2f46;
+        --cp-text: #f2efe6;
+        --cp-accent: #e4bd54;
       }
     }
     .book {

@@ -5,7 +5,7 @@
   const CATALOG = window.BOM_CHIASM_CATALOG;
   const CONSISTENCIES = window.BOM_CONSISTENCY_CATALOG;
   const state = {
-    activeView: "threads",
+    activeView: "home",
     activeThread: DATA.threads[0],
     activeFilter: "All",
     activeChiasm: DATA.chiasms[0],
@@ -139,6 +139,7 @@
       const target = document.querySelector(`[data-view-panel="${view}"]`);
       target?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+    if (view === "threads") requestAnimationFrame(drawConnection);
   }
 
   function renderFilters() {
@@ -266,10 +267,16 @@
   }
 
   function updateStats() {
-    $("#stat-consistencies").textContent = CONSISTENCIES.entries.length.toLocaleString();
-    $("#stat-diagrams").textContent = DATA.chiasms.length.toLocaleString();
-    $("#stat-proposals").textContent = CATALOG.entries.length.toLocaleString();
-    $("#stat-verses").textContent = state.scripture.verseList.length.toLocaleString();
+    const values = {
+      "#stat-consistencies": CONSISTENCIES.entries.length,
+      "#stat-diagrams": DATA.chiasms.length,
+      "#stat-proposals": CATALOG.entries.length,
+      "#stat-verses": state.scripture.verseList.length
+    };
+    for (const [selector, value] of Object.entries(values)) {
+      const node = $(selector);
+      if (node) node.textContent = value.toLocaleString();
+    }
   }
 
   function firstConsistencyReference(referenceSet) {

@@ -518,6 +518,138 @@ window.BOM_DATA = {
         { key: "B", theme: "Good, righteous, just, and merciful qualities", left: "Alma 41:13", right: "Alma 41:14", tone: "link" },
         { key: "C", theme: "What is sent out is restored again", center: "Alma 41:14", tone: "success" }
       ]
+    },
+    {
+      id: "first-nephi-4", book: "1 Nephi", chapter: "4", reference: "1 Nephi 4:4–27",
+      title: "The brass plates turn on covenant law",
+      description: "Nephi’s approach to Laban reverses after the central realization that his descendants need the law preserved on the plates.",
+      status: "Widely studied", source: "John W. Welch",
+      pairs: [
+        { key: "A", theme: "The brothers wait outside Jerusalem", left: "1 Nephi 4:4", right: "1 Nephi 4:27", tone: "accent" },
+        { key: "B", theme: "Nephi enters alone and returns in disguise", left: "1 Nephi 4:5", right: "1 Nephi 4:20", tone: "link" },
+        { key: "C", theme: "Laban’s sword is drawn and used", left: "1 Nephi 4:9", right: "1 Nephi 4:18", tone: "success" },
+        { key: "D", theme: "The Spirit constrains; Nephi obeys", left: "1 Nephi 4:10", right: "1 Nephi 4:18", tone: "warning" },
+        { key: "E", theme: "The Lord delivers Laban into Nephi’s hands", left: "1 Nephi 4:11", right: "1 Nephi 4:17", tone: "danger" },
+        { key: "F", theme: "One man and one nation are weighed", left: "1 Nephi 4:13", right: "1 Nephi 4:16", tone: "accent" },
+        { key: "G", theme: "The seed must have the commandments", center: "1 Nephi 4:14", tone: "warning" }
+      ]
+    },
+    {
+      id: "second-nephi-1", book: "2 Nephi", chapter: "1", reference: "2 Nephi 1:5–7",
+      title: "Lehi’s land of promise",
+      description: "Promise, consecration, divine leading, and liberty surround Lehi’s prophetic declaration about the land.",
+      status: "Widely studied", source: "Royal Skousen and Book of Mormon Central",
+      pairs: [
+        { key: "A", theme: "Affliction answered by freedom from captivity", left: "2 Nephi 1:5", right: "2 Nephi 1:7", tone: "accent" },
+        { key: "B", theme: "A land of promise and liberty", left: "2 Nephi 1:5", right: "2 Nephi 1:7", tone: "link" },
+        { key: "C", theme: "The land is consecrated", left: "2 Nephi 1:5", right: "2 Nephi 1:7", tone: "success" },
+        { key: "D", theme: "The Lord leads those brought to the land", left: "2 Nephi 1:6", right: "2 Nephi 1:6", tone: "warning" },
+        { key: "E", theme: "Lehi speaks the prophecy at the center", center: "2 Nephi 1:6", tone: "danger" }
+      ]
+    },
+    {
+      id: "second-nephi-25", book: "2 Nephi", chapter: "25", reference: "2 Nephi 25:24–27",
+      title: "A hymn centered on Christ",
+      description: "The law points inward to repeated testimony of Christ, then outward to children taught that the law is fulfilled in him.",
+      status: "Widely studied", source: "Boyd F. Edwards and W. Farrell Edwards",
+      pairs: [
+        { key: "A", theme: "Belief in Christ frames observance and fulfillment", left: "2 Nephi 25:24", right: "2 Nephi 25:27", tone: "accent" },
+        { key: "B", theme: "The law points to Christ and becomes dead in him", left: "2 Nephi 25:24", right: "2 Nephi 25:27", tone: "link" },
+        { key: "C", theme: "Parents testify so children know the source of remission", left: "2 Nephi 25:26", right: "2 Nephi 25:26", tone: "success" },
+        { key: "D", theme: "Talk, rejoice, preach, and prophesy of Christ", center: "2 Nephi 25:26", tone: "warning" }
+      ]
+    },
+    {
+      id: "alma-29", book: "Alma", chapter: "29", reference: "Alma 29:1–7",
+      title: "The desire of an angel",
+      description: "Alma’s wish to speak with an angel’s voice yields to contentment with his calling around a threefold meditation on human desire.",
+      status: "Widely studied", source: "Book of Mormon Central",
+      pairs: [
+        { key: "A", theme: "The wish to be an angel is asked and released", left: "Alma 29:1", right: "Alma 29:6", tone: "accent" },
+        { key: "B", theme: "A mortal calling sets the proper boundary", left: "Alma 29:3", right: "Alma 29:6", tone: "link" },
+        { key: "C", theme: "God grants according to desires and wills", center: "Alma 29:4", tone: "warning" }
+      ]
+    },
+    {
+      id: "first-nephi-macro", book: "1 Nephi", chapter: "1–22", reference: "1 Nephi 1–22",
+      title: "The architecture of First Nephi",
+      description: "The whole book moves from Jerusalem to Nephi’s revelatory center and back through paired visions, bindings, guides, weapons, and lands.",
+      status: "Widely studied", source: "John W. Welch",
+      pairs: [
+        { key: "A", theme: "Prophecies concerning the Jews", left: "1 Nephi 1:4", right: "1 Nephi 22:1", tone: "accent" },
+        { key: "B", theme: "Departure from Jerusalem and arrival in promise", left: "1 Nephi 2:2", right: "1 Nephi 18:23", tone: "link" },
+        { key: "C", theme: "The sword and the broken bow of fine steel", left: "1 Nephi 4:9", right: "1 Nephi 16:18", tone: "success" },
+        { key: "D", theme: "Brass plates and Liahona guide the family", left: "1 Nephi 5:10", right: "1 Nephi 16:28", tone: "warning" },
+        { key: "E", theme: "Nephi is bound in wilderness and at sea", left: "1 Nephi 7:16", right: "1 Nephi 18:11", tone: "danger" },
+        { key: "F", theme: "The tree of life is seen and interpreted", left: "1 Nephi 8:10", right: "1 Nephi 15:21", tone: "accent" },
+        { key: "G", theme: "Old World and New World visions of the Lamb", left: "1 Nephi 10:4", right: "1 Nephi 14:1", tone: "link" },
+        { key: "H", theme: "Nephi encounters the Spirit of the Lord", center: "1 Nephi 11:1", tone: "warning" }
+      ]
+    },
+    {
+      id: "mosiah-macro", book: "Mosiah", chapter: "1–29", reference: "Mosiah 1–29",
+      title: "The nested record of Mosiah",
+      description: "Mosiah’s nonchronological histories fold around Abinadi’s confrontation with the law, pairing kingship, records, bondage, priests, and deliverance.",
+      status: "Widely studied", source: "John W. Welch",
+      pairs: [
+        { key: "A", theme: "Benjamin and Mosiah exhort the people", left: "Mosiah 1:1", right: "Mosiah 29:47", tone: "accent" },
+        { key: "B", theme: "A king is chosen; judges replace kings", left: "Mosiah 1:10", right: "Mosiah 29:41", tone: "link" },
+        { key: "C", theme: "Sacred records pass to the next custodian", left: "Mosiah 1:16", right: "Mosiah 28:20", tone: "success" },
+        { key: "D", theme: "Benjamin’s angel and Alma’s angel", left: "Mosiah 3:2", right: "Mosiah 27:11", tone: "warning" },
+        { key: "E", theme: "Covenant community and those outside it", left: "Mosiah 5:5", right: "Mosiah 26:4", tone: "danger" },
+        { key: "F", theme: "Priests are consecrated and churches organized", left: "Mosiah 6:3", right: "Mosiah 25:19", tone: "accent" },
+        { key: "G", theme: "Journeys between Zarahemla and Lehi-Nephi", left: "Mosiah 7:1", right: "Mosiah 24:25", tone: "link" },
+        { key: "H", theme: "Two peoples enter and escape bondage", left: "Mosiah 9:1", right: "Mosiah 24:20", tone: "success" },
+        { key: "I", theme: "Noah and his priests rise and fall", left: "Mosiah 11:1", right: "Mosiah 19:20", tone: "warning" },
+        { key: "J", theme: "Abinadi is imprisoned and put to death", left: "Mosiah 12:9", right: "Mosiah 17:20", tone: "danger" },
+        { key: "K", theme: "Abinadi reads the commandments of God", center: "Mosiah 13:11", tone: "warning" }
+      ]
+    },
+    {
+      id: "benjamin-speech", book: "Mosiah", chapter: "2–5", reference: "Mosiah 2–5",
+      title: "King Benjamin’s covenant speech",
+      description: "Seven major sections pair human indebtedness with divine sonship and obedience with redeemed conduct around sanctification through Christ.",
+      status: "Widely studied", source: "John W. Welch",
+      pairs: [
+        { key: "A", theme: "All are indebted to God; all may become his children", left: "Mosiah 2:19", right: "Mosiah 5:7", tone: "accent" },
+        { key: "B", theme: "Consequences of conduct and the life of the redeemed", left: "Mosiah 2:31", right: "Mosiah 4:12", tone: "link" },
+        { key: "C", theme: "The angel’s testimony and Benjamin’s testimony", left: "Mosiah 3:1", right: "Mosiah 4:5", tone: "success" },
+        { key: "D", theme: "Sanctification through the atonement of Christ", center: "Mosiah 3:18", tone: "warning" }
+      ]
+    },
+    {
+      id: "first-nephi-17", book: "1 Nephi", chapter: "17", reference: "1 Nephi 17:35–40",
+      title: "Creation, covenant, and the Lord’s footstool",
+      description: "Creation frames the Lord’s favor toward the righteous and judgment of the wicked in a compact nested inversion.",
+      status: "Widely studied", source: "John W. Welch",
+      pairs: [
+        { key: "A", theme: "The earth is created and remains the Lord’s footstool", left: "1 Nephi 17:36", right: "1 Nephi 17:39", tone: "accent" },
+        { key: "B", theme: "Righteous peoples are favored and loved", left: "1 Nephi 17:35", right: "1 Nephi 17:40", tone: "link" },
+        { key: "C", theme: "Nations are raised and destroyed in righteousness", center: "1 Nephi 17:37", tone: "warning" }
+      ]
+    },
+    {
+      id: "second-nephi-27", book: "2 Nephi", chapter: "27", reference: "2 Nephi 27:1–5",
+      title: "A drunken dream of the last days",
+      description: "The nations’ iniquity and spiritual sleep surround paired images of a hungry or thirsty dreamer who wakes still empty.",
+      status: "Widely studied", source: "John W. Welch",
+      pairs: [
+        { key: "A", theme: "The last days and the nations of the earth", left: "2 Nephi 27:1", right: "2 Nephi 27:5", tone: "accent" },
+        { key: "B", theme: "Drunkenness comes from iniquity, not wine", left: "2 Nephi 27:1", right: "2 Nephi 27:4", tone: "link" },
+        { key: "C", theme: "Those who fight Zion are like a vanishing dream", left: "2 Nephi 27:3", right: "2 Nephi 27:3", tone: "success" },
+        { key: "D", theme: "The hungry and thirsty awaken unfilled", center: "2 Nephi 27:3", tone: "warning" }
+      ]
+    },
+    {
+      id: "second-nephi-29", book: "2 Nephi", chapter: "29", reference: "2 Nephi 29:13",
+      title: "The records of gathered Israel",
+      description: "A single verse rotates the records of Jews, Nephites, and the lost tribes until every people possesses the words of the others.",
+      status: "Widely studied", source: "John W. Welch",
+      pairs: [
+        { key: "A", theme: "The Jews receive the words of the lost tribes", left: "2 Nephi 29:13", right: "2 Nephi 29:13", tone: "accent" },
+        { key: "B", theme: "The Nephites and Jews exchange their records", left: "2 Nephi 29:13", right: "2 Nephi 29:13", tone: "link" },
+        { key: "C", theme: "The lost tribes receive the gathered records", center: "2 Nephi 29:13", tone: "warning" }
+      ]
     }
   ],
   sources: {
