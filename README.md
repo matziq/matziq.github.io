@@ -5,6 +5,7 @@ Public GitHub Pages site.
 - Collection gateway: https://memconfigmgr.org/
 - WML resources: https://memconfigmgr.org/wml/
 - Latter-day Saint resources: https://memconfigmgr.org/lds/
+- Apps: https://memconfigmgr.org/apps/
 - Fun and games: https://memconfigmgr.org/games/
 - Linger Longer Potluck signup: https://memconfigmgr.org/linger_longer/
 - Love, Share, Invite missionary activity: https://memconfigmgr.org/wml/love-share-invite.html
