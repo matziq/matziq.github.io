@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A topic-organized collection of ward missionary and Latter-day Saint study resources.">
-  <title>Faith &amp; Fellowship Resources</title>
+  <meta name="description" content="Topic-organized collections for WML, Latter-day Saint study, and fun and games.">
+  <title>MemConfigMgr Collections</title>
+  <link rel="icon" type="image/svg+xml" sizes="any" href="./favicon.svg">
   <script>
     (() => {
       const param = new URLSearchParams(window.location.search).get("scoutTheme");
@@ -66,365 +67,48 @@
       --cp-sheen: rgba(255, 255, 255, 0.04);
       --cp-highlight: rgba(253, 142, 161, 0.12);
     }
-    :root {
-      --cp-bg: #f3f0e6;
-      --cp-bg-elevated: #faf8f1;
-      --cp-surface-soft: #ebe6d8;
-      --cp-border: #d8cfb4;
-      --cp-border-strong: #8a7a52;
-      --cp-text: #0f2d45;
-      --cp-text-muted: #506474;
-      --cp-text-soft: #687b88;
-      --cp-accent: #b38a1f;
-      --cp-accent-hover: #967319;
-      --cp-accent-soft: rgba(179, 138, 31, 0.11);
-      --cp-accent-fg: #0b2942;
-      --cp-link: #14557d;
-      --cp-overlay: rgba(243, 240, 230, 0.9);
-      --cp-panel: rgba(255, 255, 255, 0.9);
-      --cp-panel-strong: rgba(255, 255, 255, 0.97);
-      --cp-highlight: rgba(179, 138, 31, 0.16);
-    }
-    html[data-theme="dark"] {
-      --cp-bg: #071b2b;
-      --cp-bg-elevated: #0b2538;
-      --cp-surface: #0f2f46;
-      --cp-surface-soft: #123850;
-      --cp-border: #294d65;
-      --cp-border-strong: #7c91a0;
-      --cp-text: #f2efe6;
-      --cp-text-muted: #b4c2cc;
-      --cp-text-soft: #91a5b4;
-      --cp-accent: #e4bd54;
-      --cp-accent-hover: #f0cc68;
-      --cp-accent-soft: rgba(228, 189, 84, 0.14);
-      --cp-accent-fg: #071b2b;
-      --cp-link: #82c7ec;
-      --cp-overlay: rgba(7, 27, 43, 0.9);
-      --cp-panel: rgba(15, 47, 70, 0.82);
-      --cp-panel-strong: rgba(15, 47, 70, 0.97);
-      --cp-highlight: rgba(228, 189, 84, 0.16);
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: var(--cp-bg);
-      color: var(--cp-text);
-      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
-      line-height: 1.5;
-    }
-    a:focus-visible, button:focus-visible {
-      outline: 3px solid var(--cp-link);
-      outline-offset: 3px;
-    }
-    .site-header {
-      border-bottom: 1px solid var(--cp-border);
-      background: var(--cp-bg-elevated);
-    }
-    .header-inner, main, footer {
-      width: min(1120px, calc(100% - 32px));
-      margin: auto;
-    }
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      min-height: 72px;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--cp-text);
-      text-decoration: none;
-    }
-    .brand-mark {
-      width: 40px;
-      height: 40px;
-      display: grid;
-      place-items: center;
-      border: 1px solid var(--cp-border-strong);
-      border-radius: 50%;
-      color: var(--cp-accent);
-      font: 700 20px Georgia, "Times New Roman", serif;
-    }
-    .brand strong { display: block; letter-spacing: .08em; text-transform: uppercase; }
-    .brand small { display: block; color: var(--cp-text-muted); font-family: Georgia, "Times New Roman", serif; font-style: italic; }
-    nav { display: flex; gap: 8px; }
-    nav a {
-      border: 1px solid var(--cp-border);
-      border-radius: 0.625rem;
-      padding: 8px 12px;
-      color: var(--cp-text);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 700;
-    }
-    nav a:hover { border-color: var(--cp-accent); background: var(--cp-accent-soft); }
-    .hero {
-      padding: 72px 0 44px;
-      text-align: center;
-    }
-    .eyebrow {
-      margin: 0 0 8px;
-      color: var(--cp-accent);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-    }
-    h1 {
-      max-width: 760px;
-      margin: 0 auto 16px;
-      font: 500 clamp(42px, 7vw, 72px)/1.04 Georgia, "Times New Roman", serif;
-      letter-spacing: -.03em;
-    }
-    .hero > p:last-child {
-      max-width: 640px;
-      margin: auto;
-      color: var(--cp-text-muted);
-      font-size: 18px;
-    }
-    .menu-section { padding: 28px 0 40px; scroll-margin-top: 20px; }
-    .section-heading {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(260px, 500px);
-      gap: 32px;
-      align-items: end;
-      margin-bottom: 20px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--cp-border);
-    }
-    h2 {
-      margin: 4px 0 0;
-      font: 500 clamp(30px, 4vw, 44px)/1.1 Georgia, "Times New Roman", serif;
-    }
-    .section-heading > p {
-      margin: 0;
-      color: var(--cp-text-muted);
-    }
-    .resource-list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .resource-list li:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
-    .resource-card {
-      height: 100%;
-      display: grid;
-      grid-template-columns: 52px 1fr auto;
-      gap: 16px;
-      align-items: center;
-      border: 1px solid var(--cp-border);
-      border-radius: 16px;
-      padding: 20px;
-      background: var(--cp-surface);
-      color: var(--cp-text);
-      text-decoration: none;
-      box-shadow: 0 0 2px var(--cp-border), 0 1px 2px var(--cp-border);
-      transition: border-color .2s, transform .2s;
-    }
-    .resource-card:hover {
-      border-color: var(--cp-accent);
-      transform: translateY(-2px);
-    }
-    .resource-icon {
-      width: 52px;
-      height: 52px;
-      display: grid;
-      place-items: center;
-      border: 1px solid var(--cp-border);
-      border-radius: 50%;
-      background: var(--cp-bg-elevated);
-      color: var(--cp-accent);
-      font: 700 20px Georgia, "Times New Roman", serif;
-    }
-    .resource-topic {
-      display: block;
-      margin-bottom: 3px;
-      color: var(--cp-accent);
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-    .resource-card strong { display: block; font-size: 18px; }
-    .resource-card p { margin: 4px 0 0; color: var(--cp-text-muted); font-size: 14px; }
-    .arrow { color: var(--cp-accent); font-size: 24px; }
-    footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      border-top: 1px solid var(--cp-border);
-      padding: 24px 0 40px;
-      color: var(--cp-text-muted);
-      font-size: 13px;
-    }
-    footer a { color: var(--cp-link); }
-    @media (max-width: 760px) {
-      .header-inner { padding: 12px 0; align-items: flex-start; }
-      nav { flex-direction: column; }
-      .hero { padding-top: 52px; }
-      .section-heading { grid-template-columns: 1fr; gap: 12px; }
-      .resource-list { grid-template-columns: 1fr; }
-      .resource-list li:first-child:nth-last-child(odd) { grid-column: auto; }
-    }
-    @media (max-width: 480px) {
-      .brand small { display: none; }
-      .resource-card { grid-template-columns: 44px 1fr; padding: 16px; }
-      .resource-icon { width: 44px; height: 44px; }
-      .arrow { display: none; }
-      footer { flex-direction: column; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .resource-card { transition: none; }
-    }
   </style>
+  <link rel="stylesheet" href="./collections.css">
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="./" aria-label="Faith and Fellowship home">
-        <span class="brand-mark" aria-hidden="true">F</span>
-        <span><strong>Faith &amp; Fellowship</strong><small>Resources by topic</small></span>
+      <a class="brand" href="./" aria-label="MemConfigMgr collections home">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span><strong>MemConfigMgr</strong><small>Collections</small></span>
       </a>
-      <nav aria-label="Resource collections">
-        <a href="#wml">WML</a>
-        <a href="#church-study">Church Study</a>
-      </nav>
     </div>
   </header>
-
   <main>
     <section class="hero" aria-labelledby="page-title">
-      <p class="eyebrow">Two collections &middot; one home</p>
-      <h1 id="page-title">Resources for gathering, sharing, and studying</h1>
-      <p>Choose a collection below. Each menu is grouped by topic so related resources stay together.</p>
+      <p class="eyebrow">Everything in its place</p>
+      <h1 id="page-title">Choose a collection</h1>
+      <p>Each collection has its own topic-focused menu and permanent home.</p>
     </section>
-
-    <section class="menu-section" id="wml" aria-labelledby="wml-title">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Love, Share, Invite</p>
-          <h2 id="wml-title">WML Resources</h2>
-        </div>
-        <p>Tools for building friendships, creating welcoming ward experiences, and finding natural ways to love, share, and invite.</p>
-      </div>
-      <ul class="resource-list">
-        <li>
-          <a class="resource-card" href="./linger_longer/">
-            <span class="resource-icon" aria-hidden="true">LL</span>
-            <span>
-              <span class="resource-topic">Gathering &amp; fellowship</span>
-              <strong>Linger Longer</strong>
-              <p>Coordinate the ward potluck and help everyone feel welcome.</p>
-            </span>
-            <span class="arrow" aria-hidden="true">&rarr;</span>
-          </a>
-        </li>
-        <li>
-          <a class="resource-card" href="./wml/">
-            <span class="resource-icon" aria-hidden="true">LSI</span>
-            <span>
-              <span class="resource-topic">Everyday missionary work</span>
-              <strong>Love, Share, Invite</strong>
-              <p>Generate approachable activities for members and missionaries.</p>
-            </span>
-            <span class="arrow" aria-hidden="true">&rarr;</span>
-          </a>
-        </li>
-        <li>
-          <a class="resource-card" href="https://matziq.github.io/wml/personality.html">
-            <span class="resource-icon" aria-hidden="true">P</span>
-            <span>
-              <span class="resource-topic">Connection &amp; self-discovery</span>
-              <strong>Personality Test</strong>
-              <p>Discover communication strengths and ways to connect with others.</p>
-            </span>
-            <span class="arrow" aria-hidden="true">&rarr;</span>
-          </a>
-        </li>
-      </ul>
-    </section>
-
-    <section class="menu-section" id="church-study" aria-labelledby="church-title">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Latter-day Saint Resources</p>
-          <h2 id="church-title">Church Study</h2>
-        </div>
-        <p>Explore scripture, restored teachings, common questions, and thoughtful comparisons from a Latter-day Saint perspective.</p>
-      </div>
-      <ul class="resource-list">
-        <li>
-          <a class="resource-card" href="./638274915042781396/">
-            <span class="resource-icon" aria-hidden="true">B</span>
-            <span>
-              <span class="resource-topic">Scripture &amp; evidence</span>
-              <strong>Evidences of the True Church: The Book of Mormon</strong>
-              <p>Explore narrative consistency and Hebrew chiasmus in the record.</p>
-            </span>
-            <span class="arrow" aria-hidden="true">&rarr;</span>
-          </a>
-        </li>
-        <li>
-          <a class="resource-card" href="./345783929428755657/">
-            <span class="resource-icon" aria-hidden="true">KF</span>
-            <span>
-              <span class="resource-topic">Prophetic teachings</span>
-              <strong>The King Follett Sermon</strong>
-              <p>Compare four eyewitness accounts by passage and topic.</p>
-            </span>
-            <span class="arrow" aria-hidden="true">&rarr;</span>
-          </a>
-        </li>
-        <li>
-          <a class="resource-card" href="./lds_creedal_responses/">
-            <span class="resource-icon" aria-hidden="true">CR</span>
-            <span>
-              <span class="resource-topic">Doctrine &amp; responses</span>
-              <strong>LDS Creedal Responses</strong>
-              <p>Review scripture-based responses to creedal Christian criticisms.</p>
-            </span>
-            <span class="arrow" aria-hidden="true">&rarr;</span>
-          </a>
-        </li>
-        <li>
-          <a class="resource-card" href="./974309109194538516/">
-            <span class="resource-icon" aria-hidden="true">20</span>
-            <span>
-              <span class="resource-topic">Questions &amp; responses</span>
-              <strong>Top 20 Criticisms</strong>
-              <p>Study common criticisms alongside Latter-day Saint responses.</p>
-            </span>
-            <span class="arrow" aria-hidden="true">&rarr;</span>
-          </a>
-        </li>
-        <li>
-          <a class="resource-card" href="./religion/religion-comparison.html">
-            <span class="resource-icon" aria-hidden="true">RC</span>
-            <span>
-              <span class="resource-topic">Beliefs &amp; comparison</span>
-              <strong>Religion Comparison</strong>
-              <p>Compare beliefs across Christian and world faith traditions.</p>
-            </span>
-            <span class="arrow" aria-hidden="true">&rarr;</span>
-          </a>
-        </li>
-      </ul>
-    </section>
+    <ul class="resource-list collection-list">
+      <li>
+        <a class="resource-card" href="./wml/">
+          <span class="resource-icon" aria-hidden="true">W</span>
+          <span><span class="resource-topic">Fellowship &amp; missionary work</span><strong>WML</strong><p>Linger Longer, Love, Share, Invite, and the Personality Test.</p></span>
+          <span class="arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+      <li>
+        <a class="resource-card" href="./lds/">
+          <span class="resource-icon" aria-hidden="true">L</span>
+          <span><span class="resource-topic">Faith &amp; study</span><strong>Latter-day Saint Resources</strong><p>Scripture evidence, teachings, responses, and religion comparisons.</p></span>
+          <span class="arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+      <li>
+        <a class="resource-card" href="./games/">
+          <span class="resource-icon" aria-hidden="true">G</span>
+          <span><span class="resource-topic">Play &amp; explore</span><strong>Fun &amp; Games</strong><p>Browser games, playful experiments, and creative apps.</p></span>
+          <span class="arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+    </ul>
   </main>
-
-  <footer>
-    <span>Faith &amp; Fellowship Resources</span>
-    <a href="./iomenu.html">View the complete site index</a>
-  </footer>
+  <footer><span>MemConfigMgr Collections</span><a href="./iomenu.html">Complete site index</a></footer>
 </body>
 </html>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    .bg { fill: #242424; }
+    .mark { fill: #f7f4ef; font: 700 34px "Segoe UI", sans-serif; }
+    .dot { fill: #b11f4b; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #dedede; }
+      .mark { fill: #292929; }
+      .dot { fill: #fd8ea1; }
+    }
+  </style>
+  <rect class="bg" width="64" height="64" rx="14"/>
+  <text class="mark" x="30" y="44" text-anchor="middle">M</text>
+  <circle class="dot" cx="49" cy="18" r="6"/>
+</svg>
