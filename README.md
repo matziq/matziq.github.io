@@ -2,10 +2,13 @@
 
 Public GitHub Pages site.
 
-- Faith and Fellowship resource menus: https://matziq.github.io/
-- Linger Longer Potluck signup: https://matziq.github.io/linger_longer/
-- Love, Share, Invite missionary activity: https://matziq.github.io/wml/
-- WML Personality Test: https://matziq.github.io/wml/personality.html
-- Complete site index: https://matziq.github.io/iomenu.html
+- Collection gateway: https://memconfigmgr.org/
+- WML resources: https://memconfigmgr.org/wml/
+- Latter-day Saint resources: https://memconfigmgr.org/lds/
+- Fun and games: https://memconfigmgr.org/games/
+- Linger Longer Potluck signup: https://memconfigmgr.org/linger_longer/
+- Love, Share, Invite missionary activity: https://memconfigmgr.org/wml/love-share-invite.html
+- WML Personality Test: https://memconfigmgr.org/wml/personality.html
+- Complete site index: https://memconfigmgr.org/iomenu.html
 
-Root page: https://matziq.github.io/
+Root page: https://memconfigmgr.org/

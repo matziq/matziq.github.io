@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    .bg { fill: #0f2d45; }
+    .book { fill: #f3f0e6; stroke: #b38a1f; stroke-width: 2.5; }
+    .line { fill: none; stroke: #b38a1f; stroke-width: 2; stroke-linecap: round; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #071b2b; }
+      .book { fill: #f2efe6; stroke: #e4bd54; }
+      .line { stroke: #e4bd54; }
+    }
+  </style>
+  <rect class="bg" width="64" height="64" rx="14"/>
+  <path class="book" d="M13 17h15c4 0 7 3 7 7v25c0-4-3-7-7-7H13V17Zm38 0H36c-4 0-7 3-7 7v25c0-4 3-7 7-7h15V17Z"/>
+  <path class="line" d="M18 25h10M18 31h10M41 25h5M41 31h5"/>
+</svg>

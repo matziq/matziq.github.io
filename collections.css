@@ -1,0 +1,115 @@
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--cp-bg);
+  color: var(--cp-text);
+  font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+}
+a:focus-visible { outline: 3px solid var(--cp-link); outline-offset: 3px; }
+.site-header { border-bottom: 1px solid var(--cp-border); background: var(--cp-bg-elevated); }
+.header-inner, main, footer { width: min(1080px, calc(100% - 32px)); margin: auto; }
+.header-inner { min-height: 72px; display: flex; align-items: center; }
+.brand { display: flex; align-items: center; gap: 12px; color: var(--cp-text); text-decoration: none; }
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--cp-border-strong);
+  border-radius: 50%;
+  color: var(--cp-accent);
+  font: 700 20px Georgia, "Times New Roman", serif;
+}
+.brand strong { display: block; letter-spacing: .08em; text-transform: uppercase; }
+.brand small { display: block; color: var(--cp-text-muted); font-family: Georgia, "Times New Roman", serif; font-style: italic; }
+.hero { padding: 72px 0 44px; text-align: center; }
+.eyebrow, .resource-topic {
+  color: var(--cp-accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.eyebrow { margin: 0 0 8px; }
+h1 { margin: 0 auto 16px; font: 500 clamp(42px, 7vw, 72px)/1.04 Georgia, "Times New Roman", serif; letter-spacing: -.03em; }
+.hero > p:last-child { max-width: 620px; margin: auto; color: var(--cp-text-muted); font-size: 18px; }
+.section-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 500px);
+  gap: 32px;
+  align-items: end;
+  margin: 20px 0;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--cp-border);
+}
+h2 { margin: 4px 0 0; font: 500 clamp(30px, 4vw, 44px)/1.1 Georgia, "Times New Roman", serif; }
+.section-heading > p { margin: 0; color: var(--cp-text-muted); }
+.resource-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0 0 48px;
+  list-style: none;
+}
+.collection-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.resource-card {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  gap: 16px;
+  align-items: center;
+  border: 1px solid var(--cp-border);
+  border-radius: 16px;
+  padding: 20px;
+  background: var(--cp-surface);
+  color: var(--cp-text);
+  text-decoration: none;
+  box-shadow: 0 0 2px var(--cp-border), 0 1px 2px var(--cp-border);
+  transition: border-color .2s, transform .2s;
+}
+.collection-list .resource-card { grid-template-columns: 52px 1fr; align-content: start; }
+.collection-list .arrow { display: none; }
+.resource-card:hover { border-color: var(--cp-accent); transform: translateY(-2px); }
+.resource-icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--cp-border);
+  border-radius: 50%;
+  background: var(--cp-bg-elevated);
+  color: var(--cp-accent);
+  font: 700 20px Georgia, "Times New Roman", serif;
+}
+.resource-card strong { display: block; margin-top: 3px; font-size: 18px; }
+.resource-card p { margin: 4px 0 0; color: var(--cp-text-muted); font-size: 14px; }
+.arrow { color: var(--cp-accent); font-size: 24px; }
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid var(--cp-border);
+  padding: 24px 0 40px;
+  color: var(--cp-text-muted);
+  font-size: 13px;
+}
+footer a { color: var(--cp-link); }
+@media (max-width: 800px) {
+  .collection-list, .resource-list { grid-template-columns: 1fr; }
+  .section-heading { grid-template-columns: 1fr; gap: 12px; }
+}
+@media (max-width: 480px) {
+  .hero { padding-top: 52px; }
+  .resource-card { grid-template-columns: 44px 1fr; padding: 16px; }
+  .resource-icon { width: 44px; height: 44px; }
+  .arrow { display: none; }
+  footer { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .resource-card { transition: none; }
+}
