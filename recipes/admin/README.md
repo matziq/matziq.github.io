@@ -1,7 +1,8 @@
 # Recipe editor
 
 The browser editor at <https://memconfigmgr.org/recipes/admin/> publishes recipe
-changes directly to the `main` branch through GitHub's Git Data API.
+changes directly to the `main` branch of `matziq/recipes` through GitHub's Git
+Data API.
 
 ## Granting access
 
@@ -9,7 +10,7 @@ changes directly to the `main` branch through GitHub's Git Data API.
 2. Invite the editor's GitHub account and have them accept the invitation.
 3. The editor creates a fine-grained personal access token:
    - Resource owner: their GitHub account
-   - Repository access: **Only select repositories > matziq.github.io**
+   - Repository access: **Only select repositories > recipes**
    - Repository permissions: **Contents > Read and write**
    - Expiration: 90 days or another short period
 4. Open the recipe editor, add or select a recipe, and paste the token only when

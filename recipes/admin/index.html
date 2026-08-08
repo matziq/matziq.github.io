@@ -105,7 +105,7 @@
     <ol>
       <li>Ask the site owner to invite your GitHub account as a repository collaborator.</li>
       <li>Accept the invitation from GitHub.</li>
-      <li>Create a fine-grained token for only <code>matziq/matziq.github.io</code> with <strong>Contents: Read and write</strong>.</li>
+      <li>Create a fine-grained token for only <code>matziq/recipes</code> with <strong>Contents: Read and write</strong>.</li>
       <li>Keep this page bookmarked. Paste the token only when you publish.</li>
     </ol>
     <p class="help">The token is not stored in cookies, local storage, or the recipe files. GitHub recommends giving tokens an expiration date and replacing them periodically.</p>
@@ -148,7 +148,7 @@
     <div class="field">
       <label for="token">GitHub fine-grained access token</label>
       <input id="token" type="password" autocomplete="off" required>
-      <p class="help">The token needs <strong>Contents: Read and write</strong> access to <code>matziq/matziq.github.io</code>. It stays in this browser tab and is never saved by this page.</p>
+      <p class="help">The token needs <strong>Contents: Read and write</strong> access to <code>matziq/recipes</code>. It stays in this browser tab and is never saved by this page.</p>
     </div>
     <div class="actions">
       <button id="publish" type="submit">Publish recipe</button>
@@ -161,7 +161,7 @@
 (() => {
   "use strict";
   const owner = "matziq";
-  const repo = "matziq.github.io";
+  const repo = "recipes";
   const branch = "main";
   const picker = document.querySelector("#recipe-picker");
   const form = document.querySelector("#recipe-form");
@@ -359,19 +359,19 @@
       const reference = await github(`/git/ref/heads/${branch}`, token);
       const parent = await github(`/git/commits/${reference.object.sha}`, token);
       const entries = [
-        {path: `recipes/${url}`, mode: "100644", type: "blob", content: buildRecipePage(templateText, recipe, bodyHtml, imageName)},
-        {path: "recipes/recipes_index.json", mode: "100644", type: "blob", content: JSON.stringify(recipes, null, 2) + "\n"},
-        {path: "recipes/ingredients_master.json", mode: "100644", type: "blob", content: JSON.stringify(ingredientMaster, null, 2) + "\n"},
-        {path: "recipes/index.html", mode: "100644", type: "blob", content: updateIndex(indexText, editing, recipe)}
+        {path: url, mode: "100644", type: "blob", content: buildRecipePage(templateText, recipe, bodyHtml, imageName)},
+        {path: "recipes_index.json", mode: "100644", type: "blob", content: JSON.stringify(recipes, null, 2) + "\n"},
+        {path: "ingredients_master.json", mode: "100644", type: "blob", content: JSON.stringify(ingredientMaster, null, 2) + "\n"},
+        {path: "index.html", mode: "100644", type: "blob", content: updateIndex(indexText, editing, recipe)}
       ];
-      if (!editing) entries.push({path: "recipes/new.html", mode: "100644", type: "blob", content: updateNewPage(newText, recipe)});
-      if (editing && editing.url !== recipe.url) entries.push({path: `recipes/${editing.url}`, mode: "100644", type: "blob", sha: null});
+      if (!editing) entries.push({path: "new.html", mode: "100644", type: "blob", content: updateNewPage(newText, recipe)});
+      if (editing && editing.url !== recipe.url) entries.push({path: editing.url, mode: "100644", type: "blob", sha: null});
       if (photo) {
         const blob = await github("/git/blobs", token, {
           method: "POST",
           body: JSON.stringify({content: await toBase64(photo), encoding: "base64"})
         });
-        entries.push({path: `recipes/recipes/${categorySlug}/${imageName}`, mode: "100644", type: "blob", sha: blob.sha});
+        entries.push({path: `recipes/${categorySlug}/${imageName}`, mode: "100644", type: "blob", sha: blob.sha});
       }
       const tree = await github("/git/trees", token, {
         method: "POST",
