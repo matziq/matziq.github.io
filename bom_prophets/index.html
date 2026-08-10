@@ -228,8 +228,9 @@
     .explorer {
       display: grid;
       grid-template-columns: minmax(330px, 44%) minmax(0, 1fr);
+      height: calc(100vh - 190px);
       min-height: 620px;
-      max-height: calc(100vh - 190px);
+      max-height: 800px;
       margin-bottom: 48px;
       overflow: hidden;
       border: 1px solid var(--cp-border);
@@ -239,6 +240,7 @@
     }
     .timeline-panel {
       position: relative;
+      min-height: 0;
       overflow-y: auto;
       overscroll-behavior: contain;
       border-right: 1px solid var(--cp-border);
@@ -501,10 +503,16 @@
       .search-wrap { grid-column: 1 / -1; }
       .explorer {
         display: block;
-        min-height: 620px;
-        max-height: calc(100vh - 220px);
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        overflow: visible;
       }
-      .timeline-panel { height: 100%; border-right: 0; }
+      .timeline-panel {
+        height: auto;
+        overflow: visible;
+        border-right: 0;
+      }
       .detail-panel {
         position: fixed;
         z-index: 50;
