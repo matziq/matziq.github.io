@@ -1,0 +1,28 @@
+{
+  "source": "https://www.rockstargames.com/VI",
+  "newswire": "https://www.rockstargames.com/newswire",
+  "fetchedAt": "2026-08-10T00:23:03+00:00",
+  "items": [
+    {
+      "title": "Grand Theft Auto VI: An Extended Look",
+      "url": "https://www.rockstargames.com/newswire/article/9k2kaa1o3297k9/",
+      "date": "August 6, 2026",
+      "isoDate": "2026-08-06",
+      "image": "https://www.rockstargames.com/VI/_next/static/media/3642a34ab778931f321cc65c7d870a090dcfd4a4.0ia9.4vs63z~2.jpg?akim=1&imdensity=1&imwidth=640"
+    },
+    {
+      "title": "Pre-Order Grand Theft Auto VI on June 25",
+      "url": "https://www.rockstargames.com/newswire/article/5171972o3ak5oa/pre-order-grand-theft-auto-vi-on-june-25",
+      "date": "June 24, 2026",
+      "isoDate": "2026-06-24",
+      "image": "https://www.rockstargames.com/VI/_next/static/media/5171972o3ak5oa.15416o23e-~x2.jpg?akim=1&imdensity=1&imwidth=640"
+    },
+    {
+      "title": "Grand Theft Auto VI is Now Set to Launch November 19, 2026",
+      "url": "https://www.rockstargames.com/newswire/article/ak3ak31a49a221/grand-theft-auto-vi-is-now-set-to-launch-november-19-2026",
+      "date": "November 6, 2025",
+      "isoDate": "2025-11-06",
+      "image": "https://www.rockstargames.com/VI/_next/static/media/ak3ak31a49a221.01qomdzfhfg58.jpg?akim=1&imdensity=1&imwidth=640"
+    }
+  ]
+}
