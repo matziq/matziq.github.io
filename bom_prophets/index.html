@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore the prophets of the Book of Mormon on an interactive, searchable timeline.">
+  <title>The Book of Mormon Prophets</title>
+  <link rel="icon" type="image/svg+xml" sizes="any" href="./favicon.svg">
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--cp-bg);
+      color: var(--cp-text);
+      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5;
+    }
+    button, input, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: var(--cp-link); }
+    a:hover { color: var(--cp-accent-hover); }
+    :focus-visible { outline: 3px solid var(--cp-link); outline-offset: 3px; }
+
+    .site-header {
+      position: relative;
+      border-bottom: 1px solid var(--cp-border);
+      background: var(--cp-bg-elevated);
+    }
+    .header-inner, main, .site-footer {
+      width: min(1280px, calc(100% - 32px));
+      margin-inline: auto;
+    }
+    .header-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--cp-text);
+      text-decoration: none;
+    }
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border: 1px solid var(--cp-border-strong);
+      border-radius: 50%;
+      color: var(--cp-accent);
+      font: 700 20px Georgia, "Times New Roman", serif;
+    }
+    .brand strong {
+      display: block;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .brand small {
+      display: block;
+      color: var(--cp-text-muted);
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+    }
+    .theme-button, .zoom-button, .close-button {
+      min-width: 40px;
+      min-height: 40px;
+      border: 1px solid var(--cp-border);
+      border-radius: .625rem;
+      background: var(--cp-surface);
+      color: var(--cp-text);
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .theme-button:hover, .zoom-button:hover, .close-button:hover {
+      border-color: var(--cp-accent);
+      background: var(--cp-accent-soft);
+      color: var(--cp-accent-hover);
+    }
+
+    .hero {
+      padding: 56px 0 32px;
+      text-align: center;
+    }
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--cp-accent);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0 auto 14px;
+      font: 500 clamp(38px, 6vw, 64px)/1.04 Georgia, "Times New Roman", serif;
+      letter-spacing: -.03em;
+    }
+    .hero-description {
+      max-width: 720px;
+      margin: auto;
+      color: var(--cp-text-muted);
+      font-size: 17px;
+    }
+
+    .controls {
+      position: sticky;
+      top: 8px;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) minmax(150px, 220px) auto;
+      gap: 12px;
+      align-items: end;
+      margin-bottom: 20px;
+      padding: 14px;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-panel-strong);
+      box-shadow: 0 0 2px var(--cp-border), 0 1px 2px var(--cp-border);
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--cp-text-muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .search-wrap { position: relative; }
+    .search-wrap::before {
+      content: "\2315";
+      position: absolute;
+      left: 12px;
+      bottom: 8px;
+      color: var(--cp-text-muted);
+      font-size: 22px;
+      pointer-events: none;
+    }
+    input[type="search"], select {
+      width: 100%;
+      height: 42px;
+      border: 1px solid var(--cp-border);
+      border-radius: .625rem;
+      background: var(--cp-surface);
+      color: var(--cp-text);
+    }
+    input[type="search"] { padding: 8px 12px 8px 38px; }
+    select { padding: 8px 34px 8px 12px; }
+    input[type="search"]:focus, select:focus { border-color: var(--cp-accent); }
+    .zoom-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .zoom-control input { width: 116px; accent-color: var(--cp-accent); }
+    .result-count {
+      grid-column: 1 / -1;
+      margin: -2px 2px 0;
+      color: var(--cp-text-muted);
+      font-size: 12px;
+    }
+
+    .explorer {
+      display: grid;
+      grid-template-columns: minmax(330px, 44%) minmax(0, 1fr);
+      min-height: 620px;
+      max-height: calc(100vh - 190px);
+      margin-bottom: 48px;
+      overflow: hidden;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+      box-shadow: 0 0 2px var(--cp-border), 0 1px 2px var(--cp-border);
+    }
+    .timeline-panel {
+      position: relative;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      border-right: 1px solid var(--cp-border);
+      background: var(--cp-bg-elevated);
+      scrollbar-color: var(--cp-border-strong) var(--cp-surface-soft);
+    }
+    .timeline {
+      --timeline-gap: 12px;
+      position: relative;
+      margin: 0;
+      padding: 24px 16px 40px 104px;
+      list-style: none;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 28px;
+      bottom: 28px;
+      left: 76px;
+      width: 2px;
+      background: var(--cp-border-strong);
+    }
+    .timeline-item {
+      position: relative;
+      min-height: 66px;
+      margin-bottom: var(--timeline-gap);
+    }
+    .timeline-item[hidden] { display: none; }
+    .timeline-date {
+      position: absolute;
+      top: 18px;
+      right: calc(100% + 42px);
+      width: 76px;
+      color: var(--cp-text-muted);
+      font: 700 11px/1.2 Consolas, "Courier New", Courier, monospace;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .timeline-dot {
+      position: absolute;
+      z-index: 1;
+      top: 23px;
+      right: calc(100% + 19px);
+      width: 12px;
+      height: 12px;
+      border: 3px solid var(--cp-bg-elevated);
+      border-radius: 50%;
+      background: var(--cp-accent);
+      box-shadow: 0 0 0 1px var(--cp-accent);
+    }
+    .prophet-button {
+      width: 100%;
+      min-height: 62px;
+      padding: 10px 38px 10px 14px;
+      border: 1px solid var(--cp-border);
+      border-radius: .625rem;
+      background: var(--cp-surface);
+      color: var(--cp-text);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color .15s, transform .15s, background .15s;
+    }
+    .prophet-button::after {
+      content: "\2192";
+      position: absolute;
+      top: 18px;
+      right: 13px;
+      color: var(--cp-accent);
+      font-size: 20px;
+    }
+    .prophet-button:hover {
+      border-color: var(--cp-accent);
+      background: var(--cp-accent-soft);
+      transform: translateX(2px);
+    }
+    .prophet-button[aria-current="true"] {
+      border-color: var(--cp-accent);
+      background: var(--cp-accent-soft);
+    }
+    .prophet-name {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .prophet-role {
+      display: block;
+      margin-top: 2px;
+      overflow: hidden;
+      color: var(--cp-text-muted);
+      font-size: 12px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .era-marker {
+      position: relative;
+      margin: 16px 0 var(--timeline-gap);
+      padding: 8px 10px;
+      border-top: 1px solid var(--cp-border);
+      border-bottom: 1px solid var(--cp-border);
+      color: var(--cp-accent);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .empty-state {
+      display: none;
+      margin: 40px 12px;
+      color: var(--cp-text-muted);
+      text-align: center;
+    }
+
+    .detail-panel {
+      position: relative;
+      overflow-y: auto;
+      padding: clamp(24px, 4vw, 48px);
+      background: var(--cp-surface);
+    }
+    .detail-panel.updating .detail-content {
+      animation: detail-in .22s ease-out;
+    }
+    .close-button {
+      display: none;
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 3;
+      font-size: 22px;
+    }
+    .detail-placeholder {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      text-align: center;
+    }
+    .placeholder-icon {
+      width: 84px;
+      height: 84px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px;
+      border: 1px solid var(--cp-border);
+      border-radius: 50%;
+      background: var(--cp-bg-elevated);
+      color: var(--cp-accent);
+      font: 500 42px Georgia, "Times New Roman", serif;
+    }
+    .detail-placeholder h2 { margin: 0 0 8px; }
+    .detail-placeholder p { max-width: 420px; margin: 0; color: var(--cp-text-muted); }
+    .detail-content { max-width: 650px; margin: auto; }
+    .detail-content[hidden], .detail-placeholder[hidden] { display: none; }
+    .detail-era {
+      margin: 0 0 8px;
+      color: var(--cp-accent);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .detail-content h2 {
+      margin: 0 0 5px;
+      font: 500 clamp(34px, 5vw, 52px)/1.05 Georgia, "Times New Roman", serif;
+    }
+    .detail-dates { margin: 0 0 24px; color: var(--cp-text-muted); font-weight: 650; }
+    .fact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+    .fact {
+      padding: 14px;
+      border: 1px solid var(--cp-border);
+      border-radius: .625rem;
+      background: var(--cp-bg-elevated);
+    }
+    .fact-label {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--cp-text-muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .detail-section { margin-top: 26px; }
+    .detail-section h3 {
+      margin: 0 0 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--cp-border);
+      font: 600 20px Georgia, "Times New Roman", serif;
+    }
+    .detail-section p { margin: 0; }
+    blockquote {
+      position: relative;
+      margin: 0;
+      padding: 18px 18px 18px 28px;
+      border: 1px solid var(--cp-border);
+      border-radius: .625rem;
+      background: var(--cp-accent-soft);
+      font: italic 18px/1.55 Georgia, "Times New Roman", serif;
+    }
+    .quote-ref {
+      display: block;
+      margin-top: 10px;
+      font: 700 12px/1.4 "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .quote-ref a { text-decoration: none; }
+    .scripture-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .scripture-links a {
+      display: inline-block;
+      padding: 7px 10px;
+      border: 1px solid var(--cp-border);
+      border-radius: .625rem;
+      background: var(--cp-bg-elevated);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 650;
+    }
+    .scripture-links a:hover {
+      border-color: var(--cp-accent);
+      background: var(--cp-accent-soft);
+    }
+    .note {
+      margin: 0 0 20px;
+      padding: 12px 14px;
+      border: 1px solid var(--cp-border);
+      border-radius: .625rem;
+      background: var(--cp-surface-soft);
+      color: var(--cp-text-muted);
+      font-size: 13px;
+    }
+    .site-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px 0 40px;
+      border-top: 1px solid var(--cp-border);
+      color: var(--cp-text-muted);
+      font-size: 13px;
+    }
+    .mobile-overlay { display: none; }
+
+    @keyframes detail-in {
+      from { opacity: 0; transform: translateX(10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @media (max-width: 800px) {
+      .controls { grid-template-columns: 1fr 1fr; }
+      .search-wrap { grid-column: 1 / -1; }
+      .explorer {
+        display: block;
+        min-height: 620px;
+        max-height: calc(100vh - 220px);
+      }
+      .timeline-panel { height: 100%; border-right: 0; }
+      .detail-panel {
+        position: fixed;
+        z-index: 50;
+        inset: 24px 12px 12px;
+        border: 1px solid var(--cp-border);
+        border-radius: 16px;
+        box-shadow: var(--cp-shadow);
+        transform: translateX(110%);
+        transition: transform .22s ease-out;
+      }
+      .detail-panel.open { transform: translateX(0); }
+      .detail-panel.open + .mobile-overlay {
+        display: block;
+        position: fixed;
+        z-index: 40;
+        inset: 0;
+        border: 0;
+        background: var(--cp-overlay);
+      }
+      .close-button { display: block; }
+      .site-footer { flex-direction: column; }
+    }
+    @media (max-width: 520px) {
+      .header-inner { min-height: 64px; }
+      .brand small { display: none; }
+      .hero { padding-top: 38px; }
+      .controls { grid-template-columns: 1fr; }
+      .search-wrap { grid-column: auto; }
+      .zoom-control { justify-content: space-between; }
+      .timeline { padding-left: 92px; }
+      .timeline::before { left: 66px; }
+      .timeline-date { right: calc(100% + 37px); width: 66px; font-size: 10px; }
+      .timeline-dot { right: calc(100% + 14px); }
+      .fact-grid { grid-template-columns: 1fr; }
+      .detail-panel { padding: 54px 20px 28px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .prophet-button, .detail-panel { transition: none; }
+      .detail-panel.updating .detail-content { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../lds/">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span><strong>Latter-day Saint</strong><small>Study resources</small></span>
+      </a>
+      <button id="themeButton" class="theme-button" type="button" aria-label="Toggle color theme" title="Toggle color theme">
+        <span aria-hidden="true">&#9680;</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">People of the record</p>
+      <h1 id="page-title">The Book of Mormon Prophets</h1>
+      <p class="hero-description">Travel through the record from the Jaredites to Moroni. Search by name, lineage, teaching, or scripture, then select a prophet to learn more.</p>
+    </section>
+
+    <section class="controls" aria-label="Timeline controls">
+      <div class="search-wrap">
+        <label for="searchInput">Search prophets</label>
+        <input id="searchInput" type="search" placeholder="Try Nephi, faith, Jaredite, or Helaman..." autocomplete="off">
+      </div>
+      <div>
+        <label for="peopleFilter">People or record</label>
+        <select id="peopleFilter">
+          <option value="">All peoples</option>
+          <option value="Nephite">Nephite</option>
+          <option value="Lamanite">Lamanite</option>
+          <option value="Jaredite">Jaredite</option>
+        </select>
+      </div>
+      <div>
+        <label for="zoomRange">Timeline spacing</label>
+        <div class="zoom-control">
+          <button id="zoomOut" class="zoom-button" type="button" aria-label="Zoom timeline out">&minus;</button>
+          <input id="zoomRange" type="range" min="0" max="4" step="1" value="1" aria-label="Timeline spacing">
+          <button id="zoomIn" class="zoom-button" type="button" aria-label="Zoom timeline in">+</button>
+        </div>
+      </div>
+      <p id="resultCount" class="result-count" aria-live="polite"></p>
+    </section>
+
+    <section class="explorer" aria-label="Prophet timeline and details">
+      <div id="timelinePanel" class="timeline-panel">
+        <ol id="timeline" class="timeline"></ol>
+        <p id="emptyState" class="empty-state">No prophets match those filters. Try a different search.</p>
+      </div>
+      <aside id="detailPanel" class="detail-panel" aria-label="Prophet details">
+        <button id="closeDetail" class="close-button" type="button" aria-label="Close prophet details">&times;</button>
+        <div id="detailPlaceholder" class="detail-placeholder">
+          <div>
+            <div class="placeholder-icon" aria-hidden="true">P</div>
+            <h2>Select a prophet</h2>
+            <p>Choose a name on the timeline to explore lineage, approximate dates, notable teachings, and linked scripture passages.</p>
+          </div>
+        </div>
+        <article id="detailContent" class="detail-content" hidden></article>
+      </aside>
+      <button id="mobileOverlay" class="mobile-overlay" type="button" aria-label="Close prophet details"></button>
+    </section>
+
+    <p class="note"><strong>About the dates:</strong> Scripture seldom records exact birth or death years. Dates below are approximate ranges inferred from the Book of Mormon narrative; Jaredite chronology is especially uncertain. Unknown dates are identified rather than presented as fact.</p>
+  </main>
+
+  <footer class="site-footer">
+    <a href="../lds/">&larr; Latter-day Saint Resources</a>
+    <span>Scripture links open in the official Gospel Library.</span>
+  </footer>
+
+  <script>
+    const SCRIPTURE_BASE = "https://www.churchofjesuschrist.org/study/scriptures/bofm/";
+    const prophets = [
+      {
+        id: "brother-of-jared", name: "Brother of Jared", people: "Jaredite", era: "Jaredite record",
+        sort: -2200, dates: "Jaredite migration, traditionally placed near the Tower of Babel",
+        lineage: "Brother of Jared; his revealed name is Mahonri Moriancumer in later Latter-day Saint tradition",
+        role: "Visionary prophet and leader of the Jaredite migration",
+        known: "Exercised extraordinary faith, saw the premortal Christ, and received a sweeping vision of humankind.",
+        quote: "Never has man come before me with such exceeding faith as thou hast.",
+        quoteRef: "Ether 3:9", refs: ["Ether 1:33-43", "Ether 2:16-25", "Ether 3:6-20", "Ether 4:1-7"]
+      },
+      {
+        id: "ether", name: "Ether", people: "Jaredite", era: "Jaredite record",
+        sort: -610, dates: "Final generation of the Jaredite nation; exact dates unknown",
+        lineage: "Descendant of Coriantor in the royal Jaredite line",
+        role: "Last Jaredite prophet and source of the record abridged by Moroni",
+        known: "Warned Coriantumr of destruction, witnessed the Jaredite collapse, and taught the nature of faith and hope.",
+        quote: "By faith all things are fulfilled.",
+        quoteRef: "Ether 12:3", refs: ["Ether 11:23", "Ether 12:1-6", "Ether 13:13-22", "Ether 15:33-34"]
+      },
+      {
+        id: "lehi", name: "Lehi", people: "Nephite", era: "Lehi's family",
+        sort: -600, dates: "Active about 600-570 BC; birth and death unknown",
+        lineage: "Descendant of Manasseh; husband of Sariah and father of Laman, Lemuel, Sam, Nephi, Jacob, and Joseph",
+        role: "Founding patriarch and prophet of the Lehite colony",
+        known: "Led his family from Jerusalem, taught of the Messiah, interpreted the tree-of-life vision, and blessed his posterity.",
+        quote: "Adam fell that men might be; and men are, that they might have joy.",
+        quoteRef: "2 Nephi 2:25", refs: ["1 Nephi 1:4-20", "1 Nephi 8:2-35", "2 Nephi 1:13-15", "2 Nephi 2:25-27"]
+      },
+      {
+        id: "nephi", name: "Nephi", people: "Nephite", era: "Lehi's family",
+        sort: -590, dates: "Born about 615 BC; died after 545 BC",
+        lineage: "Son of Lehi and Sariah; brother of Jacob and Joseph",
+        role: "Prophet, record keeper, teacher, and first Nephite ruler",
+        known: "Obtained the brass plates, built the ship, founded the Nephite community, and testified repeatedly of Jesus Christ.",
+        quote: "I will go and do the things which the Lord hath commanded.",
+        quoteRef: "1 Nephi 3:7", refs: ["1 Nephi 3:7", "1 Nephi 11:13-33", "1 Nephi 17:7-16", "2 Nephi 25:23-29", "2 Nephi 33:10-15"]
+      },
+      {
+        id: "jacob", name: "Jacob", people: "Nephite", era: "Early Nephites",
+        sort: -545, dates: "Born between about 592 and 570 BC; died after 500 BC",
+        lineage: "Son of Lehi and Sariah; younger brother of Nephi",
+        role: "Priest, prophet, and keeper of the small plates",
+        known: "Taught the Atonement and Resurrection, confronted pride and immorality, and recorded the allegory of the olive tree.",
+        quote: "O be wise; what can I say more?",
+        quoteRef: "Jacob 6:12", refs: ["2 Nephi 9:5-13", "Jacob 2:12-21", "Jacob 5:3-77", "Jacob 7:1-23"]
+      },
+      {
+        id: "enos", name: "Enos", people: "Nephite", era: "Small plates",
+        sort: -500, dates: "Fifth century BC; exact birth and death unknown",
+        lineage: "Son of Jacob; grandson of Lehi",
+        role: "Prophet and keeper of the small plates",
+        known: "Received forgiveness through prolonged prayer, then prayed for the Nephites, Lamanites, and preservation of the record.",
+        quote: "My soul hungered; and I kneeled down before my Maker.",
+        quoteRef: "Enos 1:4", refs: ["Enos 1:1-18", "Enos 1:26-27"]
+      },
+      {
+        id: "jarom", name: "Jarom", people: "Nephite", era: "Small plates",
+        sort: -420, dates: "Active about 420-361 BC",
+        lineage: "Son of Enos; descendant of Lehi through Jacob",
+        role: "Prophet and keeper of the small plates",
+        known: "Preserved a brief account of Nephite spiritual decline, prophetic labor, and deliverance from the Lamanites.",
+        quote: "The prophets of the Lord did threaten the people.",
+        quoteRef: "Jarom 1:10", refs: ["Jarom 1:1-12"]
+      },
+      {
+        id: "omni", name: "Omni", people: "Nephite", era: "Small plates",
+        sort: -360, dates: "Active about 361-317 BC",
+        lineage: "Son of Jarom",
+        role: "Record keeper and military participant",
+        known: "Continued the small plates during a period of warfare and acknowledged his own need for repentance.",
+        quote: "I of myself am a wicked man.",
+        quoteRef: "Omni 1:2", refs: ["Omni 1:1-3"]
+      },
+      {
+        id: "amaleki", name: "Amaleki", people: "Nephite", era: "Small plates",
+        sort: -200, dates: "Active about 200-130 BC",
+        lineage: "Son of Abinadom; last writer on the small plates",
+        role: "Witness, exhorter, and keeper of the small plates",
+        known: "Recorded the migration to Zarahemla and entrusted the plates to King Benjamin, urging all to come unto Christ.",
+        quote: "Come unto Christ, who is the Holy One of Israel.",
+        quoteRef: "Omni 1:26", refs: ["Omni 1:12-19", "Omni 1:25-30"]
+      },
+      {
+        id: "benjamin", name: "King Benjamin", people: "Nephite", era: "Kings of Zarahemla",
+        sort: -130, dates: "Died about 121 BC; birth unknown",
+        lineage: "Son of King Mosiah I; father of Mosiah II",
+        role: "Prophet-king of Zarahemla",
+        known: "Established peace, served his people with his own labor, and delivered a landmark covenant sermon about Christ and discipleship.",
+        quote: "When ye are in the service of your fellow beings ye are only in the service of your God.",
+        quoteRef: "Mosiah 2:17", refs: ["Words of Mormon 1:12-18", "Mosiah 2:9-27", "Mosiah 3:5-21", "Mosiah 5:5-12"]
+      },
+      {
+        id: "abinadi", name: "Abinadi", people: "Nephite", era: "Land of Nephi",
+        sort: -148, dates: "Martyred about 148 BC; birth unknown",
+        lineage: "Not recorded",
+        role: "Prophet sent to King Noah's people",
+        known: "Boldly called Noah's court to repentance, explained Isaiah's messianic prophecy, and sealed his testimony with his life.",
+        quote: "God himself shall come down among the children of men.",
+        quoteRef: "Mosiah 15:1", refs: ["Mosiah 11:20-25", "Mosiah 13:11-24", "Mosiah 15:1-12", "Mosiah 17:6-20"]
+      },
+      {
+        id: "alma-elder", name: "Alma the Elder", people: "Nephite", era: "Land of Nephi",
+        sort: -147, dates: "Born about 173 BC; died about 91 BC",
+        lineage: "Father of Alma the Younger; earlier lineage not recorded",
+        role: "Priest, prophet, and founder of the Church among the Nephites",
+        known: "Believed Abinadi, organized the believers at Waters of Mormon, led refugees, and later directed the Church in Zarahemla.",
+        quote: "Bear one another's burdens, that they may be light.",
+        quoteRef: "Mosiah 18:8", refs: ["Mosiah 17:1-4", "Mosiah 18:7-17", "Mosiah 23:1-18", "Mosiah 26:14-32"]
+      },
+      {
+        id: "mosiah", name: "Mosiah II", people: "Nephite", era: "Kings of Zarahemla",
+        sort: -121, dates: "Born about 154 BC; died about 91 BC",
+        lineage: "Son of King Benjamin; father of Ammon, Aaron, Omner, and Himni",
+        role: "Prophet-king, seer, and translator",
+        known: "Translated Jaredite records with interpreters, supported missionary work, and replaced monarchy with a system of judges.",
+        quote: "The voice of the people desireth anything contrary to that which is right.",
+        quoteRef: "Mosiah 29:26", refs: ["Mosiah 8:13-19", "Mosiah 21:28", "Mosiah 27:8-37", "Mosiah 29:25-42"]
+      },
+      {
+        id: "alma-younger", name: "Alma the Younger", people: "Nephite", era: "Reign of the judges",
+        sort: -91, dates: "Born about 126 BC; disappeared about 73 BC",
+        lineage: "Son of Alma the Elder",
+        role: "Prophet, high priest, chief judge, and missionary",
+        known: "Was converted by an angel, reformed the Church, defended the nation, and taught extensively about conversion, resurrection, and faith.",
+        quote: "By small and simple things are great things brought to pass.",
+        quoteRef: "Alma 37:6", refs: ["Mosiah 27:8-32", "Alma 5:14-16", "Alma 32:21-43", "Alma 36:17-21", "Alma 45:18-19"]
+      },
+      {
+        id: "ammon", name: "Ammon", people: "Nephite", era: "Mission to the Lamanites",
+        sort: -90, dates: "Active about 91-77 BC; birth and death unknown",
+        lineage: "Son of Mosiah II; grandson of King Benjamin",
+        role: "Missionary and teacher among the Lamanites",
+        known: "Renounced the throne, served King Lamoni, defended the king's flocks, and helped convert thousands of Lamanites.",
+        quote: "Yea, I know that I am nothing; as to my strength I am weak.",
+        quoteRef: "Alma 26:12", refs: ["Mosiah 28:1-9", "Alma 17:18-39", "Alma 18:22-39", "Alma 26:11-16"]
+      },
+      {
+        id: "aaron", name: "Aaron", people: "Nephite", era: "Mission to the Lamanites",
+        sort: -89, dates: "Active about 91-77 BC; birth and death unknown",
+        lineage: "Son of Mosiah II; brother of Ammon",
+        role: "Missionary and teacher among the Lamanites",
+        known: "Endured imprisonment, taught Lamoni's father about the Fall and redemption, and helped establish churches throughout Lamanite lands.",
+        quote: "If thou wilt bow down before God... thou shalt receive the hope which thou desirest.",
+        quoteRef: "Alma 22:16", refs: ["Alma 20:29-30", "Alma 21:4-17", "Alma 22:7-18", "Alma 23:1-6"]
+      },
+      {
+        id: "helaman", name: "Helaman", people: "Nephite", era: "Reign of the judges",
+        sort: -73, dates: "Active about 74-57 BC; died about 57 BC",
+        lineage: "Son of Alma the Younger; father of Helaman and Shiblon",
+        role: "Prophet, record keeper, and commander of the stripling warriors",
+        known: "Preserved the sacred records, led the two thousand young warriors, and emphasized faith learned from their mothers.",
+        quote: "They had been taught by their mothers, that if they did not doubt, God would deliver them.",
+        quoteRef: "Alma 56:47", refs: ["Alma 37:1-20", "Alma 53:10-22", "Alma 56:43-56", "Alma 58:39-40"]
+      },
+      {
+        id: "nephi-son-helaman", name: "Nephi, Son of Helaman", people: "Nephite", era: "Before Christ's birth",
+        sort: -30, dates: "Active about 39-1 BC; death unknown",
+        lineage: "Son of Helaman II; brother of Lehi; great-grandson of Alma the Younger",
+        role: "Chief judge, missionary, prophet, and record keeper",
+        known: "Relinquished the judgment seat to preach, exposed the murder of the chief judge, received sealing power, and prayed away a famine.",
+        quote: "Except ye shall repent, behold, ye shall perish.",
+        quoteRef: "Helaman 7:17", refs: ["Helaman 5:5-14", "Helaman 7:6-29", "Helaman 8:27-28", "Helaman 10:4-11", "Helaman 11:3-17"]
+      },
+      {
+        id: "samuel", name: "Samuel the Lamanite", people: "Lamanite", era: "Before Christ's birth",
+        sort: -6, dates: "Active about 6 BC; birth and death unknown",
+        lineage: "Lamanite; family lineage not recorded",
+        role: "Prophet sent to the Nephites in Zarahemla",
+        known: "Prophesied from the city wall of signs of Christ's birth and death, called the Nephites to repentance, and highlighted Lamanite faithfulness.",
+        quote: "Nothing can save this people save it be repentance and faith on the Lord Jesus Christ.",
+        quoteRef: "Helaman 13:6", refs: ["Helaman 13:2-11", "Helaman 14:2-8", "Helaman 14:14-20", "Helaman 16:1-8"]
+      },
+      {
+        id: "nephi-disciple", name: "Nephi, Disciple of Christ", people: "Nephite", era: "Ministry of Christ",
+        sort: 1, dates: "Active about AD 1-34; death unknown",
+        lineage: "Son of Nephi and grandson of Helaman II",
+        role: "Prophet, record keeper, and chief disciple of the risen Christ",
+        known: "Ministered with great power before Christ's coming, raised his brother from the dead, and was called as the first of twelve disciples.",
+        quote: "The voice of the Lord came unto him, saying: Lift up your head and be of good cheer.",
+        quoteRef: "3 Nephi 1:12-13", refs: ["3 Nephi 1:2-14", "3 Nephi 7:15-26", "3 Nephi 11:18-22", "3 Nephi 19:4-14"]
+      },
+      {
+        id: "three-nephites", name: "The Three Nephites", people: "Nephite", era: "Ministry of Christ",
+        sort: 34, dates: "Translated about AD 34; mortal deaths not recorded",
+        lineage: "Three of the twelve Nephite disciples; individual names not given",
+        role: "Translated disciples and continuing witnesses of Christ",
+        known: "Desired to remain on earth to bring souls to Christ and were promised power over death until His return.",
+        quote: "Ye shall never endure the pains of death.",
+        quoteRef: "3 Nephi 28:7", refs: ["3 Nephi 28:1-12", "3 Nephi 28:18-31", "4 Nephi 1:14", "Mormon 8:10-11"]
+      },
+      {
+        id: "amos", name: "Amos", people: "Nephite", era: "Years of peace",
+        sort: 110, dates: "Active about AD 110-194",
+        lineage: "Son of Nephi, one of the twelve disciples; father of Amos",
+        role: "Prophet and record keeper",
+        known: "Kept the record through generations of remarkable unity and prosperity following Christ's ministry.",
+        quote: "There was no contention in the land, because of the love of God.",
+        quoteRef: "4 Nephi 1:15", refs: ["4 Nephi 1:13-19"]
+      },
+      {
+        id: "ammaron", name: "Ammaron", people: "Nephite", era: "Decline of the Nephites",
+        sort: 320, dates: "Active about AD 320; birth and death unknown",
+        lineage: "Brother of Amos; descendant of the disciple Nephi",
+        role: "Prophet and custodian of the sacred records",
+        known: "Hid the records in the hill Shim and commissioned ten-year-old Mormon to retrieve and continue them when grown.",
+        quote: "I perceive that thou art a sober child, and art quick to observe.",
+        quoteRef: "Mormon 1:2", refs: ["4 Nephi 1:47-49", "Mormon 1:2-4"]
+      },
+      {
+        id: "mormon", name: "Mormon", people: "Nephite", era: "Final Nephite generation",
+        sort: 322, dates: "Born about AD 311; died about AD 385",
+        lineage: "Descendant of Nephi; father of Moroni",
+        role: "Prophet, historian, abridger, and military commander",
+        known: "Abridged centuries of records into the Book of Mormon, led Nephite armies, and witnessed the destruction of his nation.",
+        quote: "Repent and prepare to stand before the judgment-seat of Christ.",
+        quoteRef: "Mormon 3:22", refs: ["Mormon 1:1-5", "Mormon 3:16-22", "Mormon 6:16-22", "Mormon 7:5-10", "Words of Mormon 1:1-9"]
+      },
+      {
+        id: "moroni", name: "Moroni", people: "Nephite", era: "Final witness",
+        sort: 385, dates: "Active about AD 385-421; death unknown",
+        lineage: "Son of Mormon; last known Nephite record keeper",
+        role: "Prophet, abridger of Ether, and final keeper of the plates",
+        known: "Completed and sealed the record, wrote alone after the Nephite destruction, and promised that sincere seekers could know its truth by the Holy Ghost.",
+        quote: "By the power of the Holy Ghost ye may know the truth of all things.",
+        quoteRef: "Moroni 10:5", refs: ["Mormon 8:1-16", "Ether 12:23-29", "Moroni 7:45-48", "Moroni 10:3-5", "Moroni 10:32-34"]
+      }
+    ];
+
+    const bookPaths = {
+      "1 Nephi": "1-ne", "2 Nephi": "2-ne", "Jacob": "jacob", "Enos": "enos",
+      "Jarom": "jarom", "Omni": "omni", "Words of Mormon": "w-of-m",
+      "Mosiah": "mosiah", "Alma": "alma", "Helaman": "hel", "3 Nephi": "3-ne",
+      "4 Nephi": "4-ne", "Mormon": "morm", "Ether": "ether", "Moroni": "moro"
+    };
+
+    const timeline = document.getElementById("timeline");
+    const searchInput = document.getElementById("searchInput");
+    const peopleFilter = document.getElementById("peopleFilter");
+    const resultCount = document.getElementById("resultCount");
+    const emptyState = document.getElementById("emptyState");
+    const detailPanel = document.getElementById("detailPanel");
+    const detailContent = document.getElementById("detailContent");
+    const detailPlaceholder = document.getElementById("detailPlaceholder");
+    const zoomRange = document.getElementById("zoomRange");
+    let selectedId = "";
+
+    function scriptureUrl(ref) {
+      const match = ref.match(/^(.+?)\s+(\d+)(?::(\d+))?/);
+      if (!match || !bookPaths[match[1]]) return "https://www.churchofjesuschrist.org/study/scriptures/bofm?lang=eng";
+      let url = SCRIPTURE_BASE + bookPaths[match[1]] + "/" + match[2] + "?lang=eng";
+      if (match[3]) url += "&id=p" + match[3] + "#p" + match[3];
+      return url;
+    }
+
+    function formatTimelineDate(prophet) {
+      if (prophet.sort < -1000) return "c. 2200 BC";
+      if (prophet.sort < 0) return Math.abs(prophet.sort) + " BC";
+      return "AD " + prophet.sort;
+    }
+
+    function searchText(prophet) {
+      return [
+        prophet.name, prophet.people, prophet.era, prophet.dates, prophet.lineage,
+        prophet.role, prophet.known, prophet.quote, prophet.quoteRef, ...prophet.refs
+      ].join(" ").toLowerCase();
+    }
+
+    function buildTimeline() {
+      timeline.innerHTML = "";
+      let lastEra = "";
+      prophets.slice().sort((a, b) => a.sort - b.sort).forEach((prophet) => {
+        if (prophet.era !== lastEra) {
+          const marker = document.createElement("li");
+          marker.className = "era-marker";
+          marker.dataset.era = prophet.era;
+          marker.textContent = prophet.era;
+          timeline.appendChild(marker);
+          lastEra = prophet.era;
+        }
+        const item = document.createElement("li");
+        item.className = "timeline-item";
+        item.dataset.id = prophet.id;
+        item.dataset.people = prophet.people;
+        item.dataset.era = prophet.era;
+        item.dataset.search = searchText(prophet);
+        item.innerHTML = `
+          <span class="timeline-date">${formatTimelineDate(prophet)}</span>
+          <span class="timeline-dot" aria-hidden="true"></span>
+          <button class="prophet-button" type="button" data-id="${prophet.id}" aria-current="false">
+            <span class="prophet-name">${prophet.name}</span>
+            <span class="prophet-role">${prophet.role}</span>
+          </button>`;
+        timeline.appendChild(item);
+      });
+    }
+
+    function filterTimeline() {
+      const query = searchInput.value.trim().toLowerCase();
+      const people = peopleFilter.value;
+      let visible = 0;
+      const visibleEras = new Set();
+      document.querySelectorAll(".timeline-item").forEach((item) => {
+        const show = (!query || item.dataset.search.includes(query)) &&
+          (!people || item.dataset.people === people);
+        item.hidden = !show;
+        if (show) {
+          visible += 1;
+          visibleEras.add(item.dataset.era);
+        }
+      });
+      document.querySelectorAll(".era-marker").forEach((marker) => {
+        let sibling = marker.nextElementSibling;
+        let hasVisibleEntry = false;
+        while (sibling && !sibling.classList.contains("era-marker")) {
+          if (sibling.classList.contains("timeline-item") && !sibling.hidden) {
+            hasVisibleEntry = true;
+            break;
+          }
+          sibling = sibling.nextElementSibling;
+        }
+        marker.hidden = !hasVisibleEntry;
+      });
+      emptyState.style.display = visible ? "none" : "block";
+      resultCount.textContent = visible + (visible === 1 ? " prophet shown" : " prophets shown");
+    }
+
+    function renderDetails(id) {
+      const prophet = prophets.find((entry) => entry.id === id);
+      if (!prophet) return;
+      selectedId = id;
+      document.querySelectorAll(".prophet-button").forEach((button) => {
+        button.setAttribute("aria-current", String(button.dataset.id === id));
+      });
+      const scriptureLinks = prophet.refs.map((ref) =>
+        `<li><a href="${scriptureUrl(ref)}" target="_blank" rel="noopener">${ref}</a></li>`
+      ).join("");
+      detailContent.innerHTML = `
+        <p class="detail-era">${prophet.people} &middot; ${prophet.era}</p>
+        <h2>${prophet.name}</h2>
+        <p class="detail-dates">${prophet.dates}</p>
+        <div class="fact-grid">
+          <div class="fact"><span class="fact-label">Lineage</span>${prophet.lineage}</div>
+          <div class="fact"><span class="fact-label">Calling</span>${prophet.role}</div>
+        </div>
+        <section class="detail-section">
+          <h3>Known for</h3>
+          <p>${prophet.known}</p>
+        </section>
+        <section class="detail-section">
+          <h3>Notable words</h3>
+          <blockquote>&ldquo;${prophet.quote}&rdquo;<span class="quote-ref"><a href="${scriptureUrl(prophet.quoteRef)}" target="_blank" rel="noopener">${prophet.quoteRef} &rarr;</a></span></blockquote>
+        </section>
+        <section class="detail-section">
+          <h3>Study in the record</h3>
+          <ul class="scripture-links">${scriptureLinks}</ul>
+        </section>`;
+      detailPlaceholder.hidden = true;
+      detailContent.hidden = false;
+      detailPanel.classList.remove("updating");
+      void detailPanel.offsetWidth;
+      detailPanel.classList.add("updating", "open");
+      if (window.matchMedia("(max-width: 800px)").matches) {
+        document.getElementById("closeDetail").focus();
+      }
+    }
+
+    function closeDetails() {
+      detailPanel.classList.remove("open");
+      const selected = document.querySelector(`.prophet-button[data-id="${selectedId}"]`);
+      if (selected && window.matchMedia("(max-width: 800px)").matches) selected.focus();
+    }
+
+    function setZoom(value) {
+      const level = Math.max(0, Math.min(4, Number(value)));
+      zoomRange.value = level;
+      timeline.style.setProperty("--timeline-gap", [4, 12, 24, 40, 64][level] + "px");
+    }
+
+    buildTimeline();
+    filterTimeline();
+    setZoom(zoomRange.value);
+
+    timeline.addEventListener("click", (event) => {
+      const button = event.target.closest(".prophet-button");
+      if (button) renderDetails(button.dataset.id);
+    });
+    searchInput.addEventListener("input", filterTimeline);
+    peopleFilter.addEventListener("change", filterTimeline);
+    zoomRange.addEventListener("input", () => setZoom(zoomRange.value));
+    document.getElementById("zoomOut").addEventListener("click", () => setZoom(Number(zoomRange.value) - 1));
+    document.getElementById("zoomIn").addEventListener("click", () => setZoom(Number(zoomRange.value) + 1));
+    document.getElementById("closeDetail").addEventListener("click", closeDetails);
+    document.getElementById("mobileOverlay").addEventListener("click", closeDetails);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeDetails();
+    });
+    document.getElementById("themeButton").addEventListener("click", () => {
+      const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try { localStorage.setItem("bom-prophets-theme", next); } catch (error) {}
+    });
+    try {
+      const saved = localStorage.getItem("bom-prophets-theme");
+      if (saved && !new URLSearchParams(window.location.search).get("scoutTheme")) {
+        document.documentElement.setAttribute("data-theme", saved);
+      }
+    } catch (error) {}
+  </script>
+</body>
+</html>
