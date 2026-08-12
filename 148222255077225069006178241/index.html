@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!--
+  THESIS: Context, not caricature. The page refuses a one-villain explainer and makes competing truths inspectable without flattening their moral differences.
+  OWN-WORLD: An evidence desk in ink, mineral blue, clay, and paper white; split tracks, source tabs, and annotated records replace generic cards.
+  STORY: Readers move from the core distinction between intent and consequence, through history and lived perspectives, into claims, law, questions, and primary sources.
+  FIRST VIEWPORT: A compact evidence-bar navigation sits above a large thesis, a two-sided balance line, and direct routes into the timeline or source library.
+  FORM: Read mode; a split-record atlas ranked first for clarity, staged as an evidence brief with a synchronized dual-perspective track. Seed key unavailable because the required Node-based concept tool was unavailable.
+  -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A sourced, interactive guide to the Israeli-Palestinian conflict: history, competing perspectives, international law, misconceptions, and questions.">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#132a35">
+  <title>Context, Not Caricature</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to the guide</a>
+
+  <header class="site-header" id="top">
+    <a class="wordmark" href="#top" aria-label="Context, Not Caricature home">
+      <span class="wordmark-mark" aria-hidden="true"><i></i><i></i></span>
+      <span>Context, Not Caricature</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="sr-only">Toggle navigation</span>
+      <i></i><i></i>
+    </button>
+    <nav id="site-nav" aria-label="Primary navigation">
+      <a href="#history">History</a>
+      <a href="#perspectives">Perspectives</a>
+      <a href="#claims">Claims</a>
+      <a href="#law">Law</a>
+      <a href="#questions">FAQs</a>
+      <a class="nav-search" href="#explore">Explore topics <span aria-hidden="true">/</span></a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="opening" aria-labelledby="page-title">
+      <div class="opening-copy">
+        <p class="status-line"><span></span> Reviewed August 2026 · Sources remain date-sensitive</p>
+        <h1 id="page-title">A brutal conflict cannot be understood as a <em>cartoon.</em></h1>
+        <p class="lede">The claim that Israel kills civilians “for fun” erases history, motive, and the reality of fighting Hamas. The claim that motive excuses mass civilian harm erases law, responsibility, and Palestinian suffering. A serious account has to hold both truths at once.</p>
+        <div class="mobile-balance" aria-label="Two realities that must be held together">
+          <p><strong>Israeli security</strong><span>Massacres, hostages, rockets, and eliminationist threats are real.</span></p>
+          <p><strong>Palestinian freedom</strong><span>Occupation, displacement, settlements, and civilian loss are real.</span></p>
+        </div>
+        <div class="opening-actions">
+          <a class="button button-primary" href="#history">Follow the history <span aria-hidden="true">↓</span></a>
+          <a class="button button-text" href="#sources">Open the source desk <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="balance" aria-label="Two realities that must be held together">
+        <div class="balance-axis" aria-hidden="true"><span></span></div>
+        <article class="balance-side israel">
+          <span class="balance-label">Israeli reality</span>
+          <strong>Security is not theoretical.</strong>
+          <p>Massacres, hostage-taking, rockets, and eliminationist movements shape how Israelis assess risk.</p>
+        </article>
+        <article class="balance-side palestine">
+          <span class="balance-label">Palestinian reality</span>
+          <strong>Freedom is not theoretical.</strong>
+          <p>Occupation, displacement, blockade, settlement growth, and civilian loss shape how Palestinians assess power.</p>
+        </article>
+        <p class="balance-note">Understanding is not exoneration.</p>
+      </div>
+    </section>
+
+    <section class="principle-strip" aria-label="Three principles for reading">
+      <p><strong>Intent matters.</strong> Deliberately targeting civilians is not identical to civilian deaths during an attack on a military objective.</p>
+      <p><strong>Consequences matter.</strong> A military objective does not cancel duties of distinction, proportionality, and precaution.</p>
+      <p><strong>Evidence matters.</strong> Numbers, legal claims, and historical narratives should be sourced and their uncertainty made visible.</p>
+    </section>
+
+    <section class="section timeline-section" id="history" aria-labelledby="history-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="history-title">How the present was built</h2>
+          <p>No date “starts” the conflict. This timeline marks decisions and ruptures that changed what each population believed was possible.</p>
+        </div>
+        <div class="timeline-controls" role="group" aria-label="Filter timeline">
+          <button type="button" class="filter active" data-filter="all" aria-pressed="true">All events</button>
+          <button type="button" class="filter" data-filter="shared" aria-pressed="false">Shared turning points</button>
+          <button type="button" class="filter" data-filter="diplomacy" aria-pressed="false">Diplomacy</button>
+          <button type="button" class="filter" data-filter="violence" aria-pressed="false">Wars &amp; violence</button>
+        </div>
+      </div>
+      <div class="timeline" id="timeline" aria-live="polite"></div>
+      <noscript><p class="noscript">Enable JavaScript to use the interactive timeline and topic search. The rest of the guide remains readable.</p></noscript>
+    </section>
+
+    <section class="section perspectives-section" id="perspectives" aria-labelledby="perspectives-title">
+      <div class="section-heading compact">
+        <div>
+          <h2 id="perspectives-title">The same event can produce two rational fears</h2>
+          <p>These are broad patterns, not claims that every Israeli or Palestinian thinks alike.</p>
+        </div>
+      </div>
+      <div class="perspective-switcher">
+        <div class="view-controls" role="group" aria-label="Choose perspective display">
+          <button type="button" class="view-button active" data-view="both" aria-pressed="true">See both</button>
+          <button type="button" class="view-button" data-view="israel" aria-pressed="false">Israeli lens</button>
+          <button type="button" class="view-button" data-view="palestine" aria-pressed="false">Palestinian lens</button>
+        </div>
+        <div class="perspective-grid">
+          <article class="perspective perspective-israel">
+            <div class="perspective-header">
+              <span>Israeli lens</span>
+              <h3>“What happens if the threat is underestimated?”</h3>
+            </div>
+            <div class="perspective-body">
+              <p>Jewish history includes exile, persecution, pogroms, and the Holocaust. Zionism promised that Jews would no longer depend entirely on others for protection. The attacks of October 7 made that promise feel urgent again.</p>
+              <dl>
+                <div><dt>1948</dt><dd>Independence and survival against invading armies; also the beginning of an unresolved refugee conflict.</dd></div>
+                <div><dt>Land for peace</dt><dd>Withdrawal from territory can look dangerous when attacks continue from areas Israel leaves.</dd></div>
+                <div><dt>October 7</dt><dd>Evidence that Hamas’s capacity and stated goals cannot be treated as rhetoric alone.</dd></div>
+              </dl>
+              <p class="perspective-limit"><strong>What this lens can miss:</strong> military dominance, indefinite occupation, settlement expansion, and collective restrictions create insecurity rather than merely responding to it.</p>
+            </div>
+          </article>
+          <article class="perspective perspective-palestine">
+            <div class="perspective-header">
+              <span>Palestinian lens</span>
+              <h3>“What happens if dispossession becomes permanent?”</h3>
+            </div>
+            <div class="perspective-body">
+              <p>Palestinian history includes the Nakba, refugeehood, military occupation, fragmented territory, and repeated failures to achieve sovereignty. Daily control by a far stronger state makes promises of a future state feel increasingly abstract.</p>
+              <dl>
+                <div><dt>1948</dt><dd>Mass displacement, destroyed communities, and a right-of-return claim that remains central to national memory.</dd></div>
+                <div><dt>Peace process</dt><dd>Negotiations continued while settlements and movement restrictions deepened on the ground.</dd></div>
+                <div><dt>Gaza war</dt><dd>Large-scale death, destruction, displacement, and deprivation experienced as proof that Palestinian life is treated as expendable.</dd></div>
+              </dl>
+              <p class="perspective-limit"><strong>What this lens can miss:</strong> attacks on civilians, hostage-taking, rockets, and eliminationist rhetoric make territorial concessions feel existentially risky to Israelis.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section claims-section" id="claims" aria-labelledby="claims-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="claims-title">Claims worth slowing down</h2>
+          <p>Tap a claim to separate what is established, what is disputed, and what the evidence does not prove.</p>
+        </div>
+        <p class="section-aside">A correction is not a “both sides” escape hatch. Some acts are clear crimes; other questions depend on facts, intent, and law.</p>
+      </div>
+      <div class="claim-list">
+        <details>
+          <summary><span>“Israel kills civilians for fun.”</span><i aria-hidden="true"></i></summary>
+          <div class="claim-answer">
+            <p><strong>Misleading and dehumanizing.</strong> Israel’s declared war aim after October 7 was to dismantle Hamas and recover hostages, not to kill civilians as entertainment. That distinction matters. It does not establish that every strike was lawful, necessary, or competently targeted.</p>
+            <p>Independent investigations have alleged unlawful attacks, collective punishment, forced displacement, and severe aid restrictions. Civilian harm can be foreseeable, excessive, reckless, or criminal without being “for fun.”</p>
+            <a href="#source-ihl">Read: the rules governing attacks</a>
+          </div>
+        </details>
+        <details>
+          <summary><span>“October 7 was simply armed resistance.”</span><i aria-hidden="true"></i></summary>
+          <div class="claim-answer">
+            <p><strong>False as a description of attacks on civilians.</strong> Hamas-led groups killed roughly 1,200 people in Israel, most of them civilians, and abducted about 250 people. Human Rights Watch, Amnesty International, and UN investigators documented deliberate killing and hostage-taking as war crimes; investigators also found evidence of sexual and gender-based violence.</p>
+            <p>Opposition to occupation does not make civilians lawful targets.</p>
+            <a href="#source-oct7">Read: documented findings on October 7</a>
+          </div>
+        </details>
+        <details>
+          <summary><span>“Human shields make all resulting civilian deaths Hamas’s fault.”</span><i aria-hidden="true"></i></summary>
+          <div class="claim-answer">
+            <p><strong>False under international humanitarian law.</strong> Palestinian armed groups have operated from densely populated areas and built military tunnels beneath civilian terrain. Using civilians to shield military activity is unlawful. But one party’s violation does not release the other from distinction, proportionality, and feasible precautions.</p>
+            <p>Evidence about military use must be assessed for each site and attack; a general claim about Hamas cannot automatically legalize a specific strike.</p>
+            <a href="#source-ihl">Read: ICRC guidance</a>
+          </div>
+        </details>
+        <details>
+          <summary><span>“The Gaza death toll is fake because the ministry is run by Hamas.”</span><i aria-hidden="true"></i></summary>
+          <div class="claim-answer">
+            <p><strong>Too sweeping.</strong> Gaza’s health ministry operates within the Hamas-run government and wartime verification is difficult. Its headline toll does not provide a clean civilian/combatant split. UN agencies regularly cite its figures with attribution, while independent studies have generally treated the aggregate count as a serious baseline and warned of undercounting.</p>
+            <p>Responsible use means naming the source, date, scope, and uncertainty—not pretending the data are perfect or worthless.</p>
+            <a href="#source-casualties">Read: OCHA data and methodology</a>
+          </div>
+        </details>
+        <details>
+          <summary><span>“Jews are foreign colonizers with no connection to the land.”</span><i aria-hidden="true"></i></summary>
+          <div class="claim-answer">
+            <p><strong>Historically false.</strong> Jewish religious, cultural, and political ties to the land are ancient, and Jewish communities maintained a continuous presence. Modern Zionism also developed in Europe and brought migration, institutions, and state-building under imperial conditions. Both facts can be true.</p>
+            <p>Ancient connection does not erase the rights of the Arab population that lived there, just as later displacement does not erase Jewish indigeneity and attachment.</p>
+            <a href="https://www.britannica.com/place/Palestine" target="_blank" rel="noopener">Read: Palestine’s long historical record ↗</a>
+          </div>
+        </details>
+        <details>
+          <summary><span>“Palestinians are an invented people with no real claim.”</span><i aria-hidden="true"></i></summary>
+          <div class="claim-answer">
+            <p><strong>False.</strong> National identities develop historically; that does not make them fictitious. Palestinian identity emerged from long-standing local communities and sharpened through late Ottoman, Mandate, 1948, occupation, exile, and resistance experiences.</p>
+            <p>Palestinian self-determination does not require denying Jewish nationhood, and Jewish self-determination does not require denying Palestinians’ peoplehood.</p>
+            <a href="https://www.britannica.com/place/Palestine" target="_blank" rel="noopener">Read: Palestine’s history and peoples ↗</a>
+          </div>
+        </details>
+        <details>
+          <summary><span>“Arab states kept trying to wipe Israel out in every war.”</span><i aria-hidden="true"></i></summary>
+          <div class="claim-answer">
+            <p><strong>Overgeneralized.</strong> Israel faced genuine existential threats, especially in 1948, and eliminationist rhetoric has been real. But the causes and aims differed by war. The 1967 war followed escalation and a preemptive Israeli strike; Egypt and Syria’s central objective in 1973 was recovering territory lost in 1967.</p>
+            <p>Precision strengthens the case for Israeli security; it does not weaken it.</p>
+            <a href="https://history.state.gov/milestones/1969-1976/arab-israeli-war-1973" target="_blank" rel="noopener">Read: U.S. historical record on the 1973 war ↗</a>
+          </div>
+        </details>
+        <details>
+          <summary><span>“A peace deal was offered; Palestinians simply said no.”</span><i aria-hidden="true"></i></summary>
+          <div class="claim-answer">
+            <p><strong>Incomplete.</strong> Major proposals and negotiations existed at Camp David, in the Clinton Parameters, at Taba, and later under Prime Minister Olmert. Palestinian leaders made grave errors and failed to close deals. The proposals also contained unresolved disputes over borders, Jerusalem, refugees, security, sovereignty, and implementation.</p>
+            <p>There is no single offer whose rejection explains the entire conflict. Violence, political weakness, settlement growth, and leadership choices on both sides repeatedly damaged negotiations.</p>
+            <a href="https://history.state.gov/milestones/1993-2000/oslo" target="_blank" rel="noopener">Read: Oslo and the peace process ↗</a>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section law-section" id="law" aria-labelledby="law-title">
+      <div class="law-intro">
+        <h2 id="law-title">Intent changes the analysis. It does not end it.</h2>
+        <p>The laws of war judge conduct, not whether a cause feels righteous. These duties apply to Israel and Palestinian armed groups alike.</p>
+      </div>
+      <div class="law-track">
+        <article>
+          <span>Distinction</span>
+          <h3>Separate civilians from fighters.</h3>
+          <p>Parties may direct attacks only at combatants and military objectives. Deliberate attacks on civilians are prohibited.</p>
+        </article>
+        <article>
+          <span>Proportionality</span>
+          <h3>Weigh expected civilian harm.</h3>
+          <p>An attack is prohibited when expected incidental civilian harm would be excessive relative to the concrete and direct military advantage anticipated.</p>
+        </article>
+        <article>
+          <span>Precautions</span>
+          <h3>Reduce harm where feasible.</h3>
+          <p>Parties must verify targets, choose means and timing carefully, warn when circumstances permit, and cancel attacks when the legal test is not met.</p>
+        </article>
+        <article>
+          <span>Protection</span>
+          <h3>Do not exploit civilian status.</h3>
+          <p>Hostage-taking and human shielding are prohibited. Hospitals have special protection, though that protection is not a license for military use.</p>
+        </article>
+      </div>
+      <p class="law-note">Legal labels such as war crimes, crimes against humanity, genocide, and apartheid have distinct elements. Courts—not slogans—determine individual or state responsibility after examining evidence and jurisdiction.</p>
+    </section>
+
+    <section class="section explore-section" id="explore" aria-labelledby="explore-title">
+      <div class="search-panel">
+        <div class="search-copy">
+          <h2 id="explore-title">Search the evidence desk</h2>
+          <p>Search a person, event, legal term, or disputed claim. Results point to relevant sections and outside sources.</p>
+        </div>
+        <form class="search-form" role="search" id="topic-search">
+          <label for="search-input">Topic or question</label>
+          <div class="search-field">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+            <input id="search-input" type="search" autocomplete="off" placeholder="Try “settlements” or “proportionality”" aria-describedby="search-help">
+            <button type="reset">Clear</button>
+          </div>
+          <p id="search-help">Suggested topics</p>
+          <div class="suggestions" aria-label="Suggested search terms">
+            <button type="button">Zionism</button>
+            <button type="button">British Mandate</button>
+            <button type="button">UN partition</button>
+            <button type="button">Nakba</button>
+            <button type="button">Jewish refugees</button>
+            <button type="button">1967 war</button>
+            <button type="button">Occupation</button>
+            <button type="button">Settlements</button>
+            <button type="button">Oslo Accords</button>
+            <button type="button">Second Intifada</button>
+            <button type="button">Gaza blockade</button>
+            <button type="button">Hamas charter</button>
+            <button type="button">October 7</button>
+            <button type="button">Hostages</button>
+            <button type="button">Sexual violence</button>
+            <button type="button">Civilian casualties</button>
+            <button type="button">Human shields</button>
+            <button type="button">Proportionality</button>
+            <button type="button">War crimes</button>
+            <button type="button">Genocide case</button>
+            <button type="button">Apartheid claim</button>
+            <button type="button">Right of return</button>
+            <button type="button">Two-state solution</button>
+            <button type="button">Security guarantees</button>
+          </div>
+        </form>
+      </div>
+      <div class="search-results" id="search-results" hidden>
+        <div class="results-heading">
+          <p id="results-count"></p>
+          <button type="button" id="close-results">Close results</button>
+        </div>
+        <div id="results-list"></div>
+      </div>
+    </section>
+
+    <section class="section faq-section" id="questions" aria-labelledby="faq-title">
+      <div class="faq-heading">
+        <h2 id="faq-title">Questions people use as shortcuts</h2>
+        <p>Short answers cannot resolve the conflict. They can stop common errors from doing the thinking for us.</p>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Who “started” the conflict?<i aria-hidden="true"></i></summary>
+          <p>There is no neutral single start date. Ancient attachment, late Ottoman nationalism, Zionist migration, British rule, intercommunal violence, the 1947 partition vote, and the 1948 war are all part of the causal chain. Choosing one date often predetermines who appears only as aggressor or victim.</p>
+        </details>
+        <details>
+          <summary>Did Palestinians reject the 1947 UN partition plan?<i aria-hidden="true"></i></summary>
+          <p>Yes. The Jewish Agency accepted Resolution 181 as a basis for statehood; Palestinian Arab leaders and surrounding Arab states rejected it as unjust to the Arab majority and opposed partition. Civil war followed, then regional war after Israel declared independence. Acceptance did not settle borders or prevent expulsions and flight.</p>
+        </details>
+        <details>
+          <summary>Were Palestinians expelled in 1948?<i aria-hidden="true"></i></summary>
+          <p>Many fled combat and fear; many were expelled; some were instructed or encouraged to leave locally; and some remained and became Israeli citizens. Historians debate proportions and decisions in specific places, but the mass displacement of roughly 700,000 Palestinians and prevention of most returns are not seriously disputed.</p>
+        </details>
+        <details>
+          <summary>What happened to Jews in Arab and Muslim countries?<i aria-hidden="true"></i></summary>
+          <p>From the 1940s onward, roughly 800,000–900,000 Jews left or were expelled from Arab and Muslim-majority countries under widely varying conditions: persecution, violence, legal discrimination, expulsion, Zionist migration, and insecurity. Most resettled in Israel. Their history does not cancel Palestinian refugee claims, nor vice versa.</p>
+        </details>
+        <details>
+          <summary>Is Gaza still occupied?<i aria-hidden="true"></i></summary>
+          <p>Israel removed settlements and permanent ground forces in 2005. The UN, ICRC, and many legal experts continued to regard Gaza as occupied because of Israel’s control over most borders, airspace, maritime access, population registry, and other functions; Israel disputes that legal characterization, especially after disengagement.</p>
+        </details>
+        <details>
+          <summary>Does Hamas want a state alongside Israel?<i aria-hidden="true"></i></summary>
+          <p>Hamas’s 1988 charter used antisemitic language and called for Israel’s destruction. Its 2017 political document accepted a Palestinian state on 1967 lines as a “formula of national consensus” without recognizing Israel or renouncing armed struggle. That is not the same as committing to permanent two-state coexistence.</p>
+        </details>
+        <details>
+          <summary>Can Israel defend itself under international law?<i aria-hidden="true"></i></summary>
+          <p>Israel may protect its population and pursue lawful military objectives. The precise legal basis for force in occupied territory is debated, but no theory permits attacks on civilians, disproportionate attacks, starvation of civilians, hostage-taking, or collective punishment. Self-defense and compliance with humanitarian law are separate questions.</p>
+        </details>
+        <details>
+          <summary>Is criticism of Israel antisemitic?<i aria-hidden="true"></i></summary>
+          <p>Not inherently. Criticism of Israeli policy, Zionism, occupation, settlements, or military conduct can be legitimate. It becomes antisemitic when it targets Jews as Jews, uses anti-Jewish conspiracy or collective blame, or denies Jews rights granted to other peoples solely because they are Jews. Context and consistent standards matter.</p>
+        </details>
+        <details>
+          <summary>Is support for Palestinians support for Hamas?<i aria-hidden="true"></i></summary>
+          <p>No. Supporting Palestinian safety, freedom, rights, or statehood does not imply support for Hamas, just as supporting Israeli safety or statehood does not imply support for every Israeli government policy.</p>
+        </details>
+        <details>
+          <summary>What would a durable settlement require?<i aria-hidden="true"></i></summary>
+          <p>At minimum: credible security for Israelis; freedom, sovereignty, and dignity for Palestinians; an end to attacks on civilians; a halt to settlement expansion that forecloses territorial compromise; workable arrangements for borders, Jerusalem, refugees, and resources; legitimate leadership; and enforcement trusted by both publics.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="section conclusion" aria-labelledby="conclusion-title">
+      <p>There is no clean “good guys versus bad guys” ending.</p>
+      <h2 id="conclusion-title">Two peoples do not become safe by proving the other has no home.</h2>
+      <div>
+        <p>Israel has a right to exist in security. Palestinians have a right to security, freedom, and self-determination. Hamas’s attacks on civilians and eliminationist project are indefensible. Occupation, settlement entrenchment, and avoidable civilian devastation are indefensible too.</p>
+        <p>The necessary work is less satisfying than a villain story: replace elimination with political settlement, protect civilians as a duty rather than a public-relations strategy, and build institutions capable of keeping promises after trust has collapsed.</p>
+      </div>
+    </section>
+
+    <section class="section sources-section" id="sources" aria-labelledby="sources-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="sources-title">Source desk</h2>
+          <p>Start with primary documents and institutions, then compare reporting and analysis across viewpoints.</p>
+        </div>
+        <p class="source-method">Links open in a new tab. A source’s inclusion does not endorse every conclusion it has published.</p>
+      </div>
+      <div class="source-groups">
+        <article>
+          <h3>Foundations &amp; history</h3>
+          <p>Core diplomatic records and institutional histories.</p>
+          <ul>
+            <li><a href="https://www.un.org/unispal/document/auto-insert-185393/" target="_blank" rel="noopener">UN General Assembly Resolution 181: partition plan (1947)</a></li>
+            <li><a href="https://history.state.gov/historicaldocuments/frus1948v05p2" target="_blank" rel="noopener">U.S. diplomatic records on Palestine and Israel (1948)</a></li>
+            <li><a href="https://www.unrwa.org/palestine-refugees" target="_blank" rel="noopener">UNRWA: Palestine refugees</a></li>
+            <li><a href="https://www.un.org/unispal/document/auto-insert-184858/" target="_blank" rel="noopener">UN Security Council Resolution 242 (1967)</a></li>
+            <li><a href="https://history.state.gov/milestones/1993-2000/oslo" target="_blank" rel="noopener">U.S. Office of the Historian: Oslo Accords</a></li>
+          </ul>
+        </article>
+        <article id="source-oct7">
+          <h3>October 7 &amp; Hamas</h3>
+          <p>Independent investigations and foundational texts.</p>
+          <ul>
+            <li><a href="https://www.hrw.org/report/2024/07/17/i-cant-erase-all-the-blood-from-my-mind/palestinian-armed-groups-october-7" target="_blank" rel="noopener">Human Rights Watch: October 7 crimes against humanity</a></li>
+            <li><a href="https://www.amnestyusa.org/reports/targeting-civilians-murder-hostage-taking-and-other-violations-by-palestinian-armed-groups-in-israel-and-gaza/" target="_blank" rel="noopener">Amnesty International: targeting civilians and hostage-taking</a></li>
+            <li><a href="https://www.ohchr.org/en/press-releases/2024/03/israelgaza-un-experts-call-justice-and-accountability-violations-sexual" target="_blank" rel="noopener">UN experts: sexual violence and accountability</a></li>
+            <li><a href="https://avalon.law.yale.edu/20th_century/hamas.asp" target="_blank" rel="noopener">Hamas Covenant (1988), Yale Avalon Project</a></li>
+            <li><a href="https://www.wilsoncenter.org/article/doctrine-hamas" target="_blank" rel="noopener">Wilson Center: 1988 charter and 2017 document</a></li>
+          </ul>
+        </article>
+        <article id="source-casualties">
+          <h3>Occupation, Gaza &amp; civilian harm</h3>
+          <p>Reported impacts, rights monitoring, and settlement records.</p>
+          <ul>
+            <li><a href="https://www.ochaopt.org/data/casualties" target="_blank" rel="noopener">UN OCHA: casualty data and methodology</a></li>
+            <li><a href="https://www.ochaopt.org/publications/snapshots" target="_blank" rel="noopener">UN OCHA: Gaza reported-impact snapshots</a></li>
+            <li><a href="https://www.btselem.org/topic/settlements" target="_blank" rel="noopener">B’Tselem: Israeli settlements</a></li>
+            <li><a href="https://press.un.org/en/2016/sc12657.doc.htm" target="_blank" rel="noopener">UN Security Council Resolution 2334 on settlements</a></li>
+            <li><a href="https://www.icrc.org/en/where-we-work/middle-east/israel-and-occupied-territories" target="_blank" rel="noopener">ICRC: Israel and the occupied territories</a></li>
+          </ul>
+        </article>
+        <article id="source-ihl">
+          <h3>Law &amp; accountability</h3>
+          <p>Rules, court dockets, and ongoing accountability processes.</p>
+          <ul>
+            <li><a href="https://www.icrc.org/en/document/FAQ-rules-of-war-ihl" target="_blank" rel="noopener">ICRC: frequently asked questions on the rules of war</a></li>
+            <li><a href="https://ihl-databases.icrc.org/en/customary-ihl/v1" target="_blank" rel="noopener">ICRC customary international humanitarian law database</a></li>
+            <li><a href="https://www.icc-cpi.int/palestine" target="_blank" rel="noopener">International Criminal Court: Situation in Palestine</a></li>
+            <li><a href="https://www.icj-cij.org/case/192" target="_blank" rel="noopener">International Court of Justice: South Africa v. Israel</a></li>
+            <li><a href="https://www.ohchr.org/en/hr-bodies/hrc/co-israel/index" target="_blank" rel="noopener">UN Independent Commission of Inquiry</a></li>
+          </ul>
+        </article>
+      </div>
+      <p class="update-note">Editorial note: casualty totals and legal proceedings change. Follow the linked institutions for dated updates. Historical summaries on this page compress contested scholarship and should be used as a map, not as a substitute for deeper reading.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Context, Not Caricature</strong><br>A private-link reading guide for difficult conversations.</p>
+    <div>
+      <a href="#top">Back to top ↑</a>
+      <button type="button" id="copy-link">Copy private link</button>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
