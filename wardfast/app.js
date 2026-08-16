@@ -204,8 +204,10 @@ function submitSignup(event) {
     }, iframe, postForm);
   }, 15000);
   const onMessage = (message) => {
-    if (message.source !== iframe.contentWindow ||
-        !message.data || message.data.source !== SOURCE) return;
+    const trustedGoogleOrigin =
+      message.origin === "https://script.google.com" ||
+      /^https:\/\/[a-z0-9-]+-script\.googleusercontent\.com$/i.test(message.origin);
+    if (!trustedGoogleOrigin || !message.data || message.data.source !== SOURCE) return;
     window.removeEventListener("message", onMessage);
     window.clearTimeout(timeout);
     finishSubmit(message.data, iframe, postForm);

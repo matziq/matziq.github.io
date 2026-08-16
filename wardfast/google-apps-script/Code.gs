@@ -231,7 +231,7 @@ function htmlPostMessage_(payload) {
   const json = JSON.stringify(safePayload).replace(/</g, "\\u003c");
   return HtmlService
     .createHtmlOutput(
-      `<!doctype html><html><body><script>window.parent.postMessage(${json}, "*");</script></body></html>`
+      `<!doctype html><html><body><script>window.top.postMessage(${json}, "*");</script></body></html>`
     )
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
