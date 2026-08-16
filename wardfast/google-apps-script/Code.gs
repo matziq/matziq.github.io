@@ -67,6 +67,19 @@ function handleSignup_(e) {
       return { success: false, error: "Please provide a valid email address for the reminder." };
     }
 
+    const duplicate = readSignupRows_().find((row) =>
+      formatDateKey_(row.Date) === date &&
+      clean_(row.Name, 100).toLowerCase() === name.toLowerCase() &&
+      normalizePhone_(row.Phone) === normalizePhone_(phone)
+    );
+    if (duplicate) {
+      return {
+        success: true,
+        message: `${name}, you are already signed up for ${formatDateLabel_(date)}.`,
+        payload: buildPublicPayload_()
+      };
+    }
+
     const sheet = getSpreadsheet_().getSheetByName(SIGNUP_SHEET);
     sheet.appendRow([
       new Date(), Utilities.getUuid(), date, name, phone,
@@ -84,12 +97,24 @@ function handleSignup_(e) {
 }
 
 function buildPublicPayload_() {
-  const signups = readSignupRows_().map((row) => ({
-    id: String(row.SignupId || ""),
-    date: String(row.Date || ""),
-    name: String(row.Name || ""),
-    createdAt: stringifyDate_(row.Timestamp)
-  }));
+  const seen = new Set();
+  const signups = readSignupRows_()
+    .filter((row) => {
+      const key = [
+        formatDateKey_(row.Date),
+        clean_(row.Name, 100).toLowerCase(),
+        normalizePhone_(row.Phone)
+      ].join("|");
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .map((row) => ({
+      id: String(row.SignupId || ""),
+      date: formatDateKey_(row.Date),
+      name: String(row.Name || ""),
+      createdAt: stringifyDate_(row.Timestamp)
+    }));
   return { success: true, signups, serverTime: new Date().toISOString() };
 }
 
@@ -179,6 +204,20 @@ function isAvailableDate_(value) {
   if (!match) return false;
   const day = Number(match[1]);
   return day >= 1 && day <= 30 && day !== 6;
+}
+
+function formatDateKey_(value) {
+  if (Object.prototype.toString.call(value) === "[object Date]" && !Number.isNaN(value.getTime())) {
+    return Utilities.formatDate(value, TIME_ZONE, "yyyy-MM-dd");
+  }
+  const text = String(value || "").trim();
+  if (isAvailableDate_(text)) return text;
+  const parsed = new Date(text);
+  return Number.isNaN(parsed.getTime()) ? text : Utilities.formatDate(parsed, TIME_ZONE, "yyyy-MM-dd");
+}
+
+function normalizePhone_(value) {
+  return String(value || "").replace(/\D/g, "");
 }
 
 function formatDateLabel_(value) {
