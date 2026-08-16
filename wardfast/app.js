@@ -1,6 +1,6 @@
 "use strict";
 
-const BACKEND_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_EXEC_URL_HERE";
+const BACKEND_URL = "https://script.google.com/macros/s/AKfycbwpIPhF2ANhh3JIjsktNsw38peHWln7tgqd4tpsihZgTeIkY8fEx82lDJxBeUuXxa-Rvg/exec";
 const YEAR = 2026;
 const MONTH_INDEX = 8;
 const EXCLUDED_DAY = 6;
