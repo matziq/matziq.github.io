@@ -2,8 +2,8 @@
 
 The website is ready to publish, but Google requires the sheet owner to authorize the private sign-up backend once.
 
-1. Create a new Google Sheet named **Sundance 1st Ward September Fast 2026**.
-2. In the sheet, choose **Extensions > Apps Script**.
+1. Open the configured [Sundance 1st Ward September Fast 2026 sheet](https://docs.google.com/spreadsheets/d/1KMBZ-QJKKdFCmFcUeu4dcALQaFLL6hBAPHRBDXpuIw8/edit).
+2. Choose **Extensions > Apps Script**.
 3. Replace `Code.gs` with the contents of this folder's `Code.gs`.
 4. Open **Project Settings**, enable **Show "appsscript.json" manifest file**, and replace the manifest with `appsscript.json`.
 5. Run `setup` once and approve the permissions. This creates the `Signups` tab and a daily 6 PM Arizona reminder trigger.

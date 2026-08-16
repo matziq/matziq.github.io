@@ -3,7 +3,7 @@
  * Run setup() once, then deploy as a web app with access set to Anyone.
  */
 
-const SPREADSHEET_ID = ""; // Optional: paste an existing Google Sheet ID here.
+const SPREADSHEET_ID = "1KMBZ-QJKKdFCmFcUeu4dcALQaFLL6hBAPHRBDXpuIw8";
 const SOURCE = "ward-fast-september-2026";
 const TIME_ZONE = "America/Phoenix";
 const SIGNUP_SHEET = "Signups";
