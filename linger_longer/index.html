@@ -149,10 +149,10 @@
             position: absolute;
             inset: 0;
             background-image: var(--hero-image);
-            background-position: center bottom;
+            background-position: center 55%;
             background-size: cover;
-            filter: saturate(1.05);
-            opacity: 0.42;
+            filter: saturate(1.08);
+            opacity: 0.7;
             transform: scale(1.04);
         }
 
@@ -160,7 +160,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg, rgba(12, 22, 48, 0.94), rgba(16, 28, 60, 0.82) 48%, rgba(120, 16, 36, 0.5));
+            background: linear-gradient(90deg, rgba(12, 22, 48, 0.92), rgba(16, 28, 60, 0.72) 42%, rgba(120, 16, 36, 0.26));
         }
 
         .hero-content {
@@ -502,6 +502,10 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.06em;
+        }
+
+        label[hidden] {
+            display: none;
         }
 
         input,
@@ -1331,13 +1335,17 @@
                         <label>Your name <input id="signup-name" type="text" autocomplete="name" required /></label>
                         <label>Email <input id="signup-email" type="email" autocomplete="email" required /></label>
                         <label>Phone <input id="signup-phone" type="tel" autocomplete="tel" required /></label>
-                        <label>What are you bringing? <input id="signup-item" type="text"
-                                placeholder="e.g., white cheddar mac, crispy bacon, roasted broccoli, brownies" required /></label>
+                        <label id="signup-item-choice-label">What are you bringing? <select
+                                id="signup-item-choice"></select></label>
+                        <label id="signup-item-custom-label" hidden>Describe your dish <input id="signup-item"
+                                type="text"
+                                placeholder="e.g., white cheddar mac, crispy bacon, roasted broccoli, brownies" /></label>
                         <button type="submit" id="signup-submit">Add my sign-up</button>
                     </form>
                     <div id="signup-status" class="signup-status" role="status" aria-live="polite"></div>
                     <p class="hint">Choose a dish type first, then fill out your name, contact info, and what you are
-                        bringing. Full dish types are hidden from the dropdown.
+                        bringing. Pick an idea from the list or choose &ldquo;Something else&rdquo; to describe your own.
+                        Full dish types are hidden from the dropdown.
                     </p>
                 </div>
 
@@ -1374,6 +1382,76 @@
         // Paste your deployed Google Apps Script Web app /exec URL here to enable shared Google Sheet sign-ups.
         // Example: const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycb.../exec";
         const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwZt-lr6VcrglwwyfHsqIW_an3_NZe9gaUHWm1UunIfuLGkAevqTMYvRll18W9KAq87GQ/exec";
+
+        const CUSTOM_ITEM_VALUE = "__custom__";
+
+        // Dish ideas offered per category. Keyed by category id; a category with no
+        // entry here simply falls back to the free-text box.
+        const ITEM_SUGGESTIONS = {
+            "macaroni-cheese": [
+                "Classic Mac & Cheese",
+                "White Cheddar Mac & Cheese",
+                "Three-Cheese Mac & Cheese",
+                "Baked Mac & Cheese",
+                "Creamy Stovetop Mac & Cheese",
+                "Smoked Gouda Mac & Cheese",
+                "Pepper Jack Mac & Cheese (spicy)",
+                "Buffalo Mac & Cheese",
+                "Gluten-Free Mac & Cheese",
+                "Dairy-Free Mac & Cheese"
+            ],
+            "toppings-meat": [
+                "Crispy Bacon Bits",
+                "Diced Ham",
+                "Pulled Pork",
+                "Shredded Chicken",
+                "Buffalo Chicken",
+                "Sliced Smoked Sausage",
+                "Crumbled Italian Sausage",
+                "Seasoned Ground Beef"
+            ],
+            "toppings-veggie": [
+                "Steamed Broccoli",
+                "Diced Tomatoes",
+                "Sauteed Mushrooms",
+                "Caramelized Onions",
+                "Sliced Green Onions",
+                "Roasted Red Peppers",
+                "Sliced Jalapenos",
+                "Baby Spinach",
+                "Sweet Peas"
+            ],
+            "toppings-crunchy": [
+                "Buttered Breadcrumbs",
+                "Crushed Ritz Crackers",
+                "French Fried Onions",
+                "Crushed Potato Chips",
+                "Toasted Panko",
+                "Extra Shredded Cheddar",
+                "Grated Parmesan",
+                "Garlic Croutons"
+            ],
+            "desserts": [
+                "Brownies",
+                "Chocolate Chip Cookies",
+                "Cupcakes",
+                "Apple Crisp",
+                "Rice Krispie Treats",
+                "Cheesecake Bars",
+                "Fruit Salad",
+                "Gluten-Free Dessert"
+            ],
+            "beverages": [
+                "Lemonade",
+                "Fruit Punch",
+                "Ice Water with Lemon",
+                "Sparkling Water",
+                "Apple Juice",
+                "Root Beer",
+                "Iced Herbal Tea",
+                "Hot Cocoa"
+            ]
+        };
 
         const DEFAULT_STATE = {
             event: {
@@ -1421,6 +1499,9 @@
             signupEmail: $("signup-email"),
             signupPhone: $("signup-phone"),
             signupItem: $("signup-item"),
+            signupItemChoice: $("signup-item-choice"),
+            signupItemChoiceLabel: $("signup-item-choice-label"),
+            signupItemCustomLabel: $("signup-item-custom-label"),
             signupSubmit: $("signup-submit"),
             signupStatus: $("signup-status"),
             needsBanner: $("needs-banner"),
@@ -1764,11 +1845,53 @@
             if (els.needsBanner) els.needsBanner.hidden = true;
         }
 
+        function suggestionsFor(categoryId) {
+            const list = ITEM_SUGGESTIONS[categoryId];
+            return Array.isArray(list) ? list : [];
+        }
+
+        function renderSignupItemOptions() {
+            const categoryId = els.signupCategory.value;
+            const suggestions = suggestionsFor(categoryId);
+
+            if (!suggestions.length) {
+                // No ideas for this category, so go straight to the free-text box.
+                els.signupItemChoice.innerHTML = "";
+                els.signupItemChoiceLabel.hidden = true;
+                els.signupItemCustomLabel.hidden = false;
+                els.signupItemCustomLabel.firstChild.nodeValue = "What are you bringing? ";
+                return;
+            }
+
+            els.signupItemChoiceLabel.hidden = false;
+            els.signupItemCustomLabel.firstChild.nodeValue = "Describe your dish ";
+            els.signupItemChoice.innerHTML = `<option value="">Choose or add your own...</option>`
+                + suggestions.map((name) => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join("")
+                + `<option value="${CUSTOM_ITEM_VALUE}">Something else (type my own)</option>`;
+            els.signupItemChoice.value = "";
+            syncItemFromChoice();
+        }
+
+        function syncItemFromChoice() {
+            const choice = els.signupItemChoice.value;
+            const isCustom = choice === CUSTOM_ITEM_VALUE;
+            const usingDropdown = !els.signupItemChoiceLabel.hidden;
+
+            els.signupItemCustomLabel.hidden = usingDropdown && !isCustom;
+
+            if (isCustom) {
+                els.signupItem.value = "";
+            } else if (usingDropdown) {
+                els.signupItem.value = choice;
+            }
+        }
+
         function renderSignupCategoryOptions() {
             const available = state.categories.filter((cat) => openSlots(cat) > 0);
             if (!available.length) {
                 els.signupCategory.innerHTML = `<option value="">All categories are full</option>`;
                 els.signupSubmit.disabled = true;
+                renderSignupItemOptions();
                 updateSignupFieldState();
                 return;
             }
@@ -1776,15 +1899,20 @@
             els.signupCategory.innerHTML = `<option value="">Choose a dish type...</option>` + available
                 .map((cat) => `<option value="${escapeHtml(cat.id)}">${escapeHtml(cat.icon)} ${escapeHtml(cat.name)} (${openSlots(cat)} open)</option>`)
                 .join("");
-            els.signupCategory.value = available.some((cat) => cat.id === current) ? current : "";
+            const keep = available.some((cat) => cat.id === current);
+            els.signupCategory.value = keep ? current : "";
+            if (!keep) renderSignupItemOptions();
             updateSignupFieldState();
         }
 
         function updateSignupFieldState() {
             const hasCategory = Boolean(els.signupCategory.value);
-            [els.signupName, els.signupEmail, els.signupPhone, els.signupItem].forEach((field) => {
+            [els.signupName, els.signupEmail, els.signupPhone, els.signupItem, els.signupItemChoice].forEach((field) => {
                 field.disabled = !hasCategory;
             });
+            // Only require the control the person can actually see.
+            els.signupItemChoice.required = hasCategory && !els.signupItemChoiceLabel.hidden;
+            els.signupItem.required = hasCategory && !els.signupItemCustomLabel.hidden;
             els.signupSubmit.disabled = !hasCategory;
         }
 
@@ -1948,6 +2076,7 @@
             state.signups.push(entry);
             saveState();
             els.signupForm.reset();
+            renderSignupItemOptions();
             render();
             showStatus(`Thanks, ${entry.name}! You are signed up for ${category.name}.`, "success");
             if (state.event.organizerEmail) emailSignup(entry.id, true);
@@ -2185,6 +2314,7 @@
 
             if (data.success) {
                 els.signupForm.reset();
+                renderSignupItemOptions();
                 if (data.payload) applySharedPayload(data.payload);
                 else loadSharedData({ quiet: true });
                 showStatus(data.message || "Your shared sign-up was saved.", "success");
@@ -2219,11 +2349,17 @@
             if (event.target.closest("[data-dismiss-workflow-notice]")) dismissNotice(WORKFLOW_NOTICE_DISMISS_KEY, els.workflowPanel);
         });
         els.signupCategory.addEventListener("change", () => {
+            renderSignupItemOptions();
             updateSignupFieldState();
             if (els.signupCategory.value) {
                 expandedCategories.add(els.signupCategory.value);
                 renderCategoryCards();
             }
+        });
+        els.signupItemChoice.addEventListener("change", () => {
+            syncItemFromChoice();
+            updateSignupFieldState();
+            if (els.signupItemChoice.value === CUSTOM_ITEM_VALUE) els.signupItem.focus();
         });
         els.signupForm.addEventListener("submit", addSignup);
         window.addEventListener("message", handleSharedMessage);
