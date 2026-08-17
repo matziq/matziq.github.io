@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="Macaroni and cheese bar with a cheesy baked casserole, bowls of toppings, desserts, and a drink dispenser">
+  <defs>
+    <linearGradient id="wall-mac" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5b2f1c"/>
+      <stop offset="0.55" stop-color="#a85f2c"/>
+      <stop offset="1" stop-color="#e8a94a"/>
+    </linearGradient>
+    <linearGradient id="cheese-mac" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd45c"/>
+      <stop offset="1" stop-color="#e8952a"/>
+    </linearGradient>
+    <linearGradient id="table-mac" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8d2338"/>
+      <stop offset="0.5" stop-color="#b53a45"/>
+      <stop offset="1" stop-color="#7d2038"/>
+    </linearGradient>
+    <linearGradient id="pan-mac" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4d566b"/>
+      <stop offset="1" stop-color="#2b3244"/>
+    </linearGradient>
+    <pattern id="cloth-mac" width="100" height="100" patternUnits="userSpaceOnUse">
+      <rect width="100" height="100" fill="url(#table-mac)"/>
+      <path d="M0 50h100M50 0v100" stroke="#f6e2c0" stroke-width="8" opacity="0.85"/>
+      <path d="M0 25h100M25 0v100M0 75h100M75 0v100" stroke="#f9efd8" stroke-width="2" opacity="0.6"/>
+    </pattern>
+    <filter id="glow-mac" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#wall-mac)"/>
+  <circle cx="1290" cy="176" r="98" fill="#ffe9b0" opacity="0.9"/>
+  <circle cx="1290" cy="176" r="132" fill="#ffe9b0" opacity="0.22" filter="url(#glow-mac)"/>
+
+  <g fill="#fff3d6" opacity="0.16">
+    <ellipse cx="250" cy="196" rx="132" ry="28"/>
+    <ellipse cx="372" cy="178" rx="90" ry="22"/>
+    <ellipse cx="700" cy="140" rx="96" ry="20"/>
+    <ellipse cx="792" cy="158" rx="70" ry="18"/>
+  </g>
+
+  <g stroke="#3a1c10" stroke-width="7" fill="none" opacity="0.85">
+    <path d="M60 92Q420 168 800 112T1520 108"/>
+  </g>
+  <g>
+    <path d="M180 111l56 16-42 68-56-16z" fill="#f2b134"/>
+    <path d="M266 129l57 11-34 69-57-11z" fill="#e2542c"/>
+    <path d="M354 143l57 7-27 69-57-7z" fill="#f7e7c1"/>
+    <path d="M442 151l58 2-18 69-58-2z" fill="#6d9a45"/>
+    <path d="M530 152l58-4-9 69-58 4z" fill="#f2b134"/>
+    <path d="M618 146l58-9 1 69-58 9z" fill="#e2542c"/>
+    <path d="M1030 122l58-10 15 68-58 10z" fill="#f7e7c1"/>
+    <path d="M1118 109l58-14 23 67-58 14z" fill="#6d9a45"/>
+    <path d="M1206 93l58-17 30 66-58 17z" fill="#f2b134"/>
+    <path d="M1294 76l58-19 37 65-58 19z" fill="#e2542c"/>
+  </g>
+
+  <path d="M0 596Q340 540 660 580T1180 560T1600 592V900H0Z" fill="#6b3a1f"/>
+  <path d="M0 648Q320 604 740 640T1600 616V900H0Z" fill="#542c17" opacity="0.9"/>
+
+  <path d="M0 672Q400 624 800 658T1600 634V900H0Z" fill="url(#cloth-mac)"/>
+  <path d="M0 672Q400 624 800 658T1600 634" fill="none" stroke="#ffeccb" stroke-width="7" opacity="0.9"/>
+
+  <g transform="translate(560 596)">
+    <ellipse cx="248" cy="252" rx="292" ry="46" fill="#2a1008" opacity="0.28"/>
+    <path d="M18 96h460l-28 150q-202 46-404 0z" fill="url(#pan-mac)"/>
+    <ellipse cx="248" cy="96" rx="230" ry="46" fill="#5a6479"/>
+    <ellipse cx="248" cy="94" rx="212" ry="38" fill="url(#cheese-mac)"/>
+    <path d="M-6 122q-52 6-46 46q6 38 60 30" fill="none" stroke="#5a6479" stroke-width="17"/>
+    <path d="M502 122q52 6 46 46q-6 38-60 30" fill="none" stroke="#5a6479" stroke-width="17"/>
+    <g fill="#fff0c2" opacity="0.95">
+      <ellipse cx="150" cy="86" rx="19" ry="13"/>
+      <ellipse cx="218" cy="72" rx="19" ry="13"/>
+      <ellipse cx="288" cy="86" rx="19" ry="13"/>
+      <ellipse cx="352" cy="72" rx="19" ry="13"/>
+      <ellipse cx="184" cy="108" rx="19" ry="13"/>
+      <ellipse cx="252" cy="110" rx="19" ry="13"/>
+      <ellipse cx="320" cy="106" rx="19" ry="13"/>
+      <ellipse cx="116" cy="106" rx="17" ry="12"/>
+      <ellipse cx="388" cy="104" rx="17" ry="12"/>
+    </g>
+    <g fill="none" stroke="#d3862a" stroke-width="4" opacity="0.7">
+      <path d="M150 86q0 12 10 16M218 72q0 12 10 16M288 86q0 12 10 16M352 72q0 12 10 16"/>
+    </g>
+    <g fill="#b9541f" opacity="0.85">
+      <circle cx="196" cy="94" r="6"/><circle cx="270" cy="82" r="6"/><circle cx="330" cy="94" r="6"/>
+      <circle cx="140" cy="76" r="5"/><circle cx="368" cy="92" r="5"/>
+    </g>
+    <path d="M186 46q-24-42 6-64M248 42q28-42-2-66M312 48q34-34 12-62" fill="none" stroke="#fff4dc" stroke-width="8" opacity="0.68" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(120 700)">
+    <ellipse cx="120" cy="112" rx="140" ry="26" fill="#2a1008" opacity="0.26"/>
+    <path d="M14 42h212l-20 68q-86 24-172 0z" fill="#f4ede0"/>
+    <ellipse cx="120" cy="42" rx="106" ry="24" fill="#fffaf0"/>
+    <g fill="#a9412b">
+      <path d="M46 36h44v9H46zM100 30h44v9h-44zM152 38h40v9h-40z"/>
+      <path d="M56 48h44v9H56zM112 46h44v9h-44z"/>
+    </g>
+    <g fill="#e0714b">
+      <path d="M60 28h40v7H60zM120 22h40v7h-40z"/>
+    </g>
+  </g>
+
+  <g transform="translate(330 716)">
+    <ellipse cx="104" cy="104" rx="122" ry="24" fill="#2a1008" opacity="0.26"/>
+    <path d="M12 40h184l-18 60q-74 22-148 0z" fill="#f4ede0"/>
+    <ellipse cx="104" cy="40" rx="92" ry="22" fill="#fffaf0"/>
+    <g fill="#3f7a34">
+      <circle cx="56" cy="34" r="17"/><circle cx="96" cy="26" r="19"/><circle cx="140" cy="34" r="17"/>
+      <circle cx="76" cy="44" r="15"/><circle cx="122" cy="44" r="15"/>
+    </g>
+    <g fill="#5f9c4a" opacity="0.85">
+      <circle cx="60" cy="28" r="6"/><circle cx="100" cy="20" r="6"/><circle cx="144" cy="30" r="6"/>
+    </g>
+    <g stroke="#8fbf6a" stroke-width="5" stroke-linecap="round">
+      <path d="M56 50v12M96 44v14M140 50v12"/>
+    </g>
+  </g>
+
+  <g transform="translate(1104 706)">
+    <ellipse cx="112" cy="110" rx="132" ry="25" fill="#2a1008" opacity="0.26"/>
+    <path d="M14 42h196l-20 64q-78 24-156 0z" fill="#f4ede0"/>
+    <ellipse cx="112" cy="42" rx="98" ry="23" fill="#fffaf0"/>
+    <g fill="#d8452f">
+      <circle cx="62" cy="34" r="16"/><circle cx="106" cy="26" r="17"/><circle cx="150" cy="36" r="16"/>
+      <circle cx="84" cy="44" r="14"/><circle cx="130" cy="46" r="14"/>
+    </g>
+    <g fill="#f08a6a" opacity="0.8">
+      <circle cx="58" cy="28" r="5"/><circle cx="102" cy="20" r="5"/><circle cx="146" cy="30" r="5"/>
+    </g>
+  </g>
+
+  <g transform="translate(1300 626)">
+    <ellipse cx="118" cy="212" rx="140" ry="30" fill="#2a1008" opacity="0.26"/>
+    <path d="M44 40h148l-14 156q-60 22-120 0z" fill="#cfe3f2" opacity="0.9"/>
+    <path d="M52 82h132l-10 110q-56 20-112 0z" fill="#c0562f" opacity="0.92"/>
+    <g fill="#f2c14a" opacity="0.85">
+      <circle cx="88" cy="112" r="12"/><circle cx="140" cy="132" r="10"/><circle cx="106" cy="160" r="11"/>
+    </g>
+    <ellipse cx="118" cy="40" rx="76" ry="18" fill="#e8f2fa"/>
+    <rect x="96" y="0" width="44" height="26" rx="8" fill="#9fb6c9"/>
+    <path d="M108 196h22v26h-22z" fill="#8fa6ba"/>
+    <path d="M96 222h46v10h-46z" fill="#6f8496"/>
+  </g>
+
+  <g transform="translate(866 742)">
+    <ellipse cx="96" cy="96" rx="112" ry="22" fill="#2a1008" opacity="0.24"/>
+    <path d="M16 36h160l-16 56q-64 20-128 0z" fill="#f4ede0"/>
+    <ellipse cx="96" cy="36" rx="80" ry="19" fill="#fffaf0"/>
+    <g fill="#6b3f22">
+      <rect x="42" y="20" width="34" height="22" rx="4"/>
+      <rect x="84" y="14" width="34" height="22" rx="4"/>
+      <rect x="126" y="22" width="30" height="20" rx="4"/>
+    </g>
+    <g fill="#c98b52" opacity="0.9">
+      <rect x="46" y="16" width="26" height="7" rx="3"/>
+      <rect x="88" y="10" width="26" height="7" rx="3"/>
+    </g>
+  </g>
+</svg>

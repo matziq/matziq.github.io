@@ -1247,10 +1247,11 @@
                             </g>
                         </svg></span>
                 </div>
-                <p class="hero-note" id="event-note-display">September's theme is The Flavors of Tibet. Bring a
-                    dish inspired by Tibetan food and culture to share, and help create a warm, flavorful meal!</p>
+                <p class="hero-note" id="event-note-display">September's theme is a Macaroni &amp; Cheese Bar. Bring a
+                    big batch of macaroni &amp; cheese or a favorite topping to pile on top, plus desserts and beverages
+                    to round out the meal!</p>
                 <div class="hero-details">
-                    <span class="pill pill-provided" id="event-provided-display">The Flavors of Tibet</span>
+                    <span class="pill pill-provided" id="event-provided-display">Macaroni &amp; Cheese Bar</span>
                     <span class="pill" id="event-date-display">📅 Sun, Sep 06, 2026</span>
                     <span class="pill" id="event-time-display">🕑 2 PM</span>
                     <span class="pill" id="event-location-display">📍 Sundance 1st Ward Cultural Hall</span>
@@ -1331,7 +1332,7 @@
                         <label>Email <input id="signup-email" type="email" autocomplete="email" required /></label>
                         <label>Phone <input id="signup-phone" type="tel" autocomplete="tel" required /></label>
                         <label>What are you bringing? <input id="signup-item" type="text"
-                                placeholder="e.g., turkey wraps, pasta salad, veggie tray, lemon bars" required /></label>
+                                placeholder="e.g., white cheddar mac, crispy bacon, roasted broccoli, brownies" required /></label>
                         <button type="submit" id="signup-submit">Add my sign-up</button>
                     </form>
                     <div id="signup-status" class="signup-status" role="status" aria-live="polite"></div>
@@ -1378,22 +1379,20 @@
             event: {
                 eyebrow: "Linger Longer Potluck",
                 title: "Linger Longer Potluck Sign-Up",
-                note: "September's theme is The Flavors of Tibet. Bring a dish inspired by Tibetan food and culture to share, and help create a warm, flavorful meal!",
+                note: "September's theme is a Macaroni & Cheese Bar. Bring a big batch of macaroni & cheese or a favorite topping to pile on top, plus desserts and beverages to round out the meal!",
                 date: "September 6, 2026",
                 time: "2 PM",
                 location: "Sundance 1st Ward Cultural Hall",
                 organizerEmail: "",
-                heroImage: "September_Hero_Image.svg"
+                heroImage: "MacAndCheese_Hero_Image.svg"
             },
             categories: [
-                { id: "sandwiches-wraps", name: "Sandwiches & Wraps", needed: 6, icon: "🥪" },
-                { id: "finger-foods", name: "Finger Foods & Appetizers", needed: 6, icon: "🥨" },
-                { id: "salads", name: "Salads (Pasta, Potato, Fruit)", needed: 5, icon: "🥗" },
-                { id: "chips-dips", name: "Chips, Crackers & Dips", needed: 5, icon: "🧀" },
-                { id: "fresh-fruit-veggies", name: "Fresh Fruit & Veggie Trays", needed: 5, icon: "🍉" },
-                { id: "cookies-bars", name: "Cookies & Bar Desserts", needed: 5, icon: "🍪" },
-                { id: "beverages", name: "Beverages", needed: 4, icon: "🥤" },
-                { id: "clean-up-help", name: "Clean-Up Help", needed: 4, icon: "🧹" }
+                { id: "macaroni-cheese", name: "Macaroni & Cheese (Large Batch)", needed: 8, icon: "🧀" },
+                { id: "toppings-meat", name: "Meat Toppings (Bacon, Ham, Pulled Pork)", needed: 4, icon: "🥓" },
+                { id: "toppings-veggie", name: "Veggie & Fresh Toppings (Broccoli, Tomatoes, Jalapeños)", needed: 4, icon: "🥦" },
+                { id: "toppings-crunchy", name: "Crunchy & Cheesy Toppings (Breadcrumbs, Fried Onions, Extra Cheese)", needed: 4, icon: "🍞" },
+                { id: "desserts", name: "Desserts", needed: 6, icon: "🍰" },
+                { id: "beverages", name: "Beverages", needed: 4, icon: "🥤" }
             ],
             signups: []
         };
@@ -1496,8 +1495,8 @@
             next.event.time = String(next.event.time || base.event.time).trim() || base.event.time;
             if (/^time\s+tbd$/i.test(next.event.time)) next.event.time = base.event.time;
             next.event.heroImage = String(next.event.heroImage || base.event.heroImage).trim() || base.event.heroImage;
-            // Migrate cached state from previous default hero images to the current September theme image.
-            if (next.event.heroImage === "lingerlonger.png" || next.event.heroImage === "June_Hero_Image.jpg" || next.event.heroImage === "July_Hero_Image.svg" || next.event.heroImage === "August_Hero_Image.svg") next.event.heroImage = base.event.heroImage;
+            // Migrate cached state from previous default hero images to the current Macaroni & Cheese Bar theme image.
+            if (next.event.heroImage === "lingerlonger.png" || next.event.heroImage === "June_Hero_Image.jpg" || next.event.heroImage === "July_Hero_Image.svg" || next.event.heroImage === "August_Hero_Image.svg" || next.event.heroImage === "September_Hero_Image.svg") next.event.heroImage = base.event.heroImage;
             next.categories = Array.isArray(next.categories) && next.categories.length ? next.categories : base.categories;
             next.signups = Array.isArray(next.signups) ? next.signups : [];
             next.categories = next.categories.map((cat, index) => ({
