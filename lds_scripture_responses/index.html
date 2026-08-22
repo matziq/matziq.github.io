@@ -638,11 +638,13 @@
       return `<a class="chip" href="${BIBLE}${path}${separator}lang=eng" target="_blank" rel="noopener">${label}</a>`;
     };
 
+    const searchIndex = entries.map(entry => [
+      entry.title, entry.passage, entry.challenge, entry.category, ...entry.response, ...entry.points
+    ].join(" ").replace(/<[^>]*>/g, " ").toLowerCase());
+
     function render() {
       cards.innerHTML = entries.map((entry, index) => `
-        <details class="card" data-category="${entry.category}" data-search="${[
-          entry.title, entry.passage, entry.challenge, entry.category, ...entry.response, ...entry.points
-        ].join(" ").toLowerCase()}">
+        <details class="card" data-index="${index}">
           <summary>
             <span class="number">${index + 1}</span>
             <span class="title-wrap"><span class="category">${entry.category}</span><span class="card-title">${entry.title}</span></span>
@@ -672,8 +674,9 @@
       const selected = category.value;
       let visible = 0;
       document.querySelectorAll(".card").forEach(card => {
-        const matches = (!query || card.dataset.search.includes(query)) &&
-          (!selected || card.dataset.category === selected);
+        const index = Number(card.dataset.index);
+        const matches = (!query || searchIndex[index].includes(query)) &&
+          (!selected || entries[index].category === selected);
         card.hidden = !matches;
         if (matches) visible++;
       });
