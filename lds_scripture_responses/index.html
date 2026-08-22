@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Twenty Bible passages commonly used to challenge Latter-day Saint beliefs, read in context with scripture-based responses.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <title>20 Bible Passages Used to Challenge Latter-day Saint Beliefs</title>
+  <link rel="icon" type="image/svg+xml" href="../religion/favicon.svg">
+  <style>
+    :root {
+      color-scheme: light;
+      --lds-blue: #003366;
+      --lds-gold: #c9a961;
+      --bg: #f5f3ee;
+      --panel: #ffffff;
+      --ink: #1f1f1f;
+      --muted: #555;
+      --rule: #d8d3c4;
+      --accent: #0b3d91;
+      --header-start: #003366;
+      --header-end: #1a4d8c;
+      --card-start: #fafaf6;
+      --card-end: #ffffff;
+      --challenge-bg: #fbeaea;
+      --challenge-border: #c0392b;
+      --challenge-ink: #7c2018;
+      --response-bg: #e8f3ec;
+      --response-border: #2e7d4f;
+      --response-ink: #1c4a30;
+      --chip-bg: #eef2fb;
+      --chip-ink: #0b3d91;
+      --chip-border: #c7d6f3;
+      --shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --lds-blue: #4a7bb5;
+      --lds-gold: #d4b870;
+      --bg: #14171c;
+      --panel: #20242b;
+      --ink: #e8e8e8;
+      --muted: #a8a8a8;
+      --rule: #3a3f47;
+      --accent: #8cb8ff;
+      --header-start: #0d1a2e;
+      --header-end: #1a2c4a;
+      --card-start: #232831;
+      --card-end: #20242b;
+      --challenge-bg: #3a201d;
+      --challenge-border: #d55345;
+      --challenge-ink: #f0b3aa;
+      --response-bg: #1c3226;
+      --response-border: #4caf7d;
+      --response-ink: #b6e6c8;
+      --chip-bg: #232d40;
+      --chip-ink: #b4d0ff;
+      --chip-border: #38486a;
+      --shadow: 0 1px 4px rgba(0, 0, 0, 0.28);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+      transition: background 0.25s, color 0.25s;
+    }
+    a { color: var(--accent); }
+    header {
+      background: linear-gradient(135deg, var(--header-start), var(--header-end));
+      color: #fff;
+      padding: 24px 32px;
+      border-bottom: 4px solid var(--lds-gold);
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .eyebrow {
+      margin: 0 0 5px;
+      color: #f0d78c;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    header h1 {
+      margin: 0 0 6px;
+      max-width: 780px;
+      font-size: clamp(24px, 4vw, 34px);
+      line-height: 1.18;
+      font-weight: 650;
+    }
+    header p { margin: 0; max-width: 760px; opacity: 0.88; font-size: 14px; }
+    .header-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .icon-btn {
+      appearance: none;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 6px;
+      padding: 8px 13px;
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff;
+      font: 600 13px inherit;
+      cursor: pointer;
+    }
+    .icon-btn:hover { background: rgba(255, 255, 255, 0.26); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    .intro {
+      margin-bottom: 20px;
+      padding: 18px 20px;
+      border-left: 4px solid var(--lds-gold);
+      border-radius: 0 8px 8px 0;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+    .intro p { margin: 0; color: var(--muted); }
+    .controls {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      margin-bottom: 20px;
+      padding: 18px;
+      border-top: 3px solid var(--lds-gold);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+    .control-row { display: flex; align-items: end; gap: 14px; flex-wrap: wrap; }
+    .control-group { flex: 1; min-width: 210px; }
+    .control-group.grow { flex: 2; min-width: 260px; }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      background: var(--bg);
+      color: var(--ink);
+      font: 14px inherit;
+    }
+    input:focus, select:focus, button:focus-visible, summary:focus-visible, a:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--accent) 55%, transparent);
+      outline-offset: 2px;
+    }
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .toolbar .spacer { flex: 1; }
+    .text-btn {
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 6px 11px;
+      background: transparent;
+      color: var(--accent);
+      font: 700 13px inherit;
+      cursor: pointer;
+    }
+    .text-btn:hover { background: var(--chip-bg); }
+    .cards { display: grid; gap: 16px; }
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--rule);
+      border-radius: 9px;
+      background: linear-gradient(145deg, var(--card-start), var(--card-end));
+      box-shadow: var(--shadow);
+    }
+    .card[hidden] { display: none; }
+    summary {
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 18px 20px;
+      cursor: pointer;
+      list-style: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary:hover { background: color-mix(in srgb, var(--lds-gold) 8%, transparent); }
+    .number {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--lds-blue);
+      color: #fff;
+      font-weight: 800;
+    }
+    .title-wrap { min-width: 0; }
+    .category {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .card-title { font-size: 17px; font-weight: 700; line-height: 1.3; }
+    .chevron {
+      color: var(--accent);
+      font-size: 22px;
+      transition: transform 0.2s;
+    }
+    details[open] .chevron { transform: rotate(180deg); }
+    .card-body { padding: 0 20px 20px 76px; }
+    .passage {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 14px;
+      font-style: italic;
+    }
+    .panel {
+      margin: 12px 0;
+      padding: 14px 16px;
+      border-left: 4px solid;
+      border-radius: 0 7px 7px 0;
+    }
+    .panel h3 { margin: 0 0 7px; font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .panel p { margin: 0 0 9px; }
+    .panel p:last-child { margin-bottom: 0; }
+    .challenge { background: var(--challenge-bg); border-color: var(--challenge-border); color: var(--challenge-ink); }
+    .response { background: var(--response-bg); border-color: var(--response-border); color: var(--response-ink); }
+    .context { margin: 14px 0; }
+    .context h3, .sources h3 { margin: 0 0 7px; color: var(--ink); font-size: 14px; }
+    .context ul { margin: 0; padding-left: 20px; }
+    .context li { margin: 4px 0; }
+    .links { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 9px;
+      border: 1px solid var(--chip-border);
+      border-radius: 999px;
+      background: var(--chip-bg);
+      color: var(--chip-ink);
+      font-size: 12px;
+      font-weight: 650;
+      text-decoration: none;
+    }
+    .chip:hover { filter: brightness(0.96); text-decoration: underline; }
+    .sources { margin-top: 15px; padding-top: 12px; border-top: 1px solid var(--rule); }
+    .sources a { font-size: 13px; }
+    .empty {
+      display: none;
+      padding: 34px;
+      border: 1px dashed var(--rule);
+      border-radius: 8px;
+      color: var(--muted);
+      text-align: center;
+    }
+    footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px 24px 30px;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    footer a { font-weight: 650; }
+
+    @media (max-width: 700px) {
+      header { padding: 21px 18px; }
+      .container { padding: 18px 12px; }
+      .controls { position: static; }
+      summary { grid-template-columns: 34px 1fr auto; gap: 10px; padding: 15px 13px; }
+      .number { width: 32px; height: 32px; font-size: 13px; }
+      .card-title { font-size: 15px; }
+      .card-body { padding: 0 14px 16px; }
+    }
+
+    @media print {
+      header { background: #fff; color: #111; border-top: 3px solid #003366; }
+      .eyebrow { color: #6b5318; }
+      .header-actions, .controls { display: none; }
+      body { background: #fff; color: #111; }
+      .intro, .card { box-shadow: none; }
+      .card { break-inside: avoid; margin-bottom: 12px; }
+      .card-body { display: block !important; }
+      details:not([open]) > *:not(summary) { display: block; }
+      .chevron { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Latter-day Saint Resources</p>
+        <h1>20 Bible Passages Used to Challenge Latter-day Saint Beliefs</h1>
+        <p>Common proof texts, their usual objection, and a believing Latter-day Saint reading in the context of the whole Bible.</p>
+      </div>
+      <div class="header-actions">
+        <button class="icon-btn" id="theme-btn" type="button" aria-label="Toggle dark mode">Dark mode</button>
+        <button class="icon-btn" type="button" onclick="window.print()">Print</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro" aria-label="How to use this guide">
+      <p><strong>How to use this guide:</strong> Open a passage to see the challenge stated fairly, then compare its immediate setting with related scriptures. The goal is not to dismiss sincere Christian concerns, but to show why these verses do not require the conclusions sometimes placed on them.</p>
+    </section>
+
+    <section class="controls" aria-label="Filter passages">
+      <div class="control-row">
+        <div class="control-group grow">
+          <label for="search">Search passages and topics</label>
+          <input id="search" type="search" placeholder="Try grace, God, Revelation, priesthood...">
+        </div>
+        <div class="control-group">
+          <label for="category">Topic</label>
+          <select id="category">
+            <option value="">All topics</option>
+          </select>
+        </div>
+      </div>
+      <div class="toolbar">
+        <span id="count" aria-live="polite">20 passages</span>
+        <span class="spacer"></span>
+        <button class="text-btn" id="expand" type="button">Expand all</button>
+        <button class="text-btn" id="collapse" type="button">Collapse all</button>
+      </div>
+    </section>
+
+    <section class="cards" id="cards" aria-label="Bible passage responses"></section>
+    <div class="empty" id="empty">No passages match that search. Try a book name or broader topic.</div>
+  </main>
+
+  <footer>
+    <a href="../lds/">&larr; Latter-day Saint Resources</a>
+    <span>Scripture quotations are summarized; use the links to read each passage in full.</span>
+  </footer>
+
+  <script>
+    const BIBLE = "https://www.churchofjesuschrist.org/study/scriptures/";
+    const FAIR = "https://www.fairlatterdaysaints.org/answers/";
+    const entries = [
+      {
+        category: "Canon & Revelation",
+        title: "Revelation 22:18-19 - Do not add to this book",
+        passage: "John warns that anyone who adds to or takes away from \"the words of the book of this prophecy\" will face God's judgment.",
+        challenge: "The Book of Mormon and modern revelation add to the Bible, directly violating the Bible's final warning.",
+        response: [
+          "The warning identifies its scope: <em>this book of prophecy</em>, meaning Revelation. Revelation was a separate scroll before the Bible was assembled, and it was probably not the last New Testament book written.",
+          "A nearly identical warning appears in Deuteronomy 4:2, yet Christians accept the many inspired books written afterward. Latter-day Saints agree no one may alter John's revelation; receiving another record from God is not editing Revelation."
+        ],
+        points: ["The verse says \"this book,\" not \"the future Bible collection.\"", "The biblical canon was assembled centuries after John wrote.", "God may reveal more without changing an earlier revelation."],
+        scriptures: [["Revelation 22:18-19", "nt/rev/22?id=p18-p19#p18"], ["Deuteronomy 4:2", "ot/deut/4?id=p2#p2"], ["2 Nephi 29:7-10", "bofm/2-ne/29?id=p7-p10#p7"]],
+        source: ["FAIR - Adding to the Bible", FAIR + "Bible/Adding_to_the_Bible"]
+      },
+      {
+        category: "Canon & Revelation",
+        title: "Galatians 1:8-9 - No other gospel",
+        passage: "Paul says even an angel should be rejected if he preaches a gospel contrary to the one the apostles preached.",
+        challenge: "Moroni was an angel who delivered another gospel, so Paul specifically condemns the Book of Mormon.",
+        response: [
+          "Paul condemns a <em>different</em> or distorted gospel, not every angelic ministry. The Bible records righteous angels announcing the gospel, including Gabriel and the angel in Revelation 14:6 who carries \"the everlasting gospel.\"",
+          "The Book of Mormon's central message is the apostolic gospel: Jesus Christ is the Son of God, He died and rose, and all must have faith in Him, repent, be baptized, receive the Holy Ghost, and endure in discipleship."
+        ],
+        points: ["Paul's test is the message, not merely the presence of an angel.", "Revelation itself predicts an angel proclaiming the everlasting gospel.", "The Book of Mormon repeatedly identifies its doctrine as the doctrine of Christ."],
+        scriptures: [["Galatians 1:6-9", "nt/gal/1?id=p6-p9#p6"], ["Revelation 14:6-7", "nt/rev/14?id=p6-p7#p6"], ["2 Nephi 31:17-21", "bofm/2-ne/31?id=p17-p21#p17"]],
+        source: ["Gospel Topics - Gospel", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/gospel?lang=eng"]
+      },
+      {
+        category: "Canon & Revelation",
+        title: "Hebrews 1:1-2 - God has spoken by His Son",
+        passage: "Hebrews contrasts earlier revelation through prophets with God's climactic revelation through His Son.",
+        challenge: "Jesus was God's final spokesman, so there can be no prophets or revelation after Christ.",
+        response: [
+          "The passage teaches Christ's supremacy, not the end of prophetic gifts. Jesus called apostles and prophets, and those servants continued receiving revelation after His Resurrection.",
+          "The New Testament records post-Ascension visions to Stephen, Peter, Paul, John, and others. Ephesians says apostles and prophets remain part of Christ's Church until believers reach unity and maturity."
+        ],
+        points: ["Hebrews says Christ is greater than prior messengers.", "Acts and Revelation contain revelation given after Christ's Ascension.", "Christ can speak through servants without being displaced by them."],
+        scriptures: [["Hebrews 1:1-3", "nt/heb/1?id=p1-p3#p1"], ["Ephesians 4:11-14", "nt/eph/4?id=p11-p14#p11"], ["Acts 10:9-20", "nt/acts/10?id=p9-p20#p9"]],
+        source: ["Guide to the Scriptures - Prophet", "https://www.churchofjesuschrist.org/study/scriptures/gs/prophet?lang=eng"]
+      },
+      {
+        category: "Canon & Revelation",
+        title: "Jude 1:3 - The faith was once delivered",
+        passage: "Jude urges believers to contend for the faith \"once delivered unto the saints.\"",
+        challenge: "Christian doctrine was delivered once for all, leaving no need or room for a Restoration.",
+        response: [
+          "The verse says the faith was decisively entrusted to the Saints; it does not say the Church could never suffer apostasy or need divine renewal. Jude immediately describes corrupt people who had entered the community.",
+          "The Restoration claims to restore that same apostolic faith, authority, ordinances, and gifts - not invent a replacement. Biblical calls to return, renew, and restore assume truth can be lost or neglected while still remaining God's original truth."
+        ],
+        points: ["\"Once delivered\" describes the faith's divine source and sufficiency.", "Jude's own letter warns of corruption within the Church.", "A restoration returns to the original; it does not create another foundation."],
+        scriptures: [["Jude 1:3-4", "nt/jude/1?id=p3-p4#p3"], ["Acts 3:19-21", "nt/acts/3?id=p19-p21#p19"], ["2 Thessalonians 2:1-3", "nt/2-thes/2?id=p1-p3#p1"]],
+        source: ["Gospel Topics - Restoration of the Church", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/restoration-of-the-church?lang=eng"]
+      },
+      {
+        category: "Prophets & Apostasy",
+        title: "Matthew 24:24 - False prophets will deceive",
+        passage: "Jesus warns that false christs and false prophets will show signs powerful enough to deceive many.",
+        challenge: "Joseph Smith's visions and signs fit Jesus' warning about deceptive latter-day prophets.",
+        response: [
+          "A warning about <em>false</em> prophets assumes that the category of true prophets remains meaningful. Jesus did not say to reject every prophetic claim; He taught disciples to discern by doctrine, fruit, and faithfulness to Him.",
+          "Latter-day Saints invite that test: examine Joseph Smith's witness of Christ, the Book of Mormon, restored ordinances, and the lived fruits of the Restoration, then seek confirmation from God."
+        ],
+        points: ["The warning calls for discernment, not automatic rejection.", "Jesus' stated test is fruit.", "Spiritual claims should be tested through study, prayer, and their results."],
+        scriptures: [["Matthew 24:23-26", "nt/matt/24?id=p23-p26#p23"], ["Matthew 7:15-20", "nt/matt/7?id=p15-p20#p15"], ["Moroni 10:3-5", "bofm/moro/10?id=p3-p5#p3"]],
+        source: ["Guide to the Scriptures - False Prophets", "https://www.churchofjesuschrist.org/study/scriptures/gs/false-prophets?lang=eng"]
+      },
+      {
+        category: "Prophets & Apostasy",
+        title: "Matthew 16:18 - The gates of hell will not prevail",
+        passage: "Jesus promises that the gates of hell will not prevail against His Church.",
+        challenge: "A Great Apostasy would mean Christ's Church failed, contradicting His explicit promise.",
+        response: [
+          "In biblical imagery, \"gates\" defend a realm; they do not attack. Christ's victory means death and hell cannot permanently hold His people. The verse does not promise that every office, ordinance, or congregation would remain unchanged through history.",
+          "The New Testament itself predicts a falling away, loss of sound teaching, and persecution of apostolic authority. Restoration is evidence of Christ's victory: He overcomes loss and death by reestablishing His work."
+        ],
+        points: ["Christ's ultimate victory is not in question.", "The apostles repeatedly warned of broad apostasy.", "Restoration fulfills, rather than defeats, the promise that hell will not win."],
+        scriptures: [["Matthew 16:16-19", "nt/matt/16?id=p16-p19#p16"], ["2 Thessalonians 2:1-3", "nt/2-thes/2?id=p1-p3#p1"], ["Acts 3:19-21", "nt/acts/3?id=p19-p21#p19"]],
+        source: ["Gospel Topics - Apostasy", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/apostasy?lang=eng"]
+      },
+      {
+        category: "Prophets & Apostasy",
+        title: "Matthew 7:15-20 - Beware of false prophets",
+        passage: "Jesus says false prophets come in sheep's clothing and are known by their fruits.",
+        challenge: "Joseph Smith's controversial history identifies him as a false prophet.",
+        response: [
+          "The test is not whether opponents can identify human weakness or difficult episodes; biblical prophets also had weaknesses. The test is the full harvest produced by a prophetic ministry.",
+          "Joseph's fruits include the Book of Mormon's witness of Christ, restored covenant ordinances, a worldwide missionary movement, temples, service, family discipleship, and generations drawn toward Jesus Christ. Those fruits deserve direct examination."
+        ],
+        points: ["Fruit is evaluated as a whole and over time.", "Prophetic calling never meant personal infallibility.", "The Book of Mormon is the central, testable fruit of Joseph's claim."],
+        scriptures: [["Matthew 7:15-20", "nt/matt/7?id=p15-p20#p15"], ["James 1:5-6", "nt/james/1?id=p5-p6#p5"], ["Moroni 10:3-5", "bofm/moro/10?id=p3-p5#p3"]],
+        source: ["Gospel Topics - Joseph Smith", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/joseph-smith?lang=eng"]
+      },
+      {
+        category: "Nature of God",
+        title: "John 1:18 and 1 Timothy 6:16 - No one has seen God",
+        passage: "John says no one has seen God, and Paul says God dwells in light \"whom no man hath seen, nor can see.\"",
+        challenge: "Joseph Smith could not have seen God the Father because the Bible says God cannot be seen.",
+        response: [
+          "The Bible also says Moses, Stephen, Isaiah, and others saw God. The passages are therefore read as teaching that mortals cannot see God by unaided natural capacity, or that no one has fully comprehended Him.",
+          "Other verses supply the condition: people have seen God when transformed, empowered, or granted a vision by God. Joseph Smith's account explicitly describes heavenly glory descending before he saw the Father and the Son."
+        ],
+        points: ["Scripture cannot mean both \"absolutely never seen\" and \"seen\" in the same sense.", "John 1 emphasizes that the Son reveals the otherwise unseen Father.", "Divine enabling reconciles the passages."],
+        scriptures: [["John 1:18", "nt/john/1?id=p18#p18"], ["Exodus 33:11", "ot/ex/33?id=p11#p11"], ["Acts 7:55-56", "nt/acts/7?id=p55-p56#p55"], ["Joseph Smith-History 1:16-17", "pgp/js-h/1?id=p16-p17#p16"]],
+        source: ["Guide to the Scriptures - God, Godhead", "https://www.churchofjesuschrist.org/study/scriptures/gs/god-godhead?lang=eng"]
+      },
+      {
+        category: "Nature of God",
+        title: "John 4:24 - God is a Spirit",
+        passage: "Jesus tells the Samaritan woman, \"God is a Spirit: and they that worship him must worship him in spirit and in truth.\"",
+        challenge: "God the Father cannot have a tangible body because Jesus says God is spirit.",
+        response: [
+          "The statement describes God's divine nature and the kind of worship He requires; it does not say spirit and embodied existence are mutually exclusive. The risen Jesus had a glorified body while remaining fully divine and spiritually life-giving.",
+          "Latter-day Saints teach that the Father's body is glorified, immortal, and wholly unlike fallen flesh. They also affirm that God is spiritual, and that true worship must be animated by the Holy Spirit and truth."
+        ],
+        points: ["The immediate subject is true worship, not divine anatomy.", "The resurrected Christ is embodied and divine.", "Biblical \"spirit\" can describe nature, life, and power."],
+        scriptures: [["John 4:21-24", "nt/john/4?id=p21-p24#p21"], ["Luke 24:36-43", "nt/luke/24?id=p36-p43#p36"], ["Doctrine and Covenants 130:22", "dc-testament/dc/130?id=p22#p22"]],
+        source: ["Gospel Topics - God the Father", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/god-the-father?lang=eng"]
+      },
+      {
+        category: "Nature of God",
+        title: "Isaiah 43:10 - No God formed before or after",
+        passage: "The Lord declares, \"before me there was no God formed, neither shall there be after me.\"",
+        challenge: "The verse rules out the Latter-day Saint doctrine that God's children may become like Him.",
+        response: [
+          "Isaiah confronts Israel's temptation to manufacture and worship rival idols. The Lord is uniquely Israel's covenant God and Savior; no humanly formed idol preceded Him or will replace Him.",
+          "Latter-day Saint exaltation does not teach that redeemed children overthrow God, become independent rivals, or cease worshiping the Father. It teaches participation in divine life through Christ - the biblical promise to become heirs of God and partakers of the divine nature."
+        ],
+        points: ["The surrounding chapters repeatedly contrast Jehovah with man-made idols.", "Exaltation is dependent on the Father and the grace of Christ.", "Becoming like God is not becoming His competitor or replacement."],
+        scriptures: [["Isaiah 43:8-13", "ot/isa/43?id=p8-p13#p8"], ["Romans 8:16-17", "nt/rom/8?id=p16-p17#p16"], ["2 Peter 1:3-4", "nt/2-pet/1?id=p3-p4#p3"]],
+        source: ["Gospel Topics - Becoming Like God", "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/becoming-like-god?lang=eng"]
+      },
+      {
+        category: "Nature of God",
+        title: "Isaiah 44:6, 8 - There is no God beside me",
+        passage: "Jehovah says He is the first and the last and knows no God beside Him.",
+        challenge: "Any distinction among the Father, Son, and Holy Ghost - or any doctrine of exaltation - is polytheism.",
+        response: [
+          "Latter-day Saints affirm the Father, Son, and Holy Ghost are one eternal Godhead, perfectly united in glory, purpose, truth, and work. They worship the Father in the name of the Son by the Holy Ghost, not a pantheon of competing deities.",
+          "Isaiah's polemic is against idols and rival objects of worship. The same Bible calls the Father God, Jesus God, and the Holy Ghost divine while insisting God is one. Latter-day Saint scripture preserves both truths: real personal distinction and perfect divine unity."
+        ],
+        points: ["The target in Isaiah 44 is idolatry.", "The New Testament distinguishes Father, Son, and Spirit.", "Biblical oneness can describe complete unity, as in Jesus' prayer for His disciples."],
+        scriptures: [["Isaiah 44:6-11", "ot/isa/44?id=p6-p11#p6"], ["Matthew 3:16-17", "nt/matt/3?id=p16-p17#p16"], ["John 17:20-23", "nt/john/17?id=p20-p23#p20"]],
+        source: ["Gospel Topics - Godhead", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/godhead?lang=eng"]
+      },
+      {
+        category: "Nature of God",
+        title: "Deuteronomy 6:4 - The Lord is one",
+        passage: "Israel's confession, the Shema, declares: \"The Lord our God is one Lord.\"",
+        challenge: "Latter-day Saint belief in three distinct divine persons contradicts biblical monotheism.",
+        response: [
+          "Latter-day Saints wholeheartedly affirm one God and reject rival worship. Their distinction between Father, Son, and Holy Ghost comes from passages where the three speak, appear, or act simultaneously.",
+          "Jesus prayed that His disciples \"may be one\" as He and the Father are one. That oneness does not erase the disciples' personhood; it describes perfect unity. Latter-day Saints understand the Godhead's oneness as incomparably complete unity rather than one person appearing in three modes."
+        ],
+        points: ["The Shema demands exclusive covenant loyalty.", "Jesus and the apostles identify three divine persons.", "Distinction need not mean division or competing gods."],
+        scriptures: [["Deuteronomy 6:4-5", "ot/deut/6?id=p4-p5#p4"], ["Matthew 28:19", "nt/matt/28?id=p19#p19"], ["John 17:21-23", "nt/john/17?id=p21-p23#p21"]],
+        source: ["Guide to the Scriptures - Godhead", "https://www.churchofjesuschrist.org/study/scriptures/gs/god-godhead?lang=eng"]
+      },
+      {
+        category: "Grace & Ordinances",
+        title: "Ephesians 2:8-9 - Saved by grace, not works",
+        passage: "Paul teaches that salvation is God's gift by grace through faith, \"not of works, lest any man should boast.\"",
+        challenge: "Latter-day Saint commandments, ordinances, and temple covenants replace grace with earning salvation.",
+        response: [
+          "Latter-day Saints affirm that no human work can conquer sin or death; salvation is possible only through Jesus Christ's grace. Ordinances and obedience do not purchase grace - they are covenant responses made possible by grace.",
+          "The next verse says believers are created in Christ \"unto good works.\" Paul opposes boastful self-salvation, not faithful discipleship. The New Testament repeatedly joins grace, living faith, repentance, baptism, and enduring obedience."
+        ],
+        points: ["Grace is the source of salvation.", "Faith receives Christ and produces a changed life.", "Ordinances witness reliance on Christ; they do not make Him unnecessary."],
+        scriptures: [["Ephesians 2:8-10", "nt/eph/2?id=p8-p10#p8"], ["James 2:17-24", "nt/james/2?id=p17-p24#p17"], ["2 Nephi 25:23", "bofm/2-ne/25?id=p23#p23"]],
+        source: ["Gospel Topics - Grace", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/grace?lang=eng"]
+      },
+      {
+        category: "Grace & Ordinances",
+        title: "Romans 3:28 - Justified by faith without works of the law",
+        passage: "Paul concludes that a person is justified by faith apart from \"the deeds of the law.\"",
+        challenge: "Baptism, commandments, and temple worship cannot be conditions of discipleship because justification is by faith alone.",
+        response: [
+          "In Romans, \"works of the law\" especially concerns relying on the law of Moses and boundary markers such as circumcision. Paul denies that law-keeping gives anyone a claim on God; all depend on Christ.",
+          "The same Paul teaches baptism into Christ, judgment according to deeds, and the \"obedience of faith.\" Latter-day Saints distinguish earning salvation - impossible - from accepting Christ through a living, covenantal faith that obeys Him."
+        ],
+        points: ["Paul attacks boasting and reliance on Mosaic law.", "Romans begins and ends with the obedience of faith.", "Biblical faith is trust and allegiance, not mere acknowledgment."],
+        scriptures: [["Romans 3:27-31", "nt/rom/3?id=p27-p31#p27"], ["Romans 6:3-4", "nt/rom/6?id=p3-p4#p3"], ["Romans 2:6-8", "nt/rom/2?id=p6-p8#p6"]],
+        source: ["Bible Dictionary - Grace", "https://www.churchofjesuschrist.org/study/scriptures/bd/grace?lang=eng"]
+      },
+      {
+        category: "Priesthood & Church",
+        title: "Hebrews 7:24 - Christ has an unchangeable priesthood",
+        passage: "Because Jesus lives forever, Hebrews says He has an enduring or \"unchangeable\" priesthood.",
+        challenge: "If Christ alone holds a permanent priesthood, Latter-day Saint priesthood offices are unnecessary or blasphemous.",
+        response: [
+          "Jesus is the eternal High Priest and sole source of saving power. Delegated priesthood does not compete with His authority; it is authority exercised in His name, just as Christ authorized apostles to preach, baptize, heal, bind, and loose.",
+          "Hebrews contrasts Christ's endless life with mortal high priests who died and needed successors. It does not abolish authorized ministers; the New Testament continues to name apostles, elders, bishops, deacons, and ordination by laying on hands."
+        ],
+        points: ["Christ owns the priesthood eternally.", "Servants act under delegated authority, not alongside a rival high priest.", "New Testament offices continue after Christ's Ascension."],
+        scriptures: [["Hebrews 7:23-28", "nt/heb/7?id=p23-p28#p23"], ["John 15:16", "nt/john/15?id=p16#p16"], ["Titus 1:5", "nt/titus/1?id=p5#p5"]],
+        source: ["Gospel Topics - Priesthood", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/priesthood?lang=eng"]
+      },
+      {
+        category: "Eternal Family & Afterlife",
+        title: "Matthew 22:30 - No marriage in the resurrection",
+        passage: "Jesus says that in the resurrection people \"neither marry, nor are given in marriage, but are as the angels of God in heaven.\"",
+        challenge: "Temple sealings and eternal marriage directly contradict Jesus' statement that no one is married after death.",
+        response: [
+          "Jesus says marriages are not newly contracted in the resurrection; He does not say God cannot preserve a covenant He authorized before death. The Sadducees' hypothetical assumes ordinary mortal marriage and serial ownership, not a sealing made for eternity.",
+          "Latter-day Saints agree that civil marriage alone ends at death. Their claim is narrower: Christ gave binding and sealing authority, and a marriage entered by that authority and kept through His grace can remain valid in the resurrection."
+        ],
+        points: ["The verbs describe marrying in the future resurrection.", "The question was designed to mock resurrection, not explain covenant sealing.", "Jesus elsewhere gives authority to bind on earth and in heaven."],
+        scriptures: [["Matthew 22:23-33", "nt/matt/22?id=p23-p33#p23"], ["Matthew 16:19", "nt/matt/16?id=p19#p19"], ["Doctrine and Covenants 132:19", "dc-testament/dc/132?id=p19#p19"]],
+        source: ["Gospel Topics - Marriage", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/marriage?lang=eng"]
+      },
+      {
+        category: "Eternal Family & Afterlife",
+        title: "Hebrews 9:27 - It is appointed once to die",
+        passage: "Hebrews says people die once and afterward face judgment.",
+        challenge: "There can be no repentance, preaching, or ordinances connected with the dead; death permanently fixes every person's opportunity.",
+        response: [
+          "The verse denies repeated mortal lives and points toward accountability; it does not describe the timing or full process between death and final judgment. The New Testament also speaks of Christ preaching to spirits in prison and the gospel being preached to the dead.",
+          "Proxy ordinances do not give a second mortal life or force salvation. They extend Christ's offered covenants to those who lacked a fair opportunity, while each person remains free to accept or reject them before final judgment."
+        ],
+        points: ["Death is followed by judgment, not reincarnation.", "Peter explicitly describes ministry among the dead.", "God's judgment can include informed agency without erasing accountability."],
+        scriptures: [["Hebrews 9:27-28", "nt/heb/9?id=p27-p28#p27"], ["1 Peter 3:18-20", "nt/1-pet/3?id=p18-p20#p18"], ["1 Peter 4:6", "nt/1-pet/4?id=p6#p6"]],
+        source: ["Gospel Topics - Baptisms for the Dead", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/baptisms-for-the-dead?lang=eng"]
+      },
+      {
+        category: "Eternal Family & Afterlife",
+        title: "1 Corinthians 15:29 - Baptism for the dead",
+        passage: "Paul asks why people are baptized for the dead if the dead do not rise.",
+        challenge: "Paul merely mentions a strange pagan practice and does not endorse the Latter-day Saint ordinance.",
+        response: [
+          "Paul uses the practice as evidence in his defense of the Resurrection. His argument has force because the Corinthians recognize the ordinance; he does not condemn it as idolatrous or correct it among the chapter's errors.",
+          "The brief verse does not supply a complete ritual manual, but it establishes that proxy baptism was intelligible among early Christians. Modern revelation provides the order and authority for practicing it in temples."
+        ],
+        points: ["The entire chapter defends bodily resurrection.", "Paul appeals to, rather than rebukes, the practice.", "A brief apostolic reference can preserve evidence of a practice explained elsewhere."],
+        scriptures: [["1 Corinthians 15:20-29", "nt/1-cor/15?id=p20-p29#p20"], ["1 Peter 4:6", "nt/1-pet/4?id=p6#p6"], ["Doctrine and Covenants 128:15-18", "dc-testament/dc/128?id=p15-p18#p15"]],
+        source: ["Gospel Topics - Baptisms for the Dead", "https://www.churchofjesuschrist.org/study/manual/gospel-topics/baptisms-for-the-dead?lang=eng"]
+      },
+      {
+        category: "Book of Mormon",
+        title: "John 10:16 - Other sheep are Gentiles, not Nephites",
+        passage: "Jesus says He has \"other sheep\" not of the Jerusalem fold who will hear His voice and become one fold.",
+        challenge: "The phrase only predicts the Gentile mission; it cannot support Christ visiting people in the Americas.",
+        response: [
+          "Gentiles were already present around Jesus and soon heard His voice through apostolic messengers. The wording can naturally include covenant peoples elsewhere who would hear the risen Lord's own voice.",
+          "The Book of Mormon does not rely on John 10 alone to prove its account. It records Christ identifying the Nephites as those other sheep while also distinguishing additional lost tribes who would hear Him."
+        ],
+        points: ["Jesus says the sheep will hear <em>His</em> voice.", "The audience did not understand because they assumed all Israel was local.", "The Book of Mormon presents the visit as fulfillment, not as a deduction invented from one verse."],
+        scriptures: [["John 10:14-16", "nt/john/10?id=p14-p16#p14"], ["3 Nephi 15:12-21", "bofm/3-ne/15?id=p12-p21#p12"], ["3 Nephi 16:1-3", "bofm/3-ne/16?id=p1-p3#p1"]],
+        source: ["Guide to the Scriptures - Sheep", "https://www.churchofjesuschrist.org/study/scriptures/gs/sheep?lang=eng"]
+      },
+      {
+        category: "Book of Mormon",
+        title: "Ezekiel 37:15-17 - The two sticks are divided Israel",
+        passage: "Ezekiel joins the stick of Judah with the stick of Joseph/Ephraim as a sign that divided Israel will become one nation.",
+        challenge: "The passage is only a political sign-act about tribal reunification and is not a prophecy of the Bible and Book of Mormon.",
+        response: [
+          "The immediate interpretation is indeed the gathering of divided Israel. Latter-day Saints accept that context. They see the joining of two covenant records as one important means by which God accomplishes the larger promised gathering.",
+          "The Hebrew word can refer to wood and does not by itself prove \"book.\" The LDS reading is typological: Judah's biblical record and Joseph's Book of Mormon record come together in God's hand to witness of Christ and gather Israel."
+        ],
+        points: ["The national gathering is the prophecy's primary setting.", "The scripture-and-record application supports rather than replaces that meaning.", "The Book of Mormon identifies itself with Joseph's descendants and the latter-day gathering."],
+        scriptures: [["Ezekiel 37:15-28", "ot/ezek/37?id=p15-p28#p15"], ["2 Nephi 3:11-12", "bofm/2-ne/3?id=p11-p12#p11"], ["2 Nephi 29:8", "bofm/2-ne/29?id=p8#p8"]],
+        source: ["Guide to the Scriptures - Stick of Ephraim", "https://www.churchofjesuschrist.org/study/scriptures/gs/stick-of-ephraim?lang=eng"]
+      }
+    ];
+
+    const cards = document.getElementById("cards");
+    const search = document.getElementById("search");
+    const category = document.getElementById("category");
+    const count = document.getElementById("count");
+    const empty = document.getElementById("empty");
+    const themeButton = document.getElementById("theme-btn");
+
+    const scriptureLink = ([label, path]) => {
+      const separator = path.includes("?") ? "&" : "?";
+      return `<a class="chip" href="${BIBLE}${path}${separator}lang=eng" target="_blank" rel="noopener">${label}</a>`;
+    };
+
+    function render() {
+      cards.innerHTML = entries.map((entry, index) => `
+        <details class="card" data-category="${entry.category}" data-search="${[
+          entry.title, entry.passage, entry.challenge, entry.category, ...entry.response, ...entry.points
+        ].join(" ").toLowerCase()}">
+          <summary>
+            <span class="number">${index + 1}</span>
+            <span class="title-wrap"><span class="category">${entry.category}</span><span class="card-title">${entry.title}</span></span>
+            <span class="chevron" aria-hidden="true">&#8964;</span>
+          </summary>
+          <div class="card-body">
+            <p class="passage">${entry.passage}</p>
+            <section class="panel challenge"><h3>Common challenge</h3><p>${entry.challenge}</p></section>
+            <section class="panel response"><h3>Latter-day Saint response</h3>${entry.response.map(p => `<p>${p}</p>`).join("")}</section>
+            <section class="context"><h3>Read it in context</h3><ul>${entry.points.map(p => `<li>${p}</li>`).join("")}</ul></section>
+            <div class="links">${entry.scriptures.map(scriptureLink).join("")}</div>
+            <section class="sources"><h3>Further study</h3><a href="${entry.source[1]}" target="_blank" rel="noopener">${entry.source[0]} &rarr;</a></section>
+          </div>
+        </details>
+      `).join("");
+    }
+
+    [...new Set(entries.map(entry => entry.category))].sort().forEach(name => {
+      const option = document.createElement("option");
+      option.value = name;
+      option.textContent = name;
+      category.appendChild(option);
+    });
+
+    function filterCards() {
+      const query = search.value.trim().toLowerCase();
+      const selected = category.value;
+      let visible = 0;
+      document.querySelectorAll(".card").forEach(card => {
+        const matches = (!query || card.dataset.search.includes(query)) &&
+          (!selected || card.dataset.category === selected);
+        card.hidden = !matches;
+        if (matches) visible++;
+      });
+      count.textContent = `${visible} ${visible === 1 ? "passage" : "passages"}`;
+      empty.style.display = visible ? "none" : "block";
+    }
+
+    function setTheme(theme) {
+      document.documentElement.dataset.theme = theme;
+      themeButton.textContent = theme === "dark" ? "Light mode" : "Dark mode";
+      localStorage.setItem("lds-scripture-theme", theme);
+    }
+
+    render();
+    filterCards();
+    search.addEventListener("input", filterCards);
+    category.addEventListener("change", filterCards);
+    document.getElementById("expand").addEventListener("click", () => {
+      document.querySelectorAll(".card:not([hidden])").forEach(card => card.open = true);
+    });
+    document.getElementById("collapse").addEventListener("click", () => {
+      document.querySelectorAll(".card").forEach(card => card.open = false);
+    });
+    themeButton.addEventListener("click", () => {
+      setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+    });
+    setTheme(localStorage.getItem("lds-scripture-theme") ||
+      (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+  </script>
+</body>
+</html>
