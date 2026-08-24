@@ -4,7 +4,7 @@ Public GitHub Pages site.
 
 - Collection gateway: https://memconfigmgr.org/
 - WML resources: https://memconfigmgr.org/wml/
-- Latter-day Saint resources: https://memconfigmgr.org/lds/
+- Evidences of the True Church: https://memconfigmgr.org/lds/
 - Apps: https://memconfigmgr.org/apps/
 - Recipes: https://memconfigmgr.org/recipes/
 - Recipe editor: https://memconfigmgr.org/recipes/admin/
