@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Machine Learning on Azure &mdash; AI-900 Exam Prep</title>
+<meta name="description" content="Learn the machine learning concepts, metrics, and Azure Machine Learning tools tested on the AI-900 exam.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Machine Learning on Azure</h1>
+<p class="lede">This covers skill area 2, &ldquo;Describe fundamental principles of machine learning on Azure&rdquo; (15&ndash;20% of the exam).</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#techniques">Techniques</a>
+    <a class="btn secondary sm" href="#concepts">Core concepts</a>
+    <a class="btn secondary sm" href="#deep">Deep learning</a>
+    <a class="btn secondary sm" href="#metrics">Metrics</a>
+    <a class="btn secondary sm" href="#azureml">Azure ML</a>
+    <a class="btn secondary sm" href="#traps">Exam traps</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="techniques">
+  <h2>Regression, classification, clustering</h2>
+  <p>The exam expects you to recognize the three basic machine learning techniques from a scenario. Start with one question: does the training data include the answer the model should learn?</p>
+  <p><strong>Supervised learning</strong> uses labeled examples. Each training row includes input features and the correct answer, called the label. Regression and classification are supervised. <strong>Unsupervised learning</strong> looks for structure in data without labeled answers. Clustering is unsupervised.</p>
+  <p><strong>Regression</strong> predicts a number. The number can be a price, duration, quantity, temperature, demand level, or risk score. <strong>Classification</strong> predicts a category. Binary classification has two classes, such as approve or reject. Multiclass classification has more than two classes, such as low, medium, or high priority. <strong>Clustering</strong> groups unlabeled records by similarity, such as customer segments discovered from behavior.</p>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Technique</th><th>Predicts</th><th>Labeled data needed?</th><th>Example scenario</th><th>Typical metric</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Regression</td><td>A numeric value</td><td>Yes</td><td>Predict next month&rsquo;s sales revenue for each store.</td><td>RMSE, MAE, R-squared</td></tr>
+        <tr><td>Binary classification</td><td>One of two categories</td><td>Yes</td><td>Predict whether a claim is fraudulent or legitimate.</td><td>Accuracy, precision, recall, F1, AUC</td></tr>
+        <tr><td>Multiclass classification</td><td>One of three or more categories</td><td>Yes</td><td>Classify a support ticket as billing, technical, account, or shipping.</td><td>Accuracy, precision, recall, F1</td></tr>
+        <tr><td>Clustering</td><td>A group assignment based on similarity</td><td>No</td><td>Group customers into segments based on purchase patterns.</td><td>Cluster quality measures such as separation and cohesion</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout tip">
+    <span class="callout-title">Single-sentence test</span>
+    <p>If the answer is a number, choose regression. If the answer is a named category, choose classification. If the question says there are no labels and you need natural groups, choose clustering.</p>
+  </div>
+</section>
+
+<section id="concepts">
+  <h2>Features, labels, and the data splits</h2>
+  <p>A <strong>feature</strong> is an input used by the model. A <strong>label</strong> is the known answer the model learns to predict. In a house-price model, size, bedrooms, location, and age are features. The sale price is the label.</p>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Size</th><th>Bedrooms</th><th>ZIP code</th><th>Age</th><th>Sale price</th><th>Role</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1,450 sq ft</td><td>3</td><td>98103</td><td>18 years</td><td>$640,000</td><td>Features: size, bedrooms, ZIP code, age &middot; Label: sale price</td></tr>
+        <tr><td>2,200 sq ft</td><td>4</td><td>98052</td><td>6 years</td><td>$915,000</td><td>Features: size, bedrooms, ZIP code, age &middot; Label: sale price</td></tr>
+        <tr><td>900 sq ft</td><td>2</td><td>98118</td><td>42 years</td><td>$485,000</td><td>Features: size, bedrooms, ZIP code, age &middot; Label: sale price</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Training data is split because a model can appear good when it is only memorizing examples. The <strong>training set</strong> teaches the model. The <strong>validation set</strong> helps tune choices while you are developing, such as algorithm, features, or hyperparameters. The <strong>test set</strong> is held back until the end to estimate how the final model performs on unseen data.</p>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Overfitting</h3>
+      <p>The model learns the training data too specifically, including noise. The tell-tale symptom is high training performance but poor validation or test performance. It works on examples it saw and fails on new ones.</p>
+    </div>
+    <div class="card">
+      <h3>Underfitting</h3>
+      <p>The model is too simple or lacks useful features. The tell-tale symptom is poor performance on both training data and validation data. It has not learned the pattern well enough.</p>
+    </div>
+  </div>
+  <div class="callout trap">
+    <span class="callout-title">Validation is not the final exam</span>
+    <p>Validation data guides model selection during development. Test data is the final unbiased check. If you keep changing the model based on the test set, the test set is no longer a clean test.</p>
+  </div>
+</section>
+
+<section id="deep">
+  <h2>Deep learning and the Transformer architecture</h2>
+  <p>A neural network is a model made of connected processing units that transform inputs into outputs. In plain language, each layer learns a representation that helps the next layer make a better prediction. For an image, early layers might detect edges, later layers might detect shapes, and later layers might recognize objects.</p>
+  <p>Deep learning is &ldquo;deep&rdquo; because the network has multiple layers. More layers can learn richer patterns, but they also require more data, more compute, and careful evaluation. AI-900 does not expect you to calculate neural network weights. It expects you to know that deep learning is useful for complex unstructured data such as images, speech, and language.</p>
+  <p>The <strong>Transformer architecture</strong> is a neural network architecture designed to process sequences, especially language. Its key idea is <strong>attention</strong>: the model can weigh which words or tokens are most relevant to each other when interpreting or generating text. Attention lets the model connect information across a prompt, such as linking a pronoun to the noun it refers to or using earlier instructions when creating a later answer.</p>
+  <p>Transformers matter for AI-900 because they are the basis for many large language models used in generative AI. When the exam later discusses prompts, completions, summarization, grounding, and Azure OpenAI Service, the conceptual foundation is that Transformer-based models use attention over tokens to generate likely next content.</p>
+  <div class="callout key">
+    <span class="callout-title">Keep it conceptual</span>
+    <p>For AI-900, you do not need the math behind attention. Remember the purpose: Transformers handle language sequences well and power modern generative AI systems.</p>
+  </div>
+</section>
+
+<section id="metrics">
+  <h2>Evaluating a model</h2>
+  <p>Evaluation metrics tell you how a trained model behaves. The best metric depends on the business cost of mistakes. A disease screening model, fraud model, and product recommendation model can all be classification models, but they may need different metrics.</p>
+  <p>For a disease screening test, assume &ldquo;positive&rdquo; means the model predicts the person has the disease.</p>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th></th><th>Actual disease</th><th>Actual no disease</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Predicted disease</td><td><strong>True positive:</strong> sick person correctly flagged.</td><td><strong>False positive:</strong> healthy person incorrectly flagged.</td></tr>
+        <tr><td>Predicted no disease</td><td><strong>False negative:</strong> sick person missed by the test.</td><td><strong>True negative:</strong> healthy person correctly cleared.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Metric</th><th>What it measures</th><th>When it misleads</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Accuracy</td><td>The share of all predictions that were correct.</td><td>It can look excellent when one class is very common.</td></tr>
+        <tr><td>Precision</td><td>Of the items predicted positive, how many were truly positive.</td><td>It can ignore many missed positives if recall is low.</td></tr>
+        <tr><td>Recall</td><td>Of the actual positives, how many the model found.</td><td>It can be high while producing too many false alarms.</td></tr>
+        <tr><td>F1</td><td>A balanced score that combines precision and recall.</td><td>It hides whether the problem is mostly false positives or false negatives.</td></tr>
+        <tr><td>AUC/ROC</td><td>How well the model separates classes across thresholds.</td><td>It may be less intuitive than precision or recall for a specific operating threshold.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Use <strong>precision</strong> when false positives are expensive. If a model flags transactions for manual review, low precision wastes analyst time. Use <strong>recall</strong> when false negatives are expensive. In a disease screen, missing a sick patient may be worse than doing extra follow-up tests. Use <strong>F1</strong> when you need a balance between precision and recall.</p>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Regression metric</th><th>Meaning</th><th>Exam clue</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>MAE</td><td>Mean absolute error; average absolute difference between predicted and actual values.</td><td>Easy-to-explain average error in original units.</td></tr>
+        <tr><td>RMSE</td><td>Root mean squared error; penalizes larger errors more heavily than MAE.</td><td>Choose when large mistakes should hurt more.</td></tr>
+        <tr><td>R-squared</td><td>How much variation in the label is explained by the model.</td><td>A higher value usually means a better fit, but it is not an error amount.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout key">
+    <span class="callout-title">Rare class rule</span>
+    <p>When one class is rare, accuracy is often the wrong answer. A fraud model could be 99% accurate by predicting &ldquo;not fraud&rdquo; for every transaction. Use precision, recall, F1, or AUC depending on whether false positives, false negatives, or threshold behavior matters most.</p>
+  </div>
+</section>
+
+<section id="azureml">
+  <h2>Azure Machine Learning</h2>
+  <p>Azure Machine Learning is Microsoft&rsquo;s cloud platform for building, training, evaluating, managing, and deploying machine learning models. Azure Machine Learning studio is the web experience where you create workspaces, run experiments, manage data and compute, train models, register models, deploy endpoints, and review responsible AI insights.</p>
+  <p><strong>Automated machine learning</strong> tries multiple algorithms and settings for a supervised task such as classification, regression, or forecasting. It still produces trained models, metrics, explanations, and deployable assets; it does not mean no model exists. The <strong>designer</strong> is a drag-and-drop canvas for building pipelines without writing much code. <strong>Notebooks</strong> are code-first environments for data scientists who want full control with Python and SDKs.</p>
+  <p><strong>Datastores</strong> are connections to storage locations. <strong>Data assets</strong> are versioned references to data used by jobs. <strong>Jobs</strong> run training, evaluation, or processing work. <strong>Pipelines</strong> chain jobs together so steps can be reused and automated. The <strong>model registry</strong> stores trained models with names, versions, metadata, and lineage.</p>
+  <p>Compute matters because Azure separates authoring, scalable training, and serving. A <strong>compute instance</strong> is a personal development workstation in the cloud, often used for notebooks. A <strong>compute cluster</strong> scales out training jobs and can add or remove nodes. An <strong>inference cluster</strong> or managed online endpoint hosts a model for predictions.</p>
+  <p><strong>Real-time endpoints</strong> return predictions immediately for applications and APIs. <strong>Batch endpoints</strong> process many records asynchronously, such as scoring a file of customers overnight. The <strong>responsible AI dashboard</strong> helps examine error analysis, model interpretability, counterfactuals, causal analysis, and fairness-related views when available for the scenario.</p>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Tool</th><th>Who uses it</th><th>What it needs</th><th>When to pick it</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Automated ML</td><td>Analysts and data scientists who want fast model selection.</td><td>Labeled data, target column, task type, compute.</td><td>Pick it when you need the service to try algorithms and compare metrics.</td></tr>
+        <tr><td>Designer</td><td>Users who prefer a visual pipeline.</td><td>Data assets, components, compute, pipeline configuration.</td><td>Pick it when the question says drag-and-drop or no-code pipeline.</td></tr>
+        <tr><td>Notebooks</td><td>Data scientists and ML engineers.</td><td>Code, packages, compute instance, SDK access.</td><td>Pick it when the scenario needs custom Python or full control.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Comparison</th><th>First option</th><th>Second option</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Compute instance vs compute cluster</td><td>Compute instance: personal cloud VM for development and notebooks.</td><td>Compute cluster: scalable pool for training or batch jobs.</td></tr>
+        <tr><td>Real-time vs batch endpoint</td><td>Real-time endpoint: low-latency prediction for one or small numbers of requests.</td><td>Batch endpoint: asynchronous scoring for large datasets.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="traps">
+  <h2>Where people lose points here</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Calling clustering supervised</h3>
+      <p>Clustering does not need labeled answers. If the scenario says discover natural groups, it is unsupervised learning.</p>
+    </div>
+    <div class="card">
+      <h3>Choosing accuracy on imbalanced data</h3>
+      <p>If the positive class is rare, accuracy can reward a useless model. Look for precision, recall, F1, or AUC.</p>
+    </div>
+    <div class="card">
+      <h3>Confusing compute instance and compute cluster</h3>
+      <p>A compute instance is mainly for interactive development. A compute cluster is for scalable training or jobs.</p>
+    </div>
+    <div class="card">
+      <h3>Thinking AutoML writes no model</h3>
+      <p>Automated ML creates trained models and compares them. The automation is in model selection and tuning, not in avoiding models.</p>
+    </div>
+    <div class="card">
+      <h3>Confusing validation data with test data</h3>
+      <p>Validation data helps choose and tune a model. Test data estimates final performance after choices are made.</p>
+    </div>
+    <div class="card">
+      <h3>Forgetting deployment mode</h3>
+      <p>Immediate app predictions need a real-time endpoint. Scheduled scoring for many records usually needs a batch endpoint.</p>
+    </div>
+  </div>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+  <div class="grid grid-3">
+    <div class="card">
+      <h3>Techniques</h3>
+      <ul>
+        <li><strong>Regression:</strong> supervised; predicts a number.</li>
+        <li><strong>Classification:</strong> supervised; predicts a category.</li>
+        <li><strong>Clustering:</strong> unsupervised; groups unlabeled data.</li>
+      </ul>
+      <h3>Confusion matrix cells</h3>
+      <ul>
+        <li><strong>True positive:</strong> predicted positive and actually positive.</li>
+        <li><strong>False positive:</strong> predicted positive but actually negative.</li>
+        <li><strong>False negative:</strong> predicted negative but actually positive.</li>
+        <li><strong>True negative:</strong> predicted negative and actually negative.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Classification metrics</h3>
+      <ul>
+        <li><strong>Accuracy:</strong> overall percent correct.</li>
+        <li><strong>Precision:</strong> correctness of positive predictions.</li>
+        <li><strong>Recall:</strong> coverage of actual positives.</li>
+        <li><strong>F1:</strong> balance of precision and recall.</li>
+        <li><strong>AUC/ROC:</strong> class separation across thresholds.</li>
+      </ul>
+      <h3>Regression metrics</h3>
+      <ul>
+        <li><strong>MAE:</strong> average absolute error.</li>
+        <li><strong>RMSE:</strong> error metric that penalizes large misses.</li>
+        <li><strong>R-squared:</strong> variation explained by the model.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Azure Machine Learning components</h3>
+      <ul>
+        <li><strong>Automated ML:</strong> tries algorithms and settings for you.</li>
+        <li><strong>Designer:</strong> visual drag-and-drop pipelines.</li>
+        <li><strong>Notebooks:</strong> code-first development.</li>
+        <li><strong>Datastores:</strong> storage connections.</li>
+        <li><strong>Data assets:</strong> versioned data references.</li>
+        <li><strong>Compute instance:</strong> personal dev VM.</li>
+        <li><strong>Compute cluster:</strong> scalable job compute.</li>
+        <li><strong>Model registry:</strong> versioned trained models.</li>
+        <li><strong>Real-time endpoint:</strong> immediate predictions.</li>
+        <li><strong>Batch endpoint:</strong> large asynchronous scoring.</li>
+        <li><strong>Responsible AI dashboard:</strong> error, fairness, and explainability views.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?set=d2-techniques">Drill: ML techniques</a>
+    <a class="btn" href="drills.html?set=d2-metrics">Drill: Model metrics</a>
+    <a class="btn" href="drills.html?set=d2-azureml">Drill: Azure Machine Learning</a>
+    <a class="btn secondary" href="computer-vision.html">Next guide: Computer vision &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>

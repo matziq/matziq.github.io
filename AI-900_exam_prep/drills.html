@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Topic Drills &mdash; AI-900 Exam Prep</title>
+<meta name="description" content="Fifteen short timed Microsoft AI-900 drills on one skill at a time, with instant scoring and a full explanation for every question.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+    <div id="head">
+        <h1>Topic Drills</h1>
+        <p class="lede">One skill, eight questions, about ten minutes. This is the tool for the days between
+            practice exams &mdash; short enough that you will actually do it, specific enough that it fixes
+            something you can name.</p>
+    </div>
+    <div id="list"></div>
+    <div id="app"></div>
+</div></main>
+
+<footer id="footer"></footer>
+
+<script src="assets/data/drills.js"></script>
+<script src="assets/test-engine.js"></script>
+<script>
+(function () {
+    function param(k) {
+        var m = new RegExp("[?&]" + k + "=([^&]*)").exec(window.location.search);
+        return m ? decodeURIComponent(m[1]) : null;
+    }
+
+    var DOMAIN_META = {
+        "AI Workloads and Considerations":
+            { icon: "",      blurb: "15\u201320% of the exam. Almost pure vocabulary: hear a business problem, name the workload or the responsible AI principle." },
+        "Machine Learning on Azure":
+            { icon: "teal",  blurb: "15\u201320% of the exam. The most conceptual area, and the only one where a metric can be read wrong." },
+        "Computer Vision":
+            { icon: "amber", blurb: "15\u201320% of the exam. Four solution types and five Azure services, and the exam mostly asks you to pick between two of them." },
+        "Natural Language Processing":
+            { icon: "good",  blurb: "15\u201320% of the exam. Three services with overlapping edges \u2014 learn which one owns which verb." },
+        "Generative AI":
+            { icon: "bad",   blurb: "20\u201325% of the exam and the largest single area. Also the most memorizable, which makes it the cheapest points available." }
+    };
+
+    function bestFor(id) {
+        var runs = AI9.store.get("drillScores", {});
+        return runs[id] || null;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var sets = (window.AI9_DATA && window.AI9_DATA.drills) || [];
+        var want = param("set");
+
+        if (want) {
+            var found = null;
+            for (var i = 0; i < sets.length; i++) if (sets[i].id === want) found = sets[i];
+            if (found) {
+                document.getElementById("head").innerHTML =
+                    '<p class="no-print"><a href="drills.html">&larr; All drills</a></p>' +
+                    "<h1>" + found.title + "</h1>" +
+                    '<p class="lede">' + (found.blurb || "") + "</p>";
+                document.getElementById("list").innerHTML = "";
+                AI9.Test.mountDrill({ el: document.getElementById("app"), drillId: want });
+                return;
+            }
+            AI9.toast("That drill was not found.");
+        }
+
+        var html = "";
+        var totalQ = 0;
+
+        for (var o = 0; o < AI9.DOMAINS.length; o++) {
+            var domain = AI9.DOMAINS[o].name;
+            var group = [];
+            for (var s = 0; s < sets.length; s++) {
+                if (sets[s].domain === domain) group.push(sets[s]);
+            }
+            if (!group.length) continue;
+
+            var meta = DOMAIN_META[domain] || { icon: "", blurb: "" };
+            html += '<div class="week-head"><h2>' + AI9.DOMAINS[o].num + ". " + domain + "</h2>" +
+                '<span class="wgoal">' + meta.blurb + "</span></div>" +
+                '<div class="grid grid-3">';
+
+            for (var g = 0; g < group.length; g++) {
+                var d = group[g];
+                var qn = d.questions.length;
+                totalQ += qn;
+                var prev = bestFor(d.id);
+                var badge = prev
+                    ? '<span class="badge ' + (prev.pct >= 85 ? "good" : (prev.pct >= 60 ? "amber" : "bad")) +
+                      '">Best ' + prev.right + "/" + prev.total + "</span>"
+                    : "";
+                html += '<a class="card card-link" href="drills.html?set=' + d.id + '">' +
+                    '<div class="card-icon ' + meta.icon + '">' + qn + "</div>" +
+                    "<h3>" + d.title + " " + badge + "</h3>" +
+                    "<p>" + (d.blurb || "") + "</p>" +
+                    '<p class="faint" style="margin-bottom:0"><small>' + qn + " questions &middot; " +
+                    (d.timeMinutes || 10) + " minutes</small></p></a>";
+            }
+            html += "</div>";
+        }
+
+        if (!html) {
+            html = '<div class="card"><h3>Drills did not load</h3>' +
+                "<p>The drill data file could not be read. Refresh the page; if it keeps happening the file is missing.</p></div>";
+        } else {
+            html = '<div class="callout tip"><span class="callout-title">How to use a drill</span>' +
+                "<p>Do the whole set on the clock without checking anything. Then read the explanation for " +
+                "<em>every</em> question, including the ones you got right \u2014 if you guessed correctly, you " +
+                "have not learned it yet, you have just been lucky once.</p>" +
+                '<p style="margin-bottom:0">Anything you miss goes in the <a href="tools.html#errorlog">error log</a>, ' +
+                "and you re-drill that set two days later. A repeated drill is worth more than a new one, " +
+                "especially in the last few days.</p></div>" +
+                '<p class="muted">' + sets.length + " drill sets &middot; " + totalQ +
+                " questions in total, weighted toward the skill areas that carry the most of the exam.</p>" + html;
+        }
+        document.getElementById("list").innerHTML = html;
+    });
+})();
+</script>
+</body>
+</html>

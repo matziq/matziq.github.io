@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Natural Language Processing &mdash; AI-900 Exam Prep</title>
+<meta name="description" content="A focused AI-900 study guide for natural language processing, speech, translation, bots, and the Azure services that support them.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Natural Language Processing on Azure</h1>
+<p class="lede">This covers skill area 4, &ldquo;Describe features of Natural Language Processing (NLP) workloads on Azure&rdquo; (15&ndash;20% of the exam).</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#workloads">Text workloads</a>
+    <a class="btn secondary sm" href="#understanding">Understanding and Q&A</a>
+    <a class="btn secondary sm" href="#speech">Speech</a>
+    <a class="btn secondary sm" href="#services">Services</a>
+    <a class="btn secondary sm" href="#traps">Exam traps</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="workloads">
+  <h2>The text workloads</h2>
+  <p>Natural language processing lets software analyze, understand, generate, and transform human language. On AI-900, the safest approach is to identify the output. If the output is topics, entities, sentiment, language, summary, or a custom category, Azure AI Language is usually the service behind it.</p>
+  <p>Key phrase extraction and named entity recognition are the pair people mix up most often. <strong>Key phrases</strong> are the main talking points in a document, such as &ldquo;late shipment&rdquo; or &ldquo;battery life.&rdquo; <strong>Entities</strong> are typed things such as person, location, organization, datetime, quantity, URL, email, or product. A phrase can be important without being an entity, and an entity can be extracted even if it is not the main topic.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Feature</th><th>Returns</th><th>Example question wording</th></tr></thead>
+      <tbody>
+        <tr><td>Key phrase extraction</td><td>Main topics or important phrases in text</td><td>&ldquo;Find the main issues customers mention in support tickets.&rdquo;</td></tr>
+        <tr><td>Named entity recognition</td><td>Typed entities such as person, location, organization, datetime, quantity, URL, and email</td><td>&ldquo;Identify company names, cities, dates, and monetary amounts in a document.&rdquo;</td></tr>
+        <tr><td>PII detection and redaction</td><td>Personal data categories and optionally redacted text</td><td>&ldquo;Remove names, phone numbers, email addresses, and government IDs before storing chat logs.&rdquo;</td></tr>
+        <tr><td>Sentiment analysis</td><td>Positive, neutral, negative, or mixed sentiment with confidence scores</td><td>&ldquo;Determine whether customer reviews are favorable or unfavorable.&rdquo;</td></tr>
+        <tr><td>Opinion mining</td><td>Aspect-level opinions, such as a negative opinion about delivery but a positive opinion about quality</td><td>&ldquo;Find which product attributes customers like or dislike.&rdquo;</td></tr>
+        <tr><td>Language detection</td><td>The detected language and confidence score</td><td>&ldquo;Route incoming messages to the correct regional support queue.&rdquo;</td></tr>
+        <tr><td>Extractive summarization</td><td>Important existing sentences selected from the source text</td><td>&ldquo;Pull the most important sentences from a long policy document.&rdquo;</td></tr>
+        <tr><td>Abstractive summarization</td><td>A newly generated summary that may use wording not found verbatim in the source</td><td>&ldquo;Write a short executive summary of a long article.&rdquo;</td></tr>
+        <tr><td>Custom text classification</td><td>Your own labels for text documents or utterances</td><td>&ldquo;Train a model to classify help-desk tickets into company-specific categories.&rdquo;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Trap: topic is not type</span>
+    <p>&ldquo;Shipping delay&rdquo; and &ldquo;poor battery life&rdquo; are key phrases because they are what the text is about. &ldquo;Seattle,&rdquo; &ldquo;Contoso,&rdquo; and &ldquo;Friday&rdquo; are entities because they are typed things.</p>
+  </div>
+</section>
+
+<section id="understanding">
+  <h2>Conversational language understanding and question answering</h2>
+  <p>Conversational language understanding, or CLU, is for apps that need to understand what a user wants to do. You define example user statements called utterances, map them to intents, and extract entities needed to complete the action.</p>
+  <p>Example: the user says, &ldquo;book me a flight to Seattle on Friday.&rdquo; The whole sentence is the <strong>utterance</strong>. The desired action is the <strong>intent</strong>, so the model predicts <strong>BookFlight</strong>. The useful details are <strong>entities</strong>: destination is Seattle and date is Friday. A travel bot can then ask follow-up questions such as origin city, airline preference, or departure time.</p>
+  <p>CLU is not just keyword matching. The point is that different utterances can mean the same intent: &ldquo;I need to fly to Seattle Friday,&rdquo; &ldquo;get me a ticket to Seattle,&rdquo; and &ldquo;schedule travel to Seattle this Friday&rdquo; should all map to BookFlight. The model learns from labeled examples and returns the best intent plus extracted entities.</p>
+  <p>Question answering is different. It is for answering user questions from a knowledge base, FAQ page, product manual, or support article collection. Custom question answering lets you build and curate a knowledge base of question-and-answer pairs, synonyms, alternate phrasings, and source documents. The output is an answer, often with a confidence score and source. It does not choose an intent so an application can perform a transaction; it retrieves or generates the best answer from the configured knowledge source.</p>
+  <p>Azure AI Bot Service is the channel layer. It hosts and connects a bot to users through channels such as Microsoft Teams, web chat, and other messaging surfaces. The bot can call CLU when it needs to understand intent, or call question answering when it needs to answer from a knowledge base. Bot Service is not the language model itself; it is how the conversation reaches the user and how the application logic is orchestrated.</p>
+
+  <div class="callout key"><span class="callout-title">Exam rule</span>
+    <p>Intent means conversational language understanding. A knowledge base of question-and-answer pairs means question answering. A bot in Teams or web chat is usually Azure AI Bot Service in front of one of those language capabilities.</p>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Choice</th><th>Best for</th><th>Output</th><th>Exam clue</th></tr></thead>
+      <tbody>
+        <tr><td>Conversational language understanding</td><td>Understanding what the user wants to do</td><td>Intent plus entities</td><td>&ldquo;Book a flight,&rdquo; &ldquo;cancel an order,&rdquo; or &ldquo;change my address&rdquo;</td></tr>
+        <tr><td>Question answering</td><td>Answering questions from FAQs and documents</td><td>Answer with confidence and source</td><td>&ldquo;Use a knowledge base,&rdquo; &ldquo;FAQ,&rdquo; or &ldquo;support article&rdquo;</td></tr>
+        <tr><td>Azure AI Bot Service</td><td>Publishing a conversational app to channels</td><td>A bot endpoint and channel connections</td><td>&ldquo;Make it available in Teams or web chat&rdquo;</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="speech">
+  <h2>Speech: recognition, synthesis, translation</h2>
+  <p>Speech workloads move between spoken audio and text. The exam usually signals the direction. Speech to text turns audio into text. Text to speech turns text into audio. Speech translation translates spoken input into another language. Speaker recognition works with enrolled voice profiles to verify or identify speakers.</p>
+  <p><strong>Speech to text</strong> supports real-time recognition for live captions, voice commands, and dictation. It also supports batch transcription for stored audio files such as call-center recordings. Custom speech can improve recognition for specialized vocabulary, accents, product names, or noisy environments.</p>
+  <p><strong>Text to speech</strong> creates spoken audio from text using neural voices. Speech Synthesis Markup Language, or SSML, controls pronunciation, pauses, pitch, rate, style, and voice selection. Custom neural voice can create a branded voice from training data, but it is governed by responsible AI and access requirements because synthetic voices can be misused.</p>
+  <p><strong>Speech translation</strong> accepts spoken input and produces translated text or speech in another language. If the input is typed text rather than audio, that is not Speech; that is Azure AI Translator. <strong>Speaker recognition</strong> compares a voice against enrolled voice profiles for verification or identification scenarios.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Capability</th><th>Input</th><th>Output</th><th>Example scenario</th></tr></thead>
+      <tbody>
+        <tr><td>Speech to text</td><td>Audio stream or audio file</td><td>Text transcript</td><td>Live captions for a meeting or transcription of recorded calls</td></tr>
+        <tr><td>Text to speech</td><td>Text or SSML</td><td>Spoken audio</td><td>An app reads instructions aloud with a neural voice</td></tr>
+        <tr><td>Custom neural voice</td><td>Approved voice training data</td><td>A custom synthetic voice</td><td>A brand creates an approved voice for guided customer experiences</td></tr>
+        <tr><td>Speech translation</td><td>Spoken audio in one language</td><td>Translated text or translated speech</td><td>A live support call is translated between English and Spanish</td></tr>
+        <tr><td>Speaker recognition</td><td>Audio sample and enrolled voice profile</td><td>Speaker verification or identification result</td><td>A system verifies a caller by voice after enrollment</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Trap: direction matters</span>
+    <p>Audio to text is speech recognition. Text to audio is speech synthesis. Audio in one language to another language is speech translation. Typed text translation belongs to Azure AI Translator.</p>
+  </div>
+</section>
+
+<section id="services">
+  <h2>The Azure services, and how to choose</h2>
+  <p>The NLP service lineup is smaller than it first looks. Azure AI Language owns text analysis, custom text features, CLU, and question answering. Azure AI Speech owns audio-to-text, text-to-audio, spoken translation, and speaker recognition. Azure AI Translator owns text translation and transliteration. Azure AI Bot Service connects conversational apps to channels.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Service</th><th>Owns these features</th><th>Use it when</th><th>Do not use it for</th></tr></thead>
+      <tbody>
+        <tr><td>Azure AI Language</td><td>Key phrase extraction, NER, PII detection, sentiment analysis, opinion mining, language detection, summarization, custom text classification, custom NER, CLU, and question answering</td><td>You need to analyze or understand text</td><td>Translating text between languages, processing audio, or hosting a bot channel</td></tr>
+        <tr><td>Azure AI Speech</td><td>Speech to text, batch transcription, text to speech, neural voices, custom neural voice, speech translation, and speaker recognition</td><td>The input or output is spoken audio</td><td>Typed text translation, key phrase extraction, PII redaction, or FAQ knowledge bases</td></tr>
+        <tr><td>Azure AI Translator</td><td>Text translation, language detection for translation, dictionary lookup, and transliteration</td><td>You need to translate typed text or rewrite text into another script</td><td>Recognizing speech, generating audio, extracting sentiment, or understanding user intent</td></tr>
+        <tr><td>Azure AI Bot Service</td><td>Bot hosting, channel connections, conversation endpoint, and integration with language services</td><td>You need users to interact with a conversational app in Teams, web chat, or another channel</td><td>Training language models, translating text, or transcribing audio by itself</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Two decisions the exam repeats</h3>
+  <p>The first decision is translation mode. <strong>Text translation</strong> is Azure AI Translator. The user types or submits text, and the service returns equivalent text in another language. <strong>Spoken translation</strong> is Azure AI Speech because the input is audio. Speech translation can recognize speech, translate it, and return translated text or speech.</p>
+  <p>The second decision is translation versus transliteration. Translation changes meaning from one language to another, such as English to French. Transliteration rewrites text from one script to another while keeping the same language, such as Hindi written in Latin characters. Transliteration is a Translator feature, not a Speech feature and not language understanding.</p>
+
+  <h3>Prebuilt versus custom language features</h3>
+  <p>Azure AI Language has prebuilt features you can use immediately: key phrase extraction, named entity recognition, PII detection, sentiment analysis, opinion mining, language detection, and summarization. You send text and receive analysis without training your own model.</p>
+  <p>It also has custom features for domain-specific needs. Custom text classification trains labels that matter to your organization, such as &ldquo;billing dispute,&rdquo; &ldquo;technical outage,&rdquo; or &ldquo;contract risk.&rdquo; Custom named entity recognition extracts your own entity types, such as internal product codes, project names, equipment IDs, or policy references. Conversational language understanding is custom in the sense that you define intents, utterances, and entities for the application.</p>
+  <p>Azure AI services can be provisioned as a multi-service resource or as a single-service resource. A multi-service resource gives one key and endpoint for several supported Azure AI services. A single-service resource gives one key and endpoint for one service. For AI-900, remember that this is about provisioning and access, not which workload the service solves.</p>
+
+  <div class="callout key"><span class="callout-title">Service shortcut</span>
+    <p>Text analysis and understanding: Language. Audio: Speech. Text translation or transliteration: Translator. User-facing conversational channel: Bot Service.</p>
+  </div>
+</section>
+
+<section id="traps">
+  <h2>Where people lose points here</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>They confuse key phrases with entities</h3>
+      <p>Key phrases are the main talking points. Entities are typed objects. &ldquo;Poor battery life&rdquo; is likely a key phrase. &ldquo;April 15&rdquo; is a datetime entity.</p>
+    </div>
+    <div class="card">
+      <h3>They confuse CLU with question answering</h3>
+      <p>CLU predicts intent and extracts entities so the app can do something. Question answering returns answers from a knowledge base or FAQ.</p>
+    </div>
+    <div class="card">
+      <h3>They send all translation to Translator</h3>
+      <p>Typed text translation is Translator. Spoken translation is Speech because audio recognition is part of the workload.</p>
+    </div>
+    <div class="card">
+      <h3>They treat Bot Service as the AI model</h3>
+      <p>Bot Service connects the conversation to channels and application logic. Language and Speech provide the AI capabilities behind the bot.</p>
+    </div>
+  </div>
+  <div class="callout trap"><span class="callout-title">Trap: summarization wording matters</span>
+    <p>Extractive summarization selects existing sentences. Abstractive summarization writes a new summary. If the answer describes creating new wording, do not call it extractive.</p>
+  </div>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+  <h3>Text features</h3>
+  <ul>
+    <li><strong>Key phrases:</strong> main talking points.</li>
+    <li><strong>NER:</strong> typed things such as person, location, organization, datetime, and quantity.</li>
+    <li><strong>PII:</strong> finds and can redact personal data.</li>
+    <li><strong>Sentiment:</strong> positive, neutral, negative, or mixed.</li>
+    <li><strong>Opinion mining:</strong> sentiment about specific aspects.</li>
+    <li><strong>Language detection:</strong> identifies the language of text.</li>
+    <li><strong>Extractive summarization:</strong> selects important original sentences.</li>
+    <li><strong>Abstractive summarization:</strong> creates a new summary.</li>
+    <li><strong>Custom text classification:</strong> trains your own document labels.</li>
+  </ul>
+  <h3>CLU vocabulary</h3>
+  <ul>
+    <li><strong>Utterance:</strong> what the user says.</li>
+    <li><strong>Intent:</strong> what the user wants to do.</li>
+    <li><strong>Entity:</strong> the extracted detail needed to complete the intent.</li>
+  </ul>
+  <h3>Speech capabilities</h3>
+  <ul>
+    <li><strong>Speech to text:</strong> audio becomes a transcript.</li>
+    <li><strong>Batch transcription:</strong> stored audio becomes transcripts at scale.</li>
+    <li><strong>Text to speech:</strong> text becomes spoken audio using neural voices.</li>
+    <li><strong>SSML:</strong> controls pronunciation, pauses, pitch, rate, and style.</li>
+    <li><strong>Custom neural voice:</strong> approved custom synthetic voice.</li>
+    <li><strong>Speech translation:</strong> spoken language becomes translated text or speech.</li>
+    <li><strong>Speaker recognition:</strong> verifies or identifies an enrolled speaker.</li>
+  </ul>
+  <h3>Services in one line</h3>
+  <ul>
+    <li><strong>Azure AI Language:</strong> text analytics, summarization, custom classification, CLU, and question answering.</li>
+    <li><strong>Azure AI Speech:</strong> speech recognition, synthesis, spoken translation, and speaker recognition.</li>
+    <li><strong>Azure AI Translator:</strong> typed text translation and transliteration.</li>
+    <li><strong>Azure AI Bot Service:</strong> channels and hosting for conversational apps.</li>
+  </ul>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?set=d4-language">Drill: language features</a>
+    <a class="btn secondary" href="drills.html?set=d4-services">Drill: NLP services</a>
+    <a class="btn secondary" href="generative-ai.html">Next guide: Generative AI &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>

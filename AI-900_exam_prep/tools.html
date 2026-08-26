@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Study Tools &mdash; AI-900 Exam Prep</title>
+<meta name="description" content="AI-900 study tools: scaled-score estimator, exam timer, 180 flashcards across eight decks, a searchable Azure AI service reference, a readiness check, and an error log.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Study Tools</h1>
+<p class="lede">Six things that each do a specific job: turn a raw score into a scaled one, run the clock,
+    hammer the pure-recall facts, look up which Azure service owns a job, see whether you are actually ready,
+    and keep a record of every mistake so you stop making it twice.</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#calc">Score estimator</a>
+    <a class="btn secondary sm" href="#timer">Exam timer</a>
+    <a class="btn secondary sm" href="#flashcards">Flashcards</a>
+    <a class="btn secondary sm" href="#services">Service reference</a>
+    <a class="btn secondary sm" href="#readiness">Readiness check</a>
+    <a class="btn secondary sm" href="#errorlog">Error log</a>
+</div>
+
+<!-- ============ SCORE ESTIMATOR ============ -->
+<section id="calc">
+    <h2>Scaled score estimator</h2>
+    <p>Enter how many you got right out of how many you answered, and this converts it to the 1&ndash;1000
+        scale Microsoft reports. Useful for scoring any practice material, not just the exams on this site.</p>
+
+    <div class="grid grid-2">
+        <div class="card">
+            <h3 style="margin-top:0">Your raw score</h3>
+            <div class="grid grid-2">
+                <div class="field"><label for="cRight">Questions correct</label>
+                    <input type="number" id="cRight" min="0" max="200" value="35"></div>
+                <div class="field"><label for="cTotal">Questions total</label>
+                    <input type="number" id="cTotal" min="1" max="200" value="50"></div>
+            </div>
+            <div class="btn-row">
+                <button class="btn secondary sm" id="loadLast">Load my last practice exam</button>
+                <button class="btn secondary sm" id="loadPass">Show me exactly what passing needs</button>
+            </div>
+            <p class="faint" style="margin-bottom:0"><small>The real exam is 40 to 60 questions, so the
+                &ldquo;what passing needs&rdquo; button uses 50 as a midpoint.</small></p>
+        </div>
+
+        <div class="card center">
+            <div class="muted" style="font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700">Estimated scaled score</div>
+            <div style="font-size:4.5rem;font-weight:800;line-height:1.05" id="scaledOut">700</div>
+            <div id="scaledNote" class="muted"></div>
+            <div id="scaledBars" style="margin-top:1.2rem;text-align:left"></div>
+        </div>
+    </div>
+
+    <div class="callout warn">
+        <span class="callout-title">What this number is and is not</span>
+        <p style="margin-bottom:0">Microsoft has never published its raw-to-scaled conversion, and the real
+            exam weights harder questions more heavily. This curve is anchored so that 70% correct lands on
+            700, which is where the passing mark sits. Treat it as a readiness signal with a margin of error of
+            roughly &plusmn;50 points, not as a prediction.</p>
+    </div>
+</section>
+
+<!-- ============ TIMER ============ -->
+<section id="timer">
+    <h2>Exam timer</h2>
+    <p>The real exam gives you about 45 minutes for 40 to 60 questions. Use this for timed drills or a full
+        rehearsal, and watch the checkpoints rather than the clock.</p>
+
+    <div class="card center">
+        <div class="big-timer" id="bigClock">45:00</div>
+        <div class="btn-row" style="justify-content:center;margin-bottom:.8rem">
+            <button class="btn lg" id="tStart">Start</button>
+            <button class="btn secondary" id="tPause">Pause</button>
+            <button class="btn ghost" id="tReset">Reset</button>
+        </div>
+        <div class="btn-row" style="justify-content:center" id="tPresets"></div>
+        <div id="checkpoints" style="margin-top:1.4rem;text-align:left"></div>
+    </div>
+</section>
+
+<!-- ============ FLASHCARDS ============ -->
+<section id="flashcards">
+    <h2>Flashcards</h2>
+    <p>One hundred and eighty cards across eight decks. These are for the facts that are pure recall &mdash;
+        which service owns which job, what a metric measures, what a setting does. Click the card or press
+        <kbd>Space</kbd> to flip it, then say whether you knew it.</p>
+
+    <div class="card">
+        <div class="grid grid-2">
+            <div class="field"><label for="deckSel">Deck</label><select id="deckSel"></select></div>
+            <div class="field"><label for="modeSel">Show</label><select id="modeSel">
+                <option value="all">All cards in this deck</option>
+                <option value="missed">Only cards I have missed</option>
+            </select></div>
+        </div>
+
+        <div class="flashcard" id="card" role="button" tabindex="0" aria-label="Flashcard, click to flip">
+            <span class="fc-side" id="fcSide">Front</span>
+            <span class="fc-deck" id="fcDeck"></span>
+            <div id="fcBody" class="fc-front">Loading&hellip;</div>
+            <span class="fc-hint">Click, or press Space, to flip</span>
+        </div>
+
+        <div class="btn-row" style="justify-content:center;margin-top:1rem">
+            <button class="btn secondary" id="fcPrev">&larr; Back</button>
+            <button class="btn" id="fcGot" style="background:var(--good)">I knew it</button>
+            <button class="btn danger" id="fcMiss">I missed it</button>
+            <button class="btn secondary" id="fcNext">Next &rarr;</button>
+        </div>
+        <div class="btn-row" style="justify-content:center;margin-top:.6rem">
+            <button class="btn ghost sm" id="fcShuffle">Shuffle</button>
+            <button class="btn ghost sm" id="fcClear">Clear my missed list</button>
+        </div>
+
+        <div class="meter-row" style="margin-top:1.2rem">
+            <span class="mlabel" id="fcPos">Card 1 of 1</span>
+            <span class="meter"><i class="good" id="fcMeter" data-pct="0"></i></span>
+            <span class="mval" id="fcStats">0 missed</span>
+        </div>
+    </div>
+</section>
+
+<!-- ============ SERVICE REFERENCE ============ -->
+<section id="services">
+    <h2>Azure AI service reference</h2>
+    <p>The single densest source of easy points on this exam. Almost every question is really asking
+        &ldquo;which of these owns that job?&rdquo; Type in the box to filter by service name, capability, or
+        the thing you are trying to do.</p>
+
+    <div class="card">
+        <div class="field"><label for="svcFilter">Filter</label>
+            <input type="text" id="svcFilter" placeholder="Try OCR, or translate, or bounding box"></div>
+        <div class="table-scroll"><table class="data-table">
+            <thead><tr><th style="width:12rem">Service or feature</th><th style="width:9rem">Skill area</th><th>What it owns, and when it is the answer</th></tr></thead>
+            <tbody id="svcBody"></tbody>
+        </table></div>
+        <p class="muted" id="svcCount" style="margin-bottom:0"></p>
+    </div>
+</section>
+
+<!-- ============ READINESS ============ -->
+<section id="readiness">
+    <h2>Readiness check</h2>
+    <p>Everything this site knows about you, in one place. It reads your practice exams, your drill scores,
+        and your plan progress, and tells you the one thing to do next.</p>
+    <div id="readyBox"><p class="muted">Loading&hellip;</p></div>
+</section>
+
+<!-- ============ ERROR LOG ============ -->
+<section id="errorlog">
+    <h2>Error log</h2>
+    <p>The single highest-value habit in the whole plan. Every question you miss goes in here &mdash; not the
+        question, the <strong>rule</strong>. &ldquo;Object detection returns a bounding box; classification
+        labels the whole image&rdquo; is a log entry. &ldquo;Missed question 14&rdquo; is not.</p>
+
+    <div class="callout key">
+        <span class="callout-title">Tag the cause, because the three causes have three different fixes</span>
+        <p style="margin-bottom:0"><strong>Never knew it</strong> means learn the fact &mdash; flashcards.
+            <strong>Knew it and read past it</strong> means slow down and read the last line first &mdash; that
+            is a pacing and care problem, and more studying will not touch it.
+            <strong>Misread the question</strong> means you missed a BEST, a FIRST, or a NOT &mdash; that is a
+            reading habit, and it is the cheapest one to fix.</p>
+    </div>
+
+    <div class="card">
+        <div class="grid grid-4">
+            <div class="field"><label for="elDomain">Skill area</label><select id="elDomain"></select></div>
+            <div class="field"><label for="elTopic">Topic or rule</label>
+                <input type="text" id="elTopic" placeholder="e.g. RAG vs fine-tuning"></div>
+            <div class="field"><label for="elCause">Cause</label><select id="elCause">
+                <option value="never">Never knew the fact</option>
+                <option value="rushed">Knew it and read past it</option>
+                <option value="misread">Misread the question</option>
+            </select></div>
+            <div class="field"><label for="elAdd">&nbsp;</label>
+                <button class="btn" id="elAdd" style="width:100%">Add entry</button></div>
+        </div>
+        <div class="field"><label for="elNote">The fix, in your own words</label>
+            <textarea id="elNote" placeholder="Write the rule, not the mistake. &ldquo;Grounding with RAG adds your own documents to the prompt at query time and needs no retraining. Fine-tuning changes the model&rsquo;s style and format and needs a curated dataset. I picked fine-tuning because the scenario said &lsquo;company handbook&rsquo; and I panicked.&rdquo;"></textarea></div>
+
+        <div id="elSummary" style="margin-top:1.2rem"></div>
+        <div id="elTable" style="margin-top:1rem"></div>
+        <div class="btn-row" style="margin-top:1rem">
+            <button class="btn secondary sm" id="elCopy">Copy the whole log</button>
+            <button class="btn ghost sm" id="elClear">Clear the log</button>
+        </div>
+    </div>
+</section>
+
+</div></main>
+
+<footer id="footer"></footer>
+
+<script src="assets/data/flashcards.js"></script>
+<script src="assets/data/drills.js"></script>
+<script>
+/* ============================================================
+   Azure AI service reference
+   ============================================================ */
+var SERVICES = [
+    ["Azure AI Vision", "Computer Vision", "Prebuilt image analysis: captions, dense captions, tags, object detection, smart crop, background removal, and the Read capability for text in images. The general-purpose answer when the question does not say the model was trained on their own images."],
+    ["Azure AI Custom Vision", "Computer Vision", "Train your own image classifier or object detector on your own labeled images. Two project types, classification and object detection, and two resources, training and prediction. The answer whenever the scenario says &ldquo;their own product photos&rdquo; or &ldquo;categories specific to the business.&rdquo;"],
+    ["Azure AI Face", "Computer Vision", "Face detection, face attributes such as head pose, blur, occlusion and glasses, face verification (are these two the same person), and face identification against an enrolled group. Recognition features are behind a Limited Access application."],
+    ["Azure AI Document Intelligence", "Computer Vision", "Structured extraction from forms and documents. Prebuilt models for invoice, receipt, ID document, business card, and layout, plus custom models. Returns key-value pairs and tables, not just raw text."],
+    ["Azure AI Video Indexer", "Computer Vision", "Insights from video: faces, spoken words, on-screen text, topics, and scenes. The answer when the input is video rather than a still image."],
+    ["Read / OCR", "Computer Vision", "Extracts printed and handwritten text from images and scanned pages as plain text with locations. If the question wants text out of a photo or a sign, this is it; if it wants fields out of a form, use Document Intelligence."],
+    ["Image classification", "Computer Vision", "Labels the whole image with one class. No location information."],
+    ["Object detection", "Computer Vision", "Returns a class <em>and</em> a bounding box for each object instance found. Any mention of &ldquo;where in the image&rdquo; or &ldquo;how many&rdquo; means detection."],
+    ["Semantic segmentation", "Computer Vision", "Classifies every pixel, producing a mask rather than a box. The most precise and least common of the three."],
+    ["Azure AI Language", "Natural Language Processing", "The text service: key phrase extraction, named entity recognition, PII detection, sentiment analysis and opinion mining, language detection, summarization, conversational language understanding, and question answering."],
+    ["Azure AI Speech", "Natural Language Processing", "The audio service: speech to text, text to speech with neural voices, custom neural voice, speech translation, and speaker recognition. Spoken translation lives here, not in Translator."],
+    ["Azure AI Translator", "Natural Language Processing", "Text translation between languages, document translation preserving formatting, and transliteration (rewriting one script in another). Text in, text out."],
+    ["Azure AI Bot Service", "Natural Language Processing", "The channel and hosting layer that puts a language model or knowledge base in front of users on Teams, a website, or a phone line. It is not itself the language understanding."],
+    ["Key phrase extraction", "Natural Language Processing", "Returns the main talking points of a document as a list of phrases. Not typed, not categorized."],
+    ["Named entity recognition", "Natural Language Processing", "Returns typed things: person, location, organization, datetime, quantity. If the question mentions categories or types, it is entities, not key phrases."],
+    ["Sentiment analysis", "Natural Language Processing", "Positive, negative, neutral, or mixed, with confidence scores. Opinion mining goes further and ties the sentiment to a specific aspect such as &ldquo;the room&rdquo; or &ldquo;the service.&rdquo;"],
+    ["Conversational language understanding", "Natural Language Processing", "Maps an utterance to an intent plus entities. Anything about &ldquo;what the user is asking for&rdquo; from free-form input is this."],
+    ["Question answering", "Natural Language Processing", "Answers from a knowledge base built out of an FAQ page or documents. A knowledge base of question-and-answer pairs means this, not conversational language understanding."],
+    ["Azure Machine Learning", "Machine Learning", "The end-to-end platform for building, training, deploying, and managing your own models. Studio, automated ML, the designer, notebooks, pipelines, the model registry, and endpoints."],
+    ["Automated machine learning", "Machine Learning", "Tries many algorithms and preprocessing combinations for you and ranks them by your chosen metric. The answer when a scenario says &ldquo;without data science expertise&rdquo; or &ldquo;find the best model automatically.&rdquo;"],
+    ["Azure Machine Learning designer", "Machine Learning", "Drag-and-drop pipeline builder. Visual, no code, but you choose the algorithm yourself &mdash; that is the difference from automated ML."],
+    ["Compute instance", "Machine Learning", "A single managed VM for one person, used for notebooks and development."],
+    ["Compute cluster", "Machine Learning", "A scalable multi-node pool that scales down to zero, used for training jobs and batch scoring."],
+    ["Real-time endpoint", "Machine Learning", "Deployed model answering one request at a time with low latency, for interactive applications."],
+    ["Batch endpoint", "Machine Learning", "Deployed model scoring a large file or dataset on a schedule. Higher throughput, no latency requirement."],
+    ["Regression", "Machine Learning", "Predicts a continuous number: price, temperature, units sold. Metrics are MAE, RMSE, and R-squared."],
+    ["Classification", "Machine Learning", "Predicts a category. Binary is two classes, multiclass is more. Metrics are accuracy, precision, recall, F1, and AUC."],
+    ["Clustering", "Machine Learning", "Groups similar records with no labels at all. Unsupervised. Customer segmentation is the classic example."],
+    ["Confusion matrix", "Machine Learning", "The four-cell table of true positive, false positive, false negative, and true negative that every classification metric is calculated from."],
+    ["Azure OpenAI Service", "Generative AI", "OpenAI models hosted in Azure with Azure security, networking, and regional control. GPT for chat and text, embeddings for vectors, DALL-E for images, Whisper for transcription. You deploy a model before you can call it."],
+    ["Azure AI Foundry", "Generative AI", "The portal and platform for building generative AI applications: projects and hubs, model playgrounds, prompt flow, evaluations, and content safety in one place."],
+    ["Azure AI Foundry model catalog", "Generative AI", "The library of models you can deploy, including OpenAI models and open models from other providers. Deploy as a serverless API (pay per token) or to managed compute (pay for the infrastructure)."],
+    ["Azure AI Content Safety", "Generative AI", "Detects and blocks harmful content across hate, sexual, violence, and self-harm categories with configurable severity thresholds. Also provides prompt shields against jailbreak and indirect prompt injection."],
+    ["Azure AI Search", "Generative AI", "The index behind retrieval augmented generation. It finds the passages of your own content that get inserted into the prompt so the model can answer from them and cite them."],
+    ["Retrieval augmented generation", "Generative AI", "Grounding a model in your own documents at query time. No retraining, answers stay current, and the model can cite sources. The answer whenever a scenario says &ldquo;using our own documents&rdquo; and &ldquo;without retraining.&rdquo;"],
+    ["Fine-tuning", "Generative AI", "Retraining a base model on a curated labeled dataset to change its style, format, or a narrow specialized behavior. Expensive, and the wrong tool for teaching new or changing facts."],
+    ["Prompt engineering", "Generative AI", "Rewriting the prompt and system message to get better output. Always the first thing to try, because it costs nothing."],
+    ["Temperature", "Generative AI", "Controls randomness. Lower is more focused and repeatable; higher is more varied and creative. It does not make answers more accurate."],
+    ["Token", "Generative AI", "The chunk of text a model actually processes, roughly a word or word-piece. Tokens are what you are billed on and what fills the context window."],
+    ["Embedding", "Generative AI", "A numeric vector representing meaning, so that similar text lands close together. The basis of vector search and of retrieval augmented generation."],
+    ["Hallucination", "Generative AI", "A confident, fluent, wrong answer. Mitigated by grounding, lower temperature, and instructing the model to say when it does not know."],
+    ["Anomaly detection", "AI Workloads", "Finding data points that fall outside an established pattern, such as an unusual transaction or a sensor reading spike."],
+    ["Knowledge mining", "AI Workloads", "Extracting structure and searchable insight from large volumes of unstructured documents. Azure AI Search is the usual engine."],
+    ["Conversational AI", "AI Workloads", "Software that holds a dialog with a person: bots, virtual agents, voice assistants."],
+    ["Fairness", "AI Workloads", "The responsible AI principle about a system treating groups of people equitably. Giveaway words: bias, demographic, disadvantaged group, equally."],
+    ["Reliability and safety", "AI Workloads", "The principle about consistent, safe behavior including under unexpected conditions. Giveaway words: fail safe, rigorous testing, physical harm."],
+    ["Privacy and security", "AI Workloads", "The principle about protecting personal data and securing the system. Giveaway words: consent, personal data, encryption, retention."],
+    ["Inclusiveness", "AI Workloads", "The principle about the system being usable by everyone, including people with disabilities. Giveaway words: accessible, everyone, regardless of ability."],
+    ["Transparency", "AI Workloads", "The principle about people understanding how a system works and why it decided what it decided. Giveaway words: explain, understand, interpretability."],
+    ["Accountability", "AI Workloads", "The principle about people and organizations answering for the system. Giveaway words: governance, responsible for, oversight, framework."]
+];
+
+/* ============================================================
+   Tools
+   ============================================================ */
+(function () {
+    "use strict";
+
+    /* ---------- score estimator ---------- */
+    function calc() {
+        var right = parseInt(document.getElementById("cRight").value, 10) || 0;
+        var total = parseInt(document.getElementById("cTotal").value, 10) || 1;
+        if (right > total) { right = total; document.getElementById("cRight").value = total; }
+
+        var pct = right / total * 100;
+        var scaled = AI9.rawToScaled(right, total);
+        var pass = AI9.passMark();
+        var v = AI9.verdict(scaled);
+
+        document.getElementById("scaledOut").textContent = scaled;
+
+        var gap = scaled - pass;
+        var note = gap >= 0
+            ? '<span class="badge good">' + v.label + "</span> " + gap + " point" + (gap === 1 ? "" : "s") +
+              " above the " + pass + " line."
+            : '<span class="badge ' + v.cls + '">' + v.label + "</span> " + Math.abs(gap) +
+              " point" + (Math.abs(gap) === 1 ? "" : "s") + " short of " + pass + ".";
+        var needPct = AI9.passPct();
+        var need = AI9.correctNeeded(total);
+        if (right < need) {
+            note += " You would need <strong>" + need + " of " + total + "</strong> (" + needPct +
+                "%), which is " + (need - right) + " more correct.";
+        }
+        document.getElementById("scaledNote").innerHTML = note;
+
+        var bars = '<div class="meter-row"><span class="mlabel">Percent correct</span>' +
+            '<span class="meter"><i class="' + (pct >= needPct ? "good" : (pct >= needPct - 8 ? "amber" : "bad")) +
+            '" data-pct="' + Math.round(pct) + '"></i></span>' +
+            '<span class="mval">' + Math.round(pct) + "%</span></div>" +
+            '<div class="meter-row"><span class="mlabel">Scaled, out of 1000</span>' +
+            '<span class="meter"><i class="' + v.cls + '" data-pct="' + Math.round(scaled / 1000 * 100) + '"></i></span>' +
+            '<span class="mval">' + scaled + "</span></div>" +
+            '<div class="meter-row"><span class="mlabel">Passing mark</span>' +
+            '<span class="meter"><i class="amber" data-pct="' + Math.round(pass / 1000 * 100) + '"></i></span>' +
+            '<span class="mval">' + pass + "</span></div>";
+        var box = document.getElementById("scaledBars");
+        box.innerHTML = bars;
+        AI9.autoFillMeters(box);
+    }
+
+    function bindCalc() {
+        var ids = ["cRight", "cTotal"];
+        for (var i = 0; i < ids.length; i++) {
+            document.getElementById(ids[i]).addEventListener("input", calc);
+            document.getElementById(ids[i]).addEventListener("change", calc);
+        }
+        document.getElementById("loadLast").onclick = function () {
+            var hist = AI9.store.get("history", {});
+            var runs = [];
+            for (var k in hist) { if (Object.prototype.hasOwnProperty.call(hist, k)) runs.push(hist[k]); }
+            if (!runs.length) { AI9.toast("No practice exam recorded yet."); return; }
+            runs.sort(function (a, b) { return a.at - b.at; });
+            var last = runs[runs.length - 1];
+            document.getElementById("cRight").value = last.right;
+            document.getElementById("cTotal").value = last.total;
+            calc();
+            AI9.toast("Loaded " + last.title + ".");
+        };
+        document.getElementById("loadPass").onclick = function () {
+            document.getElementById("cTotal").value = 50;
+            document.getElementById("cRight").value = AI9.correctNeeded(50);
+            calc();
+            AI9.toast("That is the score you need on a 50-question exam.");
+        };
+        calc();
+    }
+
+    /* ---------- timer ---------- */
+    var PRESETS = [
+        { label: "Real exam \u00b7 45 min", secs: 2700 },
+        { label: "Practice exam \u00b7 45 min", secs: 2700 },
+        { label: "Half exam \u00b7 22 min", secs: 1320 },
+        { label: "Drill \u00b7 10 min", secs: 600 }
+    ];
+    var tTotal = 2700, tLeft = 2700, tRunning = false, tHandle = null;
+
+    function paintClock() {
+        var c = document.getElementById("bigClock");
+        var m = Math.floor(tLeft / 60), s = Math.round(tLeft % 60);
+        c.textContent = m + ":" + (s < 10 ? "0" : "") + s;
+        c.className = "big-timer" + (tLeft <= 60 ? " danger" : (tLeft <= 300 ? " warn" : ""));
+        paintCheckpoints();
+    }
+
+    function paintCheckpoints() {
+        var elapsed = tTotal - tLeft;
+        var marks = [
+            { at: 0.25, label: "Quarter mark" },
+            { at: 0.50, label: "Halfway" },
+            { at: 0.75, label: "Three quarters" },
+            { at: 0.90, label: "Sweep your marked questions" }
+        ];
+        var html = "";
+        for (var i = 0; i < marks.length; i++) {
+            var atSec = Math.round(tTotal * marks[i].at);
+            var reached = elapsed >= atSec;
+            var qAt = Math.round(50 * marks[i].at);
+            html += '<div class="meter-row"><span class="mlabel">' + marks[i].label + "</span>" +
+                '<span class="meter"><i class="' + (reached ? "good" : "") + '" data-pct="' +
+                (reached ? 100 : Math.min(100, Math.round(elapsed / atSec * 100))) + '"></i></span>' +
+                '<span class="mval">' + Math.floor(atSec / 60) + " min" +
+                (tTotal === 2700 ? " &middot; Q" + qAt : "") + "</span></div>";
+        }
+        var box = document.getElementById("checkpoints");
+        box.innerHTML = html;
+        AI9.autoFillMeters(box);
+    }
+
+    function tick() {
+        tLeft = Math.max(0, tLeft - 1);
+        paintClock();
+        if (tLeft <= 0) {
+            window.clearInterval(tHandle); tRunning = false;
+            AI9.toast("Time is up.", 4000);
+        }
+    }
+
+    function bindTimer() {
+        var ph = document.getElementById("tPresets");
+        for (var i = 0; i < PRESETS.length; i++) {
+            (function (p, idx) {
+                var b = document.createElement("button");
+                b.className = "btn sm " + (idx === 0 ? "" : "secondary");
+                b.type = "button";
+                b.innerHTML = p.label;
+                b.onclick = function () {
+                    window.clearInterval(tHandle); tRunning = false;
+                    tTotal = p.secs; tLeft = p.secs; paintClock();
+                    var all = ph.querySelectorAll("button");
+                    for (var j = 0; j < all.length; j++) all[j].className = "btn sm secondary";
+                    b.className = "btn sm";
+                };
+                ph.appendChild(b);
+            })(PRESETS[i], i);
+        }
+        document.getElementById("tStart").onclick = function () {
+            if (tRunning || tLeft <= 0) return;
+            tRunning = true;
+            tHandle = window.setInterval(tick, 1000);
+        };
+        document.getElementById("tPause").onclick = function () {
+            window.clearInterval(tHandle); tRunning = false;
+        };
+        document.getElementById("tReset").onclick = function () {
+            window.clearInterval(tHandle); tRunning = false; tLeft = tTotal; paintClock();
+        };
+        paintClock();
+    }
+
+    /* ---------- flashcards ---------- */
+    var cards = [], order = [], pos = 0, flipped = false;
+
+    function allCards() { return (window.AI9_DATA && window.AI9_DATA.flashcards) || []; }
+
+    function decks() {
+        var all = allCards(), seen = {}, out = [];
+        for (var i = 0; i < all.length; i++) {
+            if (!seen[all[i].deck]) { seen[all[i].deck] = 1; out.push(all[i].deck); }
+        }
+        return out;
+    }
+
+    function missedSet() { return AI9.store.get("fcMissed", {}); }
+
+    function buildOrder() {
+        var deck = document.getElementById("deckSel").value;
+        var mode = document.getElementById("modeSel").value;
+        var missed = missedSet();
+        var all = allCards();
+        cards = [];
+        for (var i = 0; i < all.length; i++) {
+            if (deck !== "__all" && all[i].deck !== deck) continue;
+            if (mode === "missed" && !missed[all[i].id]) continue;
+            cards.push(all[i]);
+        }
+        order = [];
+        for (var j = 0; j < cards.length; j++) order.push(j);
+        pos = 0; flipped = false;
+        paintCard();
+    }
+
+    function paintCard() {
+        var side = document.getElementById("fcSide");
+        var body = document.getElementById("fcBody");
+        var deckEl = document.getElementById("fcDeck");
+        var missed = missedSet();
+        var missedCount = 0;
+        for (var k in missed) { if (Object.prototype.hasOwnProperty.call(missed, k)) missedCount++; }
+
+        if (!cards.length) {
+            side.textContent = "";
+            deckEl.textContent = "";
+            body.className = "fc-back";
+            body.innerHTML = "<p>No cards match this filter. If you chose &ldquo;only cards I have missed&rdquo; " +
+                "and the list is empty, that is good news.</p>";
+            document.getElementById("fcPos").textContent = "0 cards";
+            document.getElementById("fcStats").textContent = missedCount + " missed";
+            AI9.fillMeter(document.getElementById("fcMeter"), 0);
+            return;
+        }
+
+        var c = cards[order[pos]];
+        side.textContent = flipped ? "Back" : "Front";
+        deckEl.textContent = c.deck;
+        body.className = flipped ? "fc-back" : "fc-front";
+        body.innerHTML = flipped ? c.back : AI9.escapeHtml(c.front);
+
+        document.getElementById("fcPos").textContent = "Card " + (pos + 1) + " of " + cards.length +
+            (c.tag ? " \u00b7 " + c.tag : "");
+        document.getElementById("fcStats").textContent = missedCount + " missed";
+        AI9.fillMeter(document.getElementById("fcMeter"), Math.round((pos + 1) / cards.length * 100));
+    }
+
+    function step(n) {
+        if (!cards.length) return;
+        pos = (pos + n + cards.length) % cards.length;
+        flipped = false;
+        paintCard();
+    }
+
+    function bindFlashcards() {
+        var sel = document.getElementById("deckSel");
+        var list = decks();
+        var html = '<option value="__all">All decks</option>';
+        for (var i = 0; i < list.length; i++) {
+            html += '<option value="' + AI9.escapeHtml(list[i]) + '">' + AI9.escapeHtml(list[i]) + "</option>";
+        }
+        sel.innerHTML = html;
+
+        sel.onchange = buildOrder;
+        document.getElementById("modeSel").onchange = buildOrder;
+
+        var card = document.getElementById("card");
+        card.onclick = function () { flipped = !flipped; paintCard(); };
+        card.onkeydown = function (e) {
+            if (e.key === " " || e.key === "Enter") { e.preventDefault(); flipped = !flipped; paintCard(); }
+            else if (e.key === "ArrowRight") { step(1); }
+            else if (e.key === "ArrowLeft") { step(-1); }
+        };
+
+        document.getElementById("fcNext").onclick = function () { step(1); };
+        document.getElementById("fcPrev").onclick = function () { step(-1); };
+        document.getElementById("fcGot").onclick = function () {
+            if (!cards.length) return;
+            var m = missedSet();
+            delete m[cards[order[pos]].id];
+            AI9.store.set("fcMissed", m);
+            step(1);
+        };
+        document.getElementById("fcMiss").onclick = function () {
+            if (!cards.length) return;
+            var m = missedSet();
+            m[cards[order[pos]].id] = 1;
+            AI9.store.set("fcMissed", m);
+            step(1);
+        };
+        document.getElementById("fcShuffle").onclick = function () {
+            for (var i2 = order.length - 1; i2 > 0; i2--) {
+                var j = Math.floor(Math.random() * (i2 + 1));
+                var tmp = order[i2]; order[i2] = order[j]; order[j] = tmp;
+            }
+            pos = 0; flipped = false; paintCard();
+            AI9.toast("Shuffled.");
+        };
+        document.getElementById("fcClear").onclick = function () {
+            if (window.confirm("Clear the list of cards you have marked as missed?")) {
+                AI9.store.set("fcMissed", {});
+                buildOrder();
+                AI9.toast("Missed list cleared.");
+            }
+        };
+
+        buildOrder();
+    }
+
+    /* ---------- service reference ---------- */
+    function paintServices(filter) {
+        var f = (filter || "").toLowerCase().trim();
+        var body = document.getElementById("svcBody");
+        var html = "", shown = 0;
+        for (var i = 0; i < SERVICES.length; i++) {
+            var row = SERVICES[i];
+            var hay = (row[0] + " " + row[1] + " " + row[2]).toLowerCase();
+            if (f && hay.indexOf(f) < 0) continue;
+            shown++;
+            html += "<tr><td><strong>" + row[0] + "</strong></td><td>" + row[1] + "</td><td>" + row[2] + "</td></tr>";
+        }
+        body.innerHTML = html || '<tr><td colspan="3" class="muted">Nothing matches that.</td></tr>';
+        document.getElementById("svcCount").textContent = shown + " of " + SERVICES.length + " rows shown.";
+    }
+
+    function bindServices() {
+        var inp = document.getElementById("svcFilter");
+        inp.addEventListener("input", function () { paintServices(inp.value); });
+        paintServices("");
+    }
+
+    /* ---------- readiness ---------- */
+    function bindReadiness() {
+        var box = document.getElementById("readyBox");
+        var hist = AI9.store.get("history", {});
+        var runs = [];
+        for (var k in hist) { if (Object.prototype.hasOwnProperty.call(hist, k)) runs.push(hist[k]); }
+        runs.sort(function (a, b) { return a.at - b.at; });
+
+        var drillScores = AI9.store.get("drillScores", {});
+        var sets = (window.AI9_DATA && window.AI9_DATA.drills) || [];
+        var drillsDone = 0, drillPctSum = 0;
+        for (var d in drillScores) {
+            if (Object.prototype.hasOwnProperty.call(drillScores, d)) {
+                drillsDone++; drillPctSum += drillScores[d].pct;
+            }
+        }
+
+        var plan = AI9.plan();
+        var state = AI9.store.get("plan", {});
+        var doneTasks = 0;
+        for (var t in state) { if (Object.prototype.hasOwnProperty.call(state, t)) doneTasks++; }
+        var totalTasks = AI9.planTaskCount();
+
+        var html = '<div class="grid grid-4" style="margin-bottom:1.25rem">';
+        var last = runs.length ? runs[runs.length - 1] : null;
+        var tiles = [
+            { label: "Latest scaled score", val: last ? last.scaled : "\u2014",
+              note: last ? (last.passed ? "Above 700" : "Below 700") : "No exam taken yet" },
+            { label: "Practice exams done", val: runs.length + " / 3",
+              note: runs.length ? "Keep the spacing" : "Start with the baseline" },
+            { label: "Drills attempted", val: drillsDone + " / " + (sets.length || 15),
+              note: drillsDone ? Math.round(drillPctSum / drillsDone) + "% average" : "None yet" },
+            { label: "Plan tasks done", val: doneTasks + " / " + totalTasks,
+              note: plan.length + "-day plan" }
+        ];
+        for (var i = 0; i < tiles.length; i++) {
+            html += '<div class="card center"><div class="muted" style="font-size:.72rem;text-transform:uppercase;letter-spacing:.09em;font-weight:700">' +
+                tiles[i].label + '</div><div style="font-size:2.2rem;font-weight:800;line-height:1.1">' +
+                tiles[i].val + '</div><div class="faint" style="font-size:.8rem">' + tiles[i].note + "</div></div>";
+        }
+        html += "</div>";
+
+        /* the one next action */
+        var verdict, advice;
+        if (!runs.length) {
+            verdict = { cls: "warn", title: "Start with a cold baseline" };
+            advice = "You have not taken a practice exam yet. Take <a href=\"practice-exam-1.html\">Practice Exam 1</a> " +
+                "before you read a single guide. A baseline you studied for is not a baseline, and every other " +
+                "recommendation on this page depends on having one.";
+        } else if (last.scaled >= 800) {
+            verdict = { cls: "key", title: "You are comfortably in range" };
+            advice = "Your last estimate was <strong>" + last.scaled + "</strong>. Do not add new material. " +
+                "Re-drill your two weakest sets, sweep the flashcard decks, and protect your sleep. " +
+                "Cramming from here reliably lowers scores.";
+        } else if (last.scaled >= 700) {
+            verdict = { cls: "key", title: "Passing, but the margin is thin" };
+            advice = "Your last estimate was <strong>" + last.scaled + "</strong>, which clears 700 with little room. " +
+                "Find your two lowest skill areas in the exam results and spend your remaining sessions there. " +
+                "A single bad area is what turns a 710 into a 680 on the day.";
+        } else if (last.scaled >= 620) {
+            verdict = { cls: "warn", title: "Close, and closeable" };
+            advice = "Your last estimate was <strong>" + last.scaled + "</strong>. That gap is usually two or three " +
+                "focused sessions, not weeks. Go to your exam results, take the two weakest skill areas, read " +
+                "those guides again, and re-drill them. Then take the next practice exam.";
+        } else {
+            verdict = { cls: "trap", title: "Not there yet, and that is fine this early" };
+            advice = "Your last estimate was <strong>" + last.scaled + "</strong>. Do not take another full exam yet &mdash; " +
+                "they measure, they do not teach. Work the guides and the drills for your two weakest areas " +
+                "first, then re-test.";
+        }
+        if (drillsDone < 5 && runs.length) {
+            advice += " You have only attempted " + drillsDone + " of the " + (sets.length || 15) +
+                " drill sets; those are the cheapest points available to you right now.";
+        }
+
+        html += '<div class="callout ' + verdict.cls + '"><span class="callout-title">' + verdict.title +
+            "</span><p style=\"margin-bottom:0\">" + advice + "</p></div>";
+
+        /* skill area breakdown from the most recent exam */
+        if (last && last.domains) {
+            html += '<div class="card"><h3 style="margin-top:0">Skill areas on your last exam</h3>';
+            for (var dd = 0; dd < AI9.DOMAINS.length; dd++) {
+                var nm = AI9.DOMAINS[dd].name;
+                if (typeof last.domains[nm] !== "number") continue;
+                var p = last.domains[nm];
+                html += '<div class="meter-row"><span class="mlabel">' + AI9.DOMAINS[dd].short + "</span>" +
+                    '<span class="meter"><i class="' + (p >= 80 ? "good" : (p >= 65 ? "amber" : "bad")) +
+                    '" data-pct="' + p + '"></i></span><span class="mval">' + p + "%</span></div>";
+            }
+            html += '<p class="muted" style="margin-bottom:0"><small>Anything under 65% is where your next ' +
+                "session belongs. <a href=\"drills.html\">Go to the drills</a>.</small></p></div>";
+        }
+
+        box.innerHTML = html;
+        AI9.autoFillMeters(box);
+    }
+
+    /* ---------- error log ---------- */
+    var CAUSES = { never: "Never knew the fact", rushed: "Knew it, read past it", misread: "Misread the question" };
+
+    function logGet() { return AI9.store.get("errorLog", []); }
+    function logSet(v) { AI9.store.set("errorLog", v); }
+
+    function paintLog() {
+        var rows = logGet();
+        var byCause = { never: 0, rushed: 0, misread: 0 };
+        var byDomain = {};
+        for (var i = 0; i < rows.length; i++) {
+            byCause[rows[i].cause] = (byCause[rows[i].cause] || 0) + 1;
+            byDomain[rows[i].domain] = (byDomain[rows[i].domain] || 0) + 1;
+        }
+
+        var sum = "";
+        if (rows.length) {
+            sum = '<h4 style="margin:0 0 .6rem">' + rows.length + " entr" + (rows.length === 1 ? "y" : "ies") + "</h4>";
+            for (var c in CAUSES) {
+                if (!Object.prototype.hasOwnProperty.call(CAUSES, c)) continue;
+                var n = byCause[c] || 0;
+                var pct = rows.length ? Math.round(n / rows.length * 100) : 0;
+                sum += '<div class="meter-row"><span class="mlabel">' + CAUSES[c] + "</span>" +
+                    '<span class="meter"><i class="' + (c === "never" ? "amber" : (c === "rushed" ? "bad" : "")) +
+                    '" data-pct="' + pct + '"></i></span><span class="mval">' + n + "</span></div>";
+            }
+            var worst = null;
+            for (var d in byDomain) {
+                if (Object.prototype.hasOwnProperty.call(byDomain, d)) {
+                    if (!worst || byDomain[d] > byDomain[worst]) worst = d;
+                }
+            }
+            if (worst) {
+                sum += '<div class="callout tip" style="margin-top:.9rem"><span class="callout-title">Your pattern</span>' +
+                    "<p style=\"margin-bottom:0\">Most of your misses are in <strong>" + AI9.escapeHtml(worst) +
+                    "</strong>" +
+                    ((byCause.rushed || 0) > rows.length / 3
+                        ? ", and more than a third are &ldquo;knew it, read past it&rdquo; \u2014 that is a pacing " +
+                          "and care problem. Slow down and read the last line of every question first."
+                        : ". Spend the next drill session there.") +
+                    "</p></div>";
+            }
+        } else {
+            sum = '<p class="muted" style="margin:0">Nothing logged yet. Add your first entry after the ' +
+                "baseline exam.</p>";
+        }
+        var sBox = document.getElementById("elSummary");
+        sBox.innerHTML = sum;
+        AI9.autoFillMeters(sBox);
+
+        var t = "";
+        if (rows.length) {
+            t = '<div class="table-scroll"><table class="data-table"><thead><tr>' +
+                "<th>Skill area</th><th>Topic or rule</th><th>Cause</th><th>The fix</th><th></th>" +
+                "</tr></thead><tbody>";
+            for (var j = rows.length - 1; j >= 0; j--) {
+                var r = rows[j];
+                t += "<tr><td>" + AI9.escapeHtml(r.domain) + "</td><td><strong>" + AI9.escapeHtml(r.topic) +
+                    '</strong></td><td><span class="badge ' +
+                    (r.cause === "never" ? "amber" : (r.cause === "rushed" ? "bad" : "")) + '">' +
+                    CAUSES[r.cause] + "</span></td><td>" + AI9.escapeHtml(r.note || "") +
+                    '</td><td><button class="btn ghost sm" data-del="' + j + '">Remove</button></td></tr>';
+            }
+            t += "</tbody></table></div>";
+        }
+        var tBox = document.getElementById("elTable");
+        tBox.innerHTML = t;
+        var dels = tBox.querySelectorAll("button[data-del]");
+        for (var k = 0; k < dels.length; k++) {
+            (function (b) {
+                b.onclick = function () {
+                    var idx = parseInt(b.getAttribute("data-del"), 10);
+                    var cur = logGet();
+                    cur.splice(idx, 1);
+                    logSet(cur);
+                    paintLog();
+                };
+            })(dels[k]);
+        }
+    }
+
+    function bindLog() {
+        var sel = document.getElementById("elDomain");
+        var opts = "";
+        for (var i = 0; i < AI9.DOMAINS.length; i++) {
+            opts += "<option>" + AI9.DOMAINS[i].name + "</option>";
+        }
+        sel.innerHTML = opts;
+
+        document.getElementById("elAdd").onclick = function () {
+            var topic = document.getElementById("elTopic").value.trim();
+            if (!topic) { AI9.toast("Give the entry a topic first."); return; }
+            var rows = logGet();
+            rows.push({
+                domain: sel.value,
+                topic: topic,
+                cause: document.getElementById("elCause").value,
+                note: document.getElementById("elNote").value.trim(),
+                at: Date.now()
+            });
+            logSet(rows);
+            document.getElementById("elTopic").value = "";
+            document.getElementById("elNote").value = "";
+            paintLog();
+            AI9.toast("Logged.");
+        };
+
+        document.getElementById("elCopy").onclick = function () {
+            var rows = logGet();
+            if (!rows.length) { AI9.toast("Nothing to copy yet."); return; }
+            var txt = "AI-900 error log \u2014 " + rows.length + " entries\n\n";
+            for (var i = 0; i < rows.length; i++) {
+                txt += (i + 1) + ". [" + rows[i].domain + "] " + rows[i].topic +
+                    "\n   Cause: " + CAUSES[rows[i].cause] +
+                    (rows[i].note ? "\n   Fix: " + rows[i].note : "") + "\n\n";
+            }
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(txt).then(function () { AI9.toast("Copied."); },
+                    function () { AI9.toast("Could not copy."); });
+            } else {
+                window.prompt("Copy your log:", txt);
+            }
+        };
+
+        document.getElementById("elClear").onclick = function () {
+            if (window.confirm("Delete every entry in the error log? This cannot be undone.")) {
+                logSet([]);
+                paintLog();
+                AI9.toast("Log cleared.");
+            }
+        };
+
+        paintLog();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        bindCalc();
+        bindTimer();
+        bindFlashcards();
+        bindServices();
+        bindReadiness();
+        bindLog();
+    });
+})();
+</script>
+</body>
+</html>

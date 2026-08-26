@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Workloads &amp; Responsible AI &mdash; AI-900 Exam Prep</title>
+<meta name="description" content="Learn the common AI workloads and responsible AI principles tested on the AI-900 exam.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>AI Workloads and Responsible AI</h1>
+<p class="lede">This covers skill area 1, &ldquo;Describe Artificial Intelligence workloads and considerations&rdquo; (15&ndash;20% of the exam).</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#workloads">Common workloads</a>
+    <a class="btn secondary sm" href="#table">Lookup table</a>
+    <a class="btn secondary sm" href="#responsible">Responsible AI</a>
+    <a class="btn secondary sm" href="#traps">Exam traps</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="workloads">
+  <h2>Identifying common AI workloads</h2>
+  <p>AI-900 does not ask you to build every kind of model. It asks whether you can recognize the workload from a business sentence and choose the right Azure service family. The quickest path is to look for the action verb: see, read, listen, translate, predict, recommend, detect, mine, chat, or generate.</p>
+  <p>Machine learning underpins these workloads because the system learns patterns from data instead of being programmed with every rule. On this exam, <strong>artificial intelligence</strong> is the broad capability: software behaving intelligently, understanding content, making predictions, or creating responses. <strong>Machine learning</strong> is the common technique behind it: training a model on data so it can make predictions or classifications on new examples.</p>
+  <p>That distinction matters because the same workload can be delivered by a prebuilt Azure AI service or by a custom model that your team trains in Azure Machine Learning. If the question describes a common perception or language task and asks for the fastest managed option, choose the relevant Azure AI service. If the question says the organization has unique historical data and needs to train, evaluate, register, or deploy a custom model, think Azure Machine Learning.</p>
+  <p>Also watch the input and output. Images and video point to vision. Text points to language unless the task is translation or generation. Audio points to speech. Forms with fields point to document intelligence. Time-based numeric predictions point to forecasting. Large document collections with search and enrichment point to knowledge mining. A turn-by-turn user interaction points to conversational AI.</p>
+  <p>When two answers sound plausible, choose the one that names the primary user goal. A receipt image involves vision, but if the goal is total, merchant, and tax extraction, the workload is document intelligence. A searchable archive may use language skills, but the end-to-end workload is knowledge mining.</p>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Computer vision</h3>
+      <p>Computer vision extracts information from images and video. It can classify an image, detect objects, read printed or handwritten text, analyze faces, or describe what appears in a picture.</p>
+      <p><strong>Business example:</strong> a manufacturer uses Azure AI Vision to detect whether a product label is missing before the item leaves the line.</p>
+    </div>
+    <div class="card">
+      <h3>Natural language processing</h3>
+      <p>Natural language processing, or NLP, works with human language in text. It can identify sentiment, key phrases, entities, language, personally identifiable information, or user intent.</p>
+      <p><strong>Business example:</strong> a support team uses Azure AI Language to classify customer comments as complaints, compliments, or refund requests.</p>
+    </div>
+    <div class="card">
+      <h3>Document processing</h3>
+      <p>Document processing extracts structured fields from forms, receipts, invoices, IDs, contracts, and other semi-structured documents. The exam may call this document intelligence.</p>
+      <p><strong>Business example:</strong> an accounts payable team uses Azure AI Document Intelligence to extract vendor, invoice number, due date, and total from PDF invoices.</p>
+    </div>
+    <div class="card">
+      <h3>Generative AI</h3>
+      <p>Generative AI creates new text, images, code, summaries, or answers from a prompt. It is associated with large language models and foundation models.</p>
+      <p><strong>Business example:</strong> an internal knowledge assistant uses Azure OpenAI Service or Azure AI Foundry to summarize a policy and draft a response for an employee.</p>
+    </div>
+    <div class="card">
+      <h3>Anomaly detection</h3>
+      <p>Anomaly detection finds unusual patterns that do not match expected behavior. It is common in monitoring, fraud, operations, and equipment telemetry.</p>
+      <p><strong>Business example:</strong> a bank flags a card transaction because the amount, location, and time are unusual for that account.</p>
+    </div>
+    <div class="card">
+      <h3>Knowledge mining</h3>
+      <p>Knowledge mining extracts facts, entities, relationships, and searchable structure from large stores of unstructured content. It often combines search with enrichment skills.</p>
+      <p><strong>Business example:</strong> a legal department uses Azure AI Search to index contracts, extract organization names, and let staff search by clause type.</p>
+    </div>
+    <div class="card">
+      <h3>Conversational AI</h3>
+      <p>Conversational AI lets people interact with software through natural-language dialog. It includes chatbots, virtual agents, intent recognition, and responses grounded in business data.</p>
+      <p><strong>Business example:</strong> a benefits bot answers employee questions, asks follow-up questions, and routes complex cases to HR.</p>
+    </div>
+  </div>
+  <div class="callout key">
+    <span class="callout-title">Exam shortcut</span>
+    <p>If the question asks what type of workload is being used, answer with the workload. If it asks which Azure service is appropriate, answer with the service. For example, &ldquo;extract totals from invoices&rdquo; is document processing; the Azure service is Azure AI Document Intelligence.</p>
+  </div>
+</section>
+
+<section id="table">
+  <h2>The workload lookup table</h2>
+  <p>Use this table as a translation layer between question wording and Azure vocabulary. AI-900 often gives you a scenario, not the service name.</p>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Workload</th><th>What it does</th><th>Giveaway words in the question</th><th>Typical Azure service</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Computer vision</td><td>Analyzes images or video.</td><td>Image, object, scene, OCR, visual, face, tag</td><td>Azure AI Vision, Azure AI Face, Azure AI Custom Vision</td></tr>
+        <tr><td>Natural language processing</td><td>Analyzes or classifies text.</td><td>Sentiment, key phrases, entities, intent, language, PII</td><td>Azure AI Language</td></tr>
+        <tr><td>Document processing</td><td>Extracts fields from forms and documents.</td><td>Invoice, receipt, form, contract, fields, layout</td><td>Azure AI Document Intelligence</td></tr>
+        <tr><td>Generative AI</td><td>Creates text, code, images, answers, and summaries.</td><td>Generate, draft, summarize, prompt, LLM, chatbot answer</td><td>Azure OpenAI Service, Azure AI Foundry</td></tr>
+        <tr><td>Anomaly detection</td><td>Finds unusual records or behavior.</td><td>Outlier, unusual, abnormal, spike, fraud, deviation</td><td>Azure Machine Learning, anomaly detection models</td></tr>
+        <tr><td>Knowledge mining</td><td>Makes unstructured content searchable and enriched.</td><td>Index documents, enrich, extract entities, search across files</td><td>Azure AI Search</td></tr>
+        <tr><td>Conversational AI</td><td>Supports natural-language dialog with users.</td><td>Bot, virtual assistant, dialog, intent, conversation</td><td>Azure AI Foundry, Azure OpenAI Service, Azure AI Language</td></tr>
+        <tr><td>Speech</td><td>Converts speech to text, text to speech, or analyzes speech.</td><td>Transcribe, synthesize, spoken audio, voice, caption</td><td>Azure AI Speech</td></tr>
+        <tr><td>Translation</td><td>Converts text or speech from one language to another.</td><td>Translate, multilingual, target language, source language</td><td>Azure AI Translator, Azure AI Speech</td></tr>
+        <tr><td>Forecasting</td><td>Predicts future numeric values over time.</td><td>Future sales, demand, next month, time series</td><td>Azure Machine Learning automated ML</td></tr>
+        <tr><td>Recommendation</td><td>Suggests items based on users, items, or behavior.</td><td>Recommend, next best product, similar users, personalize</td><td>Azure Machine Learning</td></tr>
+        <tr><td>Content moderation</td><td>Detects harmful, unsafe, or policy-violating content.</td><td>Hate, sexual, violence, self-harm, unsafe prompt, filter</td><td>Azure AI Content Safety</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="responsible">
+  <h2>The six responsible AI principles</h2>
+  <p>Responsible AI questions usually describe a risk, not a feature. Your job is to identify which principle the risk maps to. The principles are not slogans; each points to a different design obligation.</p>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Fairness</h3>
+      <p><strong>Definition:</strong> AI systems should treat people and groups equitably and avoid unjustified differences in outcomes.</p>
+      <p><strong>Exam scenario:</strong> a loan approval model rejects qualified applicants from one demographic group more often than others.</p>
+      <p><strong>Giveaway:</strong> bias, demographic disparity, protected group, unequal outcome.</p>
+      <p><strong>Tooling:</strong> Fairlearn and the responsible AI dashboard help compare model behavior across cohorts and investigate fairness issues.</p>
+    </div>
+    <div class="card">
+      <h3>Reliability and safety</h3>
+      <p><strong>Definition:</strong> AI systems should work consistently under expected conditions and fail safely when conditions change.</p>
+      <p><strong>Exam scenario:</strong> an autonomous quality-inspection system must continue to perform correctly when lighting changes or the camera angle shifts.</p>
+      <p><strong>Giveaway:</strong> safe operation, robustness, failover, unexpected input, dependable behavior.</p>
+      <p><strong>Tooling:</strong> testing, monitoring, model evaluation, and operational controls support safe deployment.</p>
+    </div>
+    <div class="card">
+      <h3>Privacy and security</h3>
+      <p><strong>Definition:</strong> AI systems should protect data, identities, models, and access to outputs.</p>
+      <p><strong>Exam scenario:</strong> a hospital trains a model without exposing patient records beyond the approved team.</p>
+      <p><strong>Giveaway:</strong> personal data, confidential, encryption, access control, anonymize, data handling.</p>
+      <p><strong>Tooling:</strong> differential privacy, secure storage, access controls, and careful data handling reduce exposure of sensitive data.</p>
+    </div>
+    <div class="card">
+      <h3>Inclusiveness</h3>
+      <p><strong>Definition:</strong> AI systems should empower everyone and account for different abilities, languages, contexts, and ways of interacting.</p>
+      <p><strong>Exam scenario:</strong> a government service adds speech output, captions, keyboard access, and plain-language prompts so more residents can use it.</p>
+      <p><strong>Giveaway:</strong> accessible, disabilities, language needs, broad participation, usable by everyone.</p>
+      <p><strong>Tooling:</strong> inclusive design practices, accessibility testing, speech, translation, and multimodal interfaces support this principle.</p>
+    </div>
+    <div class="card">
+      <h3>Transparency</h3>
+      <p><strong>Definition:</strong> people should understand that they are interacting with AI and have meaningful information about how it works.</p>
+      <p><strong>Exam scenario:</strong> a hiring tool provides explanations for the factors that influenced a recommendation.</p>
+      <p><strong>Giveaway:</strong> explain, interpret, disclose, understand model behavior, why did it decide.</p>
+      <p><strong>Tooling:</strong> model interpretability, explanations, documentation, and responsible AI dashboard insights support transparency.</p>
+    </div>
+    <div class="card">
+      <h3>Accountability</h3>
+      <p><strong>Definition:</strong> people and organizations remain responsible for AI systems and must have governance, review, and oversight.</p>
+      <p><strong>Exam scenario:</strong> a company assigns an approval board and human reviewers before a high-impact model goes into production.</p>
+      <p><strong>Giveaway:</strong> responsible owner, governance, audit, human review, oversight, compliance process.</p>
+      <p><strong>Tooling:</strong> human governance, audit trails, review processes, and documented ownership support accountability.</p>
+    </div>
+  </div>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Principle</th><th>The question sounds like</th><th>Giveaway word</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Fairness</td><td>The model treats one group worse than another.</td><td>Bias</td></tr>
+        <tr><td>Reliability and safety</td><td>The system must keep working safely and consistently.</td><td>Robust</td></tr>
+        <tr><td>Privacy and security</td><td>Sensitive data must be protected from exposure.</td><td>Confidential</td></tr>
+        <tr><td>Inclusiveness</td><td>The system must work for people with different abilities or contexts.</td><td>Accessible</td></tr>
+        <tr><td>Transparency</td><td>Users need to understand AI use or model behavior.</td><td>Explain</td></tr>
+        <tr><td>Accountability</td><td>A human or organization must own decisions and governance.</td><td>Oversight</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout trap">
+    <span class="callout-title">Two pairs people confuse</span>
+    <p><strong>Transparency</strong> is about disclosure and explainability; <strong>accountability</strong> is about ownership, governance, and human responsibility. <strong>Inclusiveness</strong> is about making the system usable by more people; <strong>fairness</strong> is about avoiding biased outcomes across groups.</p>
+  </div>
+</section>
+
+<section id="traps">
+  <h2>Where people lose points here</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Choosing a service instead of a workload</h3>
+      <p>If the question asks for the workload, answer &ldquo;computer vision,&rdquo; not &ldquo;Azure AI Vision.&rdquo; Match the level of abstraction in the question.</p>
+    </div>
+    <div class="card">
+      <h3>Calling every chatbot generative AI</h3>
+      <p>A bot that routes intents and returns scripted answers is conversational AI. A bot that creates new answers from prompts and grounding data is generative AI.</p>
+    </div>
+    <div class="card">
+      <h3>Mixing OCR and document intelligence</h3>
+      <p>Reading text from an image is OCR in a vision workload. Extracting invoice fields, tables, and key-value pairs is document processing.</p>
+    </div>
+    <div class="card">
+      <h3>Missing knowledge mining clues</h3>
+      <p>When the scenario says to search thousands of documents and enrich them with extracted entities, think Azure AI Search, not only NLP.</p>
+    </div>
+    <div class="card">
+      <h3>Confusing translation with language detection</h3>
+      <p>Detecting that text is Spanish is NLP. Converting Spanish text into English is translation.</p>
+    </div>
+    <div class="card">
+      <h3>Treating responsible AI as optional</h3>
+      <p>The exam expects responsible AI to be part of design, deployment, and monitoring, not a final checklist after the model is built.</p>
+    </div>
+  </div>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+  <div class="grid grid-3">
+    <div class="card">
+      <h3>Seven core workloads</h3>
+      <ul>
+        <li><strong>Computer vision:</strong> analyze images and video.</li>
+        <li><strong>NLP:</strong> analyze text for meaning, sentiment, entities, or intent.</li>
+        <li><strong>Document intelligence:</strong> extract structured fields from forms and documents.</li>
+        <li><strong>Generative AI:</strong> create text, images, code, summaries, or answers.</li>
+        <li><strong>Anomaly detection:</strong> detect unusual values or behavior.</li>
+        <li><strong>Knowledge mining:</strong> enrich and search large content collections.</li>
+        <li><strong>Conversational AI:</strong> interact through dialog.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Six principles</h3>
+      <ul>
+        <li><strong>Fairness:</strong> avoid unjust biased outcomes.</li>
+        <li><strong>Reliability and safety:</strong> operate dependably and safely.</li>
+        <li><strong>Privacy and security:</strong> protect data, systems, and access.</li>
+        <li><strong>Inclusiveness:</strong> design for people with different needs.</li>
+        <li><strong>Transparency:</strong> disclose and explain AI behavior.</li>
+        <li><strong>Accountability:</strong> assign human ownership and governance.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Giveaway verbs</h3>
+      <ul>
+        <li><strong>Extract:</strong> document intelligence when fields come from forms; NLP when entities come from plain text.</li>
+        <li><strong>Classify:</strong> NLP for text, vision for images, machine learning for general categories.</li>
+        <li><strong>Detect:</strong> vision for objects, anomaly detection for outliers, content safety for harmful content.</li>
+        <li><strong>Transcribe:</strong> speech to text with Azure AI Speech.</li>
+        <li><strong>Translate:</strong> Azure AI Translator or speech translation.</li>
+        <li><strong>Generate or summarize:</strong> generative AI with Azure OpenAI Service or Azure AI Foundry.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?set=d1-workloads">Drill: AI workloads</a>
+    <a class="btn" href="drills.html?set=d1-responsible">Drill: Responsible AI</a>
+    <a class="btn secondary" href="machine-learning.html">Next guide: Machine Learning on Azure &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>

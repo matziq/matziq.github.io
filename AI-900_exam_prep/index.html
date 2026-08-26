@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI-900 Exam Prep &mdash; A Study Plan Built Around Your Exam Date</title>
+<meta name="description" content="A complete Microsoft AI-900 Azure AI Fundamentals prep site: pick your exam date and get a study plan sized to it, three full practice exams, fifteen topic drills, five guides, and study tools.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<div class="hero">
+    <div class="wrap">
+        <div class="eyebrow" id="heroEyebrow">Microsoft Exam AI-900 &middot; Azure AI Fundamentals</div>
+        <h1 id="heroTitle">Pick your exam date. Everything else is calculated.</h1>
+        <p id="heroBlurb">Five skill areas, a 700 to pass, and about forty-five minutes to prove it. Tell this
+            site when you are sitting the exam and it builds a day-by-day plan that fits the time you actually
+            have &mdash; whether that is three days or six weeks.</p>
+        <div class="hero-stats" id="heroStats"></div>
+    </div>
+</div>
+
+<main id="main"><div class="wrap">
+
+<!-- ================= EXAM DATE ================= -->
+<section id="examdate">
+    <h2>Step one: your exam date</h2>
+    <p class="lede">This is the only setting on the site, and it drives everything else &mdash; the countdown,
+        how many study days you get, what lands on each of them, and when each practice exam is scheduled.</p>
+    <div id="dateHost"></div>
+</section>
+
+<!-- ================= WHAT THE EXAM IS ================= -->
+<section>
+    <h2>What the exam actually looks like</h2>
+
+    <div class="grid grid-2" style="margin-bottom:1.5rem">
+        <div class="card">
+            <h3 style="margin-top:0">The facts that shape how you study</h3>
+            <div class="table-scroll">
+                <table class="data-table">
+                    <tbody>
+                        <tr><td><strong>Exam code</strong></td><td>AI-900</td></tr>
+                        <tr><td><strong>Certification</strong></td><td>Microsoft Certified: Azure AI Fundamentals</td></tr>
+                        <tr><td><strong>Questions</strong></td><td>Typically 40&ndash;60, multiple choice and multiple response</td></tr>
+                        <tr><td><strong>Exam time</strong></td><td>About 45 minutes, in a 60-minute appointment</td></tr>
+                        <tr><td><strong>Score scale</strong></td><td>1&ndash;1000</td></tr>
+                        <tr><td><strong>Passing score</strong></td><td><span class="badge good">700</span></td></tr>
+                        <tr><td><strong>Wrong-answer penalty</strong></td><td>None &mdash; never leave a question blank</td></tr>
+                        <tr><td><strong>Prerequisites</strong></td><td>None. No coding or data science required.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 style="margin-top:0">What 700 really means</h3>
+            <p>A 700 is <em>not</em> 70% of the questions in a simple sense &mdash; Microsoft scales scores and
+                weights harder items more heavily, and it has never published the conversion. But 70% correct is
+                the working assumption everyone uses, and it is what this site is calibrated to.</p>
+            <p>On a 50-question practice exam that is <strong>35 correct</strong>. Miss sixteen and you are out.
+                That sounds tight, and it is: AI-900 is a broad exam with very little partial credit for
+                &ldquo;sort of knowing&rdquo; a service.</p>
+            <div class="callout key" style="margin-bottom:0">
+                <span class="callout-title">Strategy in one line</span>
+                <p style="margin-bottom:0">Almost every question is &ldquo;which workload is this?&rdquo; or
+                    &ldquo;which Azure service does this?&rdquo; Learn to map a business sentence onto exactly one
+                    service, and the exam becomes short.</p>
+            </div>
+        </div>
+    </div>
+
+    <h3>The five skill areas, and what each is worth</h3>
+    <p>These are the official weightings from the Microsoft skills-measured document. The third column is how
+        this site distributes its 50-question practice exams.</p>
+    <div class="table-scroll">
+        <table class="data-table">
+            <thead><tr>
+                <th style="width:2.5rem">#</th><th>Skill area</th><th>Official weight</th>
+                <th>Questions here</th><th>Guide</th>
+            </tr></thead>
+            <tbody id="domainRows"></tbody>
+        </table>
+    </div>
+    <div class="callout tip">
+        <span class="callout-title">Where the points actually are</span>
+        <p style="margin-bottom:0">Generative AI is the single largest skill area, and it grew the last time
+            Microsoft revised the exam while machine learning shrank. If you are short on time, read the
+            <a href="generative-ai.html">Generative AI guide</a> first and the
+            <a href="ai-workloads.html#responsible">responsible AI principles</a> second. Together they are
+            close to <strong>a third of the exam</strong> and they are the two most memorizable areas on it.</p>
+    </div>
+
+    <div class="callout warn">
+        <span class="callout-title">One thing you should know before you book</span>
+        <p><strong>Microsoft retired Exam AI-900 on June 30, 2026</strong> and replaced it with
+            <strong>AI-901</strong>, which leads to the same Azure AI Fundamentals certification. If you already
+            hold the credential from AI-900, it stays valid and does not expire.</p>
+        <p style="margin-bottom:0">This site is built to the AI-900 objectives. Most of what is here still
+            transfers directly &mdash; the AI workload vocabulary, the six responsible AI principles, the machine
+            learning fundamentals, the Azure AI service line-up, and the generative AI material all carry over.
+            The main gap is that AI-901 leans harder on building with Microsoft Foundry, agents, and Copilot. Use
+            this site for the fundamentals, then check the current
+            <a href="https://learn.microsoft.com/credentials/certifications/azure-ai-fundamentals/" rel="noopener">official
+            skills-measured document</a> for whichever exam you are actually booked for.</p>
+    </div>
+</section>
+
+<!-- ================= HOW THE PLAN WORKS ================= -->
+<section>
+    <h2>How the plan is built</h2>
+    <p class="lede">There is no fixed number of days. The generator takes the days between today and your exam
+        and fits a real plan into them.</p>
+
+    <div class="grid grid-3" style="margin-bottom:1.5rem">
+        <div class="card">
+            <div class="card-icon">1</div>
+            <h3>Baseline before you study</h3>
+            <p style="margin-bottom:0">Day one is a cold practice exam. Not to feel good &mdash; to find the two
+                skill areas that are costing you the most, so the rest of the plan can aim at them.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon amber">2</div>
+            <h3>Three exams, three repairs</h3>
+            <p style="margin-bottom:0">Practice exams are spaced across whatever window you have, and each one is
+                followed by a repair day. The repair day is where the score actually moves.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon teal">3</div>
+            <h3>It stretches and it compresses</h3>
+            <p style="margin-bottom:0">A long runway gets reinforcement days instead of filler. A short one merges
+                study blocks and drops the optional work. Either way the last day is a taper.</p>
+        </div>
+    </div>
+
+    <div class="callout">
+        <span class="callout-title">Why the day after a practice exam matters more than the exam</span>
+        <p style="margin-bottom:0">Taking a practice exam measures your score. It does not raise it. The gain
+            comes from the hour afterward, when you work out <em>why</em> each miss happened &mdash; a fact you
+            never learned, a fact you know but read past, or a misread question. Sort every miss into one of
+            those three buckets and the fix becomes obvious, because the three have three different fixes.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:1.5rem">
+        <h3 style="margin-top:0">Your progress</h3>
+        <div id="progressBox"><p class="muted">Loading&hellip;</p></div>
+    </div>
+
+    <div class="btn-row">
+        <a class="btn lg" href="plan.html">Open your study plan</a>
+        <a class="btn lg secondary" href="exams.html">Go to the practice exams</a>
+    </div>
+</section>
+
+<!-- ================= EVERYTHING HERE ================= -->
+<section id="everything">
+    <h2>Everything on this site</h2>
+    <div class="grid grid-3">
+        <a class="card card-link" href="plan.html">
+            <div class="card-icon">1</div><h3>Your Study Plan</h3>
+            <p>Day-by-day tasks with checkboxes that save automatically, sized to your exam date. Start here every morning.</p>
+        </a>
+        <a class="card card-link" href="ai-workloads.html">
+            <div class="card-icon">2</div><h3>AI Workloads &amp; Responsible AI</h3>
+            <p>Naming the workload from a business sentence, plus the six responsible AI principles and the giveaway word for each.</p>
+        </a>
+        <a class="card card-link" href="machine-learning.html">
+            <div class="card-icon teal">3</div><h3>Machine Learning Guide</h3>
+            <p>Regression, classification, clustering, features and labels, the metrics that matter, and what Azure Machine Learning actually does.</p>
+        </a>
+        <a class="card card-link" href="computer-vision.html">
+            <div class="card-icon amber">4</div><h3>Computer Vision Guide</h3>
+            <p>Classification versus detection versus OCR, face capabilities, and choosing between Azure AI Vision, Custom Vision, and Document Intelligence.</p>
+        </a>
+        <a class="card card-link" href="nlp.html">
+            <div class="card-icon good">5</div><h3>NLP Guide</h3>
+            <p>Key phrases, entities, sentiment, summarization, and the split between Azure AI Language, Speech, and Translator.</p>
+        </a>
+        <a class="card card-link" href="generative-ai.html">
+            <div class="card-icon bad">6</div><h3>Generative AI Guide <span class="badge bad">largest area</span></h3>
+            <p>Tokens, prompts, temperature, grounding, RAG, fine-tuning, and the Azure AI Foundry and Azure OpenAI service line-up.</p>
+        </a>
+        <a class="card card-link" href="drills.html">
+            <div class="card-icon">7</div><h3>Topic Drills</h3>
+            <p>Fifteen short timed sets on one skill at a time. Instant scoring and an explanation for every question.</p>
+        </a>
+        <a class="card card-link" href="exams.html">
+            <div class="card-icon amber">8</div><h3>Practice Exams 1&ndash;3</h3>
+            <p>Three full-length 50-question exams weighted like the real thing, with scaled scoring and full review mode.</p>
+        </a>
+        <a class="card card-link" href="tools.html">
+            <div class="card-icon teal">9</div><h3>Study Tools</h3>
+            <p>Score estimator, exam timer, 180 flashcards, a searchable Azure AI service reference, and the error log.</p>
+        </a>
+    </div>
+</section>
+
+<!-- ================= EXAM DAY ================= -->
+<section>
+    <h2>Exam day logistics</h2>
+    <div class="grid grid-2">
+        <div class="card">
+            <h3 style="margin-top:0">Whichever way you are testing</h3>
+            <ul style="margin-bottom:0">
+                <li>Two forms of ID, one of them government issued with a photo. The names must match your booking exactly.</li>
+                <li>Arrive or log in <strong>thirty minutes early</strong>. Late is the same as absent.</li>
+                <li>No notes, no phone, no watch, no second monitor.</li>
+                <li>If you are testing online, run the system check on the machine you will actually use, days ahead.</li>
+                <li>Online testing also means a clear desk and a clear room. The proctor will make you pan the camera.</li>
+                <li>Eat something with protein first. Forty-five minutes is short, but a blood-sugar crash is still real.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3 style="margin-top:0">Once the clock starts</h3>
+            <ul style="margin-bottom:0">
+                <li><strong>Read the last line first.</strong> BEST, FIRST, MOST, and NOT each change which answer is correct.</li>
+                <li>Watch for &ldquo;Select two&rdquo; and &ldquo;Select three.&rdquo; Missing one costs the whole question.</li>
+                <li>If a question passes about 75 seconds, answer it, mark it for review, and move on.</li>
+                <li>Two choices that mean the same thing are usually both wrong.</li>
+                <li><strong>Answer every question.</strong> There is no penalty, so a blank is strictly worse than a guess.</li>
+                <li>Leave five minutes to sweep your marked questions. Do not rewrite answers you were confident about.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+</div></main>
+
+<footer id="footer"></footer>
+
+<script>
+(function () {
+    document.addEventListener("DOMContentLoaded", function () {
+
+        /* ---------- hero ---------- */
+        var set = AI9.hasExamDate();
+        var left = AI9.daysLeft();
+        var plan = AI9.plan();
+
+        if (set && !AI9.isPast()) {
+            document.getElementById("heroEyebrow").innerHTML =
+                "Microsoft Exam AI-900 &middot; " + AI9.fmtLong(AI9.examDate());
+            document.getElementById("heroTitle").textContent =
+                left === 0 ? "Today is the day."
+                    : left + " day" + (left === 1 ? "" : "s") + ". One number that matters.";
+            document.getElementById("heroBlurb").innerHTML =
+                "Your plan below is built for exactly the time you have left. Work the day you are on, take the " +
+                "three practice exams where they fall, and review every miss. That is the whole game.";
+        }
+
+        var stats = [
+            { n: set && !AI9.isPast() ? left : "\u2014", l: "Days left" },
+            { n: AI9.planLength(), l: "Study days" },
+            { n: "700", l: "Score to pass" },
+            { n: "3", l: "Practice exams" },
+            { n: "270", l: "Practice questions" }
+        ];
+        var sh = "";
+        for (var i = 0; i < stats.length; i++) {
+            sh += '<div class="hero-stat"><div class="n">' + stats[i].n + '</div><div class="l">' +
+                stats[i].l + "</div></div>";
+        }
+        document.getElementById("heroStats").innerHTML = sh;
+
+        /* ---------- date picker ---------- */
+        AI9.renderDatePicker(document.getElementById("dateHost"));
+
+        /* ---------- skill area table ---------- */
+        var rows = "";
+        for (var d = 0; d < AI9.DOMAINS.length; d++) {
+            var dm = AI9.DOMAINS[d];
+            rows += "<tr><td><strong>" + dm.num + "</strong></td>" +
+                "<td>" + dm.full + "</td>" +
+                '<td><span class="badge ' + (dm.id === "genai" ? "bad" : "accent") + '">' + dm.weight + "</span></td>" +
+                "<td>" + dm.q + " of 50</td>" +
+                '<td><a href="' + dm.page + '">' + dm.short + "</a></td></tr>";
+        }
+        document.getElementById("domainRows").innerHTML = rows;
+
+        /* ---------- progress ---------- */
+        var box = document.getElementById("progressBox");
+        var checks = AI9.store.get("plan", {});
+        var doneTasks = 0;
+        for (var k in checks) { if (Object.prototype.hasOwnProperty.call(checks, k)) doneTasks++; }
+
+        var hist = AI9.store.get("history", {});
+        var runs = [];
+        for (var t in hist) { if (Object.prototype.hasOwnProperty.call(hist, t)) runs.push(hist[t]); }
+        runs.sort(function (a, b) { return a.at - b.at; });
+
+        var totalTasks = AI9.planTaskCount();
+        var day = Math.min(plan.length, Math.max(1, AI9.currentPlanDay()));
+        var started = AI9.currentPlanDay() >= 1;
+
+        var html = "";
+        if (started) {
+            html += '<div class="meter-row"><span class="mlabel">Day ' + day + " of " + plan.length + "</span>" +
+                '<span class="meter"><i data-pct="' + Math.round(day / plan.length * 100) + '"></i></span>' +
+                '<span class="mval">' + Math.round(day / plan.length * 100) + "%</span></div>";
+        } else {
+            html += '<p class="muted">Your plan starts on <strong>' + AI9.fmtDate(AI9.planStart()) +
+                "</strong>, in " + (1 - AI9.currentPlanDay()) + " day" +
+                ((1 - AI9.currentPlanDay()) === 1 ? "" : "s") +
+                ". Until then, read the guides and take Practice Exam 1 whenever you want an early baseline.</p>";
+        }
+        html += '<div class="meter-row"><span class="mlabel">Plan tasks checked off</span>' +
+            '<span class="meter"><i class="good" data-pct="' +
+            Math.min(100, Math.round(doneTasks / Math.max(1, totalTasks) * 100)) + '"></i></span>' +
+            '<span class="mval">' + doneTasks + " / " + totalTasks + "</span></div>";
+
+        if (runs.length) {
+            html += '<h4 style="margin-top:1.2rem">Practice exams taken</h4><div class="table-scroll">' +
+                '<table class="data-table"><thead><tr><th>Exam</th><th>Correct</th><th>Percent</th>' +
+                "<th>Scaled</th><th>Result</th></tr></thead><tbody>";
+            for (var i2 = 0; i2 < runs.length; i2++) {
+                var r = runs[i2];
+                html += "<tr><td>" + AI9.escapeHtml(r.title) + "</td><td>" + r.right + " / " + r.total +
+                    "</td><td>" + r.pct + "%</td><td><strong>" + r.scaled + "</strong></td><td>" +
+                    '<span class="badge ' + (r.passed ? "good" : "bad") + '">' +
+                    (r.passed ? "Pass" : "Below 700") + "</span></td></tr>";
+            }
+            html += "</tbody></table></div>";
+            var last = runs[runs.length - 1];
+            html += '<p class="muted" style="margin-bottom:0">Most recent estimate: <strong>' + last.scaled +
+                "</strong> &middot; passing is 700.</p>";
+        } else {
+            html += '<p class="muted" style="margin:1rem 0 0">No practice exams recorded yet. ' +
+                "Your first one is <strong>" + AI9.fmtDate(AI9.dateForDay(AI9.examSchedule().exam1)) +
+                "</strong> &mdash; take it cold, before you read anything.</p>";
+        }
+        box.innerHTML = html;
+        AI9.autoFillMeters(box);
+
+        if (location.hash === "#examdate") {
+            setTimeout(function () {
+                document.getElementById("examdate").scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 200);
+        }
+    });
+})();
+</script>
+</body>
+</html>

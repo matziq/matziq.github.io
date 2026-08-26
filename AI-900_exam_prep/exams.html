@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice Exams &mdash; AI-900 Exam Prep</title>
+<meta name="description" content="Three timed 50-question Microsoft AI-900 practice exams weighted across the five skill areas, with scaled scoring against the 700 passing mark and full review mode.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>The Practice Exams</h1>
+<p class="lede">Three full-length exams, one for each checkpoint in your plan. Each is 50 questions in 45
+    minutes at roughly the same pace as the real thing, weighted across the five skill areas the way Microsoft
+    weights them, and scored against the 700 line.</p>
+
+<div id="dateBanner"></div>
+
+<div class="callout warn">
+    <span class="callout-title">Take these properly or do not take them at all</span>
+    <p style="margin-bottom:0">A practice exam taken with your phone next to you, in three sittings, with the
+        clock paused and a browser tab open, tells you nothing except that you can look things up. Sit down, put
+        the phone in another room, close every tab, start the clock, and do not stop. The score you get under
+        real conditions is the only number worth having &mdash; and it is the number your whole plan is
+        calibrated against.</p>
+</div>
+
+<div class="grid grid-3" id="examCards" style="margin:1.5rem 0"></div>
+
+<section>
+    <h2>The schedule, and why it is spaced this way</h2>
+    <div class="grid grid-2">
+        <div class="card">
+            <h3 style="margin-top:0">When to take each one</h3>
+            <div class="table-scroll"><table class="data-table">
+                <thead><tr><th>Date</th><th>Exam</th><th>Purpose</th></tr></thead>
+                <tbody id="schedRows"></tbody>
+            </table></div>
+        </div>
+        <div class="card">
+            <h3 style="margin-top:0">Three is the right number</h3>
+            <p>More would not help. Full-length exams are expensive in time and energy, and they measure far
+                more than they teach.</p>
+            <p>What raises a score is the day <em>after</em> the exam, when you work out why each miss happened.
+                Three exams give you three full repair cycles, and each cycle aims the next stretch of the plan
+                at something specific rather than at &ldquo;more studying.&rdquo;</p>
+            <p style="margin-bottom:0">On the days in between, use the <a href="drills.html">topic drills</a>.
+                Same benefit, ten minutes instead of an hour.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Exam habits worth rehearsing now</h2>
+    <div class="grid grid-2">
+        <div class="card">
+            <h3 style="margin-top:0">Pacing</h3>
+            <ul style="margin-bottom:0">
+                <li><strong>About one minute per question.</strong> On the real exam that is roughly 45 minutes for 40 to 60 questions.</li>
+                <li>Most AI-900 questions are recognition, not reasoning. If you know it, you know it in fifteen seconds.</li>
+                <li>If a question passes about 75 seconds, answer it, mark it, and move. You can come back.</li>
+                <li>Leave five minutes at the end to sweep your marked questions.</li>
+                <li>Do not rewrite an answer you were confident about. Change it only if you can name the reason.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3 style="margin-top:0">Reading</h3>
+            <ul style="margin-bottom:0">
+                <li>Read the <strong>last line first</strong>. <em>BEST</em>, <em>FIRST</em>, <em>MOST</em>, and <em>NOT</em> each change which answer is correct.</li>
+                <li>Find the verb in the scenario. &ldquo;Extract,&rdquo; &ldquo;classify,&rdquo; &ldquo;detect,&rdquo; &ldquo;summarize,&rdquo; and &ldquo;generate&rdquo; each point at a different service.</li>
+                <li>Watch for &ldquo;Select two.&rdquo; Missing one costs the whole question.</li>
+                <li>Two choices that mean the same thing are usually both wrong.</li>
+                <li><strong>Never leave anything blank.</strong> There is no penalty, so a blind guess is free expected value.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>How the score is estimated</h2>
+    <div class="card">
+        <p>Microsoft reports AI-900 on a <strong>1 to 1000</strong> scale and passes at <strong>700</strong>.
+            It has never published the raw-to-scaled conversion, and the live exam weights questions by
+            difficulty, so no practice test anywhere can produce your exact score.</p>
+        <p>What this site does is anchor a curve on the two facts that are public &mdash; the range and the
+            passing mark &mdash; so that <strong>70% correct lands exactly on 700</strong>. That makes the number
+            honest as a readiness signal even though it is not an official score.</p>
+        <p style="margin-bottom:0">Read it this way: <span class="badge good">800+</span> means you are
+            comfortably ready, <span class="badge good">700&ndash;799</span> means you would pass but the margin
+            is thin, <span class="badge amber">620&ndash;699</span> means a focused repair day or two would get
+            you there, and <span class="badge bad">under 620</span> means the skill-area breakdown under your
+            score is where all your attention should go.</p>
+    </div>
+</section>
+
+</div></main>
+
+<footer id="footer"></footer>
+
+<script src="assets/data/exam1.js"></script>
+<script src="assets/data/exam2.js"></script>
+<script src="assets/data/exam3.js"></script>
+<script>
+(function () {
+    var EXAMS = [
+        { key: "exam1", n: 1, tag: "Baseline", cls: "", day: "exam1",
+          href: "practice-exam-1.html",
+          purpose: "Cold baseline, before you study anything. Its job is to find your two weakest skill areas, not to make you feel good.",
+          note: "Your real starting point. Take it before you read a single guide \u2014 studying first makes the result useless." },
+        { key: "exam2", n: 2, tag: "Checkpoint", cls: "amber", day: "exam2",
+          href: "practice-exam-2.html",
+          purpose: "Midpoint checkpoint. Did the targeted work actually move the areas you were weak in?",
+          note: "Harder than Exam 1, and heavier on questions that force a choice between two similar Azure services." },
+        { key: "exam3", n: 3, tag: "Dress rehearsal", cls: "good", day: "exam3",
+          href: "practice-exam-3.html",
+          purpose: "Dress rehearsal. Hardest set of the three, taken at your real appointment time.",
+          note: "Heavy on BEST and FIRST scenarios and on the distinctions people get wrong under time pressure." }
+    ];
+
+    function countQ(key) {
+        var e = (window.AI9_DATA || {})[key];
+        if (!e || !e.units) return 0;
+        var n = 0;
+        for (var u = 0; u < e.units.length; u++) n += e.units[u].questions.length;
+        return n;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        AI9.renderDateBanner(document.getElementById("dateBanner"));
+
+        var hist = AI9.store.get("history", {});
+        var sched = AI9.examSchedule();
+        var html = "", rows = "";
+
+        for (var i = 0; i < EXAMS.length; i++) {
+            var t = EXAMS[i];
+            var run = hist[t.key];
+            var q = countQ(t.key);
+            var mins = ((window.AI9_DATA || {})[t.key] || {}).timeMinutes || 45;
+            var dayN = sched[t.day];
+            var when = AI9.fmtDate(AI9.dateForDay(dayN));
+
+            var status = "";
+            if (run) {
+                status = '<div class="callout ' + (run.passed ? "key" : "warn") + '" style="margin:.9rem 0 0">' +
+                    '<span class="callout-title">' + (run.passed ? "Passed" : "Completed") + "</span>" +
+                    '<p style="margin-bottom:0">Scaled <strong>' + run.scaled + "</strong> &middot; " +
+                    run.right + " of " + run.total + " correct &middot; passing is 700.</p></div>";
+            }
+
+            html += '<a class="card card-link" href="' + t.href + '">' +
+                '<div class="card-icon ' + t.cls + '">' + t.n + "</div>" +
+                "<h3>Practice Exam " + t.n +
+                ' <span class="badge ' + (t.cls || "accent") + '">' + t.tag + "</span></h3>" +
+                '<p class="muted" style="font-size:.86rem;margin-bottom:.5rem"><strong>Day ' + dayN +
+                " &middot; " + when + "</strong></p>" +
+                "<p>" + t.note + "</p>" +
+                '<p class="faint" style="margin-bottom:0"><small>' + q + " questions &middot; " + mins +
+                " minutes &middot; passing 700</small></p>" +
+                status + "</a>";
+
+            rows += "<tr><td><strong>" + when + "</strong></td><td>Practice Exam " + t.n + "</td><td>" +
+                t.purpose + "</td></tr>";
+        }
+
+        rows += "<tr><td><strong>" + AI9.fmtDate(AI9.examDate()) + "</strong></td>" +
+            '<td><span class="badge good">The real AI-900</span></td><td>The one that counts.</td></tr>';
+
+        document.getElementById("examCards").innerHTML = html;
+        document.getElementById("schedRows").innerHTML = rows;
+    });
+})();
+</script>
+</body>
+</html>

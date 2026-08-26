@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Computer Vision &mdash; AI-900 Exam Prep</title>
+<meta name="description" content="A focused AI-900 study guide for computer vision workloads, face capabilities, OCR, and the Azure services that support them.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Computer Vision on Azure</h1>
+<p class="lede">This covers skill area 3, &ldquo;Describe features of computer vision workloads on Azure&rdquo; (15&ndash;20% of the exam).</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#types">The four solution types</a>
+    <a class="btn secondary sm" href="#faces">Faces</a>
+    <a class="btn secondary sm" href="#ocr">OCR</a>
+    <a class="btn secondary sm" href="#services">Services</a>
+    <a class="btn secondary sm" href="#traps">Exam traps</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="types">
+  <h2>The four solution types</h2>
+  <p>Computer vision lets software interpret visual input. For AI-900, do not memorize every API operation. Learn the shape of the problem: what goes in, what comes out, and which Azure service fits the business sentence.</p>
+  <p>The exam loves the difference between classifying an image and detecting objects in it. Classification labels the whole image. Object detection returns a class plus a bounding box for each instance. Semantic segmentation goes further and labels every pixel. Optical character recognition reads printed or handwritten text.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Image classification</h3>
+      <p><strong>Input:</strong> one image. <strong>Output:</strong> one or more labels for the entire image, usually with confidence scores.</p>
+      <p>A retailer can classify uploaded product photos as shoes, jackets, bags, or accessories. The model is not saying where the shoe is. It is saying what the overall image is about.</p>
+    </div>
+    <div class="card">
+      <h3>Object detection</h3>
+      <p><strong>Input:</strong> one image. <strong>Output:</strong> each detected object, its class, confidence, and rectangular bounding box.</p>
+      <p>A warehouse camera can find every pallet in an aisle and return coordinates for each one. If there are six pallets, expect six detections, not one image-level label.</p>
+    </div>
+    <div class="card">
+      <h3>Semantic segmentation</h3>
+      <p><strong>Input:</strong> one image. <strong>Output:</strong> a pixel-level mask that assigns a category to each pixel or region.</p>
+      <p>A city planning team can label road, sidewalk, building, vehicle, and tree pixels in street imagery. This is more detailed than a bounding box.</p>
+    </div>
+    <div class="card">
+      <h3>Optical character recognition</h3>
+      <p><strong>Input:</strong> an image, scanned page, sign, receipt, or document. <strong>Output:</strong> extracted text, lines, words, and location data.</p>
+      <p>A mobile app can read a serial number from a photo of equipment. A back-office process can extract typed and handwritten text from scanned forms.</p>
+    </div>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Solution type</th><th>Output</th><th>Example question wording</th><th>Azure service</th></tr></thead>
+      <tbody>
+        <tr><td>Image classification</td><td>A label for the whole image, such as product category or scene type</td><td>&ldquo;Determine whether an image is a receipt, invoice, or contract.&rdquo;</td><td>Azure AI Vision for prebuilt tags, or Azure AI Custom Vision for your own categories</td></tr>
+        <tr><td>Object detection</td><td>A class and bounding box for each object instance</td><td>&ldquo;Find every defective part on a conveyor belt and show where each one is.&rdquo;</td><td>Azure AI Custom Vision object detection, or Azure AI Vision for supported prebuilt detection scenarios</td></tr>
+        <tr><td>Semantic segmentation</td><td>A pixel-by-pixel label map</td><td>&ldquo;Label each pixel in satellite imagery as water, road, building, or vegetation.&rdquo;</td><td>Azure Machine Learning with a custom computer vision model</td></tr>
+        <tr><td>Optical character recognition</td><td>Text, lines, words, and text locations</td><td>&ldquo;Read the words on a road sign from a photo.&rdquo;</td><td>Azure AI Vision Read; use Azure AI Document Intelligence for forms and structured documents</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Trap: one label is not the same as many boxes</span>
+    <p>If the question says &ldquo;is this an X?&rdquo; or &ldquo;which category best describes this image?&rdquo;, think classification. If it says &ldquo;locate each X&rdquo;, &ldquo;count the objects&rdquo;, or &ldquo;draw a rectangle around each one&rdquo;, think object detection.</p>
+  </div>
+</section>
+
+<section id="faces">
+  <h2>Faces: detection, analysis, recognition</h2>
+  <p>Face workloads are still computer vision, but AI-900 expects you to separate ordinary face detection from identity-related recognition. A camera can detect that a face exists and return a face rectangle without identifying the person. Recognition requires enrollment, matching, and stricter responsible AI controls.</p>
+  <p><strong>Face detection</strong> answers &ldquo;is there a face, and where is it?&rdquo; It returns face locations and can support simple scenarios such as cropping a profile photo. Azure AI Vision can also do basic face detection, while Azure AI Face is the service focused on face analysis and recognition scenarios.</p>
+  <p><strong>Face analysis</strong> describes visible properties of a detected face. Current Face capabilities can include attributes such as head pose, blur, occlusion, exposure, noise, glasses, facial hair, mask, and landmarks depending on the API and access level. Microsoft retired broad inferred attributes such as emotion and gender because they created high risk and unreliable social inference. On the exam, do not pick emotion analysis as a modern Face feature.</p>
+  <p><strong>Face verification</strong> compares two faces and answers whether they are likely the same person. <strong>Face identification</strong>, sometimes called recognition, compares a detected face against an enrolled person group and returns who it most likely is. Identification is a one-to-many search. Verification is a one-to-one comparison.</p>
+  <p>Azure AI Face has a Limited Access policy for sensitive capabilities such as face recognition. Microsoft uses this policy because biometric identification can affect privacy, consent, fairness, and safety. Customers must apply for access and describe an appropriate use case. That does not mean face detection is banned; it means identity recognition is controlled.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Operation</th><th>Question it answers</th><th>What must exist first?</th><th>Typical output</th></tr></thead>
+      <tbody>
+        <tr><td>Detection</td><td>Is there a face, and where?</td><td>An image</td><td>Face rectangle, landmarks, and supported analysis attributes</td></tr>
+        <tr><td>Verification</td><td>Are these two faces the same person?</td><td>Two face images or face IDs</td><td>Same or not same, with a confidence score</td></tr>
+        <tr><td>Identification</td><td>Who is this person?</td><td>An enrolled person group with stored face data</td><td>Candidate person identity and confidence</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout key"><span class="callout-title">Exam rule</span>
+    <p>Detection finds faces. Verification compares two faces. Identification finds a person from an enrolled group. If the scenario says &ldquo;who is this employee?&rdquo;, it is identification and it points to Azure AI Face, subject to Limited Access.</p>
+  </div>
+</section>
+
+<section id="ocr">
+  <h2>Reading text from images and documents</h2>
+  <p>OCR appears in two different Azure services, and the exam checks whether you can choose between them. Azure AI Vision has a Read capability for extracting text from images and scanned pages. Azure AI Document Intelligence extracts structured information from documents such as forms, invoices, receipts, and ID documents.</p>
+  <p>Use Azure AI Vision Read when the goal is the text itself. Good clues are photos, signs, labels, license plates, screenshots, scanned pages, and handwritten notes. The output is text lines and words, often with bounding polygons. The service is not trying to understand an invoice total or map a receipt merchant into a field. It is reading.</p>
+  <p>Use Azure AI Document Intelligence when the goal is document understanding. The clue is usually a business form, a semi-structured document, or a requirement to extract key-value pairs, selection marks, tables, fields, and normalized values. Document Intelligence can use prebuilt models for common document types, including invoice, receipt, ID document, business card, W-2, health insurance card, and layout. The layout model extracts text, tables, selection marks, and document structure. Custom models let you train extraction for your own forms and templates.</p>
+  <p>The core decision is simple: plain text out of a photo or sign is Azure AI Vision Read. Key-value pairs and tables out of a form is Azure AI Document Intelligence.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Scenario</th><th>Best choice</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Read a street sign from a phone photo</td><td>Azure AI Vision Read</td><td>The output is unstructured text from an image</td></tr>
+        <tr><td>Extract invoice number, vendor, due date, line items, and total</td><td>Azure AI Document Intelligence prebuilt invoice model</td><td>The output is structured fields and tables</td></tr>
+        <tr><td>Extract text and checkboxes from a blank form layout</td><td>Azure AI Document Intelligence layout model</td><td>The output includes tables, selection marks, and document structure</td></tr>
+        <tr><td>Read handwriting from a scanned page</td><td>Azure AI Vision Read</td><td>The task is OCR, not form understanding</td></tr>
+        <tr><td>Train extraction for a company-specific claim form</td><td>Azure AI Document Intelligence custom model</td><td>The schema is specific to your organization</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Trap: OCR does not always mean Document Intelligence</span>
+    <p>Document Intelligence includes OCR, but it is chosen for structure. If the question only asks to read words from an image, do not overbuild the answer. Choose Azure AI Vision Read.</p>
+  </div>
+</section>
+
+<section id="services">
+  <h2>The Azure services, and how to choose</h2>
+  <p>Most AI-900 computer vision questions are service selection questions. Start with whether the model is prebuilt, custom-trained, face-specific, document-specific, or video-specific.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Service</th><th>What it does</th><th>Use it when</th><th>Do not use it for</th></tr></thead>
+      <tbody>
+        <tr><td>Azure AI Vision</td><td>General image analysis, OCR Read, image tagging, captions, object-related analysis, smart crops, and basic face detection</td><td>You need prebuilt computer vision without training your own model</td><td>Extracting structured invoice fields, training custom categories, or identifying known people</td></tr>
+        <tr><td>Azure AI Custom Vision</td><td>Trains custom image classification and object detection models from your labeled images</td><td>Your business has its own visual categories or objects that a prebuilt model will not know</td><td>General OCR, document key-value extraction, face recognition, or video transcript indexing</td></tr>
+        <tr><td>Azure AI Face</td><td>Detects and analyzes faces, verifies faces, and identifies people from enrolled groups when approved</td><td>The scenario is face-specific, especially verification or identification</td><td>General image tagging, product defect detection, document extraction, or emotion and gender inference</td></tr>
+        <tr><td>Azure AI Document Intelligence</td><td>Extracts text, tables, selection marks, and fields from documents using prebuilt or custom models</td><td>You need invoice, receipt, ID, business card, W-2, health insurance card, layout, or custom form extraction</td><td>Classifying ordinary photos, detecting objects in images, or recognizing faces</td></tr>
+        <tr><td>Azure AI Video Indexer</td><td>Analyzes video and audio to create searchable insights such as transcripts, speakers, faces, labels, scenes, topics, and keywords</td><td>You need to search, summarize, caption, or index video content</td><td>Single-image classification, form extraction, or training an object detector from still images</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Azure AI Vision versus Azure AI Custom Vision</h3>
+  <p>Azure AI Vision is the prebuilt general-purpose option. You send an image and ask for features such as tags, captions, image analysis, or Read OCR. You do not train it for your company first.</p>
+  <p>Azure AI Custom Vision is the train-your-own option. You upload labeled images, train a model, evaluate performance, and publish an iteration. Use it when the categories or objects are specific to your domain: types of machine damage, acceptable versus defective packaging, species in local wildlife images, or product variants that a generic model will not distinguish.</p>
+  <p>If the question says &ldquo;no training data&rdquo;, &ldquo;prebuilt model&rdquo;, or &ldquo;analyze general images&rdquo;, lean toward Azure AI Vision. If it says &ldquo;train a model with labeled images&rdquo;, &ldquo;custom categories&rdquo;, or &ldquo;detect our products&rdquo;, lean toward Azure AI Custom Vision.</p>
+
+  <h3>Custom Vision project types and resources</h3>
+  <p>Custom Vision has two project types. A <strong>classification</strong> project predicts image-level tags. An <strong>object detection</strong> project predicts object tags plus bounding boxes. This is the same distinction as the workload types above, but now it is in the custom training service.</p>
+  <p>Custom Vision also separates <strong>training</strong> and <strong>prediction</strong> resources. The training resource is used to upload images, label them, train iterations, and manage the project. The prediction resource hosts the published model so applications can send images and receive predictions. You can create the resources separately, which is useful when different teams, regions, pricing, or access controls are needed.</p>
+  <p>More broadly, Azure AI services can be provisioned as a multi-service resource or as a single-service resource. A multi-service resource gives one key and endpoint for multiple supported Azure AI services. A single-service resource gives one key and endpoint for one service. On AI-900, this is usually a provisioning detail, not a modeling detail.</p>
+
+  <div class="callout tip"><span class="callout-title">Fast service selection</span>
+    <p>Prebuilt image analysis is Azure AI Vision. Your own labeled images are Azure AI Custom Vision. Faces are Azure AI Face. Forms and fields are Azure AI Document Intelligence. Video search and insights are Azure AI Video Indexer.</p>
+  </div>
+</section>
+
+<section id="traps">
+  <h2>Where people lose points here</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>They choose detection when the question says classification</h3>
+      <p>If the required output is one label for the image, it is classification. Detection only matters when the output includes object locations or bounding boxes.</p>
+    </div>
+    <div class="card">
+      <h3>They choose Document Intelligence for every OCR question</h3>
+      <p>Read text from a sign, photo, or scanned page with Azure AI Vision Read. Choose Document Intelligence when the output is structured fields, tables, or form layout.</p>
+    </div>
+    <div class="card">
+      <h3>They forget Limited Access for face recognition</h3>
+      <p>Identity-related Face capabilities are sensitive and controlled. Detection is not the same as identifying a known person from an enrolled group.</p>
+    </div>
+    <div class="card">
+      <h3>They pick Custom Vision without training data</h3>
+      <p>Custom Vision is for custom classification and object detection from labeled images. If the scenario needs general image tags with no custom training, use Azure AI Vision.</p>
+    </div>
+  </div>
+  <div class="callout trap"><span class="callout-title">Trap: segmentation is not just a better bounding box</span>
+    <p>Semantic segmentation labels every pixel. Object detection draws rectangles. If the answer options include a custom machine learning model for pixel masks, that is usually the segmentation answer.</p>
+  </div>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+  <h3>Four solution types</h3>
+  <ul>
+    <li><strong>Classification:</strong> labels the whole image.</li>
+    <li><strong>Object detection:</strong> returns class plus bounding box for each instance.</li>
+    <li><strong>Semantic segmentation:</strong> labels every pixel.</li>
+    <li><strong>OCR:</strong> reads text from images or scanned pages.</li>
+  </ul>
+  <h3>Three face operations</h3>
+  <ul>
+    <li><strong>Detection:</strong> finds whether and where faces exist.</li>
+    <li><strong>Verification:</strong> compares two faces and asks whether they match.</li>
+    <li><strong>Identification:</strong> matches one face against an enrolled group to answer who it is.</li>
+  </ul>
+  <h3>Read versus Document Intelligence</h3>
+  <p>Text from a photo, sign, screenshot, or scanned page: Azure AI Vision Read. Key-value pairs, tables, line items, and fields from forms: Azure AI Document Intelligence.</p>
+  <h3>Services in one line</h3>
+  <ul>
+    <li><strong>Azure AI Vision:</strong> prebuilt image analysis and Read OCR.</li>
+    <li><strong>Azure AI Custom Vision:</strong> train custom image classifiers and object detectors.</li>
+    <li><strong>Azure AI Face:</strong> face detection, analysis, verification, and identification with access controls.</li>
+    <li><strong>Azure AI Document Intelligence:</strong> structured extraction from documents and forms.</li>
+    <li><strong>Azure AI Video Indexer:</strong> searchable insights from video and audio.</li>
+  </ul>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?set=d3-types">Drill: vision workload types</a>
+    <a class="btn secondary" href="drills.html?set=d3-services">Drill: vision services</a>
+    <a class="btn secondary" href="nlp.html">Next guide: Natural Language Processing &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>

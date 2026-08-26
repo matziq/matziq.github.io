@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice Exam 2 &mdash; AI-900 Exam Prep</title>
+<meta name="description" content="Microsoft AI-900 practice exam 2: 50 timed questions at midpoint difficulty, weighted across the five Azure AI Fundamentals skill areas, with scaled scoring and full review.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+    <h1 class="no-print">Practice Exam 2</h1>
+    <p class="lede no-print" id="whenLine">Your midpoint checkpoint.</p>
+    <div id="app"></div>
+</div></main>
+
+<footer id="footer"></footer>
+
+<script src="assets/data/exam2.js"></script>
+<script src="assets/test-engine.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var day = AI9.examSchedule().exam2;
+    document.getElementById("whenLine").innerHTML =
+        "<strong>Day " + day + " &middot; " + AI9.fmtDate(AI9.dateForDay(day)) +
+        "</strong> \u2014 the midpoint checkpoint. Did the targeted work move the numbers?";
+
+    AI9.Test.mount({
+        el: document.getElementById("app"),
+        testId: "exam2",
+        title: "Practice Exam 2 \u2014 Checkpoint",
+        blurb: "Fifty questions in forty-five minutes, harder than Exam 1 and deliberately loaded with questions that force a choice between two similar Azure services. Compare the skill-area percentages against Exam 1 rather than the total: anything weak on both is a real gap, and anything that fixed itself was a fluke.",
+        sections: ["exam2"]
+    });
+});
+</script>
+</body>
+</html>
