@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Study Plan &mdash; AI-901 Exam Prep</title>
+<meta name="description" content="A day-by-day Microsoft AI-901 study plan generated from your chosen exam date: a cold baseline exam, targeted repair, hands-on Foundry labs, three timed practice exams, and a proper taper.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1 id="planTitle">Your Study Plan</h1>
+<p class="lede" id="planLede">Loading&hellip;</p>
+
+<div id="dateBanner"></div>
+
+<div class="card" style="margin:1.5rem 0">
+    <div class="meter-row" style="margin-bottom:1rem">
+        <span class="mlabel"><strong>Overall progress</strong></span>
+        <span class="meter"><i class="good" id="progMeter" data-pct="0"></i></span>
+        <span class="mval" id="progTxt">0 / 0</span>
+    </div>
+    <div class="btn-row">
+        <button class="btn" id="todayBtn">Jump to today</button>
+        <button class="btn secondary" id="printBtn">Print the plan</button>
+        <a class="btn secondary" href="index.html#examdate">Change my exam date</a>
+        <button class="btn ghost" id="resetBtn">Clear all checkboxes</button>
+    </div>
+</div>
+
+<div class="callout tip">
+    <span class="callout-title">How to use this</span>
+    <p style="margin-bottom:0">Do the day you are on, check the boxes as you go, and stop when you are done.
+        Checkmarks save automatically in this browser. If you miss a day, do not double up the next day
+        &mdash; drop the lowest-value task instead and keep moving. Momentum beats volume.</p>
+</div>
+
+<div class="callout key">
+    <span class="callout-title">Do not skip the lab tasks</span>
+    <p style="margin-bottom:0">Tasks marked <span class="tag tag-lab">Lab</span> put you in the Foundry portal
+        for ten or fifteen minutes. They look optional and they are not. More than half of AI-901 asks whether
+        you can actually deploy a model, write a prompt, build an agent, or run an analyzer &mdash; and that
+        knowledge does not survive being read about. Deploying one model yourself is worth more than reading
+        the deployment table five times.</p>
+</div>
+
+<div class="callout warn">
+    <span class="callout-title">The one rule that matters most</span>
+    <p style="margin-bottom:0">Never review a practice exam on the same day you take it, unless the plan is so
+        short that it explicitly tells you to. Your brain is still defending its answers. Sleep on it, come back
+        the next morning, and you will see mistakes that were invisible the night before. Every exam day here is
+        followed by a repair day for exactly that reason.</p>
+</div>
+
+<div id="planRoot"></div>
+
+<div class="card" style="margin-top:2rem;border-color:var(--good)">
+    <h2 style="margin-top:0" id="examDayHead">Exam Day</h2>
+    <p id="examDayBody">No studying. You have done the work. Two forms of ID, arrive or log in thirty minutes
+        early, read the last line of every question first, and answer every single one even if it is a guess.</p>
+    <p style="margin-bottom:0"><a href="index.html#main">Review the exam-day checklist &rarr;</a></p>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+
+<script>
+(function () {
+    var TAGS = { exam: "Exam", review: "Review", study: "Read", drill: "Drill",
+                 cards: "Cards", lab: "Lab", logistics: "Logistics" };
+    var TAGCLS = { exam: "tag-math", review: "tag-writing", study: "tag-english",
+                   drill: "tag-reading", cards: "tag-science", lab: "tag-lab",
+                   logistics: "tag-test" };
+
+    function phasesFor(plan, sched) {
+        var n = plan.length;
+        var b1 = Math.max(2, Math.min(sched.exam2 || Math.ceil(n / 3), n));
+        var b2 = Math.max(b1 + 1, Math.min(sched.exam3 || Math.ceil(n * 2 / 3), n));
+        var out = [];
+        out.push({ from: 1, to: b1 - 1,
+            title: "Phase 1 \u2014 Find the gaps, then close the biggest ones",
+            goal: "A cold baseline exam, an honest review, and the first pass through the concepts." });
+        out.push({ from: b1, to: b2 - 1,
+            title: "Phase 2 \u2014 Checkpoint, then the half that carries the exam",
+            goal: "A second exam at the midpoint, then Foundry, agents, and the modalities." });
+        out.push({ from: b2, to: n,
+            title: "Phase 3 \u2014 Rehearse, repair, taper",
+            goal: "Dress rehearsal, one last targeted repair, then deliberately back off." });
+        var kept = [];
+        for (var i = 0; i < out.length; i++) if (out[i].to >= out[i].from) kept.push(out[i]);
+        if (!kept.length) {
+            kept.push({ from: 1, to: n, title: "Your plan", goal: "Everything, in order." });
+        }
+        return kept;
+    }
+
+    function render() {
+        var plan = AI9.plan();
+        var sched = AI9.examSchedule();
+        var today = AI9.currentPlanDay();
+        var root = document.getElementById("planRoot");
+        var phases = phasesFor(plan, sched);
+        var html = "";
+
+        for (var w = 0; w < phases.length; w++) {
+            var ph = phases[w];
+            html += '<div class="week-head"><h2>' + ph.title + "</h2>" +
+                '<span class="wgoal">' + ph.goal + "</span></div>";
+
+            for (var i = 0; i < plan.length; i++) {
+                var day = plan[i];
+                if (day.d < ph.from || day.d > ph.to) continue;
+
+                var date = AI9.dateForDay(day.d);
+                var cls = "day-card";
+                if (day.d === today) cls += " is-today";
+                else if (day.d < today) cls += " is-past";
+
+                var hrs = day.min >= 120
+                    ? (Math.floor(day.min / 60) + " hr " + (day.min % 60 ? (day.min % 60) + " min" : ""))
+                    : day.min + " min";
+
+                var extra = "";
+                if (day.isExam) extra += ' <span class="badge amber">Full exam</span>';
+                if (day.isReview) extra += ' <span class="badge teal">Repair day</span>';
+                if (day.isRest) extra += ' <span class="badge good">Taper</span>';
+                if (day.isExtra) extra += ' <span class="badge">Reinforcement</span>';
+                if (day.merged) extra += ' <span class="badge bad">Combined day</span>';
+
+                html += '<div class="' + cls + '" id="day-' + day.d + '">' +
+                    '<div class="day-head">' +
+                    '<span class="day-chip">Day ' + day.d + "</span>" +
+                    '<span class="day-date">' + AI9.fmtDate(date) + "</span>" +
+                    '<span class="day-focus">' + day.focus + extra + "</span>" +
+                    '<span class="day-time">' + hrs + "</span></div>";
+
+                for (var t = 0; t < day.tasks.length; t++) {
+                    var task = day.tasks[t];
+                    var key = "d" + day.d + "-" + t;
+                    var label = '<span class="tag ' + (TAGCLS[task.tag] || "tag-test") + '">' +
+                        (TAGS[task.tag] || "Task") + "</span>" + task.text;
+                    if (task.href) label += ' <a href="' + task.href + '" style="font-size:.85em">open &rarr;</a>';
+                    html += '<div class="task"><input type="checkbox" id="' + key + '" data-key="' + key + '">' +
+                        '<label for="' + key + '">' + label + "</label></div>";
+                }
+                html += "</div>";
+            }
+        }
+        root.innerHTML = html;
+
+        AI9.onCheckChange = updateProgress;
+        AI9.bindPersistentChecks("plan", root);
+        updateProgress();
+    }
+
+    function markCompleteDays() {
+        var plan = AI9.plan();
+        var state = AI9.store.get("plan", {});
+        for (var i = 0; i < plan.length; i++) {
+            var day = plan[i], all = true;
+            for (var t = 0; t < day.tasks.length; t++) {
+                if (!state["d" + day.d + "-" + t]) { all = false; break; }
+            }
+            var node = document.getElementById("day-" + day.d);
+            if (node) node.classList.toggle("all-done", all);
+        }
+    }
+
+    function updateProgress() {
+        var plan = AI9.plan();
+        var state = AI9.store.get("plan", {});
+        var total = AI9.planTaskCount(), done = 0;
+        for (var i = 0; i < plan.length; i++) {
+            for (var t = 0; t < plan[i].tasks.length; t++) {
+                if (state["d" + plan[i].d + "-" + t]) done++;
+            }
+        }
+        AI9.fillMeter(document.getElementById("progMeter"), Math.round(done / Math.max(1, total) * 100));
+        document.getElementById("progTxt").textContent = done + " / " + total;
+        markCompleteDays();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        AI9.renderDateBanner(document.getElementById("dateBanner"));
+
+        var plan = AI9.plan();
+        var start = AI9.planStart();
+        var end = AI9.dateForDay(plan.length);
+        var exam = AI9.examDate();
+        var runway = AI9.runwayDays();
+
+        document.getElementById("planTitle").textContent = "Your " + plan.length + "-Day Plan";
+
+        var shape = plan.length <= 3
+            ? "There is very little time, so this is a triage plan: one baseline, one hard push at Foundry and " +
+              "your two weakest objectives, one rehearsal, and stop."
+            : (plan.length < AI9.BLOCK_COUNT
+                ? "The window is tight, so some study blocks are combined onto a single day and the optional " +
+                  "work has been dropped. Everything left is load-bearing."
+                : "There is room for the full plan, with reinforcement days folded in so you are consolidating " +
+                  "rather than piling on new material.");
+
+        document.getElementById("planLede").innerHTML =
+            "<strong>" + AI9.fmtDate(start) + "</strong> through <strong>" + AI9.fmtDate(end) +
+            "</strong>, ending the day before your exam on <strong>" + AI9.fmtLong(exam) + "</strong>. " +
+            shape +
+            (runway > 0
+                ? " Your exam is far enough out that the plan starts in " + runway + " day" +
+                  (runway === 1 ? "" : "s") + " \u2014 read the guides and take Practice Exam 1 before then " +
+                  "if you want an early baseline."
+                : "");
+
+        document.getElementById("examDayHead").textContent = AI9.fmtLong(exam) + " \u2014 Exam Day";
+
+        render();
+
+        document.getElementById("todayBtn").onclick = function () {
+            var d = Math.min(AI9.plan().length, Math.max(1, AI9.currentPlanDay()));
+            var node = document.getElementById("day-" + d);
+            if (node) node.scrollIntoView({ behavior: "smooth", block: "center" });
+            else AI9.toast("The plan window has passed \u2014 it is exam day.");
+        };
+        document.getElementById("printBtn").onclick = function () { window.print(); };
+        document.getElementById("resetBtn").onclick = function () {
+            if (window.confirm("Uncheck every task in the whole plan?")) {
+                AI9.store.set("plan", {});
+                render();
+                AI9.toast("Plan reset.");
+            }
+        };
+
+        var d0 = AI9.currentPlanDay();
+        if (d0 >= 1 && d0 <= AI9.plan().length) {
+            var node = document.getElementById("day-" + d0);
+            if (node) window.setTimeout(function () {
+                node.scrollIntoView({ behavior: "smooth", block: "center" });
+            }, 350);
+        }
+    });
+})();
+</script>
+</body>
+</html>

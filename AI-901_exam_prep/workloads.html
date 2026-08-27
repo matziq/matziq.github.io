@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Workloads &mdash; AI-901 Exam Prep</title>
+<meta name="description" content="Learn how to identify AI workloads and text-analysis techniques for Microsoft Exam AI-901.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Identifying AI Workloads</h1>
+<p class="lede">Objective 1.3 asks whether you can read a business scenario and name the right AI workload. It sits inside skill area 1, which is 40&ndash;45% of AI-901.</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#workloads">Workloads</a>
+    <a class="btn secondary sm" href="#textanalysis">Text analysis</a>
+    <a class="btn secondary sm" href="#choosing">Choosing tools</a>
+    <a class="btn secondary sm" href="#traps">Traps</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="workloads">
+  <h2>The six workloads named by the objective</h2>
+  <p>AI-901 is about building with Microsoft Foundry, not about old classic machine learning topics. For this objective, train yourself to listen for the business verb. Is the solution writing, planning, extracting, seeing, hearing, or turning messy content into typed data?</p>
+
+  <div class="callout key"><span class="callout-title">Exam focus</span><p>The most important distinction is generative AI versus agentic AI. <strong>Generative AI</strong> produces content in response to a prompt. <strong>Agentic AI</strong> pursues a goal over multiple steps, chooses tools, calls them, observes results, and continues until the goal is complete.</p></div>
+
+  <div class="grid grid-2">
+    <div class="card"><h3>Generative AI</h3><p>Generative AI creates new content: text, code, images, summaries, answers, or drafts. The interaction can be one prompt and one response. A sales team asks a deployed model to turn account notes into a customer-ready executive summary. The model writes the summary; it does not independently go fetch missing data unless your app gives it that workflow.</p></div>
+    <div class="card"><h3>Agentic AI</h3><p>Agentic AI uses a model as part of an orchestrated process. It has instructions, tools, and often conversation state. A support agent receives a ticket, searches a knowledge base, checks order status through an API, drafts a response, and asks for approval. The giveaway is the multi-step goal and tool use.</p></div>
+    <div class="card"><h3>Text analysis</h3><p>Text analysis detects structure and meaning in text. It can return key phrases, named entities, sentiment, language, PII, or summaries. A bank analyzes customer comments to identify negative sentiment, common complaint topics, and names or account-like identifiers that must be redacted before sharing.</p></div>
+    <div class="card"><h3>Speech</h3><p>Speech workloads convert audio to text, text to speech, or speech between languages. A contact center transcribes calls in real time, identifies the spoken language, and generates captions for an agent desktop. In Foundry, speech can also combine with deployed multimodal audio models when spoken input needs reasoning and a spoken response.</p></div>
+    <div class="card"><h3>Computer vision</h3><p>Computer vision interprets images or video. A manufacturer sends a photo to a deployed multimodal model and asks what defect is visible. Other scenarios might read text from an image, describe a chart, redact faces, or generate an image from a text prompt.</p></div>
+    <div class="card"><h3>Information extraction</h3><p>Information extraction turns unstructured or semi-structured content into fields. An insurance company extracts policy number, claimant name, incident date, vehicle details, and a short loss summary from a claim packet. In current Foundry content, Content Understanding is the flagship multimodal extraction service.</p></div>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Workload</th><th>What it does</th><th>Giveaway words in the question</th><th>Where it is built in Foundry</th></tr></thead>
+      <tbody>
+        <tr><td>Generative AI</td><td>Creates new content from instructions and context.</td><td>generate, draft, rewrite, answer, compose, summarize in natural language</td><td>Foundry Models deployments, playgrounds, and the Foundry SDK.</td></tr>
+        <tr><td>Agentic AI</td><td>Works toward a goal through multiple steps and tool calls.</td><td>orchestrate, use tools, take action, plan, continue, route, complete a task</td><td>Foundry Agent Service inside a Foundry project.</td></tr>
+        <tr><td>Text analysis</td><td>Finds meaning, categories, entities, sentiment, language, and sensitive text.</td><td>detect sentiment, extract key phrases, identify entities, redact PII</td><td>Azure Language in Foundry Tools, or a prompt to a deployed model when flexibility matters.</td></tr>
+        <tr><td>Speech</td><td>Transcribes, synthesizes, translates, identifies language, and supports voice interactions.</td><td>transcribe, caption, spoken prompt, voice response, pronunciation, translate speech</td><td>Azure Speech in Foundry Tools, speech models in Foundry Models, and deployed multimodal audio models.</td></tr>
+        <tr><td>Computer vision</td><td>Interprets visual input or generates images.</td><td>image, video, OCR, describe a picture, visual prompt, generate an image</td><td>Deployed multimodal models, Azure Vision in Foundry Tools, image-generation models, or Content Understanding.</td></tr>
+        <tr><td>Information extraction</td><td>Returns structured fields from documents, images, audio, or video.</td><td>extract fields, schema, invoice, receipt, contract, claim, JSON, confidence, grounding</td><td>Azure Content Understanding in Foundry Tools, Azure Document Intelligence in Foundry Tools, or Azure Language.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Notice that the same verb can appear in more than one workload. &ldquo;Summarize&rdquo; might be a text-analysis feature, a generative prompt, or a field in a Content Understanding analyzer. Use the object of the sentence. Summarize a plain text review is text analysis or generative AI. Summarize an entire claim packet into a typed field is information extraction. Summarize after checking tools and sources is agentic.</p>
+</section>
+
+<section id="textanalysis">
+  <h2>Text-analysis techniques you must recognize</h2>
+  <p>Azure Language in Foundry Tools provides purpose-built text features. The objective explicitly names keyword extraction, entity detection, sentiment analysis, and summarization. You should also recognize PII detection and language detection because they are common in scenarios and are active Language capabilities.</p>
+
+  <div class="callout trap"><span class="callout-title">Key phrases are not entities</span><p><strong>Key phrases</strong> are the main talking points in the text, such as &ldquo;slow delivery,&rdquo; &ldquo;mobile app,&rdquo; or &ldquo;billing issue.&rdquo; <strong>Named entities</strong> are typed things, such as a person, location, organization, product, date, time, quantity, or URL.</p></div>
+
+  <div class="grid grid-3">
+    <div class="card"><h3>Keyword extraction</h3><p>Also called key phrase extraction. It returns important terms and short phrases that represent what the text is about. A retailer runs it over product reviews and sees that &ldquo;battery life,&rdquo; &ldquo;screen brightness,&rdquo; and &ldquo;delivery delay&rdquo; are frequent topics.</p></div>
+    <div class="card"><h3>Entity detection</h3><p>Entity detection returns typed entities. The output identifies both the span of text and the category, such as person, organization, location, dateTime, email, phone number, or product. A travel company detects city names, dates, and airline names in customer messages.</p></div>
+    <div class="card"><h3>Sentiment analysis</h3><p>Sentiment analysis returns whether text is positive, neutral, or negative, often with sentiment at sentence or document level. A service desk uses it to route strongly negative feedback to a retention queue.</p></div>
+    <div class="card"><h3>Summarization</h3><p>Summarization returns a shorter version of longer text. <strong>Extractive</strong> summarization selects important existing sentences. <strong>Abstractive</strong> summarization writes new sentences that capture the meaning. A legal team summarizes a long policy before review.</p></div>
+    <div class="card"><h3>PII detection</h3><p>PII detection returns sensitive personal data spans and categories. A company scans support transcripts for names, phone numbers, email addresses, government identifiers, and account-like values before using the text in analytics.</p></div>
+    <div class="card"><h3>Language detection</h3><p>Language detection returns the detected language for text. A global help desk detects whether a message is English, Spanish, French, or another language before sending it to the right queue or translation step.</p></div>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Technique</th><th>Returns</th><th>Example question wording</th></tr></thead>
+      <tbody>
+        <tr><td>Keyword extraction</td><td>A list of important phrases or topics from the text.</td><td>&ldquo;Identify the main terms customers mention in survey comments.&rdquo;</td></tr>
+        <tr><td>Entity detection</td><td>Recognized text spans plus categories such as person, location, organization, or dateTime.</td><td>&ldquo;Find company names and dates in support emails.&rdquo;</td></tr>
+        <tr><td>Sentiment analysis</td><td>Positive, neutral, negative, or mixed sentiment, often with scores or sentence-level detail.</td><td>&ldquo;Determine whether each review is favorable or unfavorable.&rdquo;</td></tr>
+        <tr><td>Summarization</td><td>A condensed version of the source, either selected source sentences or newly written wording.</td><td>&ldquo;Create a short summary of a long customer complaint.&rdquo;</td></tr>
+        <tr><td>PII detection</td><td>Personal or sensitive spans and their categories, suitable for review or redaction.</td><td>&ldquo;Detect and mask personal information in chat transcripts.&rdquo;</td></tr>
+        <tr><td>Language detection</td><td>The language of the text, usually with a confidence value.</td><td>&ldquo;Route incoming messages based on the language used by the customer.&rdquo;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>For the exam, do not overcomplicate text analysis. If the answer choices include a purpose-built Azure Language feature and the scenario asks for a standard operation, choose it. If the scenario asks for open-ended reasoning, a custom written answer, or several operations combined in a flexible way, a deployed generative model may be better.</p>
+</section>
+
+<section id="choosing">
+  <h2>Purpose-built feature or generative prompt?</h2>
+  <p>Modern Foundry solutions often mix both approaches. A purpose-built feature is best when the operation is standard, typed, repeatable, and easy to validate. A generative model is best when the desired output needs reasoning, flexible wording, or adaptation to a changing request.</p>
+
+  <div class="callout tip"><span class="callout-title">Legacy does not mean retired</span><p>Azure Language marks sentiment analysis, key phrase extraction, and summarization as <strong>legacy</strong>. For this exam, that means they are supported but not receiving new investment. It does <strong>not</strong> mean retired. They remain valid exam answers because the AI-901 objective explicitly lists them.</p></div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Situation</th><th>Better choice</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>You need consistent typed output such as entity categories, PII categories, or language codes.</td><td>Purpose-built Azure Language feature</td><td>The service is designed to return stable fields rather than free-form prose.</td></tr>
+        <tr><td>You need low latency for a high-volume routing step.</td><td>Purpose-built Azure Language feature</td><td>Specialized features are usually simpler calls with predictable behavior.</td></tr>
+        <tr><td>You need predictable cost for the same operation across many short records.</td><td>Purpose-built Azure Language feature</td><td>A fixed task with fixed output is easier to estimate and monitor.</td></tr>
+        <tr><td>You have compliance rules around detecting or redacting personal data.</td><td>Purpose-built Azure Language feature</td><td>PII detection exists for this job and returns spans that can be reviewed or masked.</td></tr>
+        <tr><td>You need novel or complex extraction from text that does not fit a built-in category.</td><td>Generative model with a prompt</td><td>The prompt can define the custom schema, reasoning steps, and output format.</td></tr>
+        <tr><td>You want to classify tone, extract risks, summarize, and draft a response in one call.</td><td>Generative model with a prompt</td><td>A single prompt can combine tasks and produce a tailored result.</td></tr>
+        <tr><td>The input includes text plus an image, chart, screenshot, or audio reference.</td><td>Generative multimodal model or Content Understanding</td><td>Plain text features do not interpret multimodal input.</td></tr>
+        <tr><td>The text is clinical, such as medical notes or healthcare documents.</td><td>Azure Language health feature</td><td>Text analytics for health is a purpose-built feature for healthcare text.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>When you see standard verbs, prefer the standard feature. When you see judgment, composition, flexible formatting, or several outputs fused into a response, prefer a generative model. When you see documents, images, audio, or video that must become a schema, think Content Understanding first.</p>
+</section>
+
+<section id="traps">
+  <h2>Traps candidates make with workloads</h2>
+
+  <div class="callout trap"><span class="callout-title">Do not bring AI-900 baggage</span><p>AI-901 is not the old exam. Do not look for classic machine learning workflows, labels, model training studios, or old service names. This objective is about recognizing current AI workloads and the Foundry services that support them.</p></div>
+
+  <div class="grid grid-2">
+    <div class="card"><h3>Confusing generative and agentic</h3><p>If the model writes one answer from one prompt, call it generative. If the solution plans, chooses tools, calls APIs, searches, remembers context, or completes a process across turns, call it agentic.</p></div>
+    <div class="card"><h3>Calling every extraction task text analysis</h3><p>Text analysis handles text. Information extraction can include documents, images, audio, and video and usually returns a structured schema. A contract packet with fields is extraction, not just text analysis.</p></div>
+    <div class="card"><h3>Mixing up key phrases and entities</h3><p>&ldquo;Late shipment&rdquo; can be a key phrase. &ldquo;Contoso,&rdquo; &ldquo;Seattle,&rdquo; and &ldquo;August 12&rdquo; are named entities because they are typed things.</p></div>
+    <div class="card"><h3>Assuming legacy means unusable</h3><p>Legacy Language features are still supported and testable. If the scenario asks for sentiment analysis, key phrase extraction, or summarization, those remain valid answers.</p></div>
+    <div class="card"><h3>Choosing a prompt when a feature is enough</h3><p>For repeatable detection and typed spans, the purpose-built feature is usually the exam answer. Prompts are powerful, but they are not automatically the most appropriate choice.</p></div>
+    <div class="card"><h3>Forgetting multimodal input</h3><p>If the input is an image, video, document layout, or audio file, a plain text feature is not enough. Look for multimodal models, Azure Speech, Content Understanding, or Document Intelligence depending on the scenario.</p></div>
+  </div>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+
+  <div class="grid grid-2">
+    <div class="card"><h3>Workloads in one line</h3><p><strong>Generative AI:</strong> creates content from a prompt.</p><p><strong>Agentic AI:</strong> pursues a goal through steps and tools.</p><p><strong>Text analysis:</strong> detects meaning, entities, language, sentiment, PII, and summaries in text.</p><p><strong>Speech:</strong> transcribes, speaks, translates, or handles voice interaction.</p><p><strong>Computer vision:</strong> interprets or generates visual content.</p><p><strong>Information extraction:</strong> turns messy content into structured fields.</p></div>
+    <div class="card"><h3>Text techniques in one line</h3><p><strong>Key phrases:</strong> main talking points.</p><p><strong>Entities:</strong> typed things such as person, location, organization, dateTime.</p><p><strong>Sentiment:</strong> positive, neutral, negative, or mixed opinion.</p><p><strong>Summarization:</strong> shorter version; extractive selects, abstractive writes.</p><p><strong>PII:</strong> personal or sensitive spans for review or redaction.</p><p><strong>Language detection:</strong> identifies the language of the text.</p></div>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Giveaway verb</th><th>Most likely workload</th><th>Fast exam thought</th></tr></thead>
+      <tbody>
+        <tr><td>extract</td><td>Information extraction or text analysis</td><td>Fields from documents or multimodal content means extraction; phrases or entities from text means Language.</td></tr>
+        <tr><td>classify</td><td>Text analysis, Content Understanding, or generative AI</td><td>Use the context: sentiment and language categories are text analysis; schema category fields may be extraction.</td></tr>
+        <tr><td>detect</td><td>Text analysis, vision, or speech</td><td>Detect PII, entities, language, objects, faces, or spoken language.</td></tr>
+        <tr><td>transcribe</td><td>Speech</td><td>Audio to text is Azure Speech or a transcription model.</td></tr>
+        <tr><td>translate</td><td>Speech or text</td><td>Speech translation for audio; Azure Translator for text.</td></tr>
+        <tr><td>summarize</td><td>Text analysis or generative AI</td><td>Standard text summary can be Language; custom written summary can be a prompt.</td></tr>
+        <tr><td>generate</td><td>Generative AI</td><td>Create text, code, image, or another new output.</td></tr>
+        <tr><td>orchestrate</td><td>Agentic AI</td><td>Multiple steps, tools, and goal completion point to an agent.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?set=d1-workloads">Drill: AI workloads</a>
+    <a class="btn" href="drills.html?set=d1-textanalysis">Drill: Text analysis</a>
+    <a class="btn secondary" href="foundry.html">Next guide: Foundry platform &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>

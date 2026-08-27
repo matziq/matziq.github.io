@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Information Extraction &mdash; AI-901 Exam Prep</title>
+<meta name="description" content="Study how AI-901 tests Azure Content Understanding, analyzers, multimodal extraction, and Document Intelligence comparisons.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Information Extraction with Content Understanding</h1>
+<p class="lede">Azure Content Understanding in Foundry Tools is the flagship new topic on AI-901. It did not exist on the old exam, and it is the clearest sign that AI-901 is a builder-focused exam about Microsoft Foundry.</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#what">What it is</a>
+    <a class="btn secondary sm" href="#analyzers">Analyzers</a>
+    <a class="btn secondary sm" href="#modalities">Modalities</a>
+    <a class="btn secondary sm" href="#choosing">Choosing tools</a>
+    <a class="btn secondary sm" href="#building">Build an app</a>
+    <a class="btn secondary sm" href="#traps">Traps</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="what">
+  <h2>What Content Understanding is</h2>
+  <p>Azure Content Understanding in Foundry Tools is generally available. Its one-line pitch is simple: one service turns documents, images, audio, and video into structured data you define.</p>
+  <p>That last phrase matters. You define the data shape. Content Understanding is not just OCR, and it is not just a raw generative prompt. It processes content through an analyzer and returns structured JSON that matches the schema you specified. The response can also include confidence scores, grounding, Markdown for retrieval-augmented generation, and content-safety flags.</p>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Approach</th><th>What you ask for</th><th>Typical result</th><th>Exam distinction</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Plain OCR</td><td>Read text from a page or image.</td><td>Text and layout signals.</td><td>Useful, but it does not decide your business fields by itself.</td></tr>
+        <tr><td>Raw generative prompt</td><td>Ask a model to summarize or inspect content.</td><td>Prose, unless you carefully prompt for structure.</td><td>Flexible, but the output shape is not a managed analyzer contract.</td></tr>
+        <tr><td>Content Understanding</td><td>Extract, classify, or generate fields defined in a schema.</td><td>JSON fields, confidence, grounding, and optional RAG-ready output.</td><td>Best answer when the scenario says multimodal, schema-driven extraction.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Use it when the content is unstructured, mixed-format, or multimodal. A contract, product image, call recording, and training video can all be handled through the same service family. The app does not need separate code paths for every content type if the goal is to turn content into downstream fields.</p>
+</section>
+
+<section id="analyzers">
+  <h2>Analyzers are the core unit</h2>
+  <p>An analyzer is a reusable, configurable processing unit. It sets the content type through <code>baseAnalyzerId</code>, what to pull out through a field schema, the output shape, and which models to use. You create it once and call it repeatedly from your app.</p>
+  <p>A field schema is a JSON definition of the named fields you want. Fields have types, descriptions, and methods. The description is important because custom analyzers can work zero-shot: you describe the field in plain language, and the analyzer uses that description without requiring labeled training data.</p>
+  <div class="codeblock"><span class="cb-title">Example field schema shape</span><pre><code>{
+  "fields": {
+    "vendorName": {
+      "type": "string",
+      "method": "extract",
+      "description": "The supplier or company name printed on the invoice."
+    },
+    "documentType": {
+      "type": "string",
+      "method": "classify",
+      "enum": ["invoice", "receipt", "contract"]
+    },
+    "executiveSummary": {
+      "type": "string",
+      "method": "generate",
+      "description": "A concise summary of the content for a business reviewer."
+    }
+  }
+}</code></pre></div>
+  <h3>The three field methods</h3>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Method</th><th>What it does</th><th>Use when</th><th>Example</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>extract</code></td><td>Copies a value that literally appears in the content. In the brief, this is called out for documents.</td><td>The field should come directly from the source.</td><td>Invoice number, contract effective date, printed vendor name.</td></tr>
+        <tr><td><code>classify</code></td><td>Assigns one of a predefined set of categories.</td><td>The app needs a controlled label.</td><td>Document type, product condition, call reason, video scene category.</td></tr>
+        <tr><td><code>generate</code></td><td>Produces a new value using generative AI.</td><td>The desired value is not copied directly and requires synthesis.</td><td>Summary, risk note, recommended routing explanation.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Prebuilt and custom analyzers</h3>
+  <p>Prebuilt analyzers are ready-made. Know the families rather than trying to memorize every variant. Content extraction analyzers include <code>prebuilt-read</code> and <code>prebuilt-layout</code>. The four base analyzers are <code>prebuilt-document</code>, <code>prebuilt-image</code>, <code>prebuilt-audio</code>, and <code>prebuilt-video</code>. The four RAG analyzers are <code>prebuilt-documentSearch</code>, <code>prebuilt-imageSearch</code>, <code>prebuilt-audioSearch</code>, and <code>prebuilt-videoSearch</code>. Domain-specific analyzers include <code>prebuilt-invoice</code>, <code>prebuilt-receipt</code>, <code>prebuilt-idDocument</code>, and <code>prebuilt-contract</code>.</p>
+  <p>Custom analyzers are the exam surprise. They work zero-shot. You can describe the fields in plain language and use the analyzer without labeled examples. Labeled examples are optional and can improve accuracy, but they are not required to start.</p>
+  <div class="callout key"><span class="callout-title">Response contents</span> A Content Understanding response can contain structured fields, confidence scores from 0 to 1, grounding such as bounding boxes or timestamps, Markdown for RAG pipelines, and content-safety flags.</div>
+  <p>Confidence tells you how certain the service is about a field. Grounding tells you where the value came from. In documents and images that can mean bounding boxes. In audio and video it can mean timestamps. This matters because a real extraction app often needs a reviewer experience, not just a final JSON object.</p>
+</section>
+
+<section id="modalities">
+  <h2>The four content types</h2>
+  <p>Content Understanding is multimodal. The exam may describe a document, image, recording, or video and ask which analyzer family fits. Choose the analyzer that matches the content type and whether the goal is field extraction or RAG indexing.</p>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Modality</th><th>Base analyzer</th><th>RAG analyzer</th><th>What you would extract</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Documents</td><td><code>prebuilt-document</code></td><td><code>prebuilt-documentSearch</code></td><td>Parties, dates, totals, clauses, obligations, policy topics, invoice fields.</td></tr>
+        <tr><td>Images</td><td><code>prebuilt-image</code></td><td><code>prebuilt-imageSearch</code></td><td>Product attributes, visible defects, chart values, label text, safety issues.</td></tr>
+        <tr><td>Audio</td><td><code>prebuilt-audio</code></td><td><code>prebuilt-audioSearch</code></td><td>Call reason, sentiment cue, action items, compliance statements, speaker moments.</td></tr>
+        <tr><td>Video</td><td><code>prebuilt-video</code></td><td><code>prebuilt-videoSearch</code></td><td>Scenes, actions, timestamps, demonstrated steps, visible issues, training topics.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Document scenario</h3>
+      <p>A procurement app receives supplier contracts. You define fields for party names, effective date, renewal terms, governing law, and risky clauses. Content Understanding returns those fields in JSON and can ground each value to the source location. For a simpler invoice scenario, you could use a prebuilt invoice analyzer, then route totals and vendor details to an approval workflow.</p>
+    </div>
+    <div class="card">
+      <h3>Image scenario</h3>
+      <p>A retailer receives product photos from stores. You define fields for product type, visible damage, shelf placement, and whether a required label is visible. The analyzer returns structured values instead of a loose caption. For a chart image, you can extract the title, key trend, and visible data points.</p>
+    </div>
+    <div class="card">
+      <h3>Audio scenario</h3>
+      <p>A support center analyzes call recordings. The analyzer can identify the call reason, escalation risk, promised follow-up, and summary. Grounding can point to timestamps so a supervisor can review the moment that produced a field.</p>
+    </div>
+    <div class="card">
+      <h3>Video scenario</h3>
+      <p>A training team processes field service videos. You can extract demonstrated procedure steps, scene timestamps, safety violations, and final outcome. This is different from a generic video summary because the output follows your app schema.</p>
+    </div>
+  </div>
+  <div class="callout tip"><span class="callout-title">Video choice</span> Use Azure AI Video Indexer for prebuilt video insights. Use Content Understanding when you need schema-driven field extraction from video.</div>
+</section>
+
+<section id="choosing">
+  <h2>Choosing Content Understanding or Document Intelligence</h2>
+  <p>This is the highest-value exam distinction in objective 2.4. Azure Content Understanding in Foundry Tools and Azure Document Intelligence in Foundry Tools are both active. They are complementary, not replacements for every scenario.</p>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Situation</th><th>Answer</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Images, audio, or video</td><td>Content Understanding</td><td>Document Intelligence is documents-only. Content Understanding covers all four modalities.</td></tr>
+        <tr><td>No labeled training data</td><td>Content Understanding</td><td>Custom analyzers work zero-shot from field descriptions.</td></tr>
+        <tr><td>Unstructured documents such as contracts, policies, or legal files</td><td>Content Understanding</td><td>Generative extraction handles varied language and layouts well.</td></tr>
+        <tr><td>Multimodal RAG</td><td>Content Understanding</td><td>The RAG analyzer families produce Markdown and searchable representations across modalities.</td></tr>
+        <tr><td>OCR-only or layout extraction</td><td>Content Understanding <code>prebuilt-read</code> or <code>prebuilt-layout</code></td><td>These prebuilt analyzers cover text and layout extraction within the Content Understanding family.</td></tr>
+        <tr><td>Standard structured forms needing top accuracy and low latency</td><td>Document Intelligence</td><td>Purpose-trained prebuilt document models are optimized for common structured forms.</td></tr>
+        <tr><td>Custom extraction with labeled samples on highly structured documents</td><td>Document Intelligence custom neural model</td><td>When you have labeled examples and a consistent document type, purpose-trained document extraction can be the stronger fit.</td></tr>
+        <tr><td>On-premises or air-gapped deployment</td><td>Document Intelligence containers</td><td>Document Intelligence has container options. Content Understanding has no container option.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout key"><span class="callout-title">One-line rule</span> Content Understanding is generative and multimodal; Document Intelligence is purpose-trained, deterministic, and documents-only.</div>
+  <p>If a question says document, do not jump too quickly. Ask what kind of document and what constraints matter. A standard receipt at scale points toward Document Intelligence. A long contract with custom business fields and no labeled examples points toward Content Understanding. If the input is not a document, Document Intelligence is not the answer.</p>
+</section>
+
+<section id="building">
+  <h2>Build a lightweight extraction app</h2>
+  <p>AI-901 is a fundamentals exam, but it expects builder thinking. You should recognize the flow of an extraction app even if you are not asked to write production code.</p>
+  <ol>
+    <li><strong>Create the resource.</strong> Work in Microsoft Foundry and use the appropriate Foundry resource and project context.</li>
+    <li><strong>Pick or create an analyzer.</strong> Choose a prebuilt analyzer when it matches, or create a custom analyzer for your app fields.</li>
+    <li><strong>Define the field schema.</strong> Name the fields, choose types, write descriptions, and choose <code>extract</code>, <code>classify</code>, or <code>generate</code>.</li>
+    <li><strong>Call the analyze operation.</strong> Send the document, image, audio, or video to the analyzer from your app.</li>
+    <li><strong>Read the structured JSON.</strong> Inspect field values, confidence scores, grounding, and safety flags.</li>
+    <li><strong>Route it downstream.</strong> Store fields, trigger approvals, index Markdown for RAG, show low-confidence values for review, or call another workflow.</li>
+  </ol>
+  <p>You can author analyzers in the portal without code. Code still matters for calling the analyzer, handling results, and integrating the output into the rest of the app.</p>
+  <div class="codeblock"><span class="cb-title">Returned result shape</span><pre><code>{
+  "analyzerId": "contract-risk-analyzer",
+  "status": "succeeded",
+  "result": {
+    "fields": {
+      "counterparty": {
+        "value": "Contoso Ltd.",
+        "confidence": 0.94,
+        "grounding": [{ "page": 1, "box": [1.2, 2.4, 4.8, 2.8] }]
+      },
+      "renewalRisk": {
+        "value": "auto-renewal requires 90 days notice",
+        "confidence": 0.82,
+        "grounding": [{ "page": 6, "box": [0.9, 5.1, 7.2, 5.8] }]
+      }
+    },
+    "contentSafety": {
+      "flagged": false
+    }
+  }
+}</code></pre></div>
+  <p>In a real app, you should not treat every field the same. High-confidence grounded fields can flow through automatically. Low-confidence or high-risk fields can be routed to a human reviewer. Generated summaries should be shown with source grounding when the decision matters.</p>
+</section>
+
+<section id="traps">
+  <h2>Traps candidates make</h2>
+  <div class="callout trap"><span class="callout-title">Trap</span> Do not answer every extraction question with Document Intelligence. Content Understanding is the new AI-901 flagship for schema-driven extraction across documents, images, audio, and video.</div>
+  <ul>
+    <li><strong>Confusing OCR with extraction.</strong> OCR returns text. Content Understanding returns fields you defined.</li>
+    <li><strong>Confusing a prompt with an analyzer.</strong> A raw prompt can produce prose. An analyzer is reusable and configured with a field schema.</li>
+    <li><strong>Assuming custom means trained.</strong> Content Understanding custom analyzers can work zero-shot. Labeled examples are optional.</li>
+    <li><strong>Ignoring modality.</strong> Document Intelligence is documents-only. Content Understanding also handles images, audio, and video.</li>
+    <li><strong>Missing grounding.</strong> Bounding boxes and timestamps help prove where a field came from.</li>
+    <li><strong>Choosing Content Understanding for air-gapped deployment.</strong> Content Understanding has no container option; Document Intelligence containers are the answer.</li>
+    <li><strong>Using Video Indexer for custom fields.</strong> Video Indexer gives prebuilt insights. Content Understanding gives schema-driven extraction.</li>
+  </ul>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Concept</th><th>Recall</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Content Understanding</td><td>GA Foundry Tool that turns documents, images, audio, and video into structured JSON you define.</td></tr>
+        <tr><td>Analyzer</td><td>Reusable processing unit with <code>baseAnalyzerId</code>, field schema, output shape, and model choices.</td></tr>
+        <tr><td>Field schema</td><td>JSON definition of named, typed fields and their descriptions.</td></tr>
+        <tr><td>Field methods</td><td><code>extract</code> copies literal values, <code>classify</code> assigns categories, <code>generate</code> creates a new synthesized value.</td></tr>
+        <tr><td>Document analyzers</td><td><code>prebuilt-document</code> and <code>prebuilt-documentSearch</code>.</td></tr>
+        <tr><td>Image analyzers</td><td><code>prebuilt-image</code> and <code>prebuilt-imageSearch</code>.</td></tr>
+        <tr><td>Audio analyzers</td><td><code>prebuilt-audio</code> and <code>prebuilt-audioSearch</code>.</td></tr>
+        <tr><td>Video analyzers</td><td><code>prebuilt-video</code> and <code>prebuilt-videoSearch</code>.</td></tr>
+        <tr><td>Prebuilt analyzers</td><td>Include <code>prebuilt-read</code>, <code>prebuilt-layout</code>, base analyzers, RAG analyzers, and domain analyzers such as invoice, receipt, ID document, and contract.</td></tr>
+        <tr><td>Custom analyzers</td><td>Work zero-shot from plain-language field descriptions; labeled examples are optional for accuracy.</td></tr>
+        <tr><td>Response contents</td><td>Structured fields, confidence scores, grounding, Markdown for RAG, and content-safety flags.</td></tr>
+        <tr><td>CU vs DI rule</td><td>Content Understanding is generative and multimodal; Document Intelligence is purpose-trained, deterministic, and documents-only.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?set=d2-extraction">Drill: Extraction</a>
+    <a class="btn" href="drills.html?set=d2-multimodal">Drill: Multimodal extraction</a>
+    <a class="btn secondary" href="exams.html">Take a practice exam</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>

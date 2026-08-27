@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text and Speech &mdash; AI-901 Exam Prep</title>
+<meta name="description" content="Azure Language and Azure Speech in Foundry Tools for AI-901 objective 2.2, and when a generative or multimodal model is the better answer.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Text and Speech Solutions</h1>
+<p class="lede">Objective 2.2, inside the Microsoft Foundry implementation skill area that carries 55&ndash;60% of the exam. Two services do most of the work here &mdash; Azure Language and Azure Speech in Foundry Tools &mdash; and the exam keeps asking the same underlying question: is this a job for a purpose-built feature, or for a model?</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#text">Text analysis</a>
+    <a class="btn secondary sm" href="#speech">Speech</a>
+    <a class="btn secondary sm" href="#choosing">Choosing</a>
+    <a class="btn secondary sm" href="#traps">Traps</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="text">
+  <h2>Azure Language in Foundry Tools</h2>
+  <p>Azure Language is the text service. You send it text, it sends back structured findings &mdash; typed, scored, and consistent. It does not write prose, and that predictability is exactly why it still exists alongside generative models.</p>
+
+  <p>Microsoft now splits its features into two tiers, and the distinction confuses people, so be precise about it.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Tier</th><th>Features</th><th>What the tier means</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Core</strong></td><td>PII detection, language detection, named entity recognition (prebuilt and custom), text analytics for health</td><td>Actively evolving. New capability lands here.</td></tr>
+        <tr><td><strong>Legacy</strong></td><td>Sentiment analysis and opinion mining, key phrase extraction, summarization, entity linking, conversational language understanding, question answering, custom text classification</td><td>Fully supported and working. Not receiving new investment.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-title">Legacy does not mean retired</span>
+    <p style="margin-bottom:0">This trips people up badly. &ldquo;Legacy&rdquo; here means Microsoft is not adding new capability &mdash; it does <strong>not</strong> mean deprecated, retired, or wrong. The exam objective names &ldquo;keyword extraction, entity detection, sentiment analysis, and summarization&rdquo; explicitly, and three of those four are in the legacy tier. They are still correct answers. Do not eliminate a choice because you remember the word legacy.</p>
+  </div>
+
+  <h3>What each feature actually returns</h3>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Feature</th><th>Returns</th><th>Example scenario</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Key phrase extraction</strong></td><td>A flat list of the main talking points, as phrases</td><td>Summarize what a thousand survey comments are about, without reading them</td></tr>
+        <tr><td><strong>Named entity recognition</strong></td><td>Typed spans: person, location, organization, datetime, quantity, and more</td><td>Pull every company and date mentioned across a set of news articles</td></tr>
+        <tr><td><strong>PII detection</strong></td><td>Detected personal information, with the option to redact it</td><td>Strip customer identifiers out of support transcripts before analysis</td></tr>
+        <tr><td><strong>Sentiment analysis</strong></td><td>Positive, negative, neutral, or mixed, with confidence scores</td><td>Track how review tone shifts after a product change</td></tr>
+        <tr><td><strong>Opinion mining</strong></td><td>Sentiment tied to a specific aspect, not just the whole document</td><td>Learn that guests like the room but dislike the check-in process</td></tr>
+        <tr><td><strong>Language detection</strong></td><td>The detected language and a confidence score</td><td>Route incoming messages to the right regional team</td></tr>
+        <tr><td><strong>Summarization</strong></td><td>A shorter version of the text, extractive or abstractive</td><td>Give agents a two-line recap at the top of a long ticket</td></tr>
+        <tr><td><strong>Text analytics for health</strong></td><td>Medical entities, relations, and assertions</td><td>Extract medications and dosages from clinical notes</td></tr>
+        <tr><td><strong>Conversational language understanding</strong></td><td>An intent plus entities from a user utterance</td><td>Work out that &ldquo;book me a flight to Seattle Friday&rdquo; means BookFlight</td></tr>
+        <tr><td><strong>Question answering</strong></td><td>An answer drawn from a knowledge base of question-and-answer pairs</td><td>Answer common questions from an existing FAQ page</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Two distinctions the exam leans on</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="margin-top:0">Key phrases versus entities</h3>
+      <p><strong>Key phrases</strong> are the main talking points, returned as a plain list. Nothing is typed or categorized.</p>
+      <p style="margin-bottom:0"><strong>Entities</strong> are typed things &mdash; this span is a person, that one is a date. If the question mentions categories, types, or &ldquo;identify all the organizations,&rdquo; it wants entity recognition.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Extractive versus abstractive</h3>
+      <p><strong>Extractive summarization</strong> selects the most important sentences that already exist, unchanged. Nothing is invented, and every word traces back to the source.</p>
+      <p style="margin-bottom:0"><strong>Abstractive summarization</strong> writes new sentences that capture the meaning. It can paraphrase and condense across the whole document. If a scenario needs a summary in the reader&rsquo;s own words, it is abstractive.</p>
+    </div>
+  </div>
+</section>
+
+<section id="speech">
+  <h2>Azure Speech in Foundry Tools</h2>
+  <p>Azure Speech handles audio in both directions: turning speech into text, and turning text into speech. It is deterministic, low latency, and built for production audio pipelines.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Capability</th><th>Input</th><th>Output</th><th>Example scenario</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Speech to text</strong> (real-time)</td><td>Streaming audio</td><td>Text, as it is spoken</td><td>Live captions during a meeting</td></tr>
+        <tr><td><strong>Batch transcription</strong></td><td>Many stored audio files</td><td>Text, asynchronously</td><td>Transcribe last month&rsquo;s call recordings overnight</td></tr>
+        <tr><td><strong>Fast transcription</strong></td><td>A pre-recorded file</td><td>Text, quickly</td><td>Turn an uploaded voicemail into text while the user waits</td></tr>
+        <tr><td><strong>Custom speech</strong></td><td>Audio plus your own training data</td><td>Text, tuned to your vocabulary</td><td>Recognize product names and industry jargon reliably</td></tr>
+        <tr><td><strong>Text to speech</strong></td><td>Text</td><td>Natural neural-voice audio</td><td>Read confirmation details back to a caller</td></tr>
+        <tr><td><strong>SSML</strong></td><td>Marked-up text</td><td>Audio with controlled pronunciation, pace, and emphasis</td><td>Make the system say a product name correctly every time</td></tr>
+        <tr><td><strong>Custom neural voice</strong></td><td>Recorded voice samples (gated)</td><td>A brand-specific synthetic voice</td><td>One consistent voice across every customer touchpoint</td></tr>
+        <tr><td><strong>Speech translation</strong></td><td>Spoken audio in one language</td><td>Text or speech in another</td><td>Let a support agent and a caller speak different languages</td></tr>
+        <tr><td><strong>Speaker recognition</strong></td><td>Audio plus enrolled voice profiles</td><td>Who is speaking, or whether they are who they claim</td><td>Verify a caller by voice before discussing an account</td></tr>
+        <tr><td><strong>Pronunciation assessment</strong></td><td>Learner audio</td><td>Accuracy and fluency scoring</td><td>Give feedback in a language-learning app</td></tr>
+        <tr><td><strong>Language identification</strong></td><td>Audio</td><td>Which language is being spoken</td><td>Pick the right transcription model automatically</td></tr>
+        <tr><td><strong>Voice Live</strong></td><td>Streaming conversation</td><td>Low-latency spoken interaction</td><td>A natural, interruptible voice assistant</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout trap">
+    <span class="callout-title">Speaker recognition is not speech recognition</span>
+    <p style="margin-bottom:0">These sound almost identical and mean completely different things. <strong>Speech recognition</strong> answers <em>what was said</em> and produces a transcript. <strong>Speaker recognition</strong> answers <em>who said it</em> and is used for identification and verification. Any scenario about confirming a caller&rsquo;s identity by voice is speaker recognition, no matter how much transcription is also happening.</p>
+  </div>
+
+  <h3>Responding to spoken prompts with a multimodal model</h3>
+  <p>The objective says &ldquo;respond to spoken prompts by using a deployed multimodal model,&rdquo; and that is a different thing from the Speech service. The realtime and audio model families in Foundry Models take <strong>speech in</strong> and produce <strong>speech out</strong>, with a language model reasoning in between. There is no separate transcribe step you manage, no separate synthesis step, and crucially the model <em>understands and answers</em> rather than just converting formats.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th></th><th>Azure Speech</th><th>Multimodal audio model</th></tr></thead>
+      <tbody>
+        <tr><td>What it does</td><td>Converts between audio and text</td><td>Understands spoken input and answers it</td></tr>
+        <tr><td>Reasoning</td><td>None &mdash; it is a converter</td><td>Full language model reasoning between input and output</td></tr>
+        <tr><td>Output</td><td>A transcript, or synthesized audio you supplied the words for</td><td>A spoken answer the model composed itself</td></tr>
+        <tr><td>Reach for it when</td><td>You need an accurate transcript, a branded voice, or speaker verification</td><td>You want a conversational assistant that listens and replies</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">Whisper also appears in Foundry Models as a transcription model. It converts speech to text; it does not hold a conversation.</p>
+</section>
+
+<section id="choosing">
+  <h2>Purpose-built feature or generative model?</h2>
+  <p>This is the decision the exam returns to again and again, in both directions. Neither answer is always right, and the scenario always contains the deciding constraint.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Situation</th><th>Better choice</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Output must be consistently structured and typed</td><td>Purpose-built feature</td><td>It returns the same shape every time. A model may phrase things differently on each call.</td></tr>
+        <tr><td>High volume, latency and cost matter</td><td>Purpose-built feature</td><td>Narrow models are faster and cheaper per call than general-purpose ones.</td></tr>
+        <tr><td>Regulated domain needing predictable behavior</td><td>Purpose-built feature</td><td>Documented, auditable behavior is easier to defend than free-form generation.</td></tr>
+        <tr><td>Clinical or medical text</td><td>Text analytics for health</td><td>Purpose-built for medical entities, relations, and assertions.</td></tr>
+        <tr><td>Detecting and redacting personal information</td><td>PII detection</td><td>Built for exactly this, with redaction included.</td></tr>
+        <tr><td>Verbatim transcription, or a branded voice</td><td>Azure Speech</td><td>Deterministic transcription, custom neural voice, and SSML control live here.</td></tr>
+        <tr><td>Confirming who is speaking</td><td>Azure Speech speaker recognition</td><td>No generative model does voice identity.</td></tr>
+        <tr><td>The task is novel, or combines several steps in one call</td><td>Generative model</td><td>One prompt can summarize, classify, and rewrite together.</td></tr>
+        <tr><td>The task needs reasoning about the content</td><td>Generative model</td><td>Purpose-built features detect and label; they do not reason.</td></tr>
+        <tr><td>Input mixes text with images or audio</td><td>Multimodal model</td><td>Purpose-built text features only take text.</td></tr>
+        <tr><td>A spoken, conversational assistant</td><td>Multimodal audio model</td><td>Speech in, reasoning, speech out, in one model.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Azure Translator in Foundry Tools</h3>
+  <p>Translator is the third service in this objective and the one people misplace most often. It does text translation between languages, document translation that preserves formatting, and <strong>transliteration</strong>.</p>
+
+  <div class="callout key">
+    <span class="callout-title">Two Translator rules worth memorizing</span>
+    <p><strong>Text translation lives in Translator; spoken translation lives in Azure Speech.</strong> If the input is audio, the answer is Speech, even though the task is translation.</p>
+    <p style="margin-bottom:0"><strong>Transliteration is not translation.</strong> It rewrites text from one script into another &mdash; Hindi written in Latin characters, for example. The language does not change, only the alphabet. A question about making a name readable in another script wants transliteration.</p>
+  </div>
+</section>
+
+<section id="traps">
+  <h2>Where people lose points</h2>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>The mistake</th><th>What is actually true</th></tr></thead>
+      <tbody>
+        <tr><td>Eliminating sentiment analysis or key phrase extraction because they are &ldquo;legacy&rdquo;</td><td>Legacy means no new investment, not retired. The objective names these features explicitly and they remain correct answers.</td></tr>
+        <tr><td>Answering key phrase extraction when the scenario asks for types</td><td>Categories such as person, location, or organization mean named entity recognition.</td></tr>
+        <tr><td>Treating extractive and abstractive summarization as interchangeable</td><td>Extractive selects existing sentences; abstractive writes new ones. Scenarios that need paraphrasing are abstractive.</td></tr>
+        <tr><td>Choosing speech recognition for a caller-identity scenario</td><td>Identity by voice is speaker recognition. Speech recognition only produces the transcript.</td></tr>
+        <tr><td>Sending audio to Azure Translator</td><td>Translator takes text. Spoken translation is Azure Speech.</td></tr>
+        <tr><td>Calling transliteration a kind of translation</td><td>Transliteration changes the script, not the language.</td></tr>
+        <tr><td>Reaching for a generative model for everything</td><td>When the scenario stresses consistent structure, latency, cost, or compliance, the purpose-built feature is the better answer.</td></tr>
+        <tr><td>Reaching for a purpose-built feature for everything</td><td>When the task is novel, needs reasoning, or combines steps, a model wins.</td></tr>
+        <tr><td>Confusing question answering with conversational language understanding</td><td>A knowledge base of question-and-answer pairs means question answering. Working out intent from a free-form utterance means conversational language understanding.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="margin-top:0">Azure Language, one line each</h3>
+      <ul style="margin-bottom:0">
+        <li><strong>Key phrases</strong> &mdash; the main talking points, untyped</li>
+        <li><strong>Entities</strong> &mdash; typed things: person, place, org, date</li>
+        <li><strong>PII detection</strong> &mdash; find and redact personal data</li>
+        <li><strong>Sentiment</strong> &mdash; positive, negative, neutral, mixed</li>
+        <li><strong>Opinion mining</strong> &mdash; sentiment about a specific aspect</li>
+        <li><strong>Language detection</strong> &mdash; which language is this</li>
+        <li><strong>Summarization</strong> &mdash; extractive selects, abstractive rewrites</li>
+        <li><strong>Health</strong> &mdash; medical entities and relations</li>
+        <li><strong>CLU</strong> &mdash; intent plus entities from an utterance</li>
+        <li><strong>Question answering</strong> &mdash; answers from a knowledge base</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Azure Speech, one line each</h3>
+      <ul style="margin-bottom:0">
+        <li><strong>Speech to text</strong> &mdash; real-time, batch, or fast</li>
+        <li><strong>Custom speech</strong> &mdash; tuned to your vocabulary</li>
+        <li><strong>Text to speech</strong> &mdash; neural voices</li>
+        <li><strong>SSML</strong> &mdash; control pronunciation and pace</li>
+        <li><strong>Custom neural voice</strong> &mdash; brand voice, gated</li>
+        <li><strong>Speech translation</strong> &mdash; spoken, across languages</li>
+        <li><strong>Speaker recognition</strong> &mdash; <em>who</em> is talking</li>
+        <li><strong>Voice Live</strong> &mdash; low-latency conversation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.1rem">
+    <h3 style="margin-top:0">The decisions, in one line each</h3>
+    <ul style="margin-bottom:0">
+      <li><strong>Core versus legacy</strong> &mdash; legacy still works and is still the right answer when the objective names it.</li>
+      <li><strong>Key phrases versus entities</strong> &mdash; types and categories mean entities.</li>
+      <li><strong>Extractive versus abstractive</strong> &mdash; selects existing sentences versus writes new ones.</li>
+      <li><strong>Speech versus speaker</strong> &mdash; what was said versus who said it.</li>
+      <li><strong>Translator versus Speech</strong> &mdash; text in, or audio in.</li>
+      <li><strong>Transliteration</strong> &mdash; new script, same language.</li>
+      <li><strong>Purpose-built versus generative</strong> &mdash; consistency, latency, cost, and compliance point to purpose-built; novelty, reasoning, and combined steps point to a model.</li>
+      <li><strong>Speech service versus multimodal audio model</strong> &mdash; converting formats versus understanding and answering.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?set=d2-text">Drill: Text Analysis in Practice</a>
+    <a class="btn" href="drills.html?set=d2-speech">Drill: Speech Recognition &amp; Synthesis</a>
+    <a class="btn secondary" href="vision.html">Next guide: Vision and Image Generation &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>

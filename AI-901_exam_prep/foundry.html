@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Foundry Platform &mdash; AI-901 Exam Prep</title>
+<meta name="description" content="Learn the Microsoft Foundry platform concepts, deployments, prompts, and SDK basics for AI-901.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Building on Microsoft Foundry</h1>
+<p class="lede">Skill area 2 is 55&ndash;60% of AI-901, and objective 2.1 is where you prove you understand the Foundry platform. This guide covers the platform, deployments, prompts, and SDK. Agents have their own guide.</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#portal">Portal</a>
+    <a class="btn secondary sm" href="#deploy">Deploy</a>
+    <a class="btn secondary sm" href="#prompts">Prompts</a>
+    <a class="btn secondary sm" href="#sdk">SDK</a>
+    <a class="btn secondary sm" href="#traps">Traps</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="portal">
+  <h2>Foundry portal, resources, and projects</h2>
+  <p>Microsoft Foundry is the platform for building, deploying, evaluating, observing, and securing AI apps and agents. It was previously called Azure AI Foundry; the exam and some docs may still use that name, but Microsoft Foundry is the current name. The Foundry portal is at <code>ai.azure.com</code>.</p>
+
+  <p>The hierarchy matters. A <strong>Foundry resource</strong> is the top-level Azure resource. A <strong>Foundry project</strong> lives inside that resource and is the unit of scoping for access, billing, endpoints, deployments, tools, and development work. When a question asks where you manage a solution, think project first.</p>
+
+  <div class="callout key"><span class="callout-title">Project endpoint format</span><p>Your code connects to the project endpoint, not just the Azure portal. The format is <code>https://&lt;resource-name&gt;.services.ai.azure.com/api/projects/&lt;project-name&gt;</code>.</p></div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Inside a Foundry project</th><th>What it means for the exam</th></tr></thead>
+      <tbody>
+        <tr><td>Model deployments</td><td>A deployed model endpoint with a deployment name your app passes in code.</td></tr>
+        <tr><td>Agents</td><td>Agent definitions and related runtime assets. This guide only locates them; the Agents guide covers details.</td></tr>
+        <tr><td>Playgrounds</td><td>Interactive testing surfaces for chat, prompts, models, and scenario experiments before code.</td></tr>
+        <tr><td>Evaluations</td><td>Tools for measuring outputs, comparing prompt changes, and checking quality before release.</td></tr>
+        <tr><td>Connections</td><td>References to other resources such as Azure AI Search, storage, or data sources.</td></tr>
+        <tr><td>Toolboxes</td><td>Reusable groups of tools that can be exposed to agents and apps through a managed endpoint.</td></tr>
+        <tr><td>Observability</td><td>Tracing, monitoring, and diagnostics for requests, tool calls, and app behavior.</td></tr>
+        <tr><td>RBAC</td><td>Project-scoped role assignments that control who can create, manage, and use assets.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Foundry RBAC role names include Foundry User, Foundry Owner, Foundry Account Owner, and Foundry Project Manager. You may still see older Azure AI role names in screenshots or older material, but AI-901 content should use the Foundry names.</p>
+
+  <p>Foundry (classic) is the older hub-based project model. It is deprecated, so mention it only as an older architecture you might see in existing environments. For new work and for this site, use the current Foundry resource and Foundry project model.</p>
+</section>
+
+<section id="deploy">
+  <h2>From Foundry Models to a callable deployment</h2>
+  <p>The Foundry Models catalog is where you discover available model families and compare what they are designed to do. A model in the catalog is not automatically something your app can call. In the normal path, you choose a model, create a deployment in your project, and then call that deployment from code.</p>
+
+  <div class="callout key"><span class="callout-title">Deployment name is the code value</span><p>A deployment has its own <strong>deployment name</strong>. In SDK calls, <code>model=</code> takes that deployment name. It is a common mistake to pass the model family name when the deployment was named something else.</p></div>
+
+  <p>After deploying, test in the playground. The playground lets you try system messages, user prompts, parameters, and sample inputs before writing application code. This is also where you can quickly see whether the deployed model fits the task, whether the answer format is stable, and whether your prompt needs examples or source material.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Step</th><th>What you do</th><th>Exam clue</th></tr></thead>
+      <tbody>
+        <tr><td>Choose from Foundry Models</td><td>Select a model family based on task, modality, latency, capability, residency needs, and support requirements.</td><td>The question asks which model type or family is appropriate.</td></tr>
+        <tr><td>Deploy to the project</td><td>Create a deployment and give it a deployment name.</td><td>The app needs an endpoint it can call.</td></tr>
+        <tr><td>Configure filters and parameters</td><td>Set content filters and tune generation parameters such as system message and output length.</td><td>The question mentions safety controls or blocked input and output.</td></tr>
+        <tr><td>Test in the playground</td><td>Try prompts interactively before writing code.</td><td>The question asks how to validate a prompt or model behavior quickly.</td></tr>
+        <tr><td>Call from code</td><td>Use the project endpoint, credential, SDK client, and deployment name.</td><td>The question shows Python or asks what value goes in <code>model=</code>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Deployment options include serverless API, managed compute, and instant access. Serverless API is the normal preferred path; managed compute is for dedicated capacity that you size; instant access lets supported models be called by name without creating a deployment. For serverless deployments, Global Standard is the sensible default unless there is a specific residency, throughput, or batch-processing reason to choose something else. The Models guide covers the detail, so use <a href="models.html#deployment">models.html#deployment</a> for the deeper comparison.</p>
+
+  <p>Content filters apply to a deployment. They evaluate prompts and generated output and can block or flag content based on configured severity thresholds and blocklists. On the exam, connect content filters with Azure AI Content Safety and responsible operation of generative AI, not with model selection alone.</p>
+</section>
+
+<section id="prompts">
+  <h2>Prompt engineering before heavier changes</h2>
+  <p>Prompt engineering is how you shape model behavior through instructions, examples, and source material. It is the first lever because you can change it without redeploying infrastructure or changing model weights.</p>
+
+  <div class="callout key"><span class="callout-title">First lever</span><p>Prompt engineering is always the first lever because it costs nothing. Try clearer instructions, better format requirements, examples, and grounding material before moving to more complex approaches.</p></div>
+
+  <div class="grid grid-2">
+    <div class="card"><h3>System message</h3><p>The system message sets the role, constraints, tone, safety boundaries, and durable behavior. Put stable instructions here: who the assistant is, what it should never do, how it should handle missing information, and the output rules it must follow every time.</p></div>
+    <div class="card"><h3>User prompt</h3><p>The user prompt is the specific request for this turn. Put the task, source material, desired audience, length, format, and any one-time constraints here. A good user prompt is explicit about what success looks like.</p></div>
+  </div>
+
+  <p>Be specific about format, length, and audience. &ldquo;Summarize this&rdquo; is weak. &ldquo;Write five bullet points for a nontechnical operations director; include risks and next actions; use only the source text&rdquo; is much stronger. If you want JSON, a table, headings, citations, or a maximum length, say so directly.</p>
+
+  <h3>Zero-shot, one-shot, and few-shot</h3>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Technique</th><th>What you provide</th><th>Worked example</th></tr></thead>
+      <tbody>
+        <tr><td>Zero-shot</td><td>Only instructions and the task.</td><td>&ldquo;Classify this ticket as billing, access, hardware, or other. Return only the category.&rdquo;</td></tr>
+        <tr><td>One-shot</td><td>One example of the desired input and output.</td><td>&ldquo;Example: &lsquo;I cannot reset my password&rsquo; &rarr; access. Now classify: &lsquo;My invoice has the wrong tax rate.&rsquo;&rdquo;</td></tr>
+        <tr><td>Few-shot</td><td>Several examples that show the pattern.</td><td>&ldquo;Password reset &rarr; access; cracked screen &rarr; hardware; refund request &rarr; billing. Now classify the new ticket.&rdquo;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Give the model source material in the prompt when the answer must come from your content. This is grounding at the prompt level. It reduces hallucination because the model has the relevant facts in front of it, and you can instruct it to say when the source does not contain the answer.</p>
+
+  <div class="ex-block bad"><p><strong>Weak prompt:</strong> Summarize this policy for employees.</p><p>This prompt does not specify audience, length, format, source boundaries, or what details matter.</p></div>
+  <div class="ex-block good"><p><strong>Strong rewrite:</strong> You are helping new employees understand the travel policy. Using only the source text below, write a plain-English summary in six bullets. Include approval requirements, receipt rules, and reimbursement timing. If the source does not say something, write &ldquo;Not stated in the source.&rdquo;</p></div>
+
+  <p>The exam often asks what to adjust first when a model gives vague or inconsistent answers. The best first answer is usually to improve the prompt: add clearer instructions, specify the output format, provide examples, or include the relevant source content.</p>
+</section>
+
+<section id="sdk">
+  <h2>Foundry SDK basics</h2>
+  <p>The Foundry SDK is the current SDK surface for projects. In Python, the package is <code>azure-ai-projects</code> version 2.x. Version 1.x belongs to Foundry (classic) and is API-incompatible with the current project model.</p>
+
+  <div class="codeblock"><span class="cb-title">Minimal Foundry chat client</span><pre><code>from azure.ai.projects import AIProjectClient
+from azure.identity import DefaultAzureCredential
+
+project = AIProjectClient(
+    endpoint="https://&lt;resource-name&gt;.services.ai.azure.com/api/projects/&lt;project-name&gt;",
+    credential=DefaultAzureCredential(),
+)
+
+openai = project.get_openai_client()
+response = openai.responses.create(
+    model="support-chat-prod",
+    input="Write a three-bullet summary of the warranty note.",
+)
+print(response.output_text)</code></pre></div>
+
+  <p>The imports bring in the project client and the Azure identity credential. <code>AIProjectClient</code> connects your code to the Foundry project endpoint. <code>DefaultAzureCredential</code> uses keyless Microsoft Entra authentication, so local developers, managed identities, and hosted workloads can authenticate without hard-coding secrets.</p>
+
+  <p><code>project.get_openai_client()</code> returns an OpenAI-compatible client scoped through the Foundry project. <code>responses.create()</code> sends a request to a deployed model. The <code>model=</code> value is the <strong>deployment name</strong>, such as <code>support-chat-prod</code>, not necessarily the model family name you selected in the catalog. <code>response.output_text</code> is the plain generated text.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>SDK</th><th>Package</th><th>Use when</th></tr></thead>
+      <tbody>
+        <tr><td>Foundry SDK</td><td><code>azure-ai-projects</code> 2.x</td><td>You are working with Foundry projects, project endpoints, model deployments, project-scoped clients, and current agent surfaces.</td></tr>
+        <tr><td>OpenAI SDK</td><td>OpenAI client package for your language</td><td>You need direct OpenAI-compatible calls. Embeddings must go through the OpenAI SDK endpoint at <code>https://&lt;resource&gt;.openai.azure.com/openai/v1/</code>.</td></tr>
+        <tr><td>Foundry Tools service SDKs</td><td>Service-specific Azure SDK packages</td><td>You are calling Azure Speech, Azure Language, Azure Document Intelligence, Content Understanding, or another purpose-built service directly.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Beginner SDK errors</span><p>The two most common mistakes are passing a model family name instead of the deployment name, and using a missing or wrong project endpoint. If the endpoint does not include <code>/api/projects/&lt;project-name&gt;</code>, it is not the project endpoint shown in the current Foundry SDK pattern.</p></div>
+</section>
+
+<section id="traps">
+  <h2>Traps candidates make with Foundry</h2>
+
+  <div class="grid grid-2">
+    <div class="card"><h3>Using old product names everywhere</h3><p>Know that older docs may say Azure AI Foundry, but write and think Microsoft Foundry for current material. Foundry Tools, Foundry Models, Foundry resource, Foundry project, and Foundry SDK are the current terms.</p></div>
+    <div class="card"><h3>Skipping the project level</h3><p>A project is not cosmetic. It scopes access, billing, endpoints, deployments, tools, and observability. If a question asks where a deployment or playground lives, the answer is inside a Foundry project.</p></div>
+    <div class="card"><h3>Confusing model and deployment</h3><p>The catalog contains models. Your application usually calls a deployment. The deployment has the name used in code, even if it points to a familiar model family.</p></div>
+    <div class="card"><h3>Overengineering prompt problems</h3><p>If output is vague, too long, wrong format, or missing audience fit, improve the prompt first. Specify the role, output shape, examples, and source material before jumping to heavier solutions.</p></div>
+    <div class="card"><h3>Forgetting content filters</h3><p>Content filters attach to deployments and evaluate input and output. They are part of responsible AI operations for generative apps.</p></div>
+    <div class="card"><h3>Using Foundry SDK 1.x examples</h3><p>Foundry SDK 2.x is the current path. Version 1.x examples often reflect Foundry (classic) and can use API patterns that do not match current project endpoints.</p></div>
+  </div>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+
+  <div class="grid grid-2">
+    <div class="card"><h3>Hierarchy</h3><p><strong>Foundry resource</strong> is the top-level Azure resource.</p><p><strong>Foundry project</strong> lives inside the resource and scopes access, billing, endpoints, deployments, tools, and observability.</p><p><strong>Deployment</strong> is the callable instance of a model. Code passes the deployment name.</p></div>
+    <div class="card"><h3>Project contents</h3><p>Remember this list: model deployments, agents, playgrounds, evaluations, connections, toolboxes, observability, and RBAC. If the question asks where these are managed, answer within a Foundry project.</p></div>
+    <div class="card"><h3>Deployment options</h3><p><strong>Serverless API:</strong> normal preferred path.</p><p><strong>Managed compute:</strong> dedicated compute you size.</p><p><strong>Instant access:</strong> call a supported model without creating a deployment.</p><p><strong>Global Standard:</strong> sensible default unless a specific requirement points elsewhere.</p></div>
+    <div class="card"><h3>Prompting ladder</h3><p>Set a clear system message. Be specific about task, audience, length, and format. Add one-shot or few-shot examples when the pattern matters. Give the model source material when the answer must be grounded.</p></div>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>SDK skeleton in five lines</th><th>Recall cue</th></tr></thead>
+      <tbody>
+        <tr><td><code>from azure.ai.projects import AIProjectClient</code></td><td>Use the Foundry SDK package.</td></tr>
+        <tr><td><code>DefaultAzureCredential()</code></td><td>Keyless Entra authentication.</td></tr>
+        <tr><td><code>AIProjectClient(endpoint="https://&lt;resource&gt;.services.ai.azure.com/api/projects/&lt;project&gt;", credential=...)</code></td><td>Use the project endpoint.</td></tr>
+        <tr><td><code>project.get_openai_client()</code></td><td>Get the project-scoped OpenAI-compatible client.</td></tr>
+        <tr><td><code>openai.responses.create(model="deployment-name", input="...")</code></td><td><code>model=</code> is the deployment name.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?set=d2-portal">Drill: Foundry portal</a>
+    <a class="btn" href="drills.html?set=d2-prompts">Drill: Prompts</a>
+    <a class="btn" href="drills.html?set=d2-sdk">Drill: SDK</a>
+    <a class="btn secondary" href="agents.html">Next guide: Agents &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Responsible AI &mdash; AI-901 Exam Prep</title>
+<meta name="description" content="Learn the responsible AI principles and generative AI safety controls tested on AI-901.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Responsible AI</h1>
+<p class="lede">Responsible AI is objective 1.1 in the first AI-901 skill area, Identify AI concepts and capabilities. Expect scenario questions that ask which principle or safety control applies.</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#principles">Six principles</a>
+    <a class="btn secondary sm" href="#generative">Generative AI safety</a>
+    <a class="btn secondary sm" href="#traps">Exam traps</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="principles">
+  <h2>The six responsible AI principles</h2>
+  <p>Microsoft uses six responsible AI principles. On AI-901, you usually do not need a legal essay. You need to identify the principle from a short workplace scenario. Read the verbs and nouns in the question. They are usually stronger clues than the industry.</p>
+  <p>Use current platform language on this exam: the platform is Microsoft Foundry, model catalog is Foundry Models, service capabilities are Foundry Tools, and development uses the Foundry SDK. Some documentation may still say Azure AI Foundry; treat it as the same product name in transition.</p>
+
+  <h3>Fairness</h3>
+  <p><strong>Definition:</strong> AI systems should treat people and groups equitably and avoid unfair bias.</p>
+  <p><strong>Exam scenario:</strong> A loan assistant, screening assistant, or benefits chatbot gives worse recommendations for one demographic group than another even when the business facts are similar.</p>
+  <p><strong>Giveaway words:</strong> bias, demographic, disadvantaged, equitable, protected group, unfair outcome.</p>
+  <p><strong>Related tooling:</strong> evaluation in Microsoft Foundry, representative test prompts, human review, monitoring, and safety practices that compare behavior across user groups. Azure AI Content Safety can reduce harmful outputs, but fairness is broader than content filtering.</p>
+
+  <h3>Reliability and safety</h3>
+  <p><strong>Definition:</strong> AI systems should work consistently, handle expected and unexpected conditions, and fail safely when they cannot complete a task.</p>
+  <p><strong>Exam scenario:</strong> A customer-support agent must not invent refund approval, must recover gracefully when a tool is unavailable, or must route high-risk cases to a human instead of continuing.</p>
+  <p><strong>Giveaway words:</strong> fail safe, rigorous testing, unexpected conditions, harmful behavior, safe fallback, robust.</p>
+  <p><strong>Related tooling:</strong> Foundry evaluations, prompt testing, monitoring, tracing, Azure AI Content Safety, prompt shields, groundedness detection, and application guardrails such as human handoff.</p>
+
+  <h3>Privacy and security</h3>
+  <p><strong>Definition:</strong> AI systems should protect personal data, respect consent, and secure data, prompts, outputs, and connected resources.</p>
+  <p><strong>Exam scenario:</strong> An app summarizes employee files but must avoid exposing salary details to unauthorized users, must encrypt stored transcripts, or must delete conversation data according to retention policy.</p>
+  <p><strong>Giveaway words:</strong> personal data, consent, encryption, retention, access control, confidential, unauthorized disclosure.</p>
+  <p><strong>Related tooling:</strong> Microsoft Entra authentication, Foundry project scoping, role-based access control, managed identities, private connections where needed, content filters, and data-governance controls around storage and logs.</p>
+
+  <h3>Inclusiveness</h3>
+  <p><strong>Definition:</strong> AI systems should be usable by people with different abilities, languages, environments, and interaction needs.</p>
+  <p><strong>Exam scenario:</strong> A city-service chatbot must work with screen readers, provide captions for audio, support keyboard navigation, or offer alternatives for users who cannot speak to the system.</p>
+  <p><strong>Giveaway words:</strong> accessible, disability, everyone, regardless of ability, assistive technology, inclusive design.</p>
+  <p><strong>Related tooling:</strong> Azure Speech in Foundry Tools for speech-to-text and text-to-speech, Azure Translator in Foundry Tools, multimodal models, accessibility testing, captions, alternative text, and user-experience choices that remove barriers.</p>
+
+  <h3>Transparency</h3>
+  <p><strong>Definition:</strong> People should understand how an AI system is used, what it can and cannot do, and why it produced important output.</p>
+  <p><strong>Exam scenario:</strong> A healthcare assistant tells users when they are interacting with AI, cites source documents, explains that it is not a clinician, and shows what evidence was used for a recommendation.</p>
+  <p><strong>Giveaway words:</strong> explain, understand, interpretability, disclose, limitations, why, cite.</p>
+  <p><strong>Related tooling:</strong> grounding with Azure AI Search, citations, system messages that require source disclosure, Foundry tracing, evaluations, model cards or documentation, and user-facing explanations.</p>
+
+  <h3>Accountability</h3>
+  <p><strong>Definition:</strong> People and organizations remain responsible for AI systems, including governance, review, policy, and correction.</p>
+  <p><strong>Exam scenario:</strong> A company defines who approves a recruitment agent, who monitors incidents, who can change prompts, and how users appeal an automated decision.</p>
+  <p><strong>Giveaway words:</strong> governance, oversight, responsible for, review board, audit, policy, framework, escalation.</p>
+  <p><strong>Related tooling:</strong> Foundry project governance, role assignments, audit processes, evaluations, monitoring, human approval workflows, incident response, and documented operating procedures.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Principle</th><th>The question sounds like</th><th>Giveaway words</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Fairness</td><td>A system treats one group worse than another.</td><td>bias, demographic, disadvantaged, equitable</td></tr>
+        <tr><td>Reliability and safety</td><td>It must behave consistently and fail safely.</td><td>fail safe, rigorous testing, harm, unexpected conditions</td></tr>
+        <tr><td>Privacy and security</td><td>Personal or sensitive data must be protected.</td><td>consent, personal data, encryption, retention</td></tr>
+        <tr><td>Inclusiveness</td><td>Everyone must be able to use it.</td><td>accessible, everyone, disability, regardless of ability</td></tr>
+        <tr><td>Transparency</td><td>People must understand how and why AI is used.</td><td>explain, understand, interpretability, disclose</td></tr>
+        <tr><td>Accountability</td><td>People and organizations answer for AI behavior.</td><td>governance, responsible for, oversight, framework</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Trap: two pairs look similar</span>
+    <p><strong>Transparency vs accountability:</strong> transparency is about understanding how the system works, why it answered, and whether users know AI is involved. Accountability is about who owns decisions, policies, approvals, monitoring, and consequences.</p>
+    <p><strong>Inclusiveness vs fairness:</strong> inclusiveness asks whether everyone can use the system. Fairness asks whether the system treats groups equitably once they use it.</p>
+  </div>
+</section>
+
+<section id="generative">
+  <h2>Responsible AI for generative systems</h2>
+  <p>Generative AI adds risks because the model creates new text, images, audio, or other output instead of simply returning a fixed record. The exam focuses on practical controls: classify harmful content, defend prompts, ground answers, detect protected material, and operate the system with ongoing measurement.</p>
+
+  <h3>Azure AI Content Safety</h3>
+  <p>Azure AI Content Safety helps identify harmful input and output. The four harm categories to memorize are <strong>hate</strong>, <strong>sexual</strong>, <strong>violence</strong>, and <strong>self-harm</strong>. Each category can use configurable severity thresholds, so an application can decide whether to allow, warn, transform, block, or escalate content based on risk.</p>
+  <p>Content Safety is not the same as the whole responsible AI program. It is a safety-system layer. You still need good instructions, grounding, evaluations, user experience design, access control, and monitoring.</p>
+
+  <h3>Prompt shields</h3>
+  <p>Prompt shields defend against prompt attacks. A <strong>jailbreak</strong> is a direct attempt by the user to override system instructions, such as &ldquo;ignore all previous instructions.&rdquo; <strong>Indirect prompt injection</strong> hides malicious instructions inside external content, such as a web page, email, or document that the model is asked to summarize.</p>
+  <p>The key exam distinction is where the attack comes from. If the user types the attack, think jailbreak. If the attack is embedded in retrieved or connected content, think indirect prompt injection.</p>
+
+  <h3>Groundedness and protected material</h3>
+  <p><strong>Groundedness detection</strong> checks whether generated output is supported by the grounding sources supplied to the model. This matters in retrieval-augmented generation, where the app retrieves passages from Azure AI Search or another source and asks the model to answer from them.</p>
+  <p><strong>Protected material detection</strong> helps identify output that may reproduce protected text or code. On the exam, connect it to scenarios where generated content resembles copyrighted material, proprietary code, or long passages from a source.</p>
+
+  <h3>Identify &rarr; measure &rarr; mitigate &rarr; operate</h3>
+  <p>Microsoft frames generative AI risk management as a lifecycle. First, identify possible harms for the app and users. Then measure whether they occur through evaluations and testing. Next, mitigate with layered controls. Finally, operate the system with monitoring, incident response, and improvement over time.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Stage</th><th>What you do</th><th>Example</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Identify</td><td>List plausible harms, users, data sources, and failure modes.</td><td>A benefits assistant might expose personal data or give unsupported eligibility advice.</td></tr>
+        <tr><td>Measure</td><td>Test prompts, outputs, groundedness, safety categories, and edge cases.</td><td>Run evaluations that include jailbreak attempts and sensitive-topic questions.</td></tr>
+        <tr><td>Mitigate</td><td>Add controls across the model, safety system, grounding, instructions, and user experience.</td><td>Use content filters, prompt shields, citations, and human escalation.</td></tr>
+        <tr><td>Operate</td><td>Monitor real behavior, review incidents, update controls, and keep owners accountable.</td><td>Track blocked content, false positives, user reports, and release changes.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>The four mitigation layers</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Model</h3>
+      <p>Choose an appropriate model from Foundry Models. Prefer a model with the capability, modality, latency, and safety behavior needed for the task.</p>
+    </div>
+    <div class="card">
+      <h3>Safety system</h3>
+      <p>Use Azure AI Content Safety, prompt shields, groundedness detection, protected material detection, severity thresholds, and blocklists where appropriate.</p>
+    </div>
+    <div class="card">
+      <h3>System message and grounding</h3>
+      <p>Use clear system instructions, retrieved context, citations, and rules that tell the model what to do when evidence is missing.</p>
+    </div>
+    <div class="card">
+      <h3>User experience</h3>
+      <p>Design disclaimers, confirmations, review screens, feedback, human handoff, and safe defaults so users can recover from errors.</p>
+    </div>
+  </div>
+</section>
+
+<section id="traps">
+  <h2>Traps candidates make on objective 1.1</h2>
+  <div class="callout trap"><span class="callout-title">Trap: choosing privacy for every sensitive scenario</span>
+    <p>If the question is about protecting personal data, access, consent, encryption, or retention, choose privacy and security. If it is about unequal treatment of groups, choose fairness even when personal attributes are involved.</p>
+  </div>
+  <div class="callout trap"><span class="callout-title">Trap: confusing explanation with ownership</span>
+    <p>&ldquo;Explain why the model answered that way&rdquo; points to transparency. &ldquo;Assign owners, approvals, reviews, and escalation&rdquo; points to accountability.</p>
+  </div>
+  <div class="callout trap"><span class="callout-title">Trap: treating Content Safety as the whole solution</span>
+    <p>Content Safety is important, but it does not replace grounding, prompt shields, system instructions, evaluations, access control, monitoring, or human review.</p>
+  </div>
+  <div class="callout trap"><span class="callout-title">Trap: missing indirect prompt injection</span>
+    <p>If malicious instructions are inside a document, web page, email, ticket, or search result, the issue is indirect prompt injection. The user may not have typed anything malicious.</p>
+  </div>
+  <div class="callout trap"><span class="callout-title">Trap: using outdated study material</span>
+    <p>AI-901 is not AI-900. Responsible AI remains, but the platform context is Microsoft Foundry and generative AI safety. Do not pull in retired objective areas when answering responsible AI questions.</p>
+  </div>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Six principles</h3>
+      <p><strong>Fairness:</strong> treats groups equitably.</p>
+      <p><strong>Reliability and safety:</strong> works consistently and fails safely.</p>
+      <p><strong>Privacy and security:</strong> protects personal data and systems.</p>
+      <p><strong>Inclusiveness:</strong> everyone can use it.</p>
+      <p><strong>Transparency:</strong> users understand AI use, limits, and reasons.</p>
+      <p><strong>Accountability:</strong> people own governance and outcomes.</p>
+    </div>
+    <div class="card">
+      <h3>Giveaway words</h3>
+      <p><strong>Bias, demographic:</strong> fairness.</p>
+      <p><strong>Fail safe, testing:</strong> reliability and safety.</p>
+      <p><strong>Consent, encryption:</strong> privacy and security.</p>
+      <p><strong>Accessible, disability:</strong> inclusiveness.</p>
+      <p><strong>Explain, disclose:</strong> transparency.</p>
+      <p><strong>Oversight, responsible:</strong> accountability.</p>
+    </div>
+    <div class="card">
+      <h3>Content safety categories</h3>
+      <p>Memorize the four: hate, sexual, violence, self-harm. Severity thresholds are configurable. Input and output can both be checked.</p>
+    </div>
+    <div class="card">
+      <h3>Generative AI process</h3>
+      <p><strong>Identify &rarr; measure &rarr; mitigate &rarr; operate.</strong> Mitigate in layers: model, safety system, system message and grounding, and user experience.</p>
+    </div>
+  </div>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?set=d1-responsible">Drill: Responsible AI</a>
+    <a class="btn secondary" href="models.html">Next guide: Models and deployment &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>

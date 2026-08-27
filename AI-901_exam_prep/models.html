@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Models and Deployment &mdash; AI-901 Exam Prep</title>
+<meta name="description" content="Study model components, selection, deployment, and inference configuration for AI-901 objective 1.2.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Models, Deployment, and Configuration</h1>
+<p class="lede">Objective 1.2 asks whether you understand generative model components, how to choose a model from Foundry Models, how deployment works, and which inference setting changes behavior.</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#how">How models work</a>
+    <a class="btn secondary sm" href="#choosing">Choosing</a>
+    <a class="btn secondary sm" href="#deployment">Deployment</a>
+    <a class="btn secondary sm" href="#settings">Settings</a>
+    <a class="btn secondary sm" href="#traps">Traps</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="how">
+  <h2>How generative models work</h2>
+  <p>A generative model produces new output from a prompt. In Foundry, you usually send input to a deployed model or an agent, receive a completion, and decide how your app should use it. Keep the concepts plain: the model does not look up a single fixed answer. It predicts useful next pieces of output based on patterns learned during training and the context you provide.</p>
+
+  <h3>Tokens and tokenization</h3>
+  <p>Models read and write <strong>tokens</strong>, not whole pages. A token can be a word, part of a word, punctuation, or spacing. <strong>Tokenization</strong> is the process of splitting text into those pieces.</p>
+  <div class="codeblock"><span class="cb-title">Conceptual token split</span><pre><code>Sentence: Foundry helps you build agents.
+Tokens:   Foundry | helps | you | build | agents | .</code></pre></div>
+  <p>Real tokenizers may split words differently, especially names, code, numbers, or punctuation. For the exam, remember the purpose: tokens are the units the model consumes and generates.</p>
+
+  <h3>Prompt and completion</h3>
+  <p>The <strong>prompt</strong> is the input: user text, system instructions, retrieved grounding content, images, or other supported modalities. The <strong>completion</strong> is the generated response. In chat-style APIs, messages have roles such as system and user. The system message is especially important because it sets behavior, constraints, and boundaries.</p>
+
+  <h3>Next-token prediction</h3>
+  <p>A language model generates output one token at a time. At each step, it estimates likely next tokens given the prompt and everything already generated. Settings such as temperature and top_p affect how deterministic or varied that choice is. They do not turn the model into a database.</p>
+
+  <h3>Context window</h3>
+  <p>The <strong>context window</strong> is the amount of input and generated output the model can consider at one time. It includes system instructions, conversation history, grounding passages, user messages, tool results, and the answer being generated. When you exceed it, the app must shorten, omit, summarize, retrieve fewer passages, or otherwise manage context. If important facts fall out of context, the model cannot reliably use them.</p>
+
+  <h3>Why models hallucinate</h3>
+  <p>A <strong>hallucination</strong> is a confident, fluent, wrong answer. It happens because the model is generating plausible text, not verifying every claim against a source. You reduce hallucinations with grounding, citations, clear instructions, lower randomness, evaluation, and a rule that the model should say when evidence is missing.</p>
+
+  <h3>Multimodal models</h3>
+  <p><strong>Multimodal</strong> means the model can work with more than one kind of input or output. A multimodal chat model might accept text plus an image and answer questions about a chart. Audio and realtime models can support speech input, speech output, or transcription. Image-generation and video-generation models produce visual media from prompts.</p>
+
+  <h3>Embeddings</h3>
+  <p>An <strong>embedding</strong> is a vector representation of content. Similar meanings end up close together in vector space. You use embeddings for semantic search and retrieval-augmented generation. A common RAG flow is: create embeddings for your documents, store them in a search index such as Azure AI Search, embed the user question, retrieve relevant passages, and place those passages in the prompt so the model can answer from current sources.</p>
+</section>
+
+<section id="choosing">
+  <h2>Choosing a model</h2>
+  <p>Foundry Models is the model catalog. The exam is more likely to test model families and selection criteria than exact version trivia. Choose based on task, modality, capability, cost, latency, context window, region availability, data residency, and whether an SLA is required.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Family</th><th>What it is for</th><th>Typical use</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>GPT-5.x general chat</td><td>General-purpose chat, coding, analysis, and multimodal text plus image input.</td><td>Customer assistants, knowledge chat, content drafting, app copilots.</td></tr>
+        <tr><td>o-series reasoning models</td><td>Deep reasoning for multi-step logic, math, and complex coding.</td><td>Planning, difficult troubleshooting, tasks that need careful step-by-step reasoning.</td></tr>
+        <tr><td>Phi small language models</td><td>Microsoft small language models optimized for lower cost, lower latency, and smaller environments.</td><td>Edge or local scenarios, simple extraction, routing, and compact assistants.</td></tr>
+        <tr><td>Open-weight models</td><td>Llama, Mistral, DeepSeek, and similar families when openness, customization, or ecosystem fit matters.</td><td>Workloads needing open weights, managed compute, custom deployment choices, or partner model behavior.</td></tr>
+        <tr><td>Embedding models</td><td>Convert text into vectors for semantic similarity.</td><td>Azure AI Search, RAG, duplicate detection, finding related passages.</td></tr>
+        <tr><td><span class="nowrap">gpt-image-1</span></td><td>Current image-generation family in Foundry Models.</td><td>Create or edit images from text prompts and application context.</td></tr>
+        <tr><td>FLUX</td><td>Image-generation models from Black Forest Labs.</td><td>Alternative text-to-image generation choices in Foundry Models.</td></tr>
+        <tr><td>sora</td><td>Video generation, currently a preview area.</td><td>Create short video from prompts when the scenario asks for generated video.</td></tr>
+        <tr><td>Audio and realtime models plus whisper</td><td>Speech input, speech output, realtime conversation, and transcription.</td><td>Voice agents, live audio interaction, call transcription, speech-to-text with whisper.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Selection criteria</th><th>What to ask</th><th>Why it matters</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Task</td><td>What must the model do?</td><td>Writing, reasoning, image generation, transcription, and embeddings use different families.</td></tr>
+        <tr><td>Modality</td><td>What input and output types are required?</td><td>Text-only, image input, generated image, video, and audio are not interchangeable.</td></tr>
+        <tr><td>Capability</td><td>How hard is the task?</td><td>More capable models handle harder reasoning and richer instructions.</td></tr>
+        <tr><td>Cost</td><td>How much work will run?</td><td>Smaller variants can make high-volume workloads practical.</td></tr>
+        <tr><td>Latency</td><td>How quickly must users get a response?</td><td>Realtime and user-facing apps often favor faster models.</td></tr>
+        <tr><td>Context window</td><td>How much information must fit at once?</td><td>Long prompts, conversation history, and RAG passages consume context.</td></tr>
+        <tr><td>Region availability</td><td>Is the model available where you need it?</td><td>Availability can determine whether a design can be deployed.</td></tr>
+        <tr><td>Data residency</td><td>Where may data be processed?</td><td>Regulated workloads may require data-zone or regional choices.</td></tr>
+        <tr><td>SLA</td><td>Is a service-level agreement required?</td><td>Production systems may need deployment types with stronger operational commitments.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>The <strong>mini</strong> and <strong>nano</strong> tradeoff is simple: smaller variants usually cost less and respond faster, but may have lower capability on hard reasoning, long instructions, or nuanced content. Use them when speed and scale matter more than maximum reasoning depth.</p>
+
+  <div class="callout trap"><span class="callout-title">Trap: DALL-E is old exam language</span>
+    <p>DALL-E was taught on the old AI-900 path. For current AI-901 content, image generation in Foundry Models points to the <span class="nowrap">gpt-image-1</span> family, with FLUX as another image-generation family. If an answer choice asks for current image generation, do not default to DALL-E.</p>
+  </div>
+</section>
+
+<section id="deployment">
+  <h2>Getting a model running</h2>
+  <p>In Microsoft Foundry, choosing a model is not always the same as making it callable. A deployed model exposes an endpoint through a deployment. Your application usually passes the <strong>deployment name</strong> in code, not the model family name. This matters because you might deploy a model with a friendly name such as <code>support-chat-prod</code> and then use that deployment name in the request.</p>
+
+  <h3>Three ways to get a model</h3>
+  <div class="grid grid-3">
+    <div class="card">
+      <h3>Serverless API</h3>
+      <p>The preferred path. You do not size infrastructure. It covers pay-per-token, provisioned throughput, and batch styles.</p>
+    </div>
+    <div class="card">
+      <h3>Managed compute</h3>
+      <p>Preview option with dedicated GPU capacity you size. Use it for open-source, community, or custom-weight models when serverless is not the right fit.</p>
+    </div>
+    <div class="card">
+      <h3>Instant access</h3>
+      <p>Preview option that lets you call supported models by name without creating a deployment first. It is useful for quick evaluation where supported.</p>
+    </div>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Type</th><th>Data processed in</th><th>Billing</th><th>Use when</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Global Standard</td><td>Any Azure region</td><td>Pay-per-token</td><td>You want the default starting point with broad model access and no reserved throughput.</td></tr>
+        <tr><td>Global Provisioned (PTU)</td><td>Any Azure region</td><td>Reserved capacity</td><td>You need predictable high-throughput production capacity.</td></tr>
+        <tr><td>Global Batch</td><td>Any Azure region</td><td>Batch billing for async work</td><td>You have large asynchronous jobs that do not require immediate responses.</td></tr>
+        <tr><td>Data Zone variants</td><td>Within a data zone such as US, EU, or APAC</td><td>Standard, provisioned, or batch pattern</td><td>You need data processed within a broader residency zone.</td></tr>
+        <tr><td>Regional Standard</td><td>A selected Azure region</td><td>Pay-per-token</td><td>You have a single-region compliance or architecture requirement.</td></tr>
+        <tr><td>Developer tier</td><td>Any supported region</td><td>Pay-per-token</td><td>You are evaluating fine-tuned models and do not need a production SLA.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout key"><span class="callout-title">Key guidance: start with Global Standard</span>
+    <p>Microsoft guidance is to start with Global Standard and move only for a specific reason: data residency, reserved throughput, or asynchronous batch. Do not choose a more specialized deployment type unless the scenario gives you that reason.</p>
+  </div>
+</section>
+
+<section id="settings">
+  <h2>Inference settings</h2>
+  <p>Inference parameters change how the model responds at runtime. They are not model training. They are request or deployment configuration choices that shape behavior, length, variability, stopping, and safety.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Parameter</th><th>What it changes</th><th>When to touch it</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>System message</td><td>Sets role, persona, constraints, allowed behavior, and response rules.</td><td>Always define it for app behavior, safety boundaries, and output format.</td></tr>
+        <tr><td>temperature</td><td>Controls randomness. Lower is more focused and repeatable; higher is more varied.</td><td>Lower it for consistency. Raise it for brainstorming or varied drafts.</td></tr>
+        <tr><td>top_p</td><td>Controls nucleus sampling, another way to limit token choice variety.</td><td>Use as an alternative to temperature, not as a second knob to tune at the same time.</td></tr>
+        <tr><td>max tokens</td><td>Caps generated response length.</td><td>Use when you need concise answers, cost control, or predictable output size.</td></tr>
+        <tr><td>frequency penalty</td><td>Penalizes tokens based on how often they already appeared.</td><td>Use to reduce repetition of the same words or phrases.</td></tr>
+        <tr><td>presence penalty</td><td>Penalizes tokens that have appeared at all, nudging the model toward new topics.</td><td>Use when output gets stuck on the same ideas and you want broader coverage.</td></tr>
+        <tr><td>stop sequences</td><td>Strings that halt generation when encountered.</td><td>Use to stop at a delimiter, prevent extra sections, or separate records.</td></tr>
+        <tr><td>Content filters</td><td>Apply safety checks to input and output with configurable severity thresholds and blocklists.</td><td>Use to reduce harmful content and enforce safety requirements.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Trap: temperature is not accuracy</span>
+    <p>Raising temperature does not make answers more accurate. It makes answers more varied. For factual or grounded responses, prefer clear instructions, grounding, citations, and lower randomness. Tune temperature <em>or</em> top_p, not both at once.</p>
+  </div>
+</section>
+
+<section id="traps">
+  <h2>Traps candidates make on objective 1.2</h2>
+  <div class="callout trap"><span class="callout-title">Trap: confusing model family with deployment name</span>
+    <p>The model family is what you choose from Foundry Models. The deployment name is the name your application passes when calling a deployed model.</p>
+  </div>
+  <div class="callout trap"><span class="callout-title">Trap: using embeddings as chat models</span>
+    <p>Embedding models create vectors for similarity search and RAG. They do not write the final natural-language answer. A chat or reasoning model uses retrieved passages to respond.</p>
+  </div>
+  <div class="callout trap"><span class="callout-title">Trap: choosing managed compute by default</span>
+    <p>Serverless API is the preferred path. Managed compute is a preview option for open-source, community, and custom-weight scenarios where you need dedicated capacity choices.</p>
+  </div>
+  <div class="callout trap"><span class="callout-title">Trap: thinking context is memory forever</span>
+    <p>The context window is what the model can consider now. If old messages or source passages are omitted, the model cannot reliably use them unless your app retrieves or summarizes them back into context.</p>
+  </div>
+  <div class="callout trap"><span class="callout-title">Trap: using outdated study habits</span>
+    <p>AI-901 focuses on generative AI concepts, Foundry Models, deployments, and configuration. Retired objective areas from older prep guides are not valid shortcuts for objective 1.2.</p>
+  </div>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Model families</h3>
+      <p><strong>GPT-5.x:</strong> general chat, coding, analysis, multimodal text plus image input.</p>
+      <p><strong>o-series:</strong> deeper reasoning and multi-step logic.</p>
+      <p><strong>Phi:</strong> small Microsoft language models for speed and lower cost.</p>
+      <p><strong>Open-weight:</strong> Llama, Mistral, DeepSeek, and similar choices.</p>
+      <p><strong>Embeddings:</strong> vectors for search and RAG.</p>
+      <p><strong>Image:</strong> <span class="nowrap">gpt-image-1</span> and FLUX.</p>
+      <p><strong>Video:</strong> sora preview.</p>
+      <p><strong>Audio:</strong> realtime, audio, live transcription, and whisper.</p>
+    </div>
+    <div class="card">
+      <h3>Selection criteria</h3>
+      <p>Task, modality, capability, cost, latency, context window, region availability, data residency, and SLA. Mini and nano usually mean faster and cheaper, with less headroom for difficult tasks.</p>
+    </div>
+    <div class="card">
+      <h3>Deployment recall</h3>
+      <p><strong>Serverless API:</strong> preferred. <strong>Managed compute:</strong> preview for open-source or custom weights. <strong>Instant access:</strong> preview, no deployment. Serverless types: Global Standard, Global Provisioned, Global Batch, Data Zone variants, Regional Standard, Developer tier.</p>
+    </div>
+    <div class="card">
+      <h3>Parameter meanings</h3>
+      <p><strong>System message:</strong> behavior. <strong>Temperature:</strong> randomness. <strong>top_p:</strong> token-choice variety. <strong>Max tokens:</strong> length cap. <strong>Frequency penalty:</strong> reduce repeated words. <strong>Presence penalty:</strong> encourage new topics. <strong>Stop sequences:</strong> halt at strings. <strong>Content filters:</strong> safety checks.</p>
+    </div>
+  </div>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?set=d1-modelchoice">Drill: Model choice</a>
+    <a class="btn" href="drills.html?set=d1-deployment">Drill: Deployment</a>
+    <a class="btn secondary" href="workloads.html">Next guide: Workloads &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>

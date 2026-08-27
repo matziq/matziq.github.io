@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice Exam 1 &mdash; AI-901 Exam Prep</title>
+<meta name="description" content="Microsoft AI-901 practice exam 1: 50 timed questions weighted across the two Azure AI Fundamentals skill areas, with scaled scoring and full review.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+    <h1 class="no-print">Practice Exam 1</h1>
+    <p class="lede no-print" id="whenLine">Your cold baseline. Take it before you study anything.</p>
+    <div id="app"></div>
+</div></main>
+
+<footer id="footer"></footer>
+
+<script src="assets/data/exam1.js"></script>
+<script src="assets/test-engine.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var day = AI9.examSchedule().exam1;
+    document.getElementById("whenLine").innerHTML =
+        "<strong>Day " + day + " &middot; " + AI9.fmtDate(AI9.dateForDay(day)) +
+        "</strong> \u2014 your cold baseline. Take it before you study anything.";
+
+    AI9.Test.mount({
+        el: document.getElementById("app"),
+        testId: "exam1",
+        title: "Practice Exam 1 \u2014 Baseline",
+        blurb: "Fifty questions in forty-five minutes, weighted across the two AI-901 skill areas the way Microsoft weights them. Take this one cold. A baseline you studied for is not a baseline \u2014 it is a comfort blanket, and it will hide the exact gaps your plan is built to close. Your answers save automatically, so a closed tab will not lose your work.",
+        sections: ["exam1"]
+    });
+});
+</script>
+</body>
+</html>

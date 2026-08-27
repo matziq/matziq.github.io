@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice Exam 3 &mdash; AI-901 Exam Prep</title>
+<meta name="description" content="Microsoft AI-901 practice exam 3: the dress rehearsal. 50 timed questions at the hardest difficulty, with scaled scoring and full review.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+    <h1 class="no-print">Practice Exam 3</h1>
+    <p class="lede no-print" id="whenLine">Your dress rehearsal.</p>
+    <div id="app"></div>
+</div></main>
+
+<footer id="footer"></footer>
+
+<script src="assets/data/exam3.js"></script>
+<script src="assets/test-engine.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var day = AI9.examSchedule().exam3;
+    document.getElementById("whenLine").innerHTML =
+        "<strong>Day " + day + " &middot; " + AI9.fmtDate(AI9.dateForDay(day)) +
+        "</strong> \u2014 the dress rehearsal. Start at the clock time your real exam starts.";
+
+    AI9.Test.mount({
+        el: document.getElementById("app"),
+        testId: "exam3",
+        title: "Practice Exam 3 \u2014 Dress Rehearsal",
+        blurb: "The hardest of the three: heavy on BEST, FIRST, MOST and NOT wording, on choosing between two services that both look right, and on reading a short Python snippet and saying what breaks. Sit it under full conditions at the same clock time as your real appointment. Whatever this score says, tomorrow is a repair day and nothing new gets learned after it.",
+        sections: ["exam3"]
+    });
+});
+</script>
+</body>
+</html>

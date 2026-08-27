@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vision and Image Generation &mdash; AI-901 Exam Prep</title>
+<meta name="description" content="Study how AI-901 tests multimodal vision prompts, image generation, and the current status of classic Azure vision services.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Vision and Image Generation</h1>
+<p class="lede">AI-901 expects you to build visual AI solutions in Microsoft Foundry, not repeat old AI-900 answers. For objective 2.3, focus on multimodal models, current image generation models, Content Understanding, and the limited cases where classic vision services still fit.</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#multimodal">Multimodal vision</a>
+    <a class="btn secondary sm" href="#generation">Image generation</a>
+    <a class="btn secondary sm" href="#services">Service choices</a>
+    <a class="btn secondary sm" href="#traps">Exam traps</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="multimodal">
+  <h2>Interpret visual input with a multimodal model</h2>
+  <p>When the objective says to interpret visual input in prompts by using a deployed multimodal model, it means you send an image as part of the prompt and the model answers in text. You are not calling a separate image analysis endpoint first. You are asking a deployed model to reason over the image and the written instruction together.</p>
+  <p>In Microsoft Foundry, the vision-enabled families to recognize are the GPT-5.x series, GPT-4.1, GPT-4o, and the o-series. The question will usually describe a deployed model, an image input, and a text response. The correct answer is a multimodal model when the task needs flexible visual reasoning, natural-language questions, or a mixture of text and images.</p>
+  <div class="callout key"><span class="callout-title">Exam wording</span> If the prompt includes a photo, chart, screenshot, receipt image, or diagram and asks for a text answer, think multimodal model first. The image is input. The answer is text.</div>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>What you can ask</th><th>Example prompt</th><th>What the model returns</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Describe an image</td><td>Describe the safety issue in this warehouse photo.</td><td>A plain-language description of visible objects, context, and likely concern.</td></tr>
+        <tr><td>Answer a question about a chart or diagram</td><td>What trend does this sales chart show after April?</td><td>A text answer based on labels, shapes, axes, and visual pattern.</td></tr>
+        <tr><td>Read text visible in a photo</td><td>What warning text appears on this sign?</td><td>The visible wording, often with surrounding interpretation.</td></tr>
+        <tr><td>Spot a defect</td><td>Compare this product image to the reference and identify defects.</td><td>A description of visible differences, damage, missing parts, or anomalies.</td></tr>
+        <tr><td>Compare two images</td><td>What changed between these two screenshots?</td><td>A comparison of layout, content, state, or visible controls.</td></tr>
+        <tr><td>Extract structured detail</td><td>List the item name, color, quantity, and visible damage as JSON.</td><td>A structured answer when the prompt asks for fields, though not a guaranteed service schema.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>This approach now covers many tasks that used to require a dedicated vision service: captions, visual question answering, light OCR, visual comparison, and diagram explanation. It is especially strong when the user wants a conversational answer or when the image must be interpreted with business context from the prompt.</p>
+  <p>It is weaker when the app needs precise pixel-level geometry, guaranteed typed output, high-volume deterministic OCR, or strict extraction fields with confidence and grounding. For those cases, compare the task with Azure Content Understanding in Foundry Tools, Azure Document Intelligence in Foundry Tools, Azure Vision in Foundry Tools, or Azure Face.</p>
+</section>
+
+<section id="generation">
+  <h2>Create images and video</h2>
+  <p>Image generation on AI-901 centers on Foundry Models. The current Azure OpenAI image generation offering is the <code>gpt-image-1</code> family. Foundry Models also includes FLUX models from Black Forest Labs for image generation. For video generation, recognize <code>sora</code> as a preview video model family.</p>
+  <p>An image prompt should say what to create and how it should look. You control the subject, setting, visual style, composition, aspect, mood, and important constraints. Good prompts are specific without pretending the model is a design tool with perfect control over every pixel.</p>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Prompt controls</h3>
+      <ul>
+        <li><strong>Subject:</strong> the object, person type, scene, product, or concept.</li>
+        <li><strong>Style:</strong> photo, diagram, illustration, flat icon, realistic render, or brand-safe style guidance.</li>
+        <li><strong>Composition:</strong> foreground, background, camera angle, lighting, and empty space for text.</li>
+        <li><strong>Aspect:</strong> landscape, portrait, square, banner, or other layout intent.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Model choices</h3>
+      <ul>
+        <li><code>gpt-image-1</code> family for current Azure OpenAI image generation.</li>
+        <li>FLUX models from Black Forest Labs for partner image generation options.</li>
+        <li><code>sora</code> for text-to-video generation in preview scenarios.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout trap"><span class="callout-title">Trap</span> DALL-E, which the old AI-900 taught, has been superseded by the <code>gpt-image-1</code> family. If an AI-901 question asks for the current Foundry image generation answer, choose <code>gpt-image-1</code>, not DALL-E.</div>
+  <p>Generated visuals also bring responsible AI requirements. Content filters help block harmful input and output. Provenance and disclosure help users understand when an image or video was generated by AI. For business and exam scenarios, avoid generating realistic images of real people without permission, avoid impersonation, and avoid protected material such as copyrighted characters, logos, or proprietary art styles when the request would misuse them.</p>
+  <p>For the exam, do not memorize creative prompt tricks. Memorize the service boundary: Foundry Models generate images and preview video; multimodal models interpret visual input; Content Understanding extracts structured fields from visual or mixed content.</p>
+</section>
+
+<section id="services">
+  <h2>Classic vision services and their current status</h2>
+  <p>This is where AI-901 catches candidates who studied AI-900. The old answer was often Azure AI Vision Image Analysis, Custom Vision, or DALL-E. AI-901 expects the current Foundry view. Classic services still exist, but their status matters.</p>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Service</th><th>Current status</th><th>Use it when</th><th>Prefer instead</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Azure Vision in Foundry Tools</td><td>Active umbrella service, but Image Analysis 4.0 is deprecated and retires September 25, 2028. Read/OCR is labeled legacy.</td><td>You maintain an existing solution or need a supported legacy capability during transition.</td><td>Use a deployed multimodal model for flexible visual Q&amp;A, or Content Understanding for schema-driven extraction.</td></tr>
+        <tr><td>Azure Face</td><td>Active but Limited Access. You must apply for approval. Emotion and gender inference are retired for responsible AI reasons.</td><td>You need approved face detection, verification, identification, liveness detection, or redaction.</td><td>Use Content Understanding or multimodal vision when the task is not face recognition or liveness.</td></tr>
+        <tr><td>Azure AI Custom Vision</td><td>Active but retiring September 25, 2028.</td><td>You maintain an existing image classification or object detection solution during migration.</td><td>Use multimodal models for flexible recognition, or Content Understanding when you need fields from images.</td></tr>
+        <tr><td>Azure AI Video Indexer</td><td>Active separate service for prebuilt video insights.</td><td>You need prebuilt video insights such as faces, labels, transcripts, OCR, topics, and scene information.</td><td>Use Content Understanding when you need schema-driven field extraction from video.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Decision shortcut</h3>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>If the scenario asks for</th><th>Choose</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Natural-language reasoning over an image</td><td>Deployed multimodal model</td><td>It accepts image input and text instructions in the same prompt.</td></tr>
+        <tr><td>Structured fields from documents, images, audio, or video</td><td><a href="content-understanding.html">Content Understanding</a></td><td>It returns JSON that follows a schema you define, with confidence and grounding.</td></tr>
+        <tr><td>Legacy image analysis or OCR endpoint compatibility</td><td>Azure Vision</td><td>The service exists, but parts are deprecated or legacy.</td></tr>
+        <tr><td>Face verification, identification, liveness, or redaction</td><td>Azure Face</td><td>It is the purpose-built face service, but gated by Limited Access.</td></tr>
+        <tr><td>Prebuilt video indexing insights</td><td>Azure AI Video Indexer</td><td>It provides ready-made video metadata without designing an extraction schema.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="traps">
+  <h2>Traps candidates bring from AI-900</h2>
+  <div class="callout trap"><span class="callout-title">Trap</span> AI-901 is not AI-900. Do not answer vision questions as if Image Analysis, Custom Vision, and DALL-E are the default current choices.</div>
+  <div class="grid grid-2">
+    <div class="ex-block bad">
+      <h3>Old answer pattern</h3>
+      <p>Use Image Analysis for visual description, Custom Vision for custom recognition, and DALL-E for image generation.</p>
+    </div>
+    <div class="ex-block good">
+      <h3>AI-901 answer pattern</h3>
+      <p>Use a vision-enabled multimodal model for image prompts, Content Understanding for structured extraction, <code>gpt-image-1</code> for image generation, and classic services only when their current status fits.</p>
+    </div>
+  </div>
+  <ul>
+    <li><strong>Do not treat OCR as the whole vision story.</strong> A multimodal model can read visible text, but high-volume deterministic OCR may still call for a specialized extraction service.</li>
+    <li><strong>Do not use Face for general image understanding.</strong> Face is for approved face scenarios, including liveness and redaction.</li>
+    <li><strong>Do not choose emotion or gender inference.</strong> Those Face capabilities were retired for responsible AI reasons.</li>
+    <li><strong>Do not ignore retirement dates.</strong> Image Analysis 4.0 and Custom Vision are not the future-facing default answers.</li>
+    <li><strong>Do not use video generation for video analysis.</strong> <code>sora</code> creates video. Video Indexer and Content Understanding analyze video.</li>
+  </ul>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Remember</th><th>AI-901 answer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Vision-enabled model families</td><td>GPT-5.x, GPT-4.1, GPT-4o, and o-series.</td></tr>
+        <tr><td>What visual prompts do</td><td>Send an image with a text instruction; receive a text answer.</td></tr>
+        <tr><td>Common image questions</td><td>Describe, answer chart questions, read visible text, spot defects, compare images, extract details.</td></tr>
+        <tr><td>Current image generation</td><td><code>gpt-image-1</code> family; FLUX models are also in Foundry Models.</td></tr>
+        <tr><td>Video generation</td><td><code>sora</code> for preview text-to-video scenarios.</td></tr>
+        <tr><td>Azure Vision</td><td>Exists, but Image Analysis 4.0 is deprecated and Read/OCR is legacy.</td></tr>
+        <tr><td>Azure Face</td><td>Active, Limited Access; face detection, verification, identification, liveness, redaction.</td></tr>
+        <tr><td>Custom Vision</td><td>Active but retiring September 25, 2028.</td></tr>
+        <tr><td>Video Indexer</td><td>Active for prebuilt video insights.</td></tr>
+        <tr><td>Best extraction cross-over</td><td>Use Content Understanding when the output must match a schema.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?set=d2-vision">Drill: Vision prompts</a>
+    <a class="btn" href="drills.html?set=d2-imagegen">Drill: Image generation</a>
+    <a class="btn secondary" href="content-understanding.html">Next: Information extraction &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>

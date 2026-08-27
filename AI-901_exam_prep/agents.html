@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agents &mdash; AI-901 Exam Prep</title>
+<meta name="description" content="Learn how agents in Microsoft Foundry combine models, instructions, tools, conversations, and identity for AI-901 objective 2.1.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+<h1>Agents in Microsoft Foundry</h1>
+<p class="lede">Agents are a flagship new AI-901 topic. They did not exist on the old AI-900 exam, and they sit inside objective 2.1, part of the Microsoft Foundry implementation skill area that makes up 55&ndash;60% of the exam.</p>
+<div class="btn-row" style="margin:1.25rem 0 2rem"><a class="btn secondary sm" href="#what">What agents are</a><a class="btn secondary sm" href="#anatomy">Anatomy</a><a class="btn secondary sm" href="#tools">Tools</a><a class="btn secondary sm" href="#building">Build one</a><a class="btn secondary sm" href="#traps">Traps</a><a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a></div>
+<section id="what"><h2>What an agent is</h2><p>A plain chat completion is one stateless request and one response. Your app sends a prompt to a deployed model, receives text back, and the service does not automatically keep the larger task, tool choices, or prior turns unless your app sends that context again. An agent is different. It pairs a model with persistent <strong>instructions</strong>, <strong>tools</strong> it may call, optional knowledge, and conversation state. It can run multiple steps toward a goal: reason, call a tool, read the result, call another tool, and answer with evidence.</p><div class="table-scroll"><table class="data-table"><thead><tr><th>Aspect</th><th>Chat completion</th><th>Agent</th></tr></thead><tbody><tr><td>State</td><td>Stateless unless your application resends context.</td><td>Can use persistent conversations so follow-up turns keep context.</td></tr><tr><td>Tools</td><td>The model only answers from the prompt unless your app separately calls services.</td><td>The agent can call configured tools such as search, functions, files, or MCP tools.</td></tr><tr><td>Steps</td><td>Usually one request and one answer.</td><td>Can run multiple reasoning and tool-use steps before returning a final response.</td></tr><tr><td>Typical use</td><td>Simple Q&amp;A, rewriting, summarizing, or single-turn generation.</td><td>Goal-oriented work such as answering from documents, taking actions, or coordinating specialist agents.</td></tr></tbody></table></div><p>The exam name you need is <strong>Foundry Agent Service</strong>. It is part of Microsoft Foundry, the current platform name. You may still see older documentation say Azure AI Foundry; treat it as the same product, but use current names on this site. For AI-901, assume prompt agents are the default answer unless the question says you must write orchestration code, package it, or expose a managed custom endpoint.</p><div class="table-scroll"><table class="data-table"><thead><tr><th>Type</th><th>You provide</th><th>Foundry provides</th><th>Best for</th></tr></thead><tbody><tr><td>Prompt agent</td><td>Instructions, a model deployment, and tools through the portal or SDK.</td><td>Hosting, execution, versions, playground testing, and tool wiring.</td><td>Most exam scenarios where no custom orchestration code is required.</td></tr><tr><td>Hosted agent</td><td>Orchestration code written with an agent framework such as Agent Framework, LangGraph, or OpenAI Agents SDK.</td><td>A managed endpoint, autoscaling, deployment hosting, tracing, and the agent's own Entra identity.</td><td>Production agents that need custom control flow, custom routing, or code-owned orchestration.</td></tr><tr><td>Ephemeral agent</td><td>An agent definition inside your application request to the Responses API.</td><td>Model inference and tool calling for that request without creating a durable agent resource.</td><td>Lightweight or dynamic cases where the definition lives in code.</td></tr></tbody></table></div><p>An agent does not automatically mean a large application. Sometimes the correct implementation is a declarative prompt agent with the right grounding or action tool attached. That is a major difference from older study habits: AI-901 expects you to think like a builder using Foundry, not just name a workload.</p></section>
+<section id="anatomy"><h2>Anatomy of a Foundry agent</h2><p>An agent is built from a small set of pieces. The <strong>model</strong> is the deployed Foundry Models deployment that generates and reasons. The <strong>instructions</strong> are durable system-level guidance. <strong>Tools</strong> are capabilities the agent may call. A <strong>toolbox</strong> groups managed tools behind one MCP endpoint. <strong>Conversations</strong> hold persistent multi-turn state. <strong>Identity</strong> controls what the agent can access, often through Entra-based authorization.</p><p>Good instructions are specific. State the role, the scope, the tone, and the refusal boundaries. Tell the agent what sources to trust, when to call tools, when to ask for missing information, and when to say it cannot answer. Do not bury critical rules in a long personality paragraph. AI-901 questions often reward the candidate who separates model choice from instruction design and tool grounding.</p><div class="callout warn"><span class="callout-title">Vocabulary warning</span> The current Foundry SDK uses <strong>conversations</strong> and <strong>responses</strong>. Older material from the Assistants API era says <strong>threads</strong>, <strong>messages</strong>, and <strong>runs</strong>. It is the same general idea with older vocabulary, and you may still meet it in older examples.</div><p>A conversation is the durable state for a multi-turn exchange. Reusing the same conversation id is what makes the next turn a follow-up instead of a brand-new question. If the app creates a new conversation for every user turn, the agent loses the prior context unless the app restates it.</p><div class="codeblock"><span class="cb-title">Create a prompt agent</span><pre><code>from azure.ai.projects import AIProjectClient
+from azure.ai.projects.models import PromptAgentDefinition
+from azure.identity import DefaultAzureCredential
+
+project = AIProjectClient(
+    endpoint="https://&lt;resource&gt;.services.ai.azure.com/api/projects/&lt;project&gt;",
+    credential=DefaultAzureCredential(),
+)
+
+agent = project.agents.create_version(
+    agent_name="PolicyHelper",
+    definition=PromptAgentDefinition(
+        model="gpt-5-mini",
+        instructions="You answer policy questions from trusted sources and refuse unsupported claims.",
+    ),
+)</code></pre></div><div class="codeblock"><span class="cb-title">Reuse a conversation for a follow-up</span><pre><code>openai = project.get_openai_client(agent_name="PolicyHelper")
+conversation = openai.conversations.create()
+
+first = openai.responses.create(
+    conversation=conversation.id,
+    input="What is the travel meal policy?",
+)
+print(first.output_text)
+
+follow_up = openai.responses.create(
+    conversation=conversation.id,
+    input="Does that also apply to international trips?",
+)
+print(follow_up.output_text)</code></pre></div><p>The SDK package to recognize is <strong>azure-ai-projects</strong> 2.x. In examples, the project endpoint points to a Foundry project, authentication commonly uses <strong>DefaultAzureCredential</strong>, and the model value is the deployment name your project can use.</p></section>
+<section id="tools"><h2>Tools: the highest-value agent decision</h2><p>Tools are where agents become useful. A model can write language, but tools let the agent retrieve grounded information, execute deterministic code, call existing systems, use a browser, create images, or coordinate with other agents. On the exam, many questions are really tool-selection questions.</p><div class="table-scroll"><table class="data-table"><thead><tr><th>Tool</th><th>What it does</th><th>Reach for it when</th></tr></thead><tbody><tr><td>Code interpreter</td><td>Runs sandboxed Python for analysis, calculations, and file manipulation.</td><td>The agent must compute, transform a file, inspect tabular data, or produce a calculated result.</td></tr><tr><td>File search</td><td>Performs vector search over uploaded files attached to the agent.</td><td>You have a small or managed document set and want fast grounding without building a search service.</td></tr><tr><td>Web search / Grounding with Bing</td><td>Retrieves current public web information with grounding.</td><td>The answer depends on recent or public web content, not private corporate files.</td></tr><tr><td>Azure AI Search</td><td>Searches an existing or custom index, often with vector and keyword retrieval.</td><td>You already have enterprise search, need indexing control, or need RAG over larger internal content.</td></tr><tr><td>Function calling</td><td>Lets the model choose a typed function and arguments for your app to execute.</td><td>Your app owns the operation and needs structured parameters, such as looking up an order.</td></tr><tr><td>OpenAPI tools</td><td>Expose REST APIs described by an OpenAPI document as callable tools.</td><td>You need the agent to call existing HTTP APIs with documented operations.</td></tr><tr><td>MCP</td><td>Connects to Model Context Protocol servers that expose tools and resources.</td><td>You want a standard way to plug in external systems or reusable tool servers.</td></tr><tr><td>Agent-to-agent (A2A)</td><td>Allows an agent to delegate work to another specialist agent.</td><td>A coordinator must route tasks to specialists, such as research, planning, or support agents.</td></tr><tr><td>Browser automation</td><td>Lets an agent navigate and interact with web pages.</td><td>The task requires operating a web UI rather than calling a clean API.</td></tr><tr><td>SharePoint</td><td>Connects the agent to SharePoint content and permissions-aware files.</td><td>The source of truth is SharePoint documents or pages.</td></tr><tr><td>Azure Functions</td><td>Calls serverless functions you control.</td><td>You need custom business logic, validation, or system integration behind a managed endpoint.</td></tr><tr><td>Image generation</td><td>Generates images through current image models such as the gpt-image-1 family.</td><td>The agent must create visual assets from text instructions.</td></tr></tbody></table></div><h3>Grounding an agent</h3><p>Grounding means giving the model relevant source content at answer time. It is usually the answer before fine-tuning. If the question says the model is wrong because it does not know private or current facts, attach a retrieval tool instead of changing the model weights.</p><div class="table-scroll"><table class="data-table"><thead><tr><th>Source need</th><th>Best grounding choice</th><th>Why</th></tr></thead><tbody><tr><td>Internal documents uploaded for the agent</td><td>File search</td><td>Simple setup, agent-managed retrieval, and no separate index design.</td></tr><tr><td>Existing enterprise search index</td><td>Azure AI Search</td><td>Uses your index, analyzers, permissions strategy, vector fields, and retrieval tuning.</td></tr><tr><td>Current public web information</td><td>Grounding with Bing</td><td>Searches public web sources when freshness matters.</td></tr></tbody></table></div><p>Do not choose Grounding with Bing for internal documents. Do not choose file search when the organization already invested in a controlled Azure AI Search index. Match the tool to the content location and governance need.</p><h3>Single-agent versus multi-agent</h3><p>A single agent is easier to build and easier to test. Use it when one instruction set and one tool set can handle the task. A multi-agent design adds an orchestrator. The orchestrator receives the goal, decides which specialist should act, and routes work through A2A. That is useful when the work naturally splits into specialist responsibilities, not just because the scenario sounds important.</p><p>A <strong>toolbox</strong> is different from a multi-agent team. A toolbox is a managed group of tools exposed behind one MCP endpoint. It simplifies how agents discover and call a related set of tools. Think: many tools, one managed MCP doorway.</p></section>
+
+<section id="building"><h2>Building a single agent</h2><p>&ldquo;Create and test a single-agent solution in the Foundry portal&rdquo; is an exam objective in its own words. Do this once and every agent question gets easier, because you will have seen where each concept actually lives.</p>
+<ol><li><strong>Pick a model deployment.</strong> The agent needs a deployed model to think with. A small, fast general chat model is fine to start.</li>
+<li><strong>Write the instructions.</strong> State the role, the scope, the tone, and what to refuse. This is the agent&rsquo;s persistent system prompt.</li>
+<li><strong>Attach a tool.</strong> Start with one. File search over a handful of uploaded documents is the clearest first tool because you can see grounding working.</li>
+<li><strong>Test it in the playground.</strong> Ask something answerable only from your files, then something that is not, and watch the difference.</li>
+<li><strong>Call it from a client.</strong> Create a conversation, send a turn, then send a follow-up on the same conversation id.</li></ol>
+<div class="codeblock"><span class="cb-title">Talking to an agent from a lightweight client</span><pre><code>openai = project.get_openai_client(agent_name="MyAgent")
+
+conversation = openai.conversations.create()
+
+r1 = openai.responses.create(
+    conversation=conversation.id,
+    input="What does our refund policy say about damaged goods?")
+print(r1.output_text)
+
+r2 = openai.responses.create(
+    conversation=conversation.id,
+    input="And how long do customers have?")
+print(r2.output_text)</code></pre></div>
+<p>The second call carries no restatement of the first question, yet the agent still understands &ldquo;how long do customers have.&rdquo; That is the conversation doing the work. Drop the <code>conversation</code> argument and the follow-up becomes a fresh, contextless question.</p>
+<div class="callout tip"><span class="callout-title">Go and build one, today</span><p style="margin-bottom:0">More than half of AI-901 is implementation. Reading about agents produces a shallow, brittle kind of knowledge that collapses under a BEST or FIRST question. Fifteen minutes in the portal &mdash; deploy a model, write three sentences of instructions, attach file search, ask it two questions &mdash; will teach you more than rereading this page.</p></div></section>
+
+<section id="traps"><h2>Where people lose points</h2>
+<div class="table-scroll"><table class="data-table"><thead><tr><th>The mistake</th><th>What is actually true</th></tr></thead><tbody>
+<tr><td>Choosing fine-tuning so the agent &ldquo;knows&rdquo; company documents</td><td>Fine-tuning changes style and format, not facts, and it goes stale the moment the documents change. Attach a grounding tool instead.</td></tr>
+<tr><td>Assuming an agent requires custom code</td><td>A prompt agent is entirely declarative &mdash; model, instructions, tools. You write no orchestration code at all.</td></tr>
+<tr><td>Expecting a follow-up turn to keep context automatically</td><td>Context comes from reusing the same conversation id. A new conversation starts from nothing.</td></tr>
+<tr><td>Reaching for Grounding with Bing for internal content</td><td>Bing searches the public web. Internal documents mean file search or an Azure AI Search index.</td></tr>
+<tr><td>Using Azure AI Search when the files were uploaded to the agent</td><td>The Azure AI Search tool queries an existing index. If you just uploaded documents to the agent, file search is the simpler answer.</td></tr>
+<tr><td>Treating a toolbox as a multi-agent system</td><td>A toolbox is many tools behind one MCP endpoint. Multi-agent means an orchestrator routing to specialist agents through agent-to-agent.</td></tr>
+<tr><td>Building a multi-agent system because the scenario sounds complex</td><td>Reach for multi-agent when the work genuinely splits into specialist responsibilities, not because the wording is impressive.</td></tr>
+<tr><td>Answering with threads, messages, and runs</td><td>That is the older Assistants API vocabulary. Current Foundry uses conversations and responses.</td></tr>
+</tbody></table></div></section>
+
+<section id="cheatsheet"><h2>The night-before cheat sheet</h2>
+<div class="grid grid-2">
+<div class="card"><h3 style="margin-top:0">The shape of it</h3><ul style="margin-bottom:0">
+<li><strong>Chat completion</strong> &mdash; one request, one answer, no memory, no tools.</li>
+<li><strong>Agent</strong> &mdash; model plus instructions plus tools plus conversation, running multiple steps toward a goal.</li>
+<li><strong>Prompt agent</strong> &mdash; declarative, no orchestration code, hosted by Foundry.</li>
+<li><strong>Hosted agent</strong> &mdash; your code, Foundry runs it with an endpoint, autoscaling, and its own identity.</li>
+<li><strong>Ephemeral</strong> &mdash; defined only in your code via the Responses API, no agent resource.</li>
+</ul></div>
+<div class="card"><h3 style="margin-top:0">The parts</h3><ul style="margin-bottom:0">
+<li><strong>Model</strong> &mdash; the deployment it thinks with, swappable.</li>
+<li><strong>Instructions</strong> &mdash; role, scope, tone, refusals.</li>
+<li><strong>Tools</strong> &mdash; what it can actually do.</li>
+<li><strong>Toolbox</strong> &mdash; a managed group of tools behind one MCP endpoint.</li>
+<li><strong>Conversation</strong> &mdash; persistent multi-turn state; reuse the id to keep context.</li>
+<li><strong>Identity</strong> &mdash; an Entra managed identity for reaching secured resources.</li>
+</ul></div>
+</div>
+<div class="card" style="margin-top:1.1rem"><h3 style="margin-top:0">Reach for this tool when&hellip;</h3>
+<div class="table-scroll"><table class="data-table"><tbody>
+<tr><td><strong>Code interpreter</strong></td><td>Calculate, analyze data, produce a chart</td></tr>
+<tr><td><strong>File search</strong></td><td>Answer from documents uploaded to the agent</td></tr>
+<tr><td><strong>Azure AI Search</strong></td><td>Answer from content already in a search index</td></tr>
+<tr><td><strong>Grounding with Bing</strong></td><td>Answer needs current public web information</td></tr>
+<tr><td><strong>Function calling</strong></td><td>Take an action or read a live system through your own code</td></tr>
+<tr><td><strong>OpenAPI tool</strong></td><td>Call an existing REST API described by a spec</td></tr>
+<tr><td><strong>MCP</strong></td><td>Connect to any MCP-compatible server</td></tr>
+<tr><td><strong>Agent-to-agent</strong></td><td>Hand work to a specialist agent</td></tr>
+</tbody></table></div></div>
+<div class="callout key" style="margin-top:1.1rem"><span class="callout-title">Grounding in three lines</span><p style="margin-bottom:0">Uploaded documents &rarr; <strong>file search</strong>. Existing index &rarr; <strong>Azure AI Search</strong>. Public web, current information &rarr; <strong>Grounding with Bing</strong>. If the scenario says &ldquo;without retraining&rdquo; or &ldquo;must cite sources,&rdquo; the answer is grounding, never fine-tuning.</p></div></section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?set=d2-agents">Drill: Agent Anatomy</a>
+    <a class="btn" href="drills.html?set=d2-agenttools">Drill: Agent Tools &amp; Grounding</a>
+    <a class="btn secondary" href="text-speech.html">Next guide: Text and Speech &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>
