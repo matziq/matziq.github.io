@@ -106,7 +106,7 @@
       margin: 0 0 8px; font-size: 10.5px; font-weight: 700;
       letter-spacing: .14em; text-transform: uppercase; color: var(--cp-accent);
     }
-    .hero h1 { margin: 0 0 12px; font: 600 clamp(31px, 5vw, 42px)/1.14 Georgia, "Times New Roman", serif; }
+    .hero h1 { margin: 0 0 12px; font: 600 clamp(34px, 5vw, 43px)/1.14 Georgia, "Times New Roman", serif; }
     .hero p.lede { margin: 0; max-width: 66ch; font-size: 17px; color: var(--cp-text-muted); }
 
     .at-a-glance {
@@ -117,7 +117,7 @@
       background: var(--cp-surface); border: 1px solid var(--cp-border);
       border-radius: 12px; padding: 14px 16px;
     }
-    .glance strong { display: block; font: 600 21px/1.2 Georgia, serif; color: var(--cp-accent); }
+    .glance strong { display: block; font: 600 21.5px/1.2 Georgia, serif; color: var(--cp-accent); }
     .glance span { display: block; font-size: 13.5px; color: var(--cp-text-muted); margin-top: 2px; }
 
     /* ---------------- sections ---------------- */
@@ -159,6 +159,26 @@
     }
     .anchor p { margin: 0; font: italic 17px/1.55 Georgia, serif; }
 
+    /* ---------------- scripture text ---------------- */
+    .verses {
+      margin: 18px 0 0; border: 1px solid var(--cp-border);
+      border-radius: 10px; padding: 14px 18px 16px;
+    }
+    .verses > b {
+      display: block; font-size: 10.5px; letter-spacing: .11em;
+      text-transform: uppercase; color: var(--c); margin-bottom: 10px;
+    }
+    .verses .ref {
+      display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--cp-text-muted); margin: 14px 0 3px;
+    }
+    .verses .ref:first-of-type { margin-top: 0; }
+    .verses p { margin: 0; font: 13.5px/1.6 Georgia, serif; }
+    .verses p .v {
+      font-size: 10.5px; font-weight: 700; color: var(--c);
+      vertical-align: 2px; margin-right: 3px;
+    }
+
     /* ---------------- timing table ---------------- */
     .timing { margin: 24px 0 0; border: 1px solid var(--cp-border); border-radius: 12px; overflow: hidden; }
     .timing-row {
@@ -188,7 +208,7 @@
       font-variant-numeric: tabular-nums;
     }
     html[data-theme="dark"] .clock { color: #1a1a1a; }
-    .beat-head h3 { margin: 0; font: 600 21px/1.3 "Segoe UI", sans-serif; }
+    .beat-head h3 { margin: 0; font: 600 21.5px/1.3 "Segoe UI", sans-serif; }
     .beat p { margin: 0 0 12px; }
     .beat p:last-child { margin-bottom: 0; }
 
@@ -223,7 +243,7 @@
     }
     .tip .n {
       position: absolute; top: 12px; right: 14px;
-      font: 700 21px/1 Georgia, serif; color: var(--c); opacity: .32;
+      font: 700 21.5px/1 Georgia, serif; color: var(--c); opacity: .32;
     }
     .tip h4 { margin: 0 0 5px; padding-right: 28px; font: 600 17px/1.3 "Segoe UI", sans-serif; color: var(--c); }
     .tip p { margin: 0 0 9px; font-size: 13.5px; line-height: 1.5; color: var(--cp-text-muted); }
@@ -266,7 +286,7 @@
 
     /* ---------------- prep checklist ---------------- */
     .prep { margin-top: 26px; }
-    .prep h3 { margin: 0 0 12px; font: 600 21px/1.3 "Segoe UI", sans-serif; }
+    .prep h3 { margin: 0 0 12px; font: 600 21.5px/1.3 "Segoe UI", sans-serif; }
     .prep ul { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 8px; }
     .prep li { padding-left: 30px; position: relative; font-size: 17px; line-height: 1.5; }
     .prep li::before {
@@ -305,7 +325,7 @@
       }
       section.block:first-of-type { break-before: auto; page-break-before: auto; }
       .block-head { border-bottom: 2px solid var(--c); padding-bottom: 10px; }
-      .beat, .tip, .say, .do, .timing, .starters li, .anchor { break-inside: avoid; page-break-inside: avoid; }
+      .beat, .tip, .say, .do, .timing, .starters li, .anchor, .verses { break-inside: avoid; page-break-inside: avoid; }
       .tips { grid-template-columns: repeat(2, 1fr); }
       .styles { grid-template-columns: repeat(2, 1fr); }
       footer { display: none !important; }
@@ -360,7 +380,7 @@
 
     <div class="anchor">
       <b>Scripture anchor</b>
-      <p>&ldquo;Philip findeth Nathanael&hellip; And Nathanael said unto him, Can there any good thing come out of Nazareth? Philip saith unto him, Come and see.&rdquo; &mdash; John 1:45&ndash;46</p>
+      <p>&ldquo;Philip findeth Nathanael, and saith unto him, We have found him, of whom Moses in the law, and the prophets, did write, Jesus of Nazareth, the son of Joseph. And Nathanael said unto him, Can there any good thing come out of Nazareth? Philip saith unto him, Come and see.&rdquo; &mdash; John 1:45&ndash;46</p>
     </div>
 
     <div class="timing">
@@ -402,6 +422,26 @@
           <li>Doctrine and Covenants 4:3 &mdash; desire qualifies you</li>
         </ul>
       </div>
+
+      <div class="verses">
+        <b>Scripture text &mdash; for this beat</b>
+        <span class="ref">John 1:40&ndash;42 (KJV) &mdash; Andrew brings his brother</span>
+        <p>
+          <span class="v">40</span>One of the two which heard John speak, and followed him, was Andrew, Simon Peter&rsquo;s brother.
+          <span class="v">41</span>He first findeth his own brother Simon, and saith unto him, We have found the Messias, which is, being interpreted, the Christ.
+          <span class="v">42</span>And he brought him to Jesus. And when Jesus beheld him, he said, Thou art Simon the son of Jona: thou shalt be called Cephas, which is by interpretation, A stone.
+        </p>
+        <span class="ref">John 1:45&ndash;46 (KJV) &mdash; &ldquo;Come and see&rdquo;</span>
+        <p>
+          <span class="v">45</span>Philip findeth Nathanael, and saith unto him, We have found him, of whom Moses in the law, and the prophets, did write, Jesus of Nazareth, the son of Joseph.
+          <span class="v">46</span>And Nathanael said unto him, Can there any good thing come out of Nazareth? Philip saith unto him, Come and see.
+        </p>
+        <span class="ref">Doctrine and Covenants 4:3, 5 &mdash; desire qualifies you</span>
+        <p>
+          <span class="v">3</span>Therefore, if ye have desires to serve God ye are called to the work;
+          <span class="v">5</span>And faith, hope, charity and love, with an eye single to the glory of God, qualify him for the work.
+        </p>
+      </div>
     </div>
 
     <div class="beat">
@@ -417,6 +457,14 @@
       <div class="do">
         <b>Reference</b>
         <p>Alma 17:11 &middot; Alma 37:6 &middot; Love, Share, Invite (churchofjesuschrist.org)</p>
+      </div>
+
+      <div class="verses">
+        <b>Scripture text &mdash; for this beat</b>
+        <span class="ref">Alma 17:11 &mdash; show forth good examples</span>
+        <p><span class="v">11</span>And the Lord said unto them also: Go forth among the Lamanites, thy brethren, and establish my word; yet ye shall be patient in long-suffering and afflictions, that ye may show forth good examples unto them in me, and I will make an instrument of thee in my hands unto the salvation of many souls.</p>
+        <span class="ref">Alma 37:6 &mdash; small and simple things</span>
+        <p><span class="v">6</span>Now ye may suppose that this is foolishness in me; but behold I say unto you, that by small and simple things are great things brought to pass; and small means in many instances doth confound the wise.</p>
       </div>
     </div>
 
@@ -482,7 +530,16 @@
 
     <div class="anchor">
       <b>Scripture anchor</b>
-      <p>&ldquo;Philip saith unto him, Come and see.&rdquo; &mdash; John 1:46</p>
+      <p>&ldquo;And Nathanael said unto him, Can there any good thing come out of Nazareth? Philip saith unto him, Come and see.&rdquo; &mdash; John 1:46</p>
+    </div>
+
+    <div class="verses">
+      <b>Scripture text &mdash; read aloud or paraphrase</b>
+      <span class="ref">John 1:45&ndash;46 (KJV)</span>
+      <p>
+        <span class="v">45</span>Philip findeth Nathanael, and saith unto him, We have found him, of whom Moses in the law, and the prophets, did write, Jesus of Nazareth, the son of Joseph.
+        <span class="v">46</span>And Nathanael said unto him, Can there any good thing come out of Nazareth? Philip saith unto him, Come and see.
+      </p>
     </div>
 
     <div class="timing">
@@ -573,7 +630,17 @@
 
     <div class="anchor">
       <b>Scripture anchor</b>
-      <p>&ldquo;He first findeth his own brother Simon&hellip; and he brought him to Jesus.&rdquo; &mdash; John 1:41&ndash;42</p>
+      <p>&ldquo;He first findeth his own brother Simon, and saith unto him, We have found the Messias&hellip; And he brought him to Jesus.&rdquo; &mdash; John 1:41&ndash;42</p>
+    </div>
+
+    <div class="verses">
+      <b>Scripture text &mdash; read aloud or paraphrase</b>
+      <span class="ref">John 1:40&ndash;42 (KJV)</span>
+      <p>
+        <span class="v">40</span>One of the two which heard John speak, and followed him, was Andrew, Simon Peter&rsquo;s brother.
+        <span class="v">41</span>He first findeth his own brother Simon, and saith unto him, We have found the Messias, which is, being interpreted, the Christ.
+        <span class="v">42</span>And he brought him to Jesus. And when Jesus beheld him, he said, Thou art Simon the son of Jona: thou shalt be called Cephas, which is by interpretation, A stone.
+      </p>
     </div>
 
     <div class="timing">
@@ -667,6 +734,16 @@
       <p>&ldquo;Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven.&rdquo; &mdash; Matthew 5:16</p>
     </div>
 
+    <div class="verses">
+      <b>Scripture text &mdash; read aloud or paraphrase</b>
+      <span class="ref">Matthew 5:14&ndash;16 (KJV)</span>
+      <p>
+        <span class="v">14</span>Ye are the light of the world. A city that is set on an hill cannot be hid.
+        <span class="v">15</span>Neither do men light a candle, and put it under a bushel, but on a candlestick; and it giveth light unto all that are in the house.
+        <span class="v">16</span>Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven.
+      </p>
+    </div>
+
     <div class="timing">
       <div class="timing-row head"><span>Time</span><span>Beat</span></div>
       <div class="timing-row"><span>0:00&ndash;0:45</span><span>Welcome and what your style means</span></div>
@@ -755,7 +832,15 @@
 
     <div class="anchor">
       <b>Scripture anchor</b>
-      <p>&ldquo;Now, by small and simple things are great things brought to pass.&rdquo; &mdash; Alma 37:6 &nbsp;&middot;&nbsp; &ldquo;If ye give place, that a seed may be planted in your heart&hellip;&rdquo; &mdash; Alma 32:28</p>
+      <p>&ldquo;Now ye may suppose that this is foolishness in me; but behold I say unto you, that by small and simple things are great things brought to pass.&rdquo; &mdash; Alma 37:6</p>
+    </div>
+
+    <div class="verses">
+      <b>Scripture text &mdash; read aloud or paraphrase</b>
+      <span class="ref">Alma 37:6 &mdash; small and simple things</span>
+      <p><span class="v">6</span>Now ye may suppose that this is foolishness in me; but behold I say unto you, that by small and simple things are great things brought to pass; and small means in many instances doth confound the wise.</p>
+      <span class="ref">Alma 32:28 &mdash; the seed</span>
+      <p><span class="v">28</span>Now, we will compare the word unto a seed. Now, if ye give place, that a seed may be planted in your heart, behold, if it be a true seed, or a good seed, if ye do not cast it out by your unbelief, that ye will resist the Spirit of the Lord, behold, it will begin to swell within your breasts; and when you feel these swelling motions, ye will begin to say within yourselves&mdash;It must needs be that this is a good seed, or that the word is good, for it beginneth to enlarge my soul; yea, it beginneth to enlighten my understanding, yea, it beginneth to be delicious to me.</p>
     </div>
 
     <div class="timing">
