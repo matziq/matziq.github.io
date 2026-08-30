@@ -72,15 +72,15 @@
     "count": 25
   },
   {
+    "name": "baking powder",
+    "count": 23
+  },
+  {
     "name": "brown sugar",
-    "count": 24
+    "count": 23
   },
   {
     "name": "vanilla extract",
-    "count": 24
-  },
-  {
-    "name": "baking powder",
     "count": 23
   },
   {
@@ -296,10 +296,6 @@
     "count": 6
   },
   {
-    "name": "heavy whipping cream",
-    "count": 6
-  },
-  {
     "name": "lemon",
     "count": 6
   },
@@ -345,6 +341,10 @@
   },
   {
     "name": "guajillo chile",
+    "count": 5
+  },
+  {
+    "name": "heavy whipping cream",
     "count": 5
   },
   {
@@ -3476,10 +3476,6 @@
     "count": 1
   },
   {
-    "name": "unsalted butter",
-    "count": 1
-  },
-  {
     "name": "v juice",
     "count": 1
   },
@@ -3577,10 +3573,6 @@
   },
   {
     "name": "white wine",
-    "count": 1
-  },
-  {
-    "name": "whole milk",
     "count": 1
   },
   {
