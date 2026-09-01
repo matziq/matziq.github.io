@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      (() => {
+        const param = new URLSearchParams(window.location.search).get("scoutTheme");
+        const theme =
+          param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+
+        // Opening the project source file directly cannot load Vite's TypeScript entry point.
+        // Redirect direct-file launches to the self-contained production build instead.
+        const isSourceFile =
+          window.location.protocol === "file:" &&
+          !decodeURIComponent(window.location.pathname).replaceAll("\\", "/").endsWith("/dist/index.html");
+        if (isSourceFile) {
+          window.location.replace(new URL("./dist/index.html", window.location.href).href);
+        }
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Pink Wave, LLC local-first Arizona tax organization and expense tracking workspace." />
+    <title>Pink Wave, LLC - Arizona Tax Workspace</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

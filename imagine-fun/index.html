@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagine Fun</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='12'%20fill='%230a0a0a'/%3E%3Cpath%20d='M36%206L14%2036L28%2036L22%2058L50%2026L34%2026L42%206Z'%20fill='%23f5c542'%20stroke='%23ffd95c'%20stroke-width='1.5'%20stroke-linejoin='round'/%3E%3C/svg%3E">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #f5c842, #ff6b6b, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-weight: 300;
+            font-size: 1.1rem;
+            color: #888;
+            margin-bottom: 3rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .card {
+            background: #161616;
+            border: 1px solid #2a2a2a;
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            width: 320px;
+            text-align: center;
+            text-decoration: none;
+            color: #f0f0f0;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #f5c842;
+            box-shadow: 0 12px 40px rgba(245, 200, 66, 0.15);
+        }
+
+        .card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #888;
+            line-height: 1.5;
+        }
+
+        footer {
+            margin-top: 4rem;
+            padding: 2rem;
+            color: #444;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Imagine Fun</h1>
+    <p class="subtitle">AI-Generated Casting &amp; What-Ifs</p>
+    <div class="cards">
+        <a class="card" href="if-harry-potter-had-come-out-in-the-1980s.html">
+            <div class="icon">🎬</div>
+            <h2>If Harry Potter Had Come Out In The 80s or 90s</h2>
+            <p>What if the Wizarding World had been brought to life in the era of big hair and synth music?</p>
+        </a>
+        <a class="card" href="alternate-harry-potter-cast.html">
+            <div class="icon">✨</div>
+            <h2>Alternate Harry Potter Cast</h2>
+            <p>Reimagining the beloved characters with an entirely different ensemble of actors.</p>
+        </a>
+        <a class="card" href="who-would-make-a-better-snape.html">
+            <div class="icon">🧪</div>
+            <h2>Who Would Make A Better Snape</h2>
+            <p>The ultimate showdown — who else could have nailed the role of the Half-Blood Prince?</p>
+        </a>
+    </div>
+    <footer>&copy; 2026 Imagine Fun</footer>
+</body>
+
+</html>

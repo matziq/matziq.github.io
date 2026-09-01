@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alternate Harry Potter Cast — Imagine Fun</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='12'%20fill='%230a0a0a'/%3E%3Cpath%20d='M36%206L14%2036L28%2036L22%2058L50%2026L34%2026L42%206Z'%20fill='%23f5c542'%20stroke='%23ffd95c'%20stroke-width='1.5'%20stroke-linejoin='round'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0e17;
+            color: #f0f0f0;
+            min-height: 100vh;
+        }
+
+        /* magical particles / stars effect */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(1.5px 1.5px at 20% 30%, rgba(245, 200, 66, 0.4), transparent),
+                radial-gradient(1px 1px at 60% 70%, rgba(168, 85, 247, 0.35), transparent),
+                radial-gradient(1.5px 1.5px at 80% 20%, rgba(245, 200, 66, 0.3), transparent),
+                radial-gradient(1px 1px at 40% 80%, rgba(168, 85, 247, 0.3), transparent);
+            background-size: 200px 200px, 300px 300px, 250px 250px, 350px 350px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        header {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 3rem 1rem 2rem;
+        }
+
+        header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #f5c842, #a855f7);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: #a855f7;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .back {
+            display: inline-block;
+            margin: 1rem 2rem;
+            color: #f5c842;
+            text-decoration: none;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        .gallery {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem 2rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 2px solid #a855f733;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            aspect-ratio: 3/4;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.04);
+            border-color: #f5c842;
+            box-shadow: 0 0 30px rgba(245, 200, 66, 0.25), 0 0 60px rgba(168, 85, 247, 0.12);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.2rem 0.75rem 0.75rem;
+            background: linear-gradient(transparent, rgba(15, 14, 23, 0.92));
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: #f5c842;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(245, 200, 66, 0.5);
+        }
+
+        .role {
+            display: block;
+            font-size: 0.8rem;
+            color: #a855f7;
+            margin-top: 0.2rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <a class="back" href="index.html">← Back to Imagine Fun</a>
+    <header>
+        <h1>Alternate Harry Potter Cast</h1>
+        <p>A different kind of magic</p>
+    </header>
+    <div class="gallery">
+        <div class="gallery-item"><img src="Alternate Harry Potter Cast/Ana_de_Armas_Ca2020_0001.jpg"
+                alt="Ana de Armas as Hermione">
+            <div class="label">Ana de Armas <span class="role">Hermione</span></div>
+        </div>
+        <div class="gallery-item"><img src="Alternate Harry Potter Cast/Anya_Taylor_Joy_Ca2025_0003.jpg"
+                alt="Anya Taylor-Joy as Luna Lovegood">
+            <div class="label">Anya Taylor-Joy <span class="role">Luna Lovegood</span></div>
+        </div>
+        <div class="gallery-item"><img src="Alternate Harry Potter Cast/Bradley_Cooper_Ca2004_0001.jpg"
+                alt="Bradley Cooper as Dumbledore">
+            <div class="label">Bradley Cooper <span class="role">Dumbledore</span></div>
+        </div>
+        <div class="gallery-item"><img src="Alternate Harry Potter Cast/Daniel_Craig_Ca2004_0003.jpg"
+                alt="Daniel Craig as Dumbledore">
+            <div class="label">Daniel Craig <span class="role">Dumbledore</span></div>
+        </div>
+        <div class="gallery-item"><img src="Alternate Harry Potter Cast/Donald_Glover_Ca2008_0009.jpg"
+                alt="Donald Glover as Ron Weasley">
+            <div class="label">Donald Glover <span class="role">Ron Weasley</span></div>
+        </div>
+        <div class="gallery-item"><img src="Alternate Harry Potter Cast/Elle_Fanning_Ca2015_0013.jpg"
+                alt="Elle Fanning as Luna Lovegood">
+            <div class="label">Elle Fanning <span class="role">Luna Lovegood</span></div>
+        </div>
+        <div class="gallery-item"><img src="Alternate Harry Potter Cast/George_Clooney_Ca2015_0005.jpg"
+                alt="George Clooney as Dumbledore">
+            <div class="label">George Clooney <span class="role">Dumbledore</span></div>
+        </div>
+        <div class="gallery-item"><img src="Alternate Harry Potter Cast/Jenna_Ortega_Ca2022_0002.jpg"
+                alt="Jenna Ortega as Hermione">
+            <div class="label">Jenna Ortega <span class="role">Hermione</span></div>
+        </div>
+        <div class="gallery-item"><img src="Alternate Harry Potter Cast/Kurt_Russell_Ca2004_0004.jpg"
+                alt="Kurt Russell as Dumbledore">
+            <div class="label">Kurt Russell <span class="role">Dumbledore</span></div>
+        </div>
+        <div class="gallery-item"><img src="Alternate Harry Potter Cast/Madison_Beer_Ca2018_0012.jpg"
+                alt="Madison Beer as Hermione">
+            <div class="label">Madison Beer <span class="role">Hermione</span></div>
+        </div>
+        <div class="gallery-item"><img src="Alternate Harry Potter Cast/Margot_Robbie_Ca2025_0019.jpg"
+                alt="Margot Robbie as Hermione">
+            <div class="label">Margot Robbie <span class="role">Hermione</span></div>
+        </div>
+        <div class="gallery-item"><img src="Alternate Harry Potter Cast/Nick_Offerman_Ca2005_0004.jpg"
+                alt="Nick Offerman as Dumbledore">
+            <div class="label">Nick Offerman <span class="role">Dumbledore</span></div>
+        </div>
+        <div class="gallery-item"><img src="Alternate Harry Potter Cast/Robert_Downey_Jr_Ca2008_0003.jpg"
+                alt="Robert Downey Jr as Dumbledore">
+            <div class="label">Robert Downey Jr <span class="role">Dumbledore</span></div>
+        </div>
+        <div class="gallery-item"><img src="Alternate Harry Potter Cast/Tessa_Thompson_Ca2015_0004.jpg"
+                alt="Tessa Thompson as Hermione">
+            <div class="label">Tessa Thompson <span class="role">Hermione</span></div>
+        </div>
+        <div class="gallery-item"><img src="Alternate Harry Potter Cast/Timothee_Chalamet_Ca2021_0010.jpg"
+                alt="Timothée Chalamet as Harry">
+            <div class="label">Timothée Chalamet <span class="role">Harry</span></div>
+        </div>
+        <div class="gallery-item"><img src="Alternate Harry Potter Cast/Zooey_Deschanel_Ca2004_0026.jpg"
+                alt="Zooey Deschanel as Luna Lovegood">
+            <div class="label">Zooey Deschanel <span class="role">Luna Lovegood</span></div>
+        </div>
+    </div>
+</body>
+
+</html>
