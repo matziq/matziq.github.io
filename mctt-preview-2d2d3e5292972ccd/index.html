@@ -294,14 +294,74 @@
     .play-strip div { padding: 22px; border-right: 1px solid var(--cp-border); }
     .play-strip div:last-child { border-right: 0; }
     .play-strip strong { display: block; color: var(--cp-accent); margin-bottom: 4px; }
+    .flock-hero {
+      min-height: 680px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      background: var(--cp-surface);
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      box-shadow: var(--cp-shadow);
+    }
+    .flock-photo {
+      min-height: 520px;
+      background-image: url("https://minicassiaturkeytrot.com/media/mctt-2025.jpg");
+      background-position: center;
+      background-size: cover;
+      position: relative;
+    }
+    .flock-photo-card {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      display: grid;
+      gap: 3px;
+      padding: 18px;
+      background: var(--cp-panel-strong);
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+    }
+    .flock-photo-card strong { color: var(--cp-accent); font-size: 25px; }
+    .flock-photo-card span { color: var(--cp-text-muted); }
+    .flock-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(32px, 6vw, 72px);
+    }
+    .flock-section { background: var(--cp-bg-elevated); }
+    .flock-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .flock-card {
+      min-width: 0;
+      padding: 24px;
+      background: var(--cp-surface);
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      box-shadow: var(--cp-shadow);
+    }
+    .flock-word {
+      display: block;
+      margin-bottom: 24px;
+      color: var(--cp-accent);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 850;
+      letter-spacing: -0.05em;
+    }
+    .flock-card strong { display: block; font-size: 18px; }
+    .flock-card p { margin-bottom: 0; color: var(--cp-text-muted); }
     .concept-label { color: var(--cp-text-muted); font-size: 13px; text-align: center; padding: 18px; }
     @media (max-width: 820px) {
       .review-inner { align-items: flex-start; flex-direction: column; }
       .tabs { justify-content: flex-start; }
       .site-links a:not(.button) { display: none; }
       .photo-hero, .utility-grid, .play-hero { grid-template-columns: 1fr; }
+      .flock-hero { grid-template-columns: 1fr; }
       .photo-panel { min-height: 480px; }
+      .flock-photo { min-height: 480px; }
       .card-grid { grid-template-columns: 1fr; }
+      .flock-grid { grid-template-columns: 1fr 1fr; }
       .section-heading { align-items: flex-start; flex-direction: column; }
       .play-strip { grid-template-columns: 1fr 1fr; }
       .play-strip div:nth-child(2) { border-right: 0; }
@@ -313,11 +373,13 @@
       .site-nav .button { min-height: 42px; padding: 0 14px; }
       .brand span { max-width: 130px; }
       .photo-copy { padding: 32px 22px; }
+      .flock-copy { padding: 32px 22px; }
       .countdown { grid-template-columns: 1fr 1fr; }
       .utility-banner { align-items: flex-start; flex-direction: column; }
       .play-strip { grid-template-columns: 1fr; }
       .play-strip div { border-right: 0; border-bottom: 1px solid var(--cp-border); }
       .play-strip div:last-child { border-bottom: 0; }
+      .flock-grid { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -337,6 +399,7 @@
         <button class="tab" role="tab" aria-selected="true" aria-controls="classic" data-target="classic">1. Community Classic</button>
         <button class="tab" role="tab" aria-selected="false" aria-controls="utility" data-target="utility">2. Race Day Utility</button>
         <button class="tab" role="tab" aria-selected="false" aria-controls="playful" data-target="playful">3. Lucky’s Playground</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="community-flock" data-target="community-flock">4. Community Flock</button>
       </div>
     </div>
   </header>
@@ -433,6 +496,47 @@
         </div>
       </div>
       <p class="concept-label">Concept 3 · Mascot-led, playful, and family-focused</p>
+    </section>
+
+    <section id="community-flock" class="concept" role="tabpanel" hidden>
+      <div class="shell">
+        <nav class="site-nav" aria-label="Concept 4 navigation">
+          <div class="brand"><img src="https://minicassiaturkeytrot.com/media/lucky_192.png" alt=""><span>Mini-Cassia Turkey Trot</span></div>
+          <div class="site-links">
+            <a href="#flock-details">Race Details</a><a href="#flock-details">Course</a><a href="#flock-details">Results</a><a class="button" href="#flock-details">Join the Flock</a>
+          </div>
+        </nav>
+        <div class="flock-hero">
+          <div class="flock-photo" role="img" aria-label="Friends gathered together at the Mini-Cassia Turkey Trot">
+            <div class="flock-photo-card">
+              <strong>1,272 neighbors</strong>
+              <span>showed up, bundled up, and made history together.</span>
+            </div>
+          </div>
+          <div class="flock-copy">
+            <div class="eyebrow">21st Annual · Thanksgiving Morning</div>
+            <h1>Come Join the Flock.</h1>
+            <p class="lead">Run, walk, waddle, or trot into Thanksgiving with families, friends, and neighbors from across the Mini-Cassia Valley.</p>
+            <div class="hero-actions"><a class="button" href="#flock-details">Join the Flock · $25</a><a class="button secondary" href="#flock-details">Plan Your Morning</a></div>
+            <div class="facts"><div class="fact">Nov. 26, 2026</div><div class="fact">9:00 AM</div><div class="fact">Paul, Idaho</div></div>
+          </div>
+        </div>
+      </div>
+      <section id="flock-details" class="section flock-section">
+        <div class="shell">
+          <div class="section-heading">
+            <div><div class="eyebrow">There’s a Place for Everyone</div><h2>How will you join the flock?</h2></div>
+            <p>Four ways to experience one community tradition—from chasing a personal best to cheering on your littlest turkey.</p>
+          </div>
+          <div class="flock-grid">
+            <article class="flock-card"><span class="flock-word">Run</span><strong>Timed 5K</strong><p>Race the flat, fast course and see your official finish time.</p></article>
+            <article class="flock-card"><span class="flock-word">Walk</span><strong>Family 5K</strong><p>Bring every generation and enjoy the course at your own pace.</p></article>
+            <article class="flock-card"><span class="flock-word">Waddle</span><strong>Turkey Tots</strong><p>A welcoming race-day experience for little turkeys ages 0–6.</p></article>
+            <article class="flock-card"><span class="flock-word">Trot</span><strong>Costume Crew</strong><p>Show your spirit, gather your flock, and compete for costume prizes.</p></article>
+          </div>
+        </div>
+      </section>
+      <p class="concept-label">Concept 4 · Community photography with playful flock personality</p>
     </section>
   </main>
 
