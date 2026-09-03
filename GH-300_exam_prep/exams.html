@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice Exams &mdash; GH-300 Exam Prep</title>
+<meta name="description" content="Three timed 60-question Microsoft GH-300 practice exams with estimated scaled scoring and full review mode.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+<main id="main"><div class="wrap">
+<h1>The Practice Exams</h1>
+<p class="lede">Three full-length practice exams, one for each checkpoint in your plan. Each one is this site&rsquo;s format: 60 questions in 100 minutes, weighted across the GH-300 domains.</p>
+<div id="dateBanner"></div>
+<div class="callout warn"><span class="callout-title">Take these properly or do not take them at all</span><p style="margin-bottom:0">A practice exam with notes open tells you nothing. Sit down, close every tab, start the clock, and do not stop. The score is a readiness signal, not an official Microsoft score.</p></div>
+<div class="grid grid-3" id="examCards" style="margin:1.5rem 0"></div>
+<section><h2>The schedule, and why it is spaced this way</h2><div class="grid grid-2"><div class="card"><h3 style="margin-top:0">When to take each one</h3><div class="table-scroll"><table class="data-table"><thead><tr><th>Date</th><th>Exam</th><th>Purpose</th></tr></thead><tbody id="schedRows"></tbody></table></div></div><div class="card"><h3 style="margin-top:0">Three is the right number</h3><p>Full exams measure more than they teach. The score moves on the repair day after the exam.</p><p style="margin-bottom:0">Between exams, use the <a href="drills.html">topic drills</a>, flashcards, and the study plan.</p></div></div></section>
+<section><h2>How these are weighted</h2><p>Every exam here uses the same 60-question blueprint and stays inside the official domain weight ranges.</p><div class="table-scroll"><table class="data-table"><thead><tr><th>Domain</th><th>Objective</th><th>Questions</th><th>Share</th></tr></thead><tbody id="blueprintRows"></tbody></table></div></section>
+<section><h2>How the score is estimated</h2><div class="card"><p>Microsoft reports GH-300 on a <strong>1 to 1000</strong> scale and passes at <strong>700</strong>. Microsoft has not published the raw-to-scaled conversion, and the real exam weights questions by difficulty.</p><p style="margin-bottom:0">This site shows an estimated scaled score so you can track readiness. Do not read it as an official prediction.</p></div></section>
+</div></main>
+<footer id="footer"></footer>
+<script src="assets/data/exam1.js"></script>
+<script src="assets/data/exam2.js"></script>
+<script src="assets/data/exam3.js"></script>
+<script>
+(function () {
+    var EXAMS = [
+        { key: "exam1", n: 1, tag: "Baseline", cls: "", day: "exam1", href: "practice-exam-1.html", purpose: "Cold baseline, before you study anything.", note: "Take it cold. Its job is to find your two weakest domains." },
+        { key: "exam2", n: 2, tag: "Checkpoint", cls: "amber", day: "exam2", href: "practice-exam-2.html", purpose: "Midpoint checkpoint after targeted work.", note: "Compare objective percentages against Exam 1, not just the total." },
+        { key: "exam3", n: 3, tag: "Dress rehearsal", cls: "good", day: "exam3", href: "practice-exam-3.html", purpose: "Final timed rehearsal at your real appointment time.", note: "Hardest set. Repair it, then taper." }
+    ];
+    function countQ(key) { var e = (window.GH3_DATA || {})[key]; if (!e || !e.units) return GH3.PRACTICE_QUESTIONS; var n = 0; for (var u = 0; u < e.units.length; u++) n += e.units[u].questions.length; return n; }
+    document.addEventListener("DOMContentLoaded", function () {
+        GH3.renderDateBanner(document.getElementById("dateBanner"));
+        var hist = GH3.store.get("history", {}), sched = GH3.examSchedule(), html = "", rows = "";
+        for (var i = 0; i < EXAMS.length; i++) { var t = EXAMS[i], run = hist[t.key], q = countQ(t.key), mins = ((window.GH3_DATA || {})[t.key] || {}).timeMinutes || GH3.PRACTICE_MINUTES, dayN = sched[t.day], when = GH3.fmtDate(GH3.dateForDay(dayN)); var status = run ? '<div class="callout ' + (run.passed ? "key" : "warn") + '" style="margin:.9rem 0 0"><span class="callout-title">' + (run.passed ? "Passing estimate" : "Completed") + '</span><p style="margin-bottom:0">Scaled <strong>' + run.scaled + '</strong> &middot; ' + run.right + ' of ' + run.total + ' correct &middot; passing is 700.</p></div>' : ""; html += '<a class="card card-link" href="' + t.href + '"><div class="card-icon ' + t.cls + '">' + t.n + '</div><h3>Practice Exam ' + t.n + ' <span class="badge ' + (t.cls || "accent") + '">' + t.tag + '</span></h3><p class="muted" style="font-size:.86rem;margin-bottom:.5rem"><strong>Day ' + dayN + ' &middot; ' + when + '</strong></p><p>' + t.note + '</p><p class="faint" style="margin-bottom:0"><small>' + q + ' questions &middot; ' + mins + ' minutes &middot; estimated scaled score</small></p>' + status + '</a>'; rows += '<tr><td><strong>' + when + '</strong></td><td>Practice Exam ' + t.n + '</td><td>' + t.purpose + '</td></tr>'; }
+        rows += '<tr><td><strong>' + GH3.fmtDate(GH3.examDate()) + '</strong></td><td><span class="badge good">The real GH-300</span></td><td>The one that counts.</td></tr>';
+        document.getElementById("examCards").innerHTML = html; document.getElementById("schedRows").innerHTML = rows;
+        var brows = "";
+        for (var d = 0; d < GH3.DOMAINS.length; d++) { var dm = GH3.DOMAINS[d], first = true, span = 0; for (var c = 0; c < GH3.TOPICS.length; c++) if (GH3.TOPICS[c].domain === dm.id) span++; for (var t2 = 0; t2 < GH3.TOPICS.length; t2++) { var tp = GH3.TOPICS[t2]; if (tp.domain !== dm.id) continue; brows += "<tr>"; if (first) { brows += '<td rowspan="' + span + '"><strong>' + dm.num + '. ' + dm.name + '</strong><br><span class="badge ' + (dm.cls || "") + '">' + dm.weight + '</span></td>'; first = false; } brows += '<td>' + tp.obj[0] + ' &middot; ' + tp.name + '</td><td>' + tp.q + '</td><td>' + Math.round(tp.q / GH3.PRACTICE_QUESTIONS * 100) + '%</td></tr>'; } }
+        brows += '<tr><td colspan="2"><strong>Total</strong></td><td><strong>' + GH3.PRACTICE_QUESTIONS + '</strong></td><td><strong>100%</strong></td></tr>';
+        document.getElementById("blueprintRows").innerHTML = brows;
+    });
+})();
+</script>
+</body>
+</html>

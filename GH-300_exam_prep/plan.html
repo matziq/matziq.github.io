@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Study Plan &mdash; GH-300 Exam Prep</title>
+<meta name="description" content="A day-by-day Microsoft GH-300 study plan generated from your chosen exam date.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+<main id="main"><div class="wrap">
+<h1 id="planTitle">Your Study Plan</h1>
+<p class="lede" id="planLede">Loading&hellip;</p>
+<div id="dateBanner"></div>
+<div class="card" style="margin:1.5rem 0">
+    <div class="meter-row" style="margin-bottom:1rem"><span class="mlabel"><strong>Overall progress</strong></span><span class="meter"><i class="good" id="progMeter" data-pct="0"></i></span><span class="mval" id="progTxt">0 / 0</span></div>
+    <div class="btn-row"><button class="btn" id="todayBtn">Jump to today</button><button class="btn secondary" id="printBtn">Print the plan</button><a class="btn secondary" href="index.html#examdate">Change my exam date</a><button class="btn ghost" id="resetBtn">Clear all checkboxes</button></div>
+</div>
+<div class="callout tip"><span class="callout-title">How to use this</span><p style="margin-bottom:0">Do the day you are on, check boxes as you go, and stop when you are done. If you miss a day, do not double up the next day. Drop the lowest-value task and keep moving.</p></div>
+<div class="callout key"><span class="callout-title">Do not study logistics from memory</span><p style="margin-bottom:0">GH-300 is now a Microsoft certification delivered by Pearson VUE. It used to be a GitHub/PSI exam. The plan starts by making that change explicit.</p></div>
+<div class="callout warn"><span class="callout-title">The one rule that matters most</span><p style="margin-bottom:0">Never turn 700 into 70% correct. The real exam is scaled and weighted. Use this site&rsquo;s scaled score only as a readiness signal.</p></div>
+<div id="planRoot"></div>
+<div class="card" style="margin-top:2rem;border-color:var(--good)"><h2 style="margin-top:0" id="examDayHead">Exam Day</h2><p id="examDayBody">No studying. Confirm the current Microsoft Learn certification page, the Pearson VUE appointment, the exam code GH-300, the 100-minute limit, and the scaled 700 passing score.</p><p style="margin-bottom:0"><a href="index.html#main">Review the exam-day checklist &rarr;</a></p></div>
+</div></main>
+<footer id="footer"></footer>
+<script>
+(function () {
+    var TAGS = { exam: "Exam", review: "Review", study: "Read", drill: "Drill", cards: "Cards", lab: "Lab", logistics: "Logistics" };
+    var TAGCLS = { exam: "tag-math", review: "tag-writing", study: "tag-english", drill: "tag-reading", cards: "tag-science", lab: "tag-lab", logistics: "tag-test" };
+    function phasesFor(plan, sched) {
+        var n = plan.length, b1 = Math.max(2, Math.min(sched.exam2 || Math.ceil(n / 3), n)), b2 = Math.max(b1 + 1, Math.min(sched.exam3 || Math.ceil(n * 2 / 3), n));
+        var out = [
+            { from: 1, to: b1 - 1, title: "Phase 1 &mdash; Find the gaps, then close the biggest ones", goal: "A cold baseline exam, an honest review, and the first pass through the concepts." },
+            { from: b1, to: b2 - 1, title: "Phase 2 &mdash; Checkpoint, then the largest domain", goal: "A second exam at the midpoint, then IDE, CLI, platform, architecture, and prompting work." },
+            { from: b2, to: n, title: "Phase 3 &mdash; Rehearse, repair, taper", goal: "Dress rehearsal, one last targeted repair, then deliberately back off." }
+        ];
+        var kept = [];
+        for (var i = 0; i < out.length; i++) if (out[i].to >= out[i].from) kept.push(out[i]);
+        return kept.length ? kept : [{ from: 1, to: n, title: "Your plan", goal: "Everything, in order." }];
+    }
+    function render() {
+        var plan = GH3.plan(), sched = GH3.examSchedule(), today = GH3.currentPlanDay(), root = document.getElementById("planRoot"), phases = phasesFor(plan, sched), html = "";
+        for (var w = 0; w < phases.length; w++) {
+            var ph = phases[w];
+            html += '<div class="week-head"><h2>' + ph.title + '</h2><span class="wgoal">' + ph.goal + '</span></div>';
+            for (var i = 0; i < plan.length; i++) {
+                var day = plan[i]; if (day.d < ph.from || day.d > ph.to) continue;
+                var date = GH3.dateForDay(day.d), cls = "day-card" + (day.d === today ? " is-today" : (day.d < today ? " is-past" : ""));
+                var hrs = day.min >= 120 ? (Math.floor(day.min / 60) + " hr " + (day.min % 60 ? (day.min % 60) + " min" : "")) : day.min + " min";
+                var extra = ""; if (day.isExam) extra += ' <span class="badge amber">Full exam</span>'; if (day.isReview) extra += ' <span class="badge teal">Repair day</span>'; if (day.isRest) extra += ' <span class="badge good">Taper</span>'; if (day.isExtra) extra += ' <span class="badge">Reinforcement</span>'; if (day.merged) extra += ' <span class="badge bad">Combined day</span>';
+                html += '<div class="' + cls + '" id="day-' + day.d + '"><div class="day-head"><span class="day-chip">Day ' + day.d + '</span><span class="day-date">' + GH3.fmtDate(date) + '</span><span class="day-focus">' + day.focus + extra + '</span><span class="day-time">' + hrs + '</span></div>';
+                for (var t = 0; t < day.tasks.length; t++) {
+                    var task = day.tasks[t], key = "d" + day.d + "-" + t;
+                    var label = '<span class="tag ' + (TAGCLS[task.tag] || "tag-test") + '">' + (TAGS[task.tag] || "Task") + '</span>' + task.text;
+                    if (task.href) label += ' <a href="' + task.href + '" style="font-size:.85em">open &rarr;</a>';
+                    html += '<div class="task"><input type="checkbox" id="' + key + '" data-key="' + key + '"><label for="' + key + '">' + label + '</label></div>';
+                }
+                html += '</div>';
+            }
+        }
+        root.innerHTML = html; GH3.onCheckChange = updateProgress; GH3.bindPersistentChecks("plan", root); updateProgress();
+    }
+    function markCompleteDays() {
+        var plan = GH3.plan(), state = GH3.store.get("plan", {});
+        for (var i = 0; i < plan.length; i++) { var day = plan[i], all = true; for (var t = 0; t < day.tasks.length; t++) if (!state["d" + day.d + "-" + t]) { all = false; break; } var node = document.getElementById("day-" + day.d); if (node) node.classList.toggle("all-done", all); }
+    }
+    function updateProgress() {
+        var plan = GH3.plan(), state = GH3.store.get("plan", {}), total = GH3.planTaskCount(), done = 0;
+        for (var i = 0; i < plan.length; i++) for (var t = 0; t < plan[i].tasks.length; t++) if (state["d" + plan[i].d + "-" + t]) done++;
+        GH3.fillMeter(document.getElementById("progMeter"), Math.round(done / Math.max(1, total) * 100)); document.getElementById("progTxt").textContent = done + " / " + total; markCompleteDays();
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        GH3.renderDateBanner(document.getElementById("dateBanner"));
+        var plan = GH3.plan(), start = GH3.planStart(), end = GH3.dateForDay(plan.length), exam = GH3.examDate(), runway = GH3.runwayDays();
+        document.getElementById("planTitle").textContent = "Your " + plan.length + "-Day Plan";
+        var shape = plan.length <= 3 ? "There is very little time, so this is a triage plan." : (plan.length < GH3.BLOCK_COUNT ? "The window is tight, so some study blocks are combined and optional work is dropped." : "There is room for the full plan, with reinforcement days built in.");
+        document.getElementById("planLede").innerHTML = "<strong>" + GH3.fmtDate(start) + "</strong> through <strong>" + GH3.fmtDate(end) + "</strong>, ending the day before your exam on <strong>" + GH3.fmtLong(exam) + "</strong>. " + shape + (runway > 0 ? " Your exam is far enough out that the plan starts in " + runway + " day" + (runway === 1 ? "" : "s") + "." : "");
+        document.getElementById("examDayHead").textContent = GH3.fmtLong(exam) + " &mdash; Exam Day";
+        render();
+        document.getElementById("todayBtn").onclick = function () { var d = Math.min(GH3.plan().length, Math.max(1, GH3.currentPlanDay())), node = document.getElementById("day-" + d); if (node) node.scrollIntoView({ behavior: "smooth", block: "center" }); else GH3.toast("The plan window has passed."); };
+        document.getElementById("printBtn").onclick = function () { window.print(); };
+        document.getElementById("resetBtn").onclick = function () { if (window.confirm("Uncheck every task in the whole plan?")) { GH3.store.set("plan", {}); render(); GH3.toast("Plan reset."); } };
+        var d0 = GH3.currentPlanDay(); if (d0 >= 1 && d0 <= GH3.plan().length) { var node = document.getElementById("day-" + d0); if (node) window.setTimeout(function () { node.scrollIntoView({ behavior: "smooth", block: "center" }); }, 350); }
+    });
+})();
+</script>
+</body>
+</html>
+

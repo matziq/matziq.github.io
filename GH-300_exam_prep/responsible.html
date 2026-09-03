@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Use GitHub Copilot responsibly &mdash; GH-300 Exam Prep</title>
+<meta name="description" content="Study responsible AI principles, Copilot limitations, bias, and validation practices for the GH-300 GitHub Copilot exam.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Use GitHub Copilot responsibly</h1>
+<p class="lede">Domain 1 is 15&ndash;20% of GH-300. The exam rewards the answer that uses Copilot as an assistive tool, validates output, and keeps a human accountable for the final result.</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#principles">Six principles</a>
+    <a class="btn secondary sm" href="#limitations">Limitations</a>
+    <a class="btn secondary sm" href="#bias">Bias</a>
+    <a class="btn secondary sm" href="#verification">Verification</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="principles">
+  <h2>Microsoft's six responsible AI principles</h2>
+  <p>Memorize the principle names exactly: <strong>fairness</strong>, <strong>reliability and safety</strong>, <strong>privacy and security</strong>, <strong>inclusiveness</strong>, <strong>transparency</strong>, and <strong>accountability</strong>. GH-300 asks scenario questions. The giveaway words usually point to one principle.</p>
+  <div class="callout"><span class="callout-title">Exam posture</span>
+    <p>Copilot can improve productivity, quality, and security, but it does not remove developer responsibility. If an answer says to accept generated code without review, it is almost always wrong.</p>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Principle</th><th>Giveaway cue</th><th>Most confused with</th><th>How to separate them</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>fairness</td><td>bias, demographic, unequal treatment, disadvantaged group</td><td>inclusiveness</td><td>Fairness is about equitable outcomes across groups. Inclusiveness is about whether people can use the system at all.</td></tr>
+        <tr><td>reliability and safety</td><td>fails safely, testing, harmful behavior, robust behavior</td><td>privacy and security</td><td>Reliability and safety asks whether the system behaves correctly and avoids harm. Privacy and security asks whether data and systems are protected.</td></tr>
+        <tr><td>privacy and security</td><td>personal data, confidential code, access control, retention, unauthorized disclosure</td><td>reliability and safety</td><td>Privacy and security is about protecting data, prompts, outputs, and connected resources. Reliability is about correct and safe operation.</td></tr>
+        <tr><td>inclusiveness</td><td>accessibility, disability, everyone, assistive technology</td><td>fairness</td><td>Inclusiveness removes barriers to use. Fairness compares treatment and outcomes after people use the system.</td></tr>
+        <tr><td>transparency</td><td>explain, disclose, cite, limitations, why</td><td>accountability</td><td>Transparency tells people how AI is used and why output was produced. Accountability assigns ownership, governance, review, and correction.</td></tr>
+        <tr><td>accountability</td><td>oversight, owner, policy, audit, escalation, responsible for</td><td>transparency</td><td>Accountability is who answers for the system. Transparency is what users and reviewers can understand about it.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Fairness</h3>
+  <p><strong>Definition:</strong> AI systems should treat people and groups equitably and avoid unfair bias.</p>
+  <p><strong>Copilot scenario:</strong> generated code, tests, comments, or examples should not encode unfair assumptions about users or groups. Watch sample data, validation rules, and recommendation logic.</p>
+  <p><strong>Contrast:</strong> if the problem is unequal treatment, think fairness. If the problem is keyboard navigation or screen reader access, think inclusiveness.</p>
+
+  <h3>Reliability and safety</h3>
+  <p><strong>Definition:</strong> AI systems should work consistently, handle expected and unexpected conditions, and fail safely.</p>
+  <p><strong>Copilot scenario:</strong> a suggestion may compile but still contain a bug, a security weakness, or a wrong assumption about the codebase. The safe answer is to review, test, and scan before relying on it.</p>
+  <p><strong>Contrast:</strong> reliability and safety is not the same as privacy. A SQL injection risk is safety and security relevant; leaked personal data points directly to privacy and security.</p>
+
+  <h3>Privacy and security</h3>
+  <p><strong>Definition:</strong> AI systems should protect personal data, confidential information, prompts, outputs, and connected systems.</p>
+  <p><strong>Copilot scenario:</strong> do not paste secrets or sensitive data into prompts. Use organization and enterprise controls, content exclusions, public-code matching policy, and security review where appropriate.</p>
+  <p><strong>Contrast:</strong> privacy and security protects data and access. Accountability decides who owns policy and response when something goes wrong.</p>
+
+  <h3>Inclusiveness</h3>
+  <p><strong>Definition:</strong> AI systems should be usable by people with different abilities, languages, environments, and interaction needs.</p>
+  <p><strong>Copilot scenario:</strong> generated UI code should support accessible patterns. Generated examples should not assume that all users interact with software the same way.</p>
+  <p><strong>Contrast:</strong> inclusiveness is access to use. Fairness is equitable treatment and outcomes.</p>
+
+  <h3>Transparency</h3>
+  <p><strong>Definition:</strong> people should understand when AI is used, what it can and cannot do, and why important output was produced.</p>
+  <p><strong>Copilot scenario:</strong> be clear that Copilot suggestions are generated suggestions. Use explanations, citations where available, and visible review practices rather than treating output as authoritative.</p>
+  <p><strong>Contrast:</strong> transparency explains. Accountability assigns responsibility.</p>
+
+  <h3>Accountability</h3>
+  <p><strong>Definition:</strong> people and organizations remain responsible for AI systems, including governance, review, policy, and correction.</p>
+  <p><strong>Copilot scenario:</strong> the developer, reviewer, and organization remain accountable for committed code. Copilot is not the author of record for quality, security, licensing, or production behavior.</p>
+  <p><strong>Contrast:</strong> accountability is not just logging. It includes ownership, approvals, monitoring, escalation, and correction.</p>
+
+  <div class="callout trap"><span class="callout-title">Trap: human accountability is the safest answer</span>
+    <p>If the choices include testing, reviewing, security scanning, or requiring a human to approve high-impact output, prefer that over blind automation. GH-300 repeatedly rewards responsible operation, not maximum autonomy.</p>
+  </div>
+</section>
+
+<section id="limitations">
+  <h2>The four named limitation categories</h2>
+  <p>The exam tests the category names. Use these exact phrases from the brief: <strong>code quality and correctness</strong>, <strong>language and framework specificity</strong>, <strong>dependency on training data</strong>, and <strong>complex problem solving</strong>.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Limitation category</th><th>What it means</th><th>Responsible response</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>code quality and correctness</td><td>Suggestions can contain errors, security concerns, or context misinterpretation.</td><td>Review code, run tests, inspect edge cases, and use security scanning before merge.</td></tr>
+        <tr><td>language and framework specificity</td><td>Performance can vary by language, framework, and niche technology.</td><td>Give relevant context, keep related files open, and verify generated code against current framework behavior.</td></tr>
+        <tr><td>dependency on training data</td><td>Suggestions can reflect bias, outdated practices, or copyright concerns.</td><td>Check for outdated APIs, biased assumptions, and public-code matching policy requirements.</td></tr>
+        <tr><td>complex problem solving</td><td>Copilot can be limited on high-level design and creative architecture work.</td><td>Use Copilot for assistance, but keep architecture decisions and tradeoffs under human review.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Trap: limitations are not excuses to ignore Copilot</span>
+    <p>The responsible answer is not usually "do not use Copilot." It is to use it with validation, scope control, security checks, and human ownership.</p>
+  </div>
+
+  <h3>How limitations show up in questions</h3>
+  <p><strong>Code quality and correctness</strong> appears when code compiles but has a logic bug, misses an edge case, or introduces a security weakness. <strong>Language and framework specificity</strong> appears when the tool is weaker for a niche stack or uses a pattern that does not match the current project. <strong>Dependency on training data</strong> appears when output reflects outdated practices, bias, or copyright concerns. <strong>Complex problem solving</strong> appears when the task requires high-level design, tradeoffs, or unusual creativity.</p>
+</section>
+
+<section id="bias">
+  <h2>Bias: where it enters and how to reduce it</h2>
+  <p>Bias can enter through training data, prompt wording, context files, accepted patterns in the repository, sample data, tests, comments, and developer assumptions. Copilot may mirror patterns it sees. That is useful for consistency, but it can also preserve outdated or unfair assumptions.</p>
+
+  <h3>What bias can look like in generated code</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Sample data</h3>
+      <p>Generated names, addresses, roles, or examples may overrepresent one group or stereotype another. Review sample records before they become demos, tests, or documentation.</p>
+    </div>
+    <div class="card">
+      <h3>Validation rules</h3>
+      <p>A rule can look neutral while excluding valid users or data formats. Watch assumptions about names, addresses, languages, identity fields, or device access.</p>
+    </div>
+    <div class="card">
+      <h3>Recommendation logic</h3>
+      <p>Generated ranking, filtering, and scoring logic can encode proxies for protected or sensitive attributes. Ask what the code optimizes and who it affects.</p>
+    </div>
+    <div class="card">
+      <h3>Comments and explanations</h3>
+      <p>Comments can normalize a biased assumption even when the code works. Responsible review includes prose, tests, and examples, not only executable lines.</p>
+    </div>
+  </div>
+
+  <h3>Mitigations</h3>
+  <ul>
+    <li>Write prompts that state constraints clearly and avoid biased assumptions.</li>
+    <li>Keep relevant files open so Copilot sees the real project context instead of guessing.</li>
+    <li>Review generated code, sample data, tests, and comments before committing.</li>
+    <li>Test with representative inputs and edge cases.</li>
+    <li>Use security scanning and code review for generated changes.</li>
+    <li>Apply organization policies, content exclusions, and suggestions matching public code settings where appropriate.</li>
+    <li>Escalate high-impact decisions to humans. Copilot output should inform decisions, not silently decide them.</li>
+  </ul>
+
+  <div class="callout"><span class="callout-title">Cross-link: privacy controls live elsewhere</span>
+    <p>Bias mitigation overlaps with privacy and safeguards, but the deep policy details are in <a href="privacy.html#exclusions">content exclusions</a> and <a href="privacy.html#safeguards">safeguards</a>. This page focuses on responsible use and validation.</p>
+  </div>
+</section>
+
+<section id="verification">
+  <h2>Verification and human oversight</h2>
+  <p>Copilot suggestions are suggestions. The developer and organization remain accountable. The exam consistently favors the workflow that checks generated output before it becomes production code.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Risk</th><th>Bad answer</th><th>Responsible answer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Generated code seems plausible</td><td>Accept it because Copilot generated it.</td><td>Read it, compare it with project context, and test it.</td></tr>
+        <tr><td>Security-sensitive change</td><td>Rely on the model to avoid vulnerabilities.</td><td>Use code review, security scanning, and targeted tests.</td></tr>
+        <tr><td>Unfamiliar API or framework</td><td>Assume the generated pattern is current.</td><td>Verify against project dependencies and current framework behavior.</td></tr>
+        <tr><td>Public-code or IP concern</td><td>Ignore policy because output is generated.</td><td>Respect the organization policy for suggestions matching public code. For IP indemnity, Business and Enterprise require the setting to be Block.</td></tr>
+        <tr><td>High-impact decision</td><td>Let Copilot decide without review.</td><td>Keep a human accountable for approval, escalation, and correction.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>A responsible Copilot workflow</h3>
+  <ol>
+    <li><strong>Prompt with context.</strong> Ask for one clear task and include the relevant constraints.</li>
+    <li><strong>Review the suggestion.</strong> Check logic, style, dependencies, security, licensing concerns, and fit with the repository.</li>
+    <li><strong>Test behavior.</strong> Run targeted unit or integration tests. Add edge-case tests when the generated code changes behavior.</li>
+    <li><strong>Scan for security.</strong> Use code scanning and review for risks such as cross-site scripting and SQL injection.</li>
+    <li><strong>Use human approval.</strong> Require review for high-impact, security-sensitive, or ambiguous changes.</li>
+    <li><strong>Monitor and improve.</strong> Learn from accepted, modified, and rejected suggestions without treating the model as deterministic.</li>
+  </ol>
+
+  <div class="callout trap"><span class="callout-title">Exam-source vs. current product: names changed, responsibility did not</span>
+    <p>The official study guide still uses older names in Domain 2, including "Copilot Edits" and the pre-April 2026 agent name. Current docs use <a href="features-ide.html#modes">Edit mode</a> and <a href="features-platform.html#agent">Copilot cloud agent</a>. The responsible-use answer is unchanged: humans review and approve output.</p>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Trap: audit logs are not local prompt transcripts</span>
+    <p>Audit logs include Copilot plan changes and agent activity on the GitHub website. They do not include client session data such as prompts a user sends to Copilot locally.</p>
+  </div>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Six principles</h3>
+      <p><strong>fairness:</strong> equitable treatment across groups.</p>
+      <p><strong>reliability and safety:</strong> correct, robust, fail-safe behavior.</p>
+      <p><strong>privacy and security:</strong> protect personal data, confidential code, prompts, outputs, and systems.</p>
+      <p><strong>inclusiveness:</strong> usable by people with different abilities and needs.</p>
+      <p><strong>transparency:</strong> disclose AI use, limits, evidence, and reasons.</p>
+      <p><strong>accountability:</strong> people own governance, approvals, monitoring, and outcomes.</p>
+    </div>
+    <div class="card">
+      <h3>Four limitation categories</h3>
+      <p>Memorize the exact names: code quality and correctness; language and framework specificity; dependency on training data; complex problem solving.</p>
+    </div>
+    <div class="card">
+      <h3>Default responsible answer</h3>
+      <p>Review suggestions, test generated code, scan security-sensitive changes, and keep a human accountable. Never treat Copilot output as automatically correct.</p>
+    </div>
+    <div class="card">
+      <h3>Bias reminders</h3>
+      <p>Bias can enter through training data, prompts, context, repository patterns, sample data, tests, and assumptions. Mitigate with clear prompts, representative tests, review, and policy controls.</p>
+    </div>
+  </div>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?set=d1-principles">Drill: Responsible use</a>
+    <a class="btn secondary" href="features-ide.html">Next guide: Copilot in the IDE &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy and safeguards &mdash; GH-300 Exam Prep</title>
+<meta name="description" content="Configure GitHub Copilot privacy, content exclusions, public-code matching, indemnity, policies, plans, and audit logs for GH-300.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Configure privacy, content exclusions, and safeguards</h1>
+<p class="lede">Domain 6 is 10-15% of GH-300. It is full of reversals: content exclusion limits, public-code matching settings, indemnity conditions, policy conflict direction, plan boundaries, and audit-log gaps.</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#exclusions">Exclusions</a>
+    <a class="btn secondary sm" href="#matching">Matching</a>
+    <a class="btn secondary sm" href="#indemnity">Indemnity</a>
+    <a class="btn secondary sm" href="#policies">Policies</a>
+    <a class="btn secondary sm" href="#plans">Plans</a>
+    <a class="btn secondary sm" href="#audit">Audit</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="exclusions">
+  <h2>Content exclusions</h2>
+  <p>Content exclusions can be configured at repository and organization level. Repository administrators configure them for their own repositories. Organization owners configure them for users with a seat through the organization. Enterprise owners can also manage policy at enterprise scope.</p>
+
+  <div class="callout trap"><span class="callout-title">The limits are the exam content</span>
+    <p>Content exclusions are Copilot Business and Copilot Enterprise only. They do not apply in Edit mode or Agent mode. They do not stop semantic leakage through IDE type information, hover-over definitions, or build configuration. They do not apply to symbolic links or repositories on remote filesystems.</p>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>What exclusions do</th><th>What that means</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Inline suggestions are not available in affected files.</td><td>Copilot should not suggest directly in excluded files.</td></tr>
+        <tr><td>Affected file content does not inform inline suggestions in other files.</td><td>Excluded source is not supposed to feed neighboring completions.</td></tr>
+        <tr><td>Affected file content does not inform Copilot responses.</td><td>Chat responses should not use excluded content as source context.</td></tr>
+        <tr><td>Affected files are not reviewed in a Copilot code review.</td><td>Code review excludes those files.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Support and data sent</h3>
+  <p>For inline suggestions, content exclusion is supported in Visual Studio, VS Code, JetBrains IDEs, Vim/NeoVim, Xcode, and Eclipse, but not Azure Data Studio. For chat and agent scenarios, it is supported in Visual Studio, VS Code, JetBrains IDEs, the GitHub website, GitHub Mobile, the Copilot app, and Copilot CLI, but not Xcode or Eclipse.</p>
+  <p>Only the repository URL is sent to the server so the correct policy can be returned, and the facts brief states that these URLs are not logged anywhere.</p>
+
+  <div class="callout trap"><span class="callout-title">GitHub Enterprise Server trap</span>
+    <p>Copilot is not currently available for GitHub Enterprise Server. Do not choose an answer that says GHES supports Copilot content exclusion.</p>
+  </div>
+</section>
+
+<section id="safeguards">
+  <h2>Safeguards and troubleshooting map</h2>
+  <p>For objective 6.2, treat safeguards as the combination of public-code matching, indemnity conditions, policy resolution, and audit-log troubleshooting. The detailed settings follow in the sections below.</p>
+</section>
+
+<section id="matching">
+  <h2>Suggestions matching public code</h2>
+  <p>The current setting is <strong>Suggestions matching public code</strong>, with values <strong>Allow</strong> and <strong>Block</strong>. It was formerly called the duplication detection filter; use the old wording only as rename history.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Setting</th><th>Meaning</th><th>Exam cue</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Allow</td><td>Matching suggestions are allowed to appear.</td><td>Less restrictive public-code matching behavior.</td></tr>
+        <tr><td>Block</td><td>Matching suggestions are not shown.</td><td>Required for GitHub to assume IP indemnity responsibility.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>The setting can be configured for an organization or enterprise under Settings, Copilot, Features, Privacy, and then Suggestions matching public code. Personal settings also expose Allow or Block, but a user whose seat is assigned by an organization may see the toggle locked because the value is inherited from organization or enterprise policy.</p>
+
+  <div class="callout trap"><span class="callout-title">About the 150-character figure</span>
+    <p>The facts brief documents a real source conflict around the approximate 150-character wording. It is safe to remember that Copilot compares candidate suggestions with surrounding code against public GitHub.com code, but do not build a rule that depends on one exact interpretation of the 150-character figure.</p>
+  </div>
+
+  <h3>Other public-code matching facts</h3>
+  <ul>
+    <li>Only public code is searched. Private GitHub repositories and code outside GitHub are not included in the search process.</li>
+    <li>Only accepted, unmodified suggestions are checked. Code written by the user and Copilot suggestions the user altered are not checked for matches to public code.</li>
+    <li>Matches occur in less than one percent of suggestions.</li>
+    <li>The index refreshes every few months, so very new or deleted public code may not be represented.</li>
+    <li>The setting applies regardless of which model is selected.</li>
+    <li>Code referencing is available in JetBrains IDEs, Visual Studio, VS Code, Copilot cloud agent, and on the GitHub website. It is not available in Xcode or NeoVim.</li>
+  </ul>
+</section>
+
+<section id="indemnity">
+  <h2>IP indemnity and contractual protections</h2>
+  <div class="callout trap"><span class="callout-title">Two conditions, not one</span>
+    <p><strong>IP indemnity requires Copilot Business or Copilot Enterprise and Suggestions matching public code set to Block.</strong> If either condition is missing, do not choose the indemnity answer.</p>
+  </div>
+
+  <p>The official learning path says the Business and Enterprise plans include IP indemnity. If a GitHub Copilot suggestion is challenged as infringing third-party IP rights, GitHub assumes legal responsibility only when matching public code is blocked.</p>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <h3>IP indemnity</h3>
+      <p>Available for Business and Enterprise, with public-code matching set to Block.</p>
+    </div>
+    <div class="card">
+      <h3>Data Protection Agreement</h3>
+      <p>One of the three contractual protections named in the facts brief.</p>
+    </div>
+    <div class="card">
+      <h3>GitHub Copilot Trust Center</h3>
+      <p>Another named protection. The facts brief flags primary Trust Center text as not fully readable, so avoid adding unsupported details.</p>
+    </div>
+  </div>
+</section>
+
+<section id="policies">
+  <h2>Policy conflict resolution</h2>
+  <p>Policy conflict direction is heavily tested because it is easy to reverse. Enterprise policies live on the enterprise AI controls tab or in organization settings. For most policies, an enterprise admin can enable, disable, or let organizations decide. Copilot cloud agent is the exception: enterprises select exactly which organizations get access.</p>
+
+  <div class="callout trap"><span class="callout-title">Memorize the direction</span>
+    <p><strong>Within a single enterprise, the least restrictive policy usually wins.</strong> Across different enterprises, the most restrictive policy almost always wins.</p>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Scenario</th><th>Resolution</th><th>Worked example</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Two organizations in one enterprise</td><td>Least restrictive usually wins.</td><td>If one org allows a feature and another org blocks it for the same user inside the same enterprise, expect the less restrictive result.</td></tr>
+        <tr><td>Two different enterprises</td><td>Most restrictive almost always wins.</td><td>If any enterprise disables Copilot Chat in GitHub for that user, it is disabled for that user.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>The Copilot app and Copilot CLI are governed by separate, independent client policies. An admin can allow one without the other. Managing enterprise AI controls requires enterprise owner permission or the custom role permission named Manage enterprise AI controls.</p>
+</section>
+
+<section id="plans">
+  <h2>The seven current plans and tested boundaries</h2>
+  <p>The study guide's older plan lineup is not the whole current product. The current structure has seven plans: Free, Student, Pro, Pro+, Max, Business, and Enterprise. Focus on boundaries, not price.</p>
+
+  <div class="callout"><span class="callout-title">Exam source vs current product</span>
+    <p><strong>Exam-source answer:</strong> older material often centers on Free, Pro, Business, and Enterprise. <strong>Current product reality:</strong> the facts brief lists seven plans, adding Student, Pro+, and Max. Teach the current seven, but recognize older stems.</p>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Plan</th><th>Model and credit boundary</th><th>Feature boundary to remember</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Free</td><td>AI Credits allowance; auto model selection only; 2,000 completions per month.</td><td>Only for individual developers who do not have access through an organization or enterprise.</td></tr>
+        <tr><td>Student</td><td>AI Credits allowance; auto model selection only.</td><td>Excludes third-party agents.</td></tr>
+        <tr><td>Pro</td><td>1,500 AI Credits; selection of models.</td><td>Individual plan. Data is not excluded from training by default, but individual subscribers can opt out.</td></tr>
+        <tr><td>Pro+</td><td>7,000 AI Credits; premium models.</td><td>Individual higher-allowance plan, not the Business/Enterprise administration tier.</td></tr>
+        <tr><td>Max</td><td>20,000 AI Credits; priority premium model access.</td><td>Individual highest-allowance tier, not the Business/Enterprise administration tier.</td></tr>
+        <tr><td>Business</td><td>1,900 AI Credits per user per month; premium models.</td><td>Business-only and Enterprise-only features begin here: content exclusions and IP indemnity.</td></tr>
+        <tr><td>Enterprise</td><td>3,900 AI Credits per user per month; priority premium model access.</td><td>Enterprise governance and Enterprise-level controls. Also Business/Enterprise-only training exclusion by default.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Boundaries that become questions</h3>
+  <ul>
+    <li>All plans include Copilot CLI and the Copilot app.</li>
+    <li>Content exclusion is Business and Enterprise only.</li>
+    <li>IP indemnity is Business and Enterprise only, and only with public-code matching set to Block.</li>
+    <li>Free and Student use auto model selection only.</li>
+    <li>An individual plan is cancelled when the user is added to Business or Enterprise, so personal policies do not conflict with organization policies.</li>
+    <li>Verified teachers and maintainers of popular open source projects may get Copilot Pro free.</li>
+    <li>Copilot is not currently available for GitHub Enterprise Server.</li>
+  </ul>
+</section>
+
+<section id="audit">
+  <h2>Audit logs</h2>
+  <div class="callout trap"><span class="callout-title">Audit logs do not capture prompt content</span>
+    <p>The audit log does not include client session data, such as prompts a user sends to Copilot locally. A custom solution is required for that kind of logging.</p>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Audit fact</th><th>What to remember</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Logged</td><td>Changes to the Copilot plan, settings, policies, license grants, license removals, and agent activity on the GitHub website.</td></tr>
+        <tr><td>Not logged</td><td>Prompt content and local client session data.</td></tr>
+        <tr><td>Retention</td><td>180 days. Stream to a SIEM for longer history.</td></tr>
+        <tr><td>All Copilot events</td><td>Use action:copilot.</td></tr>
+        <tr><td>Specific event example</td><td>Use a filter such as action:copilot.cfb_seat_assignment_created.</td></tr>
+        <tr><td>Agent activity</td><td>Use actor:Copilot. Agentic fields include action, actor_is_agent, agent_session_id, and user.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<section id="exam-traps">
+  <h2>Domain 6 exam traps</h2>
+  <p>Privacy and safeguards questions are often written as reversals. Watch for a correct feature name paired with the wrong plan, mode, or conflict rule.</p>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Question wording</th><th>Safe answer</th><th>Wrong turn</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>A Pro user wants content exclusions.</td><td>Content exclusion is Business and Enterprise only.</td><td>Assuming all paid plans get it.</td></tr>
+        <tr><td>An excluded file still influences completion through hover or type data.</td><td>That semantic leakage can still happen through IDE-provided information.</td><td>Assuming exclusion blocks every indirect signal.</td></tr>
+        <tr><td>A user sees the public-code matching toggle locked.</td><td>The seat may be assigned by an organization, so the setting is inherited.</td><td>Troubleshooting it as a browser bug.</td></tr>
+        <tr><td>Two orgs in the same enterprise disagree.</td><td>The least restrictive policy usually wins.</td><td>Choosing most restrictive because it sounds safer.</td></tr>
+        <tr><td>Two different enterprises disagree.</td><td>The most restrictive policy almost always wins.</td><td>Reusing the same-enterprise rule.</td></tr>
+        <tr><td>An auditor asks for local prompt text.</td><td>Audit logs do not capture prompt content.</td><td>Searching action:copilot and expecting prompts.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout trap"><span class="callout-title">One-sentence memory aid</span>
+    <p>Business and Enterprise unlock the privacy controls; Block unlocks indemnity; same enterprise goes least restrictive; different enterprises go most restrictive; audit logs do not include prompts.</p>
+  </div>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Content exclusions</h3>
+      <p>Business and Enterprise only. No Edit mode. No Agent mode. No symlinks. No remote filesystems. IDE semantic info can still leak through type, hover, or build configuration.</p>
+    </div>
+    <div class="card">
+      <h3>Public-code matching</h3>
+      <p>Current setting: Suggestions matching public code, Allow or Block. Organization-assigned seats may show a locked toggle. Treat the 150-character figure loosely.</p>
+    </div>
+    <div class="card">
+      <h3>Indemnity and policies</h3>
+      <p>IP indemnity requires Business or Enterprise and Block. Same enterprise: least restrictive usually wins. Different enterprises: most restrictive almost always wins.</p>
+    </div>
+    <div class="card">
+      <h3>Audit logs</h3>
+      <p>No prompt content. Retention is 180 days. Use action:copilot for Copilot events and actor:Copilot for agent activity.</p>
+    </div>
+  </div>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?topic=Privacy%20Settings%20and%20Exclusions">Drill: Privacy settings</a>
+    <a class="btn secondary" href="data-architecture.html">Back to data architecture &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>

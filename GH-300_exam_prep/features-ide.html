@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Copilot in the IDE &mdash; GH-300 Exam Prep</title>
+<meta name="description" content="Study GitHub Copilot inline completions, next edit suggestions, Ask mode, Edit mode, Agent mode, chat, CLI, and model selection for GH-300.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Copilot in the IDE</h1>
+<p class="lede">This page covers the IDE half of Domain 2, Use GitHub Copilot features. Domain 2 is the largest GH-300 domain at 25&ndash;30%, so expect detail questions about inline suggestions, chat, CLI, modes, and model selection.</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#completions">Completions</a>
+    <a class="btn secondary sm" href="#modes">Modes</a>
+    <a class="btn secondary sm" href="#chat">Chat and CLI</a>
+    <a class="btn secondary sm" href="#models">Models</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="completions">
+  <h2>Inline completions, next edit suggestions, and FIM</h2>
+  <p>Copilot can assist directly inside the editor. The exam likes three distinct ideas: <strong>inline suggestions</strong>, <strong>next edit suggestions</strong>, and <strong>Fill-in-the-Middle (FIM)</strong>.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Feature</th><th>What it does</th><th>Exam cue</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Inline suggestions</td><td>Complete code at the cursor. The IDE renders the suggestion as ghost text.</td><td>"Finish this line", "complete this function", "accept the ghost text".</td></tr>
+        <tr><td>Next edit suggestions</td><td>Predict the location of the developer's next likely edit. This is separate from inline completion.</td><td>"Where should I edit next?", "predict the next change location".</td></tr>
+        <tr><td>Fill-in-the-Middle (FIM)</td><td>Uses code before and after the cursor during preprocessing so the model can fill the gap.</td><td>The phrase FIM or "before and after the cursor".</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Trap: ghost text is not a separate feature</span>
+    <p>Ghost text is how the IDE displays an inline suggestion. It is not a third completion feature and not the same as next edit suggestions.</p>
+  </div>
+
+  <h3>What context is gathered</h3>
+  <p>The exam-source data flow says Copilot gathers code before and after the cursor, filename and file type, adjacent open tabs, project structure and file paths, programming languages and frameworks, and FIM preprocessing. The prompt is transmitted over HTTPS.</p>
+
+  <div class="callout"><span class="callout-title">Cross-link: data flow belongs to Domain 3</span>
+    <p>The seven-step prompt flow is covered in <a href="data-architecture.html#dataflow">data handling and flow</a>. For this page, know that FIM is a named, high-value term and that inline suggestions are not the same as next edit suggestions.</p>
+  </div>
+</section>
+
+<section id="modes">
+  <h2>Ask mode vs. Edit mode vs. Agent mode</h2>
+  <p>This is one of the most-tested distinctions on GH-300. The safest way to answer is to ask: who chooses the scope, and how much authority does Copilot have?</p>
+
+  <div class="callout trap"><span class="callout-title">Exam-source vs. current product: Copilot Edits was renamed</span>
+    <p>The official August 2026 study guide still says "Copilot Edits." Current product documentation uses <strong>Edit mode</strong>. Treat "Copilot Edits" as the old name and Edit mode as the current name.</p>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Mode</th><th>Scope</th><th>What Copilot can do</th><th>What Copilot cannot do</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Ask mode</td><td>The user asks a question. The user chooses what to do with the answer.</td><td>Explain code, answer questions, suggest commands, describe changes, and reason about context.</td><td>It does not directly rewrite a chosen set of files as its main purpose.</td></tr>
+        <tr><td>Edit mode</td><td>The user chooses the files or scope to edit.</td><td>Propose and apply edits inside that chosen scope. Best when the developer knows where the change belongs.</td><td>It should not roam the repository deciding a broad implementation plan on its own.</td></tr>
+        <tr><td>Agent mode</td><td>Copilot can determine more of the work plan and affected files inside the IDE workflow.</td><td>Carry out multi-step coding work, use tools where supported, and iterate more autonomously.</td><td>It is not the same as the Copilot cloud agent that runs on GitHub and opens a pull request.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Mode memory hooks</h3>
+  <p><strong>Ask mode:</strong> "tell me." Use it when the developer wants explanation, ideas, or help understanding code.</p>
+  <p><strong>Edit mode:</strong> "change these files." Use it when the developer knows the target scope and wants Copilot to edit within it.</p>
+  <p><strong>Agent mode:</strong> "take on this task." Use it when the workflow needs multi-step changes and Copilot can decide more of the implementation path.</p>
+
+  <div class="callout trap"><span class="callout-title">Trap: IDE Agent mode is not the cloud agent</span>
+    <p><a href="#modes">Agent mode</a> runs in the IDE context. The <a href="features-platform.html#agent">Copilot cloud agent</a> is assigned an issue, works in its own environment, and opens a pull request. They are different features.</p>
+  </div>
+
+  <div class="callout"><span class="callout-title">Support details from the brief</span>
+    <p>Edit mode is supported in VS Code and JetBrains. It is not supported in Visual Studio, Eclipse, or Xcode. Agent mode is not available in NeoVim.</p>
+  </div>
+</section>
+
+<section id="chat">
+  <h2>Chat in the IDE, GitHub.com, mobile, and CLI</h2>
+  <p>Copilot Chat is an assistive feature across the website, mobile app, IDEs, and Windows Terminal. GH-300 also calls out Copilot CLI as its own objective area.</p>
+
+  <h3>Chat in the IDE</h3>
+  <p>IDE chat can use <strong>slash commands</strong>, <strong>chat participants</strong>, and <strong>chat variables</strong>. Read those as ways to shape the request and context. A slash command expresses an action. A participant routes the request to a specialized context. A variable includes named context.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Chat tool</th><th>Plain meaning</th><th>How it appears in exam wording</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Slash commands</td><td>Short commands that tell chat what kind of task to perform.</td><td>"Use a command to explain, test, fix, or perform a common chat action."</td></tr>
+        <tr><td>Chat participants</td><td>Named participants that bring a particular capability or context into the conversation.</td><td>"Route the question to a participant for workspace, terminal, or other specialized help."</td></tr>
+        <tr><td>Chat variables</td><td>Named references that add context to the prompt.</td><td>"Include the current selection, file, workspace, or other context variable."</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Trap: do not treat chat as automatically authoritative</span>
+    <p>Chat can explain and suggest. The responsible workflow still requires review, tests, and security scanning for code changes. See <a href="responsible.html#verification">verification and human oversight</a>.</p>
+  </div>
+
+  <h3>Chat on GitHub.com and in mobile</h3>
+  <p>Copilot Chat is available on the GitHub website and in GitHub Mobile. The brief also notes that content exclusions for the GitHub website and GitHub Mobile are in public preview. Do not assume every IDE support detail also applies to GitHub.com or mobile.</p>
+
+  <h3>GitHub Copilot CLI</h3>
+  <p><strong>GitHub Copilot CLI</strong> is now standalone. The old <code>gh copilot</code> CLI extension was renamed history; current wording is GitHub Copilot CLI. The CLI is an agentic feature and has its own objective, 2.2.</p>
+  <p>The brief confirms that Copilot CLI has a plan mode, that Shift+Tab cycles modes, that it runs interactively or programmatically with <code>-p</code> or <code>--prompt</code>, and that it runs on Linux, macOS, and Windows, including PowerShell and WSL.</p>
+  <div class="callout"><span class="callout-title">What CLI questions usually test</span>
+    <p>Expect benefits, installation steps at a high level, interactive sessions, programmatic prompts, script generation, file management, and plan mode. Do not answer with the retired extension model unless the question explicitly asks for history.</p>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Surface</th><th>Best use</th><th>Trap</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>IDE chat</td><td>Explain code, discuss changes, use slash commands, participants, and variables with local context.</td><td>Confusing chat with inline ghost text.</td></tr>
+        <tr><td>GitHub.com chat</td><td>Ask questions and use Copilot on the GitHub website.</td><td>Assuming local editor support details are identical.</td></tr>
+        <tr><td>GitHub Mobile</td><td>Use Copilot on mobile.</td><td>Forgetting that retention and policy details may differ from code-editor prompts.</td></tr>
+        <tr><td>GitHub Copilot CLI</td><td>Work interactively or programmatically from the terminal.</td><td>Calling it the old extension instead of the standalone CLI.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="models">
+  <h2>Model selection without version numbers</h2>
+  <p>GH-300 can test model-selection concepts, but this site never names specific model versions. The brief explicitly bans questions and guide claims that depend on version numbers because availability changes too fast.</p>
+
+  <div class="callout trap"><span class="callout-title">Hard rule: name zero specific model versions</span>
+    <p>Know the concepts, not the model list. Inline suggestions, next edit suggestions, and Chat are three independent model selections. Changing one does not change the others.</p>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Concept</th><th>What to know</th><th>Exam trap</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Independent selections</td><td>Inline suggestions, next edit suggestions, and Chat each have their own model selection.</td><td>Assuming one picker changes all three.</td></tr>
+        <tr><td>Auto model selection</td><td>Auto model selection is a distinct concept and is the only option on Free and Student.</td><td>Assuming Free or Student can choose from the same model picker as paid tiers.</td></tr>
+        <tr><td>LTS fallback</td><td>A long-term support model is used if no other model is available.</td><td>Picking a specific version number instead of the fallback concept.</td></tr>
+        <tr><td>Content filters</td><td>Content filters apply regardless of which model is chosen, on both input prompts and output completions.</td><td>Thinking a model switch bypasses filters or public-code matching policy.</td></tr>
+        <tr><td>Data policy</td><td>Changing the AI model does not change the data collection and usage policy.</td><td>Assuming a model provider change creates a different data policy.</td></tr>
+        <tr><td>Plan gating</td><td>Model choices depend on plan and organization settings. Business and Enterprise model switching requires the org to enable editor preview features.</td><td>Ignoring plan and policy controls.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Safe wording for model questions</h3>
+  <p>Use durable words: model picker, auto model selection, independent selections, long-term support fallback, content filters, plan gating, and data policy. Avoid any answer that turns on a specific model version.</p>
+
+  <div class="callout"><span class="callout-title">BYOK facts from the brief</span>
+    <p>Bring your own key exists. It is generally available in Visual Studio, preview in VS Code, JetBrains, Eclipse, and Xcode, and not supported in NeoVim. The brief names providers, but exam prep should still avoid specific model version numbers.</p>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Trap: filters follow the request</span>
+    <p>Content filters apply no matter which model is selected. Suggestions matching public code also applies irrespective of model selection when that policy is enabled.</p>
+  </div>
+  <h3>Plan and policy gates</h3>
+  <p>Model access is not only a user preference. The brief ties model selection to plan and organization controls. Free and Student use auto model selection only. Business and Enterprise model switching requires the organization to enable editor preview features. If no other model is available, Copilot uses a long-term support model.</p>
+  <p>Do not confuse model choice with privacy choice. The brief is explicit: changing the AI model does not change the data collection and usage policy. Content filters still apply on input prompts and output completions, and public-code matching policy still applies when enabled.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>If the question asks...</th><th>Think...</th><th>Do not answer...</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>"A Free or Student user wants to pick a model."</td><td>Auto model selection only.</td><td>A named model version.</td></tr>
+        <tr><td>"Changing the chat model should change data use."</td><td>Data collection and usage policy does not change.</td><td>That model choice overrides data policy.</td></tr>
+        <tr><td>"One model picker should control all IDE experiences."</td><td>Inline suggestions, next edit suggestions, and Chat are independent selections.</td><td>One global picker for all three.</td></tr>
+        <tr><td>"A filter should disappear after switching models."</td><td>Filters apply regardless of model.</td><td>Use a model switch to bypass safeguards.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Completions</h3>
+      <p>Inline suggestions complete at the cursor and appear as ghost text. Next edit suggestions predict the next edit location. FIM uses code before and after the cursor.</p>
+    </div>
+    <div class="card">
+      <h3>Modes</h3>
+      <p>Ask mode answers. Edit mode changes the user-selected scope. Agent mode takes on multi-step work in the IDE. The cloud agent is different and runs on GitHub.</p>
+    </div>
+    <div class="card">
+      <h3>Chat and CLI</h3>
+      <p>IDE chat uses slash commands, chat participants, and chat variables. GitHub Copilot CLI is standalone, supports plan mode, and can run interactively or with <code>-p</code>/<code>--prompt</code>.</p>
+    </div>
+    <div class="card">
+      <h3>Models</h3>
+      <p>Do not memorize version numbers. Inline suggestions, next edit suggestions, and Chat are independent selections. Auto is the only option on Free and Student. Filters and data policy do not change because the model changes.</p>
+    </div>
+  </div>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?set=d2-completions">Drill: IDE features</a>
+    <a class="btn secondary" href="features-platform.html">Next guide: Platform features &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>

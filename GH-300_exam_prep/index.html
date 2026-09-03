@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GH-300 Exam Prep &mdash; A Study Plan Built Around Your Exam Date</title>
+<meta name="description" content="A Microsoft GH-300 GitHub Copilot exam-prep site with a date-driven study plan, three practice exams, drills, flashcards, and tools.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<div class="hero">
+    <div class="wrap">
+        <div class="eyebrow" id="heroEyebrow">Microsoft Exam GH-300 &middot; GitHub Copilot</div>
+        <h1 id="heroTitle">Pick your exam date. Everything else is calculated.</h1>
+        <p id="heroBlurb">GH-300 is the intermediate Microsoft certification for GitHub Copilot. Tell this site when you are sitting the exam and it builds a day-by-day plan that fits the time you actually have.</p>
+        <div class="hero-stats" id="heroStats"></div>
+    </div>
+</div>
+
+<main id="main"><div class="wrap">
+
+<section id="examdate">
+    <h2>Step one: your exam date</h2>
+    <p class="lede">This one date drives the countdown, study-plan length, daily tasks, and practice-exam schedule.</p>
+    <div id="dateHost"></div>
+</section>
+
+<section id="warning">
+    <div class="callout warn" style="border-width:2px">
+        <span class="callout-title">The scoring trap that costs people points</span>
+        <p><strong>Passing is 700 on a scaled 1&ndash;1000 range. That is not 70% correct.</strong> Microsoft weights questions by difficulty and does not publish the raw-to-scaled conversion.</p>
+        <p style="margin-bottom:0">Scores on this site are readiness estimates only. Use the domain breakdown to decide what to fix next.</p>
+    </div>
+</section>
+
+<section>
+    <h2>What GH-300 is</h2>
+    <div class="grid grid-2" style="margin-bottom:1.5rem">
+        <div class="card">
+            <h3 style="margin-top:0">The facts that shape how you study</h3>
+            <div class="table-scroll"><table class="data-table"><tbody>
+                <tr><td><strong>Exam code</strong></td><td>GH-300</td></tr>
+                <tr><td><strong>Certification</strong></td><td>GitHub Copilot</td></tr>
+                <tr><td><strong>Administered by</strong></td><td>Microsoft Certifications</td></tr>
+                <tr><td><strong>Delivered by</strong></td><td>Pearson VUE</td></tr>
+                <tr><td><strong>Time limit</strong></td><td>100 minutes</td></tr>
+                <tr><td><strong>Level</strong></td><td>Intermediate</td></tr>
+                <tr><td><strong>Format</strong></td><td>Proctored, and may include interactive components</td></tr>
+                <tr><td><strong>Skills measured</strong></td><td>August 7, 2026</td></tr>
+                <tr><td><strong>Questions</strong></td><td>Microsoft does not publish the real exam question count</td></tr>
+                <tr><td><strong>Price</strong></td><td>Microsoft does not publish one fixed price; it varies by country or region</td></tr>
+            </tbody></table></div>
+        </div>
+        <div class="card">
+            <h3 style="margin-top:0">What changed</h3>
+            <p>GH-300 used to be a GitHub/PSI exam. It moved into Microsoft Certifications and is now delivered by Pearson VUE from the Microsoft Learn registration flow.</p>
+            <p>Do not study from old logistics. The current exam is Microsoft-administered, proctored, 100 minutes, and scored on the Microsoft scaled-score model.</p>
+            <div class="callout key" style="margin-bottom:0"><span class="callout-title">The useful non-facts</span>
+                <p style="margin-bottom:0">If a source gives a real-exam question count or a fixed exam price, treat it as a guess. Microsoft publishes neither for GH-300.</p></div>
+        </div>
+    </div>
+
+    <h3>The six domains</h3>
+    <p>These are the official domain names and weights. Domain 2 is the largest, so the plan gives it the most time.</p>
+    <div class="table-scroll"><table class="data-table">
+        <thead><tr><th style="width:2.5rem">#</th><th>Domain</th><th>Weight</th><th>Guide</th></tr></thead>
+        <tbody id="domainRows"></tbody>
+    </table></div>
+</section>
+
+<section>
+    <h2>How to use this site</h2>
+    <div class="grid grid-3" style="margin-bottom:1.5rem">
+        <div class="card"><div class="card-icon">1</div><h3>Take Exam 1 cold</h3><p style="margin-bottom:0">Do not read the guides first. The baseline is supposed to find the gaps you cannot see yet.</p></div>
+        <div class="card"><div class="card-icon amber">2</div><h3>Build the plan</h3><p style="margin-bottom:0">Pick your exam date, then work the daily guide, drill, card, and lab tasks in order.</p></div>
+        <div class="card"><div class="card-icon good">3</div><h3>Finish with Exam 3</h3><p style="margin-bottom:0">Use the final exam as a dress rehearsal. Then repair mistakes, taper, and stop cramming.</p></div>
+    </div>
+    <div class="btn-row"><a class="btn lg" href="plan.html">Open your study plan</a><a class="btn lg secondary" href="exams.html">Go to the practice exams</a></div>
+</section>
+
+<section>
+    <h2>Retakes and renewal</h2>
+    <div class="grid grid-2">
+        <div class="card"><h3 style="margin-top:0">Retake policy</h3><ul style="margin-bottom:0">
+            <li>After a first failure, wait 24 hours.</li>
+            <li>After later failures, wait 14 days between attempts.</li>
+            <li>Maximum five attempts in a 12-month period.</li>
+            <li>There is no free retake. You pay for each retake.</li>
+        </ul></div>
+        <div class="card"><h3 style="margin-top:0">Renewal</h3><p>Certifications of this type renew annually through a free Microsoft Learn renewal assessment. Renewal is unproctored, open book, and available in the six-month window before expiration.</p><p style="margin-bottom:0">Treat renewal as maintenance, not another full proctored exam.</p></div>
+    </div>
+</section>
+
+<section id="everything">
+    <h2>Everything on this site</h2>
+    <p class="lede">A condensed all-domains cheat sheet. Use it the night before the exam, not as your first pass.</p>
+
+    <div class="week-head"><h2>Domain 1 &mdash; Use GitHub Copilot responsibly</h2><span class="wgoal">15&ndash;20%. Risks, principles, harms, mitigation, and validation.</span></div>
+    <div class="grid grid-3">
+        <a class="card card-link" href="responsible.html"><div class="card-icon teal">1</div><h3>Responsible use</h3><p>Fairness, reliability and safety, privacy and security, inclusiveness, transparency, and accountability. The exam asks for judgment, not slogans.</p></a>
+        <a class="card card-link" href="responsible.html#limitations"><div class="card-icon teal">L</div><h3>Limitations</h3><p>Code quality, language and framework specificity, dependency on training data, and complex problem solving.</p></a>
+        <a class="card card-link" href="responsible.html#verification"><div class="card-icon teal">V</div><h3>Validate output</h3><p>The safe answer keeps a human accountable: review, test, scan, and verify before trust.</p></a>
+    </div>
+
+    <div class="week-head"><h2>Domain 2 &mdash; Use GitHub Copilot features</h2><span class="wgoal">25&ndash;30%. The largest domain.</span></div>
+    <div class="grid grid-3">
+        <a class="card card-link" href="features-ide.html"><div class="card-icon bad">IDE</div><h3>IDE and CLI</h3><p>Inline suggestions, ghost text, next edit suggestions, chat, Ask, Edit, Agent mode, and the standalone GitHub Copilot CLI.</p></a>
+        <a class="card card-link" href="features-platform.html"><div class="card-icon bad">P</div><h3>Platform features</h3><p>Copilot cloud agent, code review, PR summaries, Spaces, custom instructions, prompt files, custom agents, skills, hooks, and MCP servers.</p></a>
+        <a class="card card-link" href="features-platform.html#mcp"><div class="card-icon bad">MCP</div><h3>Replacements matter</h3><p>Copilot Extensions were retired and replaced by MCP servers. Knowledge bases were retired and replaced by Copilot Spaces. Learn the mapping.</p></a>
+    </div>
+
+    <div class="week-head"><h2>Domains 3 and 4 &mdash; Data, architecture, and prompting</h2><span class="wgoal">20&ndash;30%. The process questions.</span></div>
+    <div class="grid grid-3">
+        <a class="card card-link" href="data-architecture.html"><div class="card-icon amber">3</div><h3>Seven-step data flow</h3><p>HTTPS, context gathering, proxy filtering, toxicity filtering, LLM generation, post-processing, delivery, and repeated prompts.</p></a>
+        <a class="card card-link" href="data-architecture.html#retention"><div class="card-icon amber">28</div><h3>Retention and training</h3><p>Editor prompts are discarded after a suggestion returns. Chat outside the editor, CLI, Mobile, and GitHub.com are typically retained 28 days.</p></a>
+        <a class="card card-link" href="prompting.html"><div class="card-icon good">4S</div><h3>Prompt engineering</h3><p>Single, Specific, Short, Surround. Add context, use examples, manage chat history, and know zero-shot, one-shot, and few-shot prompting.</p></a>
+    </div>
+
+    <div class="week-head"><h2>Domains 5 and 6 &mdash; Productivity, privacy, and safeguards</h2><span class="wgoal">20&ndash;30%. How teams use and govern Copilot.</span></div>
+    <div class="grid grid-3">
+        <a class="card card-link" href="productivity.html"><div class="card-icon teal">5</div><h3>Productivity</h3><p>Generation, refactoring, documentation, learning, modernization, tests, edge cases, assertions, security, and performance improvements.</p></a>
+        <a class="card card-link" href="privacy.html"><div class="card-icon">6</div><h3>Content exclusions</h3><p>Business and Enterprise only. Exclusions affect suggestions, chat context, and code review, but not symlinks, remote filesystems, or indirect IDE semantic information.</p></a>
+        <a class="card card-link" href="privacy.html#policies"><div class="card-icon">P</div><h3>Policies and audit</h3><p>Within one enterprise, least restrictive usually wins. Across different enterprises, most restrictive almost always wins. Audit logs do not include local prompts.</p></a>
+    </div>
+
+    <div class="week-head"><h2>Practice and tools</h2><span class="wgoal">Where the score moves.</span></div>
+    <div class="grid grid-3">
+        <a class="card card-link" href="plan.html"><div class="card-icon">P</div><h3>Study Plan</h3><p>Day-by-day tasks with checkboxes that save automatically.</p></a>
+        <a class="card card-link" href="drills.html"><div class="card-icon">18</div><h3>Topic Drills</h3><p>Eighteen focused drill sets, one skill at a time.</p></a>
+        <a class="card card-link" href="tools.html"><div class="card-icon teal">T</div><h3>Study Tools</h3><p>Score estimator, timer, flashcards, reference, readiness check, and error log.</p></a>
+    </div>
+</section>
+
+<section>
+    <h2>Exam-day focus</h2>
+    <div class="card"><p>Verify the current Microsoft Learn certification page before you sit the exam. Confirm the exam code, the 100-minute limit, the Pearson VUE delivery path, and the scaled 700 passing score.</p><p style="margin-bottom:0">Do not carry old GitHub/PSI logistics, a guessed question count, or a guessed price into your planning.</p></div>
+</section>
+
+</div></main>
+
+<footer id="footer"></footer>
+<script>
+(function () {
+    document.addEventListener("DOMContentLoaded", function () {
+        var set = GH3.hasExamDate();
+        var left = GH3.daysLeft();
+        if (set && !GH3.isPast()) {
+            document.getElementById("heroEyebrow").innerHTML = "Microsoft Exam GH-300 &middot; " + GH3.fmtLong(GH3.examDate());
+            document.getElementById("heroTitle").textContent = left === 0 ? "Today is the day." : left + " day" + (left === 1 ? "" : "s") + ". One score trap to remember.";
+            document.getElementById("heroBlurb").innerHTML = "Your plan is built for exactly the time you have left. Work the day you are on, take the three practice exams where they fall, and review every miss.";
+        }
+        var stats = [
+            { n: set && !GH3.isPast() ? left : "&mdash;", l: "Days left" },
+            { n: GH3.planLength(), l: "Study days" },
+            { n: "700", l: "Scaled pass mark" },
+            { n: "6", l: "Domains" },
+            { n: "3", l: "Practice exams" }
+        ];
+        var sh = "";
+        for (var i = 0; i < stats.length; i++) sh += '<div class="hero-stat"><div class="n">' + stats[i].n + '</div><div class="l">' + stats[i].l + "</div></div>";
+        document.getElementById("heroStats").innerHTML = sh;
+        GH3.renderDatePicker(document.getElementById("dateHost"));
+        var rows = "";
+        for (var d = 0; d < GH3.DOMAINS.length; d++) {
+            var dm = GH3.DOMAINS[d];
+            rows += "<tr><td><strong>" + dm.num + "</strong></td><td>" + dm.full + "</td>" +
+                '<td><span class="badge ' + (dm.cls || "") + '">' + dm.weight + "</span></td>" +
+                '<td><a href="' + dm.page + '">' + dm.short + "</a></td></tr>";
+        }
+        document.getElementById("domainRows").innerHTML = rows;
+        if (location.hash === "#examdate") setTimeout(function () { document.getElementById("examdate").scrollIntoView({ behavior: "smooth", block: "start" }); }, 200);
+    });
+})();
+</script>
+</body>
+</html>
+

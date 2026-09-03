@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data and architecture &mdash; GH-300 Exam Prep</title>
+<meta name="description" content="Understand GitHub Copilot data handling, request lifecycle, retention, context, and LLM fundamentals for GH-300.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Understand GitHub Copilot data and architecture</h1>
+<p class="lede">Domain 3 is only 10-15% of GH-300, but it is dense. Expect sequence questions: what happens inbound, what happens outbound, what is retained, and which limitations belong to the exam source rather than the live product.</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#lifecycle">Lifecycle</a>
+    <a class="btn secondary sm" href="#retention">Retention</a>
+    <a class="btn secondary sm" href="#context">Context</a>
+    <a class="btn secondary sm" href="#llm">LLM fundamentals</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<div id="dataflow" aria-hidden="true"></div>
+<section id="lifecycle">
+  <h2>The seven-step request lifecycle</h2>
+  <p>The official training splits a Copilot request into <strong>inbound steps 1-4</strong> and <strong>outbound steps 5-7</strong>. Memorize that split. A natural exam question asks which action happens on the way into the model and which action happens on the way out.</p>
+
+  <div class="callout trap"><span class="callout-title">Exam split: inbound vs outbound</span>
+    <p><strong>Inbound:</strong> transmit the prompt, gather context, build the prompt, pass through the proxy, filter toxicity, then generate with the LLM.</p>
+    <p><strong>Outbound:</strong> validate the response, run final proxy checks, deliver only passing suggestions, and repeat for the next prompt.</p>
+  </div>
+
+  <h3>Inbound: steps 1-4</h3>
+  <ol>
+    <li><strong>Secure prompt transmission and context gathering.</strong> The prompt is transmitted over HTTPS while Copilot gathers context. The named context sources are code before and after the cursor, filename and file type, adjacent open tabs, project structure and file paths, and programming languages and frameworks. This same step also includes pre-processing with Fill-in-the-Middle, or FIM, which considers both preceding and following code.</li>
+    <li><strong>Proxy filter.</strong> The built prompt passes to a proxy service hosted in a GitHub-owned Microsoft Azure tenant. On the inbound leg, the proxy blocks prompt injection and jailbreak attempts. This is not the same as toxicity filtering.</li>
+    <li><strong>Toxicity filtering before intent extraction.</strong> The training names hate speech and inappropriate content, plus personal data such as names, addresses, or identification numbers.</li>
+    <li><strong>Code generation with the LLM.</strong> After the inbound checks, the LLM generates the candidate response.</li>
+  </ol>
+
+  <div class="callout trap"><span class="callout-title">Trap: FIM belongs inside step 1</span>
+    <p>Fill-in-the-Middle is a named technique inside secure prompt transmission and context gathering. Do not turn it into an eighth official lifecycle step.</p>
+  </div>
+
+  <h3>Outbound: steps 5-7</h3>
+  <ol start="5">
+    <li><strong>Post-processing and response validation.</strong> The toxicity filter runs again on the output. Then the proxy applies a final layer for code quality, including XSS and SQL injection checks, plus optional public-code matching. If the response fails, it can be truncated or discarded.</li>
+    <li><strong>Suggestion delivery and feedback loop.</strong> Only responses that pass all filters are delivered. Copilot can grow from accepted suggestions and learn from modifications and rejections.</li>
+    <li><strong>Repeat for subsequent prompts.</strong> The lifecycle repeats each time the user makes another request.</li>
+  </ol>
+
+  <div class="callout"><span class="callout-title">Two subtleties that become questions</span>
+    <p><strong>The toxicity filter runs on both legs.</strong> It checks inbound content before generation and checks outbound content during post-processing.</p>
+    <p><strong>The proxy runs on both legs.</strong> Inbound, it blocks prompt injection and jailbreak attempts. Outbound, it applies quality and security checks and optional public-code matching.</p>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Step</th><th>Leg</th><th>What happens</th><th>Common wrong answer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Inbound</td><td>HTTPS transmission, context gathering, and FIM prompt building.</td><td>Only the current line is used.</td></tr>
+        <tr><td>2</td><td>Inbound</td><td>Proxy service blocks prompt injection and jailbreak attempts.</td><td>The proxy is only an output filter.</td></tr>
+        <tr><td>3</td><td>Inbound</td><td>Toxicity filtering checks harmful content and personal data.</td><td>This is the same as injection defense.</td></tr>
+        <tr><td>4</td><td>Inbound</td><td>The LLM generates a candidate response.</td><td>The response has already been delivered.</td></tr>
+        <tr><td>5</td><td>Outbound</td><td>Post-processing validates the response, including toxicity, XSS, SQL injection, and optional public-code matching.</td><td>Quality checks happen only before the model.</td></tr>
+        <tr><td>6</td><td>Outbound</td><td>Passing suggestions are delivered and feedback is captured from accepts, edits, and rejects.</td><td>Failed responses are still shown with warnings.</td></tr>
+        <tr><td>7</td><td>Outbound</td><td>The cycle repeats for later prompts.</td><td>The first prompt creates a permanent session rule.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Trap: failing responses are not politely delivered</span>
+    <p>If any part of a response fails the checks, the source says it is either <strong>truncated or discarded</strong>. Do not choose an answer that says Copilot always delivers the full response with a warning banner.</p>
+  </div>
+</section>
+
+<section id="retention">
+  <h2>Retention and training use</h2>
+  <p>Retention depends on where Copilot is used. The most testable contrast is editor completions versus chat outside the editor.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Editor completions</h3>
+      <p>In the code editor, prompts are not retained. The source says Copilot discards prompts once a suggestion is returned.</p>
+    </div>
+    <div class="card">
+      <h3>Chat outside the editor</h3>
+      <p>Copilot Chat used outside the editor typically retains prompts, suggestions, and supporting context for 28 days. The same 28-day qualifier applies to CLI, Mobile, and Chat on GitHub.com. Retention within the editor may vary.</p>
+    </div>
+  </div>
+
+  <h3>Training exclusion by plan</h3>
+  <p>The clean table is the exam value. Business and Enterprise exclude data from training by default. Free and Pro do not. Individual subscribers can opt out of sharing prompts used to fine-tune the model.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Plan</th><th>Data excluded from training by default?</th><th>What to remember</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Free</td><td>No</td><td>Individual plan. User-level choices matter.</td></tr>
+        <tr><td>Pro</td><td>No</td><td>Individual subscribers can opt out.</td></tr>
+        <tr><td>Business</td><td>Yes</td><td>Organization plan with stronger administrative controls.</td></tr>
+        <tr><td>Enterprise</td><td>Yes</td><td>Enterprise plan with enterprise governance.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Trap: 28 days has a location qualifier</span>
+    <p>The confirmed 28-day retention figure is for Copilot Chat used outside the editor, plus CLI, Mobile, and Chat on GitHub.com. Do not flatten that into every editor completion prompt.</p>
+  </div>
+</section>
+
+<section id="context">
+  <h2>Context windows and source-vs-product wording</h2>
+  <p>For Domain 3, the official training gives small context figures. Those figures are useful for recognizing exam-source language, not for describing every current model.</p>
+
+  <div class="callout trap"><span class="callout-title">Exam source vs current product</span>
+    <p><strong>Exam-source wording:</strong> approximately 200-500 lines of code or up to a few thousand tokens, and Copilot Chat with a 4k-token context window.</p>
+    <p><strong>Current product reality:</strong> current models are far larger. The site teaches the exam-source figures only because they appear in the official study material. Do not present them as a current universal limit.</p>
+  </div>
+
+  <p>Use the figures carefully. A question may use them to test whether you read the training module, but a real-world answer should acknowledge that model context has moved on.</p>
+
+  <h3>Other limitations named in the source</h3>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Limitation category</th><th>What it means on the exam</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Code quality and correctness</td><td>Copilot can make errors, introduce security concerns, or misinterpret context.</td></tr>
+        <tr><td>Language and framework specificity</td><td>Performance varies, especially on niche technologies.</td></tr>
+        <tr><td>Dependency on training data</td><td>Suggestions can reflect bias, outdated practices, or copyright concerns.</td></tr>
+        <tr><td>Complex problem solving</td><td>High-level design and creative problem solving remain limited.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="llm">
+  <h2>LLM fundamentals: fine-tuning and LoRA</h2>
+  <p>GH-300 is not a machine-learning theory exam, but the official material includes enough LLM vocabulary to test basic distinctions.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Fine-tuning</h3>
+      <p>Fine-tuning trains on a smaller <strong>target dataset</strong> while using knowledge from the pretrained <strong>source model</strong>. If a question asks which dataset adapts the model to a narrower task, think target dataset.</p>
+    </div>
+    <div class="card">
+      <h3>LoRA</h3>
+      <p>LoRA, or Low-Rank Adaptation, adds smaller trainable parts to each layer instead of changing everything. The original model stays unchanged, which saves time and resources.</p>
+    </div>
+  </div>
+
+  <div class="callout"><span class="callout-title">Very testable: GitHub uses LoRA</span>
+    <p>The facts brief says GitHub explicitly uses LoRA. The exam source contrasts LoRA against adapters and prefix-tuning. If the question asks for the GitHub-used approach that keeps the original model unchanged and trains smaller parts, choose LoRA.</p>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Concept</th><th>Correct cue</th><th>Distractor to avoid</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Fine-tuning</td><td>Target dataset adapts a pretrained source model.</td><td>Training a model from nothing.</td></tr>
+        <tr><td>LoRA</td><td>Small trainable parts are added; the original model is unchanged.</td><td>Changing every model weight.</td></tr>
+        <tr><td>Adapters</td><td>Named as a contrast in the source.</td><td>Do not pick it when the question asks what GitHub explicitly uses.</td></tr>
+        <tr><td>Prefix-tuning</td><td>Named as another contrast in the source.</td><td>Do not confuse it with LoRA.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<section id="exam-traps">
+  <h2>Domain 3 exam traps</h2>
+  <p>These are the patterns that make the data-flow objective hard. They are all grounded in the canonical facts brief and are safe to use when reviewing practice questions.</p>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Trap</th><th>Correct answer</th><th>Why the wrong answer sounds tempting</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Proxy vs toxicity</td><td>Proxy blocks prompt injection and jailbreak attempts inbound; toxicity filtering checks harmful content and personal data.</td><td>Both are filters, so stems blur them together.</td></tr>
+        <tr><td>FIM position</td><td>FIM is part of context gathering and prompt building in step 1.</td><td>Because it has a name, it looks like a separate step.</td></tr>
+        <tr><td>Outbound security</td><td>Post-processing includes checks for XSS and SQL injection, plus optional public-code matching.</td><td>Candidates assume security checks happen only before generation.</td></tr>
+        <tr><td>Retention</td><td>Editor completion prompts are discarded after the suggestion returns; outside-editor chat is typically retained 28 days.</td><td>Questions often omit the location qualifier.</td></tr>
+        <tr><td>Context figures</td><td>Use 200-500 lines and 4k tokens only as exam-source wording.</td><td>Current models are larger, so real-world memory can pull you away from the source.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout trap"><span class="callout-title">Best mental model</span>
+    <p>Inbound protects and builds the prompt. Outbound validates and delivers the response. If you can classify a step as prompt-side or response-side, most lifecycle questions become straightforward.</p>
+  </div>
+</section>
+
+
+<section id="rapid-review">
+  <h2>Rapid review: classify the data-flow clue</h2>
+  <p>When a stem describes <strong>code before and after the cursor</strong>, <strong>adjacent open tabs</strong>, <strong>file paths</strong>, or <strong>languages and frameworks</strong>, it is testing step 1 context gathering. When it says <strong>prompt injection</strong> or <strong>jailbreak</strong>, it is testing the inbound proxy. When it says <strong>XSS</strong>, <strong>SQL injection</strong>, <strong>optional public-code matching</strong>, or a response being <strong>truncated or discarded</strong>, it is testing outbound post-processing.</p>
+  <div class="callout"><span class="callout-title">Cross-link: public-code matching</span>
+    <p>Public-code matching appears in the outbound lifecycle, but the settings and indemnity consequences are covered in <a href="privacy.html#matching">Suggestions matching public code</a> and <a href="privacy.html#indemnity">IP indemnity</a>.</p>
+  </div>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Seven steps</h3>
+      <p><strong>1-4 inbound:</strong> context and FIM, proxy injection defense, toxicity filter, LLM generation.</p>
+      <p><strong>5-7 outbound:</strong> response validation, delivery and feedback, repeat.</p>
+    </div>
+    <div class="card">
+      <h3>Both legs</h3>
+      <p>Toxicity filtering runs inbound and outbound. The proxy runs inbound and outbound. Inbound proxy means injection defense. Outbound proxy means quality checks and optional public-code matching.</p>
+    </div>
+    <div class="card">
+      <h3>Retention</h3>
+      <p>Editor completions discard prompts once the suggestion returns. Chat outside the editor, CLI, Mobile, and GitHub.com chat are typically retained 28 days.</p>
+    </div>
+    <div class="card">
+      <h3>Training and models</h3>
+      <p>Free and Pro are not excluded from training by default. Business and Enterprise are. Fine-tuning uses a target dataset and source model. GitHub explicitly uses LoRA.</p>
+    </div>
+  </div>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?topic=Data%20Handling%20and%20Flow">Drill: Data handling and flow</a>
+    <a class="btn secondary" href="prompting.html">Next guide: Prompting &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>

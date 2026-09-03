@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice Exam 2 &mdash; GH-300 Exam Prep</title>
+<meta name="description" content="Microsoft GH-300 practice exam 2: 60 timed questions with estimated scaled scoring and full review.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+<main id="main"><div class="wrap">
+    <h1 class="no-print">Practice Exam 2</h1>
+    <p class="lede no-print" id="whenLine">the midpoint checkpoint. Did the targeted work move the numbers?</p>
+    <div id="app"></div>
+</div></main>
+<footer id="footer"></footer>
+<script src="assets/data/exam2.js"></script>
+<script src="assets/test-engine.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var day = GH3.examSchedule().exam2;
+    document.getElementById("whenLine").innerHTML = "<strong>Day " + day + " &middot; " + GH3.fmtDate(GH3.dateForDay(day)) + "</strong> &mdash; the midpoint checkpoint. Did the targeted work move the numbers?";
+    GH3.Test.mount({
+        el: document.getElementById("app"),
+        testId: "exam2",
+        title: "Practice Exam 2 &mdash; Checkpoint",
+        blurb: "Sixty questions in 100 minutes. Compare the objective percentages against Exam 1 and repair anything that stayed weak. Your answers save automatically, so a closed tab will not lose your work.",
+        sections: ["exam2"]
+    });
+});
+</script>
+</body>
+</html>

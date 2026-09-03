@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Copilot on the GitHub platform &mdash; GH-300 Exam Prep</title>
+<meta name="description" content="Study Copilot cloud agent, code review, pull request summaries, Copilot Spaces, MCP servers, retired features, and organization settings for GH-300.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Copilot on the GitHub platform</h1>
+<p class="lede">This page covers the GitHub-platform half of Domain 2: agentic help on issues and pull requests, platform summaries, Copilot Spaces, MCP servers, retired features, and organization policy controls.</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#agent">Cloud agent</a>
+    <a class="btn secondary sm" href="#pr">PR summaries</a>
+    <a class="btn secondary sm" href="#spaces">Spaces</a>
+    <a class="btn secondary sm" href="#mcp">MCP servers</a>
+    <a class="btn secondary sm" href="#retired">Retired</a>
+    <a class="btn secondary sm" href="#orgsettings">Org settings</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="agent">
+  <h2>Copilot cloud agent and Copilot code review</h2>
+  <p>The current name is <strong>Copilot cloud agent</strong>. It was renamed from Copilot coding agent on April 1, 2026. The old name can still appear in exam-source material, but current docs use the cloud-agent name.</p>
+
+  <div class="callout trap"><span class="callout-title">Exam-source vs. current product: agent name</span>
+    <p>The official study guide predates the rename and can still point candidates toward the former Copilot coding agent wording. Current product wording is <strong>Copilot cloud agent</strong>. A fair exam item may say "formerly" and expect you to map the names.</p>
+  </div>
+
+  <h3>Cloud-agent lifecycle</h3>
+  <ol>
+    <li><strong>An issue is assigned.</strong> The cloud agent is given work from GitHub, usually from an issue or task.</li>
+    <li><strong>It works in its own environment.</strong> It does not simply type into your local editor. It runs in a separate GitHub-hosted environment.</li>
+    <li><strong>It makes changes.</strong> The agent can work through code changes, using the repository context and applicable instructions.</li>
+    <li><strong>It opens a pull request.</strong> Human review remains part of the flow. The pull request is where changes are inspected, discussed, tested, and merged or rejected.</li>
+  </ol>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Feature</th><th>Where it runs</th><th>Output</th><th>Common trap</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Agent mode in the IDE</td><td>IDE workflow</td><td>Multi-step changes in the editor context</td><td>Confusing it with the cloud agent</td></tr>
+        <tr><td>Copilot cloud agent</td><td>Its own GitHub-hosted environment</td><td>A pull request from assigned work</td><td>Thinking it is only chat or ghost text</td></tr>
+        <tr><td>Copilot code review</td><td>GitHub pull request workflow</td><td>Review comments and suggested fixes</td><td>Assuming it replaces human review</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Copilot code review</h3>
+  <p>Copilot code review is an agentic feature. It helps review pull requests and coding changes, but responsible use still requires human accountability. Organization instructions can apply to Copilot code review on GitHub.com, and on pull requests Copilot reads instructions and skills from the head branch, not the base branch.</p>
+
+  <div class="callout trap"><span class="callout-title">Trap: review help is not merge approval</span>
+    <p>Code review assistance can surface issues, but it does not remove the need for tests, security scanning, policy compliance, and human approval. Cross-link this back to <a href="responsible.html#verification">verification</a>.</p>
+  </div>
+</section>
+
+<section id="pr">
+  <h2>Pull request summaries</h2>
+  <p>Pull request summaries are an assistive Copilot feature. They help reviewers understand changes faster by summarizing what a pull request changes. The exam may group PR summaries with other platform features such as code review, Spaces, and retired features that used to appear in the study guide.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Use PR summaries for</th><th>Do not use them for</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Getting a quick overview of changed files and intent.</td><td>Replacing code review.</td></tr>
+        <tr><td>Helping reviewers triage the pull request.</td><td>Proving security, correctness, or test coverage.</td></tr>
+        <tr><td>Reducing context-switching during review.</td><td>Bypassing organization policies or required approvals.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout"><span class="callout-title">Memory hook</span>
+    <p>PR summaries explain. Code review critiques. The cloud agent creates a pull request. Keep those roles separate.</p>
+  </div>
+</section>
+
+<section id="spaces">
+  <h2>Copilot Spaces</h2>
+  <p><strong>Copilot Spaces</strong> are the current way to give Copilot organized context. The retired Copilot knowledge bases feature was replaced by Copilot Spaces after knowledge bases retired on November 1, 2025.</p>
+
+  <div class="callout trap"><span class="callout-title">Exam-source vs. current product: knowledge bases were replaced</span>
+    <p>Older exam-source material can describe knowledge bases as the Enterprise feature for organization context. Current reality is Copilot Spaces. Treat "create a knowledge base" as a retired-feature distractor unless the question explicitly asks about history.</p>
+  </div>
+
+  <h3>How to think about Spaces</h3>
+  <p>Use Spaces when the scenario asks for a shared, organized source of context for Copilot. They sit in the customization group of Copilot features, alongside custom instructions, Copilot Memory preview, prompt files, MCP servers, agent skills, custom agents, subagents, and hooks.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Need</th><th>Current answer</th><th>Wrong retired answer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Give Copilot curated project or organization context.</td><td>Use Copilot Spaces.</td><td>Create a Copilot knowledge base.</td></tr>
+        <tr><td>Reuse instructions for a repository.</td><td>Use repository custom instructions or prompt files where supported.</td><td>Assume Spaces replace every instruction mechanism.</td></tr>
+        <tr><td>Apply policies across an organization.</td><td>Use organization and enterprise Copilot settings.</td><td>Use Spaces as a policy engine.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="mcp">
+  <h2>MCP servers</h2>
+  <p><strong>MCP servers</strong> are the current replacement for GitHub App-based Copilot Extensions, which fully sunset on November 10, 2025. MCP belongs to the customization group and appears in the study guide wording for enhanced development and workflows.</p>
+
+  <div class="callout trap"><span class="callout-title">Critical distinction: client-side VS Code extensions are unaffected</span>
+    <p>The retirement applies to GitHub App-based Copilot Extensions. Client-side VS Code extensions are a completely different thing and are unaffected. Do not answer as if all editor extensions were retired.</p>
+  </div>
+
+  <h3>What MCP gives Copilot</h3>
+  <p>MCP servers connect Copilot workflows to additional tools and context. On the exam, read MCP as the current extensibility answer when a retired extension name appears as a distractor.</p>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Question wording</th><th>Best answer</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>"Extend Copilot with external tools or context."</td><td>MCP servers.</td><td>Current replacement for the retired GitHub App-based extension model.</td></tr>
+        <tr><td>"Use a VS Code extension installed in the editor."</td><td>Client-side VS Code extension.</td><td>Unaffected by the Copilot Extensions sunset.</td></tr>
+        <tr><td>"Manage the enterprise MCP policy."</td><td>Use enterprise or organization policy where MCP support is generally available.</td><td>The brief notes that the MCP servers policy does not control the GitHub MCP server inside third-party hosts like Cursor, Windsurf, or Claude.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="retired">
+  <h2>Retired features and replacements</h2>
+  <p>Retired feature names are excellent distractors. The rule is simple: learn them so you can reject them as current answers.</p>
+
+  <div class="callout trap"><span class="callout-title">Do not accidentally make a retired feature live</span>
+    <p>Use retired names only when you are explicitly saying they were renamed, retired, no longer live, formerly used, or replaced. Never present them as the correct current feature.</p>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Retired or renamed item</th><th>Status</th><th>Current replacement or safe framing</th><th>Exam trap</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Copilot Spark</td><td>Retired August 31, 2026.</td><td>Build directly with Copilot in VS Code, Copilot CLI, and the GitHub Copilot app. Already-deployed Spark apps continue to work.</td><td>The August 7, 2026 study guide still says to utilize Spark.</td></tr>
+        <tr><td>Copilot Extensions</td><td>GitHub App-based Copilot Extensions fully sunset November 10, 2025.</td><td>MCP servers.</td><td>Confusing retired GitHub App-based extensions with unaffected client-side VS Code extensions.</td></tr>
+        <tr><td>Copilot knowledge bases</td><td>Retired November 1, 2025.</td><td>Copilot Spaces.</td><td>Choosing "knowledge base" for organization context instead of Spaces.</td></tr>
+        <tr><td>Copilot Workspace</td><td>Retired. The exact sunset date is unverified in the brief.</td><td>State the retirement fact only. Do not state a date.</td><td>Overconfident study material that invents a sunset date.</td></tr>
+        <tr><td>GitHub Models</td><td>Retired July 30, 2026 as the inference service behind Spark's <code>llm()</code> function.</td><td>Do not present it as a live service. Use current Copilot workflows instead.</td><td>Keeping a retired Spark-era service as a current answer.</td></tr>
+        <tr><td>Copilot Edits</td><td>Renamed in current docs.</td><td>Edit mode.</td><td>Missing that the study guide still uses the old name.</td></tr>
+        <tr><td>Copilot coding agent</td><td>Renamed April 1, 2026.</td><td>Copilot cloud agent.</td><td>Thinking the old name and new name are two separate features.</td></tr>
+        <tr><td>Premium requests</td><td>Renamed in current docs.</td><td>GitHub AI Credits.</td><td>Answering with retired billing terminology.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout"><span class="callout-title">Unverified-date policy</span>
+    <p>The brief confirms Copilot Workspace was retired, but flags the exact sunset date as unverified. This page deliberately omits that date.</p>
+  </div>
+</section>
+
+<section id="orgsettings">
+  <h2>Organization and enterprise settings</h2>
+  <p>Organization and enterprise settings control feature availability, policies, subscriptions, audit logs, and safeguards. GH-300 Domain 2 objective 2.4 covers organization-wide policy management, code review policies, feature availability across IDEs and GitHub.com, audit log events, and subscription management using the REST API.</p>
+
+  <div class="callout"><span class="callout-title">Cross-link: deep privacy settings are on privacy.html</span>
+    <p>This page covers settings at a high level. Study detailed content exclusions, public-code matching, retention, and safeguards on <a href="privacy.html#exclusions">privacy settings and exclusions</a> and <a href="privacy.html#safeguards">safeguards</a>.</p>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Control area</th><th>What to remember</th><th>Trap</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Enterprise policy</td><td>Policies live on the enterprise AI controls tab or in organization settings. For most policies, enterprise admins can enable, disable, or let organizations decide.</td><td>For Copilot cloud agent, enterprises select exactly which organizations get access.</td></tr>
+        <tr><td>Policy conflicts</td><td>Multiple organizations within the same enterprise usually use the least restrictive policy. Multiple different enterprises almost always use the most restrictive policy.</td><td>Reversing the conflict direction.</td></tr>
+        <tr><td>Client policies</td><td>The Copilot app and Copilot CLI are governed by separate, independent client policies.</td><td>Assuming allowing one automatically allows the other.</td></tr>
+        <tr><td>Audit logs</td><td>Audit logs include Copilot plan changes and agent activity on the GitHub website. Query all Copilot events with <code>action:copilot</code>.</td><td>Assuming local client prompts are logged. They are not.</td></tr>
+        <tr><td>Subscriptions</td><td>Domain 2 includes managing subscriptions using the REST API.</td><td>Confusing plan management with personal instruction precedence.</td></tr>
+        <tr><td>Custom instructions</td><td>Instruction precedence is personal, then repository, then organization, even though org policies can control availability.</td><td>Assuming organization instructions outrank personal instructions.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Policy memory hooks</h3>
+  <p><strong>Policies:</strong> enterprise first, then organization where allowed. <strong>Instructions:</strong> personal first, repository second, organization third. <strong>Same enterprise conflict:</strong> usually least restrictive. <strong>Different enterprises:</strong> almost always most restrictive.</p>
+
+  <div class="callout trap"><span class="callout-title">Trap: GitHub Enterprise Server</span>
+    <p>The brief states that Copilot is not currently available for GitHub Enterprise Server. Do not choose an answer that says GH-300 Copilot features are supported there.</p>
+  </div>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Agent features</h3>
+      <p>Copilot cloud agent was renamed from Copilot coding agent on April 1, 2026. It is assigned an issue, works in its own environment, and opens a pull request. IDE Agent mode is different.</p>
+    </div>
+    <div class="card">
+      <h3>Platform help</h3>
+      <p>PR summaries explain pull requests. Copilot code review critiques changes. Neither replaces human review, testing, policy compliance, or security scanning.</p>
+    </div>
+    <div class="card">
+      <h3>Replacements</h3>
+      <p>Copilot Spaces replaced retired knowledge bases. MCP servers replaced retired GitHub App-based Copilot Extensions. Client-side VS Code extensions are unaffected.</p>
+    </div>
+    <div class="card">
+      <h3>Retired traps</h3>
+      <p>Copilot Spark retired August 31, 2026. GitHub Models retired July 30, 2026. Copilot Workspace is retired, but do not state its date. Premium requests are now GitHub AI Credits.</p>
+    </div>
+    <div class="card">
+      <h3>Policies</h3>
+      <p>Most enterprise policies can enable, disable, or let orgs decide. Same-enterprise conflicts usually use least restrictive; different-enterprise conflicts almost always use most restrictive.</p>
+    </div>
+    <div class="card">
+      <h3>Audit logs</h3>
+      <p>Audit logs include plan changes and agent activity on GitHub.com. They do not include local client session prompts. Retention is 180 days.</p>
+    </div>
+  </div>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?set=d2-platform">Drill: Platform features</a>
+    <a class="btn secondary" href="data-architecture.html">Next guide: Data and architecture &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>

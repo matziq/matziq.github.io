@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prompt engineering and context crafting &mdash; GH-300 Exam Prep</title>
+<meta name="description" content="Apply prompt engineering, the 4 Ss, prompting shots, custom instruction precedence, and context crafting for GH-300.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Apply prompt engineering and context crafting</h1>
+<p class="lede">Domain 4 is 10-15% of GH-300. It tests practical prompt habits, shot patterns, instruction precedence, and the context signals Copilot uses to answer well.</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#fundamentals">4 Ss</a>
+    <a class="btn secondary sm" href="#shots">Shots</a>
+    <a class="btn secondary sm" href="#patterns">Patterns</a>
+    <a class="btn secondary sm" href="#instructions">Instructions</a>
+    <a class="btn secondary sm" href="#context">Context</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="fundamentals">
+  <h2>The 4 Ss: Single, Specific, Short, Surround</h2>
+  <p>The official material names the <strong>4 Ss</strong>. Treat them as a memorization item. If a question asks how to improve a weak prompt, map the fix to one of these four words.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>S</th><th>Definition</th><th>Example</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Single</td><td>Focus the prompt on one well-defined task or question.</td><td>Write unit tests for this function, not tests, docs, and refactoring in one request.</td></tr>
+        <tr><td>Specific</td><td>Make the instructions explicit and detailed.</td><td>Ask for edge cases around null input and duplicate IDs, not just better tests.</td></tr>
+        <tr><td>Short</td><td>Keep prompts concise and to the point.</td><td>State the goal, constraints, and expected format without dumping unrelated history.</td></tr>
+        <tr><td>Surround</td><td>Use descriptive filenames and keep related files open.</td><td>Open the service, model, and test file so Copilot can infer the local pattern.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout"><span class="callout-title">Fast diagnosis</span>
+    <p>If the prompt is trying to do too much, fix <strong>Single</strong>. If it is vague, fix <strong>Specific</strong>. If it is bloated, fix <strong>Short</strong>. If Copilot lacks nearby code, fix <strong>Surround</strong>.</p>
+  </div>
+</section>
+
+<section id="shots">
+  <h2>Zero-shot, one-shot, and few-shot prompting</h2>
+  <p>The study guide names zero-shot and few-shot, but the training material defines one-shot too. All three are fair game.</p>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <h3>Zero-shot</h3>
+      <p>You give the task without an example. Use it when the request is common and the expected format is obvious.</p>
+      <p><strong>Example:</strong> Explain what this function does in plain English.</p>
+    </div>
+    <div class="card">
+      <h3>One-shot</h3>
+      <p>You give one example of the desired pattern, then ask Copilot to apply it to a new case.</p>
+      <p><strong>Example:</strong> Show one test naming style, then ask for another test that follows it.</p>
+    </div>
+    <div class="card">
+      <h3>Few-shot</h3>
+      <p>You give several examples so Copilot can infer a pattern, style, or mapping.</p>
+      <p><strong>Example:</strong> Provide three API error mappings, then ask for the remaining mappings.</p>
+    </div>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Trap: examples define the shot count</span>
+    <p>No example means zero-shot. One example means one-shot. Several examples mean few-shot. The count is about examples supplied in the prompt, not how many files are open.</p>
+  </div>
+</section>
+
+<section id="patterns">
+  <h2>Prompt patterns for performance</h2>
+  <p>Prompt engineering is not magic wording. It is structuring the request so Copilot has the right job, role, sequence, and history.</p>
+
+  <h3>Role prompting</h3>
+  <p>Role prompting asks Copilot to respond from a useful perspective, such as a security expert, performance optimization specialist, or testing specialist. Use the role to focus the review criteria, not to replace validation.</p>
+
+  <h3>Chain prompting</h3>
+  <p>Chain prompting breaks a larger task into a sequence. First ask Copilot to inspect or explain. Then ask it to propose a change. Then ask it to implement or generate tests. This keeps each turn narrower and easier to verify.</p>
+
+  <h3>Chat history management</h3>
+  <p>Chat history can help Copilot maintain context, but stale or overloaded history can hurt answer quality. Start a narrower thread or restate the current goal when the conversation has drifted.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Pattern</th><th>Best use</th><th>Risk if misused</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Role prompting</td><td>Direct Copilot toward security, tests, performance, or another lens.</td><td>The role sounds authoritative, but output still needs review.</td></tr>
+        <tr><td>Chain prompting</td><td>Split a complex task into inspect, plan, change, and verify turns.</td><td>A long chain can carry stale assumptions.</td></tr>
+        <tr><td>Chat history management</td><td>Preserve useful context and remove distractions.</td><td>Too much history consumes context and can confuse the next answer.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Retired wording trap</span>
+    <p>The training mentions PRUs for long prompts. That term is retired. The current term is <strong>GitHub AI Credits</strong>. Use PRU only as history, not as current product wording.</p>
+  </div>
+</section>
+
+<section id="instructions">
+  <h2>Custom instructions and precedence</h2>
+  <p>Instruction precedence is one of the easiest GH-300 facts to reverse. The order is not the same as policy control.</p>
+
+  <div class="callout trap"><span class="callout-title">Memorize this exact order</span>
+    <p><strong>Personal beats repository beats organization.</strong> Within repository instructions, <strong>path-specific beats repo-wide beats AGENTS.md</strong>.</p>
+    <p><strong>Organization ranks lowest for instructions, even though organization policies win over user preferences.</strong> That asymmetry is the trap.</p>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Rank</th><th>Instruction source</th><th>Notes from the facts brief</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Personal instructions</td><td>Highest precedence. Supported for Copilot Chat on GitHub.com.</td></tr>
+        <tr><td>2</td><td>Repository path-specific instructions</td><td>Stored under .github/instructions/NAME.instructions.md.</td></tr>
+        <tr><td>3</td><td>Repository-wide instructions</td><td>Stored in .github/copilot-instructions.md.</td></tr>
+        <tr><td>4</td><td>AGENTS.md</td><td>Repository agent instructions, below repo-wide instructions.</td></tr>
+        <tr><td>5</td><td>Organization instructions</td><td>Lowest precedence, even though relevant instruction sets are still provided to Copilot.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Related instruction facts</h3>
+  <ul>
+    <li>All relevant instruction sets are provided to Copilot, even though precedence still matters.</li>
+    <li>Organization instructions are currently supported for Copilot Chat on GitHub.com, Copilot code review on GitHub.com, and Copilot cloud agent on GitHub.com.</li>
+    <li>Organization instructions apply to all organization members, regardless of whether that organization provides the member&rsquo;s Copilot subscription.</li>
+    <li>On pull requests, Copilot reads instructions and skills from the head branch, not the base branch.</li>
+    <li>Prompt files live at .github/prompts/*.prompt.md. They are GA in VS Code and Visual Studio, preview in JetBrains and Xcode, and not supported in Eclipse, on GitHub.com, or in the CLI.</li>
+    <li>Hooks live at .github/hooks/*.json.</li>
+    <li>Copilot may not follow custom instructions identically every time because it is non-deterministic.</li>
+  </ul>
+
+  <div class="callout"><span class="callout-title">Cross-link: policies are different</span>
+    <p>For policy conflict rules, use the <a href="privacy.html#policies">privacy and safeguards guide</a>. Instructions are about guidance. Policies are about administrative control.</p>
+  </div>
+</section>
+
+<section id="context">
+  <h2>Context crafting</h2>
+  <p>Context crafting means shaping what Copilot can see and infer. It starts before the prompt: file names, open tabs, current cursor position, and scope all matter.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Open the right tabs</h3>
+      <p>Surround says to keep related files open. Open the implementation, tests, interface, route, schema, or configuration file that shows the local pattern.</p>
+    </div>
+    <div class="card">
+      <h3>Name files descriptively</h3>
+      <p>Filenames and file types are part of context. A descriptive file name gives Copilot a stronger signal than a generic scratch file.</p>
+    </div>
+    <div class="card">
+      <h3>Scope the request</h3>
+      <p>Ask for a focused change in a known area. Tie the request to a function, file, test, or behavior instead of asking for a broad rewrite.</p>
+    </div>
+    <div class="card">
+      <h3>Provide examples</h3>
+      <p>Use one-shot or few-shot prompting when style, format, or mapping matters. Examples reduce guessing.</p>
+    </div>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Weak prompt</th><th>Better prompt</th><th>Why it improves</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Make this better.</td><td>Refactor this function to reduce duplicate validation logic without changing behavior.</td><td>Single and specific.</td></tr>
+        <tr><td>Write tests.</td><td>Write unit tests for null input, duplicate IDs, and a successful save using the style in the open test file.</td><td>Specific, surrounded, and example-aware.</td></tr>
+        <tr><td>Explain the app.</td><td>Explain how this controller calls the service and where errors are handled.</td><td>Smaller scope and clearer target.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Trap: context is not only chat text</span>
+    <p>Context can include open tabs, filenames, file types, project structure, file paths, languages, frameworks, and code before and after the cursor. See the <a href="data-architecture.html#lifecycle">data lifecycle guide</a> for the full inbound list.</p>
+  </div>
+</section>
+
+
+<section id="exam-traps">
+  <h2>Domain 4 exam traps</h2>
+  <p>Prompting questions usually ask for the next best action, not a definition. Look for the weakness in the prompt, then choose the smallest fix.</p>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Scenario</th><th>Best move</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>The prompt asks for a refactor, tests, docs, and a security review at once.</td><td>Make it Single.</td><td>One well-defined task gives Copilot a cleaner target.</td></tr>
+        <tr><td>The prompt says &ldquo;fix this&rdquo; with no behavior or constraints.</td><td>Make it Specific.</td><td>Explicit details reduce guessing.</td></tr>
+        <tr><td>The prompt includes a long stale chat history and unrelated requirements.</td><td>Make it Short or restart with a focused summary.</td><td>Concise prompts leave more useful context for the answer.</td></tr>
+        <tr><td>Copilot misses the local test style.</td><td>Use Surround and examples.</td><td>Open related files and provide one-shot or few-shot examples.</td></tr>
+        <tr><td>Personal, repository, and organization instructions conflict.</td><td>Personal wins for instructions.</td><td>Organization instructions are lowest, even though organization policies control preferences.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Instruction files to recognize</h3>
+      <p><strong>.github/instructions/NAME.instructions.md:</strong> path-specific repository instructions.</p>
+      <p><strong>.github/copilot-instructions.md:</strong> repository-wide instructions.</p>
+      <p><strong>AGENTS.md:</strong> agent instructions inside the repository precedence stack.</p>
+    </div>
+    <div class="card">
+      <h3>Prompt files and hooks</h3>
+      <p><strong>.github/prompts/*.prompt.md:</strong> reusable prompt files. GA in VS Code and Visual Studio, preview in JetBrains and Xcode, not supported in Eclipse, on GitHub.com, or in the CLI.</p>
+      <p><strong>.github/hooks/*.json:</strong> hooks. Do not confuse hooks with custom instructions.</p>
+    </div>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Common reversal</span>
+    <p>For <strong>instructions</strong>, personal is highest and organization is lowest. For <strong>policies</strong>, administrative policy can override user preference. If a question mixes those words, slow down.</p>
+  </div>
+</section>
+
+
+<section id="rapid-review">
+  <h2>Rapid review: choose the prompt fix</h2>
+  <p>Use the 4 Ss as a quick decision tree. If the user asks for many deliverables, make it Single. If Copilot must guess the expected behavior, make it Specific. If the thread is full of old constraints, make it Short. If Copilot cannot see the local pattern, use Surround by opening related files and using descriptive filenames.</p>
+  <div class="callout"><span class="callout-title">Examples are context</span>
+    <p>A one-shot or few-shot prompt is often the fastest way to communicate style. It is especially useful for tests, error formats, naming conventions, and repeated mappings.</p>
+  </div>
+  <p>On the exam, prefer the answer that improves the prompt or context without changing the administrative setting. Prompt engineering changes the request. Policy changes belong in the privacy and organization-management objectives.</p>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>4 Ss</h3>
+      <p><strong>Single:</strong> one task. <strong>Specific:</strong> explicit details. <strong>Short:</strong> concise. <strong>Surround:</strong> related files open and descriptive filenames.</p>
+    </div>
+    <div class="card">
+      <h3>Shots</h3>
+      <p>Zero-shot has no example. One-shot has one example. Few-shot has several examples.</p>
+    </div>
+    <div class="card">
+      <h3>Patterns</h3>
+      <p>Role prompting gives a lens. Chain prompting splits work into steps. Chat history management keeps useful context and removes drift.</p>
+    </div>
+    <div class="card">
+      <h3>Precedence</h3>
+      <p>Personal &gt; repository &gt; organization. Inside repository: path-specific &gt; repo-wide &gt; AGENTS.md. Policies are different.</p>
+    </div>
+  </div>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?topic=Crafting%20Effective%20Prompts">Drill: Prompt crafting</a>
+    <a class="btn secondary" href="productivity.html">Next guide: Productivity &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>

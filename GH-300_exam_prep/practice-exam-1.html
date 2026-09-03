@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice Exam 1 &mdash; GH-300 Exam Prep</title>
+<meta name="description" content="Microsoft GH-300 practice exam 1: 60 timed questions with estimated scaled scoring and full review.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+<main id="main"><div class="wrap">
+    <h1 class="no-print">Practice Exam 1</h1>
+    <p class="lede no-print" id="whenLine">your cold baseline. Take it before you study anything.</p>
+    <div id="app"></div>
+</div></main>
+<footer id="footer"></footer>
+<script src="assets/data/exam1.js"></script>
+<script src="assets/test-engine.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var day = GH3.examSchedule().exam1;
+    document.getElementById("whenLine").innerHTML = "<strong>Day " + day + " &middot; " + GH3.fmtDate(GH3.dateForDay(day)) + "</strong> &mdash; your cold baseline. Take it before you study anything.";
+    GH3.Test.mount({
+        el: document.getElementById("app"),
+        testId: "exam1",
+        title: "Practice Exam 1 &mdash; Baseline",
+        blurb: "Sixty questions in 100 minutes, weighted across the six GH-300 domains. Take this one cold. A baseline you studied for is not a baseline. Your answers save automatically, so a closed tab will not lose your work.",
+        sections: ["exam1"]
+    });
+});
+</script>
+</body>
+</html>

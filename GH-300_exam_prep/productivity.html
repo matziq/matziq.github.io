@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Developer productivity &mdash; GH-300 Exam Prep</title>
+<meta name="description" content="Improve developer productivity with GitHub Copilot across the SDLC, quality, testing, security, and impact metrics for GH-300.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Improve developer productivity with GitHub Copilot</h1>
+<p class="lede">Domain 5 is 10-15% of GH-300. It asks where Copilot helps in the development lifecycle, how to improve quality without over-trusting output, how test and security features fit, and how impact is measured.</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#sdlc">SDLC</a>
+    <a class="btn secondary sm" href="#quality">Quality</a>
+    <a class="btn secondary sm" href="#testing">Testing and security</a>
+    <a class="btn secondary sm" href="#metrics">Metrics</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="sdlc">
+  <h2>Where Copilot fits across the SDLC</h2>
+  <p>Copilot is not a single coding feature. The facts brief places it across code generation, testing, documentation, debugging, refactoring, modernization, code review, learning, sample data, and reduced context switching.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>SDLC area</th><th>How Copilot helps</th><th>What the human still owns</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Writing code</td><td>Generates code, inline suggestions, and implementation ideas from the current context.</td><td>Correctness, design fit, security, and maintainability.</td></tr>
+        <tr><td>Tests</td><td>Generates unit and integration tests, edge cases, and assertions.</td><td>Choosing meaningful coverage and checking test quality.</td></tr>
+        <tr><td>Documentation</td><td>Drafts explanations, comments, summaries, and usage notes.</td><td>Accuracy, audience fit, and removal of unsupported claims.</td></tr>
+        <tr><td>Debugging</td><td>Explains errors, suggests causes, and proposes fixes.</td><td>Reproducing the bug and validating the fix.</td></tr>
+        <tr><td>Refactoring</td><td>Suggests cleaner structure while preserving intent.</td><td>Behavior preservation and code review.</td></tr>
+        <tr><td>Modernization</td><td>Helps update legacy patterns and generate sample data.</td><td>Migration strategy and regression testing.</td></tr>
+        <tr><td>Code review</td><td>Provides review assistance and pull request support.</td><td>Final approval and accountability.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout"><span class="callout-title">Cross-link: prompt quality drives productivity</span>
+    <p>Productivity questions often hide a prompt question. If the problem is vague output, use <a href="prompting.html#fundamentals">Single, Specific, Short, Surround</a> before blaming the model.</p>
+  </div>
+</section>
+
+<section id="quality">
+  <h2>Using Copilot to improve code quality</h2>
+  <p>Copilot can improve quality by surfacing edge cases, writing assertions, suggesting security improvements, identifying performance optimizations, and explaining unfamiliar code. It does not remove the need to validate output.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>What to trust</h3>
+      <p>Trust Copilot as a fast assistant for drafts, alternatives, explanations, examples, tests, refactoring ideas, and security prompts. It is useful for reducing blank-page time and context switching.</p>
+    </div>
+    <div class="card">
+      <h3>What to verify</h3>
+      <p>Verify correctness, security, licensing risk, fit with the local framework, behavior changes, and assumptions about dependencies. LLM limitations include errors, outdated practices, context misinterpretation, and weaker performance on niche technologies.</p>
+    </div>
+  </div>
+
+  <div class="callout trap"><span class="callout-title">Trap: generated code is not automatically safe</span>
+    <p>The Domain 3 source names security concerns, context misinterpretation, outdated practices, bias, copyright concerns, and limited high-level design as LLM limitations. Use Copilot to improve quality, then review and test.</p>
+  </div>
+
+  <h3>Quality moves that map to exam objectives</h3>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Need</th><th>Good Copilot use</th><th>Verification step</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>More reliable behavior</td><td>Ask for edge cases and assertions around boundary conditions.</td><td>Run the tests and inspect the cases.</td></tr>
+        <tr><td>Cleaner implementation</td><td>Ask for a focused refactor that preserves behavior.</td><td>Compare behavior before and after.</td></tr>
+        <tr><td>Security improvement</td><td>Ask Copilot to review for injection, XSS, validation, and unsafe defaults.</td><td>Use code scanning and human review.</td></tr>
+        <tr><td>Performance optimization</td><td>Ask for likely bottlenecks and alternatives.</td><td>Measure before accepting the change.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="testing">
+  <h2>Testing and security support</h2>
+  <div class="callout trap"><span class="callout-title">High-value trap: Copilot Autofix does not require Copilot</span>
+    <p><strong>Copilot Autofix for code scanning does not require a GitHub Copilot subscription.</strong> It is available for CodeQL analysis. Candidates often assume the name means a Copilot seat is required. It does not.</p>
+  </div>
+
+  <h3>Test generation</h3>
+  <p>Domain 5 expects Copilot to help generate unit tests, integration tests, edge cases, and assertions. The best prompts point Copilot at the code under test and the style of existing tests.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Good test prompts</h3>
+      <p>Ask for specific behaviors: null input, duplicate IDs, authorization failure, timeout, invalid format, success path, and regression cases. Keep the prompt narrow.</p>
+    </div>
+    <div class="card">
+      <h3>Test review</h3>
+      <p>Check that tests can fail for the right reason, have useful assertions, do not simply mirror the implementation, and match the framework used in the repository.</p>
+    </div>
+  </div>
+
+  <h3>Copilot Autofix for code scanning</h3>
+  <p>Copilot Autofix automatically generates fix suggestions for CodeQL alerts on pull requests and the default branch. Each suggestion includes a code change and a natural-language explanation.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Autofix fact</th><th>Exam value</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Subscription</td><td>Does not require a GitHub Copilot subscription.</td></tr>
+        <tr><td>Analysis source</td><td>Available for CodeQL analysis.</td></tr>
+        <tr><td>Inputs</td><td>CodeQL alert data in SARIF format, surrounding code snippets, and query help text.</td></tr>
+        <tr><td>Output</td><td>A suggested code change plus a natural-language explanation.</td></tr>
+        <tr><td>Where</td><td>Pull requests and the default branch.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Supported languages for Copilot Autofix</h3>
+  <p>The confirmed language list is C#, C/C++, Go, Java/Kotlin, Swift, JavaScript/TypeScript, Python, Ruby, and Rust.</p>
+
+  <div class="callout"><span class="callout-title">Sibling features that also do not require Copilot</span>
+    <p>Generic secret detection, the custom pattern regex generator, and GitHub Code Quality also do not require a GitHub Copilot subscription.</p>
+  </div>
+</section>
+
+<section id="metrics">
+  <h2>Measuring impact</h2>
+  <p>The facts brief maps productivity measurement to four stages and three named metrics. Memorize the stage order and the metric names exactly.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Stage</th><th>Question cue</th><th>What you are doing</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Evaluation</td><td>Before broad rollout</td><td>Assess whether Copilot helps the organization and where it should be piloted.</td></tr>
+        <tr><td>Adoption</td><td>Rollout and usage</td><td>Measure whether developers are activating and using Copilot.</td></tr>
+        <tr><td>Optimization</td><td>Improve how teams use it</td><td>Use feedback and usage data to refine practices, prompts, and enablement.</td></tr>
+        <tr><td>Sustained efficiency</td><td>Long-term value</td><td>Track whether gains persist after initial adoption.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Named metrics</h3>
+  <div class="grid grid-3">
+    <div class="card">
+      <h3>Average Daily Active Users</h3>
+      <p>Use this when the question asks whether users are active day to day.</p>
+    </div>
+    <div class="card">
+      <h3>Total Acceptance Rate</h3>
+      <p>Use this when the question asks how often suggestions are accepted.</p>
+    </div>
+    <div class="card">
+      <h3>Lines of Code Accepted</h3>
+      <p>Use this when the question asks how much generated code was accepted.</p>
+    </div>
+  </div>
+
+  <h3>Sources</h3>
+  <p>The named sources are the <strong>REST API for Copilot usage metrics</strong> and the <strong>GitHub Copilot Developer Survey</strong>. The survey has a short form every two weeks and a long form no more than once every four weeks.</p>
+
+  <div class="callout trap"><span class="callout-title">Trap: metrics are not the same as correctness</span>
+    <p>Acceptance rate and lines accepted measure use, not code quality by themselves. Pair productivity metrics with validation, testing, code scanning, and review.</p>
+  </div>
+</section>
+
+
+<section id="exam-traps">
+  <h2>Domain 5 exam traps</h2>
+  <p>Productivity questions reward practical judgment. Copilot accelerates work, but the developer remains responsible for validation, quality, and security.</p>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Trap</th><th>Correct framing</th><th>Better answer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Acceptance equals correctness</td><td>Usage metrics show adoption and efficiency signals, not proof that code is correct.</td><td>Measure usage, then validate with tests and review.</td></tr>
+        <tr><td>Autofix requires a Copilot seat</td><td>Copilot Autofix for CodeQL analysis does not require a GitHub Copilot subscription.</td><td>Use Autofix for supported CodeQL alerts even without a Copilot seat.</td></tr>
+        <tr><td>Generated tests are automatically good</td><td>Copilot can generate tests, but tests must be reviewed for meaningful assertions and useful failure modes.</td><td>Ask for edge cases and inspect the result.</td></tr>
+        <tr><td>Refactoring means changing behavior</td><td>Refactoring should preserve behavior unless the prompt explicitly asks for a behavior change.</td><td>Run targeted tests after refactoring.</td></tr>
+        <tr><td>Modernization is just syntax updates</td><td>Modernization can include legacy pattern updates, sample data, and reducing context switching.</td><td>Validate the migration strategy and compatibility.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Autofix language list drill</h3>
+  <p>Memorize the confirmed list as groups: C#; C/C++; Go; Java/Kotlin; Swift; JavaScript/TypeScript; Python; Ruby; Rust. If a distractor adds an unsupported language from outside the brief, do not assume it is safe.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Security workflow</h3>
+      <p>Use Copilot to suggest improvements. Use CodeQL, SARIF-backed alerts, code scanning, tests, and review to validate the change. Copilot can explain the suggestion, but the team owns the merge.</p>
+    </div>
+    <div class="card">
+      <h3>Measurement workflow</h3>
+      <p>Start with evaluation, drive adoption, optimize behavior, and then prove sustained efficiency. Pull usage metrics from the REST API and pair them with developer survey feedback.</p>
+    </div>
+  </div>
+</section>
+
+
+<section id="rapid-review">
+  <h2>Rapid review: productivity without over-trust</h2>
+  <p>Use Copilot where speed and pattern recognition help: drafting code, creating tests, explaining errors, documenting behavior, proposing refactors, suggesting modernization paths, and reviewing code. Then verify the output with the normal engineering loop.</p>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Copilot output</th><th>Minimum validation</th><th>Reason</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Implementation code</td><td>Run targeted tests and inspect security-sensitive paths.</td><td>LLMs can make correctness and security mistakes.</td></tr>
+        <tr><td>Generated tests</td><td>Check assertions, edge cases, and whether the test can fail.</td><td>A test that mirrors the implementation may not prove behavior.</td></tr>
+        <tr><td>Documentation</td><td>Confirm every claim against the repository or approved source.</td><td>Generated explanations can sound confident while missing context.</td></tr>
+        <tr><td>Autofix suggestion</td><td>Review the SARIF-backed alert, code change, and natural-language explanation.</td><td>Autofix accelerates remediation, but the team still approves the change.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout"><span class="callout-title">Cross-link: prompt crafting</span>
+    <p>Better productivity usually starts with better prompts. Use <a href="prompting.html#context">context crafting</a> for open tabs, examples, file naming, and request scope.</p>
+  </div>
+  <p>For scenario questions, separate acceleration from assurance. Copilot can accelerate the draft, but assurance comes from tests, code review, code scanning, and measuring whether adoption produces sustained efficiency.</p>
+</section>
+
+<section id="cheatsheet">
+  <h2>The night-before cheat sheet</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>SDLC uses</h3>
+      <p>Code, tests, docs, debugging, refactoring, modernization, code review, learning, sample data, and reduced context switching.</p>
+    </div>
+    <div class="card">
+      <h3>Quality rule</h3>
+      <p>Use Copilot for drafts and ideas. Verify correctness, security, local framework fit, dependencies, and behavior.</p>
+    </div>
+    <div class="card">
+      <h3>Autofix trap</h3>
+      <p>Copilot Autofix does not require a GitHub Copilot subscription. Inputs include CodeQL alert data in SARIF, surrounding snippets, and query help.</p>
+    </div>
+    <div class="card">
+      <h3>Impact metrics</h3>
+      <p>Stages: Evaluation &gt; Adoption &gt; Optimization &gt; Sustained efficiency. Metrics: Average Daily Active Users, Total Acceptance Rate, Lines of Code Accepted.</p>
+    </div>
+  </div>
+  <p>Remember the accountability line: Copilot can suggest, explain, and accelerate, but developers and organizations remain responsible for what ships.</p>
+</section>
+
+<div class="btn-row" style="margin-top:2rem">
+    <a class="btn" href="drills.html?topic=Productivity%20and%20Code%20Quality">Drill: Productivity and quality</a>
+    <a class="btn secondary" href="privacy.html">Next guide: Privacy &rarr;</a>
+</div>
+
+</div></main>
+
+<footer id="footer"></footer>
+</body>
+</html>
