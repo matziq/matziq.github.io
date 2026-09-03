@@ -1,87 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex">
-  <meta http-equiv="refresh" content="0; url=../wardfast/">
-  <title>Opening September Ward Fast Sign-up</title>
-  <script>
-    (() => {
-      const param = new URLSearchParams(window.location.search).get("scoutTheme");
-      const theme =
-        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", theme);
-    })();
-  </script>
-  <style>
-    :root {
-      color-scheme: light;
-      --cp-bg: #f7f4ef;
-      --cp-bg-elevated: #fcfbf8;
-      --cp-surface: #ffffff;
-      --cp-surface-soft: #f5f5f5;
-      --cp-border: #dedede;
-      --cp-border-strong: #919191;
-      --cp-text: #242424;
-      --cp-text-muted: #5c5c5c;
-      --cp-text-soft: #6f6f6f;
-      --cp-accent: #b11f4b;
-      --cp-accent-hover: #9a1a41;
-      --cp-accent-soft: rgba(177, 31, 75, 0.08);
-      --cp-accent-fg: #ffffff;
-      --cp-success: #16a34a;
-      --cp-danger: #dc2626;
-      --cp-warning: #f59e0b;
-      --cp-link: #0078d4;
-      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
-      --cp-overlay: rgba(255, 255, 255, 0.8);
-      --cp-panel: rgba(255, 255, 255, 0.86);
-      --cp-panel-strong: rgba(255, 255, 255, 0.96);
-      --cp-sheen: rgba(255, 255, 255, 0.55);
-      --cp-highlight: rgba(177, 31, 75, 0.12);
-    }
-    html[data-theme="dark"] {
-      color-scheme: dark;
-      --cp-bg: #3d3b3a;
-      --cp-bg-elevated: #343231;
-      --cp-surface: #292929;
-      --cp-surface-soft: #2e2e2e;
-      --cp-border: #474747;
-      --cp-border-strong: #5f5f5f;
-      --cp-text: #dedede;
-      --cp-text-muted: #919191;
-      --cp-text-soft: #b0b0b0;
-      --cp-accent: #fd8ea1;
-      --cp-accent-hover: #fb7b91;
-      --cp-accent-soft: rgba(253, 142, 161, 0.14);
-      --cp-accent-fg: #1a1a1a;
-      --cp-success: #4ade80;
-      --cp-danger: #f87171;
-      --cp-warning: #fbbf24;
-      --cp-link: #4da6ff;
-      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
-      --cp-overlay: rgba(41, 41, 41, 0.88);
-      --cp-panel: rgba(41, 41, 41, 0.72);
-      --cp-panel-strong: rgba(41, 41, 41, 0.96);
-      --cp-sheen: rgba(255, 255, 255, 0.04);
-      --cp-highlight: rgba(253, 142, 161, 0.12);
-    }
-    body {
-      display: grid;
-      min-height: 100vh;
-      margin: 0;
-      place-items: center;
-      background: var(--cp-bg);
-      color: var(--cp-text);
-      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    a { color: var(--cp-link); }
-  </style>
-  <link rel="icon" href="../wardfast/favicon.svg" type="image/svg+xml">
-  <script>location.replace("../wardfast/");</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moved &mdash; Ward Fast Sign-up</title>
+<link rel="canonical" href="https://wardmission.org/wf/">
+<meta name="robots" content="noindex, follow">
+<meta http-equiv="refresh" content="0; url=https://wardmission.org/wf/">
+<script>
+  (function () {
+    var t = "https://wardmission.org/wf/";
+    location.replace(t + window.location.search + window.location.hash);
+  })();
+</script>
+<style>
+  body{margin:0;min-height:100vh;display:grid;place-items:center;
+       font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+       background:#f3f0e6;color:#0f2d45;padding:2rem;text-align:center}
+  @media (prefers-color-scheme:dark){body{background:#071b2b;color:#f2efe6}}
+  a{color:#14557d}
+  @media (prefers-color-scheme:dark){a{color:#82c7ec}}
+  h1{font-size:1.4rem;margin:0 0 .75rem}
+  p{margin:.35rem 0;color:#506474}
+  @media (prefers-color-scheme:dark){p{color:#b4c2cc}}
+</style>
 </head>
 <body>
-  <p>Opening the <a href="../wardfast/">September Ward Fast sign-up</a>…</p>
+  <main>
+    <h1>This page has moved</h1>
+    <p>Ward mission resources now have their own home.</p>
+    <p><a href="https://wardmission.org/wf/">https://wardmission.org/wf/</a></p>
+    <p><small>Redirecting you automatically&hellip;</small></p>
+  </main>
 </body>
 </html>
