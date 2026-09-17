@@ -217,8 +217,12 @@
     AB1.parseISO = function (s) {
         if (!s || !/^\d{4}-\d{2}-\d{2}$/.test(String(s))) return null;
         var p = String(s).split("-");
-        var d = new Date(parseInt(p[0], 10), parseInt(p[1], 10) - 1, parseInt(p[2], 10));
-        return isNaN(d.getTime()) ? null : d;
+        var year = parseInt(p[0], 10);
+        var month = parseInt(p[1], 10) - 1;
+        var day = parseInt(p[2], 10);
+        var d = new Date(year, month, day);
+        return isNaN(d.getTime()) || d.getFullYear() !== year ||
+            d.getMonth() !== month || d.getDate() !== day ? null : d;
     };
 
     AB1.toISO = function (d) {
@@ -718,7 +722,7 @@
         host.className = "topbar";
         host.innerHTML =
             '<div class="topbar-inner">' +
-            '<a class="brand" href="index.html"><span class="brand-mark">GH</span>' +
+            '<a class="brand" href="index.html"><span class="brand-mark">AB</span>' +
             '<span>AB-100 Exam Prep <span class="brand-sub">' + sub + "</span></span></a>" +
             '<nav class="nav" id="mainNav" aria-label="Main">' + links + "</nav>" +
             '<div style="margin-left:auto;display:flex;align-items:center;gap:.5rem">' + pill +
@@ -748,7 +752,7 @@
             "<strong>not</strong> the same as answering 70% of questions correctly \u2014 Microsoft weights questions " +
             "by difficulty and has never published the conversion, so scores shown here are readiness estimates " +
             "only. Agentic AI Business Solutions Architect changes quickly \u2014 always check the current " +
-            "<a href=\"https://learn.microsoft.com/credentials/certifications/resources/study-guides/gh-300\" " +
+            "<a href=\"https://learn.microsoft.com/credentials/certifications/resources/study-guides/ab-100\" " +
             "rel=\"noopener\">official study guide</a> before your exam. Your exam date, progress, and notes are " +
             "saved in this browser only.</p>" +
             "</div>";
