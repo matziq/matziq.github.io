@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="New Revised Standard Version, Updated Edition (NRSVue) &mdash; book-by-book index linking to Bible Gateway.">
+  <title>NRSV Bible</title>
+  <link rel="icon" type="image/svg+xml" sizes="any" href="./favicon.svg">
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+  </style>
+  <link rel="stylesheet" href="../collections.css">
+  <style>
+    .source-note {
+      margin: 0 0 32px;
+      padding: 16px 20px;
+      border: 1px solid var(--cp-border);
+      border-radius: 12px;
+      background: var(--cp-bg-elevated);
+      color: var(--cp-text-muted);
+      font-size: 14px;
+    }
+    .source-note a { color: var(--cp-link); }
+    .book-grid {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+    }
+    .book-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      border: 1px solid var(--cp-border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      background: var(--cp-surface);
+      color: var(--cp-text);
+      text-decoration: none;
+      font-size: 14px;
+      transition: border-color .2s, transform .2s;
+    }
+    .book-link:hover { border-color: var(--cp-accent); transform: translateY(-1px); }
+    .book-link .arrow { color: var(--cp-accent); font-size: 16px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../bible_resources/">
+        <span class="brand-mark" aria-hidden="true">N</span>
+        <span><strong>NRSV Bible</strong><small>Scripture &amp; study</small></span>
+      </a>
+    </div>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">Translation &amp; study</p>
+      <h1 id="page-title">New Revised Standard Version, Updated Edition</h1>
+      <p>A book-by-book index of the NRSVue. Each book opens the full text on Bible Gateway, the NRSVue's official publisher and licensed host.</p>
+    </section>
+    <p class="source-note">Text hosted by <a href="https://www.biblegateway.com/versions/New-Revised-Standard-Version-Updated-Edition-NRSVue-Bible/#booklist" target="_blank" rel="noopener">Bible Gateway</a>. The NRSVue is &copy; National Council of the Churches of Christ in the USA; this page links out to the licensed text rather than reproducing it.</p>
+
+    <div class="section-heading">
+      <div><p class="eyebrow">39 books</p><h2>Old Testament</h2></div>
+      <p>The Hebrew Scriptures, from Genesis through Malachi.</p>
+    </div>
+    <ul class="resource-list book-grid">
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Genesis+1&amp;version=NRSVUE" target="_blank" rel="noopener">Genesis<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Exodus+1&amp;version=NRSVUE" target="_blank" rel="noopener">Exodus<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Leviticus+1&amp;version=NRSVUE" target="_blank" rel="noopener">Leviticus<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Numbers+1&amp;version=NRSVUE" target="_blank" rel="noopener">Numbers<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Deuteronomy+1&amp;version=NRSVUE" target="_blank" rel="noopener">Deuteronomy<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Joshua+1&amp;version=NRSVUE" target="_blank" rel="noopener">Joshua<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Judges+1&amp;version=NRSVUE" target="_blank" rel="noopener">Judges<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Ruth+1&amp;version=NRSVUE" target="_blank" rel="noopener">Ruth<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=1+Samuel+1&amp;version=NRSVUE" target="_blank" rel="noopener">1 Samuel<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=2+Samuel+1&amp;version=NRSVUE" target="_blank" rel="noopener">2 Samuel<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=1+Kings+1&amp;version=NRSVUE" target="_blank" rel="noopener">1 Kings<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=2+Kings+1&amp;version=NRSVUE" target="_blank" rel="noopener">2 Kings<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=1+Chronicles+1&amp;version=NRSVUE" target="_blank" rel="noopener">1 Chronicles<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=2+Chronicles+1&amp;version=NRSVUE" target="_blank" rel="noopener">2 Chronicles<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Ezra+1&amp;version=NRSVUE" target="_blank" rel="noopener">Ezra<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Nehemiah+1&amp;version=NRSVUE" target="_blank" rel="noopener">Nehemiah<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Esther+1&amp;version=NRSVUE" target="_blank" rel="noopener">Esther<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Job+1&amp;version=NRSVUE" target="_blank" rel="noopener">Job<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Psalm+1&amp;version=NRSVUE" target="_blank" rel="noopener">Psalms<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Proverbs+1&amp;version=NRSVUE" target="_blank" rel="noopener">Proverbs<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Ecclesiastes+1&amp;version=NRSVUE" target="_blank" rel="noopener">Ecclesiastes<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Song+of+Solomon+1&amp;version=NRSVUE" target="_blank" rel="noopener">Song of Solomon<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Isaiah+1&amp;version=NRSVUE" target="_blank" rel="noopener">Isaiah<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Jeremiah+1&amp;version=NRSVUE" target="_blank" rel="noopener">Jeremiah<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Lamentations+1&amp;version=NRSVUE" target="_blank" rel="noopener">Lamentations<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Ezekiel+1&amp;version=NRSVUE" target="_blank" rel="noopener">Ezekiel<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Daniel+1&amp;version=NRSVUE" target="_blank" rel="noopener">Daniel<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Hosea+1&amp;version=NRSVUE" target="_blank" rel="noopener">Hosea<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Joel+1&amp;version=NRSVUE" target="_blank" rel="noopener">Joel<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Amos+1&amp;version=NRSVUE" target="_blank" rel="noopener">Amos<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Obadiah+1&amp;version=NRSVUE" target="_blank" rel="noopener">Obadiah<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Jonah+1&amp;version=NRSVUE" target="_blank" rel="noopener">Jonah<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Micah+1&amp;version=NRSVUE" target="_blank" rel="noopener">Micah<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Nahum+1&amp;version=NRSVUE" target="_blank" rel="noopener">Nahum<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Habakkuk+1&amp;version=NRSVUE" target="_blank" rel="noopener">Habakkuk<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Zephaniah+1&amp;version=NRSVUE" target="_blank" rel="noopener">Zephaniah<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Haggai+1&amp;version=NRSVUE" target="_blank" rel="noopener">Haggai<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Zechariah+1&amp;version=NRSVUE" target="_blank" rel="noopener">Zechariah<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Malachi+1&amp;version=NRSVUE" target="_blank" rel="noopener">Malachi<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+    </ul>
+
+    <div class="section-heading">
+      <div><p class="eyebrow">27 books</p><h2>New Testament</h2></div>
+      <p>The Gospels through Revelation.</p>
+    </div>
+    <ul class="resource-list book-grid">
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Matthew+1&amp;version=NRSVUE" target="_blank" rel="noopener">Matthew<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Mark+1&amp;version=NRSVUE" target="_blank" rel="noopener">Mark<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Luke+1&amp;version=NRSVUE" target="_blank" rel="noopener">Luke<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=John+1&amp;version=NRSVUE" target="_blank" rel="noopener">John<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Acts+1&amp;version=NRSVUE" target="_blank" rel="noopener">Acts<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Romans+1&amp;version=NRSVUE" target="_blank" rel="noopener">Romans<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=1+Corinthians+1&amp;version=NRSVUE" target="_blank" rel="noopener">1 Corinthians<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=2+Corinthians+1&amp;version=NRSVUE" target="_blank" rel="noopener">2 Corinthians<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Galatians+1&amp;version=NRSVUE" target="_blank" rel="noopener">Galatians<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Ephesians+1&amp;version=NRSVUE" target="_blank" rel="noopener">Ephesians<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Philippians+1&amp;version=NRSVUE" target="_blank" rel="noopener">Philippians<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Colossians+1&amp;version=NRSVUE" target="_blank" rel="noopener">Colossians<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=1+Thessalonians+1&amp;version=NRSVUE" target="_blank" rel="noopener">1 Thessalonians<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=2+Thessalonians+1&amp;version=NRSVUE" target="_blank" rel="noopener">2 Thessalonians<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=1+Timothy+1&amp;version=NRSVUE" target="_blank" rel="noopener">1 Timothy<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=2+Timothy+1&amp;version=NRSVUE" target="_blank" rel="noopener">2 Timothy<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Titus+1&amp;version=NRSVUE" target="_blank" rel="noopener">Titus<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Philemon+1&amp;version=NRSVUE" target="_blank" rel="noopener">Philemon<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Hebrews+1&amp;version=NRSVUE" target="_blank" rel="noopener">Hebrews<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=James+1&amp;version=NRSVUE" target="_blank" rel="noopener">James<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=1+Peter+1&amp;version=NRSVUE" target="_blank" rel="noopener">1 Peter<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=2+Peter+1&amp;version=NRSVUE" target="_blank" rel="noopener">2 Peter<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=1+John+1&amp;version=NRSVUE" target="_blank" rel="noopener">1 John<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=2+John+1&amp;version=NRSVUE" target="_blank" rel="noopener">2 John<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=3+John+1&amp;version=NRSVUE" target="_blank" rel="noopener">3 John<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Jude+1&amp;version=NRSVUE" target="_blank" rel="noopener">Jude<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      <li><a class="book-link" href="https://www.biblegateway.com/passage/?search=Revelation+1&amp;version=NRSVUE" target="_blank" rel="noopener">Revelation<span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+    </ul>
+  </main>
+  <footer><a href="../bible_resources/">&larr; Bible Resources</a><span>NRSV Bible</span></footer>
+</body>
+</html>
