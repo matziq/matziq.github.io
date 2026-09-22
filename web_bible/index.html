@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Bible translations and reading resources, organized by version.">
-  <title>Bible Resources</title>
+  <meta name="description" content="Read and search the full text of the World English Bible (WEB), a public-domain modern-English translation.">
+  <title>World English Bible</title>
   <link rel="icon" type="image/svg+xml" sizes="any" href="./favicon.svg">
   <script>
     (() => {
@@ -69,39 +69,41 @@
     }
   </style>
   <link rel="stylesheet" href="../collections.css">
+  <link rel="stylesheet" href="./assets/styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="../" aria-label="MemConfigMgr collections home">
-        <span class="brand-mark" aria-hidden="true">B</span>
-        <span><strong>Bible Resources</strong><small>Scripture &amp; study</small></span>
+  <header class="reader-header">
+    <div class="reader-header-inner">
+      <a class="reader-brand" href="../bible_resources/">
+        <span class="brand-mark" aria-hidden="true">W</span>
+        <span><strong>World English Bible</strong><small>Full text &amp; search</small></span>
       </a>
+      <form class="search-form" id="search-form" role="search">
+        <input type="search" id="search-input" name="q" placeholder="Search the Bible (e.g. love your neighbor)" aria-label="Search the Bible">
+        <button type="submit">Search</button>
+      </form>
     </div>
   </header>
-  <main>
-    <section class="hero" aria-labelledby="page-title">
-      <p class="eyebrow">Scripture &amp; study</p>
-      <h1 id="page-title">Bible Resources</h1>
-      <p>Bible translations for reading and study, organized by version. More translations will be added over time.</p>
-    </section>
-    <ul class="resource-list">
-      <li>
-        <a class="resource-card" href="../web_bible/">
-          <span class="resource-icon" aria-hidden="true">W</span>
-          <span><span class="resource-topic">Translation &amp; study</span><strong>World English Bible (WEB)</strong><p>Full public-domain text hosted on-site, with a book/chapter reader and full-text search.</p></span>
-          <span class="arrow" aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
-      <li>
-        <a class="resource-card" href="../nrsv_bible/">
-          <span class="resource-icon" aria-hidden="true">N</span>
-          <span><span class="resource-topic">Translation &amp; study</span><strong>NRSV Bible</strong><p>New Revised Standard Version, Updated Edition (NRSVue) &mdash; a book-by-book index linking to the full text on Bible Gateway.</p></span>
-          <span class="arrow" aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
-    </ul>
-  </main>
-  <footer><a href="../">&larr; All collections</a><span>Bible Resources</span></footer>
+  <div class="reader-shell">
+    <aside class="reader-nav">
+      <h2>Browse</h2>
+      <div class="nav-selects">
+        <select id="book-select" aria-label="Select book"></select>
+      </div>
+      <div class="chapter-grid" id="chapter-grid" aria-label="Select chapter"></div>
+    </aside>
+    <main class="reader-main">
+      <div class="reader-toolbar">
+        <h1 id="toolbar-title">Loading&hellip;</h1>
+        <div class="toolbar-nav">
+          <button type="button" id="prev-chapter" aria-label="Previous chapter">&larr; Prev</button>
+          <button type="button" id="next-chapter" aria-label="Next chapter">Next &rarr;</button>
+        </div>
+      </div>
+      <div id="reader-body"><p class="loading-note">Loading Bible text&hellip;</p></div>
+    </main>
+  </div>
+  <footer><a href="../bible_resources/">&larr; Bible Resources</a><span>World English Bible</span></footer>
+  <script src="./assets/app.js"></script>
 </body>
 </html>
