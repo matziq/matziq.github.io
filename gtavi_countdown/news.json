@@ -1,8 +1,15 @@
 {
   "source": "https://www.rockstargames.com/VI",
   "newswire": "https://www.rockstargames.com/newswire",
-  "fetchedAt": "2026-09-24T11:42:34+00:00",
+  "fetchedAt": "2026-09-24T17:08:30+00:00",
   "items": [
+    {
+      "title": "Pre-Order The Goodtime State \u2013 Vice City Collection Now While Supplies Last",
+      "url": "https://www.rockstargames.com/newswire/article/9k2a49ook82o57",
+      "date": "September 24, 2026",
+      "isoDate": "2026-09-24",
+      "image": "https://www.rockstargames.com/VI/_next/static/media/9k2a49ook82o57.0y.tef0ihubh2.jpg?akim=1&imdensity=1&imwidth=640"
+    },
     {
       "title": "Announcing Grand Theft Auto VI: The Album, Coming November 19",
       "url": "https://www.rockstargames.com/newswire/article/7599a881942544",
@@ -16,13 +23,6 @@
       "date": "August 27, 2026",
       "isoDate": "2026-08-27",
       "image": "https://www.rockstargames.com/VI/_next/static/media/9k2kaa1o3297k9.0ux_qup1vxl7o.jpg?akim=1&imdensity=1&imwidth=640"
-    },
-    {
-      "title": "Pre-Order Grand Theft Auto VI on June 25",
-      "url": "https://www.rockstargames.com/newswire/article/5171972o3ak5oa",
-      "date": "June 24, 2026",
-      "isoDate": "2026-06-24",
-      "image": "https://www.rockstargames.com/VI/_next/static/media/5171972o3ak5oa.15416o23e-~x2.jpg?akim=1&imdensity=1&imwidth=640"
     }
   ]
 }
