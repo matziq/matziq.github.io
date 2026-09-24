@@ -1,0 +1,15 @@
+FICTIONAL TRAINING EXERCISE — CHOOSE ONE WEAK PROMPT
+
+1. "Summarize the quality issue."
+Desired outcome: A decision-ready status with evidence, owners, and next steps.
+
+2. "Analyze this spreadsheet."
+Desired outcome: A defensible trend analysis that flags data-quality limitations.
+
+3. "Make a PowerPoint about the investigation."
+Desired outcome: A ten-slide cross-functional review grounded only in the investigation brief.
+
+4. "Write an update for leadership."
+Desired outcome: A concise update that separates confirmed facts, assumptions, risks, and asks.
+
+Paste one weak prompt and its desired outcome into Demo 3. Do not add real customer or employee information.

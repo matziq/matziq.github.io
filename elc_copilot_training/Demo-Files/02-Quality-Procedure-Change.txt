@@ -1,0 +1,40 @@
+FICTIONAL TRAINING SOURCE — PROCEDURE CHANGE
+Document: QP-104, Review and Escalation of Quality Events
+Draft revision: 7
+Effective date: Proposed October 15, 2026
+
+1. Purpose
+This revision introduces risk-based review timing and a documented escalation path for overdue quality events.
+
+2. Scope
+Applies to manufacturing, packaging, and laboratory quality events recorded at the Riverton, Delft, and Kaipara training sites.
+
+3. Definitions
+Critical event: an event with potential impact to patient or consumer safety, regulatory compliance, or released-product integrity.
+Major event: an event that may affect product quality or process control but does not meet the Critical definition.
+Business day: Monday through Friday, excluding local site holidays.
+
+4. Requirements
+4.1 Critical events must receive an initial Quality assessment within 1 business day of record creation.
+4.2 Major events must receive an initial Quality assessment within 3 business days.
+4.3 Minor events should be reviewed promptly.
+4.4 Event owners must update the record periodically while an investigation remains open.
+4.5 Events open longer than 30 calendar days require a documented recovery plan.
+4.6 Events open longer than 60 calendar days require escalation to the site Quality lead.
+4.7 Extensions beyond 90 calendar days require approval from the site Quality lead and a documented risk assessment.
+4.8 Supporting evidence should be attached where feasible.
+
+5. New workflow
+The event owner drafts the assessment. A Quality reviewer confirms classification, assigns due dates, and documents required actions. The site Quality lead reviews escalations. The system sends reminders 5 calendar days before a due date and again on the due date.
+
+6. Records
+The event record, attachments, approvals, recovery plans, and extension decisions are retained according to the applicable site retention schedule.
+
+7. Training
+Affected users must complete training before the effective date. Training effectiveness will be checked as appropriate.
+
+8. Open questions in this draft
+- Should "promptly" in 4.3 have a numeric limit?
+- Who owns reminder failures?
+- What evidence is sufficient under 4.8?
+- What is the acceptance criterion for training effectiveness?

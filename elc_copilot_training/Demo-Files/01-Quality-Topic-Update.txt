@@ -1,0 +1,29 @@
+FICTIONAL TRAINING SOURCE — QUALITY TOPIC UPDATE
+Topic: Closure of packaging seal-strength investigation QI-26-017
+Reporting window: August 24–September 18, 2026
+
+August 24 — Teams meeting recap
+The team confirmed intermittent low seal strength on Line 4 for 50 mL jars. Product remains on hold. Mira Patel owns the investigation. The working hypothesis is jaw-temperature drift after extended runs, but Engineering has not confirmed causality.
+
+August 27 — Email from Supplier Quality
+Supplier certificate review found no out-of-specification film thickness. Three retained material rolls were sent for independent testing. Results were expected September 8.
+
+September 3 — Teams channel update
+Maintenance replaced the Line 4 temperature sensor and completed calibration. Post-maintenance checks passed at start-up. The team agreed that one successful start-up was not enough evidence to close the investigation.
+
+September 9 — Email summary
+Independent film testing met the agreed specification. Supplier material was removed as the primary suspected cause. The investigation shifted to equipment control and run-duration effects.
+
+September 12 — Working session notes
+A four-hour engineering run was completed. Seal strength stayed within the provisional range for the first three hours, then showed increased variation. No result crossed the current release limit. The team requested an eight-hour confirmation run.
+
+September 16 — Teams message
+The eight-hour run is booked for September 24. Production will provide operators; Engineering will provide data logging. Validation must approve the sampling plan before the run. Lena Ortiz owns the sampling-plan approval.
+
+September 18 — Status email
+Open items:
+- Lena Ortiz: approve the sampling plan by September 22.
+- Mira Patel: confirm the investigation report outline by September 23.
+- Engineering: complete the eight-hour run on September 24.
+- Data analyst: issue the trend summary within two business days after the run.
+No final root cause, disposition, or closure date has been approved.
