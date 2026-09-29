@@ -178,7 +178,7 @@
       </div>
     </section>
     <div class="hearth-wrap">
-      <section class="hearth-scene" aria-label="Stone fireplace with turbulent golden fire, glowing AI tokens, embers, and smoke rising into the chimney">
+      <section class="hearth-scene" aria-label="Stone fireplace with billowing golden flames, glowing AI tokens, embers, and smoke rising into the chimney">
         <div class="smoke chimney-smoke" aria-hidden="true">
           <i style="--left:22%;--size:65px;--duration:7s;--delay:-2s;--drift:30px"></i>
           <i style="--left:36%;--size:75px;--duration:9s;--delay:-6s;--drift:50px"></i>
@@ -320,10 +320,9 @@
     }
   }
 
-  let canvas = document.getElementById("fire");
+  const canvas = document.getElementById("fire");
   const notice = document.getElementById("rendererNotice");
   let renderer;
-  let gl;
   let paused = reducedMotion.matches;
   let raf = 0;
   let time = 18;
@@ -342,156 +341,175 @@
     probe.remove();
   }
   readPalette();
-  const vertexSource = `
-    attribute vec2 position;
-    varying vec2 uv;
-    void main() { uv = position * .5 + .5; gl_Position = vec4(position, 0., 1.); }
-  `;
-  const fragmentSource = `
-    precision mediump float;
-    varying vec2 uv;
-    uniform float clock;
-    uniform float heat;
-    uniform vec3 ember;
-    uniform vec3 gold;
-    uniform vec3 whiteHot;
-    float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-    float noise(vec2 p) {
-      vec2 i = floor(p), f = fract(p); f = f * f * (3. - 2. * f);
-      return mix(mix(hash(i), hash(i + vec2(1., 0.)), f.x),
-        mix(hash(i + vec2(0., 1.)), hash(i + vec2(1., 1.)), f.x), f.y);
-    }
-    float fbm(vec2 p) {
-      float n = 0., a = .5;
-      for (int i = 0; i < 4; i++) { n += a * noise(p); p = p * 2.03 + 7.1; a *= .5; }
-      return n;
-    }
-    void main() {
-      float y = max(0., (uv.y - .10) / (.48 + heat * .42));
-      float t = clock * 1.25;
-      vec2 p = vec2(uv.x * 6.5, y * 3.2 - t);
-      float turbulence = fbm(p + vec2(fbm(p * .65 + t * .15), 0.));
-      float detail = fbm(vec2(uv.x * 17., y * 10. - t * 2.));
-      float bend = (turbulence - .48) * (.09 + y * .16);
-      float field = 0.;
-      for (int i = 0; i < 7; i++) {
-        float k = float(i);
-        float center = .18 + k * .105;
-        float height = .65 + .22 * sin(k * 2.1 + 1.2) + .16 * sin(t * 1.2 + k * 3.);
-        float h = y / height;
-        float width = (.105 + .026 * sin(k * 1.7)) * max(0., 1. - h * .87);
-        float curl = bend + sin(h * 5. - t * 1.5 + k) * .048 * h;
-        float ribbon = 1. - abs(uv.x - center + curl) / max(.004, width);
-        float tip = 1. - smoothstep(.62, 1.15, h);
-        field += max(0., ribbon) * tip * .8;
-      }
-      float density = max(0., field - turbulence * .48 - detail * .23);
-      float alpha = smoothstep(.0, .43, density) * smoothstep(.06, .21, uv.y);
-      alpha *= 1. - smoothstep(.89, 1., uv.y);
-      float temperature = clamp(density * 1.12 + (1. - y) * .12, 0., 1.);
-      vec3 color = mix(ember, gold, smoothstep(.02, .38, temperature));
-      color = mix(color, whiteHot, smoothstep(.46, .92, temperature));
-      float halo = exp(-pow((uv.x - .5) * 3.7, 2.) - pow((uv.y - .24) * 5., 2.)) * .22;
-      float a = max(alpha * .95, halo);
-      gl_FragColor = vec4(mix(gold, color, alpha), a);
-    }
-  `;
-  function createShader(type, source) {
-    const shader = gl.createShader(type);
-    gl.shaderSource(shader, source);
-    gl.compileShader(shader);
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-      const message = gl.getShaderInfoLog(shader);
-      gl.deleteShader(shader);
-      throw new Error(`Fire shader could not compile: ${message}`);
-    }
-    return shader;
-  }
-  function setupWebGL() {
-    gl = canvas.getContext("webgl", { alpha: true, premultipliedAlpha: false, antialias: false });
-    if (!gl) return false;
-    const vertex = createShader(gl.VERTEX_SHADER, vertexSource);
-    const fragment = createShader(gl.FRAGMENT_SHADER, fragmentSource);
-    const program = gl.createProgram();
-    gl.attachShader(program, vertex); gl.attachShader(program, fragment); gl.linkProgram(program);
-    gl.deleteShader(vertex); gl.deleteShader(fragment);
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw new Error(`Fire program could not link: ${gl.getProgramInfoLog(program)}`);
-    gl.useProgram(program);
-    const buffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);
-    const position = gl.getAttribLocation(program, "position");
-    gl.enableVertexAttribArray(position); gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
-    const uniforms = Object.fromEntries(["clock", "heat", "ember", "gold", "whiteHot"].map(name => [name, gl.getUniformLocation(program, name)]));
-    renderer = () => {
-      gl.viewport(0, 0, canvas.width, canvas.height);
-      gl.uniform1f(uniforms.clock, time); gl.uniform1f(uniforms.heat, Number(heat.value) / 100);
-      gl.uniform3fv(uniforms.ember, palette.red.map(c => c / 255));
-      gl.uniform3fv(uniforms.gold, palette.gold.map(c => c / 255));
-      gl.uniform3fv(uniforms.whiteHot, palette.white.map(c => c / 255));
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
-    };
-    canvas.dataset.renderer = "webgl";
-    return true;
-  }
-  function setupFallback(message) {
-    if (gl) {
-      const replacement = canvas.cloneNode(false);
-      canvas.replaceWith(replacement);
-      canvas = replacement;
-    }
+  function createFireSimulation() {
     const ctx = canvas.getContext("2d");
-    notice.hidden = false;
-    notice.textContent = message;
     if (!ctx) {
-      notice.textContent = "Your browser could not create the fire renderer. Try enabling graphics acceleration.";
-      renderer = () => {};
+      notice.hidden = false;
+      notice.textContent = "This browser could not create the fire canvas. Open this page in a browser with Canvas 2D support.";
       canvas.dataset.renderer = "unavailable";
-      return;
+      return () => {};
     }
-    const rgba = (color, alpha) => `rgba(${color.join(",")},${alpha})`;
-    renderer = () => {
-      const w = canvas.width, h = canvas.height;
-      ctx.clearRect(0, 0, w, h);
-      ctx.globalCompositeOperation = "screen";
-      for (let i = 0; i < 14; i++) {
-        const base = .16 + i * .052;
-        const height = (.22 + seeded(i, 3) * .45) * (.55 + Number(heat.value) / 130);
-        const gradient = ctx.createLinearGradient(0, h * .89, 0, h * (.89 - height));
-        gradient.addColorStop(0, rgba(palette.white, .75));
-        gradient.addColorStop(.35, rgba(palette.gold, .8));
-        gradient.addColorStop(.8, rgba(palette.red, .45));
-        gradient.addColorStop(1, rgba(palette.gold, 0));
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        for (const side of [-1, 1]) {
-          for (let n = 0; n <= 28; n++) {
-            const y = side === -1 ? n / 28 : 1 - n / 28;
-            const curl = Math.sin(y * 7 - time * 2.8 + i) * .033 * y + Math.sin(y * 15 - time * 4 + i) * .012 * y;
-            const x = base + curl + side * .042 * Math.pow(1 - y, .8);
-            const py = (.89 - y * height) * h;
-            if (side === -1 && n === 0) ctx.moveTo(x * w, py);
-            else ctx.lineTo(x * w, py);
+    // Hot gas is transported through a velocity field. Vorticity confinement
+    // rolls the edges into eddies; cooling extinguishes detached flame.
+    const width = 150, height = 170, count = width * height;
+    let temperature = new Float32Array(count), nextTemperature = new Float32Array(count);
+    let vx = new Float32Array(count), nextVx = new Float32Array(count);
+    let vy = new Float32Array(count), nextVy = new Float32Array(count);
+    const curl = new Float32Array(count), divergence = new Float32Array(count);
+    const pressure = new Float32Array(count);
+    const noiseTable = new Float32Array(4096);
+    let randomState = 701;
+    for (let i = 0; i < noiseTable.length; i++) {
+      randomState = (Math.imul(randomState, 1664525) + 1013904223) >>> 0;
+      noiseTable[i] = randomState / 4294967296;
+    }
+    const mix = (a, b, t) => a + (b - a) * t;
+    function noise(x, y) {
+      const ix = Math.floor(x), iy = Math.floor(y);
+      let fx = x - ix, fy = y - iy;
+      fx = fx * fx * (3 - 2 * fx); fy = fy * fy * (3 - 2 * fy);
+      const row0 = (iy & 63) * 64, row1 = ((iy + 1) & 63) * 64;
+      return mix(mix(noiseTable[row0 + (ix & 63)], noiseTable[row0 + ((ix + 1) & 63)], fx),
+        mix(noiseTable[row1 + (ix & 63)], noiseTable[row1 + ((ix + 1) & 63)], fx), fy);
+    }
+    function sample(field, x, y) {
+      x = Math.max(.5, Math.min(width - 1.5, x));
+      y = Math.max(.5, Math.min(height - 1.5, y));
+      const ix = Math.floor(x), iy = Math.floor(y), dx = x - ix, dy = y - iy;
+      const i = iy * width + ix;
+      return mix(mix(field[i], field[i + 1], dx), mix(field[i + width], field[i + width + 1], dx), dy);
+    }
+    let simulationTime = 0;
+    function step(dt, intensity) {
+      simulationTime += dt;
+      for (let y = 1; y < height - 1; y++) {
+        for (let x = 1; x < width - 1; x++) {
+          const i = y * width + x;
+          curl[i] = .5 * (vy[i + 1] - vy[i - 1] - vx[i + width] + vx[i - width]);
+        }
+      }
+      for (let y = 2; y < height - 2; y++) {
+        for (let x = 2; x < width - 2; x++) {
+          const i = y * width + x;
+          const dx = Math.abs(curl[i + 1]) - Math.abs(curl[i - 1]);
+          const dy = Math.abs(curl[i + width]) - Math.abs(curl[i - width]);
+          const length = Math.hypot(dx, dy) + .001;
+          vx[i] += dt * dy / length * curl[i] * 9;
+          vy[i] -= dt * (dx / length * curl[i] * 9 + temperature[i] * 74);
+          vx[i] *= .988; vy[i] *= .996;
+          vx[i] = Math.max(-95, Math.min(95, vx[i]));
+          vy[i] = Math.max(-130, Math.min(35, vy[i]));
+        }
+      }
+      pressure.fill(0);
+      for (let y = 1; y < height - 1; y++) {
+        for (let x = 1; x < width - 1; x++) {
+          const i = y * width + x;
+          divergence[i] = .5 * (vx[i + 1] - vx[i - 1] + vy[i + width] - vy[i - width]);
+        }
+      }
+      for (let iteration = 0; iteration < 8; iteration++) {
+        for (let y = 1; y < height - 1; y++) {
+          for (let x = 1; x < width - 1; x++) {
+            const i = y * width + x;
+            pressure[i] = (pressure[i - 1] + pressure[i + 1] + pressure[i - width] + pressure[i + width] - divergence[i]) * .25;
           }
         }
-        ctx.closePath(); ctx.fill();
       }
+      for (let y = 1; y < height - 1; y++) {
+        for (let x = 1; x < width - 1; x++) {
+          const i = y * width + x;
+          vx[i] -= .5 * (pressure[i + 1] - pressure[i - 1]);
+          vy[i] -= .5 * (pressure[i + width] - pressure[i - width]);
+        }
+      }
+      for (let y = 1; y < height - 1; y++) {
+        for (let x = 1; x < width - 1; x++) {
+          const i = y * width + x;
+          const px = x - vx[i] * dt, py = y - vy[i] * dt;
+          nextVx[i] = sample(vx, px, py);
+          nextVy[i] = sample(vy, px, py);
+          const cooling = .67 + (1 - intensity) * .55 + (1 - y / height) * .45;
+          nextTemperature[i] = Math.max(0, sample(temperature, px, py) - dt * cooling);
+        }
+      }
+      [temperature, nextTemperature] = [nextTemperature, temperature];
+      [vx, nextVx] = [nextVx, vx]; [vy, nextVy] = [nextVy, vy];
+      for (let source = 0; source < 6; source++) {
+        const phase = simulationTime * 4.5;
+        const centerX = width * (.19 + source * .123) + (noise(phase * .45, source * 7) - .5) * 12;
+        const centerY = height * (.835 + noise(source * 3, phase * .3) * .04);
+        const radius = 6 + noise(source * 5 + 20, phase) * 6;
+        const burst = .65 + noise(source * 11, phase * 1.4) * .65;
+        for (let y = Math.floor(centerY - 5); y <= centerY + 5; y++) {
+          for (let x = Math.floor(centerX - radius); x <= centerX + radius; x++) {
+            const d = ((x - centerX) / radius) ** 2 + ((y - centerY) / 5) ** 2;
+            if (d >= 1) continue;
+            const i = y * width + x, fuel = (1 - d) * burst;
+            temperature[i] = Math.max(temperature[i], fuel * (1.15 + intensity * .85));
+            vy[i] -= dt * fuel * (180 + intensity * 90);
+            vx[i] += dt * (noise(source * 9, phase * .7) - .5) * 100 * fuel;
+          }
+        }
+      }
+    }
+    const surface = document.createElement("canvas");
+    surface.width = width; surface.height = height;
+    const surfaceContext = surface.getContext("2d");
+    if (!surfaceContext) throw new Error("Unable to allocate the fire simulation drawing surface.");
+    const image = surfaceContext.createImageData(width, height);
+    const pixels = image.data;
+    const colors = new Uint8ClampedArray(256 * 4);
+    let cachedPalette;
+    function updateColors() {
+      for (let i = 0; i < 256; i++) {
+        const t = i / 255;
+        const orange = Math.min(1, t * 3);
+        const core = Math.max(0, Math.min(1, (t - .36) / .48));
+        for (let c = 0; c < 3; c++) colors[i * 4 + c] = mix(mix(palette.red[c], palette.gold[c], orange), palette.white[c], core);
+        colors[i * 4 + 3] = Math.min(1, t * 4.5) * 245;
+      }
+      cachedPalette = palette;
+    }
+    let lastIntensity = Number(heat.value) / 100;
+    function warmStart(intensity) {
+      temperature.fill(0); nextTemperature.fill(0);
+      vx.fill(0); nextVx.fill(0); vy.fill(0); nextVy.fill(0);
+      curl.fill(0); pressure.fill(0); divergence.fill(0);
+      for (let i = 0; i < 130; i++) step(1 / 45, intensity);
+    }
+    warmStart(lastIntensity);
+    let lastTime = time, accumulator = 0;
+    canvas.dataset.renderer = "fluid-canvas";
+    return () => {
+      const intensity = Number(heat.value) / 100;
+      if (intensity !== lastIntensity && (paused || reducedMotion.matches)) warmStart(intensity);
+      lastIntensity = intensity;
+      accumulator += Math.min(.09, Math.max(0, time - lastTime));
+      lastTime = time;
+      while (accumulator >= 1 / 45) {
+        step(1 / 45, intensity);
+        accumulator -= 1 / 45;
+      }
+      if (cachedPalette !== palette) updateColors();
+      for (let y = 0; y < height; y++) {
+        const floorFade = Math.min(1, Math.max(0, (height * .9 - y) / (height * .12)));
+        for (let x = 0; x < width; x++) {
+          const i = y * width + x, p = i * 4;
+          const t = Math.max(0, Math.min(1, (temperature[i] - .12) / 1.3));
+          const color = Math.floor(t * 255) * 4;
+          pixels[p] = colors[color]; pixels[p + 1] = colors[color + 1]; pixels[p + 2] = colors[color + 2];
+          pixels[p + 3] = colors[color + 3] * floorFade;
+        }
+      }
+      surfaceContext.putImageData(image, 0, 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+      ctx.drawImage(surface, 0, 0, canvas.width, canvas.height);
     };
-    canvas.dataset.renderer = "canvas2d";
   }
-  try {
-    if (!setupWebGL()) setupFallback("Compatibility fire renderer active.");
-  } catch (error) {
-    console.error("Fire renderer initialization failed.", error);
-    setupFallback("Advanced fire rendering is unavailable. Compatibility renderer active.");
-  }
-  canvas.addEventListener("webglcontextlost", event => {
-    event.preventDefault();
-    cancelAnimationFrame(raf); raf = 0;
-    setupFallback("Graphics context was interrupted. Compatibility renderer active.");
-    resize();
-    synchronizeMotion();
-  });
+  renderer = createFireSimulation();
   function paint() {
     renderer();
     const flicker = .73 + Math.sin(time * 3.2) * .05 + Math.sin(time * 7.7) * .025;
