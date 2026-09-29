@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A winter hearth fueled by AI tokens. Real-time procedural fire, hand-built stonework, drifting smoke, and falling snow.">
+<title>Token Hearth - Compute, made cozy.</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cstyle%3E:root%7B--cp-soot:%23242424;--cp-warning:%23f59e0b%7D%3C/style%3E%3Crect width='32' height='32' rx='6' fill='var(--cp-soot)'/%3E%3Cpath d='M17 4C22 15 27 16 25 23C22 32 7 30 7 21C7 15 12 14 12 9C15 13 14 17 16 17C19 14 16 9 17 4Z' fill='var(--cp-warning)'/%3E%3C/svg%3E">
+<script>
+  (() => {
+    const param = new URLSearchParams(window.location.search).get("scoutTheme");
+    const theme =
+      param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", theme);
+  })();
+</script>
+<style>
+  :root {
+    color-scheme: light;
+    --cp-bg: #f7f4ef;
+    --cp-bg-elevated: #fcfbf8;
+    --cp-surface: #ffffff;
+    --cp-surface-soft: #f5f5f5;
+    --cp-border: #dedede;
+    --cp-border-strong: #919191;
+    --cp-text: #242424;
+    --cp-text-muted: #5c5c5c;
+    --cp-text-soft: #6f6f6f;
+    --cp-accent: #b11f4b;
+    --cp-accent-hover: #9a1a41;
+    --cp-accent-soft: rgba(177, 31, 75, 0.08);
+    --cp-accent-fg: #ffffff;
+    --cp-success: #16a34a;
+    --cp-danger: #dc2626;
+    --cp-warning: #f59e0b;
+    --cp-link: #0078d4;
+    --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+    --cp-overlay: rgba(255, 255, 255, 0.8);
+    --cp-panel: rgba(255, 255, 255, 0.86);
+    --cp-panel-strong: rgba(255, 255, 255, 0.96);
+    --cp-sheen: rgba(255, 255, 255, 0.55);
+    --cp-highlight: rgba(177, 31, 75, 0.12);
+  }
+  html[data-theme="dark"] {
+    color-scheme: dark;
+    --cp-bg: #3d3b3a;
+    --cp-bg-elevated: #343231;
+    --cp-surface: #292929;
+    --cp-surface-soft: #2e2e2e;
+    --cp-border: #474747;
+    --cp-border-strong: #5f5f5f;
+    --cp-text: #dedede;
+    --cp-text-muted: #919191;
+    --cp-text-soft: #b0b0b0;
+    --cp-accent: #fd8ea1;
+    --cp-accent-hover: #fb7b91;
+    --cp-accent-soft: rgba(253, 142, 161, 0.14);
+    --cp-accent-fg: #1a1a1a;
+    --cp-success: #4ade80;
+    --cp-danger: #f87171;
+    --cp-warning: #fbbf24;
+    --cp-link: #4da6ff;
+    --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+    --cp-overlay: rgba(41, 41, 41, 0.88);
+    --cp-panel: rgba(41, 41, 41, 0.72);
+    --cp-panel-strong: rgba(41, 41, 41, 0.96);
+    --cp-sheen: rgba(255, 255, 255, 0.04);
+    --cp-highlight: rgba(253, 142, 161, 0.12);
+  }
+  :root {
+    --cp-soot: light-dark(var(--cp-text), var(--cp-accent-fg));
+    --cp-stone: light-dark(var(--cp-text-soft), var(--cp-border-strong));
+    --cp-stone-light: light-dark(var(--cp-border-strong), var(--cp-text-muted));
+    --cp-fire-white: light-dark(var(--cp-bg-elevated), var(--cp-text));
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--cp-bg); color: var(--cp-text); font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif; }
+  button, input { font: inherit; }
+  button { color: inherit; cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--cp-accent); outline-offset: 4px; }
+  .experience { position: relative; overflow: hidden; min-height: 100svh; isolation: isolate; background: radial-gradient(ellipse at 53% 72%, var(--cp-highlight), transparent 42%), var(--cp-bg); }
+  .experience::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .2; background: repeating-linear-gradient(90deg, transparent 0 139px, var(--cp-border-strong) 140px 141px); mask-image: linear-gradient(var(--cp-text), transparent 90%); }
+  header { width: min(1540px, calc(100% - 64px)); margin: auto; height: 92px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 3; border-bottom: 1px solid var(--cp-border); }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-mark { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid var(--cp-border-strong); border-radius: 10px; color: var(--cp-accent); font: 700 20px Consolas, "Courier New", Courier, monospace; }
+  .brand b { display: block; font-size: 13px; letter-spacing: .17em; text-transform: uppercase; }
+  .brand small { color: var(--cp-text-muted); font-size: 11px; }
+  .winter-status { color: var(--cp-text-muted); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+  main { width: min(1540px, calc(100% - 64px)); margin: auto; min-height: calc(100svh - 145px); display: grid; grid-template-columns: minmax(210px, .85fr) minmax(0, 2.1fr) minmax(216px, .7fr); align-items: center; gap: 24px; padding: 24px 0 40px; position: relative; }
+  .eyebrow { color: var(--cp-accent); text-transform: uppercase; letter-spacing: .2em; font-size: 10px; font-weight: 700; margin: 0 0 24px; }
+  h1 { font-size: clamp(48px, 6.3vw, 94px); line-height: .96; letter-spacing: -.065em; margin: 0; font-weight: 650; }
+  h1 em { font-style: normal; color: var(--cp-accent); }
+  .lede { font-size: 15px; line-height: 1.8; color: var(--cp-text-muted); max-width: 290px; margin: 28px 0; }
+  .metric-row { display: flex; gap: 28px; padding-top: 24px; border-top: 1px solid var(--cp-border); }
+  .metric strong { display: block; font: 500 23px Consolas, "Courier New", Courier, monospace; }
+  .metric span { display: block; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--cp-text-muted); margin-top: 8px; }
+  .hearth-wrap { min-width: 0; }
+  .hearth-scene { position: relative; width: 100%; aspect-ratio: 760 / 800; isolation: isolate; }
+  .hearth-scene::before { content: ""; position: absolute; inset: 50% -14% -5%; background: radial-gradient(ellipse, color-mix(in srgb, var(--cp-warning) 14%, transparent), transparent 68%); pointer-events: none; }
+  .architecture { position: absolute; width: 100%; height: 100%; overflow: visible; }
+  .firebox { position: absolute; left: 23.6842%; top: 40%; width: 52.6316%; height: 45%; overflow: hidden; border-radius: 50% 50% 0 0 / 37.5% 37.5% 0 0; background: var(--cp-soot); isolation: isolate; }
+  .firebox::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 87%, color-mix(in srgb, var(--cp-danger) 16%, transparent), transparent 70%), repeating-linear-gradient(0deg, transparent 0 24px, var(--cp-soot) 25px 27px), repeating-linear-gradient(90deg, transparent 0 49px, var(--cp-soot) 50px 52px); background-color: color-mix(in srgb, var(--cp-soot) 91%, var(--cp-stone)); box-shadow: inset 0 20px 38px 10px var(--cp-soot); }
+  .fire-renderer { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; }
+  .ember-bed { position: absolute; inset: auto 6% 2%; height: 17%; z-index: 1; border-radius: 50%; background: radial-gradient(ellipse, var(--cp-warning), var(--cp-danger) 35%, transparent 72%); opacity: .7; filter: blur(7px); }
+  .token-stack { position: absolute; inset: auto 8% 8%; height: 24%; z-index: 2; }
+  .token { position: absolute; left: var(--left); bottom: var(--bottom); width: var(--w); height: clamp(19px, 2.3vw, 32px); display: flex; align-items: center; justify-content: center; border: 1px solid color-mix(in srgb, var(--cp-warning) 80%, var(--cp-soot)); border-radius: 4px; background: repeating-linear-gradient(90deg, transparent 0 12px, color-mix(in srgb, var(--cp-danger) 30%, transparent) 13px 14px), linear-gradient(175deg, var(--cp-soot) 15%, color-mix(in srgb, var(--cp-soot) 60%, var(--cp-danger)) 80%, var(--cp-warning)); color: var(--cp-warning); font: 700 clamp(7px, .8vw, 11px)/1 Consolas, "Courier New", Courier, monospace; letter-spacing: .08em; transform: rotate(var(--r)); box-shadow: inset 0 -2px 6px var(--cp-danger), 0 3px 0 var(--cp-soot), 0 5px 12px color-mix(in srgb, var(--cp-danger) 50%, transparent); }
+  .token::before { content: "{ }"; margin-right: 6px; font-size: .8em; }
+  .grate { position: absolute; inset: auto 6% 2%; height: 17%; z-index: 5; border-bottom: 5px solid var(--cp-soot); background: repeating-linear-gradient(90deg, transparent 0 12%, var(--cp-soot) 12.5% 14%, color-mix(in srgb, var(--cp-warning) 40%, var(--cp-soot)) 14% 14.6%, transparent 15% 25%); transform: perspective(180px) rotateX(-12deg); }
+  .spark { position: absolute; bottom: 14%; left: var(--left); width: 2px; height: 3px; border-radius: 50%; background: var(--cp-warning); box-shadow: 0 0 5px var(--cp-warning); animation: sparkUp var(--duration) ease-out infinite; animation-delay: var(--delay); z-index: 5; }
+  @keyframes sparkUp { 0% { transform: translate(0, 0) scale(.4); opacity: 0; } 12% { opacity: 1; } 100% { transform: translate(var(--drift), -240px) scale(0); opacity: 0; } }
+  .smoke { position: absolute; inset: 0 10% 12%; z-index: 4; opacity: calc(.12 + var(--heat) * .002); pointer-events: none; overflow: hidden; mask-image: linear-gradient(to top, transparent, var(--cp-text) 30%, var(--cp-text) 70%, transparent); }
+  .smoke i { position: absolute; bottom: 0; left: var(--left); width: var(--size); height: var(--size); border-radius: 50%; background: radial-gradient(ellipse, var(--cp-stone-light), transparent 70%); filter: blur(7px); animation: smokeRise var(--duration) ease-out infinite; animation-delay: var(--delay); }
+  @keyframes smokeRise { from { transform: translate3d(0, 0, 0) scale(.55); opacity: 0; } 20% { opacity: .45; } to { transform: translate3d(var(--drift), -320px, 0) scale(2.1, 3); opacity: 0; } }
+  .chimney-smoke { left: 36%; right: 36%; top: -5%; bottom: 80%; z-index: -1; overflow: visible; }
+  .chimney-smoke i { animation-name: chimneyRise; }
+  @keyframes chimneyRise { from { transform: translate(0, 20px) scale(.5); opacity: 0; } 25% { opacity: .3; } to { transform: translate(var(--drift), -110px) scale(2.5); opacity: 0; } }
+  .plaque { position: absolute; bottom: 3.1%; left: 50%; transform: translateX(-50%); font: 700 clamp(6px, .65vw, 9px) Consolas, "Courier New", Courier, monospace; letter-spacing: .16em; color: var(--cp-stone-light); white-space: nowrap; }
+  .fire-tools { display: flex; justify-content: center; margin-top: 8px; }
+  .motion-button { border: 1px solid var(--cp-border); background: var(--cp-surface); border-radius: 10px; padding: 8px 14px; font-size: 11px; }
+  #rendererNotice { font-size: 12px; color: var(--cp-text-muted); text-align: center; }
+  .controls { padding: 24px 20px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-panel); }
+  .controls h2 { margin: 0 0 6px; font-size: 18px; font-weight: 600; letter-spacing: -.03em; }
+  .controls > p { margin: 0 0 24px; font-size: 12px; color: var(--cp-text-muted); line-height: 1.7; }
+  .control { margin-top: 24px; }
+  .control-head { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 12px; gap: 8px; }
+  output { color: var(--cp-accent); font: 700 12px Consolas, "Courier New", Courier, monospace; }
+  input[type=range] { width: 100%; height: 4px; accent-color: var(--cp-accent); cursor: pointer; }
+  .button-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 24px; }
+  .mode-button { border: 1px solid var(--cp-border); background: var(--cp-surface); border-radius: 10px; padding: 12px 4px; font-size: 11px; }
+  .mode-button:hover { border-color: var(--cp-accent); }
+  .mode-button.active { background: var(--cp-accent); color: var(--cp-accent-fg); border-color: var(--cp-accent); }
+  .now-burning { padding-top: 20px; margin-top: 24px; border-top: 1px solid var(--cp-border); font-size: 11px; line-height: 1.8; }
+  .now-burning b { font-weight: 600; }
+  .now-burning span { display: block; color: var(--cp-text-muted); font-size: 10px; }
+  footer { text-align: center; color: var(--cp-text-muted); font-size: 10px; letter-spacing: .16em; padding: 0 20px 24px; text-transform: uppercase; }
+  .snowfield { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .snow { position: absolute; top: -20px; left: var(--x); width: var(--s); height: var(--s); border-radius: 50%; background: var(--cp-stone-light); opacity: var(--o); animation: snowfall var(--d) linear infinite; animation-delay: var(--delay); }
+  @keyframes snowfall { to { transform: translate3d(var(--drift), max(110vh, 1600px), 0); } }
+  .is-paused *, .is-paused *::before, .is-paused *::after { animation-play-state: paused !important; }
+  @media (max-width: 1100px) {
+    main { grid-template-columns: minmax(180px, .7fr) minmax(0, 1.5fr); }
+    .controls { grid-column: 1 / -1; width: min(540px, 100%); justify-self: center; }
+  }
+  @media (max-width: 640px) {
+    header, main { width: calc(100% - 32px); }
+    header { height: 76px; }
+    .winter-status { display: none; }
+    main { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-top: 32px; }
+    .story { text-align: center; }
+    h1 { font-size: clamp(56px, 17vw, 80px); }
+    .eyebrow { margin-bottom: 16px; }
+    .lede { margin: 20px auto; }
+    .metric-row { justify-content: center; }
+    .token { font-size: 8px; height: 22px; }
+    .hearth-wrap { margin-top: 4px; }
+    .controls { grid-column: auto; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
+  }
+</style>
+</head>
+<body>
+<div class="experience" id="experience" style="--heat:68">
+  <div class="snowfield" id="snowfield" aria-hidden="true"></div>
+  <header>
+    <div class="brand"><div class="brand-mark" aria-hidden="true">{ }</div><div><b>Token Hearth</b><small>Compute, made cozy.</small></div></div>
+    <div class="winter-status">Winter outside. Warmth within.</div>
+  </header>
+  <main>
+    <section class="story">
+      <p class="eyebrow">A digital winter ritual</p>
+      <h1>Let the<br><em>tokens</em><br>burn.</h1>
+      <p class="lede">Outside, winter writes in white. Inside, intelligence crackles&mdash;one bright token at a time.</p>
+      <div class="metric-row">
+        <div class="metric"><strong id="tokenCount">12.8K</strong><span>tokens glowing</span></div>
+        <div class="metric"><strong id="warmth">68%</strong><span>semantic warmth</span></div>
+      </div>
+    </section>
+    <div class="hearth-wrap">
+      <section class="hearth-scene" aria-label="Stone fireplace with turbulent golden fire, glowing AI tokens, embers, and smoke rising into the chimney">
+        <div class="smoke chimney-smoke" aria-hidden="true">
+          <i style="--left:22%;--size:65px;--duration:7s;--delay:-2s;--drift:30px"></i>
+          <i style="--left:36%;--size:75px;--duration:9s;--delay:-6s;--drift:50px"></i>
+        </div>
+        <svg class="architecture" viewBox="0 0 760 800" aria-hidden="true">
+          <defs>
+            <linearGradient id="stone" x1="0" y1="0" x2=".5" y2="1">
+              <stop stop-color="var(--cp-stone-light)"/><stop offset=".14" stop-color="var(--cp-stone)"/><stop offset="1" stop-color="var(--cp-soot)"/>
+            </linearGradient>
+            <linearGradient id="mantel" x1="0" y1="0" x2="0" y2="1">
+              <stop stop-color="var(--cp-stone-light)"/><stop offset=".12" stop-color="var(--cp-stone)"/><stop offset=".7" stop-color="var(--cp-soot)"/><stop offset="1" stop-color="var(--cp-stone)"/>
+            </linearGradient>
+            <radialGradient id="bounce" cx=".5" cy=".88" r=".65">
+              <stop stop-color="var(--cp-warning)" stop-opacity=".52"/><stop offset=".45" stop-color="var(--cp-danger)" stop-opacity=".1"/><stop offset="1" stop-color="var(--cp-warning)" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="floorLight">
+              <stop stop-color="var(--cp-warning)" stop-opacity=".23"/><stop offset="1" stop-color="var(--cp-warning)" stop-opacity="0"/>
+            </radialGradient>
+            <pattern id="blocks" width="166" height="94" patternUnits="userSpaceOnUse">
+              <rect width="166" height="94" fill="var(--cp-soot)"/>
+              <g fill="url(#stone)" stroke="var(--cp-stone-light)" stroke-opacity=".18">
+                <rect x="2" y="2" width="162" height="42" rx="3"/>
+                <rect x="-80" y="49" width="162" height="42" rx="3"/>
+                <rect x="87" y="49" width="162" height="42" rx="3"/>
+              </g>
+            </pattern>
+            <filter id="texture" x="0" y="0" width="100%" height="100%">
+              <feTurbulence type="fractalNoise" baseFrequency=".48" numOctaves="3" seed="8" result="noise"/>
+              <feColorMatrix in="noise" type="saturate" values="0"/>
+              <feComponentTransfer><feFuncA type="linear" slope=".12"/></feComponentTransfer>
+              <feComposite in2="SourceGraphic" operator="in" result="grain"/>
+              <feBlend in="SourceGraphic" in2="grain" mode="soft-light"/>
+            </filter>
+          </defs>
+          <ellipse cx="380" cy="755" rx="337" ry="30" fill="var(--cp-soot)" opacity=".12"/>
+          <ellipse cx="380" cy="736" rx="310" ry="54" fill="url(#floorLight)"/>
+          <g filter="url(#texture)">
+            <path d="M278 25H482L540 272H220Z" fill="url(#blocks)" stroke="var(--cp-soot)" stroke-width="3"/>
+            <path d="M278 25L292 25L249 265H220Z" fill="var(--cp-stone-light)" opacity=".15"/>
+            <rect x="267" y="13" width="226" height="17" rx="2" fill="url(#mantel)"/>
+            <rect x="111" y="284" width="538" height="424" fill="url(#blocks)" stroke="var(--cp-soot)" stroke-width="3"/>
+            <g id="archStones"></g>
+            <rect x="65" y="263" width="630" height="26" rx="3" fill="url(#mantel)" stroke="var(--cp-soot)" stroke-width="2"/>
+            <path d="M65 263L83 245H677L695 263Z" fill="var(--cp-stone-light)"/>
+            <path d="M78 290H682L668 308H92Z" fill="var(--cp-soot)"/>
+            <path d="M88 695H672L705 723H55Z" fill="url(#stone)" stroke="var(--cp-soot)" stroke-width="2"/>
+            <rect x="55" y="723" width="650" height="24" rx="2" fill="url(#mantel)"/>
+            <path d="M55 747H705L692 758H68Z" fill="var(--cp-soot)"/>
+          </g>
+          <path d="M139 684V455A241 175 0 0 1 621 455V684H580V455A200 135 0 0 0 180 455V684Z" fill="url(#bounce)" id="stoneLight"/>
+          <path d="M180 680V455A200 135 0 0 1 580 455V680Z" fill="var(--cp-soot)" stroke="var(--cp-soot)" stroke-width="13"/>
+          <path d="M174 678V455A206 141 0 0 1 586 455V678" fill="none" stroke="var(--cp-warning)" stroke-opacity=".25" stroke-width="2"/>
+        </svg>
+        <div class="firebox">
+          <div class="ember-bed"></div>
+          <div class="token-stack">
+            <div class="token" style="--left:1%;--bottom:0;--w:42%;--r:8deg">GPT-5</div>
+            <div class="token" style="--left:37%;--bottom:0;--w:48%;--r:-6deg">CLAUDE</div>
+            <div class="token" style="--left:14%;--bottom:36%;--w:42%;--r:-8deg">GEMINI</div>
+            <div class="token" style="--left:52%;--bottom:40%;--w:40%;--r:13deg">LLAMA</div>
+          </div>
+          <canvas id="fire" class="fire-renderer" aria-hidden="true"></canvas>
+          <div class="smoke" aria-hidden="true">
+            <i style="--left:18%;--size:60px;--duration:5s;--delay:-2s;--drift:22px"></i>
+            <i style="--left:45%;--size:72px;--duration:6.5s;--delay:-5s;--drift:-12px"></i>
+            <i style="--left:32%;--size:50px;--duration:4.5s;--delay:-1s;--drift:15px"></i>
+          </div>
+          <div id="sparks" aria-hidden="true"></div>
+          <div class="grate" aria-hidden="true"></div>
+        </div>
+        <div class="plaque">INFERENCE HEARTH &middot; EST. 2026</div>
+      </section>
+      <div class="fire-tools"><button class="motion-button" id="motion" type="button" aria-pressed="false">Pause motion</button></div>
+      <p id="rendererNotice" role="status" hidden></p>
+    </div>
+    <aside class="controls">
+      <p class="eyebrow">Make yourself at home</p>
+      <h2>Control the glow</h2>
+      <p>A little more fire.<br>A little less outside world.</p>
+      <div class="control"><div class="control-head"><label for="heat">Inference heat</label><output id="heatOut" for="heat">68%</output></div><input id="heat" type="range" min="20" max="100" value="68"></div>
+      <div class="control"><div class="control-head"><label for="snow">Snowfall</label><output id="snowOut" for="snow">Soft</output></div><input id="snow" type="range" min="1" max="3" value="2"></div>
+      <div class="button-grid" aria-label="Ambience presets"><button class="mode-button active" data-mode="focus" aria-pressed="true">Focus</button><button class="mode-button" data-mode="deep" aria-pressed="false">Deep winter</button></div>
+      <div class="now-burning"><b>Now burning: context window</b><span>An imaginary fire. A very real moment of calm.</span></div>
+    </aside>
+  </main>
+  <footer>No wood. No deadlines. Just a little warmth.</footer>
+</div>
+<script>
+  const experience = document.getElementById("experience");
+  const snowfield = document.getElementById("snowfield");
+  const sparks = document.getElementById("sparks");
+  const heat = document.getElementById("heat");
+  const snow = document.getElementById("snow");
+  const heatOut = document.getElementById("heatOut");
+  const snowOut = document.getElementById("snowOut");
+  const motion = document.getElementById("motion");
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const svgNS = "http://www.w3.org/2000/svg";
+
+  function seeded(index, salt) { return ((index * 47 + salt * 31) % 101) / 100; }
+  function makeStone(path, opacity) {
+    const element = document.createElementNS(svgNS, "path");
+    element.setAttribute("d", path);
+    element.setAttribute("fill", "url(#stone)");
+    element.setAttribute("stroke", "var(--cp-soot)");
+    element.setAttribute("stroke-width", "3");
+    element.setAttribute("opacity", opacity);
+    document.getElementById("archStones").append(element);
+  }
+  // Individual voussoirs keep the arch joints radial rather than stretching a brick pattern.
+  for (let i = 0; i < 13; i++) {
+    const a = Math.PI + i * Math.PI / 13 + .006;
+    const b = Math.PI + (i + 1) * Math.PI / 13 - .006;
+    const point = (angle, rx, ry) => `${380 + Math.cos(angle) * rx},${455 + Math.sin(angle) * ry}`;
+    makeStone(`M${point(a, 240, 175)}A240 175 0 0 1 ${point(b, 240, 175)}L${point(b, 200, 135)}A200 135 0 0 0 ${point(a, 200, 135)}Z`, .84 + seeded(i, 3) * .16);
+  }
+  for (let i = 0; i < 5; i++) {
+    for (const x of [139, 580]) {
+      const y = 458 + i * 46;
+      makeStone(`M${x} ${y}h41v43h-41Z`, .82 + seeded(i, x) * .18);
+    }
+  }
+  function renderSnow(level) {
+    snowfield.replaceChildren();
+    for (let i = 0; i < [22, 44, 70][level - 1]; i++) {
+      const flake = document.createElement("i");
+      flake.className = "snow";
+      Object.entries({ x: `${seeded(i, 2) * 100}%`, s: `${1 + seeded(i, 5) * 3}px`, o: `${.12 + seeded(i, 8) * .3}`, d: `${14 + seeded(i, 3) * 20}s`, delay: `${-seeded(i, 11) * 34}s`, drift: `${-55 + seeded(i, 7) * 110}px` }).forEach(([key, value]) => flake.style.setProperty(`--${key}`, value));
+      snowfield.append(flake);
+    }
+  }
+  function renderSparks(value) {
+    sparks.replaceChildren();
+    for (let i = 0; i < Math.round(value / 4); i++) {
+      const spark = document.createElement("i");
+      spark.className = "spark";
+      Object.entries({ left: `${12 + seeded(i, 4) * 76}%`, duration: `${1.6 + seeded(i, 9) * 2.4}s`, delay: `${-seeded(i, 6) * 4}s`, drift: `${-35 + seeded(i, 12) * 70}px` }).forEach(([key, value]) => spark.style.setProperty(`--${key}`, value));
+      sparks.append(spark);
+    }
+  }
+
+  let canvas = document.getElementById("fire");
+  const notice = document.getElementById("rendererNotice");
+  let renderer;
+  let gl;
+  let paused = reducedMotion.matches;
+  let raf = 0;
+  let time = 18;
+  let previous = 0;
+  let lastPaint = 0;
+  let palette;
+  function readPalette() {
+    const probe = document.createElement("span");
+    document.body.append(probe);
+    const resolve = name => {
+      probe.style.color = `var(${name})`;
+      const numbers = getComputedStyle(probe).color.match(/[\d.]+/g);
+      return numbers.slice(0, 3).map(Number);
+    };
+    palette = { red: resolve("--cp-danger"), gold: resolve("--cp-warning"), white: resolve("--cp-fire-white") };
+    probe.remove();
+  }
+  readPalette();
+  const vertexSource = `
+    attribute vec2 position;
+    varying vec2 uv;
+    void main() { uv = position * .5 + .5; gl_Position = vec4(position, 0., 1.); }
+  `;
+  const fragmentSource = `
+    precision mediump float;
+    varying vec2 uv;
+    uniform float clock;
+    uniform float heat;
+    uniform vec3 ember;
+    uniform vec3 gold;
+    uniform vec3 whiteHot;
+    float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+    float noise(vec2 p) {
+      vec2 i = floor(p), f = fract(p); f = f * f * (3. - 2. * f);
+      return mix(mix(hash(i), hash(i + vec2(1., 0.)), f.x),
+        mix(hash(i + vec2(0., 1.)), hash(i + vec2(1., 1.)), f.x), f.y);
+    }
+    float fbm(vec2 p) {
+      float n = 0., a = .5;
+      for (int i = 0; i < 4; i++) { n += a * noise(p); p = p * 2.03 + 7.1; a *= .5; }
+      return n;
+    }
+    void main() {
+      float y = max(0., (uv.y - .10) / (.48 + heat * .42));
+      float t = clock * 1.25;
+      vec2 p = vec2(uv.x * 6.5, y * 3.2 - t);
+      float turbulence = fbm(p + vec2(fbm(p * .65 + t * .15), 0.));
+      float detail = fbm(vec2(uv.x * 17., y * 10. - t * 2.));
+      float bend = (turbulence - .48) * (.09 + y * .16);
+      float field = 0.;
+      for (int i = 0; i < 7; i++) {
+        float k = float(i);
+        float center = .18 + k * .105;
+        float height = .65 + .22 * sin(k * 2.1 + 1.2) + .16 * sin(t * 1.2 + k * 3.);
+        float h = y / height;
+        float width = (.105 + .026 * sin(k * 1.7)) * max(0., 1. - h * .87);
+        float curl = bend + sin(h * 5. - t * 1.5 + k) * .048 * h;
+        float ribbon = 1. - abs(uv.x - center + curl) / max(.004, width);
+        float tip = 1. - smoothstep(.62, 1.15, h);
+        field += max(0., ribbon) * tip * .8;
+      }
+      float density = max(0., field - turbulence * .48 - detail * .23);
+      float alpha = smoothstep(.0, .43, density) * smoothstep(.06, .21, uv.y);
+      alpha *= 1. - smoothstep(.89, 1., uv.y);
+      float temperature = clamp(density * 1.12 + (1. - y) * .12, 0., 1.);
+      vec3 color = mix(ember, gold, smoothstep(.02, .38, temperature));
+      color = mix(color, whiteHot, smoothstep(.46, .92, temperature));
+      float halo = exp(-pow((uv.x - .5) * 3.7, 2.) - pow((uv.y - .24) * 5., 2.)) * .22;
+      float a = max(alpha * .95, halo);
+      gl_FragColor = vec4(mix(gold, color, alpha), a);
+    }
+  `;
+  function createShader(type, source) {
+    const shader = gl.createShader(type);
+    gl.shaderSource(shader, source);
+    gl.compileShader(shader);
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+      const message = gl.getShaderInfoLog(shader);
+      gl.deleteShader(shader);
+      throw new Error(`Fire shader could not compile: ${message}`);
+    }
+    return shader;
+  }
+  function setupWebGL() {
+    gl = canvas.getContext("webgl", { alpha: true, premultipliedAlpha: false, antialias: false });
+    if (!gl) return false;
+    const vertex = createShader(gl.VERTEX_SHADER, vertexSource);
+    const fragment = createShader(gl.FRAGMENT_SHADER, fragmentSource);
+    const program = gl.createProgram();
+    gl.attachShader(program, vertex); gl.attachShader(program, fragment); gl.linkProgram(program);
+    gl.deleteShader(vertex); gl.deleteShader(fragment);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw new Error(`Fire program could not link: ${gl.getProgramInfoLog(program)}`);
+    gl.useProgram(program);
+    const buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);
+    const position = gl.getAttribLocation(program, "position");
+    gl.enableVertexAttribArray(position); gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+    const uniforms = Object.fromEntries(["clock", "heat", "ember", "gold", "whiteHot"].map(name => [name, gl.getUniformLocation(program, name)]));
+    renderer = () => {
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.uniform1f(uniforms.clock, time); gl.uniform1f(uniforms.heat, Number(heat.value) / 100);
+      gl.uniform3fv(uniforms.ember, palette.red.map(c => c / 255));
+      gl.uniform3fv(uniforms.gold, palette.gold.map(c => c / 255));
+      gl.uniform3fv(uniforms.whiteHot, palette.white.map(c => c / 255));
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+    };
+    canvas.dataset.renderer = "webgl";
+    return true;
+  }
+  function setupFallback(message) {
+    if (gl) {
+      const replacement = canvas.cloneNode(false);
+      canvas.replaceWith(replacement);
+      canvas = replacement;
+    }
+    const ctx = canvas.getContext("2d");
+    notice.hidden = false;
+    notice.textContent = message;
+    if (!ctx) {
+      notice.textContent = "Your browser could not create the fire renderer. Try enabling graphics acceleration.";
+      renderer = () => {};
+      canvas.dataset.renderer = "unavailable";
+      return;
+    }
+    const rgba = (color, alpha) => `rgba(${color.join(",")},${alpha})`;
+    renderer = () => {
+      const w = canvas.width, h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+      ctx.globalCompositeOperation = "screen";
+      for (let i = 0; i < 14; i++) {
+        const base = .16 + i * .052;
+        const height = (.22 + seeded(i, 3) * .45) * (.55 + Number(heat.value) / 130);
+        const gradient = ctx.createLinearGradient(0, h * .89, 0, h * (.89 - height));
+        gradient.addColorStop(0, rgba(palette.white, .75));
+        gradient.addColorStop(.35, rgba(palette.gold, .8));
+        gradient.addColorStop(.8, rgba(palette.red, .45));
+        gradient.addColorStop(1, rgba(palette.gold, 0));
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        for (const side of [-1, 1]) {
+          for (let n = 0; n <= 28; n++) {
+            const y = side === -1 ? n / 28 : 1 - n / 28;
+            const curl = Math.sin(y * 7 - time * 2.8 + i) * .033 * y + Math.sin(y * 15 - time * 4 + i) * .012 * y;
+            const x = base + curl + side * .042 * Math.pow(1 - y, .8);
+            const py = (.89 - y * height) * h;
+            if (side === -1 && n === 0) ctx.moveTo(x * w, py);
+            else ctx.lineTo(x * w, py);
+          }
+        }
+        ctx.closePath(); ctx.fill();
+      }
+    };
+    canvas.dataset.renderer = "canvas2d";
+  }
+  try {
+    if (!setupWebGL()) setupFallback("Compatibility fire renderer active.");
+  } catch (error) {
+    console.error("Fire renderer initialization failed.", error);
+    setupFallback("Advanced fire rendering is unavailable. Compatibility renderer active.");
+  }
+  canvas.addEventListener("webglcontextlost", event => {
+    event.preventDefault();
+    cancelAnimationFrame(raf); raf = 0;
+    setupFallback("Graphics context was interrupted. Compatibility renderer active.");
+    resize();
+    synchronizeMotion();
+  });
+  function paint() {
+    renderer();
+    const flicker = .73 + Math.sin(time * 3.2) * .05 + Math.sin(time * 7.7) * .025;
+    document.getElementById("stoneLight").style.opacity = String(flicker * Number(heat.value) / 100);
+  }
+  function frame(now) {
+    raf = 0;
+    if (paused || reducedMotion.matches || document.hidden) return;
+    if (now - lastPaint >= 32) {
+      time += previous ? Math.min((now - previous) / 1000, .08) : 0;
+      previous = now; lastPaint = now;
+      paint();
+    }
+    raf = requestAnimationFrame(frame);
+  }
+  function synchronizeMotion() {
+    const stopped = paused || reducedMotion.matches || document.hidden;
+    experience.classList.toggle("is-paused", stopped);
+    motion.setAttribute("aria-pressed", String(paused || reducedMotion.matches));
+    motion.textContent = reducedMotion.matches ? "Reduced motion enabled" : paused ? "Resume motion" : "Pause motion";
+    motion.disabled = reducedMotion.matches;
+    cancelAnimationFrame(raf); raf = 0; previous = 0;
+    if (!document.hidden) paint();
+    if (!stopped) raf = requestAnimationFrame(frame);
+  }
+  function resize() {
+    const bounds = document.querySelector(".firebox").getBoundingClientRect();
+    const ratio = Math.min(devicePixelRatio || 1, 1.5);
+    canvas.width = Math.max(1, Math.round(bounds.width * ratio));
+    canvas.height = Math.max(1, Math.round(bounds.height * ratio));
+    paint();
+  }
+  function updateHeat(value) {
+    experience.style.setProperty("--heat", value);
+    heatOut.value = `${value}%`;
+    document.getElementById("warmth").textContent = `${value}%`;
+    document.getElementById("tokenCount").textContent = `${(7.4 + value * .08).toFixed(1)}K`;
+    renderSparks(Number(value));
+    paint();
+  }
+  function updateSnow() {
+    snowOut.value = ["Quiet", "Soft", "Blizzard"][Number(snow.value) - 1];
+    renderSnow(Number(snow.value));
+  }
+  function clearPreset() {
+    document.querySelectorAll(".mode-button").forEach(button => {
+      button.classList.remove("active"); button.setAttribute("aria-pressed", "false");
+    });
+  }
+  heat.addEventListener("input", () => { updateHeat(heat.value); clearPreset(); });
+  snow.addEventListener("input", () => { updateSnow(); clearPreset(); });
+  document.querySelectorAll(".mode-button").forEach(button => button.addEventListener("click", () => {
+    clearPreset(); button.classList.add("active"); button.setAttribute("aria-pressed", "true");
+    const deep = button.dataset.mode === "deep";
+    heat.value = deep ? 92 : 68; snow.value = deep ? 3 : 2;
+    updateHeat(heat.value); updateSnow();
+  }));
+  motion.addEventListener("click", () => { paused = !paused; synchronizeMotion(); });
+  reducedMotion.addEventListener("change", () => { paused = reducedMotion.matches; synchronizeMotion(); });
+  document.addEventListener("visibilitychange", synchronizeMotion);
+  new ResizeObserver(resize).observe(document.querySelector(".firebox"));
+  new MutationObserver(() => { readPalette(); paint(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  renderSnow(2); updateHeat(68); resize(); synchronizeMotion();
+</script>
+</body>
+</html>
