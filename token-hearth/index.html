@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="A winter hearth fueled by AI tokens. Real-time procedural fire, hand-built stonework, drifting smoke, and falling snow.">
+<meta name="description" content="A pixel-art winter hearth fueled by AI tokens. Procedural fire, tiled masonry, and drifting snow.">
 <title>Token Hearth - Compute, made cozy.</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cstyle%3E:root%7B--cp-soot:%23242424;--cp-warning:%23f59e0b%7D%3C/style%3E%3Crect width='32' height='32' rx='6' fill='var(--cp-soot)'/%3E%3Cpath d='M17 4C22 15 27 16 25 23C22 32 7 30 7 21C7 15 12 14 12 9C15 13 14 17 16 17C19 14 16 9 17 4Z' fill='var(--cp-warning)'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' shape-rendering='crispEdges'%3E%3Crect width='32' height='32' fill='%23242424'/%3E%3Cpath d='M14 2h4v5h3v5h3v8h-3v6h-4v4H9v-5H6v-9h3v-5h3v5h2z' fill='%23f59e0b'/%3E%3Cpath d='M14 17h4v4h3v6H11v-5h3z' fill='%23f7f4ef'/%3E%3C/svg%3E">
 <script>
   (() => {
     const param = new URLSearchParams(window.location.search).get("scoutTheme");
@@ -74,65 +74,70 @@
     --cp-fire-white: light-dark(var(--cp-bg-elevated), var(--cp-text));
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--cp-bg); color: var(--cp-text); font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif; }
+  body { margin: 0; background: var(--cp-bg); color: var(--cp-text); font-family: Consolas, "Courier New", Courier, monospace; }
   button, input { font: inherit; }
   button { color: inherit; cursor: pointer; }
-  :focus-visible { outline: 2px solid var(--cp-accent); outline-offset: 4px; }
-  .experience { position: relative; overflow: hidden; min-height: 100svh; isolation: isolate; background: radial-gradient(ellipse at 53% 72%, var(--cp-highlight), transparent 42%), var(--cp-bg); }
-  .experience::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .2; background: repeating-linear-gradient(90deg, transparent 0 139px, var(--cp-border-strong) 140px 141px); mask-image: linear-gradient(var(--cp-text), transparent 90%); }
-  header { width: min(1540px, calc(100% - 64px)); margin: auto; height: 92px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 3; border-bottom: 1px solid var(--cp-border); }
+  :focus-visible { outline: 3px solid var(--cp-accent); outline-offset: 4px; }
+  .experience { position: relative; overflow: hidden; min-height: 100svh; isolation: isolate; background: var(--cp-bg); }
+  .experience::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .22; background: repeating-linear-gradient(0deg, transparent 0 31px, var(--cp-border) 31px 32px), repeating-linear-gradient(90deg, transparent 0 63px, var(--cp-border) 63px 64px); }
+  header { width: min(1540px, calc(100% - 64px)); margin: auto; min-height: 88px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 3; border-bottom: 4px solid var(--cp-border-strong); }
   .brand { display: flex; align-items: center; gap: 12px; }
-  .brand-mark { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid var(--cp-border-strong); border-radius: 10px; color: var(--cp-accent); font: 700 20px Consolas, "Courier New", Courier, monospace; }
+  .brand-mark { width: 42px; height: 42px; display: grid; place-items: center; border: 3px solid var(--cp-border-strong); background: var(--cp-surface); box-shadow: 4px 4px 0 var(--cp-soot); color: var(--cp-accent); font: 700 20px Consolas, "Courier New", Courier, monospace; }
   .brand b { display: block; font-size: 13px; letter-spacing: .17em; text-transform: uppercase; }
   .brand small { color: var(--cp-text-muted); font-size: 11px; }
   .winter-status { color: var(--cp-text-muted); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
   main { width: min(1540px, calc(100% - 64px)); margin: auto; min-height: calc(100svh - 145px); display: grid; grid-template-columns: minmax(210px, .85fr) minmax(0, 2.1fr) minmax(216px, .7fr); align-items: center; gap: 24px; padding: 24px 0 40px; position: relative; }
-  .eyebrow { color: var(--cp-accent); text-transform: uppercase; letter-spacing: .2em; font-size: 10px; font-weight: 700; margin: 0 0 24px; }
-  h1 { font-size: clamp(48px, 6.3vw, 94px); line-height: .96; letter-spacing: -.065em; margin: 0; font-weight: 650; }
+  .eyebrow { color: var(--cp-accent); text-transform: uppercase; letter-spacing: .15em; font-size: 10px; font-weight: 700; margin: 0 0 24px; }
+  h1 { font-size: clamp(46px, 6vw, 86px); line-height: 1.05; letter-spacing: -.085em; margin: 0; font-weight: 900; text-shadow: 4px 4px 0 var(--cp-border); }
   h1 em { font-style: normal; color: var(--cp-accent); }
-  .lede { font-size: 15px; line-height: 1.8; color: var(--cp-text-muted); max-width: 290px; margin: 28px 0; }
-  .metric-row { display: flex; gap: 28px; padding-top: 24px; border-top: 1px solid var(--cp-border); }
-  .metric strong { display: block; font: 500 23px Consolas, "Courier New", Courier, monospace; }
+  .lede { font-size: 14px; line-height: 1.65; color: var(--cp-text-muted); max-width: 290px; margin: 28px 0; }
+  .metric-row { display: flex; gap: 20px; padding-top: 20px; border-top: 4px solid var(--cp-border-strong); }
+  .metric strong { display: block; font: 700 23px Consolas, "Courier New", Courier, monospace; }
   .metric span { display: block; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--cp-text-muted); margin-top: 8px; }
   .hearth-wrap { min-width: 0; }
   .hearth-scene { position: relative; width: 100%; aspect-ratio: 760 / 800; isolation: isolate; }
-  .hearth-scene::before { content: ""; position: absolute; inset: 50% -14% -5%; background: radial-gradient(ellipse, color-mix(in srgb, var(--cp-warning) 14%, transparent), transparent 68%); pointer-events: none; }
-  .architecture { position: absolute; width: 100%; height: 100%; overflow: visible; }
-  .firebox { position: absolute; left: 23.6842%; top: 40%; width: 52.6316%; height: 45%; overflow: hidden; border-radius: 50% 50% 0 0 / 37.5% 37.5% 0 0; background: var(--cp-soot); isolation: isolate; }
-  .firebox::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 87%, color-mix(in srgb, var(--cp-danger) 16%, transparent), transparent 70%), repeating-linear-gradient(0deg, transparent 0 24px, var(--cp-soot) 25px 27px), repeating-linear-gradient(90deg, transparent 0 49px, var(--cp-soot) 50px 52px); background-color: color-mix(in srgb, var(--cp-soot) 91%, var(--cp-stone)); box-shadow: inset 0 20px 38px 10px var(--cp-soot); }
-  .fire-renderer { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; }
-  .ember-bed { position: absolute; inset: auto 6% 2%; height: 17%; z-index: 1; border-radius: 50%; background: radial-gradient(ellipse, var(--cp-warning), var(--cp-danger) 35%, transparent 72%); opacity: .7; filter: blur(7px); }
-  .token-stack { position: absolute; inset: auto 8% 8%; height: 24%; z-index: 2; }
-  .token { position: absolute; left: var(--left); bottom: var(--bottom); width: var(--w); height: clamp(19px, 2.3vw, 32px); display: flex; align-items: center; justify-content: center; border: 1px solid color-mix(in srgb, var(--cp-warning) 80%, var(--cp-soot)); border-radius: 4px; background: repeating-linear-gradient(90deg, transparent 0 12px, color-mix(in srgb, var(--cp-danger) 30%, transparent) 13px 14px), linear-gradient(175deg, var(--cp-soot) 15%, color-mix(in srgb, var(--cp-soot) 60%, var(--cp-danger)) 80%, var(--cp-warning)); color: var(--cp-warning); font: 700 clamp(7px, .8vw, 11px)/1 Consolas, "Courier New", Courier, monospace; letter-spacing: .08em; transform: rotate(var(--r)); box-shadow: inset 0 -2px 6px var(--cp-danger), 0 3px 0 var(--cp-soot), 0 5px 12px color-mix(in srgb, var(--cp-danger) 50%, transparent); }
-  .token::before { content: "{ }"; margin-right: 6px; font-size: .8em; }
-  .grate { position: absolute; inset: auto 6% 2%; height: 17%; z-index: 5; border-bottom: 5px solid var(--cp-soot); background: repeating-linear-gradient(90deg, transparent 0 12%, var(--cp-soot) 12.5% 14%, color-mix(in srgb, var(--cp-warning) 40%, var(--cp-soot)) 14% 14.6%, transparent 15% 25%); transform: perspective(180px) rotateX(-12deg); }
-  .spark { position: absolute; bottom: 14%; left: var(--left); width: 2px; height: 3px; border-radius: 50%; background: var(--cp-warning); box-shadow: 0 0 5px var(--cp-warning); animation: sparkUp var(--duration) ease-out infinite; animation-delay: var(--delay); z-index: 5; }
-  @keyframes sparkUp { 0% { transform: translate(0, 0) scale(.4); opacity: 0; } 12% { opacity: 1; } 100% { transform: translate(var(--drift), -240px) scale(0); opacity: 0; } }
-  .smoke { position: absolute; inset: 0 10% 12%; z-index: 4; opacity: calc(.12 + var(--heat) * .002); pointer-events: none; overflow: hidden; mask-image: linear-gradient(to top, transparent, var(--cp-text) 30%, var(--cp-text) 70%, transparent); }
-  .smoke i { position: absolute; bottom: 0; left: var(--left); width: var(--size); height: var(--size); border-radius: 50%; background: radial-gradient(ellipse, var(--cp-stone-light), transparent 70%); filter: blur(7px); animation: smokeRise var(--duration) ease-out infinite; animation-delay: var(--delay); }
-  @keyframes smokeRise { from { transform: translate3d(0, 0, 0) scale(.55); opacity: 0; } 20% { opacity: .45; } to { transform: translate3d(var(--drift), -320px, 0) scale(2.1, 3); opacity: 0; } }
+  .architecture { position: absolute; width: 100%; height: 100%; overflow: visible; shape-rendering: crispEdges; }
+  .firebox { position: absolute; left: 23.6842%; top: 40%; width: 52.6316%; height: 45%; overflow: hidden; clip-path: polygon(30% 0,70% 0,70% 4.45%,80% 4.45%,80% 8.9%,85% 8.9%,85% 13.34%,90% 13.34%,90% 17.78%,95% 17.78%,95% 22.23%,100% 22.23%,100% 100%,0 100%,0 22.23%,5% 22.23%,5% 17.78%,10% 17.78%,10% 13.34%,15% 13.34%,15% 8.9%,20% 8.9%,20% 4.45%,30% 4.45%); background: var(--cp-soot); isolation: isolate; }
+  .firebox::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent 0 27px, var(--cp-soot) 27px 30px), repeating-linear-gradient(90deg, transparent 0 47px, var(--cp-soot) 47px 50px); background-color: color-mix(in srgb, var(--cp-soot) 89%, var(--cp-accent)); }
+  .fire-renderer { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; image-rendering: pixelated; }
+  .ember-bed { position: absolute; inset: auto 6% 2%; height: 12%; z-index: 1; background: repeating-linear-gradient(90deg, var(--cp-danger) 0 12px, var(--cp-warning) 12px 20px, var(--cp-soot) 20px 24px); opacity: .7; }
+  .token-stack { position: absolute; inset: auto 6% 8%; height: 24%; z-index: 6; }
+  .token { position: absolute; left: var(--left); bottom: 0; width: 21%; aspect-ratio: 1; display: flex; align-items: end; justify-content: center; padding: 0 1px 8px; border: 3px solid var(--cp-warning); background: var(--cp-soot); color: var(--cp-warning); font: 700 clamp(5px, .8vw, 10px)/1 Consolas, "Courier New", Courier, monospace; white-space: nowrap; box-shadow: 4px 4px 0 var(--cp-danger); }
+  .token::before { content: ""; position: absolute; top: 12%; left: 15%; width: 15%; aspect-ratio: 1; background: var(--cp-warning); box-shadow: 10px 0 0 var(--cp-danger); }
+  .grate { position: absolute; inset: auto 6% 2%; height: 17%; z-index: 5; border-bottom: 6px solid var(--cp-soot); background: repeating-linear-gradient(90deg, transparent 0 12%, var(--cp-soot) 12% 15%, transparent 15% 25%); }
+  .spark { position: absolute; bottom: 14%; left: var(--left); width: 4px; height: 4px; background: var(--cp-warning); animation: sparkUp var(--duration) steps(12) infinite; animation-delay: var(--delay); z-index: 5; }
+  @keyframes sparkUp { 0% { transform: translate(0, 0); opacity: 0; } 12% { opacity: 1; } 100% { transform: translate(var(--drift), -240px); opacity: 0; } }
+  .smoke { position: absolute; inset: 0 10% 12%; z-index: 4; opacity: calc(.2 + var(--heat) * .003); pointer-events: none; overflow: hidden; }
+  .smoke i { position: absolute; bottom: 0; left: var(--left); width: var(--size); height: var(--size); background: var(--cp-stone-light); clip-path: polygon(25% 0,65% 0,65% 18%,85% 18%,85% 40%,100% 40%,100% 68%,75% 68%,75% 85%,55% 85%,55% 100%,15% 100%,15% 78%,0 78%,0 35%,25% 35%); animation: smokeRise var(--duration) steps(12) infinite; animation-delay: var(--delay); }
+  @keyframes smokeRise { from { transform: translate(0, 0) scale(.5); opacity: 0; } 20% { opacity: .45; } to { transform: translate(var(--drift), -320px) scale(1.4); opacity: 0; } }
   .chimney-smoke { left: 36%; right: 36%; top: -5%; bottom: 80%; z-index: -1; overflow: visible; }
   .chimney-smoke i { animation-name: chimneyRise; }
-  @keyframes chimneyRise { from { transform: translate(0, 20px) scale(.5); opacity: 0; } 25% { opacity: .3; } to { transform: translate(var(--drift), -110px) scale(2.5); opacity: 0; } }
-  .plaque { position: absolute; bottom: 3.1%; left: 50%; transform: translateX(-50%); font: 700 clamp(6px, .65vw, 9px) Consolas, "Courier New", Courier, monospace; letter-spacing: .16em; color: var(--cp-stone-light); white-space: nowrap; }
+  @keyframes chimneyRise { from { transform: translate(0, 20px) scale(.5); opacity: 0; } 25% { opacity: .3; } to { transform: translate(var(--drift), -110px) scale(1.5); opacity: 0; } }
+  .plaque { position: absolute; bottom: 7.2%; left: 50%; transform: translateX(-50%); font: 700 clamp(7px, .75vw, 11px) Consolas, "Courier New", Courier, monospace; letter-spacing: .12em; color: var(--cp-fire-white); white-space: nowrap; }
   .fire-tools { display: flex; justify-content: center; margin-top: 8px; }
-  .motion-button { border: 1px solid var(--cp-border); background: var(--cp-surface); border-radius: 10px; padding: 8px 14px; font-size: 11px; }
+  .motion-button { border: 3px solid var(--cp-border-strong); background: var(--cp-surface); box-shadow: 4px 4px 0 var(--cp-soot); padding: 9px 15px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+  .motion-button:hover, .mode-button:hover { background: var(--cp-surface-soft); border-color: var(--cp-accent); }
+  .motion-button:active, .mode-button:active { box-shadow: 1px 1px 0 var(--cp-soot); transform: translate(3px, 3px); }
+  .motion-button:disabled { cursor: not-allowed; opacity: .65; }
   #rendererNotice { font-size: 12px; color: var(--cp-text-muted); text-align: center; }
-  .controls { padding: 24px 20px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-panel); }
-  .controls h2 { margin: 0 0 6px; font-size: 18px; font-weight: 600; letter-spacing: -.03em; }
+  .controls { padding: 24px 20px; border: 4px solid var(--cp-border-strong); background: var(--cp-surface); box-shadow: 8px 8px 0 var(--cp-soot); }
+  .controls h2 { margin: 0 0 6px; font-size: 18px; font-weight: 800; letter-spacing: -.04em; }
   .controls > p { margin: 0 0 24px; font-size: 12px; color: var(--cp-text-muted); line-height: 1.7; }
-  .control { margin-top: 24px; }
+  .control { margin-top: 24px; padding-top: 12px; border-top: 2px dashed var(--cp-border-strong); }
   .control-head { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 12px; gap: 8px; }
   output { color: var(--cp-accent); font: 700 12px Consolas, "Courier New", Courier, monospace; }
-  input[type=range] { width: 100%; height: 4px; accent-color: var(--cp-accent); cursor: pointer; }
+  input[type=range] { width: 100%; height: 24px; margin: 0; appearance: none; background: transparent; cursor: pointer; }
+  input[type=range]::-webkit-slider-runnable-track { height: 10px; background: var(--cp-border-strong); border: 2px solid var(--cp-soot); }
+  input[type=range]::-moz-range-track { height: 10px; background: var(--cp-border-strong); border: 2px solid var(--cp-soot); }
+  input[type=range]::-webkit-slider-thumb { appearance: none; width: 16px; height: 22px; margin-top: -8px; border: 3px solid var(--cp-soot); border-radius: 0; background: var(--cp-accent); box-shadow: 3px 3px 0 var(--cp-border-strong); }
+  input[type=range]::-moz-range-thumb { width: 12px; height: 18px; border: 3px solid var(--cp-soot); border-radius: 0; background: var(--cp-accent); box-shadow: 3px 3px 0 var(--cp-border-strong); }
   .button-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 24px; }
-  .mode-button { border: 1px solid var(--cp-border); background: var(--cp-surface); border-radius: 10px; padding: 12px 4px; font-size: 11px; }
-  .mode-button:hover { border-color: var(--cp-accent); }
+  .mode-button { border: 3px solid var(--cp-border-strong); background: var(--cp-surface-soft); box-shadow: 3px 3px 0 var(--cp-soot); padding: 12px 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
   .mode-button.active { background: var(--cp-accent); color: var(--cp-accent-fg); border-color: var(--cp-accent); }
-  .now-burning { padding-top: 20px; margin-top: 24px; border-top: 1px solid var(--cp-border); font-size: 11px; line-height: 1.8; }
+  .now-burning { padding-top: 20px; margin-top: 24px; border-top: 4px solid var(--cp-border-strong); font-size: 11px; line-height: 1.8; }
   .now-burning b { font-weight: 600; }
   .now-burning span { display: block; color: var(--cp-text-muted); font-size: 10px; }
-  footer { text-align: center; color: var(--cp-text-muted); font-size: 10px; letter-spacing: .16em; padding: 0 20px 24px; text-transform: uppercase; }
+  footer { text-align: center; color: var(--cp-text-muted); font-size: 10px; letter-spacing: .16em; padding: 12px 20px 24px; text-transform: uppercase; border-top: 4px solid var(--cp-border-strong); width: min(1540px, calc(100% - 64px)); margin: auto; }
   .snowfield { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
   .snow {
     position: absolute;
@@ -142,8 +147,7 @@
     height: var(--s);
     color: var(--cp-fire-white);
     opacity: var(--o);
-    filter: blur(var(--blur));
-    animation: snowfall var(--d) linear infinite;
+    animation: snowfall var(--d) steps(180) infinite;
     animation-delay: var(--delay);
     will-change: transform;
   }
@@ -155,81 +159,18 @@
     margin: auto;
     background: currentColor;
   }
-  .snow::before { width: 100%; height: var(--arm); }
-  .snow::after { width: var(--arm); height: 100%; }
-  .snow.near::before,
-  .snow.near::after { box-shadow: calc(var(--s) * .22) calc(var(--s) * .22) 0 color-mix(in srgb, currentColor 58%, transparent); }
+  .snow::before { width: 100%; height: var(--arm); box-shadow: 0 calc(var(--arm) * -2) 0 -1px currentColor, 0 calc(var(--arm) * 2) 0 -1px currentColor; }
+  .snow::after { width: var(--arm); height: 100%; box-shadow: calc(var(--arm) * -2) 0 0 -1px currentColor, calc(var(--arm) * 2) 0 0 -1px currentColor; }
+  .snow.far { color: var(--cp-border-strong); }
+  .snow.mid { color: var(--cp-fire-white); }
+  .snow.near { color: var(--cp-fire-white); }
   @keyframes snowfall {
-    0% { transform: translate3d(0, -8vh, 0) rotate(var(--r0)); }
-    24% { transform: translate3d(var(--sway1), 24vh, 0) rotate(calc(var(--r0) + 80deg)); }
-    52% { transform: translate3d(var(--sway2), 56vh, 0) rotate(calc(var(--r0) + 185deg)); }
-    76% { transform: translate3d(var(--sway3), 82vh, 0) rotate(calc(var(--r0) + 270deg)); }
-    100% { transform: translate3d(var(--drift), 118vh, 0) rotate(calc(var(--r0) + 380deg)); }
+    0% { transform: translate(0, 0) rotate(var(--r0)); }
+    24% { transform: translate(var(--sway1), calc(var(--fall) * .24)) rotate(var(--r0)); }
+    52% { transform: translate(var(--sway2), calc(var(--fall) * .52)) rotate(calc(var(--r0) + 90deg)); }
+    76% { transform: translate(var(--sway3), calc(var(--fall) * .76)) rotate(calc(var(--r0) + 90deg)); }
+    100% { transform: translate(var(--drift), var(--fall)) rotate(calc(var(--r0) + 180deg)); }
   }
-  /* Pixel-art pass: crisp geometry, stepped surfaces, and hard-edged UI. */
-  body { font-family: Consolas, "Courier New", Courier, monospace; image-rendering: pixelated; }
-  .experience {
-    background:
-      linear-gradient(90deg, transparent 0 49%, var(--cp-highlight) 49% 51%, transparent 51%),
-      linear-gradient(180deg, var(--cp-bg-elevated), var(--cp-bg));
-  }
-  .experience::before {
-    opacity: .12;
-    background:
-      repeating-linear-gradient(0deg, transparent 0 15px, var(--cp-border) 15px 16px),
-      repeating-linear-gradient(90deg, transparent 0 15px, var(--cp-border) 15px 16px);
-    mask-image: linear-gradient(var(--cp-text), transparent 78%);
-  }
-  header { border-bottom-width: 4px; }
-  .brand-mark,
-  .controls,
-  .motion-button,
-  .mode-button { border-radius: 0; }
-  .brand-mark,
-  .controls,
-  .motion-button {
-    border-width: 3px;
-    box-shadow: 4px 4px 0 var(--cp-border-strong);
-  }
-  h1 {
-    font-family: Consolas, "Courier New", Courier, monospace;
-    font-weight: 900;
-    letter-spacing: -.09em;
-    text-shadow: 4px 0 0 var(--cp-bg), 0 4px 0 var(--cp-bg);
-  }
-  .eyebrow,
-  .brand b,
-  .winter-status,
-  .metric span,
-  footer { letter-spacing: .22em; }
-  .metric-row,
-  .now-burning { border-top-width: 4px; }
-  .architecture { shape-rendering: crispEdges; }
-  .architecture [rx] { rx: 0; }
-  .architecture ellipse { shape-rendering: geometricPrecision; }
-  .firebox {
-    border-radius: 0;
-    clip-path: polygon(12% 0, 88% 0, 88% 4%, 94% 4%, 94% 8%, 97% 8%, 97% 14%, 100% 14%, 100% 100%, 0 100%, 0 14%, 3% 14%, 3% 8%, 6% 8%, 6% 4%, 12% 4%);
-    border: 6px solid var(--cp-soot);
-  }
-  .firebox::before {
-    background:
-      repeating-linear-gradient(0deg, transparent 0 22px, var(--cp-soot) 22px 26px),
-      repeating-linear-gradient(90deg, transparent 0 46px, var(--cp-soot) 46px 50px);
-    background-color: color-mix(in srgb, var(--cp-soot) 90%, var(--cp-accent));
-    box-shadow: none;
-  }
-  .fire-renderer { image-rendering: pixelated; filter: contrast(1.15) saturate(1.1); }
-  .ember-bed { border-radius: 0; filter: none; opacity: .48; clip-path: polygon(6% 35%, 18% 15%, 33% 28%, 49% 5%, 64% 24%, 84% 14%, 96% 44%, 90% 82%, 12% 82%); }
-  .token {
-    border-width: 3px;
-    border-radius: 0;
-    background: var(--cp-soot);
-    box-shadow: 4px 4px 0 color-mix(in srgb, var(--cp-danger) 70%, var(--cp-soot));
-  }
-  .spark { width: 4px; height: 4px; border-radius: 0; box-shadow: none; }
-  .smoke i { border-radius: 0; filter: none; opacity: .14; clip-path: polygon(20% 0, 70% 0, 70% 20%, 90% 20%, 90% 72%, 68% 72%, 68% 100%, 18% 100%, 18% 78%, 0 78%, 0 30%, 20% 30%); }
-  input[type=range] { height: 8px; }
   .is-paused *, .is-paused *::before, .is-paused *::after { animation-play-state: paused !important; }
   @media (max-width: 1100px) {
     main { grid-template-columns: minmax(180px, .7fr) minmax(0, 1.5fr); }
@@ -245,7 +186,7 @@
     .eyebrow { margin-bottom: 16px; }
     .lede { margin: 20px auto; }
     .metric-row { justify-content: center; }
-    .token { font-size: 8px; height: 22px; }
+    .token { font-size: clamp(5px, 1.4vw, 8px); }
     .hearth-wrap { margin-top: 4px; }
     .controls { grid-column: auto; }
   }
@@ -272,67 +213,56 @@
       </div>
     </section>
     <div class="hearth-wrap">
-      <section class="hearth-scene" aria-label="Stone fireplace with billowing golden flames, glowing AI tokens, embers, and smoke rising into the chimney">
+      <section class="hearth-scene" aria-label="Pixel-art tiled fireplace with stepped arch, golden flames, glowing AI tokens, square embers, and winter windows">
         <div class="smoke chimney-smoke" aria-hidden="true">
           <i style="--left:22%;--size:65px;--duration:7s;--delay:-2s;--drift:30px"></i>
           <i style="--left:36%;--size:75px;--duration:9s;--delay:-6s;--drift:50px"></i>
         </div>
-        <svg class="architecture" viewBox="0 0 760 800" aria-hidden="true">
+        <svg class="architecture" viewBox="0 0 760 800" shape-rendering="crispEdges" aria-hidden="true">
           <defs>
-            <linearGradient id="stone" x1="0" y1="0" x2=".5" y2="1">
-              <stop stop-color="var(--cp-stone-light)"/><stop offset=".14" stop-color="var(--cp-stone)"/><stop offset="1" stop-color="var(--cp-soot)"/>
-            </linearGradient>
-            <linearGradient id="mantel" x1="0" y1="0" x2="0" y2="1">
-              <stop stop-color="var(--cp-stone-light)"/><stop offset=".12" stop-color="var(--cp-stone)"/><stop offset=".7" stop-color="var(--cp-soot)"/><stop offset="1" stop-color="var(--cp-stone)"/>
-            </linearGradient>
-            <radialGradient id="bounce" cx=".5" cy=".88" r=".65">
-              <stop stop-color="var(--cp-warning)" stop-opacity=".52"/><stop offset=".45" stop-color="var(--cp-danger)" stop-opacity=".1"/><stop offset="1" stop-color="var(--cp-warning)" stop-opacity="0"/>
-            </radialGradient>
-            <radialGradient id="floorLight">
-              <stop stop-color="var(--cp-warning)" stop-opacity=".23"/><stop offset="1" stop-color="var(--cp-warning)" stop-opacity="0"/>
-            </radialGradient>
-            <pattern id="blocks" width="166" height="94" patternUnits="userSpaceOnUse">
-              <rect width="166" height="94" fill="var(--cp-soot)"/>
-              <g fill="url(#stone)" stroke="var(--cp-stone-light)" stroke-opacity=".18">
-                <rect x="2" y="2" width="162" height="42" rx="3"/>
-                <rect x="-80" y="49" width="162" height="42" rx="3"/>
-                <rect x="87" y="49" width="162" height="42" rx="3"/>
-              </g>
-            </pattern>
-            <filter id="texture" x="0" y="0" width="100%" height="100%">
-              <feTurbulence type="fractalNoise" baseFrequency=".48" numOctaves="3" seed="8" result="noise"/>
-              <feColorMatrix in="noise" type="saturate" values="0"/>
-              <feComponentTransfer><feFuncA type="linear" slope=".12"/></feComponentTransfer>
-              <feComposite in2="SourceGraphic" operator="in" result="grain"/>
-              <feBlend in="SourceGraphic" in2="grain" mode="soft-light"/>
-            </filter>
+            <clipPath id="chimneyShape"><path d="M276 32H484V64H500V112H516V160H532V208H548V256H212V208H228V160H244V112H260V64H276Z"/></clipPath>
+            <clipPath id="hearthShape"><path fill-rule="evenodd" d="M112 288H648V704H112Z M180 680V400H200V384H220V368H240V352H260V336H300V320H460V336H500V352H520V368H540V384H560V400H580V680Z"/></clipPath>
           </defs>
-          <ellipse cx="380" cy="755" rx="337" ry="30" fill="var(--cp-soot)" opacity=".12"/>
-          <ellipse cx="380" cy="736" rx="310" ry="54" fill="url(#floorLight)"/>
-          <g>
-            <path d="M278 25H482L540 272H220Z" fill="url(#blocks)" stroke="var(--cp-soot)" stroke-width="3"/>
-            <path d="M278 25L292 25L249 265H220Z" fill="var(--cp-stone-light)" opacity=".15"/>
-            <rect x="267" y="13" width="226" height="17" rx="2" fill="url(#mantel)"/>
-            <rect x="111" y="284" width="538" height="424" fill="url(#blocks)" stroke="var(--cp-soot)" stroke-width="3"/>
-            <g id="archStones"></g>
-            <rect x="65" y="263" width="630" height="26" rx="3" fill="url(#mantel)" stroke="var(--cp-soot)" stroke-width="2"/>
-            <path d="M65 263L83 245H677L695 263Z" fill="var(--cp-stone-light)"/>
-            <path d="M78 290H682L668 308H92Z" fill="var(--cp-soot)"/>
-            <path d="M88 695H672L705 723H55Z" fill="url(#stone)" stroke="var(--cp-soot)" stroke-width="2"/>
-            <rect x="55" y="723" width="650" height="24" rx="2" fill="url(#mantel)"/>
-            <path d="M55 747H705L692 758H68Z" fill="var(--cp-soot)"/>
+          <g class="room">
+            <path d="M0 696H760V800H0Z" fill="var(--cp-border)"/>
+            <path d="M0 704H760V712H0ZM0 752H760V760H0Z" fill="var(--cp-border-strong)"/>
+            <path d="M48 712V800M144 712V800M240 712V800M336 712V800M432 712V800M528 712V800M624 712V800M720 712V800" stroke="var(--cp-bg-elevated)" stroke-width="4"/>
+            <path d="M0 760H48V800M96 760H144V800M192 760H240V800M288 760H336V800M384 760H432V800M480 760H528V800M576 760H624V800M672 760H720V800" stroke="var(--cp-bg-elevated)" stroke-width="4" fill="none"/>
+            <g class="window" fill="var(--cp-bg-elevated)">
+              <path d="M16 104H192V304H16ZM568 104H744V304H568Z"/>
+            </g>
+            <path d="M28 116H180V288H28ZM580 116H732V288H580Z" fill="var(--cp-surface-soft)"/>
+            <path d="M28 116H180V288H28ZM580 116H732V288H580Z" fill="var(--cp-soot)" opacity=".82"/>
+            <path d="M36 148h8v8h-8zm76 28h8v8h-8zm36-44h8v8h-8zm468 16h8v8h-8zm64 28h8v8h-8zm24-44h8v8h-8z" fill="var(--cp-fire-white)"/>
+            <path d="M28 264h24v-8h16v-12h24v8h20v-16h16v12h20v-8h32v48H28Zm552-12h24v-16h16v12h20v-12h16v16h20v-12h20v16h36v32H580Z" fill="var(--cp-fire-white)" opacity=".76"/>
+            <path d="M48 244h8v-24h-8v-8h8v-20h8v-16h8v16h8v20h8v8h-8v24zm80-4h8v-20h-8v-8h8v-20h8v-16h8v16h8v20h8v8h-8v20zm472 0h8v-20h-8v-8h8v-20h8v-16h8v16h8v20h8v8h-8v20zm80 4h8v-24h-8v-8h8v-20h8v-16h8v16h8v20h8v8h-8v24z" fill="var(--cp-border-strong)"/>
+            <path d="M100 116V288M660 116V288M28 200H180M580 200H732" stroke="var(--cp-bg-elevated)" stroke-width="8"/>
+            <path d="M16 104H192V304H16ZM568 104H744V304H568Z" fill="none" stroke="var(--cp-border-strong)" stroke-width="8"/>
           </g>
-          <path d="M139 684V455A241 175 0 0 1 621 455V684H580V455A200 135 0 0 0 180 455V684Z" fill="url(#bounce)" id="stoneLight"/>
-          <path d="M180 680V455A200 135 0 0 1 580 455V680Z" fill="var(--cp-soot)" stroke="var(--cp-soot)" stroke-width="13"/>
-          <path d="M174 678V455A206 141 0 0 1 586 455V678" fill="none" stroke="var(--cp-warning)" stroke-opacity=".25" stroke-width="2"/>
+          <path d="M92 752H668V768H92Z" fill="var(--cp-soot)" opacity=".28"/>
+          <path d="M276 32H484V64H500V112H516V160H532V208H548V256H212V208H228V160H244V112H260V64H276Z" fill="var(--cp-stone)"/>
+          <g id="chimneyTiles" clip-path="url(#chimneyShape)"></g>
+          <path d="M268 16H492V32H268Z" fill="var(--cp-stone-light)"/>
+          <path d="M260 32H500V48H260Z" fill="var(--cp-soot)"/>
+          <path d="M112 288H648V704H112Z" fill="var(--cp-soot)"/>
+          <g id="hearthTiles" clip-path="url(#hearthShape)"></g>
+          <path d="M180 680V400H200V384H220V368H240V352H260V336H300V320H460V336H500V352H520V368H540V384H560V400H580V680Z" fill="var(--cp-soot)"/>
+          <path d="M164 680V392H184V376H204V360H224V344H244V328H284V312H476V328H516V344H536V360H556V376H576V392H596V680H580V400H560V384H540V368H520V352H500V336H460V320H300V336H260V352H240V368H220V384H200V400H180V680Z" fill="var(--cp-stone-light)"/>
+          <path id="stoneLight" d="M180 672V400H200V384H220V368H240V352H260V336H300V320H460V336H500V352H520V368H540V384H560V400H580V672H572V400H552V384H532V368H512V352H492V336H452V328H308V336H268V352H248V368H228V384H208V400H188V672Z" fill="var(--cp-warning)" opacity=".4"/>
+          <path d="M76 240H684V256H76ZM60 256H700V288H60Z" fill="var(--cp-soot)"/>
+          <path d="M76 240H684V256H76ZM68 256H692V264H68Z" fill="var(--cp-stone-light)"/>
+          <path d="M76 272H684V280H76Z" fill="var(--cp-stone)"/>
+          <path d="M96 688H664V704H96ZM72 704H688V720H72ZM56 720H704V752H56Z" fill="var(--cp-soot)"/>
+          <path d="M96 688H664V696H96ZM72 704H688V712H72ZM56 720H704V728H56Z" fill="var(--cp-stone-light)"/>
+          <path d="M64 736H696V744H64Z" fill="var(--cp-stone)"/>
         </svg>
         <div class="firebox">
           <div class="ember-bed"></div>
           <div class="token-stack">
-            <div class="token" style="--left:1%;--bottom:0;--w:42%;--r:8deg">GPT-5</div>
-            <div class="token" style="--left:37%;--bottom:0;--w:48%;--r:-6deg">CLAUDE</div>
-            <div class="token" style="--left:14%;--bottom:36%;--w:42%;--r:-8deg">GEMINI</div>
-            <div class="token" style="--left:52%;--bottom:40%;--w:40%;--r:13deg">LLAMA</div>
+            <div class="token" style="--left:1%">GPT-5</div>
+            <div class="token" style="--left:26%">CLAUDE</div>
+            <div class="token" style="--left:51%">GEMINI</div>
+            <div class="token" style="--left:76%">LLAMA</div>
           </div>
           <canvas id="fire" class="fire-renderer" aria-hidden="true"></canvas>
           <div class="smoke" aria-hidden="true">
@@ -373,30 +303,34 @@
   const svgNS = "http://www.w3.org/2000/svg";
 
   function seeded(index, salt) { return ((index * 47 + salt * 31) % 101) / 100; }
-  function makeStone(path, opacity) {
-    const element = document.createElementNS(svgNS, "path");
-    element.setAttribute("d", path);
-    element.setAttribute("fill", "url(#stone)");
-    element.setAttribute("stroke", "var(--cp-soot)");
-    element.setAttribute("stroke-width", "3");
-    element.setAttribute("opacity", opacity);
-    document.getElementById("archStones").append(element);
-  }
-  // Individual voussoirs keep the arch joints radial rather than stretching a brick pattern.
-  for (let i = 0; i < 13; i++) {
-    const a = Math.PI + i * Math.PI / 13 + .006;
-    const b = Math.PI + (i + 1) * Math.PI / 13 - .006;
-    const point = (angle, rx, ry) => `${380 + Math.cos(angle) * rx},${455 + Math.sin(angle) * ry}`;
-    makeStone(`M${point(a, 240, 175)}A240 175 0 0 1 ${point(b, 240, 175)}L${point(b, 200, 135)}A200 135 0 0 0 ${point(a, 200, 135)}Z`, .84 + seeded(i, 3) * .16);
-  }
-  for (let i = 0; i < 5; i++) {
-    for (const x of [139, 580]) {
-      const y = 458 + i * 46;
-      makeStone(`M${x} ${y}h41v43h-41Z`, .82 + seeded(i, x) * .18);
+  function tileMasonry(id, startY, endY, left, right, tileWidth, tileHeight) {
+    const group = document.getElementById(id);
+    for (let row = 0, y = startY; y < endY; row++, y += tileHeight) {
+      const offset = row % 2 ? -tileWidth / 2 : 0;
+      for (let column = 0, x = left + offset; x < right; column++, x += tileWidth) {
+        const brick = document.createElementNS(svgNS, "rect");
+        brick.setAttribute("x", x + 2);
+        brick.setAttribute("y", y + 2);
+        brick.setAttribute("width", tileWidth - 4);
+        brick.setAttribute("height", tileHeight - 4);
+        brick.setAttribute("fill", ["var(--cp-stone)", "var(--cp-stone-light)", "var(--cp-border-strong)"][Math.floor(seeded(row * 19 + column, 8) * 3)]);
+        group.append(brick);
+        const highlight = document.createElementNS(svgNS, "rect");
+        highlight.setAttribute("x", x + 4);
+        highlight.setAttribute("y", y + 4);
+        highlight.setAttribute("width", tileWidth - 10);
+        highlight.setAttribute("height", "4");
+        highlight.setAttribute("fill", "var(--cp-bg-elevated)");
+        highlight.setAttribute("opacity", ".26");
+        group.append(highlight);
+      }
     }
   }
+  tileMasonry("chimneyTiles", 32, 256, 208, 552, 64, 32);
+  tileMasonry("hearthTiles", 288, 704, 108, 652, 64, 32);
   function renderSnow(level) {
     snowfield.replaceChildren();
+    snowfield.style.setProperty("--fall", `${snowfield.clientHeight + 60}px`);
     let state = 0x51f15e ^ (level * 0x9e3779b9);
     const random = () => {
       state |= 0;
@@ -410,23 +344,22 @@
       const flake = document.createElement("i");
       const depth = random();
       const layer = depth > .78 ? "near" : depth > .35 ? "mid" : "far";
-      const size = layer === "near" ? 8 + random() * 7 : layer === "mid" ? 4 + random() * 5 : 2 + random() * 3;
+      const size = layer === "near" ? 12 + Math.floor(random() * 3) * 4 : layer === "mid" ? 8 + Math.floor(random() * 3) * 2 : 4 + Math.floor(random() * 2) * 2;
       const duration = layer === "near" ? 7 + random() * 7 : layer === "mid" ? 12 + random() * 10 : 20 + random() * 15;
       const wind = -45 + random() * 90;
       flake.className = `snow ${layer}`;
       Object.entries({
         x: `${-3 + random() * 106}%`,
         s: `${size}px`,
-        arm: `${Math.max(1, Math.round(size * (layer === "near" ? .22 : .35)))}px`,
-        o: `${layer === "near" ? .52 + random() * .38 : layer === "mid" ? .3 + random() * .38 : .14 + random() * .24}`,
-        blur: `${layer === "near" ? random() * .45 : layer === "mid" ? random() * .18 : .25 + random() * .35}px`,
+        arm: `${Math.max(2, Math.round(size / 4))}px`,
+        o: `${layer === "near" ? .64 + random() * .3 : layer === "mid" ? .42 + random() * .3 : .22 + random() * .22}`,
         d: `${duration}s`,
         delay: `${-random() * duration}s`,
         drift: `${wind}px`,
         sway1: `${wind * .18 + (-28 + random() * 56)}px`,
         sway2: `${wind * .48 + (-35 + random() * 70)}px`,
         sway3: `${wind * .72 + (-24 + random() * 48)}px`,
-        r0: `${random() * 180}deg`
+        r0: `${Math.floor(random() * 4) * 90}deg`
       }).forEach(([key, value]) => flake.style.setProperty(`--${key}`, value));
       snowfield.append(flake);
     }
@@ -618,7 +551,7 @@
         for (let x = 0; x < width; x++) {
           const i = y * width + x, p = i * 4;
           const t = Math.max(0, Math.min(1, (temperature[i] - .12) / 1.3));
-          const color = Math.floor(t * 255) * 4;
+          const color = Math.round(t * 11) * 23 * 4;
           pixels[p] = colors[color]; pixels[p + 1] = colors[color + 1]; pixels[p + 2] = colors[color + 2];
           pixels[p + 3] = colors[color + 3] * floorFade;
         }
@@ -633,7 +566,7 @@
   function paint() {
     renderer();
     const flicker = .73 + Math.sin(time * 3.2) * .05 + Math.sin(time * 7.7) * .025;
-    document.getElementById("stoneLight").style.opacity = String(flicker * Number(heat.value) / 100);
+    document.getElementById("stoneLight").style.opacity = String(Math.round(flicker * Number(heat.value) / 100 * 4) / 8);
   }
   function frame(now) {
     raf = 0;
@@ -691,6 +624,10 @@
   reducedMotion.addEventListener("change", () => { paused = reducedMotion.matches; synchronizeMotion(); });
   document.addEventListener("visibilitychange", synchronizeMotion);
   new ResizeObserver(resize).observe(document.querySelector(".firebox"));
+  new ResizeObserver(() => {
+    const distance = `${snowfield.clientHeight + 60}px`;
+    snowfield.style.setProperty("--fall", distance);
+  }).observe(snowfield);
   new MutationObserver(() => { readPalette(); paint(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
   renderSnow(2); updateHeat(68); resize(); synchronizeMotion();
 </script>
