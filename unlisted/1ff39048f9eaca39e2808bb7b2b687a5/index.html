@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="73 NFL winner picks for October 1 through November 2, 2026. Search, filter, sort, print, and export this self-contained picks sheet.">
+  <title>NFL winner picks | October 1 - November 2, 2026</title>
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <!--
+    THESIS: A useful, portable picks sheet. The matchups lead, not a dashboard of statistics.
+    OWN-WORLD: Clawpilot warm neutrals, rose selections, Segoe UI, and quiet table rules.
+    STORY: Find a game, read the original pick, and take the selected view with you.
+    FIRST VIEWPORT: Title and export actions above week filters, search, and the picks table.
+    FORM: A five-column table on desktop and labeled fixture rows on small screens.
+    This is an export of the original 73 predictions, not a live schedule or results feed.
+  -->
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scrollbar-gutter: stable; }
+    body {
+      margin: 0;
+      background: var(--cp-bg);
+      color: var(--cp-text);
+      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    button, input, select { font: inherit; }
+    button, select { cursor: pointer; }
+    button { color: inherit; }
+    button:disabled { cursor: not-allowed; opacity: 0.5; }
+    a { color: var(--cp-accent); text-underline-offset: 3px; }
+    a:hover { text-decoration-thickness: 2px; }
+    :focus-visible { outline: 3px solid var(--cp-accent); outline-offset: 3px; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+    .skip-link {
+      position: absolute;
+      top: 8px;
+      left: 16px;
+      transform: translateY(-180%);
+      z-index: 5;
+      padding: 12px;
+      background: var(--cp-surface);
+    }
+    .skip-link:focus { transform: translateY(0); }
+    .shell { width: min(1320px, calc(100% - 64px)); margin: 0 auto; }
+    .masthead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 40px 0 32px;
+    }
+    h1 { margin: 0; font-size: clamp(28px, 3vw, 40px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 700; }
+    .date-range { margin: 12px 0 0; color: var(--cp-text-soft); font-size: 16px; }
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .button {
+      min-height: 44px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      padding: 10px 16px;
+      background: var(--cp-surface);
+      color: var(--cp-text);
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: background-color 140ms ease-out, border-color 140ms ease-out;
+    }
+    .button:hover:not(:disabled) { background: var(--cp-surface-soft); border-color: var(--cp-border-strong); }
+    .button.primary { background: var(--cp-accent); border-color: var(--cp-accent); color: var(--cp-accent-fg); }
+    .button.primary:hover:not(:disabled) { background: var(--cp-accent-hover); border-color: var(--cp-accent-hover); }
+    .button.quiet { background: var(--cp-bg); }
+    .icon { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+    .theme-button { width: 44px; padding: 10px; }
+    html[data-theme="dark"] .moon-icon, html:not([data-theme="dark"]) .sun-icon { display: none; }
+    .week-nav { display: flex; gap: 8px; padding-bottom: 24px; }
+    .week-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 44px;
+      padding: 10px 20px;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-bg-elevated);
+      color: var(--cp-text);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .week-button:hover { border-color: var(--cp-border-strong); background: var(--cp-surface); }
+    .week-button[aria-pressed="true"] { background: var(--cp-accent-soft); border-color: var(--cp-accent); color: var(--cp-accent); }
+    .week-count { font-variant-numeric: tabular-nums; font-size: 12px; color: var(--cp-text-soft); }
+    .week-button[aria-pressed="true"] .week-count { color: var(--cp-accent); }
+    .sheet { border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-surface); overflow: clip; }
+    .filters {
+      display: grid;
+      grid-template-columns: minmax(200px, 1.8fr) minmax(180px, 1fr) minmax(160px, 0.8fr);
+      gap: 16px;
+      margin: 0;
+      padding: 24px 24px 16px;
+    }
+    .field { min-width: 0; }
+    .field label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; }
+    input, select {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--cp-border-strong);
+      border-radius: 0.625rem;
+      padding: 10px 12px;
+      background: var(--cp-surface);
+      color: var(--cp-text);
+      font-size: 14px;
+    }
+    input::placeholder { color: var(--cp-text-soft); opacity: 1; }
+    input:hover, select:hover { border-color: var(--cp-text-soft); }
+    .search-wrap { position: relative; }
+    .search-wrap .icon { position: absolute; top: 13px; left: 12px; color: var(--cp-text-soft); pointer-events: none; }
+    .search-wrap input { padding-left: 40px; }
+    .mobile-sort { display: none; }
+    .result-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 0 24px 16px;
+      color: var(--cp-text-soft);
+      font-size: 13px;
+    }
+    #result-count { color: var(--cp-text); font-weight: 600; }
+    .text-button {
+      min-height: 44px;
+      padding: 8px 0 8px 12px;
+      border: 0;
+      background: var(--cp-surface);
+      color: var(--cp-accent);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .text-button:hover:not(:disabled) { text-decoration: underline; text-underline-offset: 3px; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; }
+    col.date { width: 13%; }
+    col.day { width: 7%; }
+    col.teams { width: 29%; }
+    col.pick { width: 21%; }
+    col.reason { width: 30%; }
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      padding: 0 16px;
+      height: 52px;
+      border-top: 1px solid var(--cp-border);
+      border-bottom: 1px solid var(--cp-border);
+      background: var(--cp-surface-soft);
+      color: var(--cp-text-soft);
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      vertical-align: middle;
+    }
+    th:first-child, td:first-child { padding-left: 24px; }
+    th:last-child, td:last-child { padding-right: 24px; }
+    th .sort-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 8px 0;
+      border: 0;
+      background: var(--cp-surface-soft);
+      color: inherit;
+      text-align: left;
+      font-size: inherit;
+      font-weight: inherit;
+    }
+    .sort-button:hover { color: var(--cp-accent); }
+    .sort-mark { min-width: 10px; color: var(--cp-text-soft); font-size: 14px; }
+    th[aria-sort="ascending"], th[aria-sort="descending"] { color: var(--cp-text); }
+    th[aria-sort="ascending"] .sort-mark, th[aria-sort="descending"] .sort-mark { color: var(--cp-accent); }
+    td { padding: 16px; border-bottom: 1px solid var(--cp-border); vertical-align: middle; font-size: 14px; overflow-wrap: anywhere; }
+    tr:last-child td { border-bottom: 0; }
+    tbody tr:hover { background: var(--cp-bg-elevated); }
+    .date-cell { font-variant-numeric: tabular-nums; font-size: 13px; white-space: nowrap; }
+    .day-cell { color: var(--cp-text-soft); font-size: 13px; }
+    .matchup { font-weight: 600; }
+    .connector { color: var(--cp-text-soft); font-weight: 400; }
+    .venue { display: block; margin-top: 4px; color: var(--cp-text-soft); font-size: 12px; font-weight: 400; }
+    .pick-name { display: inline-block; border-radius: 6px; padding: 4px 10px; background: var(--cp-accent-soft); color: var(--cp-accent); font-weight: 650; }
+    .reason-cell { color: var(--cp-text-soft); }
+    .empty { padding: 64px 24px; text-align: center; border-top: 1px solid var(--cp-border); }
+    .empty h2 { margin: 0; font-size: 22px; line-height: 1.3; }
+    .empty p { margin: 12px 0 24px; color: var(--cp-text-soft); }
+    .error { padding: 16px; margin: 0 0 16px; border: 1px solid var(--cp-danger); border-radius: 0.625rem; background: var(--cp-surface); }
+    .error strong { color: var(--cp-danger); }
+    .footer { display: flex; justify-content: space-between; gap: 24px; padding: 24px 0 40px; color: var(--cp-text-soft); font-size: 12px; }
+    .footer p { margin: 0; max-width: 75ch; }
+    .sources { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 16px; flex-shrink: 0; }
+    .print-note { display: none; }
+    @media (max-width: 1024px) {
+      .shell { width: calc(100% - 40px); }
+      .masthead { align-items: flex-start; }
+      .week-button { flex: 1; padding: 10px 12px; gap: 8px; }
+      .actions .button { padding: 10px 12px; }
+      td, th { padding-left: 12px; padding-right: 12px; }
+      .date-cell { white-space: normal; }
+      .footer { flex-direction: column; gap: 12px; }
+    }
+    @media (max-width: 720px) {
+      .shell { width: calc(100% - 32px); }
+      .masthead { flex-direction: column; gap: 20px; padding: 28px 0 24px; }
+      .date-range { font-size: 14px; }
+      .actions { width: 100%; }
+      .actions .primary { flex: 1; }
+      .week-nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding-bottom: 16px; }
+      .week-button { padding: 10px 8px; }
+      .filters { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; padding: 20px 16px 12px; }
+      .search-field, .mobile-sort { grid-column: 1 / -1; }
+      .mobile-sort { display: block; }
+      .result-bar { padding: 0 16px 12px; }
+      table, tbody { display: block; }
+      colgroup { display: none; }
+      thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+      tbody tr { display: grid; grid-template-columns: 1fr auto; gap: 12px 16px; padding: 20px 16px; border-top: 1px solid var(--cp-border); }
+      td, td:first-child, td:last-child { display: block; padding: 0; border: 0; }
+      .day-cell { text-align: right; }
+      .matchup-cell { grid-column: 1 / -1; font-size: 17px; }
+      .pick-cell, .reason-cell { grid-column: 1 / -1; }
+      .pick-cell::before, .reason-cell::before { content: attr(data-label); display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600; color: var(--cp-text-soft); }
+      .venue { display: inline; margin: 0 0 0 8px; }
+      .reason-cell { font-size: 14px; }
+      .empty { padding: 40px 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+    }
+    @page { size: landscape; margin: 12mm; }
+    @media print {
+      html { color-scheme: light; scrollbar-gutter: auto; }
+      body { background: var(--cp-surface); font-size: 10pt; }
+      .shell { width: 100%; max-width: none; margin: 0; }
+      .masthead { display: block; padding: 0 0 12px; }
+      h1 { font-size: 22pt; }
+      .date-range { margin-top: 6px; font-size: 10pt; }
+      .actions, .week-nav, .filters, .result-bar, .skip-link, .sources, .empty button { display: none !important; }
+      .sheet { border: 0; border-radius: 0; overflow: visible; }
+      .print-note { display: block; margin: 0 0 12px; color: var(--cp-text-soft); font-size: 9pt; }
+      table { display: table; width: 100%; table-layout: fixed; border-collapse: collapse; }
+      colgroup { display: table-column-group; }
+      thead { display: table-header-group; position: static; width: auto; height: auto; overflow: visible; clip-path: none; }
+      tbody { display: table-row-group; }
+      tbody tr { display: table-row; padding: 0; break-inside: avoid; }
+      th { position: static; height: auto; font-size: 9pt; }
+      td, td:first-child, td:last-child { display: table-cell; padding: 8px; border-bottom: 1px solid var(--cp-border); font-size: 9pt; }
+      th, th:first-child, th:last-child { padding: 8px; }
+      th .sort-button { min-height: 0; padding: 0; color: var(--cp-text); }
+      .sort-mark, .pick-cell::before, .reason-cell::before { display: none; }
+      .day-cell { text-align: left; }
+      .pick-name { padding: 0; background: var(--cp-surface); color: var(--cp-text); }
+      .reason-cell { color: var(--cp-text); }
+      .venue { display: block; margin: 2px 0 0; font-size: 8pt; }
+      .footer { display: block; padding: 12px 0 0; font-size: 8pt; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#picks-table">Skip to picks</a>
+  <main class="shell">
+    <header class="masthead">
+      <div>
+        <h1>NFL winner picks</h1>
+        <p class="date-range">October 1 - November 2, 2026 <span aria-hidden="true">&middot;</span> Weeks 4-8</p>
+      </div>
+      <div class="actions">
+        <button id="export-button" class="button primary" type="button" title="Download the currently displayed games as CSV" disabled>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>
+          Export CSV
+        </button>
+        <button id="print-button" class="button" type="button" title="Print the currently displayed games" disabled>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V3h10v5M7 17H4V9h16v8h-3M7 14h10v7H7zM17 11h.01"/></svg>
+          Print view
+        </button>
+        <button id="theme-button" class="button theme-button" type="button" aria-label="Switch color theme" title="Switch color theme">
+          <svg class="icon moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg>
+          <svg class="icon sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <noscript><p class="error"><strong>JavaScript is disabled.</strong> Enable JavaScript in your browser to view and filter the picks. This file works offline; no account or connection is needed.</p></noscript>
+    <p id="app-error" class="error" role="alert" hidden></p>
+    <nav id="week-nav" class="week-nav" aria-label="Filter picks by week"></nav>
+
+    <section class="sheet" aria-label="NFL picks">
+      <form id="filters" class="filters" role="search" aria-label="Filter games">
+        <div class="field search-field">
+          <label for="search">Search games</label>
+          <div class="search-wrap">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+            <input id="search" type="search" placeholder="Team, matchup, or keyword" autocomplete="off" spellcheck="false" aria-controls="picks-body" disabled>
+          </div>
+        </div>
+        <div class="field">
+          <label for="team-filter">Team</label>
+          <select id="team-filter" aria-controls="picks-body" disabled><option value="">All teams</option></select>
+        </div>
+        <div class="field">
+          <label for="day-filter">Day</label>
+          <select id="day-filter" aria-controls="picks-body" disabled>
+            <option value="">All days</option>
+            <option value="Thu">Thursday (TNF)</option>
+            <option value="Sun">Sunday</option>
+            <option value="Mon">Monday (MNF)</option>
+          </select>
+        </div>
+        <div class="field mobile-sort">
+          <label for="sort-select">Sort games</label>
+          <select id="sort-select" aria-controls="picks-body" disabled>
+            <option value="date:asc">Date: earliest first</option>
+            <option value="date:desc">Date: latest first</option>
+            <option value="teams:asc">Teams: A to Z</option>
+            <option value="teams:desc">Teams: Z to A</option>
+            <option value="pick:asc">Team picked: A to Z</option>
+            <option value="pick:desc">Team picked: Z to A</option>
+          </select>
+        </div>
+      </form>
+      <div class="result-bar">
+        <span id="result-status" role="status" aria-live="polite" aria-atomic="true"><span id="result-count"></span><span id="result-context"></span></span>
+        <button id="reset-button" class="text-button" type="button" disabled>Reset view</button>
+      </div>
+      <p id="print-note" class="print-note"></p>
+      <table id="picks-table" tabindex="-1" aria-label="NFL winner picks" aria-describedby="snapshot-note">
+        <caption class="sr-only">Original NFL predictions for October 1 through November 2, 2026. Sort using the Date, Teams, or Team Picked to Win column buttons.</caption>
+        <colgroup><col class="date"><col class="day"><col class="teams"><col class="pick"><col class="reason"></colgroup>
+        <thead>
+          <tr>
+            <th scope="col" aria-sort="ascending"><button class="sort-button" type="button" data-sort="date" aria-label="Sort by date, latest first">Date <span class="sort-mark" aria-hidden="true">&#8593;</span></button></th>
+            <th scope="col">Day</th>
+            <th scope="col" aria-sort="none"><button class="sort-button" type="button" data-sort="teams" aria-label="Sort by teams, A to Z">Teams <span class="sort-mark" aria-hidden="true">&#8597;</span></button></th>
+            <th scope="col" aria-sort="none"><button class="sort-button" type="button" data-sort="pick" aria-label="Sort by team picked, A to Z">Team Picked to Win <span class="sort-mark" aria-hidden="true">&#8597;</span></button></th>
+            <th scope="col">5 Words Why Picked</th>
+          </tr>
+        </thead>
+        <tbody id="picks-body"></tbody>
+      </table>
+      <div id="empty-state" class="empty" hidden>
+        <h2>No games match these filters</h2>
+        <p>Try another team, week, or search.</p>
+        <button id="empty-reset-button" class="button" type="button">Reset view</button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p id="snapshot-note">For fun only. Original picks from October 1, 2026, not live results.<br>All 73 predictions are unchanged. Schedule changes are not updated automatically.</p>
+      <div class="sources">
+        <a href="https://media.nfl.com/content/dam/communications/football-communications/2026/news/05%2014%2026%20-%202026%20NFL%20Schedule%20-%20By%20Week.pdf" target="_blank" rel="noopener noreferrer">NFL schedule</a>
+        <a href="https://www.cbssports.com/nfl/powerrankings/" target="_blank" rel="noopener noreferrer">Power rankings source</a>
+      </div>
+    </footer>
+  </main>
+
+  <script type="application/json" id="games-data">
+  [
+    [4,"2026-10-01","Steelers","Browns","","Steelers","Rodgers gives Pittsburgh quarterback advantage"],
+    [4,"2026-10-04","Colts","Commanders","London","Colts","Improving defense gives Indianapolis edge"],
+    [4,"2026-10-04","Titans","Ravens","","Ravens","Baltimore's offense overwhelms struggling Tennessee"],
+    [4,"2026-10-04","Patriots","Bills","","Bills","Allen gives Buffalo decisive advantage"],
+    [4,"2026-10-04","Jets","Bears","","Bears","Chicago's improving defense controls tempo"],
+    [4,"2026-10-04","Jaguars","Bengals","","Jaguars","Jacksonville's stingy defense travels well"],
+    [4,"2026-10-04","Cowboys","Texans","","Cowboys","Dallas brings significantly stronger offense"],
+    [4,"2026-10-04","Cardinals","Giants","","Giants","Home field gives Giants edge"],
+    [4,"2026-10-04","Rams","Eagles","","Eagles","Home crowd helps Philadelphia rebound"],
+    [4,"2026-10-04","Packers","Buccaneers","","Packers","Quarterback uncertainty tilts toward Packers"],
+    [4,"2026-10-04","Dolphins","Vikings","","Vikings","Minnesota's relentless pressure overwhelms Miami"],
+    [4,"2026-10-04","Chiefs","Raiders","","Chiefs","Kansas City's championship experience prevails"],
+    [4,"2026-10-04","Chargers","Seahawks","","Seahawks","Seattle's defense punishes struggling Chargers"],
+    [4,"2026-10-04","Broncos","49ers","","49ers","Purdy's hot start keeps rolling"],
+    [4,"2026-10-04","Lions","Panthers","","Lions","Gibbs powers Detroit past Carolina"],
+    [4,"2026-10-05","Falcons","Saints","","Saints","Home field separates comparable rosters"],
+    [5,"2026-10-08","Buccaneers","Cowboys","","Cowboys","Dallas offers more reliable scoring"],
+    [5,"2026-10-11","Eagles","Jaguars","London","Jaguars","Jacksonville's defense provides the edge"],
+    [5,"2026-10-11","Bengals","Dolphins","","Bengals","Burrow exposes Miami's defensive weaknesses"],
+    [5,"2026-10-11","Raiders","Patriots","","Raiders","Cousins brings steadier quarterback play"],
+    [5,"2026-10-11","Vikings","Saints","","Vikings","Minnesota's pass rush disrupts rhythm"],
+    [5,"2026-10-11","Browns","Jets","","Browns","Cleveland's defense pressures inconsistent Jets"],
+    [5,"2026-10-11","Colts","Steelers","","Steelers","Pittsburgh's defense controls the matchup"],
+    [5,"2026-10-11","Texans","Titans","","Texans","Stroud offers more passing upside"],
+    [5,"2026-10-11","Giants","Commanders","","Commanders","Home field tips divisional tossup"],
+    [5,"2026-10-11","Broncos","Chargers","","Broncos","Denver's defense stifles struggling Chargers"],
+    [5,"2026-10-11","Lions","Cardinals","","Lions","Detroit's rushing attack overwhelms Arizona"],
+    [5,"2026-10-11","Bears","Packers","","Bears","Chicago's defense exploits protection problems"],
+    [5,"2026-10-11","49ers","Seahawks","","49ers","Purdy's efficiency offsets Seattle's crowd"],
+    [5,"2026-10-11","Ravens","Falcons","","Ravens","Jackson's versatility overwhelms Atlanta's defense"],
+    [5,"2026-10-12","Bills","Rams","","Bills","Buffalo's explosive offense travels well"],
+    [6,"2026-10-15","Seahawks","Broncos","","Broncos","Altitude and defense favor Denver"],
+    [6,"2026-10-18","Texans","Jaguars","London","Jaguars","Jacksonville's defense controls divisional matchup"],
+    [6,"2026-10-18","Bears","Falcons","","Bears","Chicago's defense limits Atlanta's offense"],
+    [6,"2026-10-18","Ravens","Browns","","Ravens","Jackson's playmaking breaks Cleveland's resistance"],
+    [6,"2026-10-18","Titans","Colts","","Colts","Indianapolis exploits Tennessee's offensive struggles"],
+    [6,"2026-10-18","Jets","Patriots","","Patriots","New England's defense supplies advantage"],
+    [6,"2026-10-18","Saints","Giants","","Saints","New Orleans brings stronger offense"],
+    [6,"2026-10-18","Panthers","Eagles","","Eagles","Philadelphia's home advantage tilts matchup"],
+    [6,"2026-10-18","Steelers","Buccaneers","","Steelers","Pittsburgh's pass rush attacks weaknesses"],
+    [6,"2026-10-18","Cardinals","Rams","","Rams","Rams' offensive ceiling beats Arizona"],
+    [6,"2026-10-18","Chargers","Chiefs","","Chiefs","Kansas City's superior execution prevails"],
+    [6,"2026-10-18","Bills","Raiders","","Bills","Allen supplies greater offensive upside"],
+    [6,"2026-10-18","Cowboys","Packers","","Cowboys","Dallas exploits Green Bay's struggles"],
+    [6,"2026-10-19","Commanders","49ers","","49ers","San Francisco's balanced roster prevails"],
+    [7,"2026-10-22","Patriots","Bears","","Bears","Chicago's defense and home advantage"],
+    [7,"2026-10-25","Steelers","Saints","Paris","Steelers","Pittsburgh's pass rush travels well"],
+    [7,"2026-10-25","49ers","Falcons","","49ers","Purdy elevates San Francisco's offense"],
+    [7,"2026-10-25","Bengals","Ravens","","Ravens","Jackson's mobility challenges Cincinnati's defense"],
+    [7,"2026-10-25","Buccaneers","Panthers","","Panthers","Carolina's offense offers greater upside"],
+    [7,"2026-10-25","Giants","Texans","","Texans","Stroud's upside tips this matchup"],
+    [7,"2026-10-25","Colts","Vikings","","Vikings","Minnesota's aggressive defense disrupts Indianapolis"],
+    [7,"2026-10-25","Dolphins","Jets","","Jets","Miami's scoring struggles favor Jets"],
+    [7,"2026-10-25","Browns","Titans","","Browns","Cleveland's defense compounds Tennessee's struggles"],
+    [7,"2026-10-25","Broncos","Cardinals","","Broncos","Denver's defense contains Arizona's attack"],
+    [7,"2026-10-25","Packers","Lions","","Lions","Gibbs exploits Green Bay's vulnerabilities"],
+    [7,"2026-10-25","Rams","Raiders","","Rams","Rams' higher ceiling outweighs inconsistency"],
+    [7,"2026-10-25","Chiefs","Seahawks","","Seahawks","Seattle's crowd disrupts offensive communication"],
+    [7,"2026-10-26","Cowboys","Eagles","","Eagles","Philadelphia's home edge decides rivalry"],
+    [8,"2026-10-29","Panthers","Packers","","Packers","Lambeau advantage offsets inconsistent form"],
+    [8,"2026-11-01","Ravens","Bills","","Bills","Allen and home field prevail"],
+    [8,"2026-11-01","Titans","Bengals","","Bengals","Cincinnati's passing firepower outpaces Tennessee"],
+    [8,"2026-11-01","Cardinals","Cowboys","","Cowboys","Prescott exposes Arizona's vulnerable secondary"],
+    [8,"2026-11-01","Vikings","Lions","","Vikings","Minnesota's defense slows Detroit's firepower"],
+    [8,"2026-11-01","Colts","Jaguars","","Jaguars","Jacksonville's defense stifles division rival"],
+    [8,"2026-11-01","Raiders","Jets","","Raiders","Cousins provides steadier offensive leadership"],
+    [8,"2026-11-01","Browns","Steelers","","Steelers","Pittsburgh's home crowd amplifies pressure"],
+    [8,"2026-11-01","Falcons","Buccaneers","","Buccaneers","Home field helps Tampa rebound"],
+    [8,"2026-11-01","Chargers","Rams","","Rams","Rams' offensive weapons create mismatches"],
+    [8,"2026-11-01","Chiefs","Broncos","","Chiefs","Mahomes' creativity counters Denver's pressure"],
+    [8,"2026-11-01","Patriots","Dolphins","","Patriots","New England's defense limits Miami"],
+    [8,"2026-11-01","Eagles","Commanders","","Eagles","Philadelphia's superior depth provides edge"],
+    [8,"2026-11-02","Bears","Seahawks","","Seahawks","Seattle's defense and crowd prevail"]
+  ]
+  </script>
+  <script>
+    (() => {
+      "use strict";
+      const byId = (id) => document.getElementById(id);
+      window.addEventListener("error", () => {
+        const error = byId("app-error");
+        error.textContent = "The picks could not be displayed correctly. Reload this file in a current browser. If this continues, use a fresh copy of the original HTML file.";
+        error.hidden = false;
+        document.querySelectorAll("button, input, select").forEach((control) => { control.disabled = true; });
+      });
+
+      const teams = {
+        "49ers": "San Francisco 49ers", "Bears": "Chicago Bears",
+        "Bengals": "Cincinnati Bengals", "Bills": "Buffalo Bills",
+        "Broncos": "Denver Broncos", "Browns": "Cleveland Browns",
+        "Buccaneers": "Tampa Bay Buccaneers", "Cardinals": "Arizona Cardinals",
+        "Chargers": "Los Angeles Chargers", "Chiefs": "Kansas City Chiefs",
+        "Colts": "Indianapolis Colts", "Commanders": "Washington Commanders",
+        "Cowboys": "Dallas Cowboys", "Dolphins": "Miami Dolphins",
+        "Eagles": "Philadelphia Eagles", "Falcons": "Atlanta Falcons",
+        "Giants": "New York Giants", "Jaguars": "Jacksonville Jaguars",
+        "Jets": "New York Jets", "Lions": "Detroit Lions",
+        "Packers": "Green Bay Packers", "Panthers": "Carolina Panthers",
+        "Patriots": "New England Patriots", "Raiders": "Las Vegas Raiders",
+        "Rams": "Los Angeles Rams", "Ravens": "Baltimore Ravens",
+        "Saints": "New Orleans Saints", "Seahawks": "Seattle Seahawks",
+        "Steelers": "Pittsburgh Steelers", "Texans": "Houston Texans",
+        "Titans": "Tennessee Titans", "Vikings": "Minnesota Vikings"
+      };
+      const formatDate = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+      const formatDay = new Intl.DateTimeFormat("en-US", { weekday: "short", timeZone: "UTC" });
+      const collator = new Intl.Collator("en-US", { numeric: true });
+      const headers = ["Date", "Day", "Teams", "Team Picked to Win", "5 Words Why Picked"];
+      const games = JSON.parse(byId("games-data").textContent).map(([week, date, away, home, venue, pick, reason], index) => {
+        const instant = new Date(date + "T12:00:00Z");
+        const day = formatDay.format(instant);
+        const displayDate = formatDate.format(instant);
+        const matchup = `${away} ${venue ? "vs." : "at"} ${home}${venue ? ` (${venue})` : ""}`;
+        const searchText = [week, date, displayDate, day, teams[away], teams[home], matchup, pick, reason, day === "Thu" ? "Thursday TNF" : day === "Mon" ? "Monday MNF" : "Sunday"].join(" ").toLowerCase();
+        return { index, week, date, day, displayDate, away, home, venue, pick, reason, matchup, searchText };
+      });
+      if (games.length !== 73 || games.some((game) => !teams[game.away] || !teams[game.home] || ![game.away, game.home].includes(game.pick) || game.reason.trim().split(/\s+/).length !== 5)) {
+        throw new Error("The embedded picks failed their integrity check.");
+      }
+
+      let week = "";
+      let sortKey = "date";
+      let sortDirection = "asc";
+      let visibleGames = [];
+      const search = byId("search");
+      const teamFilter = byId("team-filter");
+      const dayFilter = byId("day-filter");
+      const sortSelect = byId("sort-select");
+      const body = byId("picks-body");
+      const weekNav = byId("week-nav");
+      const exportButton = byId("export-button");
+      const printButton = byId("print-button");
+      const resetButton = byId("reset-button");
+      const themeButton = byId("theme-button");
+      const compactLayout = window.matchMedia("(max-width: 720px)");
+
+      function syncSortFocus() {
+        document.querySelectorAll(".sort-button").forEach((button) => {
+          button.tabIndex = compactLayout.matches ? -1 : 0;
+        });
+      }
+      compactLayout.addEventListener("change", syncSortFocus);
+      syncSortFocus();
+
+      function element(tag, className, text) {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text !== undefined) node.textContent = text;
+        return node;
+      }
+
+      for (const value of ["", "4", "5", "6", "7", "8"]) {
+        const button = element("button", "week-button");
+        button.type = "button";
+        button.dataset.week = value;
+        button.setAttribute("aria-pressed", String(value === week));
+        button.setAttribute("aria-controls", "picks-body");
+        button.append(
+          element("span", "", value ? `Week ${value}` : "All weeks"),
+          element("span", "week-count", String(games.filter((game) => !value || game.week === Number(value)).length))
+        );
+        button.addEventListener("click", () => { week = value; render(); });
+        weekNav.append(button);
+      }
+      Object.entries(teams).sort((a, b) => collator.compare(a[1], b[1])).forEach(([value, label]) => {
+        const option = element("option", "", label);
+        option.value = value;
+        teamFilter.append(option);
+      });
+
+      function render() {
+        const terms = search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+        visibleGames = games.filter((game) =>
+          (!week || game.week === Number(week)) &&
+          (!teamFilter.value || game.away === teamFilter.value || game.home === teamFilter.value) &&
+          (!dayFilter.value || game.day === dayFilter.value) &&
+          terms.every((term) => game.searchText.includes(term))
+        );
+        const direction = sortDirection === "asc" ? 1 : -1;
+        visibleGames.sort((a, b) => {
+          const first = sortKey === "teams" ? a.matchup : a[sortKey];
+          const second = sortKey === "teams" ? b.matchup : b[sortKey];
+          return collator.compare(first, second) * direction || a.index - b.index;
+        });
+        const fragment = document.createDocumentFragment();
+        for (const game of visibleGames) {
+          const row = element("tr");
+          row.dataset.game = `${game.date}-${game.away}-${game.home}`;
+          const dateCell = element("td", "date-cell");
+          const time = element("time", "", game.displayDate);
+          time.dateTime = game.date;
+          dateCell.append(time);
+          const dayCell = element("td", "day-cell", game.day);
+          const matchupCell = element("td", "matchup-cell");
+          const matchup = element("span", "matchup");
+          matchup.append(
+            element("span", "", game.away),
+            element("span", "connector", game.venue ? " vs. " : " at "),
+            element("span", "", game.home)
+          );
+          matchupCell.append(matchup);
+          if (game.venue) matchupCell.append(element("span", "venue", `(${game.venue})`));
+          const pickCell = element("td", "pick-cell");
+          const pick = element("span", "pick-name", game.pick);
+          pick.title = teams[game.pick];
+          pickCell.append(pick);
+          const reasonCell = element("td", "reason-cell", game.reason);
+          const cells = [dateCell, dayCell, matchupCell, pickCell, reasonCell];
+          cells.forEach((cell, index) => { cell.dataset.label = headers[index]; row.append(cell); });
+          fragment.append(row);
+        }
+        body.replaceChildren(fragment);
+        const count = visibleGames.length;
+        byId("result-count").textContent = `${count} of ${games.length} games`;
+        byId("result-context").textContent = week ? ` / Week ${week}` : " / All weeks";
+        byId("empty-state").hidden = count !== 0;
+        byId("picks-table").hidden = count === 0;
+        exportButton.disabled = count === 0;
+        printButton.disabled = count === 0;
+        resetButton.disabled = !week && !search.value && !teamFilter.value && !dayFilter.value && sortKey === "date" && sortDirection === "asc";
+        weekNav.querySelectorAll("button").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.week === week)));
+        document.querySelectorAll(".sort-button").forEach((button) => {
+          const active = button.dataset.sort === sortKey;
+          button.closest("th").setAttribute("aria-sort", active ? (sortDirection === "asc" ? "ascending" : "descending") : "none");
+          button.querySelector(".sort-mark").textContent = active ? (sortDirection === "asc" ? "\u2191" : "\u2193") : "\u2195";
+          const nextDirection = active && sortDirection === "asc" ? "desc" : "asc";
+          const label = button.dataset.sort === "pick" ? "team picked" : button.dataset.sort;
+          const order = button.dataset.sort === "date" ? (nextDirection === "asc" ? "earliest first" : "latest first") : (nextDirection === "asc" ? "A to Z" : "Z to A");
+          button.setAttribute("aria-label", `Sort by ${label}, ${order}`);
+        });
+        sortSelect.value = `${sortKey}:${sortDirection}`;
+        const viewDetails = [
+          `${count} of ${games.length} games`,
+          week ? `Week ${week}` : "All weeks",
+          teamFilter.value ? teams[teamFilter.value] : "All teams",
+          dayFilter.selectedOptions[0].textContent,
+          terms.length ? `Search: ${search.value.trim()}` : ""
+        ].filter(Boolean);
+        byId("print-note").textContent = viewDetails.join(" / ");
+      }
+
+      function resetView() {
+        week = "";
+        search.value = "";
+        teamFilter.value = "";
+        dayFilter.value = "";
+        sortKey = "date";
+        sortDirection = "asc";
+        render();
+        search.focus();
+      }
+
+      search.addEventListener("input", render);
+      teamFilter.addEventListener("change", render);
+      dayFilter.addEventListener("change", render);
+      byId("filters").addEventListener("submit", (event) => event.preventDefault());
+      sortSelect.addEventListener("change", () => { [sortKey, sortDirection] = sortSelect.value.split(":"); render(); });
+      document.querySelectorAll(".sort-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          sortDirection = sortKey === button.dataset.sort && sortDirection === "asc" ? "desc" : "asc";
+          sortKey = button.dataset.sort;
+          render();
+        });
+      });
+      resetButton.addEventListener("click", resetView);
+      byId("empty-reset-button").addEventListener("click", resetView);
+
+      exportButton.addEventListener("click", () => {
+        const rows = [headers, ...visibleGames.map((game) => [game.displayDate, game.day, game.matchup, game.pick, game.reason])];
+        const csv = "\uFEFF" + rows.map((row) => row.map((value) => `"${value.replace(/"/g, '""')}"`).join(",")).join("\r\n") + "\r\n";
+        const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8;" }));
+        const link = element("a");
+        link.href = url;
+        link.download = `nfl-picks-2026-${week ? `week-${week}` : "all-weeks"}${teamFilter.value ? "-" + teamFilter.value.toLowerCase() : ""}.csv`;
+        document.body.append(link);
+        link.click();
+        link.remove();
+        window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+      });
+
+      function updateThemeButton() {
+        const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        themeButton.setAttribute("aria-label", `Switch to ${next} mode`);
+        themeButton.title = `Switch to ${next} mode`;
+      }
+      themeButton.addEventListener("click", () => {
+        document.documentElement.dataset.theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        updateThemeButton();
+      });
+      let themeBeforePrint = null;
+      window.addEventListener("beforeprint", () => {
+        if (themeBeforePrint === null) themeBeforePrint = document.documentElement.dataset.theme;
+        document.documentElement.dataset.theme = "light";
+      });
+      window.addEventListener("afterprint", () => {
+        if (themeBeforePrint !== null) document.documentElement.dataset.theme = themeBeforePrint;
+        themeBeforePrint = null;
+        updateThemeButton();
+      });
+      printButton.addEventListener("click", () => window.print());
+      [search, teamFilter, dayFilter, sortSelect].forEach((control) => { control.disabled = false; });
+      updateThemeButton();
+      render();
+    })();
+  </script>
+</body>
+</html>
