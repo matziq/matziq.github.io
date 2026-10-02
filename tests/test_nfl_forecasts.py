@@ -27,7 +27,7 @@ def candidate_for(games, ledger, results, now, selections=None):
     }
     decisions = [{
         "eventId": game.event_id, "pickTeamId": selected.get(game.event_id, game.pick_id or game.away_id),
-        "reason": "Verified current evidence favors this selection. The opponent's strengths and uncertain availability still limit confidence.",
+        "reason": "I expect the selected team to have the stronger matchup. The opponent's strengths and uncertain availability could still change the outcome.",
         "rationale": "Reviewed the current opponent context and verified availability before making this provisional selection.",
         "factors": {
             "performance": "Current form is compared with opponent quality rather than raw wins.",
@@ -196,7 +196,7 @@ class ForecastTests(unittest.TestCase):
 
     def test_retained_pick_does_not_rewrite_its_original_timestamp(self):
         self.ledger = forecasts.add_paragraphs(self.ledger, {
-            f"original-{game.event_id}": f"The recorded matchup reasoning favors this team against its opponent. The original selection remains a forecast rather than a guarantee."
+            f"original-{game.event_id}": "I expect this team to benefit from the recorded matchup reasoning. The opponent could still win if that advantage does not materialize."
             for game in self.games
         }, self.games, NOW)
         batch, candidate = candidate_for(self.games, self.ledger, self.results, self.now)

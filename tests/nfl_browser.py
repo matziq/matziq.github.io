@@ -154,9 +154,16 @@ def check(browser, url, artifacts):
         expect(reason).to_have_count(1)
         expect(reason).to_have_text(current_results["games"][event_id]["pickExplanation"])
         common.validate_paragraph(reason.inner_text())
-    search.fill("retrospective")
+    search.fill("drive efficiency")
     expect(first).to_be_visible()
     search.fill("")
+    expect(first.locator(".explanation-status")).to_contain_text("postgame review")
+    expect(first.locator(".reason-cell p")).to_contain_text("choice was wrong")
+    for event_id in ("401872966", "401873037"):
+        forecasts.validate_forecast_paragraph(page.locator(f'[data-event-id="{event_id}"] .reason-cell p').inner_text())
+    assert final_row["Explanation phase"] == "incorrect-final"
+    assert final_row["Pregame explanation"] == current_results["games"]["401872964"]["pregameExplanation"]
+    assert "incorrect-final" in final_row["Explanation history"]
     assert all(row["Winner"] != "TBD" or row["Pick result"] == "pending" for row in exported)
     first.locator("summary").click()
     expect(first.locator(".pick-history")).to_contain_text("October 1 original: Pittsburgh")
@@ -222,12 +229,14 @@ def check(browser, url, artifacts):
     fixture["fixtureRevision"] = schedule["revision"]
     fixture["forecastRevision"] = ledger["revision"]
     fixture["explanationFormat"] = "paragraph"
+    fixture["explanationPolicy"] = "forecast-until-final"
     fixture["forecastPublications"] = {}
     forecasts.apply_pick_snapshots(GAMES, fixture["games"], ledger, NOW + timedelta(days=3))
     fixture["games"][GAMES[0].event_id].update(awayScore=30, winnerTeamId="23", pickResult="correct", statusDetail="Final / OT")
     fixture["games"][GAMES[1].event_id].update(awayScore=30, winnerTeamId=GAMES[1].away_id, pickResult="correct")
     fixture["games"][GAMES[2].event_id].update(awayScore=21, homeScore=21, winnerTeamId=None, pickResult="tie", statusDetail="Final / OT")
     fixture["games"][GAMES[3].event_id].update(status="postponed", statusDetail="Postponed - awaiting a verified final", scheduledAt="2026-10-06T17:00:00Z")
+    forecasts.apply_pick_snapshots(GAMES, fixture["games"], ledger, NOW + timedelta(days=3))
     fixture["revision"] = nfl.digest({key: value for key, value in fixture.items() if key != "revision"})
     scenarios = browser.new_context()
     scenarios.route("**/results.json?*", lambda route: route.fulfill(json=fixture))
@@ -242,6 +251,8 @@ def check(browser, url, artifacts):
     expect(postponed.locator(".schedule-change")).to_contain_text("Initial schedule retained.")
     expect(postponed.locator("time")).to_have_attribute("datetime", "2026-10-04")
     expect(page.locator('[data-event-id="401872964"] .pick-name')).to_have_text("Pittsburgh")
+    expect(page.locator('[data-event-id="401872964"] .explanation-status')).to_have_text("Pregame explanation unchanged.")
+    expect(page.locator('[data-event-id="401872964"] .reason-cell p')).to_have_text(fixture["games"]["401872964"]["pregameExplanation"])
     assert page.locator("#games-data").text_content() == original
     scenarios.close()
 

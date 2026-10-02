@@ -27,8 +27,7 @@ The original compact phrases and legacy assessment decisions are not
 rewritten. Published `paragraphs` in `forecasts.json` are keyed to those
 existing pick revision IDs; `results.json` exposes the selected
 `pickExplanation` without changing the pick, effective time, kickoff lock,
-or grade. Even a locked original pick can receive a display explanation
-without pretending a new selection was made after kickoff. Original
+or grade. Original
 wording remains visible in history and a separate archival CSV field.
 Current table/card/search/export/print uses **Why Picked** paragraphs.
 Historical games and unpicked playoff TBDs have no pick explanation.
@@ -40,6 +39,34 @@ No exact five-word constraint applies to new explanations. HTML, line
 breaks, empty or fragmentary explanations are rejected. Sources remain in
 the separate evidence/history fields. Archived originals retain their
 existing byte-level integrity check and original digest.
+
+Pregame explanations are future-oriented forecasts ("I expect", "should",
+or "could"), not accounts of an outcome that has not happened. Existing
+wording corrections are appended to `explanationRevisions`, never
+overwritten in the original paragraph map or old assessments. The current
+pregame paragraph is frozen with the selection once play starts.
+
+After a final, **correct picks retain their exact pregame explanation**;
+ties and games without a pick do not receive a mistaken-pick review.
+Only an incorrect final receives a new sourced postgame paragraph that
+explains why the pregame reasoning proved mistaken. The original pick and
+grade never change. The previous pregame text, review timestamp, verified
+final signature and source URLs remain in the history and CSV. A corrected
+score invalidates a stale review; if it makes the pick correct, the
+unchanged pregame paragraph is restored. While a wrong pick's review is
+pending, the page explicitly retains the pregame text instead of inventing
+an explanation.
+
+The same-session scan adds missing incorrect-final reviews to its retryable
+batch, even if the final itself was already assessed. Each future candidate
+includes `postgameReviews` for the batch's unreviewed incorrect finals:
+`eventId`, `paragraph`, and `sources` (title/url/checkedAt). Read the verified
+ESPN summary/box score/scoring plays or a reputable dated recap before
+writing that paragraph. Do not supply reviews for correct or tied games.
+The publish runner verifies the final again, requires every needed review,
+and appends it through the existing forecast-only compare-and-swap commit.
+If no upcoming games remain, an empty decision list plus the required
+postgame reviews is valid. Source errors leave the review retryable.
 
 ## Historical games and weekly winners
 

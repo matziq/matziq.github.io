@@ -71,6 +71,22 @@ def validate_results(payload: dict, games: list[Game], *, allow_pending_rebind=F
                     raise ValueError("A game without a prediction must not have a pick explanation.")
             else:
                 validate_paragraph(result.get("pickExplanation"))
+        if payload.get("explanationPolicy") == "forecast-until-final":
+            if picked is None:
+                if result.get("pregameExplanation") != "" or result.get("explanationPhase") != "none":
+                    raise ValueError("An unpicked game cannot have a pregame or postgame explanation.")
+            else:
+                validate_paragraph(result.get("pregameExplanation"))
+                phase = result.get("explanationPhase")
+                if phase in {"incorrect-final", "awaiting-review"}:
+                    if result["status"] != "final" or result["pickResult"] != "incorrect":
+                        raise ValueError("Only an incorrect completed pick may have a postgame review.")
+                    if phase == "incorrect-final" and (not result.get("explanationRevisionId") or not result.get("explanationUpdatedAt")):
+                        raise ValueError("A postgame review needs a recorded explanation revision.")
+                elif phase != "pregame":
+                    raise ValueError("Unknown pick explanation phase.")
+                if phase != "incorrect-final" and result["pickExplanation"] != result["pregameExplanation"]:
+                    raise ValueError("A correct or unfinished pick must retain its pregame wording.")
         if result["status"] == "final":
             away = score(result["awayScore"])
             home = score(result["homeScore"])
@@ -306,6 +322,7 @@ def refresh(
         "monitoringComplete": complete,
         "fixtureRevision": fixture_revision, "forecastRevision": forecast_revision,
         "explanationFormat": forecasts.get("explanationFormat") if forecasts else None,
+        "explanationPolicy": forecasts.get("explanationPolicy") if forecasts else None,
         "forecastPublications": publications or {},
         "analysis": {key: forecasts["assessments"][-1][key] for key in (
             "id", "assessedAt", "summary", "initialPickCount", "changedPickCount", "retainedCount", "skippedLockedCount"

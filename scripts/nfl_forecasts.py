@@ -15,6 +15,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 import os
 from pathlib import Path
+import re
 import subprocess
 import sys
 import time
@@ -32,6 +33,19 @@ FORECAST_PATH = PAGE_PATH.with_name("forecasts.json")
 DEFAULT_STATE = Path(os.environ.get("LOCALAPPDATA", str(Path.home()))) / "Matziq" / "NflPicks2026" / "analysis"
 PENDING_REASON = "Awaiting a verified pregame assessment"
 TBD_REASON = "Awaiting official playoff matchup confirmation"
+
+
+def validate_forecast_paragraph(paragraph: str) -> None:
+    validate_paragraph(paragraph)
+    opening = re.split(r"(?<=[.!?])\s+", paragraph, maxsplit=1)[0]
+    if not re.search(r"\b(expect|should|will|could|may|favor|lean|project)\b", opening, re.IGNORECASE):
+        raise ValueError("A pregame explanation must open with a forward-looking forecast, not a past outcome.")
+    if re.search(r"\b(was expected|were expected|was viewed|were viewed|original pick favored)\b", paragraph, re.IGNORECASE):
+        raise ValueError("Current pregame explanations cannot describe the selection in retrospective language.")
+
+
+def explanation_revision_id(entry: dict) -> str:
+    return "explanation-" + digest({key: value for key, value in entry.items() if key != "id"})[:24]
 
 
 def empty_ledger(now: datetime) -> dict:
@@ -76,6 +90,8 @@ def validate_ledger(ledger: dict, games: list[Game]) -> None:
                 raise ValueError("Every prediction needs an explanation and a separate substantive rationale.")
             if assessment.get("reasonFormat") == "paragraph":
                 validate_paragraph(decision["reason"])
+                if assessment.get("explanationPolicy") == "forecast-until-final":
+                    validate_forecast_paragraph(decision["reason"])
             explanation_ids.add(f"{assessment['id']}:{event_id}")
             if set(decision["factors"]) != {"performance", "availability", "news", "context"} or any(
                 len(text.strip()) < 12 for text in decision["factors"].values()
@@ -102,12 +118,52 @@ def validate_ledger(ledger: dict, games: list[Game]) -> None:
             if revision_id not in explanation_ids:
                 raise ValueError("A paragraph references an unknown pick revision.")
             validate_paragraph(paragraph)
+    revision_ids = set()
+    for entry in ledger.get("explanationRevisions", []):
+        if entry["id"] in revision_ids or entry["id"] != explanation_revision_id(entry):
+            raise ValueError("Explanation history has a duplicate or invalid immutable revision.")
+        revision_ids.add(entry["id"])
+        if entry["eventId"] not in game_ids or entry["pickRevisionId"] not in explanation_ids:
+            raise ValueError("An explanation revision references an unknown game or pick.")
+        game = next(game for game in games if game.event_id == entry["eventId"])
+        if entry["pickTeamId"] not in (game.away_id, game.home_id):
+            raise ValueError("An explanation revision cannot invent a selection.")
+        validate_paragraph(entry["paragraph"])
+        instant(entry["createdAt"])
+        if not entry["sources"]:
+            raise ValueError("An explanation revision needs its supporting sources.")
+        for source in entry["sources"]:
+            url = urlsplit(source["url"])
+            if url.scheme != "https" or not url.hostname or url.username or url.password:
+                raise ValueError("Explanation sources must be public HTTPS URLs.")
+            instant(source["checkedAt"])
+        proof = entry["proof"]
+        if entry["kind"] == "pregame":
+            validate_forecast_paragraph(entry["paragraph"])
+            if proof["state"] != "pre" or proof["completed"] or proof["hasStarted"] or instant(entry["createdAt"]) >= instant(proof["scheduledAt"]):
+                raise ValueError("A pregame explanation cannot be rewritten after kickoff.")
+        elif entry["kind"] == "incorrect-final":
+            if (
+                proof["status"] != "final" or proof["pickResult"] != "incorrect"
+                or proof["winnerTeamId"] is None or proof["winnerTeamId"] == entry["pickTeamId"]
+                or entry["resultSignature"] != final_signature(proof)
+            ):
+                raise ValueError("Only a verified incorrect final can receive a postgame explanation.")
+        else:
+            raise ValueError("Unknown explanation revision kind.")
 
 
-def selection_paragraph(game: Game, ledger: dict, selected: dict) -> str:
+def selection_paragraph(game: Game, ledger: dict, selected: dict, *, before: datetime | None = None) -> str:
     if selected["teamId"] is None:
         return ""
     paragraph = ledger.get("paragraphs", {}).get(selected["revisionId"], selected["reason"])
+    for entry in ledger.get("explanationRevisions", []):
+        if (
+            entry["kind"] == "pregame" and entry["eventId"] == game.event_id
+            and entry["pickRevisionId"] == selected["revisionId"] and entry["pickTeamId"] == selected["teamId"]
+            and (before is None or instant(entry["createdAt"]) < before)
+        ):
+            paragraph = entry["paragraph"]
     validate_paragraph(paragraph)
     return paragraph
 
@@ -127,6 +183,59 @@ def add_paragraphs(ledger: dict, paragraphs: dict, games: list[Game], now: datet
     for game in games:
         selection_paragraph(game, updated, selection(game, updated))
     return updated
+
+
+def append_explanation_revision(ledger: dict, game: Game, result: dict, paragraph: str, sources: list[dict], now: datetime, kind: str, proof=None) -> dict:
+    validate_paragraph(paragraph)
+    pick_id = result.get("scoredPickTeamId")
+    if pick_id is None or not result.get("pickRevisionId"):
+        raise ValueError("A game without a pick cannot have a pick explanation.")
+    if kind == "pregame":
+        validate_forecast_paragraph(paragraph)
+        if (
+            result.get("pickLockedAt") or result.get("hasStarted")
+            or result["status"] not in {"scheduled", "postponed", "delayed"}
+            or instant(result["scheduledAt"]) <= now or not proof
+        ):
+            raise ValueError("Only a verified unstarted pick may receive a pregame wording revision.")
+    elif kind == "incorrect-final":
+        if result["status"] != "final" or result["pickResult"] != "incorrect" or result.get("error"):
+            raise ValueError("Do not rewrite a correct, tied, unfinished, or unverified pick explanation.")
+        proof = {key: result[key] for key in (
+            "eventId", "awayTeamId", "homeTeamId", "awayScore", "homeScore", "winnerTeamId",
+            "scheduledAt", "statusDetail", "resultUpdatedAt", "status", "pickResult",
+        )}
+    else:
+        raise ValueError("Unknown explanation revision kind.")
+    entry = {
+        "eventId": game.event_id, "pickRevisionId": result["pickRevisionId"], "pickTeamId": pick_id,
+        "kind": kind, "paragraph": paragraph, "createdAt": stamp(now), "sources": sources, "proof": proof,
+    }
+    if kind == "incorrect-final":
+        entry["resultSignature"] = final_signature(result)
+    entry["id"] = explanation_revision_id(entry)
+    existing = ledger.setdefault("explanationRevisions", [])
+    if any(item["id"] == entry["id"] for item in existing):
+        return entry
+    if kind == "incorrect-final" and any(
+        item["kind"] == kind and item.get("resultSignature") == entry["resultSignature"]
+        and item["pickRevisionId"] == entry["pickRevisionId"] for item in existing
+    ):
+        raise ValueError("This incorrect final already has a recorded review; do not duplicate or overwrite it.")
+    existing.append(entry)
+    ledger["explanationPolicy"] = "forecast-until-final"
+    return entry
+
+
+def postgame_review(ledger: dict, result: dict) -> dict | None:
+    if result["status"] != "final" or result["pickResult"] != "incorrect":
+        return None
+    signature = final_signature(result)
+    return next((
+        entry for entry in reversed(ledger.get("explanationRevisions", []))
+        if entry["kind"] == "incorrect-final" and entry["eventId"] == result["eventId"]
+        and entry["pickRevisionId"] == result.get("pickRevisionId") and entry["resultSignature"] == signature
+    ), None)
 
 
 def selection(game: Game, ledger: dict | None, *, before: datetime | None = None, publications: dict | None = None) -> dict:
@@ -151,7 +260,7 @@ def selection(game: Game, ledger: dict | None, *, before: datetime | None = None
                     continue
                 if publications is not None and (publication is None or instant(publication["committedAt"]) >= before):
                     continue
-            old_reason = selection_paragraph(game, ledger, selected) if assessment.get("reasonFormat") == "paragraph" and ledger.get("explanationFormat") == "paragraph" else selected["reason"]
+            old_reason = selection_paragraph(game, ledger, selected, before=instant(assessment["assessedAt"])) if assessment.get("reasonFormat") == "paragraph" and ledger.get("explanationFormat") == "paragraph" else selected["reason"]
             if (selected["teamId"], old_reason) == (decision["pickTeamId"], decision["reason"]):
                 continue
             selected = {
@@ -165,6 +274,8 @@ def selection(game: Game, ledger: dict | None, *, before: datetime | None = None
 def apply_pick_snapshots(games: list[Game], results: dict, ledger: dict | None, now: datetime, publications=None) -> None:
     for game in games:
         result = results[game.event_id]
+        was_locked = bool(result.get("pickLockedAt"))
+        previous_explanation = result.get("pickExplanation")
         if not result.get("pickLockedAt"):
             kickoff = instant(result["scheduledAt"])
             started = game.teams_known and (result.get("hasStarted") or result["status"] in {"in_progress", "final"})
@@ -177,15 +288,35 @@ def apply_pick_snapshots(games: list[Game], results: dict, ledger: dict | None, 
                 pickAssessmentId=choice["assessmentId"], pickLockedAt=stamp(now) if cutoff else None,
                 pickCutoffAt=stamp(cutoff) if cutoff else None,
             )
-        if ledger and ledger.get("explanationFormat") == "paragraph":
-            result["pickExplanation"] = selection_paragraph(game, ledger, {
-                "teamId": result.get("scoredPickTeamId", game.pick_id),
-                "revisionId": result.get("pickRevisionId"), "reason": result.get("pickReason", game.reason),
-            })
         if result["status"] == "final":
             pick_id = result.get("scoredPickTeamId", game.pick_id)
             winner = result["winnerTeamId"]
             result["pickResult"] = "no_pick" if pick_id is None else "tie" if winner is None else "correct" if winner == pick_id else "incorrect"
+        if ledger and ledger.get("explanationFormat") == "paragraph":
+            selected = {
+                "teamId": result.get("scoredPickTeamId", game.pick_id),
+                "revisionId": result.get("pickRevisionId"), "reason": result.get("pickReason", game.reason),
+            }
+            if ledger.get("explanationPolicy") != "forecast-until-final":
+                result["pickExplanation"] = selection_paragraph(game, ledger, selected)
+                continue
+            if selected["teamId"] is None:
+                result.update(pickExplanation="", pregameExplanation="", explanationPhase="none", explanationRevisionId=None, explanationUpdatedAt=None)
+                continue
+            if not was_locked:
+                cutoff = instant(result["pickCutoffAt"]) if result.get("pickCutoffAt") else None
+                result["pregameExplanation"] = selection_paragraph(game, ledger, selected, before=cutoff)
+            elif "pregameExplanation" not in result:
+                result["pregameExplanation"] = previous_explanation or selection_paragraph(game, ledger, selected)
+            result["pickExplanation"] = result["pregameExplanation"]
+            result.update(explanationPhase="pregame", explanationRevisionId=None, explanationUpdatedAt=None)
+            if result["status"] == "final" and result["pickResult"] == "incorrect":
+                review = postgame_review(ledger, result)
+                if review:
+                    result.update(pickExplanation=review["paragraph"], explanationPhase="incorrect-final",
+                                  explanationRevisionId=review["id"], explanationUpdatedAt=review["createdAt"])
+                else:
+                    result["explanationPhase"] = "awaiting-review"
 
 
 def final_signature(result: dict) -> str:
@@ -218,9 +349,16 @@ def batch_for(games: list[Game], results: dict, ledger: dict, now: datetime) -> 
         and results["games"][game.event_id]["status"] in {"scheduled", "postponed", "delayed"}
         and instant(results["games"][game.event_id]["scheduledAt"]) > now + PREGAME_MARGIN
     ]
-    if not finals and not unpicked:
+    pending_reviews = {
+        event_id: final_signature(result) for event_id, result in results["games"].items()
+        if ledger.get("explanationPolicy") == "forecast-until-final" and result["status"] == "final"
+        and result["pickResult"] == "incorrect" and not result.get("error") and not postgame_review(ledger, result)
+    }
+    if not finals and not unpicked and not pending_reviews:
         return None
     identity = {"triggerResults": finals, "newOfficialFixtures": sorted(unpicked)}
+    if pending_reviews:
+        identity["incorrectFinalReviews"] = pending_reviews
     return {
         "id": "assessment-" + digest(identity)[:24], **identity,
         "detectedAt": stamp(now), "resultsRevision": results["revision"],
@@ -269,7 +407,8 @@ def prepare_assessment(games: list[Game], results: dict, ledger: dict, batch: di
         raise ValueError("The candidate is based on a stale assessment batch or forecast ledger.")
     if now - instant(candidate["evidenceCollectedAt"]) > timedelta(hours=3):
         raise ValueError("Research is more than three hours old; refresh the evidence before publishing.")
-    for event_id, signature in batch["triggerResults"].items():
+    required_finals = {**batch["triggerResults"], **batch.get("incorrectFinalReviews", {})}
+    for event_id, signature in required_finals.items():
         if final_signature(results["games"][event_id]) != signature:
             raise ValueError("A triggering result was corrected; research the new final revision instead.")
         if instant(candidate["evidenceCollectedAt"]) < instant(results["games"][event_id]["resultUpdatedAt"]):
@@ -299,7 +438,7 @@ def prepare_assessment(games: list[Game], results: dict, ledger: dict, batch: di
         if not game.teams_known:
             raise ValueError("Do not predict unofficial playoff participants.")
         decision = copy.deepcopy(candidate_decision)
-        validate_paragraph(decision["reason"])
+        validate_forecast_paragraph(decision["reason"])
         old = selection(game, ledger)
         old_reason = selection_paragraph(game, ledger, old) if ledger.get("explanationFormat") == "paragraph" else old["reason"]
         applied = event_id in eligible
@@ -318,6 +457,7 @@ def prepare_assessment(games: list[Game], results: dict, ledger: dict, batch: di
         decisions.append(decision)
     assessment = {
         "id": batch["id"], "status": "completed", "assessedAt": stamp(now), "reasonFormat": "paragraph",
+        "explanationPolicy": "forecast-until-final",
         "evidenceCollectedAt": candidate["evidenceCollectedAt"],
         "triggerResults": batch["triggerResults"], "newOfficialFixtures": batch["newOfficialFixtures"],
         "summary": candidate["summary"], "limitations": candidate["limitations"],
@@ -326,6 +466,33 @@ def prepare_assessment(games: list[Game], results: dict, ledger: dict, batch: di
         "retainedCount": retained, "skippedLockedCount": skipped,
     }
     prepared = copy.deepcopy(ledger)
+    reviews = candidate.get("postgameReviews", [])
+    supplied_reviews = {review["eventId"]: review for review in reviews}
+    if len(supplied_reviews) != len(reviews):
+        raise ValueError("Duplicate postgame review in the candidate.")
+    required_reviews = {
+        event_id for event_id in required_finals
+        if results["games"][event_id]["status"] == "final"
+        and results["games"][event_id]["pickResult"] == "incorrect"
+        and not postgame_review(ledger, results["games"][event_id])
+    }
+    if ledger.get("explanationPolicy") == "forecast-until-final" and set(supplied_reviews) != required_reviews:
+        raise ValueError("Provide one sourced mistaken-pick explanation for each unreviewed incorrect final, and none for correct picks or ties.")
+    for event_id, review in supplied_reviews.items():
+        if event_id not in required_reviews:
+            raise ValueError("A postgame explanation can only review a triggering incorrect final.")
+        actual = verified[event_id]
+        result = results["games"][event_id]
+        if actual["status"] != "final" or any(actual[key] != result[key] for key in ("awayScore", "homeScore", "winnerTeamId")):
+            raise ValueError("The postgame explanation is based on a stale or unconfirmed final.")
+        for source in review["sources"]:
+            if instant(source["checkedAt"]) < instant(result["resultUpdatedAt"]):
+                raise ValueError("Postgame research must be verified after the final result.")
+        append_explanation_revision(prepared, by_id[event_id], result, review["paragraph"], review["sources"], now, "incorrect-final")
+    assessment["postgameReviewIds"] = [
+        entry["id"] for entry in prepared.get("explanationRevisions", [])
+        if entry["kind"] == "incorrect-final" and entry["eventId"] in supplied_reviews
+    ]
     prepared["assessments"].append(assessment)
     prepared["lastAssessedAt"] = assessment["assessedAt"]
     seal(prepared)
@@ -417,7 +584,7 @@ def preflight(root: Path, batch: dict, candidate: dict):
     now = datetime.now(UTC)
     verified = verify_current_games(games, results, fetch_json, now)
     # A stale published score must not trigger analysis of a different final.
-    for event_id in batch["triggerResults"]:
+    for event_id in {**batch["triggerResults"], **batch.get("incorrectFinalReviews", {})}:
         result = results["games"][event_id]
         observation = verified[event_id]
         if observation["status"] != "final" or any(observation[key] != result[key] for key in ("awayScore", "homeScore", "winnerTeamId")):
