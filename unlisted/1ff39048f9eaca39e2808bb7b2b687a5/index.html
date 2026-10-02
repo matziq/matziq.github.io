@@ -40,6 +40,7 @@
       --cp-accent-soft: rgba(177, 31, 75, 0.08);
       --cp-accent-fg: #ffffff;
       --cp-success: #16a34a;
+      --cp-success-text: #137a37;
       --cp-danger: #dc2626;
       --cp-warning: #f59e0b;
       --cp-link: #0078d4;
@@ -66,6 +67,7 @@
       --cp-accent-soft: rgba(253, 142, 161, 0.14);
       --cp-accent-fg: #1a1a1a;
       --cp-success: #4ade80;
+      --cp-success-text: var(--cp-success);
       --cp-danger: #f87171;
       --cp-warning: #fbbf24;
       --cp-link: #4da6ff;
@@ -270,6 +272,9 @@
     .date-cell { font-variant-numeric: tabular-nums; font-size: 13px; white-space: nowrap; }
     .day-cell { color: var(--cp-text-soft); font-size: 13px; }
     .matchup { font-weight: 600; }
+    .historical-winner { color: var(--cp-success-text); font-weight: 700; }
+    .winner-marker { color: var(--cp-success); }
+    .winner-marker::after { content: " \2605"; }
     .connector { color: var(--cp-text-soft); font-weight: 400; }
     .venue { display: block; margin-top: 4px; color: var(--cp-text-soft); font-size: 12px; font-weight: 400; }
     .pick-name { display: inline-block; border-radius: 6px; padding: 4px 10px; background: var(--cp-accent-soft); color: var(--cp-accent); font-weight: 650; }
@@ -23061,10 +23066,23 @@
           const dayCell = element("td", "day-cell", shownDate.day);
           const matchupCell = element("td", "matchup-cell");
           const matchup = element("span", "matchup");
+          const historicalWinner = game.historical && result.status === "final" && result.winnerTeamId !== null;
+          const matchupTeam = (id) => {
+            const isWinner = historicalWinner && id === result.winnerTeamId;
+            const team = element("span", `matchup-team${isWinner ? " historical-winner" : ""}`, teamLabel(id));
+            team.dataset.teamId = id;
+            if (isWinner) {
+              team.title = `${teamLabel(id)}: game winner`;
+              const marker = element("span", "winner-marker");
+              marker.setAttribute("aria-hidden", "true");
+              team.append(marker);
+            }
+            return team;
+          };
           matchup.append(
-            element("span", "", teamLabel(game.awayId)),
+            matchupTeam(game.awayId),
             element("span", "connector", game.venue ? " vs. " : " at "),
-            element("span", "", teamLabel(game.homeId))
+            matchupTeam(game.homeId)
           );
           matchupCell.append(matchup);
           if (game.venue) matchupCell.append(element("span", "venue", `(${game.venue})`));
@@ -23081,7 +23099,7 @@
           if (result.status === "final") {
             resultCell.append(
               element("span", "final-score", finalScore(game, result)),
-              element("span", "actual-winner", result.winnerTeamId === null ? "Tie / no winner" : `Winner: ${winnerText(result)}`)
+              element("span", `actual-winner${historicalWinner ? " historical-winner" : ""}`, result.winnerTeamId === null ? "Tie / no winner" : `Winner: ${winnerText(result)}`)
             );
           }
           if (!game.historical && !winnersOnly) {

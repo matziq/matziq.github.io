@@ -272,6 +272,51 @@ def check_history_and_winners(browser, url, artifacts):
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.goto(url, wait_until="networkidle")
+    away_winner = next(game for game in HISTORY["games"].values() if game["winnerTeamId"] == game["awayTeamId"])
+    for theme in ("light", "dark"):
+        page.evaluate("(theme) => { document.documentElement.dataset.theme = theme; }", theme)
+        colors = page.evaluate("""() => {
+          const probe = document.createElement("span");
+          document.body.append(probe);
+          const color = name => {
+            probe.style.color = `var(${name})`;
+            return getComputedStyle(probe).color;
+          };
+          const winner = color("--cp-success-text"), neutral = color("--cp-text");
+          const luminance = value => {
+            const channels = value.match(/[\\d.]+/g).slice(0, 3).map(Number).map(value => {
+              value /= 255;
+              return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+            });
+            return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
+          };
+          const foreground = luminance(winner);
+          const contrasts = ["--cp-bg", "--cp-surface", "--cp-bg-elevated"].map(name => {
+            const background = luminance(color(name));
+            return (Math.max(foreground, background) + 0.05) / (Math.min(foreground, background) + 0.05);
+          });
+          probe.remove();
+          return {winner, neutral, contrasts};
+        }""")
+        assert min(colors["contrasts"]) >= 4.5, (theme, colors)
+        for game in (HISTORY["games"]["401872656"], away_winner):
+            row = page.locator(f'[data-event-id="{game["eventId"]}"]')
+            winner_id = game["winnerTeamId"]
+            loser_id = game["awayTeamId"] if winner_id == game["homeTeamId"] else game["homeTeamId"]
+            winner = row.locator(f'.matchup-team[data-team-id="{winner_id}"]')
+            loser = row.locator(f'.matchup-team[data-team-id="{loser_id}"]')
+            expect(winner).to_have_css("color", colors["winner"])
+            expect(loser).to_have_css("color", colors["neutral"])
+            expect(loser).to_have_attribute("class", "matchup-team")
+            expect(winner.locator(".winner-marker")).to_have_attribute("aria-hidden", "true")
+            assert "\\u2605".encode().decode("unicode_escape") in winner.locator(".winner-marker").evaluate("node => getComputedStyle(node, '::after').content")
+            expect(row.locator(".actual-winner")).to_have_css("color", colors["winner"])
+            expect(row.locator(".pick-name")).to_have_count(0)
+            expect(row.locator(".verdict")).to_have_count(0)
+        expect(page.locator('[data-event-id="401872656"] .matchup-team[data-team-id="26"]')).to_have_text("Seahawks")
+        expect(page.locator('[data-event-id="401872656"] .actual-winner')).to_have_text("Winner: Seahawks")
+        expect(page.locator('[data-event-id="401872964"] .historical-winner')).to_have_count(0)
+    page.evaluate("document.documentElement.dataset.theme = 'light'")
     options = page.locator("#week-filter option").all_text_contents()
     for label in ("Week 1 / History", "Week 2 / History", "Week 3 / History", "Week 18", "Super Bowl LXI"):
         assert label in options
@@ -303,6 +348,9 @@ def check_history_and_winners(browser, url, artifacts):
     page.get_by_label("Search games", exact=True).fill("Patriots")
     expect(rows).to_have_count(1)
     expect(rows.locator(".actual-winner")).to_have_text("Winner: Seattle")
+    expect(rows.locator('.matchup-team[data-team-id="26"]')).to_have_attribute("class", "matchup-team historical-winner")
+    expect(rows.locator('.matchup-team[data-team-id="17"]')).to_have_attribute("class", "matchup-team")
+    expect(rows.locator(".actual-winner")).to_have_attribute("class", "actual-winner historical-winner")
     expect(rows.locator(".final-score")).to_have_text("New England 10 - Seattle 13")
     with page.expect_download() as download:
         page.get_by_role("button", name="Export CSV", exact=True).click()
@@ -357,6 +405,8 @@ def check_history_and_winners(browser, url, artifacts):
     page.get_by_label("Week / round", exact=True).select_option("2:1")
     expect(page.locator("#picks-body tr")).to_have_count(16)
     expect(page.locator(f'[data-event-id="{week_one[0]["eventId"]}"] .actual-winner')).to_have_text("Tie / no winner")
+    expect(page.locator(f'[data-event-id="{week_one[0]["eventId"]}"] .historical-winner')).to_have_count(0)
+    expect(page.locator(f'[data-event-id="{week_one[1]["eventId"]}"] .historical-winner')).to_have_count(0)
     page.get_by_label("Game view", exact=True).select_option("winners")
     expect(page.locator("#picks-body tr")).to_have_count(14)
     expect(page.locator("#winner-note")).to_contain_text("1 tied game excluded")

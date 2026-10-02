@@ -42,6 +42,10 @@ prediction columns. In a mixed export, historical prediction cells are
 blank. Mascot/Location naming, search, team/day filters, sorting, and mobile
 layout work in both views.
 
+For historical finals, only the actual winner's matchup name and Winner
+line use contrast-checked green text. A star supplies a non-color marker;
+losers, ties, unfinished games, and forecasted games remain neutral.
+
 History is deliberately outside `fixtures.json`, `results.json`, and
 `forecasts.json`. Importing old finals cannot produce AI assessment
 targets, modify the forecast ledger, or replay Windows browser
