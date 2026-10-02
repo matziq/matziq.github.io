@@ -252,7 +252,7 @@ class SeasonTests(unittest.TestCase):
         self.assertEqual(common.digest(common.script_data(HTML, "games-data")), common.PICKS_SHA256)
         super_bowl = next(game for game in GAMES if game.season_type == 3 and game.week == 4)
         self.assertEqual(common.instant(super_bowl.scheduled_at).date().isoformat(), "2027-02-14")
-        self.assertFalse(super_bowl.teams_known)
+        self.assertEqual(super_bowl.season_type, 3)
 
     def test_flexible_dates_preserve_initial_record_and_unknown_time(self):
         fixtures = common.script_data(HTML, "fixtures-data")

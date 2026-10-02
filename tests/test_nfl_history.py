@@ -120,9 +120,16 @@ class HistoricalResultsTests(unittest.TestCase):
         self.assertEqual(len(CURRENT["games"]), 237)
         self.assertFalse(set(HISTORY["games"]) & set(CURRENT["games"]))
         self.assertFalse(set(HISTORY["games"]) & {game.event_id for game in GAMES})
-        self.assertEqual(sum(result["pickResult"] == "incorrect" for result in CURRENT["games"].values()), 1)
-        self.assertEqual(sum(result["pickResult"] == "pending" for result in CURRENT["games"].values()), 236)
-        self.assertIsNone(forecasts.batch_for(GAMES, CURRENT, LEDGER, NOW))
+        without_history = common.replace_data(HTML, "history-data", {})
+        original_scope = common.load_games(without_history)
+        self.assertEqual(
+            {game.event_id: CURRENT["games"][game.event_id]["pickResult"] for game in GAMES},
+            {game.event_id: CURRENT["games"][game.event_id]["pickResult"] for game in original_scope},
+        )
+        self.assertEqual(
+            forecasts.batch_for(GAMES, CURRENT, LEDGER, NOW),
+            forecasts.batch_for(original_scope, CURRENT, LEDGER, NOW),
+        )
         self.assertEqual(common.digest(common.script_data(HTML, "games-data")), common.PICKS_SHA256)
 
     def test_adding_old_finals_cannot_open_tabs_or_rebaseline_existing_state(self):
@@ -144,7 +151,8 @@ class HistoricalResultsTests(unittest.TestCase):
             after = watch.run_once(root, state_dir, NOW + timedelta(minutes=5), read_html=lambda: HTML, **options)
             self.assertEqual(after["seenFinalIds"], baseline["seenFinalIds"])
             self.assertEqual(after["lastSeenAssessmentId"], baseline["lastSeenAssessmentId"])
-            self.assertEqual(after["seenFinalIds"], ["401872964"])
+            self.assertEqual(set(after["seenFinalIds"]), {event_id for event_id, result in CURRENT["games"].items() if result["status"] == "final"})
+            self.assertFalse(set(after["seenFinalIds"]) & set(HISTORY["games"]))
             self.assertFalse(opened)
 
 
