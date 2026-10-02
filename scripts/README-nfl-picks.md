@@ -23,6 +23,40 @@ trigger analysis even without a new final. Original/initial picks and
 history are available in each row and CSV; active names follow the saved
 Mascot/Location preference. The HTML embeds all snapshots for offline use.
 
+## Historical games and weekly winners
+
+Weeks 1-3 (48 games, September 9-28, 2026) are stored in a separate
+`history.json` and embedded `history-data` block. The import cross-checks
+season-specific team schedules against dated ESPN scoreboards using stable
+event/team IDs. Only authoritative finals receive scores and a winner.
+Ties have no winner; an unfinished/canceled game never receives a guessed
+result. Historical records contain no prediction or reason fields and are
+never included in the prediction-accuracy denominator.
+
+Use **History** or select **Week 1 / History** through **Week 3 / History**.
+The **Game view** selector (`result-view`) offers **Winners only** for any
+week, round, or other active filter. It shows confirmed winners and their
+final scores, hides all pick/reason/grading columns, and explicitly reports
+excluded ties. Historical-only and winners-only CSV/print output has no
+prediction columns. In a mixed export, historical prediction cells are
+blank. Mascot/Location naming, search, team/day filters, sorting, and mobile
+layout work in both views.
+
+History is deliberately outside `fixtures.json`, `results.json`, and
+`forecasts.json`. Importing old finals cannot produce AI assessment
+targets, modify the forecast ledger, or replay Windows browser
+notifications. The existing score updater preserves the historical
+snapshot unchanged. To refresh this archival snapshot explicitly:
+
+```powershell
+python -B scripts\nfl_history.py
+```
+
+The importer updates only `history.json` and the HTML's `history-data`
+block, leaving original picks, forecast history, active results and private
+watermarks untouched. The displayed historical check timestamp identifies
+the last verified archival import.
+
 ## Independent cloud results workflow
 
 **Update NFL picks results** remains a five-minute scheduled/manual Actions
