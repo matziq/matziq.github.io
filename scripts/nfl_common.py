@@ -84,6 +84,15 @@ def verify_seal(payload: dict) -> None:
         raise ValueError("The document revision does not match its contents.")
 
 
+def validate_paragraph(value: object) -> None:
+    if (
+        not isinstance(value, str) or value != value.strip()
+        or len(value.split()) < 10 or len(value) > 1400
+        or re.search(r"[\r\n\t<>]", value) or not re.search(r"[.!?]$", value)
+    ):
+        raise ValueError("A pick explanation must be one concise plain-text paragraph, with complete sentences and no HTML or line breaks.")
+
+
 def script_data(html: str, identifier: str) -> object:
     matches = re.findall(
         rf'<script type="application/json" id="{re.escape(identifier)}">(.*?)</script>', html, re.DOTALL

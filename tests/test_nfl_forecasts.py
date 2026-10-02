@@ -27,7 +27,7 @@ def candidate_for(games, ledger, results, now, selections=None):
     }
     decisions = [{
         "eventId": game.event_id, "pickTeamId": selected.get(game.event_id, game.pick_id or game.away_id),
-        "reason": "Verified current evidence favors selection",
+        "reason": "Verified current evidence favors this selection. The opponent's strengths and uncertain availability still limit confidence.",
         "rationale": "Reviewed the current opponent context and verified availability before making this provisional selection.",
         "factors": {
             "performance": "Current form is compared with opponent quality rather than raw wins.",
@@ -152,7 +152,7 @@ class ForecastTests(unittest.TestCase):
         self.assertFalse(errors)
         self.assertIsNone(forecasts.batch_for([game], result, self.ledger, NOW))
         self.assertIsNone(result["games"][game.event_id]["scoredPickTeamId"])
-        self.assertEqual(len(result["games"][game.event_id]["pickReason"].split()), 5)
+        self.assertEqual(result["games"][game.event_id].get("pickExplanation", ""), "")
 
     def test_suspended_or_delayed_started_game_is_not_revisable(self):
         for status in ("STATUS_SUSPENDED", "STATUS_DELAYED"):
@@ -186,7 +186,7 @@ class ForecastTests(unittest.TestCase):
             self.assertEqual(common.script_data(common.read_html(page), "forecasts-data"), prepared)
             self.assertEqual(common.script_data(common.read_html(page), "games-data"), common.script_data(HTML, "games-data"))
 
-    def test_invalid_five_words_or_missing_sources_are_rejected(self):
+    def test_invalid_paragraph_or_missing_sources_are_rejected(self):
         for invalid in ("reason", "sourceIds", "factors"):
             batch, candidate = candidate_for(self.games, self.ledger, self.results, self.now)
             candidate["decisions"][0][invalid] = "only two" if invalid == "reason" else [] if invalid == "sourceIds" else {}
@@ -195,10 +195,14 @@ class ForecastTests(unittest.TestCase):
                 forecasts.prepare_assessment(self.games, self.results, self.ledger, batch, candidate, verified, self.now)
 
     def test_retained_pick_does_not_rewrite_its_original_timestamp(self):
+        self.ledger = forecasts.add_paragraphs(self.ledger, {
+            f"original-{game.event_id}": f"The recorded matchup reasoning favors this team against its opponent. The original selection remains a forecast rather than a guarantee."
+            for game in self.games
+        }, self.games, NOW)
         batch, candidate = candidate_for(self.games, self.ledger, self.results, self.now)
         for decision in candidate["decisions"]:
             game = next(game for game in self.games if game.event_id == decision["eventId"])
-            decision["reason"] = game.reason
+            decision["reason"] = forecasts.selection_paragraph(game, self.ledger, forecasts.selection(game, self.ledger))
         verified = forecasts.verify_current_games(self.games, self.results, lambda _url: {"events": self.events}, self.now)
         prepared = forecasts.prepare_assessment(self.games, self.results, self.ledger, batch, candidate, verified, self.now)
         choice = forecasts.selection(self.games[1], prepared)

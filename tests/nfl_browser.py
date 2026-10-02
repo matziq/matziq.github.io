@@ -86,9 +86,10 @@ def check(browser, url, artifacts):
     search.fill("NY Jets")
     expect(rows).to_have_count(team_count("20"))
     search.fill("Buffalo")
-    expect(rows).to_have_count(team_count("2"))
+    assert rows.count() >= team_count("2")
+    buffalo_matches = rows.count()
     names.select_option("mascot")
-    expect(rows).to_have_count(team_count("2"))
+    expect(rows).to_have_count(buffalo_matches)
     search.fill("")
     page.get_by_label("Team", exact=True).select_option("6")
     names.select_option("location")
@@ -133,22 +134,36 @@ def check(browser, url, artifacts):
     assert final_row["Winner"] == "Cleveland" and final_row["Pick result"] == "incorrect"
     assert final_row["Final score"] == "Pittsburgh 24 - Cleveland 27"
     original_ids = {game.event_id for game in GAMES if game.original}
-    assert all(len(row["5 Words Why Picked"].split()) == 5 for row in exported if row["ESPN event ID"] not in HISTORICAL_IDS)
+    for row in exported:
+        if row["ESPN event ID"] not in HISTORICAL_IDS and current_results["games"][row["ESPN event ID"]]["scoredPickTeamId"] is not None:
+            common.validate_paragraph(row["Why Picked"])
+        else:
+            assert row["Why Picked"] == ""
     for row in exported:
         if row["ESPN event ID"] in HISTORICAL_IDS:
-            assert all(row[key] == "" for key in ("5 Words Why Picked", "Team Picked to Win", "Pick result",
-                "Original or initial pick", "Original or initial reason", "Pick effective (UTC)", "Pick locked (UTC)", "Last assessment (UTC)", "Revision history"))
+            assert all(row[key] == "" for key in ("Why Picked", "Team Picked to Win", "Pick result",
+                "Original or initial pick", "Original or initial reason", "Pick effective (UTC)", "Pick locked (UTC)", "Last assessment (UTC)", "Revision history", "Archived original wording"))
     exported_by_id = {row["ESPN event ID"]: row for row in exported}
     assert len(exported_by_id) == TOTAL_GAMES
     for game in GAMES:
         if game.original:
-            assert exported_by_id[game.event_id]["Original or initial reason"] == game.reason
+            assert exported_by_id[game.event_id]["Original or initial reason"] == ledger["paragraphs"][f"original-{game.event_id}"]
+            assert exported_by_id[game.event_id]["Archived original wording"] == game.reason
+    for event_id in ("401872964", "401872966", "401873037"):
+        reason = page.locator(f'[data-event-id="{event_id}"] .reason-cell p')
+        expect(reason).to_have_count(1)
+        expect(reason).to_have_text(current_results["games"][event_id]["pickExplanation"])
+        common.validate_paragraph(reason.inner_text())
+    search.fill("retrospective")
+    expect(first).to_be_visible()
+    search.fill("")
     assert all(row["Winner"] != "TBD" or row["Pick result"] == "pending" for row in exported)
     first.locator("summary").click()
     expect(first.locator(".pick-history")).to_contain_text("October 1 original: Pittsburgh")
     page.get_by_role("button", name="Playoffs", exact=False).click()
     expect(rows).to_have_count(13)
     expect(page.locator(".pick-name").first).to_have_text("TBD")
+    expect(rows.locator(".reason-cell p")).to_have_count(0)
     page.get_by_label("Week / round", exact=True).select_option("3:4")
     expect(rows).to_have_count(1)
     expect(rows).to_contain_text("Feb 14, 2027")
@@ -160,6 +175,7 @@ def check(browser, url, artifacts):
     expect(page.locator("html")).to_have_attribute("data-theme", "light")
     expect(page.locator(".filters")).to_be_hidden()
     expect(first.locator(".final-score")).to_be_visible()
+    expect(first.locator(".reason-cell p")).to_have_text(current_results["games"]["401872964"]["pickExplanation"])
     assert page.locator("thead").evaluate("node => getComputedStyle(node).display") == "table-header-group"
     page.emulate_media(media="screen")
     page.evaluate("window.dispatchEvent(new Event('afterprint'))")
@@ -205,6 +221,7 @@ def check(browser, url, artifacts):
     fixture = snapshot(*(game.event_id for game in GAMES[:3]), now=NOW + timedelta(days=3))
     fixture["fixtureRevision"] = schedule["revision"]
     fixture["forecastRevision"] = ledger["revision"]
+    fixture["explanationFormat"] = "paragraph"
     fixture["forecastPublications"] = {}
     forecasts.apply_pick_snapshots(GAMES, fixture["games"], ledger, NOW + timedelta(days=3))
     fixture["games"][GAMES[0].event_id].update(awayScore=30, winnerTeamId="23", pickResult="correct", statusDetail="Final / OT")
@@ -255,9 +272,10 @@ def check(browser, url, artifacts):
             if decision["applied"] and decision["previousPickTeamId"] is not None and decision["pickTeamId"] != decision["previousPickTeamId"]:
                 row = page.locator(f'[data-event-id="{decision["eventId"]}"]')
                 row.locator("summary").click()
-                expect(row.locator(".pick-history")).to_contain_text(decision["reason"])
+                expected_reason = ledger["paragraphs"].get(f'{latest["id"]}:{decision["eventId"]}', decision["reason"])
+                expect(row.locator(".pick-history")).to_contain_text(expected_reason)
                 assert row.locator(".pick-history a").count() >= 2
-                assert len(row.locator(".reason-cell").inner_text().split()) == 5
+                common.validate_paragraph(row.locator(".reason-cell").inner_text())
                 changed = decision
                 break
         assert changed, "The initial researched revisions were not present."

@@ -23,7 +23,7 @@ from urllib.parse import urlsplit
 from nfl_common import (
     EASTERN, FETCH_ERRORS, Game, LIVE_URL, ORIGINAL_PUBLISHED_AT, PAGE_PATH, PICKS_SHA256,
     ROOT, SCOREBOARD_URL, SUMMARY_URL, UTC, digest, fetch_json, instant, load_games,
-    read_html, script_data, seal, stamp, validate_fixtures, verify_seal, write_json,
+    read_html, script_data, seal, stamp, validate_fixtures, validate_paragraph, verify_seal, write_json,
 )
 
 LOG = logging.getLogger("matziq.nfl.analysis")
@@ -46,6 +46,7 @@ def validate_ledger(ledger: dict, games: list[Game]) -> None:
     if ledger.get("schemaVersion") != 1 or ledger.get("season") != 2026 or ledger.get("picksSha256") != PICKS_SHA256:
         raise ValueError("The forecast ledger does not match the immutable 2026 predictions.")
     game_ids = {game.event_id for game in games}
+    explanation_ids = {f"original-{game.event_id}" for game in games if game.original}
     ids = set()
     previous_time = instant(ledger["createdAt"])
     for assessment in ledger["assessments"]:
@@ -71,8 +72,11 @@ def validate_ledger(ledger: dict, games: list[Game]) -> None:
             participants = (decision["awayTeamId"], decision["homeTeamId"])
             if decision["pickTeamId"] not in participants or not all(team_id.isdigit() for team_id in participants):
                 raise ValueError("A prediction must select an official, known participant.")
-            if len(decision["reason"].split()) != 5 or not decision["rationale"].strip():
-                raise ValueError("Every prediction needs exactly five words and a separate substantive rationale.")
+            if not isinstance(decision["reason"], str) or not decision["reason"].strip() or not decision["rationale"].strip():
+                raise ValueError("Every prediction needs an explanation and a separate substantive rationale.")
+            if assessment.get("reasonFormat") == "paragraph":
+                validate_paragraph(decision["reason"])
+            explanation_ids.add(f"{assessment['id']}:{event_id}")
             if set(decision["factors"]) != {"performance", "availability", "news", "context"} or any(
                 len(text.strip()) < 12 for text in decision["factors"].values()
             ):
@@ -91,6 +95,38 @@ def validate_ledger(ledger: dict, games: list[Game]) -> None:
                     raise ValueError("An applied forecast lacks a valid pregame safety margin and status proof.")
     if ledger["lastAssessedAt"] != (ledger["assessments"][-1]["assessedAt"] if ledger["assessments"] else None):
         raise ValueError("The latest assessment timestamp does not match the history.")
+    if ledger.get("explanationFormat") == "paragraph":
+        if not isinstance(ledger.get("paragraphs"), dict):
+            raise ValueError("The forecast ledger is missing its published paragraph explanations.")
+        for revision_id, paragraph in ledger["paragraphs"].items():
+            if revision_id not in explanation_ids:
+                raise ValueError("A paragraph references an unknown pick revision.")
+            validate_paragraph(paragraph)
+
+
+def selection_paragraph(game: Game, ledger: dict, selected: dict) -> str:
+    if selected["teamId"] is None:
+        return ""
+    paragraph = ledger.get("paragraphs", {}).get(selected["revisionId"], selected["reason"])
+    validate_paragraph(paragraph)
+    return paragraph
+
+
+def add_paragraphs(ledger: dict, paragraphs: dict, games: list[Game], now: datetime) -> dict:
+    validate_ledger(ledger, games)
+    updated = copy.deepcopy(ledger)
+    prior = updated.setdefault("paragraphs", {})
+    for revision_id, paragraph in paragraphs.items():
+        validate_paragraph(paragraph)
+        if revision_id in prior and prior[revision_id] != paragraph:
+            raise ValueError("Published explanation history cannot be overwritten.")
+        prior[revision_id] = paragraph
+    updated.update(explanationFormat="paragraph", paragraphsUpdatedAt=stamp(now))
+    seal(updated)
+    validate_ledger(updated, games)
+    for game in games:
+        selection_paragraph(game, updated, selection(game, updated))
+    return updated
 
 
 def selection(game: Game, ledger: dict | None, *, before: datetime | None = None, publications: dict | None = None) -> dict:
@@ -115,7 +151,8 @@ def selection(game: Game, ledger: dict | None, *, before: datetime | None = None
                     continue
                 if publications is not None and (publication is None or instant(publication["committedAt"]) >= before):
                     continue
-            if (selected["teamId"], selected["reason"]) == (decision["pickTeamId"], decision["reason"]):
+            old_reason = selection_paragraph(game, ledger, selected) if assessment.get("reasonFormat") == "paragraph" and ledger.get("explanationFormat") == "paragraph" else selected["reason"]
+            if (selected["teamId"], old_reason) == (decision["pickTeamId"], decision["reason"]):
                 continue
             selected = {
                 "teamId": decision["pickTeamId"], "reason": decision["reason"],
@@ -140,6 +177,11 @@ def apply_pick_snapshots(games: list[Game], results: dict, ledger: dict | None, 
                 pickAssessmentId=choice["assessmentId"], pickLockedAt=stamp(now) if cutoff else None,
                 pickCutoffAt=stamp(cutoff) if cutoff else None,
             )
+        if ledger and ledger.get("explanationFormat") == "paragraph":
+            result["pickExplanation"] = selection_paragraph(game, ledger, {
+                "teamId": result.get("scoredPickTeamId", game.pick_id),
+                "revisionId": result.get("pickRevisionId"), "reason": result.get("pickReason", game.reason),
+            })
         if result["status"] == "final":
             pick_id = result.get("scoredPickTeamId", game.pick_id)
             winner = result["winnerTeamId"]
@@ -257,10 +299,12 @@ def prepare_assessment(games: list[Game], results: dict, ledger: dict, batch: di
         if not game.teams_known:
             raise ValueError("Do not predict unofficial playoff participants.")
         decision = copy.deepcopy(candidate_decision)
+        validate_paragraph(decision["reason"])
         old = selection(game, ledger)
+        old_reason = selection_paragraph(game, ledger, old) if ledger.get("explanationFormat") == "paragraph" else old["reason"]
         applied = event_id in eligible
         action = "skipped_locked" if not applied else "initial" if old["teamId"] is None else (
-            "change" if (old["teamId"], old["reason"]) != (decision["pickTeamId"], decision["reason"]) else "retain"
+            "change" if (old["teamId"], old_reason) != (decision["pickTeamId"], decision["reason"]) else "retain"
         )
         initial += action == "initial"
         changed += applied and old["teamId"] is not None and old["teamId"] != decision["pickTeamId"]
@@ -273,7 +317,7 @@ def prepare_assessment(games: list[Game], results: dict, ledger: dict, batch: di
         )
         decisions.append(decision)
     assessment = {
-        "id": batch["id"], "status": "completed", "assessedAt": stamp(now),
+        "id": batch["id"], "status": "completed", "assessedAt": stamp(now), "reasonFormat": "paragraph",
         "evidenceCollectedAt": candidate["evidenceCollectedAt"],
         "triggerResults": batch["triggerResults"], "newOfficialFixtures": batch["newOfficialFixtures"],
         "summary": candidate["summary"], "limitations": candidate["limitations"],

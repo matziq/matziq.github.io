@@ -17,7 +17,7 @@ import urllib.request
 from nfl_common import (
     EASTERN, FETCH_ERRORS, FINAL_TYPES, Fetch, Game, LIVE_URL, PAGE_PATH, PICKS_SHA256,
     ROOT, SCOREBOARD_URL, SCOPE_START, SUMMARY_URL, UTC, digest, fetch_json, instant,
-    load_games, read_html, replace_data, script_data, stamp, write_json,
+    load_games, read_html, replace_data, script_data, stamp, validate_paragraph, write_json,
 )
 from nfl_forecasts import apply_pick_snapshots, publication_history, validate_ledger
 from nfl_season import coverage_complete, discover
@@ -65,8 +65,12 @@ def validate_results(payload: dict, games: list[Game], *, allow_pending_rebind=F
         picked = result.get("scoredPickTeamId", game.pick_id)
         if picked is not None and picked not in (game.away_id, game.home_id):
             raise ValueError(f"Invalid selected team for {game.event_id}.")
-        if "pickReason" in result and len(result["pickReason"].split()) != 5:
-            raise ValueError("The active pick explanation must remain exactly five words.")
+        if payload.get("explanationFormat") == "paragraph":
+            if picked is None:
+                if result.get("pickExplanation") != "":
+                    raise ValueError("A game without a prediction must not have a pick explanation.")
+            else:
+                validate_paragraph(result.get("pickExplanation"))
         if result["status"] == "final":
             away = score(result["awayScore"])
             home = score(result["homeScore"])
@@ -280,6 +284,7 @@ def refresh(
         semantic_results(results) != semantic_results(previous["games"])
         or fixture_revision != previous.get("fixtureRevision")
         or forecast_revision != previous.get("forecastRevision")
+        or (forecasts.get("explanationFormat") if forecasts else None) != previous.get("explanationFormat")
         or complete != previous["monitoringComplete"]
     )
     heartbeat = bool(due) and (force or previous is None or now - instant(previous["publishedAt"]) >= timedelta(hours=1))
@@ -300,6 +305,7 @@ def refresh(
         "nextCheckAt": stamp(min(active_checks)) if active_checks and not complete else None,
         "monitoringComplete": complete,
         "fixtureRevision": fixture_revision, "forecastRevision": forecast_revision,
+        "explanationFormat": forecasts.get("explanationFormat") if forecasts else None,
         "forecastPublications": publications or {},
         "analysis": {key: forecasts["assessments"][-1][key] for key in (
             "id", "assessedAt", "summary", "initialPickCount", "changedPickCount", "retainedCount", "skippedLockedCount"

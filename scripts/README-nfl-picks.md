@@ -5,7 +5,7 @@ The unlisted page is
 It discourages indexing but is not authenticated or private.
 
 The immutable `games-data` and original ESPN catalog retain all 73 October
-predictions, dates, and five-word reasons. `fixtures.json` extends coverage
+predictions, dates, and original compact wording. `fixtures.json` extends coverage
 to 224 regular-season games from October 1 onward: 151 additional matchups.
 The 13 official playoff slots remain TBD until ESPN supplies actual
 participants. No speculative bracket or player availability is presented
@@ -16,12 +16,30 @@ Super Bowl LXI February 14 at SoFi Stadium.
 `forecasts.json` is an append-only ledger of researched assessments.
 Every assessment records its triggering final-result revisions, timestamp,
 sources with check times, all remaining eligible decisions, original/current
-selection, five-word reason, longer rationale, and explicit performance,
+selection, a concise one-paragraph explanation, separate supporting rationale, and explicit performance,
 availability, news, and context factors. A no-change decision is recorded
 as an assessment, not a forced flip. Newly known playoff matchups also
 trigger analysis even without a new final. Original/initial picks and
 history are available in each row and CSV; active names follow the saved
 Mascot/Location preference. The HTML embeds all snapshots for offline use.
+
+The original compact phrases and legacy assessment decisions are not
+rewritten. Published `paragraphs` in `forecasts.json` are keyed to those
+existing pick revision IDs; `results.json` exposes the selected
+`pickExplanation` without changing the pick, effective time, kickoff lock,
+or grade. Even a locked original pick can receive a display explanation
+without pretending a new selection was made after kickoff. Original
+wording remains visible in history and a separate archival CSV field.
+Current table/card/search/export/print uses **Why Picked** paragraphs.
+Historical games and unpicked playoff TBDs have no pick explanation.
+
+New assessments use `reasonFormat: paragraph` and write one concise,
+plain-text paragraph in each decision's `reason`: usually two to four
+sentences, with concrete matchup support and an appropriate limitation.
+No exact five-word constraint applies to new explanations. HTML, line
+breaks, empty or fragmentary explanations are rejected. Sources remain in
+the separate evidence/history fields. Archived originals retain their
+existing byte-level integrity check and original digest.
 
 ## Historical games and weekly winners
 
