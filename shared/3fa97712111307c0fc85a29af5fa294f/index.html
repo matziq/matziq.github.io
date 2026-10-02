@@ -1,0 +1,194 @@
+<!doctype html>
+<!--
+THESIS: One notebook, two complete guides, with a direct path to either.
+OWN-WORLD: Inherited Clawpilot crimson, warm paper, Segoe type, fall leaf and field lines.
+STORY: Choose rules or training; return here without searching the public site.
+FIRST VIEWPORT: Notebook title and field sketch above two clearly labeled guide links.
+FORM: A compact read-mode contents page extending the established Fall 2026 guides.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Two independent family guides for Fall 2026 flag football: Arizona rules, training, and fueling.">
+<title>The Fall Football Notebook | Fall 2026</title>
+<script>
+  (() => {
+    const param = new URLSearchParams(window.location.search).get("scoutTheme");
+    const theme =
+      param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", theme);
+  })();
+</script>
+<style>
+:root {
+  color-scheme: light;
+  --cp-bg: #f7f4ef;
+  --cp-bg-elevated: #fcfbf8;
+  --cp-surface: #ffffff;
+  --cp-surface-soft: #f5f5f5;
+  --cp-border: #dedede;
+  --cp-border-strong: #919191;
+  --cp-text: #242424;
+  --cp-text-muted: #5c5c5c;
+  --cp-text-soft: #6f6f6f;
+  --cp-accent: #b11f4b;
+  --cp-accent-hover: #9a1a41;
+  --cp-accent-soft: rgba(177, 31, 75, 0.08);
+  --cp-accent-fg: #ffffff;
+  --cp-success: #16a34a;
+  --cp-danger: #dc2626;
+  --cp-warning: #f59e0b;
+  --cp-link: #0078d4;
+  --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+  --cp-overlay: rgba(255, 255, 255, 0.8);
+  --cp-panel: rgba(255, 255, 255, 0.86);
+  --cp-panel-strong: rgba(255, 255, 255, 0.96);
+  --cp-sheen: rgba(255, 255, 255, 0.55);
+  --cp-highlight: rgba(177, 31, 75, 0.12);
+}
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --cp-bg: #3d3b3a;
+  --cp-bg-elevated: #343231;
+  --cp-surface: #292929;
+  --cp-surface-soft: #2e2e2e;
+  --cp-border: #474747;
+  --cp-border-strong: #5f5f5f;
+  --cp-text: #dedede;
+  --cp-text-muted: #919191;
+  --cp-text-soft: #b0b0b0;
+  --cp-accent: #fd8ea1;
+  --cp-accent-hover: #fb7b91;
+  --cp-accent-soft: rgba(253, 142, 161, 0.14);
+  --cp-accent-fg: #1a1a1a;
+  --cp-success: #4ade80;
+  --cp-danger: #f87171;
+  --cp-warning: #fbbf24;
+  --cp-link: #4da6ff;
+  --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+  --cp-overlay: rgba(41, 41, 41, 0.88);
+  --cp-panel: rgba(41, 41, 41, 0.72);
+  --cp-panel-strong: rgba(41, 41, 41, 0.96);
+  --cp-sheen: rgba(255, 255, 255, 0.04);
+  --cp-highlight: rgba(253, 142, 161, 0.12);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cp-bg);color:var(--cp-text);font-family:"Segoe UI",Aptos,Calibri,-apple-system,BlinkMacSystemFont,sans-serif;font-size:17px;line-height:1.65}
+a{color:var(--cp-link);text-underline-offset:4px;overflow-wrap:anywhere}
+a:hover{color:var(--cp-accent)}
+button{font:inherit;border:1px solid var(--cp-border-strong);background:var(--cp-surface);color:var(--cp-text);border-radius:.625rem;padding:10px 16px;cursor:pointer;min-height:44px}
+button:hover{border-color:var(--cp-accent);color:var(--cp-accent)}
+:focus-visible{outline:3px solid var(--cp-accent);outline-offset:4px}
+.skip{position:absolute;top:-100px;left:16px;z-index:10;background:var(--cp-surface);padding:12px}
+.skip:focus{top:8px}
+.topbar,main,footer{max-width:1120px;margin:auto;padding-left:32px;padding-right:32px}
+.topbar{padding-top:20px;padding-bottom:20px;display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1px solid var(--cp-border)}
+.brand{font-weight:700;letter-spacing:.02em}.season{color:var(--cp-accent)}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.intro{display:grid;grid-template-columns:1.3fr 1fr;align-items:center;gap:48px;padding:48px 0 32px}
+h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.06;letter-spacing:-.035em;margin:0 0 24px;max-width:14ch;text-wrap:balance}
+.lead{font-size:1.2rem;line-height:1.55;max-width:48ch}
+p{margin:0 0 16px;max-width:72ch}
+.meta,footer{color:var(--cp-text-soft);font-size:.9rem}
+.field{width:100%;height:auto;display:block}
+.field-line{stroke:var(--cp-border-strong);fill:none;stroke-width:1.5}
+.field-accent{stroke:var(--cp-accent);fill:none;stroke-width:3}
+.field-fill{fill:var(--cp-accent-soft)}.field-dot{fill:var(--cp-accent)}
+.guides{list-style:none;padding:0;margin:0 0 32px;border-top:1px solid var(--cp-border-strong)}
+.guides li{border-bottom:1px solid var(--cp-border)}
+.guide{display:block;padding:24px 16px;color:var(--cp-text);text-decoration:none;border-radius:.625rem}
+.guide:hover{background:var(--cp-accent-soft);color:var(--cp-text)}
+.guide h2{font-size:1.6rem;line-height:1.25;letter-spacing:-.02em;margin:0 0 12px;text-wrap:balance}
+.guide p{margin-bottom:12px}
+.open{color:var(--cp-link);text-decoration:underline;text-underline-offset:4px;font-weight:650}
+.guide:hover .open{color:var(--cp-accent)}
+.limits{margin-bottom:32px}.limits p:last-child{margin-bottom:0}
+footer{border-top:1px solid var(--cp-border);padding-top:24px;padding-bottom:24px}
+footer p:last-child{margin-bottom:0}
+@media(max-width:700px){
+ body{font-size:16px}.topbar,main,footer{padding-left:20px;padding-right:20px}
+ .topbar{align-items:flex-start;flex-direction:column;padding-top:16px;padding-bottom:16px}
+ .intro{grid-template-columns:1fr;gap:16px;padding:32px 0 24px}h1{max-width:none}
+ .field{max-width:280px;justify-self:center}.guide{padding:24px 4px}.guide h2{font-size:1.4rem}
+ .actions button{font-size:.88rem}
+}
+@media print{
+ html{color-scheme:light}body{font-size:11pt;background:var(--cp-surface);color:var(--cp-text)}
+ .topbar,.skip{display:none!important}main,footer{padding-left:0;padding-right:0;max-width:none}
+ .intro{padding:0 0 20px;gap:24px}h1{font-size:30pt}.lead{font-size:12pt}
+ .guide{padding:16px 0}.guide h2{font-size:18pt}.guide,.limits,footer{break-inside:avoid}
+ .open{color:var(--cp-text)}.field-fill{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ @page{size:letter;margin:.6in}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the guides</a>
+<header class="topbar">
+ <div class="brand">THE FALL FOOTBALL NOTEBOOK <span class="season">/ 2026</span></div>
+ <div class="actions"><button type="button" id="theme">Switch theme</button><button type="button" id="print">Print / Save PDF</button></div>
+</header>
+<main id="main">
+ <div class="intro">
+  <div>
+   <h1>A season of smart football.</h1>
+   <p class="lead">Know the rules. Practice with purpose. Fuel the next snap.</p>
+   <p>Two companion guides for the sideline, the practice field, and the week ahead.</p>
+   <p class="meta">Fall 2026 edition &bull; Independent family guides</p>
+  </div>
+  <svg class="field" viewBox="0 0 420 200" aria-hidden="true" focusable="false">
+   <rect x="16" y="20" width="388" height="148" rx="2" class="field-line"/>
+   <rect x="16" y="20" width="40" height="148" class="field-fill"/>
+   <rect x="364" y="20" width="40" height="148" class="field-fill"/>
+   <path d="M56 20V168 M133 20V168 M210 20V168 M287 20V168 M364 20V168" class="field-line"/>
+   <path d="M16 94H404" class="field-line" stroke-dasharray="3 7"/>
+   <circle cx="95" cy="138" r="7" class="field-dot"/>
+   <path d="M95 128V98L172 48H249 M238 40L249 48L238 56" class="field-accent"/>
+   <path d="M314 141L316 127L321 132L333 121L331 134L338 136L326 142L327 150L319 146L313 155 M319 146L324 133" class="field-accent"/>
+  </svg>
+ </div>
+ <nav aria-label="Companion guides">
+  <ul class="guides">
+   <li><a class="guide" href="Arizona-Flag-Football-Rules-Fall-2026.html">
+    <h2>Arizona flag football rules</h2>
+    <p>Game essentials, legal screens, pass-rush boundaries, flag pulls, and the Fall 2026 rule changes, with official sources.</p>
+    <span class="open">Open the rules guide <span aria-hidden="true">&rarr;</span></span>
+   </a></li>
+   <li><a class="guide" href="Flag-Football-Training-and-Fueling-Fall-2026.html">
+    <h2>Training &amp; fueling</h2>
+    <p>A configurable weekly schedule, non-contact drills, receiver skills, strength, a seven-day meal plan, and recovery guidance.</p>
+    <span class="open">Open the training plan <span aria-hidden="true">&rarr;</span></span>
+   </a></li>
+  </ul>
+ </nav>
+ <div class="limits">
+  <p class="meta">Independent educational material, not an official school, AIA, or NFHS publication. Read each guide's scope, safety notes, and sources; review training and nutrition choices with the coach, parent, and appropriate health professionals.</p>
+  <p class="meta">The guides work offline when all three HTML files stay together. Schedule choices and checkmarks are saved only in the browser when available, not uploaded.</p>
+ </div>
+</main>
+<footer>
+ <p><strong>Unlisted link; not password protected.</strong> Anyone with the URL or access to the public repository can read these pages. Search engines are asked not to index them, but search blocking cannot guarantee privacy.</p>
+ <p>No analytics, remote scripts, or external runtime assets.</p>
+</footer>
+<script>
+(() => {
+  const root = document.documentElement;
+  document.getElementById("theme").addEventListener("click", () => {
+    root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+  });
+  document.getElementById("print").addEventListener("click", () => window.print());
+  let priorTheme;
+  window.addEventListener("beforeprint", () => {
+    priorTheme = root.dataset.theme;
+    root.dataset.theme = "light";
+  });
+  window.addEventListener("afterprint", () => {
+    if (priorTheme) root.dataset.theme = priorTheme;
+  });
+})();
+</script>
+</body>
+</html>
