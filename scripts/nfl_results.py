@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
-"""Update only the confirmed results of the original 73 NFL predictions."""
+"""Discover remaining 2026 NFL fixtures and update confirmed, pregame-pick results."""
 
 from __future__ import annotations
 
 import argparse
 import copy
-from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
-import hashlib
+from datetime import datetime, timedelta
 import json
 import os
 from pathlib import Path
@@ -15,116 +13,14 @@ import re
 import subprocess
 import sys
 import time
-from typing import Callable
-import urllib.error
 import urllib.request
-from zoneinfo import ZoneInfo
-
-
-ROOT = Path(__file__).resolve().parents[1]
-PAGE_PATH = Path("unlisted") / "1ff39048f9eaca39e2808bb7b2b687a5" / "index.html"
-LIVE_URL = "https://memconfigmgr.org/unlisted/1ff39048f9eaca39e2808bb7b2b687a5/"
-SCOREBOARD_URL = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard"
-SUMMARY_URL = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary"
-PICKS_SHA256 = "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2"
-EASTERN = ZoneInfo("America/New_York")
-UTC = timezone.utc
-SCOPE_START = datetime(2026, 10, 1, tzinfo=EASTERN)
-FINAL_TYPES = {"STATUS_FINAL", "STATUS_FINAL_OVERTIME", "STATUS_FINAL_TIE"}
-FETCH_ERRORS = (OSError, ValueError, TimeoutError)
-Fetch = Callable[[str], dict]
-
-
-@dataclass(frozen=True)
-class Game:
-    event_id: str
-    original_date: str
-    week: int
-    away_id: str
-    home_id: str
-    pick_id: str
-    scheduled_at: str
-
-
-def instant(value: str) -> datetime:
-    parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
-    if parsed.tzinfo is None:
-        raise ValueError("A source timestamp is missing its time zone.")
-    return parsed.astimezone(UTC)
-
-
-def stamp(value: datetime) -> str:
-    return value.astimezone(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
-
-
-def digest(value: object) -> str:
-    return hashlib.sha256(
-        json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True).encode()
-    ).hexdigest()
-
-
-def script_data(html: str, identifier: str) -> object:
-    matches = re.findall(
-        rf'<script type="application/json" id="{re.escape(identifier)}">(.*?)</script>',
-        html,
-        re.DOTALL,
-    )
-    if len(matches) != 1:
-        raise ValueError(f"Expected exactly one {identifier} data block.")
-    return json.loads(matches[0])
-
-
-def read_html(path: Path) -> str:
-    return path.read_bytes().decode("utf-8")
-
-
-def load_games(html: str) -> list[Game]:
-    picks = script_data(html, "games-data")
-    if not isinstance(picks, list) or len(picks) != 73 or digest(picks) != PICKS_SHA256:
-        raise ValueError("The original 73 predictions have changed. Refusing to update.")
-    catalog = script_data(html, "catalog-data")
-    if not isinstance(catalog, dict) or catalog.get("season") != 2026 or catalog.get("seasonType") != 2:
-        raise ValueError("The catalog must identify the 2026 regular season.")
-    bindings = catalog["events"]
-    teams = catalog["teams"]
-    if len(bindings) != len(picks) or len({entry[0] for entry in bindings}) != len(picks):
-        raise ValueError("The catalog must bind exactly 73 unique ESPN event IDs.")
-    games = []
-    for pick, binding in zip(picks, bindings, strict=True):
-        week, original_date, away, home, _venue, chosen, reason = pick
-        event_id, away_id, home_id, scheduled_at = binding
-        if (
-            not all(isinstance(value, str) and value.isdigit() for value in (event_id, away_id, home_id))
-            or teams[away][0] != away_id
-            or teams[home][0] != home_id
-            or chosen not in (away, home)
-            or len(reason.split()) != 5
-            or instant(scheduled_at).astimezone(EASTERN).date().isoformat() != original_date
-        ):
-            raise ValueError(f"Invalid original-date/team binding for event {event_id}.")
-        games.append(Game(event_id, original_date, week, away_id, home_id, teams[chosen][0], scheduled_at))
-    return games
-
-
-def fetch_json(url: str) -> dict:
-    request = urllib.request.Request(
-        url, headers={"Accept": "application/json", "User-Agent": "Matziq-NFL-Picks/1.0"}
-    )
-    for attempt in range(3):
-        try:
-            with urllib.request.urlopen(request, timeout=30) as response:
-                payload = json.load(response)
-            if not isinstance(payload, dict):
-                raise ValueError("The source returned a non-object JSON document.")
-            return payload
-        except urllib.error.HTTPError as error:
-            if error.code not in (429, 500, 502, 503, 504) or attempt == 2:
-                raise
-        except (urllib.error.URLError, TimeoutError):
-            if attempt == 2:
-                raise
-        time.sleep(2 ** attempt)
-    raise RuntimeError("HTTP retry loop ended without a response.")
+from nfl_common import (
+    EASTERN, FETCH_ERRORS, FINAL_TYPES, Fetch, Game, LIVE_URL, PAGE_PATH, PICKS_SHA256,
+    ROOT, SCOREBOARD_URL, SCOPE_START, SUMMARY_URL, UTC, digest, fetch_json, instant,
+    load_games, read_html, replace_data, script_data, stamp, write_json,
+)
+from nfl_forecasts import apply_pick_snapshots, publication_history, validate_ledger
+from nfl_season import coverage_complete, discover
 
 
 def initial_result(game: Game) -> dict:
@@ -133,6 +29,8 @@ def initial_result(game: Game) -> dict:
         "awayTeamId": game.away_id,
         "homeTeamId": game.home_id,
         "scheduledAt": game.scheduled_at,
+        "timeConfirmed": game.time_confirmed,
+        "hasStarted": False,
         "status": "scheduled",
         "statusDetail": "Scheduled",
         "awayScore": None,
@@ -148,26 +46,32 @@ def initial_result(game: Game) -> dict:
     }
 
 
-def validate_results(payload: dict, games: list[Game]) -> None:
+def validate_results(payload: dict, games: list[Game], *, allow_pending_rebind=False) -> None:
     if payload.get("schemaVersion") != 1 or payload.get("picksSha256") != PICKS_SHA256:
         raise ValueError("Results schema or original-picks digest does not match.")
     expected_revision = digest({key: value for key, value in payload.items() if key != "revision"})
     if payload.get("revision") != expected_revision:
         raise ValueError("Results revision does not match its contents.")
     if set(payload.get("games", {})) != {game.event_id for game in games}:
-        raise ValueError("Results must contain exactly the 73 bound events.")
+        raise ValueError("Results must contain exactly the scoped season fixture IDs.")
     for game in games:
         result = payload["games"][game.event_id]
         if (result["eventId"], result["awayTeamId"], result["homeTeamId"]) != (
             game.event_id, game.away_id, game.home_id
         ):
-            raise ValueError(f"Results identity mismatch for {game.event_id}.")
+            if not (allow_pending_rebind and not game.original and result["status"] in {"scheduled", "postponed", "delayed"} and not result.get("pickLockedAt")):
+                raise ValueError(f"Results identity mismatch for {game.event_id}.")
         instant(result["scheduledAt"])
+        picked = result.get("scoredPickTeamId", game.pick_id)
+        if picked is not None and picked not in (game.away_id, game.home_id):
+            raise ValueError(f"Invalid selected team for {game.event_id}.")
+        if "pickReason" in result and len(result["pickReason"].split()) != 5:
+            raise ValueError("The active pick explanation must remain exactly five words.")
         if result["status"] == "final":
             away = score(result["awayScore"])
             home = score(result["homeScore"])
             winner = game.away_id if away > home else game.home_id if home > away else None
-            verdict = "tie" if winner is None else "correct" if winner == game.pick_id else "incorrect"
+            verdict = "no_pick" if picked is None else "tie" if winner is None else "correct" if winner == picked else "incorrect"
             if (
                 result["winnerTeamId"] != winner or result["pickResult"] != verdict
                 or not result["firstFinalAt"] or not result["resultUpdatedAt"]
@@ -192,7 +96,7 @@ def observation(event: dict, game: Game, now: datetime) -> dict:
     week = event.get("week", {})
     if (
         str(event.get("id")) != game.event_id
-        or season.get("year") != 2026 or season.get("type") != 2
+        or season.get("year") != 2026 or season.get("type") != game.season_type
         or (week.get("number") if isinstance(week, dict) else week) != game.week
     ):
         raise ValueError("ESPN event ID, season, or original week does not match.")
@@ -203,7 +107,7 @@ def observation(event: dict, game: Game, now: datetime) -> dict:
     kickoff = instant(competition["date"])
     if event.get("date") and instant(event["date"]) != kickoff:
         raise ValueError("Event and competition dates disagree.")
-    if not datetime(2026, 8, 1, tzinfo=UTC) <= kickoff < datetime(2027, 3, 1, tzinfo=UTC):
+    if not datetime(2026, 8, 1, tzinfo=UTC) <= kickoff < datetime(2027, 8, 1, tzinfo=UTC):
         raise ValueError("The event date is outside the verified 2026 NFL season.")
     competitors = competition.get("competitors", [])
     if len(competitors) != 2:
@@ -224,10 +128,12 @@ def observation(event: dict, game: Game, now: datetime) -> dict:
         raise ValueError("Missing authoritative game completion status.")
     result = {
         "scheduledAt": stamp(kickoff), "status": "scheduled", "statusDetail": "Scheduled",
+        "timeConfirmed": bool(competition.get("timeValid", event.get("timeValid", True))),
+        "hasStarted": state == "in" or name in FINAL_TYPES or name == "STATUS_SUSPENDED" or int(status.get("period", 0)) > 0,
         "awayScore": None, "homeScore": None, "winnerTeamId": None, "pickResult": "pending",
     }
     if name in FINAL_TYPES:
-        if not completed or state != "post" or kickoff > now:
+        if not completed or state != "post" or kickoff > now or not game.teams_known:
             raise ValueError("The source has not confirmed a valid final.")
         away, home = score(sides["away"].get("score")), score(sides["home"].get("score"))
         winner = game.away_id if away > home else game.home_id if home > away else None
@@ -242,7 +148,7 @@ def observation(event: dict, game: Game, now: datetime) -> dict:
         result.update(
             status="final", statusDetail="Final / OT" if overtime else "Final",
             awayScore=away, homeScore=home, winnerTeamId=winner,
-            pickResult="tie" if winner is None else "correct" if winner == game.pick_id else "incorrect",
+            pickResult="no_pick" if game.pick_id is None else "tie" if winner is None else "correct" if winner == game.pick_id else "incorrect",
         )
     elif name in {"STATUS_CANCELED", "STATUS_CANCELLED"}:
         result.update(status="canceled", statusDetail="Canceled - no final result")
@@ -258,6 +164,10 @@ def observation(event: dict, game: Game, now: datetime) -> dict:
         raise ValueError(f"Unrecognized pregame source status: {name}.")
     elif now >= kickoff + timedelta(hours=12):
         result["statusDetail"] = "Final not yet confirmed by ESPN"
+    elif not game.teams_known:
+        result["statusDetail"] = "Awaiting official playoff matchup"
+    elif not result["timeConfirmed"]:
+        result["statusDetail"] = "Scheduled - kickoff date/time TBD"
     return result
 
 
@@ -301,21 +211,24 @@ def semantic_results(results: dict) -> dict:
 
 
 def refresh(
-    games: list[Game], previous: dict | None, fetch: Fetch, now: datetime, force: bool = False
+    games: list[Game], previous: dict | None, fetch: Fetch, now: datetime, force: bool = False,
+    *, fixtures: dict | None = None, forecasts: dict | None = None, publications: dict | None = None,
 ) -> tuple[dict | None, list[str]]:
+    if forecasts is not None:
+        validate_ledger(forecasts, games)
     if previous is not None:
-        validate_results(previous, games)
-    results = copy.deepcopy(previous["games"]) if previous else {game.event_id: initial_result(game) for game in games}
+        prior_games = [game for game in games if game.event_id in previous["games"]]
+        validate_results(previous, prior_games, allow_pending_rebind=True)
+    results = {}
+    for game in games:
+        old = previous["games"].get(game.event_id) if previous else None
+        results[game.event_id] = copy.deepcopy(old) if old and (old["awayTeamId"], old["homeTeamId"]) == (game.away_id, game.home_id) else initial_result(game)
     due = [
         game for game in games
         if force or (now >= SCOPE_START and (when := next_check(results[game.event_id], now)) is not None and now >= when)
     ]
-    if not due:
-        if previous and not previous["monitoringComplete"] and all(next_check(result, now) is None for result in results.values()):
-            completed = dict(previous, publishedAt=stamp(now), nextCheckAt=None, monitoringComplete=True)
-            completed["revision"] = digest({key: value for key, value in completed.items() if key != "revision"})
-            return completed, []
-        return previous, []
+    if not due and previous is None:
+        return None, []
     boards: dict[str, dict | str] = {}
     errors = []
     for game in due:
@@ -349,7 +262,7 @@ def refresh(
                 raise ValueError("Source no longer reports final; retained the last confirmed result.")
             changed_final = observed["status"] == "final" and any(
                 result[key] != observed[key]
-                for key in ("status", "statusDetail", "awayScore", "homeScore", "winnerTeamId", "pickResult")
+                for key in ("status", "statusDetail", "awayScore", "homeScore", "winnerTeamId")
             )
             result.update(observed, checkedAt=stamp(now), error=None, sourceUrl=url)
             if observed["status"] == "final":
@@ -359,22 +272,38 @@ def refresh(
         except FETCH_ERRORS as error:
             result["error"] = str(error)
             errors.append(f"{game.event_id}: {error}")
-    semantic_change = previous is None or semantic_results(results) != semantic_results(previous["games"])
-    heartbeat = force or previous is None or now - instant(previous["publishedAt"]) >= timedelta(hours=1)
+    apply_pick_snapshots(games, results, forecasts, now, publications)
+    complete = coverage_complete(fixtures, results, now) if fixtures else all(next_check(result, now) is None for result in results.values())
+    fixture_revision = fixtures["revision"] if fixtures else None
+    forecast_revision = forecasts["revision"] if forecasts else None
+    semantic_change = previous is None or (
+        semantic_results(results) != semantic_results(previous["games"])
+        or fixture_revision != previous.get("fixtureRevision")
+        or forecast_revision != previous.get("forecastRevision")
+        or complete != previous["monitoringComplete"]
+    )
+    heartbeat = bool(due) and (force or previous is None or now - instant(previous["publishedAt"]) >= timedelta(hours=1))
     if not semantic_change and not heartbeat:
         return previous, errors
     checks = [next_check(result, now) for result in results.values()]
     active_checks = [check for check in checks if check is not None]
+    if fixtures and not complete:
+        active_checks.append(instant(fixtures["nextDiscoveryAt"]))
     successful = [result["checkedAt"] for result in results.values() if result["checkedAt"]]
     finals = [result["resultUpdatedAt"] for result in results.values() if result["resultUpdatedAt"]]
     payload = {
         "schemaVersion": 1, "picksSha256": PICKS_SHA256,
         "source": {"name": "ESPN", "url": SCOREBOARD_URL},
-        "publishedAt": stamp(now), "lastAttemptAt": stamp(now),
+        "publishedAt": stamp(now), "lastAttemptAt": stamp(now) if due else previous["lastAttemptAt"],
         "lastSuccessfulCheckAt": max(successful, default=None),
         "lastResultAt": max(finals, default=None),
-        "nextCheckAt": stamp(min(active_checks)) if active_checks else None,
-        "monitoringComplete": not active_checks,
+        "nextCheckAt": stamp(min(active_checks)) if active_checks and not complete else None,
+        "monitoringComplete": complete,
+        "fixtureRevision": fixture_revision, "forecastRevision": forecast_revision,
+        "forecastPublications": publications or {},
+        "analysis": {key: forecasts["assessments"][-1][key] for key in (
+            "id", "assessedAt", "summary", "initialPickCount", "changedPickCount", "retainedCount", "skippedLockedCount"
+        )} if forecasts and forecasts["assessments"] else None,
         "games": results,
     }
     payload["revision"] = digest(payload)
@@ -382,18 +311,17 @@ def refresh(
     return payload, errors
 
 
-def write_results(page: Path, html: str, payload: dict) -> None:
-    data = json.dumps(payload, ensure_ascii=True, indent=2, sort_keys=True) + "\n"
-    newline = "\r\n" if "\r\n" in html else "\n"
-    safe_inline = data.replace("<", "\\u003c").replace("\n", newline)
-    pattern = r'(<script type="application/json" id="results-data">).*?(</script>)'
-    updated, count = re.subn(pattern, lambda match: match[1] + newline + safe_inline + "  " + match[2], html, flags=re.DOTALL)
-    if count != 1 or script_data(updated, "games-data") != script_data(html, "games-data"):
-        raise ValueError("Refusing to write outside the single results data block.")
+def write_results(page: Path, html: str, payload: dict, fixtures=None, forecasts=None) -> None:
+    updated = replace_data(html, "results-data", payload)
+    if fixtures is not None:
+        updated = replace_data(updated, "fixtures-data", fixtures)
+    if forecasts is not None:
+        updated = replace_data(updated, "forecasts-data", forecasts)
+    if script_data(updated, "games-data") != script_data(html, "games-data"):
+        raise ValueError("The immutable original predictions changed.")
     load_games(updated)
     result_path = page.with_name("results.json")
-    if not result_path.exists() or result_path.read_text(encoding="utf-8") != data:
-        result_path.write_text(data, encoding="utf-8", newline="\n")
+    write_json(result_path, payload)
     if updated != html:
         page.write_bytes(updated.encode("utf-8"))
 
@@ -403,6 +331,9 @@ def deployed_matches(expected: dict, expected_html: str, fetch: Fetch = fetch_js
     remote = fetch(LIVE_URL + "results.json?check=" + nonce)
     if remote.get("revision") != expected["revision"]:
         return False
+    for filename, key in (("fixtures.json", "fixtureRevision"), ("forecasts.json", "forecastRevision")):
+        if expected.get(key) and fetch(LIVE_URL + filename + "?check=" + nonce).get("revision") != expected[key]:
+            return False
     request = urllib.request.Request(LIVE_URL + "?check=" + nonce, headers={"Cache-Control": "no-cache"})
     with urllib.request.urlopen(request, timeout=30) as response:
         live_html = response.read().decode("utf-8")
@@ -441,7 +372,7 @@ def ensure_published(page: Path) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)
-    parser.add_argument("--force", action="store_true", help="Recheck all 73 bound events, including old finals.")
+    parser.add_argument("--force", action="store_true", help="Recheck the full scoped season, including postseason discovery and older finals.")
     parser.add_argument("--ensure-published", action="store_true", help="Request a legacy Pages build if needed and verify live bytes.")
     arguments = parser.parse_args()
     page = arguments.root / PAGE_PATH
@@ -449,14 +380,29 @@ def main() -> int:
         ensure_published(page)
         return 0
     html = read_html(page)
-    games = load_games(html)
     result_path = page.with_name("results.json")
     previous = json.loads(result_path.read_text(encoding="utf-8")) if result_path.exists() else None
     if previous is not None and script_data(html, "results-data") != previous:
         raise ValueError("The HTML snapshot and results.json disagree; refusing to overwrite either.")
-    payload, errors = refresh(games, previous, fetch_json, datetime.now(UTC), arguments.force)
+    if previous and previous["monitoringComplete"] and not arguments.force:
+        print("The full season and postseason correction windows are complete; no source checks are due.")
+        return 0
+    fixture_path = page.with_name("fixtures.json")
+    fixtures = json.loads(fixture_path.read_text(encoding="utf-8")) if fixture_path.exists() else None
+    if fixtures is not None:
+        fixtures = discover(html, fixtures, fetch_json, datetime.now(UTC), force=arguments.force, results=previous)
+    forecast_path = page.with_name("forecasts.json")
+    forecasts = json.loads(forecast_path.read_text(encoding="utf-8")) if forecast_path.exists() else None
+    games = load_games(html, fixtures)
+    publications = publication_history(arguments.root, forecasts) if forecasts is not None else None
+    payload, errors = refresh(
+        games, previous, fetch_json, datetime.now(UTC), arguments.force,
+        fixtures=fixtures, forecasts=forecasts, publications=publications,
+    )
     if payload is not None and payload != previous:
-        write_results(page, html, payload)
+        if fixtures is not None:
+            write_json(fixture_path, fixtures)
+        write_results(page, html, payload, fixtures, forecasts)
         print(f"Results revision {payload['revision']}; last result change {payload['lastResultAt']}.")
     else:
         print("No publishable results change; outside a check window or unchanged since the last published check.")

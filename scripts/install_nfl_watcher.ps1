@@ -24,9 +24,13 @@ if ($existing -and $existing.Description -notlike 'Matziq NFL picks 2026:*') {
 }
 if ($existing -and $existing.State -eq 'Running') { throw 'The NFL watcher is currently running; retry installation after it exits.' }
 
-$codePath = Join-Path $statePath 'code'
+$files = @('nfl_watch.py', 'nfl_results.py', 'nfl_common.py', 'nfl_season.py', 'nfl_forecasts.py')
+$fingerprints = ($files | ForEach-Object { (Get-FileHash -LiteralPath (Join-Path $PSScriptRoot $_) -Algorithm SHA256).Hash }) -join ''
+$algorithm = [System.Security.Cryptography.SHA256]::Create()
+try { $version = ([BitConverter]::ToString($algorithm.ComputeHash([System.Text.Encoding]::ASCII.GetBytes($fingerprints)))).Replace('-','').ToLower().Substring(0,16) } finally { $algorithm.Dispose() }
+$codePath = Join-Path (Join-Path $statePath 'code') $version
 New-Item -ItemType Directory -Path $codePath -Force | Out-Null
-foreach ($file in @('nfl_watch.py', 'nfl_results.py')) {
+foreach ($file in $files) {
     Copy-Item -LiteralPath (Join-Path $PSScriptRoot $file) -Destination (Join-Path $codePath $file) -Force
 }
 $watcher = Join-Path $codePath 'nfl_watch.py'
@@ -39,8 +43,12 @@ $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(1) -Repetiti
 $logonTrigger = New-ScheduledTaskTrigger -AtLogOn -User $identity
 $principal = New-ScheduledTaskPrincipal -UserId $identity -LogonType Interactive -RunLevel Limited
 $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -MultipleInstances IgnoreNew -ExecutionTimeLimit (New-TimeSpan -Minutes 10)
-$description = 'Matziq NFL picks 2026: checks published results every five minutes when due; opens new finals once; preserves local user work. Requires this user to be signed in.'
-Register-ScheduledTask -TaskName $taskName -Action $action -Trigger @($trigger, $logonTrigger) -Principal $principal -Settings $settings -Description $description -Force | Out-Null
+$description = 'Matziq NFL picks 2026: monitors the remaining regular season and official playoffs through the last final plus corrections; checks every five minutes when due, coalesces result/forecast tabs, and preserves local user work. Requires this user to be signed in.'
+if ($existing) {
+    Set-ScheduledTask -TaskName $taskName -Action $action -Description $description | Out-Null
+} else {
+    Register-ScheduledTask -TaskName $taskName -Action $action -Trigger @($trigger, $logonTrigger) -Principal $principal -Settings $settings -Description $description | Out-Null
+}
 Get-ScheduledTask -TaskName $taskName | Select-Object TaskName, State, @{Name='User'; Expression={$_.Principal.UserId}}, @{Name='LogonType'; Expression={$_.Principal.LogonType}}
 Get-ScheduledTaskInfo -TaskName $taskName | Select-Object LastRunTime, LastTaskResult, NextRunTime
 Write-Output "Private state and logs: $statePath"

@@ -17,11 +17,12 @@ GAMES = nfl.load_games(HTML)
 NOW = datetime(2026, 10, 2, 18, tzinfo=nfl.UTC)
 
 
-def event_for(game, *, final=False, away=24, home=27, status=None, date=None, period=4):
+def event_for(game, *, final=False, away=24, home=27, status=None, date=None, period=None):
     name = status or ("STATUS_FINAL" if final else "STATUS_SCHEDULED")
+    period = period if period is not None else 4 if final else 1 if name == "STATUS_IN_PROGRESS" else 0
     return {
         "id": game.event_id, "date": date or game.scheduled_at,
-        "season": {"year": 2026, "type": 2}, "week": {"number": game.week},
+        "season": {"year": 2026, "type": game.season_type}, "week": {"number": game.week},
         "competitions": [{
             "id": game.event_id, "date": date or game.scheduled_at,
             "status": {"period": period, "type": {
@@ -242,10 +243,11 @@ class ResultsTests(unittest.TestCase):
     def test_eastern_dates_midnight_and_dst(self):
         self.assertEqual(nfl.instant(GAMES[0].scheduled_at).astimezone(nfl.EASTERN).date().isoformat(), "2026-10-01")
         self.assertEqual(nfl.instant(GAMES[59].scheduled_at).astimezone(nfl.EASTERN).strftime("%Y-%m-%d %H:%M %z"), "2026-10-29 20:15 -0400")
-        self.assertEqual(nfl.instant(GAMES[-1].scheduled_at).astimezone(nfl.EASTERN).strftime("%Y-%m-%d %H:%M %z"), "2026-11-02 20:15 -0500")
+        november_game = next(game for game in GAMES if game.event_id == "401873036")
+        self.assertEqual(nfl.instant(november_game.scheduled_at).astimezone(nfl.EASTERN).strftime("%Y-%m-%d %H:%M %z"), "2026-11-02 20:15 -0500")
 
     def test_poll_windows_and_delayed_games_after_november_two(self):
-        result = nfl.initial_result(GAMES[-1])
+        result = nfl.initial_result(next(game for game in GAMES if game.event_id == "401873036"))
         result["lastAttemptAt"] = "2026-11-04T12:00:00Z"
         self.assertEqual(nfl.next_check(result, nfl.instant("2026-11-04T12:01Z")), nfl.instant("2026-11-04T12:15Z"))
         result["lastAttemptAt"] = "2026-11-20T12:00:00Z"

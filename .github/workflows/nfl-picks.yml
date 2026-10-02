@@ -6,15 +6,16 @@ on:
   workflow_dispatch:
     inputs:
       force:
-        description: Recheck all 73 bound games, including older finals
+        description: Recheck season fixtures, official playoffs, and older finals
         type: boolean
         default: false
   push:
     branches: [main]
     paths:
       - 'unlisted/1ff39048f9eaca39e2808bb7b2b687a5/index.html'
-      - 'scripts/nfl_results.py'
-      - 'scripts/nfl_watch.py'
+      - 'unlisted/1ff39048f9eaca39e2808bb7b2b687a5/forecasts.json'
+      - 'unlisted/1ff39048f9eaca39e2808bb7b2b687a5/fixtures.json'
+      - 'scripts/nfl_*.py'
       - 'tests/test_nfl_*.py'
       - '.github/workflows/nfl-picks.yml'
 
@@ -64,12 +65,13 @@ jobs:
           allowed = {
               'unlisted/1ff39048f9eaca39e2808bb7b2b687a5/index.html',
               'unlisted/1ff39048f9eaca39e2808bb7b2b687a5/results.json',
+              'unlisted/1ff39048f9eaca39e2808bb7b2b687a5/fixtures.json',
           }
           changed = subprocess.check_output(['git', 'diff', '--name-only'], text=True).splitlines()
           if set(changed) - allowed:
               raise SystemExit('Unexpected changed paths; refusing to stage anything.')
           PY
-          git add -- unlisted/1ff39048f9eaca39e2808bb7b2b687a5/index.html unlisted/1ff39048f9eaca39e2808bb7b2b687a5/results.json
+          git add -- unlisted/1ff39048f9eaca39e2808bb7b2b687a5/index.html unlisted/1ff39048f9eaca39e2808bb7b2b687a5/results.json unlisted/1ff39048f9eaca39e2808bb7b2b687a5/fixtures.json
           if git diff --cached --quiet; then
             echo "No results commit needed."
           else

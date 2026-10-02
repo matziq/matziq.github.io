@@ -67,6 +67,25 @@ class WatcherTests(unittest.TestCase):
         self.assertFalse(self.opened)
         self.assertEqual(len(self.synced), 2)
 
+    def test_new_forecast_opens_once_and_coalesces_with_recent_final(self):
+        payload = snapshot(GAMES[0].event_id)
+        self.run_snapshot(payload)
+        updated = copy.deepcopy(payload)
+        updated["analysis"] = {"id": "assessment-one", "initialPickCount": 151, "changedPickCount": 4}
+        updated["revision"] = nfl.digest({key: value for key, value in updated.items() if key != "revision"})
+        self.now = NOW + timedelta(minutes=20)
+        self.run_snapshot(updated)
+        self.assertEqual(len(self.opened), 1)
+        self.run_snapshot(updated)
+        self.assertEqual(len(self.opened), 1)
+        next_update = copy.deepcopy(updated)
+        next_update["analysis"]["id"] = "assessment-two"
+        next_update["revision"] = nfl.digest({key: value for key, value in next_update.items() if key != "revision"})
+        self.now += timedelta(minutes=5)
+        state = self.run_snapshot(next_update)
+        self.assertEqual(len(self.opened), 1)
+        self.assertEqual(state["lastSeenAssessmentId"], "assessment-two")
+
     def test_mixed_deployment_does_not_consume_notifications(self):
         old = snapshot(GAMES[0].event_id)
         self.run_snapshot(old)

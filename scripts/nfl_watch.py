@@ -181,15 +181,25 @@ def run_once(
     seen = set(state["seenFinalIds"]) if state else set()
     finals = {event_id for event_id, result in snapshot["games"].items() if result["status"] == "final"}
     newly_final = finals - seen if state else set()
+    analysis = snapshot.get("analysis")
+    new_analysis = bool(
+        state and analysis and state.get("lastSeenAssessmentId") != analysis["id"]
+        and (analysis["initialPickCount"] or analysis["changedPickCount"])
+    )
+    recently_opened = bool(state and state.get("lastOpenedAt") and now - instant(state["lastOpenedAt"]) < timedelta(minutes=10))
+    notify_analysis = new_analysis and not recently_opened
     updated = dict(state or {})
     updated.update(
         schemaVersion=1, bootstrappedAt=updated.get("bootstrappedAt", stamp(now)),
         lastPolledAt=stamp(now), publishedAt=snapshot["publishedAt"], lastRevision=snapshot["revision"],
         seenFinalIds=sorted(seen | finals), lastError=None, syncError=None,
+        lastSeenAssessmentId=analysis["id"] if analysis else None,
     )
     checks = [next_check(result, now) for result in snapshot["games"].values()]
     active = [check for check in checks if check is not None]
-    updated["monitoringComplete"] = not active
+    updated["monitoringComplete"] = bool(snapshot["monitoringComplete"])
+    if snapshot.get("nextCheckAt") and not updated["monitoringComplete"]:
+        active.append(instant(snapshot["nextCheckAt"]))
     updated["nextPollAt"] = stamp(max(now + timedelta(minutes=5), min(active))) if active else None
     needs_sync = state is None or state.get("lastRevision") != snapshot["revision"] or state.get("syncError")
     if needs_sync and not dry_run:
@@ -204,23 +214,25 @@ def run_once(
     if state is None:
         LOG.info("Bootstrap: baselined %d existing finals; opened no historical tabs.", len(finals))
     # Persist launch intent before the OS call so a process interruption cannot replay a tab.
-    if newly_final:
+    if newly_final or notify_analysis:
         updated["lastOpenedEventIds"] = sorted(newly_final)
         updated["lastOpenedAt"] = stamp(now)
+        updated["lastOpenedAssessmentId"] = analysis["id"] if notify_analysis else updated.get("lastOpenedAssessmentId")
     save_state(path, updated)
-    if newly_final:
+    if newly_final or notify_analysis:
         url = LIVE_URL + "?results=" + snapshot["revision"]
         try:
             if dry_run:
-                LOG.info("DRY RUN: would open one page for new finals %s.", sorted(newly_final))
+                LOG.info("DRY RUN: would open one page for finals %s / assessment %s.", sorted(newly_final), analysis["id"] if notify_analysis else None)
             else:
                 if open_url is None:
                     os.startfile(url)
                 else:
                     open_url(url)
-                LOG.info("Opened the deployed page for new finals %s.", sorted(newly_final))
+                LOG.info("Opened the deployed page for finals %s / assessment %s.", sorted(newly_final), analysis["id"] if notify_analysis else None)
         except OSError as error:
             updated["seenFinalIds"] = sorted(seen)
+            updated["lastSeenAssessmentId"] = state.get("lastSeenAssessmentId") if state else None
             updated["lastError"] = f"Browser launch failed: {error}"
             updated["nextPollAt"] = stamp(now + timedelta(minutes=5))
             updated["monitoringComplete"] = False
@@ -228,6 +240,8 @@ def run_once(
             raise
     else:
         LOG.info("No newly finished games; no browser launch. Revision %s.", snapshot["revision"])
+        if new_analysis:
+            LOG.info("The recent game tab can refresh to assessment %s; suppressed a duplicate tab.", analysis["id"])
     return updated
 
 
