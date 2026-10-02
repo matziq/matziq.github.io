@@ -22169,7 +22169,7 @@
 
       exportButton.addEventListener("click", () => {
         const csvHeaders = [...headers.slice(0, 5), "Game status", "Final score", "Winner", "Pick result", "Current kickoff (UTC)", "Result updated (UTC)", "Source checked (UTC)", "Source issue",
-          "Week or round", "Original or initial pick", "Original or initial reason", "Pick effective (UTC)", "Pick locked (UTC)", "Last assessment (UTC)", "Analysis sources", "Revision history"];
+          "Week or round", "Original or initial pick", "Original or initial reason", "Pick effective (UTC)", "Pick locked (UTC)", "Last assessment (UTC)", "Analysis sources", "Revision history", "ESPN event ID"];
         const rows = [csvHeaders, ...visibleGames.map((game) => {
           const result = results.games[game.eventId];
           const history = historyFor(game);
@@ -22182,7 +22182,7 @@
             baseline === null ? "" : teamLabel(baseline), game.original ? game.reason : initial ? initial.decision.reason : "",
             result.pickEffectiveAt || "", result.pickLockedAt || "", latest ? latest.assessment.assessedAt : "",
             latest ? latest.decision.sourceIds.map((id) => latest.assessment.sources[id].url).join(" ") : "",
-            JSON.stringify(history.map(({ assessment, decision }) => ({ assessedAt: assessment.assessedAt, pick: teamLabel(decision.pickTeamId), reason: decision.reason, action: decision.action, applied: decision.applied, rationale: decision.rationale })))];
+            JSON.stringify(history.map(({ assessment, decision }) => ({ assessedAt: assessment.assessedAt, pick: teamLabel(decision.pickTeamId), reason: decision.reason, action: decision.action, applied: decision.applied, rationale: decision.rationale }))), game.eventId];
         })];
         const csv = "\uFEFF" + rows.map((row) => row.map((value) => `"${value.replace(/"/g, '""')}"`).join(",")).join("\r\n") + "\r\n";
         const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8;" }));

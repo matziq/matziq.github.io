@@ -45,7 +45,9 @@ $principal = New-ScheduledTaskPrincipal -UserId $identity -LogonType Interactive
 $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -MultipleInstances IgnoreNew -ExecutionTimeLimit (New-TimeSpan -Minutes 10)
 $description = 'Matziq NFL picks 2026: monitors the remaining regular season and official playoffs through the last final plus corrections; checks every five minutes when due, coalesces result/forecast tabs, and preserves local user work. Requires this user to be signed in.'
 if ($existing) {
-    Set-ScheduledTask -TaskName $taskName -Action $action -Description $description | Out-Null
+    $existing.Actions = @($action)
+    $existing.Description = $description
+    Set-ScheduledTask -InputObject $existing | Out-Null
 } else {
     Register-ScheduledTask -TaskName $taskName -Action $action -Trigger @($trigger, $logonTrigger) -Principal $principal -Settings $settings -Description $description | Out-Null
 }

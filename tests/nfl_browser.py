@@ -123,7 +123,11 @@ def check(browser, url, artifacts):
     assert final_row["Final score"] == "Pittsburgh 24 - Cleveland 27"
     original_ids = {game.event_id for game in GAMES if game.original}
     assert all(len(row["5 Words Why Picked"].split()) == 5 for row in exported)
-    assert sorted(row["Original or initial reason"] for row in exported if row["Original or initial reason"] in {row[6] for row in json.loads(original)}) == sorted(row[6] for row in json.loads(original))
+    exported_by_id = {row["ESPN event ID"]: row for row in exported}
+    assert len(exported_by_id) == len(GAMES)
+    for game in GAMES:
+        if game.original:
+            assert exported_by_id[game.event_id]["Original or initial reason"] == game.reason
     assert all(row["Winner"] != "TBD" or row["Pick result"] == "pending" for row in exported)
     first.locator("summary").click()
     expect(first.locator(".pick-history")).to_contain_text("October 1 original: Pittsburgh")
