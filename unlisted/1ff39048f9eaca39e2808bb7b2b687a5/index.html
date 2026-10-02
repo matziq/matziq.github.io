@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="referrer" content="no-referrer">
-  <meta name="description" content="73 NFL winner picks for October 1 through November 2, 2026. Search, filter, sort, print, and export this self-contained picks sheet.">
+  <meta name="description" content="73 original NFL winner picks for October 1 through November 2, 2026, with verified final results. Search, filter, sort, print, and export this picks sheet.">
   <title>NFL winner picks | October 1 - November 2, 2026</title>
   <script>
     (() => {
@@ -20,8 +20,8 @@
     OWN-WORLD: Clawpilot warm neutrals, rose selections, Segoe UI, and quiet table rules.
     STORY: Find a game, read the original pick, and take the selected view with you.
     FIRST VIEWPORT: Title and export actions above week filters, search, and the picks table.
-    FORM: A five-column table on desktop and labeled fixture rows on small screens.
-    This is an export of the original 73 predictions, not a live schedule or results feed.
+    FORM: Original predictions and separate verified results, with labeled mobile rows.
+    Predictions are immutable. The embedded results snapshot also works offline.
   -->
   <style>
     :root {
@@ -172,7 +172,7 @@
     .sheet { border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-surface); overflow: clip; }
     .filters {
       display: grid;
-      grid-template-columns: minmax(200px, 1.8fr) minmax(180px, 1fr) minmax(160px, 0.8fr);
+      grid-template-columns: minmax(180px, 1.8fr) minmax(140px, 1fr) minmax(130px, 0.8fr) minmax(130px, 0.8fr);
       gap: 16px;
       margin: 0;
       padding: 24px 24px 16px;
@@ -216,11 +216,12 @@
     }
     .text-button:hover:not(:disabled) { text-decoration: underline; text-underline-offset: 3px; }
     table { width: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; }
-    col.date { width: 13%; }
-    col.day { width: 7%; }
-    col.teams { width: 29%; }
-    col.pick { width: 21%; }
-    col.reason { width: 30%; }
+    col.date { width: 11%; }
+    col.day { width: 5%; }
+    col.teams { width: 20%; }
+    col.pick { width: 15%; }
+    col.reason { width: 23%; }
+    col.result { width: 26%; }
     th {
       position: sticky;
       top: 0;
@@ -265,6 +266,19 @@
     .venue { display: block; margin-top: 4px; color: var(--cp-text-soft); font-size: 12px; font-weight: 400; }
     .pick-name { display: inline-block; border-radius: 6px; padding: 4px 10px; background: var(--cp-accent-soft); color: var(--cp-accent); font-weight: 650; }
     .reason-cell { color: var(--cp-text-soft); }
+    .results-summary { margin: 0 0 20px; padding: 16px 20px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-bg-elevated); }
+    .results-summary p { margin: 0; }
+    .results-summary p + p { margin-top: 8px; }
+    #record-summary { font-weight: 600; }
+    .source-status, .result-detail, .result-issue, .schedule-change { font-size: 12px; color: var(--cp-text-soft); }
+    .result-cell span, .result-cell a { display: block; margin-top: 4px; }
+    .final-score { font-weight: 600; font-variant-numeric: tabular-nums; }
+    .verdict { font-weight: 600; }
+    .verdict.correct { color: var(--cp-text); }
+    .verdict.correct::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: var(--cp-success); }
+    .verdict.incorrect, .source-warning { color: var(--cp-danger); }
+    .verdict.tie { color: var(--cp-text); }
+    .preference-note { margin: 0 24px 16px; color: var(--cp-text-muted); font-size: 12px; }
     .empty { padding: 64px 24px; text-align: center; border-top: 1px solid var(--cp-border); }
     .empty h2 { margin: 0; font-size: 22px; line-height: 1.3; }
     .empty p { margin: 12px 0 24px; color: var(--cp-text-soft); }
@@ -302,8 +316,8 @@
       td, td:first-child, td:last-child { display: block; padding: 0; border: 0; }
       .day-cell { text-align: right; }
       .matchup-cell { grid-column: 1 / -1; font-size: 17px; }
-      .pick-cell, .reason-cell { grid-column: 1 / -1; }
-      .pick-cell::before, .reason-cell::before { content: attr(data-label); display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600; color: var(--cp-text-soft); }
+      .pick-cell, .reason-cell, .result-cell { grid-column: 1 / -1; }
+      .pick-cell::before, .reason-cell::before, .result-cell::before { content: attr(data-label); display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600; color: var(--cp-text-soft); }
       .venue { display: inline; margin: 0 0 0 8px; }
       .reason-cell { font-size: 14px; }
       .empty { padding: 40px 20px; }
@@ -331,10 +345,12 @@
       td, td:first-child, td:last-child { display: table-cell; padding: 8px; border-bottom: 1px solid var(--cp-border); font-size: 9pt; }
       th, th:first-child, th:last-child { padding: 8px; }
       th .sort-button { min-height: 0; padding: 0; color: var(--cp-text); }
-      .sort-mark, .pick-cell::before, .reason-cell::before { display: none; }
+      .sort-mark, .pick-cell::before, .reason-cell::before, .result-cell::before, .preference-note { display: none; }
       .day-cell { text-align: left; }
       .pick-name { padding: 0; background: var(--cp-surface); color: var(--cp-text); }
       .reason-cell { color: var(--cp-text); }
+      .results-summary { padding: 0 0 12px; margin: 0; border: 0; background: var(--cp-surface); }
+      .verdict.correct, .verdict.incorrect { color: var(--cp-text); }
       .venue { display: block; margin: 2px 0 0; font-size: 8pt; }
       .footer { display: block; padding: 12px 0 0; font-size: 8pt; }
     }
@@ -367,6 +383,11 @@
     <noscript><p class="error"><strong>JavaScript is disabled.</strong> Enable JavaScript in your browser to view and filter the picks. This file works offline; no account or connection is needed.</p></noscript>
     <p id="app-error" class="error" role="alert" hidden></p>
     <nav id="week-nav" class="week-nav" aria-label="Filter picks by week"></nav>
+    <section class="results-summary" aria-label="Verified results">
+      <p id="record-summary" role="status" aria-live="polite"></p>
+      <p id="source-status" class="source-status"></p>
+      <p id="source-warning" class="source-warning" role="status" hidden></p>
+    </section>
 
     <section class="sheet" aria-label="NFL picks">
       <form id="filters" class="filters" role="search" aria-label="Filter games">
@@ -390,6 +411,13 @@
             <option value="Mon">Monday (MNF)</option>
           </select>
         </div>
+        <div class="field">
+          <label for="name-display">Team names</label>
+          <select id="name-display" aria-controls="picks-body team-filter" disabled>
+            <option value="mascot">Mascot</option>
+            <option value="location">Location</option>
+          </select>
+        </div>
         <div class="field mobile-sort">
           <label for="sort-select">Sort games</label>
           <select id="sort-select" aria-controls="picks-body" disabled>
@@ -399,17 +427,20 @@
             <option value="teams:desc">Teams: Z to A</option>
             <option value="pick:asc">Team picked: A to Z</option>
             <option value="pick:desc">Team picked: Z to A</option>
+            <option value="winner:asc">Winner: A to Z</option>
+            <option value="winner:desc">Winner: Z to A</option>
           </select>
         </div>
       </form>
+      <p id="preference-note" class="preference-note" role="status" hidden></p>
       <div class="result-bar">
         <span id="result-status" role="status" aria-live="polite" aria-atomic="true"><span id="result-count"></span><span id="result-context"></span></span>
         <button id="reset-button" class="text-button" type="button" disabled>Reset view</button>
       </div>
       <p id="print-note" class="print-note"></p>
       <table id="picks-table" tabindex="-1" aria-label="NFL winner picks" aria-describedby="snapshot-note">
-        <caption class="sr-only">Original NFL predictions for October 1 through November 2, 2026. Sort using the Date, Teams, or Team Picked to Win column buttons.</caption>
-        <colgroup><col class="date"><col class="day"><col class="teams"><col class="pick"><col class="reason"></colgroup>
+        <caption class="sr-only">Original NFL predictions for October 1 through November 2, 2026, with separate confirmed final results. Dates and picks are the original predictions.</caption>
+        <colgroup><col class="date"><col class="day"><col class="teams"><col class="pick"><col class="reason"><col class="result"></colgroup>
         <thead>
           <tr>
             <th scope="col" aria-sort="ascending"><button class="sort-button" type="button" data-sort="date" aria-label="Sort by date, latest first">Date <span class="sort-mark" aria-hidden="true">&#8593;</span></button></th>
@@ -417,6 +448,7 @@
             <th scope="col" aria-sort="none"><button class="sort-button" type="button" data-sort="teams" aria-label="Sort by teams, A to Z">Teams <span class="sort-mark" aria-hidden="true">&#8597;</span></button></th>
             <th scope="col" aria-sort="none"><button class="sort-button" type="button" data-sort="pick" aria-label="Sort by team picked, A to Z">Team Picked to Win <span class="sort-mark" aria-hidden="true">&#8597;</span></button></th>
             <th scope="col">5 Words Why Picked</th>
+            <th scope="col" aria-sort="none"><button class="sort-button" type="button" data-sort="winner" aria-label="Sort by winner, A to Z">Final Result <span class="sort-mark" aria-hidden="true">&#8597;</span></button></th>
           </tr>
         </thead>
         <tbody id="picks-body"></tbody>
@@ -429,7 +461,7 @@
     </section>
 
     <footer class="footer">
-      <p id="snapshot-note">For fun only. Original picks from October 1, 2026, not live results.<br>All 73 predictions are unchanged. Schedule changes are not updated automatically.</p>
+      <p id="snapshot-note">For fun only. All 73 original October 1, 2026 predictions, dates, and five-word reasons are unchanged. Results are separate and require a confirmed ESPN final; no live score is treated as a win.<br>Cloud checks target five-minute intervals around games; source and deployment delays can occur. Published checks are timestamped, not necessarily the most recent poll. The downloaded HTML includes its last results snapshot. An unlisted link is not private or password-protected.</p>
       <div class="sources">
         <a href="https://media.nfl.com/content/dam/communications/football-communications/2026/news/05%2014%2026%20-%202026%20NFL%20Schedule%20-%20By%20Week.pdf" target="_blank" rel="noopener noreferrer">NFL schedule</a>
         <a href="https://www.cbssports.com/nfl/powerrankings/" target="_blank" rel="noopener noreferrer">Power rankings source</a>
@@ -514,6 +546,1454 @@
     [8,"2026-11-02","Bears","Seahawks","","Seahawks","Seattle's defense and crowd prevail"]
   ]
   </script>
+  <script type="application/json" id="catalog-data">
+  {
+    "season": 2026,
+    "seasonType": 2,
+    "teams": {
+      "49ers": ["25", "San Francisco", "San Francisco 49ers"],
+      "Bears": ["3", "Chicago", "Chicago Bears"],
+      "Bengals": ["4", "Cincinnati", "Cincinnati Bengals"],
+      "Bills": ["2", "Buffalo", "Buffalo Bills"],
+      "Broncos": ["7", "Denver", "Denver Broncos"],
+      "Browns": ["5", "Cleveland", "Cleveland Browns"],
+      "Buccaneers": ["27", "Tampa Bay", "Tampa Bay Buccaneers"],
+      "Cardinals": ["22", "Arizona", "Arizona Cardinals"],
+      "Chargers": ["24", "LA Chargers", "Los Angeles Chargers"],
+      "Chiefs": ["12", "Kansas City", "Kansas City Chiefs"],
+      "Colts": ["11", "Indianapolis", "Indianapolis Colts"],
+      "Commanders": ["28", "Washington", "Washington Commanders"],
+      "Cowboys": ["6", "Dallas", "Dallas Cowboys"],
+      "Dolphins": ["15", "Miami", "Miami Dolphins"],
+      "Eagles": ["21", "Philadelphia", "Philadelphia Eagles"],
+      "Falcons": ["1", "Atlanta", "Atlanta Falcons"],
+      "Giants": ["19", "NY Giants", "New York Giants"],
+      "Jaguars": ["30", "Jacksonville", "Jacksonville Jaguars"],
+      "Jets": ["20", "NY Jets", "New York Jets"],
+      "Lions": ["8", "Detroit", "Detroit Lions"],
+      "Packers": ["9", "Green Bay", "Green Bay Packers"],
+      "Panthers": ["29", "Carolina", "Carolina Panthers"],
+      "Patriots": ["17", "New England", "New England Patriots"],
+      "Raiders": ["13", "Las Vegas", "Las Vegas Raiders"],
+      "Rams": ["14", "LA Rams", "Los Angeles Rams"],
+      "Ravens": ["33", "Baltimore", "Baltimore Ravens"],
+      "Saints": ["18", "New Orleans", "New Orleans Saints"],
+      "Seahawks": ["26", "Seattle", "Seattle Seahawks"],
+      "Steelers": ["23", "Pittsburgh", "Pittsburgh Steelers"],
+      "Texans": ["34", "Houston", "Houston Texans"],
+      "Titans": ["10", "Tennessee", "Tennessee Titans"],
+      "Vikings": ["16", "Minnesota", "Minnesota Vikings"]
+    },
+    "events": [
+      ["401872964","23","5","2026-10-02T00:15:00Z"],
+      ["401872965","11","28","2026-10-04T13:30:00Z"],
+      ["401872973","10","33","2026-10-04T17:00:00Z"],
+      ["401872971","17","2","2026-10-04T17:00:00Z"],
+      ["401872972","20","3","2026-10-04T17:00:00Z"],
+      ["401872969","30","4","2026-10-04T17:00:00Z"],
+      ["401872967","6","34","2026-10-04T17:00:00Z"],
+      ["401872966","22","19","2026-10-04T17:00:00Z"],
+      ["401872970","14","21","2026-10-04T17:00:00Z"],
+      ["401872968","9","27","2026-10-04T17:00:00Z"],
+      ["401872974","15","16","2026-10-04T20:05:00Z"],
+      ["401872976","12","13","2026-10-04T20:25:00Z"],
+      ["401872977","24","26","2026-10-04T20:25:00Z"],
+      ["401872975","7","25","2026-10-04T20:25:00Z"],
+      ["401872978","8","29","2026-10-05T00:20:00Z"],
+      ["401872979","1","18","2026-10-06T00:15:00Z"],
+      ["401872980","27","6","2026-10-09T00:15:00Z"],
+      ["401872981","21","30","2026-10-11T13:30:00Z"],
+      ["401872982","4","15","2026-10-11T17:00:00Z"],
+      ["401872986","13","17","2026-10-11T17:00:00Z"],
+      ["401872987","16","18","2026-10-11T17:00:00Z"],
+      ["401872983","5","20","2026-10-11T17:00:00Z"],
+      ["401872985","11","23","2026-10-11T17:00:00Z"],
+      ["401872984","34","10","2026-10-11T17:00:00Z"],
+      ["401872988","19","28","2026-10-11T17:00:00Z"],
+      ["401872989","7","24","2026-10-11T20:05:00Z"],
+      ["401872991","8","22","2026-10-11T20:25:00Z"],
+      ["401872990","3","9","2026-10-11T17:00:00Z"],
+      ["401872992","25","26","2026-10-11T20:25:00Z"],
+      ["401872993","33","1","2026-10-12T00:20:00Z"],
+      ["401872994","2","14","2026-10-13T00:15:00Z"],
+      ["401872995","26","7","2026-10-16T00:15:00Z"],
+      ["401872996","34","30","2026-10-18T13:30:00Z"],
+      ["401872999","3","1","2026-10-18T17:00:00Z"],
+      ["401872997","33","5","2026-10-18T17:00:00Z"],
+      ["401873003","10","11","2026-10-18T17:00:00Z"],
+      ["401873001","20","17","2026-10-18T17:00:00Z"],
+      ["401873000","18","19","2026-10-18T17:00:00Z"],
+      ["401872998","29","21","2026-10-18T17:00:00Z"],
+      ["401873002","23","27","2026-10-18T17:00:00Z"],
+      ["401873004","22","14","2026-10-18T20:05:00Z"],
+      ["401873006","24","12","2026-10-18T20:25:00Z"],
+      ["401873005","2","13","2026-10-18T20:25:00Z"],
+      ["401873007","6","9","2026-10-19T00:20:00Z"],
+      ["401873008","28","25","2026-10-20T00:15:00Z"],
+      ["401873010","17","3","2026-10-23T00:15:00Z"],
+      ["401873011","23","18","2026-10-25T13:30:00Z"],
+      ["401873017","25","1","2026-10-25T17:00:00Z"],
+      ["401873012","4","33","2026-10-25T17:00:00Z"],
+      ["401873018","27","29","2026-10-25T17:00:00Z"],
+      ["401873016","19","34","2026-10-25T17:00:00Z"],
+      ["401873014","11","16","2026-10-25T17:00:00Z"],
+      ["401873015","15","20","2026-10-25T17:00:00Z"],
+      ["401873013","5","10","2026-10-25T17:00:00Z"],
+      ["401873019","7","22","2026-10-25T20:05:00Z"],
+      ["401873020","9","8","2026-10-25T20:25:00Z"],
+      ["401873021","14","13","2026-10-25T20:25:00Z"],
+      ["401873022","12","26","2026-10-26T00:20:00Z"],
+      ["401873009","6","21","2026-10-27T00:15:00Z"],
+      ["401873023","29","9","2026-10-30T00:15:00Z"],
+      ["401873026","33","2","2026-11-01T18:00:00Z"],
+      ["401873031","10","4","2026-11-01T18:00:00Z"],
+      ["401873024","22","6","2026-11-01T18:00:00Z"],
+      ["401873030","16","8","2026-11-01T18:00:00Z"],
+      ["401873028","11","30","2026-11-01T18:00:00Z"],
+      ["401873029","13","20","2026-11-01T18:00:00Z"],
+      ["401873027","5","23","2026-11-01T18:00:00Z"],
+      ["401873025","1","27","2026-11-01T18:00:00Z"],
+      ["401873032","24","14","2026-11-01T21:05:00Z"],
+      ["401873033","12","7","2026-11-01T21:25:00Z"],
+      ["401873034","17","15","2026-11-01T21:25:00Z"],
+      ["401873035","21","28","2026-11-02T01:20:00Z"],
+      ["401873036","3","26","2026-11-03T01:15:00Z"]
+    ]
+  }
+  </script>
+  <script type="application/json" id="results-data">
+{
+  "games": {
+    "401872964": {
+      "awayScore": 24,
+      "awayTeamId": "23",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872964",
+      "firstFinalAt": "2026-10-02T18:14:57Z",
+      "homeScore": 27,
+      "homeTeamId": "5",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "incorrect",
+      "resultUpdatedAt": "2026-10-02T18:14:57Z",
+      "scheduledAt": "2026-10-02T00:15:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261001",
+      "status": "final",
+      "statusDetail": "Final",
+      "winnerTeamId": "5"
+    },
+    "401872965": {
+      "awayScore": null,
+      "awayTeamId": "11",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872965",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "28",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-04T13:30:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261004",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872966": {
+      "awayScore": null,
+      "awayTeamId": "22",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872966",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "19",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-04T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261004",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872967": {
+      "awayScore": null,
+      "awayTeamId": "6",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872967",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "34",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-04T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261004",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872968": {
+      "awayScore": null,
+      "awayTeamId": "9",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872968",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "27",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-04T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261004",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872969": {
+      "awayScore": null,
+      "awayTeamId": "30",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872969",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "4",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-04T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261004",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872970": {
+      "awayScore": null,
+      "awayTeamId": "14",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872970",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "21",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-04T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261004",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872971": {
+      "awayScore": null,
+      "awayTeamId": "17",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872971",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "2",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-04T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261004",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872972": {
+      "awayScore": null,
+      "awayTeamId": "20",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872972",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "3",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-04T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261004",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872973": {
+      "awayScore": null,
+      "awayTeamId": "10",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872973",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "33",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-04T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261004",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872974": {
+      "awayScore": null,
+      "awayTeamId": "15",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872974",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "16",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-04T20:05:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261004",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872975": {
+      "awayScore": null,
+      "awayTeamId": "7",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872975",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "25",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-04T20:25:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261004",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872976": {
+      "awayScore": null,
+      "awayTeamId": "12",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872976",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "13",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-04T20:25:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261004",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872977": {
+      "awayScore": null,
+      "awayTeamId": "24",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872977",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "26",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-04T20:25:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261004",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872978": {
+      "awayScore": null,
+      "awayTeamId": "8",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872978",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "29",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-05T00:20:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261004",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872979": {
+      "awayScore": null,
+      "awayTeamId": "1",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872979",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "18",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-06T00:15:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261005",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872980": {
+      "awayScore": null,
+      "awayTeamId": "27",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872980",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "6",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-09T00:15:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261008",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872981": {
+      "awayScore": null,
+      "awayTeamId": "21",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872981",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "30",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-11T13:30:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261011",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872982": {
+      "awayScore": null,
+      "awayTeamId": "4",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872982",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "15",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-11T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261011",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872983": {
+      "awayScore": null,
+      "awayTeamId": "5",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872983",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "20",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-11T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261011",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872984": {
+      "awayScore": null,
+      "awayTeamId": "34",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872984",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "10",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-11T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261011",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872985": {
+      "awayScore": null,
+      "awayTeamId": "11",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872985",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "23",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-11T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261011",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872986": {
+      "awayScore": null,
+      "awayTeamId": "13",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872986",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "17",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-11T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261011",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872987": {
+      "awayScore": null,
+      "awayTeamId": "16",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872987",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "18",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-11T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261011",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872988": {
+      "awayScore": null,
+      "awayTeamId": "19",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872988",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "28",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-11T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261011",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872989": {
+      "awayScore": null,
+      "awayTeamId": "7",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872989",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "24",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-11T20:05:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261011",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872990": {
+      "awayScore": null,
+      "awayTeamId": "3",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872990",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "9",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-11T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261011",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872991": {
+      "awayScore": null,
+      "awayTeamId": "8",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872991",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "22",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-11T20:25:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261011",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872992": {
+      "awayScore": null,
+      "awayTeamId": "25",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872992",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "26",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-11T20:25:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261011",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872993": {
+      "awayScore": null,
+      "awayTeamId": "33",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872993",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "1",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-12T00:20:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261011",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872994": {
+      "awayScore": null,
+      "awayTeamId": "2",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872994",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "14",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-13T00:15:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261012",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872995": {
+      "awayScore": null,
+      "awayTeamId": "26",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872995",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "7",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-16T00:15:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261015",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872996": {
+      "awayScore": null,
+      "awayTeamId": "34",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872996",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "30",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-18T13:30:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261018",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872997": {
+      "awayScore": null,
+      "awayTeamId": "33",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872997",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "5",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-18T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261018",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872998": {
+      "awayScore": null,
+      "awayTeamId": "29",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872998",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "21",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-18T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261018",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401872999": {
+      "awayScore": null,
+      "awayTeamId": "3",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401872999",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "1",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-18T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261018",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873000": {
+      "awayScore": null,
+      "awayTeamId": "18",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873000",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "19",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-18T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261018",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873001": {
+      "awayScore": null,
+      "awayTeamId": "20",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873001",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "17",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-18T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261018",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873002": {
+      "awayScore": null,
+      "awayTeamId": "23",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873002",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "27",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-18T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261018",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873003": {
+      "awayScore": null,
+      "awayTeamId": "10",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873003",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "11",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-18T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261018",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873004": {
+      "awayScore": null,
+      "awayTeamId": "22",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873004",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "14",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-18T20:05:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261018",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873005": {
+      "awayScore": null,
+      "awayTeamId": "2",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873005",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "13",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-18T20:25:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261018",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873006": {
+      "awayScore": null,
+      "awayTeamId": "24",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873006",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "12",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-18T20:25:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261018",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873007": {
+      "awayScore": null,
+      "awayTeamId": "6",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873007",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "9",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-19T00:20:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261018",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873008": {
+      "awayScore": null,
+      "awayTeamId": "28",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873008",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "25",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-20T00:15:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261019",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873009": {
+      "awayScore": null,
+      "awayTeamId": "6",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873009",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "21",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-27T00:15:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261026",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873010": {
+      "awayScore": null,
+      "awayTeamId": "17",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873010",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "3",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-23T00:15:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261022",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873011": {
+      "awayScore": null,
+      "awayTeamId": "23",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873011",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "18",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-25T13:30:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261025",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873012": {
+      "awayScore": null,
+      "awayTeamId": "4",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873012",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "33",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-25T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261025",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873013": {
+      "awayScore": null,
+      "awayTeamId": "5",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873013",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "10",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-25T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261025",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873014": {
+      "awayScore": null,
+      "awayTeamId": "11",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873014",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "16",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-25T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261025",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873015": {
+      "awayScore": null,
+      "awayTeamId": "15",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873015",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "20",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-25T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261025",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873016": {
+      "awayScore": null,
+      "awayTeamId": "19",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873016",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "34",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-25T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261025",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873017": {
+      "awayScore": null,
+      "awayTeamId": "25",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873017",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "1",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-25T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261025",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873018": {
+      "awayScore": null,
+      "awayTeamId": "27",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873018",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "29",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-25T17:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261025",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873019": {
+      "awayScore": null,
+      "awayTeamId": "7",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873019",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "22",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-25T20:05:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261025",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873020": {
+      "awayScore": null,
+      "awayTeamId": "9",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873020",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "8",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-25T20:25:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261025",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873021": {
+      "awayScore": null,
+      "awayTeamId": "14",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873021",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "13",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-25T20:25:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261025",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873022": {
+      "awayScore": null,
+      "awayTeamId": "12",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873022",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "26",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-26T00:20:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261025",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873023": {
+      "awayScore": null,
+      "awayTeamId": "29",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873023",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "9",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-10-30T00:15:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261029",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873024": {
+      "awayScore": null,
+      "awayTeamId": "22",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873024",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "6",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-11-01T18:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873025": {
+      "awayScore": null,
+      "awayTeamId": "1",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873025",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "27",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-11-01T18:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873026": {
+      "awayScore": null,
+      "awayTeamId": "33",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873026",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "2",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-11-01T18:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873027": {
+      "awayScore": null,
+      "awayTeamId": "5",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873027",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "23",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-11-01T18:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873028": {
+      "awayScore": null,
+      "awayTeamId": "11",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873028",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "30",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-11-01T18:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873029": {
+      "awayScore": null,
+      "awayTeamId": "13",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873029",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "20",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-11-01T18:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873030": {
+      "awayScore": null,
+      "awayTeamId": "16",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873030",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "8",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-11-01T18:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873031": {
+      "awayScore": null,
+      "awayTeamId": "10",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873031",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "4",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-11-01T18:00:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873032": {
+      "awayScore": null,
+      "awayTeamId": "24",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873032",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "14",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-11-01T21:05:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873033": {
+      "awayScore": null,
+      "awayTeamId": "12",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873033",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "7",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-11-01T21:25:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873034": {
+      "awayScore": null,
+      "awayTeamId": "17",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873034",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "15",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-11-01T21:25:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873035": {
+      "awayScore": null,
+      "awayTeamId": "21",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873035",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "28",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-11-02T01:20:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    },
+    "401873036": {
+      "awayScore": null,
+      "awayTeamId": "3",
+      "checkedAt": "2026-10-02T18:14:57Z",
+      "error": null,
+      "eventId": "401873036",
+      "firstFinalAt": null,
+      "homeScore": null,
+      "homeTeamId": "26",
+      "lastAttemptAt": "2026-10-02T18:14:57Z",
+      "pickResult": "pending",
+      "resultUpdatedAt": null,
+      "scheduledAt": "2026-11-03T01:15:00Z",
+      "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261102",
+      "status": "scheduled",
+      "statusDetail": "Scheduled",
+      "winnerTeamId": null
+    }
+  },
+  "lastAttemptAt": "2026-10-02T18:14:57Z",
+  "lastResultAt": "2026-10-02T18:14:57Z",
+  "lastSuccessfulCheckAt": "2026-10-02T18:14:57Z",
+  "monitoringComplete": false,
+  "nextCheckAt": "2026-10-02T19:14:57Z",
+  "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
+  "publishedAt": "2026-10-02T18:14:57Z",
+  "revision": "a77bbe3ac56fe47d87dca621214fa25b4af037e686cadf8928112039f3d74add",
+  "schemaVersion": 1,
+  "source": {
+    "name": "ESPN",
+    "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard"
+  }
+}
+  </script>
   <script>
     (() => {
       "use strict";
@@ -525,40 +2005,74 @@
         document.querySelectorAll("button, input, select").forEach((control) => { control.disabled = true; });
       });
 
-      const teams = {
-        "49ers": "San Francisco 49ers", "Bears": "Chicago Bears",
-        "Bengals": "Cincinnati Bengals", "Bills": "Buffalo Bills",
-        "Broncos": "Denver Broncos", "Browns": "Cleveland Browns",
-        "Buccaneers": "Tampa Bay Buccaneers", "Cardinals": "Arizona Cardinals",
-        "Chargers": "Los Angeles Chargers", "Chiefs": "Kansas City Chiefs",
-        "Colts": "Indianapolis Colts", "Commanders": "Washington Commanders",
-        "Cowboys": "Dallas Cowboys", "Dolphins": "Miami Dolphins",
-        "Eagles": "Philadelphia Eagles", "Falcons": "Atlanta Falcons",
-        "Giants": "New York Giants", "Jaguars": "Jacksonville Jaguars",
-        "Jets": "New York Jets", "Lions": "Detroit Lions",
-        "Packers": "Green Bay Packers", "Panthers": "Carolina Panthers",
-        "Patriots": "New England Patriots", "Raiders": "Las Vegas Raiders",
-        "Rams": "Los Angeles Rams", "Ravens": "Baltimore Ravens",
-        "Saints": "New Orleans Saints", "Seahawks": "Seattle Seahawks",
-        "Steelers": "Pittsburgh Steelers", "Texans": "Houston Texans",
-        "Titans": "Tennessee Titans", "Vikings": "Minnesota Vikings"
-      };
+      const catalog = JSON.parse(byId("catalog-data").textContent);
+      const teams = Object.fromEntries(Object.entries(catalog.teams).map(([mascot, [id, location, fullName]]) =>
+        [id, { mascot, location, fullName }]));
       const formatDate = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
       const formatDay = new Intl.DateTimeFormat("en-US", { weekday: "short", timeZone: "UTC" });
+      const formatTimestamp = new Intl.DateTimeFormat("en-US", { dateStyle: "medium", timeStyle: "short", timeZone: "America/New_York" });
       const collator = new Intl.Collator("en-US", { numeric: true });
-      const headers = ["Date", "Day", "Teams", "Team Picked to Win", "5 Words Why Picked"];
+      const headers = ["Date", "Day", "Teams", "Team Picked to Win", "5 Words Why Picked", "Final Result"];
       const games = JSON.parse(byId("games-data").textContent).map(([week, date, away, home, venue, pick, reason], index) => {
         const instant = new Date(date + "T12:00:00Z");
         const day = formatDay.format(instant);
         const displayDate = formatDate.format(instant);
-        const matchup = `${away} ${venue ? "vs." : "at"} ${home}${venue ? ` (${venue})` : ""}`;
-        const searchText = [week, date, displayDate, day, teams[away], teams[home], matchup, pick, reason, day === "Thu" ? "Thursday TNF" : day === "Mon" ? "Monday MNF" : "Sunday"].join(" ").toLowerCase();
-        return { index, week, date, day, displayDate, away, home, venue, pick, reason, matchup, searchText };
+        const [eventId, awayId, homeId, scheduledAt] = catalog.events[index];
+        const pickId = catalog.teams[pick][0];
+        const searchText = [week, date, displayDate, day, teams[awayId].fullName, teams[homeId].fullName,
+          teams[awayId].location, teams[homeId].location, away, home, pick, reason, venue,
+          day === "Thu" ? "Thursday TNF" : day === "Mon" ? "Monday MNF" : "Sunday"].join(" ").toLowerCase();
+        return { index, week, date, day, displayDate, away, home, venue, pick, reason, searchText, eventId, awayId, homeId, pickId, scheduledAt };
       });
-      if (games.length !== 73 || games.some((game) => !teams[game.away] || !teams[game.home] || ![game.away, game.home].includes(game.pick) || game.reason.trim().split(/\s+/).length !== 5)) {
+      if (games.length !== 73 || new Set(games.map((game) => game.eventId)).size !== 73 || games.some((game) =>
+        teams[game.awayId].mascot !== game.away || teams[game.homeId].mascot !== game.home ||
+        ![game.away, game.home].includes(game.pick) || game.reason.trim().split(/\s+/).length !== 5)) {
         throw new Error("The embedded picks failed their integrity check.");
       }
 
+      function validateResults(data) {
+        const expectedDigest = "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2";
+        if (data.schemaVersion !== 1 || data.picksSha256 !== expectedDigest || !/^[a-f0-9]{64}$/.test(data.revision) ||
+            !data.games || Object.keys(data.games).length !== 73 || !Number.isFinite(Date.parse(data.publishedAt))) {
+          throw new Error("The results feed does not match this picks sheet.");
+        }
+        for (const game of games) {
+          const result = data.games[game.eventId];
+          if (!result || result.eventId !== game.eventId || result.awayTeamId !== game.awayId ||
+              result.homeTeamId !== game.homeId || !Number.isFinite(Date.parse(result.scheduledAt))) {
+            throw new Error("The results feed has an invalid game identity.");
+          }
+          if (result.status === "final") {
+            if (![result.awayScore, result.homeScore].every((value) => Number.isInteger(value) && value >= 0)) {
+              throw new Error("A final result is missing confirmed scores.");
+            }
+            const winner = result.awayScore > result.homeScore ? game.awayId : result.homeScore > result.awayScore ? game.homeId : null;
+            const verdict = winner === null ? "tie" : winner === game.pickId ? "correct" : "incorrect";
+            if (result.winnerTeamId !== winner || result.pickResult !== verdict ||
+                !Number.isFinite(Date.parse(result.resultUpdatedAt)) || !Number.isFinite(Date.parse(result.firstFinalAt))) {
+              throw new Error("A final result has inconsistent winner information.");
+            }
+          } else if (!["scheduled", "in_progress", "postponed", "delayed", "canceled"].includes(result.status) ||
+              result.pickResult !== "pending" || [result.awayScore, result.homeScore, result.winnerTeamId].some((value) => value !== null)) {
+            throw new Error("An unfinished game contains an invalid result.");
+          }
+        }
+      }
+
+      let results = JSON.parse(byId("results-data").textContent);
+      validateResults(results);
+      let nameMode = "mascot";
+      const preferenceNote = byId("preference-note");
+      const preferenceKey = "nfl-picks-2026-team-names";
+      try {
+        const saved = localStorage.getItem(preferenceKey);
+        if (saved === "mascot" || saved === "location") nameMode = saved;
+        else if (saved !== null) throw new Error("Unknown saved team-name preference.");
+      } catch (error) {
+        console.warn("Team-name preference unavailable:", error);
+        preferenceNote.textContent = "Team names still work, but this browser could not restore your saved preference.";
+        preferenceNote.hidden = false;
+      }
       let week = "";
       let sortKey = "date";
       let sortDirection = "asc";
@@ -566,6 +2080,7 @@
       const search = byId("search");
       const teamFilter = byId("team-filter");
       const dayFilter = byId("day-filter");
+      const nameDisplay = byId("name-display");
       const sortSelect = byId("sort-select");
       const body = byId("picks-body");
       const weekNav = byId("week-nav");
@@ -574,6 +2089,13 @@
       const resetButton = byId("reset-button");
       const themeButton = byId("theme-button");
       const compactLayout = window.matchMedia("(max-width: 720px)");
+      nameDisplay.value = nameMode;
+
+      const teamLabel = (id) => teams[id][nameMode];
+      const matchupText = (game) => `${teamLabel(game.awayId)} ${game.venue ? "vs." : "at"} ${teamLabel(game.homeId)}${game.venue ? ` (${game.venue})` : ""}`;
+      const finalScore = (game, result) => result.status === "final" ? `${teamLabel(game.awayId)} ${result.awayScore} - ${teamLabel(game.homeId)} ${result.homeScore}` : "";
+      const winnerText = (result) => result.status !== "final" ? "Pending" : result.winnerTeamId === null ? "Tie" : teamLabel(result.winnerTeamId);
+      const timestampText = (value) => value ? `${formatTimestamp.format(new Date(value))} ET` : "Not yet available";
 
       function syncSortFocus() {
         document.querySelectorAll(".sort-button").forEach((button) => {
@@ -603,30 +2125,59 @@
         button.addEventListener("click", () => { week = value; render(); });
         weekNav.append(button);
       }
-      Object.entries(teams).sort((a, b) => collator.compare(a[1], b[1])).forEach(([value, label]) => {
-        const option = element("option", "", label);
-        option.value = value;
-        teamFilter.append(option);
-      });
+      function updateTeamOptions() {
+        const selected = teamFilter.value;
+        const all = element("option", "", "All teams");
+        all.value = "";
+        teamFilter.replaceChildren(all);
+        Object.keys(teams).sort((a, b) => collator.compare(teamLabel(a), teamLabel(b))).forEach((id) => {
+          const option = element("option", "", teamLabel(id));
+          option.value = id;
+          teamFilter.append(option);
+        });
+        teamFilter.value = selected;
+      }
+
+      function renderSource() {
+        const issues = Object.values(results.games).filter((result) => result.error).length;
+        byId("source-status").textContent =
+          `Source: ESPN. Last successful published check: ${timestampText(results.lastSuccessfulCheckAt)}. ` +
+          `Last result change: ${timestampText(results.lastResultAt)}. ` +
+          (location.protocol === "file:" ? "Offline snapshot; open the live page for later results." :
+            results.monitoringComplete ? "Automatic monitoring is complete." : "Finals are checked automatically; cloud runs and publication can be delayed.");
+        if (!feedError) {
+          byId("source-warning").hidden = issues === 0;
+          byId("source-warning").textContent = issues ? `${issues} game source check${issues === 1 ? "" : "s"} failed. Last verified results are retained; see the affected rows.` : "";
+        }
+      }
+
+      let feedError = "";
+      updateTeamOptions();
 
       function render() {
         const terms = search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
         visibleGames = games.filter((game) =>
           (!week || game.week === Number(week)) &&
-          (!teamFilter.value || game.away === teamFilter.value || game.home === teamFilter.value) &&
+          (!teamFilter.value || game.awayId === teamFilter.value || game.homeId === teamFilter.value) &&
           (!dayFilter.value || game.day === dayFilter.value) &&
-          terms.every((term) => game.searchText.includes(term))
+          terms.every((term) => [game.searchText, matchupText(game), results.games[game.eventId].statusDetail,
+            results.games[game.eventId].pickResult, finalScore(game, results.games[game.eventId]),
+            winnerText(results.games[game.eventId])].join(" ").toLowerCase().includes(term))
         );
         const direction = sortDirection === "asc" ? 1 : -1;
         visibleGames.sort((a, b) => {
-          const first = sortKey === "teams" ? a.matchup : a[sortKey];
-          const second = sortKey === "teams" ? b.matchup : b[sortKey];
+          const value = (game) => sortKey === "teams" ? matchupText(game) : sortKey === "pick" ? teamLabel(game.pickId) :
+            sortKey === "winner" ? winnerText(results.games[game.eventId]) : game.date;
+          const first = value(a);
+          const second = value(b);
           return collator.compare(first, second) * direction || a.index - b.index;
         });
         const fragment = document.createDocumentFragment();
         for (const game of visibleGames) {
           const row = element("tr");
           row.dataset.game = `${game.date}-${game.away}-${game.home}`;
+          row.dataset.eventId = game.eventId;
+          const result = results.games[game.eventId];
           const dateCell = element("td", "date-cell");
           const time = element("time", "", game.displayDate);
           time.dateTime = game.date;
@@ -635,18 +2186,37 @@
           const matchupCell = element("td", "matchup-cell");
           const matchup = element("span", "matchup");
           matchup.append(
-            element("span", "", game.away),
+            element("span", "", teamLabel(game.awayId)),
             element("span", "connector", game.venue ? " vs. " : " at "),
-            element("span", "", game.home)
+            element("span", "", teamLabel(game.homeId))
           );
           matchupCell.append(matchup);
           if (game.venue) matchupCell.append(element("span", "venue", `(${game.venue})`));
           const pickCell = element("td", "pick-cell");
-          const pick = element("span", "pick-name", game.pick);
-          pick.title = teams[game.pick];
+          const pick = element("span", "pick-name", teamLabel(game.pickId));
+          pick.title = teams[game.pickId].fullName;
           pickCell.append(pick);
           const reasonCell = element("td", "reason-cell", game.reason);
-          const cells = [dateCell, dayCell, matchupCell, pickCell, reasonCell];
+          const resultCell = element("td", "result-cell");
+          resultCell.append(element("span", "result-detail", result.statusDetail));
+          if (result.status === "final") {
+            resultCell.append(
+              element("span", "final-score", finalScore(game, result)),
+              element("span", "", result.winnerTeamId === null ? "Game ended in a tie" : `Winner: ${winnerText(result)}`)
+            );
+          }
+          const verdict = result.pickResult[0].toUpperCase() + result.pickResult.slice(1);
+          resultCell.append(element("span", `verdict ${result.pickResult}`, `Pick: ${verdict}`));
+          if (Date.parse(result.scheduledAt) !== Date.parse(game.scheduledAt)) {
+            resultCell.append(element("span", "schedule-change", `Updated kickoff: ${timestampText(result.scheduledAt)}. Original date retained.`));
+          }
+          if (result.error) resultCell.append(element("span", "result-issue", `Source issue: ${result.error}`));
+          const sourceLink = element("a", "result-detail", "ESPN game");
+          sourceLink.href = `https://www.espn.com/nfl/game/_/gameId/${game.eventId}`;
+          sourceLink.target = "_blank";
+          sourceLink.rel = "noopener noreferrer";
+          resultCell.append(sourceLink);
+          const cells = [dateCell, dayCell, matchupCell, pickCell, reasonCell, resultCell];
           cells.forEach((cell, index) => { cell.dataset.label = headers[index]; row.append(cell); });
           fragment.append(row);
         }
@@ -654,6 +2224,11 @@
         const count = visibleGames.length;
         byId("result-count").textContent = `${count} of ${games.length} games`;
         byId("result-context").textContent = week ? ` / Week ${week}` : " / All weeks";
+        const counts = { correct: 0, incorrect: 0, tie: 0, pending: 0 };
+        visibleGames.forEach((game) => { counts[results.games[game.eventId].pickResult] += 1; });
+        byId("record-summary").textContent =
+          `This view: ${counts.correct} correct / ${counts.incorrect} incorrect / ${counts.tie} tied / ${counts.pending} pending`;
+        renderSource();
         byId("empty-state").hidden = count !== 0;
         byId("picks-table").hidden = count === 0;
         exportButton.disabled = count === 0;
@@ -673,8 +2248,9 @@
         const viewDetails = [
           `${count} of ${games.length} games`,
           week ? `Week ${week}` : "All weeks",
-          teamFilter.value ? teams[teamFilter.value] : "All teams",
+          teamFilter.value ? teamLabel(teamFilter.value) : "All teams",
           dayFilter.selectedOptions[0].textContent,
+          `Team names: ${nameMode}`,
           terms.length ? `Search: ${search.value.trim()}` : ""
         ].filter(Boolean);
         byId("print-note").textContent = viewDetails.join(" / ");
@@ -694,6 +2270,19 @@
       search.addEventListener("input", render);
       teamFilter.addEventListener("change", render);
       dayFilter.addEventListener("change", render);
+      nameDisplay.addEventListener("change", () => {
+        nameMode = nameDisplay.value;
+        try {
+          localStorage.setItem(preferenceKey, nameMode);
+          preferenceNote.hidden = true;
+        } catch (error) {
+          console.warn("Team-name preference could not be saved:", error);
+          preferenceNote.textContent = "Team names changed for this visit, but this browser cannot save the preference.";
+          preferenceNote.hidden = false;
+        }
+        updateTeamOptions();
+        render();
+      });
       byId("filters").addEventListener("submit", (event) => event.preventDefault());
       sortSelect.addEventListener("change", () => { [sortKey, sortDirection] = sortSelect.value.split(":"); render(); });
       document.querySelectorAll(".sort-button").forEach((button) => {
@@ -707,12 +2296,18 @@
       byId("empty-reset-button").addEventListener("click", resetView);
 
       exportButton.addEventListener("click", () => {
-        const rows = [headers, ...visibleGames.map((game) => [game.displayDate, game.day, game.matchup, game.pick, game.reason])];
+        const csvHeaders = [...headers.slice(0, 5), "Game status", "Final score", "Winner", "Pick result", "Current kickoff (UTC)", "Result updated (UTC)", "Source checked (UTC)", "Source issue"];
+        const rows = [csvHeaders, ...visibleGames.map((game) => {
+          const result = results.games[game.eventId];
+          return [game.displayDate, game.day, matchupText(game), teamLabel(game.pickId), game.reason, result.statusDetail,
+            finalScore(game, result), winnerText(result), result.pickResult, result.scheduledAt,
+            result.resultUpdatedAt || "", result.checkedAt || "", result.error || ""];
+        })];
         const csv = "\uFEFF" + rows.map((row) => row.map((value) => `"${value.replace(/"/g, '""')}"`).join(",")).join("\r\n") + "\r\n";
         const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8;" }));
         const link = element("a");
         link.href = url;
-        link.download = `nfl-picks-2026-${week ? `week-${week}` : "all-weeks"}${teamFilter.value ? "-" + teamFilter.value.toLowerCase() : ""}.csv`;
+        link.download = `nfl-picks-2026-${week ? `week-${week}` : "all-weeks"}-${nameMode}${teamFilter.value ? "-" + teams[teamFilter.value].mascot.toLowerCase() : ""}.csv`;
         document.body.append(link);
         link.click();
         link.remove();
@@ -739,9 +2334,33 @@
         updateThemeButton();
       });
       printButton.addEventListener("click", () => window.print());
-      [search, teamFilter, dayFilter, sortSelect].forEach((control) => { control.disabled = false; });
+      async function refreshResults() {
+        if (location.protocol === "file:" || document.hidden || results.monitoringComplete) return;
+        const controller = new AbortController();
+        const timeout = window.setTimeout(() => controller.abort(), 15000);
+        try {
+          const response = await fetch(`results.json?check=${Date.now()}`, { cache: "no-store", signal: controller.signal, referrerPolicy: "no-referrer" });
+          if (!response.ok) throw new Error(`Results request failed (HTTP ${response.status}).`);
+          const updated = await response.json();
+          validateResults(updated);
+          if (Date.parse(updated.publishedAt) < Date.parse(results.publishedAt)) throw new Error("The server returned an older snapshot.");
+          results = updated;
+          feedError = "";
+          render();
+        } catch (error) {
+          console.warn("Results refresh failed:", error);
+          feedError = "The latest published results could not be loaded. The last verified snapshot is still shown; the page will retry.";
+          byId("source-warning").textContent = feedError;
+          byId("source-warning").hidden = false;
+        } finally {
+          window.clearTimeout(timeout);
+        }
+      }
+      [search, teamFilter, dayFilter, sortSelect, nameDisplay].forEach((control) => { control.disabled = false; });
       updateThemeButton();
       render();
+      refreshResults();
+      window.setInterval(refreshResults, 5 * 60 * 1000);
     })();
   </script>
 </body>

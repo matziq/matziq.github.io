@@ -1,0 +1,91 @@
+name: Update NFL picks results
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Recheck all 73 bound games, including older finals
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths:
+      - 'unlisted/1ff39048f9eaca39e2808bb7b2b687a5/index.html'
+      - 'scripts/nfl_results.py'
+      - 'scripts/nfl_watch.py'
+      - 'tests/test_nfl_*.py'
+      - '.github/workflows/nfl-picks.yml'
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: nfl-picks-results
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify updater and watcher fixtures
+        run: python -B -m unittest discover -s tests -p 'test_nfl_*.py'
+
+      - name: Check due games
+        id: update
+        continue-on-error: true
+        env:
+          FORCE_CHECK: ${{ inputs.force == true && 'true' || 'false' }}
+        run: |
+          if [ "$FORCE_CHECK" = true ]; then
+            python -B scripts/nfl_results.py --force
+          else
+            python -B scripts/nfl_results.py
+          fi
+
+      - name: Commit only the results snapshot
+        run: |
+          python - <<'PY'
+          import subprocess
+          allowed = {
+              'unlisted/1ff39048f9eaca39e2808bb7b2b687a5/index.html',
+              'unlisted/1ff39048f9eaca39e2808bb7b2b687a5/results.json',
+          }
+          changed = subprocess.check_output(['git', 'diff', '--name-only'], text=True).splitlines()
+          if set(changed) - allowed:
+              raise SystemExit('Unexpected changed paths; refusing to stage anything.')
+          PY
+          git add -- unlisted/1ff39048f9eaca39e2808bb7b2b687a5/index.html unlisted/1ff39048f9eaca39e2808bb7b2b687a5/results.json
+          if git diff --cached --quiet; then
+            echo "No results commit needed."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Update confirmed NFL picks results" -m "Co-authored-by: Copilot App <223556219+Copilot@users.noreply.github.com>"
+            git push origin HEAD:main
+          fi
+
+      - name: Explicitly deploy and verify Pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -B scripts/nfl_results.py --ensure-published
+
+      - name: Report source failures after preserving and publishing valid results
+        if: steps.update.outcome == 'failure'
+        run: |
+          echo "::error::At least one source check failed. Last confirmed results were retained; inspect the update log and affected game rows."
+          exit 1
