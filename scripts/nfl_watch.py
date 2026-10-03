@@ -184,7 +184,7 @@ def run_once(
     analysis = snapshot.get("analysis")
     new_analysis = bool(
         state and analysis and state.get("lastSeenAssessmentId") != analysis["id"]
-        and (analysis["initialPickCount"] or analysis["changedPickCount"])
+        and (analysis["initialPickCount"] or analysis["changedPickCount"] or analysis.get("changedScoreCount", 0))
     )
     recently_opened = bool(state and state.get("lastOpenedAt") and now - instant(state["lastOpenedAt"]) < timedelta(minutes=10))
     notify_analysis = new_analysis and not recently_opened

@@ -48,6 +48,23 @@ def explanation_revision_id(entry: dict) -> str:
     return "explanation-" + digest({key: value for key, value in entry.items() if key != "id"})[:24]
 
 
+def validate_projected_score(value: dict, away_id: str, home_id: str, pick_id: str) -> None:
+    if not isinstance(value, dict) or (value.get("awayTeamId"), value.get("homeTeamId")) != (away_id, home_id):
+        raise ValueError("A projected score must identify the exact away and home team IDs.")
+    away, home = value.get("awayScore"), value.get("homeScore")
+    if any(isinstance(score, bool) or not isinstance(score, int) or not 0 <= score <= 99 for score in (away, home)):
+        raise ValueError("Projected points must be whole numbers from 0 through 99.")
+    winner = away_id if away > home else home_id if home > away else None
+    if winner is None or winner != pick_id:
+        raise ValueError("The selected winner must score strictly more projected points than its opponent.")
+    if "pickTeamId" in value and value["pickTeamId"] != pick_id:
+        raise ValueError("The score projection's selected team does not match the recorded pick.")
+
+
+def score_projection_id(entry: dict) -> str:
+    return "score-" + digest({key: value for key, value in entry.items() if key != "id"})[:24]
+
+
 def empty_ledger(now: datetime) -> dict:
     return seal({
         "schemaVersion": 1, "season": 2026, "picksSha256": PICKS_SHA256,
@@ -93,6 +110,8 @@ def validate_ledger(ledger: dict, games: list[Game]) -> None:
                 if assessment.get("explanationPolicy") == "forecast-until-final":
                     validate_forecast_paragraph(decision["reason"])
             explanation_ids.add(f"{assessment['id']}:{event_id}")
+            if assessment.get("scorePolicy") == "pregame-only" and decision["applied"]:
+                validate_projected_score(decision.get("projectedScore"), *participants, decision["pickTeamId"])
             if set(decision["factors"]) != {"performance", "availability", "news", "context"} or any(
                 len(text.strip()) < 12 for text in decision["factors"].values()
             ):
@@ -151,6 +170,88 @@ def validate_ledger(ledger: dict, games: list[Game]) -> None:
                 raise ValueError("Only a verified incorrect final can receive a postgame explanation.")
         else:
             raise ValueError("Unknown explanation revision kind.")
+    score_ids = set()
+    for entry in ledger.get("scoreProjections", []):
+        if entry["id"] in score_ids or entry["id"] != score_projection_id(entry):
+            raise ValueError("Score projection history contains a duplicate or changed revision.")
+        score_ids.add(entry["id"])
+        if entry["eventId"] not in game_ids or entry["pickRevisionId"] not in explanation_ids:
+            raise ValueError("A score projection references an unknown game or pick revision.")
+        game = next(game for game in games if game.event_id == entry["eventId"])
+        validate_projected_score(entry, game.away_id, game.home_id, entry["pickTeamId"])
+        proof = entry["pregameProof"]
+        created = instant(entry["createdAt"])
+        if (
+            proof["state"] != "pre" or proof["completed"] or proof["hasStarted"]
+            or (proof["awayTeamId"], proof["homeTeamId"]) != (game.away_id, game.home_id)
+            or instant(proof["verifiedAt"]) > created
+            or created - instant(proof["verifiedAt"]) > timedelta(seconds=90)
+            or instant(proof["scheduledAt"]) - created < PREGAME_MARGIN
+        ):
+            raise ValueError("A score projection must be verified and recorded before kickoff.")
+
+
+def projected_score(game: Game, ledger: dict, pick_id: str | None, *, before: datetime | None = None, publications=None) -> dict | None:
+    if pick_id is None or not game.teams_known:
+        return None
+    latest = None
+    for entry in ledger.get("scoreProjections", []):
+        if entry["eventId"] != game.event_id or (entry["awayTeamId"], entry["homeTeamId"]) != (game.away_id, game.home_id):
+            continue
+        if before is not None:
+            if instant(entry["createdAt"]) >= before:
+                continue
+            publication = publications.get(entry["id"]) if publications is not None else None
+            if publications is not None and (publication is None or instant(publication["committedAt"]) >= before):
+                continue
+        latest = entry
+    return latest if latest and latest["pickTeamId"] == pick_id else None
+
+
+def append_score_projection(ledger: dict, game: Game, result: dict, projected: dict, proof: dict, now: datetime) -> dict:
+    pick_id = result.get("scoredPickTeamId")
+    if (
+        pick_id is None or not result.get("pickRevisionId") or result.get("pickLockedAt") or result.get("hasStarted")
+        or result["status"] not in {"scheduled", "postponed", "delayed"}
+    ):
+        raise ValueError("Only an existing unstarted pick may receive a projected score.")
+    validate_projected_score(projected, game.away_id, game.home_id, pick_id)
+    if (
+        proof["state"] != "pre" or proof["completed"] or proof["hasStarted"]
+        or (proof["awayTeamId"], proof["homeTeamId"]) != (game.away_id, game.home_id)
+        or instant(proof["verifiedAt"]) > now
+        or now - instant(proof["verifiedAt"]) > timedelta(seconds=90)
+        or instant(proof["scheduledAt"]) - now < PREGAME_MARGIN
+    ):
+        raise ValueError("The projected score needs a fresh pregame check and ten-minute safety margin.")
+    previous = projected_score(game, ledger, pick_id)
+    if previous and all(previous[key] == projected[key] for key in ("awayTeamId", "homeTeamId", "awayScore", "homeScore")):
+        return previous
+    entry = {
+        "eventId": game.event_id, "pickRevisionId": result["pickRevisionId"], "pickTeamId": pick_id,
+        **{key: projected[key] for key in ("awayTeamId", "homeTeamId", "awayScore", "homeScore")},
+        "createdAt": stamp(now), "pregameProof": proof,
+    }
+    entry["id"] = score_projection_id(entry)
+    ledger.setdefault("scoreProjections", []).append(entry)
+    ledger["scorePolicy"] = "pregame-only"
+    return entry
+
+
+def apply_score_snapshot(game: Game, result: dict, ledger: dict, publications=None) -> None:
+    if result.get("projectedScoreLockedAt"):
+        return
+    pick_id = result.get("scoredPickTeamId")
+    cutoff = instant(result["pickCutoffAt"]) if result.get("pickCutoffAt") else None
+    forecast = projected_score(game, ledger, pick_id, before=cutoff, publications=publications if cutoff else None)
+    result["projectedScore"] = {key: forecast[key] for key in (
+        "id", "awayTeamId", "homeTeamId", "awayScore", "homeScore", "createdAt", "pickTeamId", "pickRevisionId",
+    )} if forecast else None
+    result["projectedScoreLockedAt"] = result.get("pickLockedAt")
+    result["projectedScoreStatus"] = (
+        "unpicked" if pick_id is None else "available" if forecast else
+        "not-predicted-before-kickoff" if cutoff else "pending"
+    )
 
 
 def selection_paragraph(game: Game, ledger: dict, selected: dict, *, before: datetime | None = None) -> str:
@@ -292,6 +393,8 @@ def apply_pick_snapshots(games: list[Game], results: dict, ledger: dict | None, 
             pick_id = result.get("scoredPickTeamId", game.pick_id)
             winner = result["winnerTeamId"]
             result["pickResult"] = "no_pick" if pick_id is None else "tie" if winner is None else "correct" if winner == pick_id else "incorrect"
+        if ledger and ledger.get("scorePolicy") == "pregame-only":
+            apply_score_snapshot(game, result, ledger, publications)
         if ledger and ledger.get("explanationFormat") == "paragraph":
             selected = {
                 "teamId": result.get("scoredPickTeamId", game.pick_id),
@@ -431,6 +534,7 @@ def prepare_assessment(games: list[Game], results: dict, ledger: dict, batch: di
         raise ValueError(f"The assessment omitted {len(eligible - set(supplied))} eligible remaining games.")
     decisions = []
     initial, changed, retained, skipped = 0, 0, 0, 0
+    score_enabled = ledger.get("scorePolicy") == "pregame-only"
     for event_id, candidate_decision in supplied.items():
         if event_id not in by_id:
             raise ValueError("Candidate contains an event outside the verified season fixtures.")
@@ -454,6 +558,15 @@ def prepare_assessment(games: list[Game], results: dict, ledger: dict, batch: di
             previousPickTeamId=old["teamId"], effectiveAt=stamp(now),
             pregameProof=verified[event_id]["proof"],
         )
+        if score_enabled and applied:
+            proposed = decision.get("projectedScore")
+            prior_score = projected_score(game, ledger, old["teamId"])
+            if proposed is None:
+                if decision["pickTeamId"] != old["teamId"] or prior_score is None:
+                    raise ValueError("New or changed winner picks require explicit away/home score projections.")
+                proposed = {key: prior_score[key] for key in ("awayTeamId", "homeTeamId", "awayScore", "homeScore")}
+            validate_projected_score(proposed, game.away_id, game.home_id, decision["pickTeamId"])
+            decision["projectedScore"] = proposed
         decisions.append(decision)
     assessment = {
         "id": batch["id"], "status": "completed", "assessedAt": stamp(now), "reasonFormat": "paragraph",
@@ -494,6 +607,24 @@ def prepare_assessment(games: list[Game], results: dict, ledger: dict, batch: di
         if entry["kind"] == "incorrect-final" and entry["eventId"] in supplied_reviews
     ]
     prepared["assessments"].append(assessment)
+    if score_enabled:
+        assessment["scorePolicy"] = "pregame-only"
+        score_changes = 0
+        for decision in decisions:
+            if not decision["applied"]:
+                continue
+            game = by_id[decision["eventId"]]
+            selected = selection(game, prepared)
+            prior_score = projected_score(game, ledger, selected["teamId"])
+            score = append_score_projection(
+                prepared, game, {
+                    **results["games"][game.event_id],
+                    "scoredPickTeamId": selected["teamId"], "pickRevisionId": selected["revisionId"],
+                }, decision["projectedScore"], decision["pregameProof"], now,
+            )
+            decision["scoreProjectionId"] = score["id"]
+            score_changes += prior_score is None or score["id"] != prior_score["id"]
+        assessment["changedScoreCount"] = score_changes
     prepared["lastAssessedAt"] = assessment["assessedAt"]
     seal(prepared)
     validate_ledger(prepared, games)
@@ -501,7 +632,7 @@ def prepare_assessment(games: list[Game], results: dict, ledger: dict, batch: di
 
 
 def publication_history(root: Path, ledger: dict) -> dict:
-    if not ledger["assessments"]:
+    if not ledger["assessments"] and not ledger.get("scoreProjections"):
         return {}
     path = FORECAST_PATH.as_posix()
     process = subprocess.run(
@@ -515,6 +646,8 @@ def publication_history(root: Path, ledger: dict) -> dict:
         prior = json.loads(raw)
         for assessment in prior["assessments"]:
             history.setdefault(assessment["id"], {"commit": commit, "committedAt": stamp(instant(committed_at))})
+        for projection in prior.get("scoreProjections", []):
+            history.setdefault(projection["id"], {"commit": commit, "committedAt": stamp(instant(committed_at))})
     return history
 
 

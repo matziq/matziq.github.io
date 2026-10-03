@@ -19,7 +19,7 @@ from nfl_common import (
     ROOT, SCOREBOARD_URL, SCOPE_START, SUMMARY_URL, UTC, digest, fetch_json, instant,
     load_games, read_html, replace_data, script_data, stamp, validate_paragraph, write_json,
 )
-from nfl_forecasts import apply_pick_snapshots, publication_history, validate_ledger
+from nfl_forecasts import apply_pick_snapshots, publication_history, validate_ledger, validate_projected_score
 from nfl_season import coverage_complete, discover
 
 
@@ -65,6 +65,20 @@ def validate_results(payload: dict, games: list[Game], *, allow_pending_rebind=F
         picked = result.get("scoredPickTeamId", game.pick_id)
         if picked is not None and picked not in (game.away_id, game.home_id):
             raise ValueError(f"Invalid selected team for {game.event_id}.")
+        if payload.get("scorePolicy") == "pregame-only":
+            projection = result.get("projectedScore")
+            status = result.get("projectedScoreStatus")
+            if projection is not None:
+                validate_projected_score(projection, game.away_id, game.home_id, picked)
+                if status != "available" or not projection.get("id") or not projection.get("pickRevisionId"):
+                    raise ValueError("A score projection needs an auditable forecast revision.")
+                instant(projection["createdAt"])
+            else:
+                expected = "unpicked" if picked is None else "not-predicted-before-kickoff" if result.get("pickLockedAt") else "pending"
+                if status != expected:
+                    raise ValueError("A missing score projection must be labeled explicitly, not guessed.")
+            if result.get("projectedScoreLockedAt") != result.get("pickLockedAt"):
+                raise ValueError("A score projection must lock with its pregame pick.")
         if payload.get("explanationFormat") == "paragraph":
             if picked is None:
                 if result.get("pickExplanation") != "":
@@ -300,6 +314,7 @@ def refresh(
         semantic_results(results) != semantic_results(previous["games"])
         or fixture_revision != previous.get("fixtureRevision")
         or forecast_revision != previous.get("forecastRevision")
+        or (publications or {}) != previous.get("forecastPublications", {})
         or (forecasts.get("explanationFormat") if forecasts else None) != previous.get("explanationFormat")
         or complete != previous["monitoringComplete"]
     )
@@ -323,12 +338,15 @@ def refresh(
         "fixtureRevision": fixture_revision, "forecastRevision": forecast_revision,
         "explanationFormat": forecasts.get("explanationFormat") if forecasts else None,
         "explanationPolicy": forecasts.get("explanationPolicy") if forecasts else None,
+        "scorePolicy": forecasts.get("scorePolicy") if forecasts else None,
         "forecastPublications": publications or {},
         "analysis": {key: forecasts["assessments"][-1][key] for key in (
             "id", "assessedAt", "summary", "initialPickCount", "changedPickCount", "retainedCount", "skippedLockedCount"
         )} if forecasts and forecasts["assessments"] else None,
         "games": results,
     }
+    if forecasts and forecasts["assessments"]:
+        payload["analysis"]["changedScoreCount"] = forecasts["assessments"][-1].get("changedScoreCount", 0)
     payload["revision"] = digest(payload)
     validate_results(payload, games)
     return payload, errors

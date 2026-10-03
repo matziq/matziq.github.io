@@ -68,6 +68,39 @@ and appends it through the existing forecast-only compare-and-swap commit.
 If no upcoming games remain, an empty decision list plus the required
 postgame reviews is valid. Source errors leave the review retryable.
 
+## Projected final scores
+
+Every picked game that was still unstarted when this feature was added has
+an explicit score forecast. **Predicted final (away - home)** is separate
+from the actual Final Result. Mascot/Location names identify both teams;
+the selected winner must have strictly more projected points. The
+**Score forecasts** game view filters to available projections. Search,
+week/team/day filters, CSV, print and mobile preserve the same mapping.
+Historical and Winners-only views never add prediction data.
+
+The first set covers 223 unstarted picks. Pittsburgh-Cleveland was already
+final before score predictions existed, so it says **No score forecast
+was recorded before kickoff** instead of inventing a retrospective
+forecast. Unpicked playoff TBDs and historical Weeks 1-3 have no projected
+score. These are uncertain score estimates consistent with the recorded
+matchup analysis, not actual scores or calibrated probabilities.
+
+`forecasts.json` stores append-only `scoreProjections` with stable
+away/home IDs, points, the selected team, pick revision, timestamp and
+fresh pregame proof. New reassessment decisions use
+`projectedScore: {awayTeamId, homeTeamId, awayScore, homeScore}`. When the
+winner is retained, omitting that field retains its last score projection;
+a changed winner or new pick requires an explicit winning projection.
+Score-only changes do not rewrite the winner pick or explanation revision.
+
+The runner validates integer points, identity and winner consistency, and
+enforces the same ten-minute pregame publication margin. Git publication
+timestamps prevent late forecasts from being counted as pregame. The
+results snapshot freezes its projection at kickoff, including its absence
+if none was published in time. Actual result corrections and mistaken-pick
+explanation reviews cannot alter the frozen projected score. Both initial
+and revised score forecasts remain in the row history and CSV.
+
 ## Historical games and weekly winners
 
 Weeks 1-3 (48 games, September 9-28, 2026) are stored in a separate

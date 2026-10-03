@@ -230,6 +230,7 @@ def check(browser, url, artifacts):
     fixture["forecastRevision"] = ledger["revision"]
     fixture["explanationFormat"] = "paragraph"
     fixture["explanationPolicy"] = "forecast-until-final"
+    fixture["scorePolicy"] = "pregame-only"
     fixture["forecastPublications"] = {}
     forecasts.apply_pick_snapshots(GAMES, fixture["games"], ledger, NOW + timedelta(days=3))
     fixture["games"][GAMES[0].event_id].update(awayScore=30, winnerTeamId="23", pickResult="correct", statusDetail="Final / OT")
@@ -445,6 +446,97 @@ def check_history_and_winners(browser, url, artifacts):
     print("PASS: all 48 historical games, zero retrospective picks/grades, weekly winners, tie/canceled exclusions, names/search/team/day/sort, pick-free CSV/print, and mobile.")
 
 
+def check_score_projections(browser, url):
+    context = browser.new_context(viewport={"width": 1440, "height": 1100}, accept_downloads=True)
+    page = context.new_page()
+    errors = []
+    page.on("pageerror", lambda error: errors.append(str(error)))
+    page.goto(url, wait_until="networkidle")
+    expect(page.locator("#picks-body .projected-score")).to_have_count(223)
+    expect(page.locator(".history-row .projected-score")).to_have_count(0)
+    final = page.locator('[data-event-id="401872964"]')
+    expect(final.locator(".projected-score")).to_have_count(0)
+    expect(final.locator(".projected-score-unavailable")).to_have_text("No score forecast was recorded before kickoff.")
+    expect(final.locator(".final-score")).to_have_text("Steelers 24 - Browns 27")
+    away = page.locator('[data-event-id="401872965"]')
+    home = page.locator('[data-event-id="401872971"]')
+    expect(away.locator(".projected-score")).to_have_text("Colts 23 - Commanders 20")
+    expect(home.locator(".projected-score")).to_have_text("Patriots 17 - Bills 30")
+    expect(away.locator(".projected-score-label")).to_have_text("Predicted final (away - home)")
+    expect(away.locator(".final-score")).to_have_count(0)
+    expect(home.locator(".pick-name")).to_have_text("Bills")
+    away.locator("summary").click()
+    expect(away.locator(".score-history")).to_contain_text("Colts 23 - Commanders 20")
+    page.get_by_label("Team names", exact=True).select_option("location")
+    expect(away.locator(".projected-score")).to_have_text("Indianapolis 23 - Washington 20")
+    expect(home.locator(".projected-score")).to_have_text("New England 17 - Buffalo 30")
+    page.get_by_label("Game view", exact=True).select_option("projections")
+    expect(page.locator("#picks-body tr")).to_have_count(223)
+    expect(page.locator(".history-row")).to_have_count(0)
+    expect(final).to_have_count(0)
+    page.get_by_label("Week / round", exact=True).select_option("2:4")
+    expect(page.locator("#picks-body tr")).to_have_count(15)
+    page.get_by_label("Team", exact=True).select_option("2")
+    page.get_by_label("Day", exact=True).select_option("Sun")
+    page.get_by_label("Search games", exact=True).fill("Buffalo 30")
+    expect(page.locator("#picks-body tr")).to_have_count(1)
+    with page.expect_download() as download:
+        page.get_by_role("button", name="Export CSV", exact=True).click()
+    with tempfile.TemporaryDirectory() as directory:
+        file = Path(directory) / "projected-scores.csv"
+        download.value.save_as(file)
+        with file.open(encoding="utf-8-sig", newline="") as stream:
+            exported = list(csv.DictReader(stream))
+    assert len(exported) == 1
+    row = exported[0]
+    assert (row["Projected away team"], row["Projected away points"], row["Projected home team"], row["Projected home points"]) == (
+        "New England", "17", "Buffalo", "30",
+    )
+    assert row["Predicted final score"] == "New England 17 - Buffalo 30"
+    assert row["Final score"] == "" and row["Pick result"] == "pending"
+    assert row["Score forecast status"] == "available" and row["Score forecast dated (UTC)"]
+    assert row["Score forecast locked (UTC)"] == ""
+    page.evaluate("window.dispatchEvent(new Event('beforeprint'))")
+    page.emulate_media(media="print")
+    expect(home.locator(".projected-score")).to_be_visible()
+    expect(page.locator("#print-note")).to_contain_text("Score forecasts")
+    page.emulate_media(media="screen")
+    page.evaluate("window.dispatchEvent(new Event('afterprint'))")
+    page.set_viewport_size({"width": 390, "height": 1000})
+    expect(home.locator(".projected-score")).to_be_visible()
+    assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
+    page.get_by_role("button", name="Reset view", exact=True).first.click()
+    page.get_by_label("Game view", exact=True).select_option("winners")
+    expect(page.locator("#picks-body .projected-score")).to_have_count(0)
+    with page.expect_download() as download:
+        page.get_by_role("button", name="Export CSV", exact=True).click()
+    with tempfile.TemporaryDirectory() as directory:
+        file = Path(directory) / "winners.csv"
+        download.value.save_as(file)
+        with file.open(encoding="utf-8-sig", newline="") as stream:
+            columns = next(csv.reader(stream))
+    assert not any("project" in column.lower() or "predict" in column.lower() for column in columns)
+    page.get_by_role("button", name="Reset view", exact=True).first.click()
+    page.locator('#week-nav [data-scope="playoffs"]').click()
+    expect(page.locator("#picks-body .projected-score")).to_have_count(0)
+    expect(page.locator("#picks-body .projected-score-unavailable")).to_have_count(0)
+    assert not errors, errors
+    context.close()
+
+    invalid = copy.deepcopy(common.script_data(HTML, "results-data"))
+    score = invalid["games"]["401872965"]["projectedScore"]
+    score["awayScore"], score["homeScore"] = score["homeScore"], score["awayScore"]
+    common.seal(invalid)
+    rejected = browser.new_context()
+    rejected.route("**/results.json?*", lambda route: route.fulfill(json=invalid))
+    page = rejected.new_page()
+    page.goto(url, wait_until="networkidle")
+    expect(page.locator("#source-warning")).to_be_visible()
+    expect(page.locator('[data-event-id="401872965"] .projected-score')).to_have_text("Colts 23 - Commanders 20")
+    rejected.close()
+    print("PASS: 223 score projections, away/home winner mapping, no retrospective score, naming/search/filter/CSV/print/mobile, history/TBD/winner-view exclusion, and invalid-score retention.")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--url", help="Use a deployed page instead of the bounded local test server.")
@@ -467,6 +559,7 @@ def main():
             try:
                 check(browser, url, args.artifacts)
                 check_history_and_winners(browser, url, args.artifacts)
+                check_score_projections(browser, url)
             finally:
                 browser.close()
     finally:
