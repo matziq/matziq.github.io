@@ -1,18 +1,22 @@
 {
   "analysis": {
-    "assessedAt": "2026-10-04T19:08:40Z",
-    "changedPickCount": 1,
-    "changedScoreCount": 2,
-    "id": "assessment-5eb306067a54889f037ac6ed",
+    "assessedAt": "2026-10-04T22:16:56Z",
+    "changedPickCount": 3,
+    "changedScoreCount": 8,
+    "id": "assessment-1623a456fba7f4044de838bc",
     "initialPickCount": 0,
-    "retainedCount": 206,
+    "retainedCount": 207,
     "skippedLockedCount": 0,
-    "summary": "Reviewed all 214 known matchups that were still eligible at evidence capture after Indianapolis' verified 30-13 London win. Retained 213 winners and switched Monday's Falcons-Saints pick to Atlanta, 24-21, because confirmed Saints front-seven absences outweigh the previous narrow home-field case. Retained Detroit over Carolina while revising its score estimate to 31-23 for Carolina's new receiving and line limitations. Added targeted near-term availability caveats, retained other pregame paragraphs and scores, and left the correct Colts final's exact pregame explanation and 23-20 projection frozen. No incorrect-final review is required by this batch."
+    "summary": "Reassessed all 210 known games still eligible after eight newly verified Sunday finals. Changed three future winners: Giants at Washington to Giants 23-20, Buffalo at the Rams to Rams 27-24, and Dallas at Philadelphia to Cowboys 27-24. Retained the other 207 winners and their exact paragraphs; made five score-only revisions for Jaguars-Eagles, Bengals-Dolphins, Raiders-Patriots, Ravens-Falcons and Saints-Giants while preserving their winner/explanation identities. Appended exactly three sourced mistaken-pick reviews for Cardinals-Giants, Rams-Eagles and Patriots-Bills. All started-game winner picks, pregame paragraphs, projected scores and grading identities remain frozen; correct finals receive no rewrite."
   },
   "explanationFormat": "paragraph",
   "explanationPolicy": "forecast-until-final",
   "fixtureRevision": "203325f751faf4abebb9a372772cae7850ab71c97c02e995dcf1eda5fa3c8a05",
   "forecastPublications": {
+    "assessment-1623a456fba7f4044de838bc": {
+      "commit": "de155c1b56a30bfe2f31868a89edcde25f09b661",
+      "committedAt": "2026-10-04T22:17:12Z"
+    },
     "assessment-5eb306067a54889f037ac6ed": {
       "commit": "50030b9229841e3edbdf807596d3d3fc772bdc7b",
       "committedAt": "2026-10-04T19:08:56Z"
@@ -65,6 +69,10 @@
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
     },
+    "score-0d068cb86ed07455f69dd435": {
+      "commit": "de155c1b56a30bfe2f31868a89edcde25f09b661",
+      "committedAt": "2026-10-04T22:17:12Z"
+    },
     "score-0d11e936ce72f251f28c7c76": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
@@ -76,6 +84,10 @@
     "score-0d8ca49d61da4476d4b21600": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
+    },
+    "score-0e2b319a46c179f44731f9aa": {
+      "commit": "de155c1b56a30bfe2f31868a89edcde25f09b661",
+      "committedAt": "2026-10-04T22:17:12Z"
     },
     "score-0e3ed50c9eef9702205af26c": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
@@ -461,6 +473,10 @@
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
     },
+    "score-7d15e5c9fe53820e095765fc": {
+      "commit": "de155c1b56a30bfe2f31868a89edcde25f09b661",
+      "committedAt": "2026-10-04T22:17:12Z"
+    },
     "score-7d508c6619a5275addbea58d": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
@@ -493,6 +509,10 @@
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
     },
+    "score-84b950b7a6209c0da3dad883": {
+      "commit": "de155c1b56a30bfe2f31868a89edcde25f09b661",
+      "committedAt": "2026-10-04T22:17:12Z"
+    },
     "score-8570f488122bc49f7dd587c5": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
@@ -524,6 +544,10 @@
     "score-8b56e02cb34025afb7c4418d": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
+    },
+    "score-8b823c8d31eb7df7f61b4db5": {
+      "commit": "de155c1b56a30bfe2f31868a89edcde25f09b661",
+      "committedAt": "2026-10-04T22:17:12Z"
     },
     "score-8beaea3365713280a2c7fd9d": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
@@ -564,6 +588,10 @@
     "score-963b3efb29a71e3933e94504": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
+    },
+    "score-96546c9c8a0f4882563008e9": {
+      "commit": "de155c1b56a30bfe2f31868a89edcde25f09b661",
+      "committedAt": "2026-10-04T22:17:12Z"
     },
     "score-979d3ce8299603ecd02ab438": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
@@ -628,6 +656,10 @@
     "score-a66a7ef1ff28f60593c0c82c": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
+    },
+    "score-a6be8338247f357d12c22278": {
+      "commit": "de155c1b56a30bfe2f31868a89edcde25f09b661",
+      "committedAt": "2026-10-04T22:17:12Z"
     },
     "score-a759dc6b4f1a7a277e8720d8": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
@@ -728,6 +760,10 @@
     "score-ba05c3e02c6b2302e56fe8b0": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
+    },
+    "score-be65e916b386fb2213c3f3b4": {
+      "commit": "de155c1b56a30bfe2f31868a89edcde25f09b661",
+      "committedAt": "2026-10-04T22:17:12Z"
     },
     "score-be744f4840e4ddec19c85a31": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
@@ -922,7 +958,7 @@
       "committedAt": "2026-10-03T01:19:23Z"
     }
   },
-  "forecastRevision": "4dfc9d96de977c719af0394172f9c71d02278d990e6f3718464f0289175b16a5",
+  "forecastRevision": "6d08f070d8164b2c5adcca0789944e4fa0533c9aba60ab4564946b652d82442f",
   "games": {
     "401872910": {
       "awayScore": null,
@@ -1429,9 +1465,9 @@
       "checkedAt": "2026-10-04T21:59:13Z",
       "error": null,
       "eventId": "401872966",
-      "explanationPhase": "awaiting-review",
-      "explanationRevisionId": null,
-      "explanationUpdatedAt": null,
+      "explanationPhase": "incorrect-final",
+      "explanationRevisionId": "explanation-94680e74fe565b6d05c8a5ba",
+      "explanationUpdatedAt": "2026-10-04T22:16:56Z",
       "firstFinalAt": "2026-10-04T21:59:13Z",
       "hasStarted": true,
       "homeScore": 36,
@@ -1440,7 +1476,7 @@
       "pickAssessmentId": "assessment-9361153b16a65cc2713c7d4f",
       "pickCutoffAt": "2026-10-04T17:00:00Z",
       "pickEffectiveAt": "2026-10-02T19:54:57Z",
-      "pickExplanation": "I expect the Arizona Cardinals to edge the New York Giants. Dart's reported season-ending injury leaves New York relying on replacement quarterbacks, and the recorded concern about Andrew Thomas adds protection uncertainty. Arizona's recent offensive resistance against San Francisco should give it a chance to exploit that disruption, but the long trip east and the Giants' home defense could keep the matchup close.",
+      "pickExplanation": "The Cardinals pick put too much weight on New York's quarterback disruption and Arizona's previous competitive showing against San Francisco. Jameis Winston instead threw for 250 yards and three touchdowns, while Jacoby Brissett threw three interceptions and Arizona managed 270 total yards. The Giants erased an early 14-3 deficit, and Deonte Banks' 98-yard interception return on the final play sealed the 36-24 result. Arizona's expected offensive edge failed to materialize, and New York's replacement quarterback and late defensive stops were more effective than the forecast allowed.",
       "pickLockedAt": "2026-10-04T18:49:01Z",
       "pickReason": "Arizona exploits Giants quarterback disruption",
       "pickResult": "incorrect",
@@ -1605,9 +1641,9 @@
       "checkedAt": "2026-10-04T21:59:13Z",
       "error": null,
       "eventId": "401872970",
-      "explanationPhase": "awaiting-review",
-      "explanationRevisionId": null,
-      "explanationUpdatedAt": null,
+      "explanationPhase": "incorrect-final",
+      "explanationRevisionId": "explanation-c9154ecb6d5d5d5a4d15df15",
+      "explanationUpdatedAt": "2026-10-04T22:16:56Z",
       "firstFinalAt": "2026-10-04T21:59:13Z",
       "hasStarted": true,
       "homeScore": 20,
@@ -1616,7 +1652,7 @@
       "pickAssessmentId": null,
       "pickCutoffAt": "2026-10-04T17:00:00Z",
       "pickEffectiveAt": "2026-10-01T19:23:00Z",
-      "pickExplanation": "I expect the Philadelphia Eagles to beat the Los Angeles Rams because Philadelphia's home crowd should help the Eagles respond against the Rams. The home setting should help, but neither that setting nor the expected advantage will make the result certain.",
+      "pickExplanation": "The Eagles pick overestimated what home field could do for a depleted offense. Philadelphia led 20-10 at halftime but finished with only 172 total yards, went 0-for-12 on third down and scored nothing after halftime. A failed fourth-down attempt gave the Rams a chance to stay in it, and Kyren Williams scored two rushing touchdowns in the final four minutes to complete Los Angeles' 24-20 comeback. The expected rebound never became sustained offensive control, so the home-field rationale did not survive the second half.",
       "pickLockedAt": "2026-10-04T18:49:01Z",
       "pickReason": "Home crowd helps Philadelphia rebound",
       "pickResult": "incorrect",
@@ -1649,9 +1685,9 @@
       "checkedAt": "2026-10-04T21:59:13Z",
       "error": null,
       "eventId": "401872971",
-      "explanationPhase": "awaiting-review",
-      "explanationRevisionId": null,
-      "explanationUpdatedAt": null,
+      "explanationPhase": "incorrect-final",
+      "explanationRevisionId": "explanation-38720bf215a2257af7487cd5",
+      "explanationUpdatedAt": "2026-10-04T22:16:56Z",
       "firstFinalAt": "2026-10-04T21:59:13Z",
       "hasStarted": true,
       "homeScore": 26,
@@ -1660,7 +1696,7 @@
       "pickAssessmentId": null,
       "pickCutoffAt": "2026-10-04T17:00:00Z",
       "pickEffectiveAt": "2026-10-01T19:23:00Z",
-      "pickExplanation": "I expect the Buffalo Bills to beat the New England Patriots because Josh Allen was seen as the decisive quarterback advantage and a way to keep Buffalo's offense moving. The home setting should help, but neither that setting nor the expected advantage will make the result certain.",
+      "pickExplanation": "The Bills pick leaned too heavily on Josh Allen as the decisive quarterback advantage. Drake Maye answered with 269 passing yards and three touchdowns, while New England gained 405 yards and scored touchdowns on all three red-zone trips. Buffalo led 26-21 after Keon Coleman's touchdown, but Maye connected with Efton Chism III for the go-ahead score with 1:50 left, and Craig Woodson intercepted Allen on the following possession. Both teams committed two turnovers; New England's sustained offense and late execution, rather than the expected Buffalo control, decided the 29-26 game.",
       "pickLockedAt": "2026-10-04T18:49:01Z",
       "pickReason": "Allen gives Buffalo decisive advantage",
       "pickResult": "incorrect",
@@ -1778,7 +1814,7 @@
     "401872974": {
       "awayScore": null,
       "awayTeamId": "15",
-      "checkedAt": "2026-10-04T21:59:13Z",
+      "checkedAt": "2026-10-04T22:17:26Z",
       "error": null,
       "eventId": "401872974",
       "explanationPhase": "pregame",
@@ -1788,7 +1824,7 @@
       "hasStarted": true,
       "homeScore": null,
       "homeTeamId": "16",
-      "lastAttemptAt": "2026-10-04T21:59:13Z",
+      "lastAttemptAt": "2026-10-04T22:17:26Z",
       "pickAssessmentId": "assessment-5eb306067a54889f037ac6ed",
       "pickCutoffAt": "2026-10-04T20:05:00Z",
       "pickEffectiveAt": "2026-10-04T19:08:40Z",
@@ -1822,7 +1858,7 @@
     "401872975": {
       "awayScore": null,
       "awayTeamId": "7",
-      "checkedAt": "2026-10-04T21:59:13Z",
+      "checkedAt": "2026-10-04T22:17:26Z",
       "error": null,
       "eventId": "401872975",
       "explanationPhase": "pregame",
@@ -1832,7 +1868,7 @@
       "hasStarted": true,
       "homeScore": null,
       "homeTeamId": "25",
-      "lastAttemptAt": "2026-10-04T21:59:13Z",
+      "lastAttemptAt": "2026-10-04T22:17:26Z",
       "pickAssessmentId": null,
       "pickCutoffAt": "2026-10-04T20:25:00Z",
       "pickEffectiveAt": "2026-10-01T19:23:00Z",
@@ -1866,7 +1902,7 @@
     "401872976": {
       "awayScore": null,
       "awayTeamId": "12",
-      "checkedAt": "2026-10-04T21:59:13Z",
+      "checkedAt": "2026-10-04T22:17:26Z",
       "error": null,
       "eventId": "401872976",
       "explanationPhase": "pregame",
@@ -1876,7 +1912,7 @@
       "hasStarted": true,
       "homeScore": null,
       "homeTeamId": "13",
-      "lastAttemptAt": "2026-10-04T21:59:13Z",
+      "lastAttemptAt": "2026-10-04T22:17:26Z",
       "pickAssessmentId": null,
       "pickCutoffAt": "2026-10-04T20:25:00Z",
       "pickEffectiveAt": "2026-10-01T19:23:00Z",
@@ -1910,7 +1946,7 @@
     "401872977": {
       "awayScore": null,
       "awayTeamId": "24",
-      "checkedAt": "2026-10-04T21:59:13Z",
+      "checkedAt": "2026-10-04T22:17:26Z",
       "error": null,
       "eventId": "401872977",
       "explanationPhase": "pregame",
@@ -1920,7 +1956,7 @@
       "hasStarted": true,
       "homeScore": null,
       "homeTeamId": "26",
-      "lastAttemptAt": "2026-10-04T21:59:13Z",
+      "lastAttemptAt": "2026-10-04T22:17:26Z",
       "pickAssessmentId": "assessment-5eb306067a54889f037ac6ed",
       "pickCutoffAt": "2026-10-04T20:25:00Z",
       "pickEffectiveAt": "2026-10-04T19:08:40Z",
@@ -2107,12 +2143,12 @@
       "pickRevisionId": "original-401872981",
       "pregameExplanation": "I expect the Jacksonville Jaguars to beat the Philadelphia Eagles because Jacksonville's defense should provide the most important matchup advantage. With the game listed at a neutral venue in London, this case will rely on the matchup rather than a usual home-crowd advantage.",
       "projectedScore": {
-        "awayScore": 20,
+        "awayScore": 17,
         "awayTeamId": "21",
-        "createdAt": "2026-10-03T01:12:39Z",
-        "homeScore": 23,
+        "createdAt": "2026-10-04T22:16:56Z",
+        "homeScore": 24,
         "homeTeamId": "30",
-        "id": "score-a572846932d9588a8122f743",
+        "id": "score-8b823c8d31eb7df7f61b4db5",
         "pickRevisionId": "original-401872981",
         "pickTeamId": "30"
       },
@@ -2151,12 +2187,12 @@
       "pickRevisionId": "original-401872982",
       "pregameExplanation": "I expect the Cincinnati Bengals to beat the Miami Dolphins because Joe Burrow should create opportunities against the weaknesses identified in Miami's defense. That advantage will still need to hold up on the road, and the opponent could win if the expected matchup edge does not materialize.",
       "projectedScore": {
-        "awayScore": 28,
+        "awayScore": 24,
         "awayTeamId": "4",
-        "createdAt": "2026-10-03T01:12:39Z",
+        "createdAt": "2026-10-04T22:16:56Z",
         "homeScore": 17,
         "homeTeamId": "15",
-        "id": "score-5ad65af83ada3d46d278aec6",
+        "id": "score-96546c9c8a0f4882563008e9",
         "pickRevisionId": "original-401872982",
         "pickTeamId": "4"
       },
@@ -2329,10 +2365,10 @@
       "projectedScore": {
         "awayScore": 24,
         "awayTeamId": "13",
-        "createdAt": "2026-10-03T01:12:39Z",
-        "homeScore": 17,
+        "createdAt": "2026-10-04T22:16:56Z",
+        "homeScore": 23,
         "homeTeamId": "17",
-        "id": "score-9d1dc5c64ee049d8ab5c250d",
+        "id": "score-84b950b7a6209c0da3dad883",
         "pickRevisionId": "original-401872986",
         "pickTeamId": "13"
       },
@@ -2405,30 +2441,30 @@
       "homeScore": null,
       "homeTeamId": "28",
       "lastAttemptAt": "2026-10-04T21:59:13Z",
-      "pickAssessmentId": "assessment-5eb306067a54889f037ac6ed",
+      "pickAssessmentId": "assessment-1623a456fba7f4044de838bc",
       "pickCutoffAt": null,
-      "pickEffectiveAt": "2026-10-04T19:08:40Z",
-      "pickExplanation": "I lean toward the Washington Commanders at home against the New York Giants because Washington's potential offensive upside should give it a narrow path against a Giants attack that scored 18 points across its previous two completed games. Jayden Daniels reportedly aims to return to full practice for Week 5, but that is not clearance, and Marcus Mariota's knee aggravation adds uncertainty after the London loss. The pick will need another availability check rather than assuming Washington's preferred lineup returns.",
+      "pickEffectiveAt": "2026-10-04T22:16:56Z",
+      "pickExplanation": "I now lean toward the New York Giants to beat the Washington Commanders because Jameis Winston's 250-yard, three-touchdown response against Arizona should give New York a more credible passing path than the previous forecast allowed. Washington's London execution problems and unresolved quarterback and receiver availability weaken the home-field tie-breaker. Jayden Daniels and Terry McLaurin could return, and Winston still threw two interceptions, so this should remain a close game rather than a comfortable Giants win.",
       "pickLockedAt": null,
-      "pickReason": "I lean toward the Washington Commanders at home against the New York Giants because Washington's potential offensive upside should give it a narrow path against a Giants attack that scored 18 points across its previous two completed games. Jayden Daniels reportedly aims to return to full practice for Week 5, but that is not clearance, and Marcus Mariota's knee aggravation adds uncertainty after the London loss. The pick will need another availability check rather than assuming Washington's preferred lineup returns.",
+      "pickReason": "I now lean toward the New York Giants to beat the Washington Commanders because Jameis Winston's 250-yard, three-touchdown response against Arizona should give New York a more credible passing path than the previous forecast allowed. Washington's London execution problems and unresolved quarterback and receiver availability weaken the home-field tie-breaker. Jayden Daniels and Terry McLaurin could return, and Winston still threw two interceptions, so this should remain a close game rather than a comfortable Giants win.",
       "pickResult": "pending",
-      "pickRevisionId": "assessment-5eb306067a54889f037ac6ed:401872988",
-      "pregameExplanation": "I lean toward the Washington Commanders at home against the New York Giants because Washington's potential offensive upside should give it a narrow path against a Giants attack that scored 18 points across its previous two completed games. Jayden Daniels reportedly aims to return to full practice for Week 5, but that is not clearance, and Marcus Mariota's knee aggravation adds uncertainty after the London loss. The pick will need another availability check rather than assuming Washington's preferred lineup returns.",
+      "pickRevisionId": "assessment-1623a456fba7f4044de838bc:401872988",
+      "pregameExplanation": "I now lean toward the New York Giants to beat the Washington Commanders because Jameis Winston's 250-yard, three-touchdown response against Arizona should give New York a more credible passing path than the previous forecast allowed. Washington's London execution problems and unresolved quarterback and receiver availability weaken the home-field tie-breaker. Jayden Daniels and Terry McLaurin could return, and Winston still threw two interceptions, so this should remain a close game rather than a comfortable Giants win.",
       "projectedScore": {
-        "awayScore": 20,
+        "awayScore": 23,
         "awayTeamId": "19",
-        "createdAt": "2026-10-03T01:12:39Z",
-        "homeScore": 24,
+        "createdAt": "2026-10-04T22:16:56Z",
+        "homeScore": 20,
         "homeTeamId": "28",
-        "id": "score-6cf9475f615d6132b58064e2",
-        "pickRevisionId": "original-401872988",
-        "pickTeamId": "28"
+        "id": "score-be65e916b386fb2213c3f3b4",
+        "pickRevisionId": "assessment-1623a456fba7f4044de838bc:401872988",
+        "pickTeamId": "19"
       },
       "projectedScoreLockedAt": null,
       "projectedScoreStatus": "available",
       "resultUpdatedAt": null,
       "scheduledAt": "2026-10-11T17:00:00Z",
-      "scoredPickTeamId": "28",
+      "scoredPickTeamId": "19",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261011",
       "status": "scheduled",
       "statusDetail": "Scheduled",
@@ -2635,13 +2671,13 @@
       "pickRevisionId": "assessment-5eb306067a54889f037ac6ed:401872993",
       "pregameExplanation": "I lean toward the Baltimore Ravens to beat the Atlanta Falcons because Baltimore's early offensive production should offer more scoring paths than Atlanta's volatile start. Lamar Jackson's newly reported questionable status and Baltimore's interior-line IR moves make that edge conditional, and this forecast does not assume he is cleared for the matchup. Atlanta's rebound at Green Bay is a meaningful counterargument, so quarterback availability could change this pick before kickoff.",
       "projectedScore": {
-        "awayScore": 30,
+        "awayScore": 27,
         "awayTeamId": "33",
-        "createdAt": "2026-10-03T01:12:39Z",
+        "createdAt": "2026-10-04T22:16:56Z",
         "homeScore": 23,
         "homeTeamId": "1",
-        "id": "score-4dd331626558aeada5f5e2b8",
-        "pickRevisionId": "original-401872993",
+        "id": "score-0d068cb86ed07455f69dd435",
+        "pickRevisionId": "assessment-5eb306067a54889f037ac6ed:401872993",
         "pickTeamId": "33"
       },
       "projectedScoreLockedAt": null,
@@ -2669,30 +2705,30 @@
       "homeScore": null,
       "homeTeamId": "14",
       "lastAttemptAt": "2026-10-04T21:59:13Z",
-      "pickAssessmentId": null,
+      "pickAssessmentId": "assessment-1623a456fba7f4044de838bc",
       "pickCutoffAt": null,
-      "pickEffectiveAt": "2026-10-01T19:23:00Z",
-      "pickExplanation": "I expect the Buffalo Bills to beat the Los Angeles Rams because Buffalo's explosive offense should remain productive away from home. That advantage will still need to hold up on the road, and the opponent could win if the expected matchup edge does not materialize.",
+      "pickEffectiveAt": "2026-10-04T22:16:56Z",
+      "pickExplanation": "I now lean toward the Los Angeles Rams to beat the Buffalo Bills because Puka Nacua's productive return and the Rams' sustained passing attack should test a Buffalo defense with new coverage and interior-line injury questions. Los Angeles gained 415 yards against Philadelphia, but Matthew Stafford's two interceptions and the Eagles' depleted lineup keep that evidence in perspective. Josh Allen's offense remains dangerous, so the Rams' home setting and matchup edge support only a narrow forecast, with both teams' availability still needing review.",
       "pickLockedAt": null,
-      "pickReason": "Buffalo's explosive offense travels well",
+      "pickReason": "I now lean toward the Los Angeles Rams to beat the Buffalo Bills because Puka Nacua's productive return and the Rams' sustained passing attack should test a Buffalo defense with new coverage and interior-line injury questions. Los Angeles gained 415 yards against Philadelphia, but Matthew Stafford's two interceptions and the Eagles' depleted lineup keep that evidence in perspective. Josh Allen's offense remains dangerous, so the Rams' home setting and matchup edge support only a narrow forecast, with both teams' availability still needing review.",
       "pickResult": "pending",
-      "pickRevisionId": "original-401872994",
-      "pregameExplanation": "I expect the Buffalo Bills to beat the Los Angeles Rams because Buffalo's explosive offense should remain productive away from home. That advantage will still need to hold up on the road, and the opponent could win if the expected matchup edge does not materialize.",
+      "pickRevisionId": "assessment-1623a456fba7f4044de838bc:401872994",
+      "pregameExplanation": "I now lean toward the Los Angeles Rams to beat the Buffalo Bills because Puka Nacua's productive return and the Rams' sustained passing attack should test a Buffalo defense with new coverage and interior-line injury questions. Los Angeles gained 415 yards against Philadelphia, but Matthew Stafford's two interceptions and the Eagles' depleted lineup keep that evidence in perspective. Josh Allen's offense remains dangerous, so the Rams' home setting and matchup edge support only a narrow forecast, with both teams' availability still needing review.",
       "projectedScore": {
-        "awayScore": 30,
+        "awayScore": 24,
         "awayTeamId": "2",
-        "createdAt": "2026-10-03T01:12:39Z",
+        "createdAt": "2026-10-04T22:16:56Z",
         "homeScore": 27,
         "homeTeamId": "14",
-        "id": "score-535dcd6f01be44c8269cb6fe",
-        "pickRevisionId": "original-401872994",
-        "pickTeamId": "2"
+        "id": "score-7d15e5c9fe53820e095765fc",
+        "pickRevisionId": "assessment-1623a456fba7f4044de838bc:401872994",
+        "pickTeamId": "14"
       },
       "projectedScoreLockedAt": null,
       "projectedScoreStatus": "available",
       "resultUpdatedAt": null,
       "scheduledAt": "2026-10-13T00:15:00Z",
-      "scoredPickTeamId": "2",
+      "scoredPickTeamId": "14",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261012",
       "status": "scheduled",
       "statusDetail": "Scheduled",
@@ -2945,10 +2981,10 @@
       "projectedScore": {
         "awayScore": 24,
         "awayTeamId": "18",
-        "createdAt": "2026-10-03T01:12:39Z",
-        "homeScore": 17,
+        "createdAt": "2026-10-04T22:16:56Z",
+        "homeScore": 23,
         "homeTeamId": "19",
-        "id": "score-99b9b73bc6c7a48d678472de",
+        "id": "score-0e2b319a46c179f44731f9aa",
         "pickRevisionId": "original-401873000",
         "pickTeamId": "18"
       },
@@ -3329,30 +3365,30 @@
       "homeScore": null,
       "homeTeamId": "21",
       "lastAttemptAt": "2026-10-04T21:59:13Z",
-      "pickAssessmentId": null,
+      "pickAssessmentId": "assessment-1623a456fba7f4044de838bc",
       "pickCutoffAt": null,
-      "pickEffectiveAt": "2026-10-01T19:23:00Z",
-      "pickExplanation": "I expect the Philadelphia Eagles to beat the Dallas Cowboys because Philadelphia's home setting should supply the deciding edge in the divisional rivalry. The home setting should help, but neither that setting nor the expected advantage will make the result certain.",
+      "pickEffectiveAt": "2026-10-04T22:16:56Z",
+      "pickExplanation": "I now lean toward the Dallas Cowboys to beat the Philadelphia Eagles because Dallas' three straight games with at least 31 points should offer a more dependable scoring path than Philadelphia's recent offense. The Eagles followed their Chicago loss with only 172 yards and no third-down conversions against the Rams, so home field alone no longer supplies the deciding edge. This late-October forecast will need fresh availability checks rather than assuming today's injuries persist, and Dallas' own defensive problems should keep the game close.",
       "pickLockedAt": null,
-      "pickReason": "Philadelphia's home edge decides rivalry",
+      "pickReason": "I now lean toward the Dallas Cowboys to beat the Philadelphia Eagles because Dallas' three straight games with at least 31 points should offer a more dependable scoring path than Philadelphia's recent offense. The Eagles followed their Chicago loss with only 172 yards and no third-down conversions against the Rams, so home field alone no longer supplies the deciding edge. This late-October forecast will need fresh availability checks rather than assuming today's injuries persist, and Dallas' own defensive problems should keep the game close.",
       "pickResult": "pending",
-      "pickRevisionId": "original-401873009",
-      "pregameExplanation": "I expect the Philadelphia Eagles to beat the Dallas Cowboys because Philadelphia's home setting should supply the deciding edge in the divisional rivalry. The home setting should help, but neither that setting nor the expected advantage will make the result certain.",
+      "pickRevisionId": "assessment-1623a456fba7f4044de838bc:401873009",
+      "pregameExplanation": "I now lean toward the Dallas Cowboys to beat the Philadelphia Eagles because Dallas' three straight games with at least 31 points should offer a more dependable scoring path than Philadelphia's recent offense. The Eagles followed their Chicago loss with only 172 yards and no third-down conversions against the Rams, so home field alone no longer supplies the deciding edge. This late-October forecast will need fresh availability checks rather than assuming today's injuries persist, and Dallas' own defensive problems should keep the game close.",
       "projectedScore": {
-        "awayScore": 24,
+        "awayScore": 27,
         "awayTeamId": "6",
-        "createdAt": "2026-10-03T01:12:39Z",
-        "homeScore": 27,
+        "createdAt": "2026-10-04T22:16:56Z",
+        "homeScore": 24,
         "homeTeamId": "21",
-        "id": "score-ba00d639f38642d50c4fbc65",
-        "pickRevisionId": "original-401873009",
-        "pickTeamId": "21"
+        "id": "score-a6be8338247f357d12c22278",
+        "pickRevisionId": "assessment-1623a456fba7f4044de838bc:401873009",
+        "pickTeamId": "6"
       },
       "projectedScoreLockedAt": null,
       "projectedScoreStatus": "available",
       "resultUpdatedAt": null,
       "scheduledAt": "2026-10-27T00:15:00Z",
-      "scoredPickTeamId": "21",
+      "scoredPickTeamId": "6",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261026",
       "status": "scheduled",
       "statusDetail": "Scheduled",
@@ -11227,14 +11263,14 @@
       "winnerTeamId": null
     }
   },
-  "lastAttemptAt": "2026-10-04T21:59:13Z",
+  "lastAttemptAt": "2026-10-04T22:17:26Z",
   "lastResultAt": "2026-10-04T21:59:13Z",
-  "lastSuccessfulCheckAt": "2026-10-04T21:59:13Z",
+  "lastSuccessfulCheckAt": "2026-10-04T22:17:26Z",
   "monitoringComplete": false,
-  "nextCheckAt": "2026-10-04T22:04:13Z",
+  "nextCheckAt": "2026-10-04T22:22:26Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-10-04T21:59:13Z",
-  "revision": "1cc668137c7799c786de978fb7647a62736d80018d98b9d7ec66245c01e1df16",
+  "publishedAt": "2026-10-04T22:17:26Z",
+  "revision": "d60ac2d35a54a4dd61012081451e241615825af20ce364b23cddee1a0717cdbe",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
