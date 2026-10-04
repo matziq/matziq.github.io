@@ -216,6 +216,8 @@ triggering finals and fresh status of every scoped event, rejects stale
 research and late revisions, and appends one assessment via the GitHub
 Contents API's file-SHA compare-and-swap. This forecast-only commit is
 based on the current main tree, preserving concurrent score-bot changes.
+When the ledger exceeds the Contents API's inline-data limit, the runner
+reads its immutable Git blob by that same SHA before the guarded write.
 It includes the Copilot coauthor trailer, safely synchronizes local source,
 and dispatches the existing results workflow to refresh/deploy snapshots.
 

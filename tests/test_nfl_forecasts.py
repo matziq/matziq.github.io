@@ -245,6 +245,60 @@ class ForecastTests(unittest.TestCase):
             self.assertFalse((Path(directory) / "state.json").exists())
             self.assertIsNotNone(forecasts.batch_for(self.games, self.results, self.ledger, self.now))
 
+    def test_large_forecast_reads_immutable_blob_and_preserves_compare_and_swap(self):
+        self.ledger = common.seal({**self.ledger, "fixturePadding": "x" * (1024 * 1024)})
+        batch, candidate = candidate_for(self.games, self.ledger, self.results, self.now)
+        prepared = self.prepare()
+        content = json.dumps(self.ledger).encode()
+        self.assertGreater(len(content), 1024 * 1024)
+        blob_sha = "b" * 40
+        remote = {"sha": blob_sha, "size": len(content), "encoding": "none", "content": ""}
+        blob = {"sha": blob_sha, "encoding": "base64", "content": base64.b64encode(content).decode()}
+        calls = []
+
+        def api(arguments, payload=None):
+            calls.append((arguments, payload))
+            if "/git/blobs/" in arguments[0]:
+                self.assertEqual(arguments, ["repos/matziq/matziq.github.io/git/blobs/" + blob_sha])
+                return blob
+            if payload is None:
+                return remote
+            self.assertEqual(payload["sha"], blob_sha)
+            self.assertEqual(payload["branch"], "main")
+            self.assertTrue(arguments[-1].endswith("/forecasts.json"))
+            self.assertEqual(json.loads(base64.b64decode(payload["content"])), prepared)
+            return {"commit": {"sha": "a" * 40}}
+
+        with tempfile.TemporaryDirectory() as directory:
+            with patch("nfl_watch.safe_sync", return_value="current-main"), patch.object(
+                forecasts, "gh_json", side_effect=api
+            ), patch.object(
+                forecasts, "preflight", return_value=(prepared, self.ledger, {}, self.games, datetime.now(common.UTC))
+            ), patch.object(forecasts.subprocess, "run"):
+                receipt = forecasts.publish(Path(directory), Path(directory), batch, candidate)
+            self.assertEqual(receipt["status"], "committed_pending_deployment")
+            self.assertFalse((Path(directory) / "state.json").exists())
+            self.assertEqual(len(calls), 3)
+
+    def test_unexpected_large_forecast_blob_aborts_before_preflight_or_write(self):
+        batch, candidate = candidate_for(self.games, self.ledger, self.results, self.now)
+        remote = {"sha": "b" * 40, "encoding": "none", "content": ""}
+        for blob in (
+            {"sha": "c" * 40, "encoding": "base64", "content": "e30="},
+            {"sha": "b" * 40, "encoding": "none", "content": ""},
+        ):
+            with self.subTest(blob=blob), tempfile.TemporaryDirectory() as directory:
+                with patch("nfl_watch.safe_sync", return_value="current-main"), patch.object(
+                    forecasts, "gh_json", side_effect=[remote, blob]
+                ) as api, patch.object(forecasts, "preflight") as preflight, self.assertRaisesRegex(
+                    ValueError, "unexpected forecast blob"
+                ):
+                    forecasts.publish(Path(directory), Path(directory), batch, candidate)
+                preflight.assert_not_called()
+                self.assertEqual(api.call_count, 2)
+                self.assertFalse((Path(directory) / f"{batch['id']}-publication.json").exists())
+                self.assertFalse((Path(directory) / "state.json").exists())
+
 
 class SeasonTests(unittest.TestCase):
     def test_original_73_plus_151_and_13_official_tbd_slots(self):

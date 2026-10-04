@@ -747,7 +747,13 @@ def publish(root: Path, directory: Path, batch: dict, candidate: dict) -> dict:
     safe_sync(root)
     remote_path = "repos/matziq/matziq.github.io/contents/" + FORECAST_PATH.as_posix()
     remote = gh_json([remote_path + "?ref=main"])
-    remote_ledger = json.loads(base64.b64decode(remote["content"]))
+    content = remote
+    if remote.get("encoding") == "none":
+        # Contents omits inline data above 1 MB; pin the read to its immutable blob.
+        content = gh_json(["repos/matziq/matziq.github.io/git/blobs/" + remote["sha"]])
+        if content.get("sha") != remote["sha"] or content.get("encoding") != "base64":
+            raise ValueError("GitHub returned an unexpected forecast blob; no forecast was committed.")
+    remote_ledger = json.loads(base64.b64decode(content["content"]))
     if any(assessment["id"] == batch["id"] for assessment in remote_ledger["assessments"]):
         LOG.info("The assessment already exists on main; retrying publication verification without re-analysis.")
         safe_sync(root)
