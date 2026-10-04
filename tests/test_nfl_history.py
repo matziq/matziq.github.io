@@ -44,7 +44,7 @@ class HistoricalResultsTests(unittest.TestCase):
         self.assertEqual(max(item["date"] for item in HISTORY["games"].values()), "2026-09-28")
         first = HISTORY["games"]["401872656"]
         self.assertEqual((first["awayTeamId"], first["homeTeamId"], first["awayScore"], first["homeScore"], first["winnerTeamId"]), ("17", "26", 10, 13, "26"))
-        self.assertTrue(all(set(item) == history.HISTORY_FIELDS for item in HISTORY["games"].values()))
+        self.assertTrue(all(set(item) - {"fantasyLeaders"} == history.HISTORY_FIELDS for item in HISTORY["games"].values()))
         self.assertFalse(any("pick" in key.lower() for item in HISTORY["games"].values() for key in item))
 
     def test_season_specific_schedule_is_cross_checked_by_daily_event_id(self):
@@ -62,7 +62,7 @@ class HistoricalResultsTests(unittest.TestCase):
             selected = [event for event in events if common.instant(event["date"]).astimezone(common.EASTERN).strftime("%Y%m%d") == day]
             return {"events": selected}
         imported = history.collect_history(HTML, source, NOW)
-        self.assertEqual(imported["games"], HISTORY["games"])
+        self.assertEqual(imported["games"], {key: {field: value for field, value in item.items() if field != "fantasyLeaders"} for key, item in HISTORY["games"].items()})
         self.assertEqual(sum("/teams/" in url for url in calls), 32)
         self.assertEqual(len(calls), len(set(calls)))
 

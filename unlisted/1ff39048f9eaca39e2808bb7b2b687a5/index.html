@@ -42,6 +42,11 @@
       --cp-success: #16a34a;
       --cp-success-text: #137a37;
       --cp-danger: #dc2626;
+      --cp-danger-text: #b91c1c;
+      --cp-danger-soft: rgba(220, 38, 38, 0.1);
+      --cp-success-soft: rgba(22, 163, 74, 0.12);
+      --cp-info: #1d4ed8;
+      --cp-info-soft: rgba(29, 78, 216, 0.1);
       --cp-warning: #f59e0b;
       --cp-link: #0078d4;
       --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
@@ -69,6 +74,11 @@
       --cp-success: #4ade80;
       --cp-success-text: var(--cp-success);
       --cp-danger: #f87171;
+      --cp-danger-text: var(--cp-danger);
+      --cp-danger-soft: rgba(248, 113, 113, 0.16);
+      --cp-success-soft: rgba(74, 222, 128, 0.14);
+      --cp-info: #7cb3ff;
+      --cp-info-soft: rgba(124, 179, 255, 0.16);
       --cp-warning: #fbbf24;
       --cp-link: #4da6ff;
       --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
@@ -277,9 +287,28 @@
     .winner-marker::after { content: " \2605"; }
     .connector { color: var(--cp-text-soft); font-weight: 400; }
     .venue { display: block; margin-top: 4px; color: var(--cp-text-soft); font-size: 12px; font-weight: 400; }
-    .pick-name { display: inline-block; border-radius: 6px; padding: 4px 10px; background: var(--cp-accent-soft); color: var(--cp-accent); font-weight: 650; }
+    .pick-name { display: inline-block; border: 1px solid var(--cp-info); border-radius: 6px; padding: 4px 10px; background: var(--cp-info-soft); color: var(--cp-info); font-weight: 650; }
+    .pick-name.pick-correct { border-color: var(--cp-success); background: var(--cp-success-soft); color: var(--cp-success-text); }
+    .pick-name.pick-incorrect { border-color: var(--cp-danger); background: var(--cp-danger-soft); color: var(--cp-danger-text); }
+    .pick-name.pick-tie { border-color: var(--cp-border-strong); background: var(--cp-surface-soft); color: var(--cp-text); }
+    .pick-name.pick-correct::before { content: "\2713  "; }
+    .pick-name.pick-incorrect::before { content: "\2717  "; }
     .reason-cell { color: var(--cp-text-soft); }
     .reason-cell p { margin: 0; line-height: 1.5; }
+    .reason-cell.reason-correct, .reason-cell.reason-incorrect { border-left: 4px solid; }
+    .reason-cell.reason-correct { border-left-color: var(--cp-success); color: var(--cp-success-text); }
+    .reason-cell.reason-incorrect { border-left-color: var(--cp-danger); color: var(--cp-danger-text); }
+    .reason-label { display: block; margin-bottom: 4px; font-size: 12px; font-weight: 700; }
+    .legend-box { display: inline-block; width: 12px; height: 12px; margin: 0 4px 0 8px; border: 1px solid; border-radius: 3px; vertical-align: -1px; }
+    .legend-box.pending { border-color: var(--cp-info); background: var(--cp-info-soft); }
+    .legend-box.correct { border-color: var(--cp-success); background: var(--cp-success-soft); }
+    .legend-box.incorrect { border-color: var(--cp-danger); background: var(--cp-danger-soft); }
+    .fantasy-leaders { margin-top: 10px; font-size: 12px; color: var(--cp-text); }
+    .fantasy-leaders .fantasy-title { display: block; margin: 0 0 2px; color: var(--cp-text-soft); font-weight: 600; }
+    .fantasy-leaders ol { margin: 0; padding-left: 20px; }
+    .fantasy-leaders li { margin: 2px 0; }
+    .fantasy-leaders .fantasy-points { font-weight: 700; font-variant-numeric: tabular-nums; }
+    .fantasy-leaders .fantasy-line { display: block; color: var(--cp-text-soft); }
     .results-summary { margin: 0 0 20px; padding: 16px 20px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-bg-elevated); }
     .results-summary p { margin: 0; }
     .results-summary p + p { margin-top: 8px; }
@@ -375,8 +404,9 @@
       th .sort-button { min-height: 0; padding: 0; color: var(--cp-text); }
       .sort-mark, .pick-cell::before, .reason-cell::before, .result-cell::before, .preference-note { display: none; }
       .day-cell { text-align: left; }
-      .pick-name { padding: 0; background: var(--cp-surface); color: var(--cp-text); }
-      .reason-cell { color: var(--cp-text); }
+      .pick-name { padding: 2px 6px; background: var(--cp-surface); print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .reason-cell:not(.reason-correct):not(.reason-incorrect) { color: var(--cp-text); }
+      .reason-cell.reason-correct, .reason-cell.reason-incorrect { padding-left: 8px; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
       .results-summary { padding: 0 0 12px; margin: 0; border: 0; background: var(--cp-surface); }
       .verdict.correct, .verdict.incorrect { color: var(--cp-text); }
       .venue { display: block; margin: 2px 0 0; font-size: 8pt; }
@@ -418,6 +448,7 @@
       <p id="source-warning" class="source-warning" role="status" hidden></p>
       <p id="history-status"></p>
     </section>
+    <p id="pick-legend" class="calendar-note">Pick boxes:<span class="legend-box pending" aria-hidden="true"></span>Blue = current pick (not final)<span class="legend-box correct" aria-hidden="true"></span>Green &#10003; = correct<span class="legend-box incorrect" aria-hidden="true"></span>Red &#10007; = wrong. After a final, the reasoning turns green when the pick was right or red with an explanation of why it was wrong. Each completed game lists its top 3 fantasy scorers (full PPR from the ESPN box score: 0.04/passing yard, 4/passing TD, -2/INT, 0.1/rushing or receiving yard, 1/reception, 6/rushing, receiving, or return TD, -2/fumble lost).</p>
     <p class="calendar-note">Playoffs: Wild Card starts January 16; divisional January 23-24; conference championships January 31; Super Bowl LXI February 14 at SoFi Stadium. TBD slots are official schedule placeholders, not projected qualifiers. <a href="https://media.nfl.com/football-information/2026/news/2026-nfl-schedule-announced" target="_blank" rel="noopener noreferrer">Official NFL calendar</a>.</p>
 
     <section class="sheet" aria-label="NFL picks">
@@ -712,14 +743,41 @@
   </script>
   <script type="application/json" id="history-data">
 {
-  "checkedAt": "2026-10-02T20:09:52Z",
+  "checkedAt": "2026-10-04T23:39:43Z",
   "games": {
     "401872656": {
       "awayScore": 10,
       "awayTeamId": "17",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-09",
       "eventId": "401872656",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4430878",
+            "name": "Jaxon Smith-Njigba",
+            "points": 26.2,
+            "statLine": "8 rec, 122 rec yds, 1 rec TD",
+            "teamId": "26"
+          },
+          {
+            "athleteId": "4569173",
+            "name": "Rhamondre Stevenson",
+            "points": 14.5,
+            "statLine": "51 rush yds, 5 rec, 44 rec yds",
+            "teamId": "17"
+          },
+          {
+            "athleteId": "3924327",
+            "name": "Drew Lock",
+            "points": 12.78,
+            "statLine": "187 pass yds, 1 pass TD, 13 rush yds",
+            "teamId": "26"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872656"
+      },
       "homeScore": 13,
       "homeTeamId": "26",
       "scheduledAt": "2026-09-10T00:20:00Z",
@@ -736,9 +794,36 @@
     "401872657": {
       "awayScore": 27,
       "awayTeamId": "25",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-10",
       "eventId": "401872657",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4361741",
+            "name": "Brock Purdy",
+            "points": 21.1,
+            "statLine": "205 pass yds, 3 pass TD, 1 INT, 29 rush yds",
+            "teamId": "25"
+          },
+          {
+            "athleteId": "3126486",
+            "name": "Deebo Samuel Sr.",
+            "points": 18.0,
+            "statLine": "12 rush yds, 6 rec, 48 rec yds, 1 rec TD",
+            "teamId": "25"
+          },
+          {
+            "athleteId": "16737",
+            "name": "Mike Evans",
+            "points": 16.9,
+            "statLine": "6 rec, 49 rec yds, 1 rec TD",
+            "teamId": "25"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872657"
+      },
       "homeScore": 7,
       "homeTeamId": "14",
       "scheduledAt": "2026-09-11T00:35:00Z",
@@ -755,9 +840,36 @@
     "401872658": {
       "awayScore": 13,
       "awayTeamId": "1",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872658",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4430807",
+            "name": "Bijan Robinson",
+            "points": 31.3,
+            "statLine": "83 rush yds, 8 rec, 90 rec yds, 1 rec TD",
+            "teamId": "1"
+          },
+          {
+            "athleteId": "4361411",
+            "name": "Pat Freiermuth",
+            "points": 15.6,
+            "statLine": "5 rec, 46 rec yds, 1 rec TD",
+            "teamId": "23"
+          },
+          {
+            "athleteId": "8439",
+            "name": "Aaron Rodgers",
+            "points": 12.54,
+            "statLine": "221 pass yds, 1 pass TD, -3 rush yds",
+            "teamId": "23"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872658"
+      },
       "homeScore": 20,
       "homeTeamId": "23",
       "scheduledAt": "2026-09-13T17:00:00Z",
@@ -774,9 +886,36 @@
     "401872659": {
       "awayScore": 41,
       "awayTeamId": "33",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872659",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "3043078",
+            "name": "Derrick Henry",
+            "points": 35.3,
+            "statLine": "144 rush yds, 3 rush TD, 1 rec, 19 rec yds",
+            "teamId": "33"
+          },
+          {
+            "athleteId": "4429615",
+            "name": "Zay Flowers",
+            "points": 26.0,
+            "statLine": "5 rec, 150 rec yds, 1 rec TD",
+            "teamId": "33"
+          },
+          {
+            "athleteId": "4242335",
+            "name": "Jonathan Taylor",
+            "points": 25.1,
+            "statLine": "98 rush yds, 2 rush TD, 3 rec, 23 rec yds, 1 fumble lost",
+            "teamId": "11"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872659"
+      },
       "homeScore": 23,
       "homeTeamId": "11",
       "scheduledAt": "2026-09-13T17:00:00Z",
@@ -793,9 +932,36 @@
     "401872660": {
       "awayScore": 36,
       "awayTeamId": "2",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872660",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "3918298",
+            "name": "Josh Allen",
+            "points": 35.66,
+            "statLine": "334 pass yds, 2 pass TD, 23 rush yds, 2 rush TD",
+            "teamId": "2"
+          },
+          {
+            "athleteId": "4035538",
+            "name": "David Montgomery",
+            "points": 28.9,
+            "statLine": "60 rush yds, 2 rush TD, 3 rec, 19 rec yds, 1 rec TD",
+            "teamId": "34"
+          },
+          {
+            "athleteId": "4258173",
+            "name": "Nico Collins",
+            "points": 21.2,
+            "statLine": "7 rush yds, 7 rec, 75 rec yds, 1 rec TD",
+            "teamId": "34"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872660"
+      },
       "homeScore": 31,
       "homeTeamId": "34",
       "scheduledAt": "2026-09-13T17:00:00Z",
@@ -812,9 +978,36 @@
     "401872661": {
       "awayScore": 59,
       "awayTeamId": "3",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872661",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4431611",
+            "name": "Caleb Williams",
+            "points": 37.26,
+            "statLine": "269 pass yds, 2 pass TD, 65 rush yds, 2 rush TD",
+            "teamId": "3"
+          },
+          {
+            "athleteId": "4695883",
+            "name": "Jalen Coker",
+            "points": 33.8,
+            "statLine": "8 rec, 138 rec yds, 2 rec TD",
+            "teamId": "29"
+          },
+          {
+            "athleteId": "4259545",
+            "name": "D'Andre Swift",
+            "points": 32.4,
+            "statLine": "124 rush yds, 3 rush TD, 1 rec, 10 rec yds",
+            "teamId": "3"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872661"
+      },
       "homeScore": 37,
       "homeTeamId": "29",
       "scheduledAt": "2026-09-13T17:00:00Z",
@@ -831,9 +1024,36 @@
     "401872922": {
       "awayScore": 10,
       "awayTeamId": "5",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872922",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4360310",
+            "name": "Trevor Lawrence",
+            "points": 26.1,
+            "statLine": "245 pass yds, 4 pass TD, 3 rush yds",
+            "teamId": "30"
+          },
+          {
+            "athleteId": "4432620",
+            "name": "Parker Washington",
+            "points": 19.3,
+            "statLine": "5 rec, 83 rec yds, 1 rec TD",
+            "teamId": "30"
+          },
+          {
+            "athleteId": "3122840",
+            "name": "Deshaun Watson",
+            "points": 14.0,
+            "statLine": "205 pass yds, 1 pass TD, 1 INT, 38 rush yds",
+            "teamId": "5"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872922"
+      },
       "homeScore": 34,
       "homeTeamId": "30",
       "scheduledAt": "2026-09-13T17:00:00Z",
@@ -850,9 +1070,36 @@
     "401872923": {
       "awayScore": 30,
       "awayTeamId": "18",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872923",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4429795",
+            "name": "Jahmyr Gibbs",
+            "points": 33.6,
+            "statLine": "156 rush yds, 2 rush TD, 5 rec, 30 rec yds, 1 fumble lost",
+            "teamId": "8"
+          },
+          {
+            "athleteId": "4374302",
+            "name": "Amon-Ra St. Brown",
+            "points": 28.7,
+            "statLine": "10 rec, 67 rec yds, 2 rec TD",
+            "teamId": "8"
+          },
+          {
+            "athleteId": "4361370",
+            "name": "Chris Olave",
+            "points": 28.2,
+            "statLine": "10 rec, 182 rec yds",
+            "teamId": "18"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872923"
+      },
       "homeScore": 31,
       "homeTeamId": "8",
       "scheduledAt": "2026-09-13T17:00:00Z",
@@ -869,9 +1116,36 @@
     "401872924": {
       "awayScore": 23,
       "awayTeamId": "20",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872924",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4427366",
+            "name": "Breece Hall",
+            "points": 19.8,
+            "statLine": "102 rush yds, 1 rush TD, 2 rec, 16 rec yds",
+            "teamId": "20"
+          },
+          {
+            "athleteId": "4569618",
+            "name": "Garrett Wilson",
+            "points": 13.9,
+            "statLine": "6 rec, 79 rec yds",
+            "teamId": "20"
+          },
+          {
+            "athleteId": "4688380",
+            "name": "Cam Ward",
+            "points": 11.7,
+            "statLine": "140 pass yds, 1 pass TD, 21 rush yds",
+            "teamId": "10"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872924"
+      },
       "homeScore": 10,
       "homeTeamId": "10",
       "scheduledAt": "2026-09-13T17:00:00Z",
@@ -888,9 +1162,36 @@
     "401872925": {
       "awayScore": 27,
       "awayTeamId": "27",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872925",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4596448",
+            "name": "Bucky Irving",
+            "points": 20.3,
+            "statLine": "45 rush yds, 1 rush TD, 7 rec, 48 rec yds, 1 fumble lost",
+            "teamId": "27"
+          },
+          {
+            "athleteId": "4362238",
+            "name": "Chase Brown",
+            "points": 18.8,
+            "statLine": "56 rush yds, 1 rush TD, 5 rec, 22 rec yds",
+            "teamId": "4"
+          },
+          {
+            "athleteId": "3116164",
+            "name": "Mike Gesicki",
+            "points": 18.8,
+            "statLine": "5 rec, 78 rec yds, 1 rec TD",
+            "teamId": "4"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872925"
+      },
       "homeScore": 33,
       "homeTeamId": "4",
       "scheduledAt": "2026-09-13T17:00:00Z",
@@ -907,9 +1208,36 @@
     "401872926": {
       "awayScore": 26,
       "awayTeamId": "22",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872926",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4361307",
+            "name": "Trey McBride",
+            "points": 24.5,
+            "statLine": "9 rec, 95 rec yds, 1 rec TD",
+            "teamId": "22"
+          },
+          {
+            "athleteId": "4612826",
+            "name": "Ladd McConkey",
+            "points": 19.2,
+            "statLine": "5 rec, 82 rec yds, 1 rec TD",
+            "teamId": "24"
+          },
+          {
+            "athleteId": "2578570",
+            "name": "Jacoby Brissett",
+            "points": 16.48,
+            "statLine": "277 pass yds, 1 pass TD, 14 rush yds",
+            "teamId": "22"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872926"
+      },
       "homeScore": 14,
       "homeTeamId": "24",
       "scheduledAt": "2026-09-13T20:25:00Z",
@@ -926,9 +1254,36 @@
     "401872927": {
       "awayScore": 22,
       "awayTeamId": "9",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872927",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4248528",
+            "name": "Christian Watson",
+            "points": 32.7,
+            "statLine": "6 rec, 147 rec yds, 2 rec TD",
+            "teamId": "9"
+          },
+          {
+            "athleteId": "4262921",
+            "name": "Justin Jefferson",
+            "points": 29.2,
+            "statLine": "8 rec, 92 rec yds, 2 rec TD",
+            "teamId": "16"
+          },
+          {
+            "athleteId": "4036378",
+            "name": "Jordan Love",
+            "points": 19.48,
+            "statLine": "387 pass yds, 2 pass TD, 1 INT, 1 fumble lost",
+            "teamId": "9"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872927"
+      },
       "homeScore": 39,
       "homeTeamId": "16",
       "scheduledAt": "2026-09-13T20:25:00Z",
@@ -945,9 +1300,36 @@
     "401872928": {
       "awayScore": 13,
       "awayTeamId": "15",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872928",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4890973",
+            "name": "Ashton Jeanty",
+            "points": 32.7,
+            "statLine": "102 rush yds, 6 rec, 45 rec yds, 2 rec TD",
+            "teamId": "13"
+          },
+          {
+            "athleteId": "4242512",
+            "name": "Malik Willis",
+            "points": 16.7,
+            "statLine": "220 pass yds, 1 INT, 39 rush yds, 1 rush TD",
+            "teamId": "15"
+          },
+          {
+            "athleteId": "4869645",
+            "name": "Caleb Douglas",
+            "points": 14.4,
+            "statLine": "5 rec, 94 rec yds",
+            "teamId": "15"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872928"
+      },
       "homeScore": 27,
       "homeTeamId": "13",
       "scheduledAt": "2026-09-13T20:25:00Z",
@@ -964,9 +1346,36 @@
     "401872929": {
       "awayScore": 22,
       "awayTeamId": "28",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872929",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4040715",
+            "name": "Jalen Hurts",
+            "points": 24.72,
+            "statLine": "203 pass yds, 3 pass TD, 46 rush yds",
+            "teamId": "21"
+          },
+          {
+            "athleteId": "3121023",
+            "name": "Dallas Goedert",
+            "points": 23.7,
+            "statLine": "4 rec, 77 rec yds, 2 rec TD",
+            "teamId": "21"
+          },
+          {
+            "athleteId": "4426348",
+            "name": "Jayden Daniels",
+            "points": 17.66,
+            "statLine": "164 pass yds, 2 pass TD, 31 rush yds",
+            "teamId": "28"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872929"
+      },
       "homeScore": 24,
       "homeTeamId": "21",
       "scheduledAt": "2026-09-13T20:25:00Z",
@@ -983,9 +1392,36 @@
     "401872930": {
       "awayScore": 20,
       "awayTeamId": "6",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872930",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4361050",
+            "name": "Isaiah Likely",
+            "points": 27.8,
+            "statLine": "8 rec, 78 rec yds, 2 rec TD",
+            "teamId": "19"
+          },
+          {
+            "athleteId": "4689114",
+            "name": "Jaxson Dart",
+            "points": 26.6,
+            "statLine": "230 pass yds, 3 pass TD, 54 rush yds",
+            "teamId": "19"
+          },
+          {
+            "athleteId": "4361579",
+            "name": "Javonte Williams",
+            "points": 24.2,
+            "statLine": "41 rush yds, 1 rush TD, 5 rec, 31 rec yds, 1 rec TD",
+            "teamId": "6"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872930"
+      },
       "homeScore": 28,
       "homeTeamId": "19",
       "scheduledAt": "2026-09-14T00:20:00Z",
@@ -1002,9 +1438,36 @@
     "401872931": {
       "awayScore": 10,
       "awayTeamId": "7",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-14",
       "eventId": "401872931",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4567048",
+            "name": "Kenneth Walker III",
+            "points": 34.1,
+            "statLine": "173 rush yds, 1 rush TD, 3 rec, 18 rec yds, 1 rec TD",
+            "teamId": "12"
+          },
+          {
+            "athleteId": "3139477",
+            "name": "Patrick Mahomes",
+            "points": 21.66,
+            "statLine": "184 pass yds, 2 pass TD, 1 INT, 23 rush yds, 1 rush TD",
+            "teamId": "12"
+          },
+          {
+            "athleteId": "3051876",
+            "name": "Evan Engram",
+            "points": 14.3,
+            "statLine": "4 rec, 43 rec yds, 1 rec TD",
+            "teamId": "7"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872931"
+      },
       "homeScore": 31,
       "homeTeamId": "12",
       "scheduledAt": "2026-09-15T00:15:00Z",
@@ -1021,9 +1484,36 @@
     "401872932": {
       "awayScore": 31,
       "awayTeamId": "8",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-17",
       "eventId": "401872932",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "3918298",
+            "name": "Josh Allen",
+            "points": 40.82,
+            "statLine": "248 pass yds, 3 pass TD, 69 rush yds, 2 rush TD",
+            "teamId": "2"
+          },
+          {
+            "athleteId": "4374302",
+            "name": "Amon-Ra St. Brown",
+            "points": 35.2,
+            "statLine": "9 rec, 142 rec yds, 2 rec TD",
+            "teamId": "8"
+          },
+          {
+            "athleteId": "3046779",
+            "name": "Jared Goff",
+            "points": 29.78,
+            "statLine": "327 pass yds, 4 pass TD, 7 rush yds",
+            "teamId": "8"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872932"
+      },
       "homeScore": 41,
       "homeTeamId": "2",
       "scheduledAt": "2026-09-18T00:15:00Z",
@@ -1040,9 +1530,36 @@
     "401872933": {
       "awayScore": 34,
       "awayTeamId": "29",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872933",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4685720",
+            "name": "Bryce Young",
+            "points": 24.08,
+            "statLine": "287 pass yds, 3 pass TD, 6 rush yds",
+            "teamId": "29"
+          },
+          {
+            "athleteId": "2576925",
+            "name": "Darren Waller",
+            "points": 18.3,
+            "statLine": "3 rec, 33 rec yds, 2 rec TD",
+            "teamId": "29"
+          },
+          {
+            "athleteId": "4685472",
+            "name": "Tetairoa McMillan",
+            "points": 15.1,
+            "statLine": "5 rec, 101 rec yds",
+            "teamId": "29"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872933"
+      },
       "homeScore": 3,
       "homeTeamId": "1",
       "scheduledAt": "2026-09-20T17:00:00Z",
@@ -1059,9 +1576,36 @@
     "401872934": {
       "awayScore": 20,
       "awayTeamId": "4",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872934",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4362628",
+            "name": "Ja'Marr Chase",
+            "points": 26.5,
+            "statLine": "7 rec, 75 rec yds, 2 rec TD",
+            "teamId": "4"
+          },
+          {
+            "athleteId": "3117256",
+            "name": "Dalton Schultz",
+            "points": 26.0,
+            "statLine": "12 rec, 140 rec yds",
+            "teamId": "34"
+          },
+          {
+            "athleteId": "4432577",
+            "name": "C.J. Stroud",
+            "points": 17.02,
+            "statLine": "353 pass yds, 29 rush yds",
+            "teamId": "34"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872934"
+      },
       "homeScore": 6,
       "homeTeamId": "34",
       "scheduledAt": "2026-09-20T17:00:00Z",
@@ -1078,9 +1622,36 @@
     "401872935": {
       "awayScore": 23,
       "awayTeamId": "5",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872935",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4832800",
+            "name": "Denzel Boston",
+            "points": 20.5,
+            "statLine": "5 rec, 95 rec yds, 1 rec TD",
+            "teamId": "5"
+          },
+          {
+            "athleteId": "3122840",
+            "name": "Deshaun Watson",
+            "points": 19.72,
+            "statLine": "238 pass yds, 2 pass TD, 22 rush yds",
+            "teamId": "5"
+          },
+          {
+            "athleteId": "4596448",
+            "name": "Bucky Irving",
+            "points": 13.0,
+            "statLine": "89 rush yds, 4 rec, 1 rec yds",
+            "teamId": "27"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872935"
+      },
       "homeScore": 19,
       "homeTeamId": "27",
       "scheduledAt": "2026-09-20T17:00:00Z",
@@ -1097,9 +1668,36 @@
     "401872936": {
       "awayScore": 20,
       "awayTeamId": "9",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872936",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4569618",
+            "name": "Garrett Wilson",
+            "points": 16.7,
+            "statLine": "5 rec, 57 rec yds, 1 rec TD",
+            "teamId": "20"
+          },
+          {
+            "athleteId": "15864",
+            "name": "Geno Smith",
+            "points": 15.58,
+            "statLine": "247 pass yds, 1 pass TD, 17 rush yds",
+            "teamId": "20"
+          },
+          {
+            "athleteId": "4427366",
+            "name": "Breece Hall",
+            "points": 14.2,
+            "statLine": "29 rush yds, 5 rec, 63 rec yds",
+            "teamId": "20"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872936"
+      },
       "homeScore": 17,
       "homeTeamId": "20",
       "scheduledAt": "2026-09-20T17:00:00Z",
@@ -1116,9 +1714,36 @@
     "401872937": {
       "awayScore": 9,
       "awayTeamId": "16",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872937",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4259545",
+            "name": "D'Andre Swift",
+            "points": 12.9,
+            "statLine": "45 rush yds, 5 rec, 54 rec yds, 1 fumble lost",
+            "teamId": "3"
+          },
+          {
+            "athleteId": "3042519",
+            "name": "Aaron Jones Sr.",
+            "points": 10.5,
+            "statLine": "105 rush yds",
+            "teamId": "16"
+          },
+          {
+            "athleteId": "2973405",
+            "name": "Kalif Raymond",
+            "points": 9.0,
+            "statLine": "5 rec, 40 rec yds",
+            "teamId": "3"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872937"
+      },
       "homeScore": 3,
       "homeTeamId": "3",
       "scheduledAt": "2026-09-20T17:00:00Z",
@@ -1135,9 +1760,36 @@
     "401872938": {
       "awayScore": 24,
       "awayTeamId": "18",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872938",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4361370",
+            "name": "Chris Olave",
+            "points": 22.6,
+            "statLine": "8 rec, 86 rec yds, 1 rec TD",
+            "teamId": "18"
+          },
+          {
+            "athleteId": "4360689",
+            "name": "Tyler Shough",
+            "points": 22.38,
+            "statLine": "252 pass yds, 1 pass TD, 23 rush yds, 1 rush TD",
+            "teamId": "18"
+          },
+          {
+            "athleteId": "4360939",
+            "name": "Rashod Bateman",
+            "points": 21.8,
+            "statLine": "7 rec, 88 rec yds, 1 rec TD",
+            "teamId": "33"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872938"
+      },
       "homeScore": 17,
       "homeTeamId": "33",
       "scheduledAt": "2026-09-20T17:00:00Z",
@@ -1154,9 +1806,36 @@
     "401872939": {
       "awayScore": 24,
       "awayTeamId": "21",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872939",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4241478",
+            "name": "DeVonta Smith",
+            "points": 27.7,
+            "statLine": "10 rec, 117 rec yds, 1 rec TD",
+            "teamId": "21"
+          },
+          {
+            "athleteId": "4688380",
+            "name": "Cam Ward",
+            "points": 20.02,
+            "statLine": "183 pass yds, 7 rush yds, 2 rush TD",
+            "teamId": "10"
+          },
+          {
+            "athleteId": "4040715",
+            "name": "Jalen Hurts",
+            "points": 16.16,
+            "statLine": "264 pass yds, 2 pass TD, 2 INT, 16 rush yds",
+            "teamId": "21"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872939"
+      },
       "homeScore": 20,
       "homeTeamId": "10",
       "scheduledAt": "2026-09-20T17:00:00Z",
@@ -1173,9 +1852,36 @@
     "401872940": {
       "awayScore": 13,
       "awayTeamId": "30",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872940",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4372016",
+            "name": "Jaylen Waddle",
+            "points": 21.8,
+            "statLine": "8 rec, 138 rec yds",
+            "teamId": "7"
+          },
+          {
+            "athleteId": "4432620",
+            "name": "Parker Washington",
+            "points": 16.8,
+            "statLine": "7 rec, 98 rec yds",
+            "teamId": "30"
+          },
+          {
+            "athleteId": "4702555",
+            "name": "Jonah Coleman",
+            "points": 14.8,
+            "statLine": "39 rush yds, 1 rush TD, 3 rec, 19 rec yds",
+            "teamId": "7"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872940"
+      },
       "homeScore": 20,
       "homeTeamId": "7",
       "scheduledAt": "2026-09-20T20:05:00Z",
@@ -1192,9 +1898,36 @@
     "401872941": {
       "awayScore": 26,
       "awayTeamId": "13",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872941",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4428718",
+            "name": "Tre Tucker",
+            "points": 22.9,
+            "statLine": "5 rec, 119 rec yds, 1 rec TD",
+            "teamId": "13"
+          },
+          {
+            "athleteId": "14880",
+            "name": "Kirk Cousins",
+            "points": 20.22,
+            "statLine": "253 pass yds, 3 pass TD, 1 INT, 1 rush yds",
+            "teamId": "13"
+          },
+          {
+            "athleteId": "4685382",
+            "name": "Omarion Hampton",
+            "points": 17.5,
+            "statLine": "94 rush yds, 1 rush TD, 2 rec, 21 rec yds, 1 fumble lost",
+            "teamId": "24"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872941"
+      },
       "homeScore": 14,
       "homeTeamId": "24",
       "scheduledAt": "2026-09-20T20:05:00Z",
@@ -1211,9 +1944,36 @@
     "401872942": {
       "awayScore": 13,
       "awayTeamId": "15",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872942",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4361741",
+            "name": "Brock Purdy",
+            "points": 28.48,
+            "statLine": "287 pass yds, 2 pass TD, 30 rush yds, 1 rush TD",
+            "teamId": "25"
+          },
+          {
+            "athleteId": "3117251",
+            "name": "Christian McCaffrey",
+            "points": 22.6,
+            "statLine": "23 rush yds, 2 rush TD, 4 rec, 43 rec yds",
+            "teamId": "25"
+          },
+          {
+            "athleteId": "3040151",
+            "name": "George Kittle",
+            "points": 18.0,
+            "statLine": "4 rec, 80 rec yds, 1 rec TD",
+            "teamId": "25"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872942"
+      },
       "homeScore": 35,
       "homeTeamId": "25",
       "scheduledAt": "2026-09-20T20:25:00Z",
@@ -1230,9 +1990,36 @@
     "401872943": {
       "awayScore": 31,
       "awayTeamId": "26",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872943",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4430878",
+            "name": "Jaxon Smith-Njigba",
+            "points": 42.5,
+            "statLine": "9 rec, 155 rec yds, 3 rec TD",
+            "teamId": "26"
+          },
+          {
+            "athleteId": "3924327",
+            "name": "Drew Lock",
+            "points": 21.4,
+            "statLine": "235 pass yds, 3 pass TD",
+            "teamId": "26"
+          },
+          {
+            "athleteId": "4361307",
+            "name": "Trey McBride",
+            "points": 18.1,
+            "statLine": "8 rec, 41 rec yds, 1 rec TD",
+            "teamId": "22"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872943"
+      },
       "homeScore": 7,
       "homeTeamId": "22",
       "scheduledAt": "2026-09-20T20:25:00Z",
@@ -1249,9 +2036,36 @@
     "401872944": {
       "awayScore": 20,
       "awayTeamId": "28",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872944",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4241389",
+            "name": "CeeDee Lamb",
+            "points": 35.3,
+            "statLine": "8 rec, 153 rec yds, 2 rec TD",
+            "teamId": "6"
+          },
+          {
+            "athleteId": "2577417",
+            "name": "Dak Prescott",
+            "points": 29.76,
+            "statLine": "279 pass yds, 4 pass TD, 26 rush yds",
+            "teamId": "6"
+          },
+          {
+            "athleteId": "2976212",
+            "name": "Stefon Diggs",
+            "points": 21.7,
+            "statLine": "5 rec, 47 rec yds, 2 rec TD",
+            "teamId": "28"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872944"
+      },
       "homeScore": 37,
       "homeTeamId": "6",
       "scheduledAt": "2026-09-20T20:25:00Z",
@@ -1268,9 +2082,36 @@
     "401872945": {
       "awayScore": 30,
       "awayTeamId": "11",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872945",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4242335",
+            "name": "Jonathan Taylor",
+            "points": 29.2,
+            "statLine": "92 rush yds, 2 rush TD, 4 rec, 40 rec yds",
+            "teamId": "11"
+          },
+          {
+            "athleteId": "3139477",
+            "name": "Patrick Mahomes",
+            "points": 28.98,
+            "statLine": "382 pass yds, 3 pass TD, 17 rush yds",
+            "teamId": "12"
+          },
+          {
+            "athleteId": "15847",
+            "name": "Travis Kelce",
+            "points": 25.1,
+            "statLine": "9 rec, 101 rec yds, 1 rec TD",
+            "teamId": "12"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872945"
+      },
       "homeScore": 33,
       "homeTeamId": "12",
       "scheduledAt": "2026-09-21T00:20:00Z",
@@ -1287,9 +2128,36 @@
     "401872946": {
       "awayScore": 3,
       "awayTeamId": "23",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872946",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4432710",
+            "name": "TreVeyon Henderson",
+            "points": 13.6,
+            "statLine": "76 rush yds, 1 rush TD",
+            "teamId": "17"
+          },
+          {
+            "athleteId": "4361432",
+            "name": "Romeo Doubs",
+            "points": 12.6,
+            "statLine": "3 rec, 96 rec yds",
+            "teamId": "17"
+          },
+          {
+            "athleteId": "4569987",
+            "name": "Jaylen Warren",
+            "points": 9.7,
+            "statLine": "43 rush yds, 2 rec, 34 rec yds",
+            "teamId": "23"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872946"
+      },
       "homeScore": 20,
       "homeTeamId": "17",
       "scheduledAt": "2026-09-20T17:00:00Z",
@@ -1306,9 +2174,36 @@
     "401872947": {
       "awayScore": 6,
       "awayTeamId": "19",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-21",
       "eventId": "401872947",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "16800",
+            "name": "Davante Adams",
+            "points": 39.5,
+            "statLine": "8 rec, 195 rec yds, 2 rec TD",
+            "teamId": "14"
+          },
+          {
+            "athleteId": "12483",
+            "name": "Matthew Stafford",
+            "points": 26.98,
+            "statLine": "327 pass yds, 4 pass TD, 1 INT, -1 rush yds",
+            "teamId": "14"
+          },
+          {
+            "athleteId": "4570037",
+            "name": "Terrance Ferguson",
+            "points": 17.4,
+            "statLine": "6 rec, 54 rec yds, 1 rec TD",
+            "teamId": "14"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872947"
+      },
       "homeScore": 28,
       "homeTeamId": "14",
       "scheduledAt": "2026-09-22T00:15:00Z",
@@ -1325,9 +2220,36 @@
     "401872948": {
       "awayScore": 35,
       "awayTeamId": "1",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-24",
       "eventId": "401872948",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4430807",
+            "name": "Bijan Robinson",
+            "points": 35.3,
+            "statLine": "194 rush yds, 2 rush TD, 2 rec, 19 rec yds",
+            "teamId": "1"
+          },
+          {
+            "athleteId": "4426502",
+            "name": "Drake London",
+            "points": 28.4,
+            "statLine": "9 rec, 194 rec yds",
+            "teamId": "1"
+          },
+          {
+            "athleteId": "4248528",
+            "name": "Christian Watson",
+            "points": 22.6,
+            "statLine": "7 rec, 96 rec yds, 1 rec TD",
+            "teamId": "9"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872948"
+      },
       "homeScore": 14,
       "homeTeamId": "9",
       "scheduledAt": "2026-09-25T00:15:00Z",
@@ -1344,9 +2266,36 @@
     "401872949": {
       "awayScore": 18,
       "awayTeamId": "29",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872949",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "5083076",
+            "name": "Harold Fannin Jr.",
+            "points": 24.1,
+            "statLine": "7 rec, 51 rec yds, 2 rec TD",
+            "teamId": "5"
+          },
+          {
+            "athleteId": "3122840",
+            "name": "Deshaun Watson",
+            "points": 18.26,
+            "statLine": "144 pass yds, 2 pass TD, 45 rush yds",
+            "teamId": "5"
+          },
+          {
+            "athleteId": "4241416",
+            "name": "Chuba Hubbard",
+            "points": 15.0,
+            "statLine": "82 rush yds, 4 rec, 28 rec yds",
+            "teamId": "29"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872949"
+      },
       "homeScore": 21,
       "homeTeamId": "5",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -1363,9 +2312,36 @@
     "401872950": {
       "awayScore": 27,
       "awayTeamId": "4",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872950",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4362628",
+            "name": "Ja'Marr Chase",
+            "points": 24.8,
+            "statLine": "9 rec, 98 rec yds, 1 rec TD",
+            "teamId": "4"
+          },
+          {
+            "athleteId": "8439",
+            "name": "Aaron Rodgers",
+            "points": 22.68,
+            "statLine": "292 pass yds, 3 pass TD, 1 INT, 10 rush yds",
+            "teamId": "23"
+          },
+          {
+            "athleteId": "3915511",
+            "name": "Joe Burrow",
+            "points": 22.58,
+            "statLine": "282 pass yds, 3 pass TD, 13 rush yds, 1 fumble lost",
+            "teamId": "4"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872950"
+      },
       "homeScore": 30,
       "homeTeamId": "23",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -1382,9 +2358,36 @@
     "401872951": {
       "awayScore": 17,
       "awayTeamId": "34",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872951",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "15818",
+            "name": "Keenan Allen",
+            "points": 18.3,
+            "statLine": "6 rec, 63 rec yds, 1 rec TD",
+            "teamId": "11"
+          },
+          {
+            "athleteId": "4431459",
+            "name": "Tyler Warren",
+            "points": 14.7,
+            "statLine": "2 rush yds, 9 rec, 55 rec yds",
+            "teamId": "11"
+          },
+          {
+            "athleteId": "4688813",
+            "name": "Josh Downs",
+            "points": 12.7,
+            "statLine": "5 rec, 77 rec yds",
+            "teamId": "11"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872951"
+      },
       "homeScore": 19,
       "homeTeamId": "11",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -1401,9 +2404,36 @@
     "401872952": {
       "awayScore": 24,
       "awayTeamId": "12",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872952",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4567048",
+            "name": "Kenneth Walker III",
+            "points": 21.3,
+            "statLine": "70 rush yds, 1 rush TD, 2 rec, 3 rec yds, 1 rec TD",
+            "teamId": "12"
+          },
+          {
+            "athleteId": "3139477",
+            "name": "Patrick Mahomes",
+            "points": 15.94,
+            "statLine": "246 pass yds, 2 pass TD, 1 INT, 1 rush yds",
+            "teamId": "12"
+          },
+          {
+            "athleteId": "4428331",
+            "name": "Rashee Rice",
+            "points": 15.8,
+            "statLine": "7 rec, 88 rec yds",
+            "teamId": "12"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872952"
+      },
       "homeScore": 10,
       "homeTeamId": "15",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -1420,9 +2450,36 @@
     "401872953": {
       "awayScore": 16,
       "awayTeamId": "24",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872953",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4379399",
+            "name": "James Cook III",
+            "points": 19.4,
+            "statLine": "154 rush yds, 1 rush TD, 1 fumble lost",
+            "teamId": "2"
+          },
+          {
+            "athleteId": "3918298",
+            "name": "Josh Allen",
+            "points": 17.46,
+            "statLine": "204 pass yds, 2 INT, 22 rush yds, 2 rush TD, 1 rec, 1 rec yds, 1 fumble lost",
+            "teamId": "2"
+          },
+          {
+            "athleteId": "4596334",
+            "name": "Keaton Mitchell",
+            "points": 13.7,
+            "statLine": "52 rush yds, 3 rec, -5 rec yds, 1 rec TD",
+            "teamId": "24"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872953"
+      },
       "homeScore": 24,
       "homeTeamId": "2",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -1439,9 +2496,36 @@
     "401872954": {
       "awayScore": 24,
       "awayTeamId": "20",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872954",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4429795",
+            "name": "Jahmyr Gibbs",
+            "points": 41.4,
+            "statLine": "99 rush yds, 2 rush TD, 7 rec, 65 rec yds, 1 rec TD",
+            "teamId": "8"
+          },
+          {
+            "athleteId": "4569618",
+            "name": "Garrett Wilson",
+            "points": 26.7,
+            "statLine": "10 rec, 107 rec yds, 1 rec TD",
+            "teamId": "20"
+          },
+          {
+            "athleteId": "15864",
+            "name": "Geno Smith",
+            "points": 24.04,
+            "statLine": "321 pass yds, 3 pass TD, 12 rush yds, 1 fumble lost",
+            "teamId": "20"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872954"
+      },
       "homeScore": 31,
       "homeTeamId": "8",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -1458,9 +2542,36 @@
     "401872955": {
       "awayScore": 31,
       "awayTeamId": "26",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872955",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4430878",
+            "name": "Jaxon Smith-Njigba",
+            "points": 35.36,
+            "statLine": "14 pass yds, 10 rec, 128 rec yds, 2 rec TD",
+            "teamId": "26"
+          },
+          {
+            "athleteId": "3912547",
+            "name": "Sam Darnold",
+            "points": 27.66,
+            "statLine": "379 pass yds, 4 pass TD, 2 INT, 5 rush yds",
+            "teamId": "26"
+          },
+          {
+            "athleteId": "2576980",
+            "name": "Marcus Mariota",
+            "points": 20.42,
+            "statLine": "183 pass yds, 3 pass TD, 11 rush yds",
+            "teamId": "28"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872955"
+      },
       "homeScore": 33,
       "homeTeamId": "28",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -1477,9 +2588,36 @@
     "401872956": {
       "awayScore": 7,
       "awayTeamId": "10",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872956",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4569587",
+            "name": "Wan'Dale Robinson",
+            "points": 18.7,
+            "statLine": "7 rec, 57 rec yds, 1 rec TD",
+            "teamId": "10"
+          },
+          {
+            "athleteId": "3916148",
+            "name": "Tony Pollard",
+            "points": 13.6,
+            "statLine": "74 rush yds, 4 rec, 22 rec yds",
+            "teamId": "10"
+          },
+          {
+            "athleteId": "4696981",
+            "name": "Cam Skattebo",
+            "points": 13.0,
+            "statLine": "60 rush yds, 3 rec, 40 rec yds",
+            "teamId": "19"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872956"
+      },
       "homeScore": 12,
       "homeTeamId": "19",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -1496,9 +2634,36 @@
     "401872957": {
       "awayScore": 6,
       "awayTeamId": "17",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872957",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4360310",
+            "name": "Trevor Lawrence",
+            "points": 19.78,
+            "statLine": "182 pass yds, 3 pass TD, 1 INT, 25 rush yds",
+            "teamId": "30"
+          },
+          {
+            "athleteId": "3916433",
+            "name": "Jakobi Meyers",
+            "points": 19.4,
+            "statLine": "7 rec, 64 rec yds, 1 rec TD",
+            "teamId": "30"
+          },
+          {
+            "athleteId": "4882093",
+            "name": "Bhayshul Tuten",
+            "points": 17.0,
+            "statLine": "73 rush yds, 1 rush TD, 2 rec, 17 rec yds",
+            "teamId": "30"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872957"
+      },
       "homeScore": 35,
       "homeTeamId": "30",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -1515,9 +2680,36 @@
     "401872958": {
       "awayScore": 30,
       "awayTeamId": "22",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872958",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4361741",
+            "name": "Brock Purdy",
+            "points": 31.28,
+            "statLine": "297 pass yds, 4 pass TD, 34 rush yds",
+            "teamId": "25"
+          },
+          {
+            "athleteId": "3040151",
+            "name": "George Kittle",
+            "points": 26.2,
+            "statLine": "6 rec, 82 rec yds, 2 rec TD",
+            "teamId": "25"
+          },
+          {
+            "athleteId": "4360761",
+            "name": "Michael Wilson",
+            "points": 25.9,
+            "statLine": "11 rec, 89 rec yds, 1 rec TD",
+            "teamId": "22"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872958"
+      },
       "homeScore": 36,
       "homeTeamId": "25",
       "scheduledAt": "2026-09-27T20:05:00Z",
@@ -1534,9 +2726,36 @@
     "401872959": {
       "awayScore": 23,
       "awayTeamId": "16",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872959",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4429205",
+            "name": "Jordan Addison",
+            "points": 20.0,
+            "statLine": "5 rec, 90 rec yds, 1 rec TD",
+            "teamId": "16"
+          },
+          {
+            "athleteId": "3042519",
+            "name": "Aaron Jones Sr.",
+            "points": 14.2,
+            "statLine": "58 rush yds, 5 rec, 34 rec yds",
+            "teamId": "16"
+          },
+          {
+            "athleteId": "3052587",
+            "name": "Baker Mayfield",
+            "points": 11.28,
+            "statLine": "217 pass yds, 1 pass TD, 1 INT, 6 rush yds",
+            "teamId": "27"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872959"
+      },
       "homeScore": 16,
       "homeTeamId": "27",
       "scheduledAt": "2026-09-27T20:05:00Z",
@@ -1553,9 +2772,36 @@
     "401872960": {
       "awayScore": 34,
       "awayTeamId": "33",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872960",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "3043078",
+            "name": "Derrick Henry",
+            "points": 21.9,
+            "statLine": "89 rush yds, 2 rush TD, 1 rec",
+            "teamId": "33"
+          },
+          {
+            "athleteId": "3916387",
+            "name": "Lamar Jackson",
+            "points": 20.44,
+            "statLine": "186 pass yds, 2 pass TD, 50 rush yds",
+            "teamId": "33"
+          },
+          {
+            "athleteId": "4361579",
+            "name": "Javonte Williams",
+            "points": 18.3,
+            "statLine": "98 rush yds, 1 rush TD, 2 rec, 5 rec yds",
+            "teamId": "6"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872960"
+      },
       "homeScore": 31,
       "homeTeamId": "6",
       "scheduledAt": "2026-09-27T20:25:00Z",
@@ -1572,9 +2818,36 @@
     "401872961": {
       "awayScore": 35,
       "awayTeamId": "13",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872961",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4432665",
+            "name": "Brock Bowers",
+            "points": 27.6,
+            "statLine": "10 rec, 116 rec yds, 1 rec TD",
+            "teamId": "13"
+          },
+          {
+            "athleteId": "4360689",
+            "name": "Tyler Shough",
+            "points": 23.8,
+            "statLine": "255 pass yds, 4 pass TD, 1 INT, 36 rush yds, 2 fumble lost",
+            "teamId": "18"
+          },
+          {
+            "athleteId": "3929645",
+            "name": "Juwan Johnson",
+            "points": 23.3,
+            "statLine": "8 rec, 53 rec yds, 2 rec TD, 1 fumble lost",
+            "teamId": "18"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872961"
+      },
       "homeScore": 27,
       "homeTeamId": "18",
       "scheduledAt": "2026-09-27T20:25:00Z",
@@ -1591,9 +2864,36 @@
     "401872962": {
       "awayScore": 26,
       "awayTeamId": "14",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872962",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4430737",
+            "name": "Kyren Williams",
+            "points": 21.8,
+            "statLine": "88 rush yds, 6 rec, 70 rec yds",
+            "teamId": "14"
+          },
+          {
+            "athleteId": "12483",
+            "name": "Matthew Stafford",
+            "points": 20.9,
+            "statLine": "390 pass yds, 2 pass TD, 2 INT, 13 rush yds",
+            "teamId": "14"
+          },
+          {
+            "athleteId": "16800",
+            "name": "Davante Adams",
+            "points": 20.7,
+            "statLine": "7 rec, 137 rec yds",
+            "teamId": "14"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872962"
+      },
       "homeScore": 30,
       "homeTeamId": "7",
       "scheduledAt": "2026-09-28T00:20:00Z",
@@ -1610,9 +2910,36 @@
     "401872963": {
       "awayScore": 7,
       "awayTeamId": "21",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-28",
       "eventId": "401872963",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "15168",
+            "name": "Case Keenum",
+            "points": 24.48,
+            "statLine": "247 pass yds, 2 pass TD, 6 rush yds, 1 rush TD",
+            "teamId": "3"
+          },
+          {
+            "athleteId": "2973405",
+            "name": "Kalif Raymond",
+            "points": 21.0,
+            "statLine": "6 rec, 90 rec yds, 1 rec TD",
+            "teamId": "3"
+          },
+          {
+            "athleteId": "4685278",
+            "name": "Luther Burden III",
+            "points": 19.8,
+            "statLine": "7 rush yds, 7 rec, 61 rec yds, 1 rec TD",
+            "teamId": "3"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872963"
+      },
       "homeScore": 27,
       "homeTeamId": "3",
       "scheduledAt": "2026-09-29T00:15:00Z",
@@ -1629,7 +2956,7 @@
   },
   "note": "Weeks 1-3 are historical results only. No picks, prediction grading, reassessment triggers, or new-final browser notifications are created.",
   "purpose": "historical-results-only",
-  "revision": "5eb64081f40b2a834e1ce3bd217f8ece546a520dd0fabf938e83844ebd0fef0a",
+  "revision": "a05df510cc123de8c4ab84e0f84bc001926d3d5f3ccf5a8abbbf5dc2f054868f",
   "schemaVersion": 1,
   "season": 2026,
   "source": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard"
@@ -58434,6 +59761,7 @@
       "explanationPhase": "none",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -58469,6 +59797,7 @@
       "explanationPhase": "none",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -58504,6 +59833,7 @@
       "explanationPhase": "none",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -58539,6 +59869,7 @@
       "explanationPhase": "none",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -58574,6 +59905,7 @@
       "explanationPhase": "none",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -58609,6 +59941,7 @@
       "explanationPhase": "none",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -58644,6 +59977,7 @@
       "explanationPhase": "none",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -58679,6 +60013,7 @@
       "explanationPhase": "none",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -58714,6 +60049,7 @@
       "explanationPhase": "none",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -58749,6 +60085,7 @@
       "explanationPhase": "none",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -58784,6 +60121,7 @@
       "explanationPhase": "none",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -58819,6 +60157,7 @@
       "explanationPhase": "none",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -58854,6 +60193,33 @@
       "explanationPhase": "incorrect-final",
       "explanationRevisionId": "explanation-7b84751112b6fab7718d50c5",
       "explanationUpdatedAt": "2026-10-02T21:50:33Z",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4685702",
+            "name": "Quinshon Judkins",
+            "points": 21.6,
+            "statLine": "53 rush yds, 1 rush TD, 6 rec, 43 rec yds",
+            "teamId": "5"
+          },
+          {
+            "athleteId": "8439",
+            "name": "Aaron Rodgers",
+            "points": 19.96,
+            "statLine": "299 pass yds, 3 pass TD, 2 INT",
+            "teamId": "23"
+          },
+          {
+            "athleteId": "4047650",
+            "name": "DK Metcalf",
+            "points": 16.5,
+            "statLine": "5 rec, 115 rec yds",
+            "teamId": "23"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872964"
+      },
       "firstFinalAt": "2026-10-02T18:14:57Z",
       "hasStarted": true,
       "homeScore": 27,
@@ -58883,17 +60249,44 @@
     "401872965": {
       "awayScore": 30,
       "awayTeamId": "11",
-      "checkedAt": "2026-10-04T21:59:13Z",
+      "checkedAt": "2026-10-04T23:40:27Z",
       "error": null,
       "eventId": "401872965",
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4242335",
+            "name": "Jonathan Taylor",
+            "points": 22.7,
+            "statLine": "95 rush yds, 2 rush TD, 1 rec, 2 rec yds",
+            "teamId": "11"
+          },
+          {
+            "athleteId": "4567156",
+            "name": "Treylon Burks",
+            "points": 11.7,
+            "statLine": "1 rec, 47 rec yds, 1 rec TD",
+            "teamId": "28"
+          },
+          {
+            "athleteId": "4432722",
+            "name": "Athan Kaliakmanis",
+            "points": 11.04,
+            "statLine": "186 pass yds, 1 pass TD, 1 INT, 16 rush yds",
+            "teamId": "28"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872965"
+      },
       "firstFinalAt": "2026-10-04T18:49:01Z",
       "hasStarted": true,
       "homeScore": 13,
       "homeTeamId": "28",
-      "lastAttemptAt": "2026-10-04T21:59:13Z",
+      "lastAttemptAt": "2026-10-04T23:40:27Z",
       "pickAssessmentId": null,
       "pickCutoffAt": "2026-10-04T13:30:00Z",
       "pickEffectiveAt": "2026-10-01T19:23:00Z",
@@ -58927,17 +60320,44 @@
     "401872966": {
       "awayScore": 24,
       "awayTeamId": "22",
-      "checkedAt": "2026-10-04T21:59:13Z",
+      "checkedAt": "2026-10-04T23:40:27Z",
       "error": null,
       "eventId": "401872966",
       "explanationPhase": "incorrect-final",
       "explanationRevisionId": "explanation-94680e74fe565b6d05c8a5ba",
       "explanationUpdatedAt": "2026-10-04T22:16:56Z",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4595348",
+            "name": "Malik Nabers",
+            "points": 23.2,
+            "statLine": "6 rec, 112 rec yds, 1 rec TD",
+            "teamId": "19"
+          },
+          {
+            "athleteId": "2969939",
+            "name": "Jameis Winston",
+            "points": 18.0,
+            "statLine": "250 pass yds, 3 pass TD, 2 INT",
+            "teamId": "19"
+          },
+          {
+            "athleteId": "4360761",
+            "name": "Michael Wilson",
+            "points": 16.5,
+            "statLine": "7 rec, 95 rec yds",
+            "teamId": "22"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872966"
+      },
       "firstFinalAt": "2026-10-04T21:59:13Z",
       "hasStarted": true,
       "homeScore": 36,
       "homeTeamId": "19",
-      "lastAttemptAt": "2026-10-04T21:59:13Z",
+      "lastAttemptAt": "2026-10-04T23:40:27Z",
       "pickAssessmentId": "assessment-9361153b16a65cc2713c7d4f",
       "pickCutoffAt": "2026-10-04T17:00:00Z",
       "pickEffectiveAt": "2026-10-02T19:54:57Z",
@@ -58971,17 +60391,44 @@
     "401872967": {
       "awayScore": 34,
       "awayTeamId": "6",
-      "checkedAt": "2026-10-04T21:59:13Z",
+      "checkedAt": "2026-10-04T23:40:27Z",
       "error": null,
       "eventId": "401872967",
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4241389",
+            "name": "CeeDee Lamb",
+            "points": 41.3,
+            "statLine": "-6 rush yds, 17 rec, 189 rec yds, 1 rec TD",
+            "teamId": "6"
+          },
+          {
+            "athleteId": "4361579",
+            "name": "Javonte Williams",
+            "points": 31.3,
+            "statLine": "62 rush yds, 3 rush TD, 5 rec, 21 rec yds",
+            "teamId": "6"
+          },
+          {
+            "athleteId": "4258173",
+            "name": "Nico Collins",
+            "points": 30.8,
+            "statLine": "7 rec, 118 rec yds, 2 rec TD",
+            "teamId": "34"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872967"
+      },
       "firstFinalAt": "2026-10-04T21:59:13Z",
       "hasStarted": true,
       "homeScore": 30,
       "homeTeamId": "34",
-      "lastAttemptAt": "2026-10-04T21:59:13Z",
+      "lastAttemptAt": "2026-10-04T23:40:27Z",
       "pickAssessmentId": null,
       "pickCutoffAt": "2026-10-04T17:00:00Z",
       "pickEffectiveAt": "2026-10-01T19:23:00Z",
@@ -59015,17 +60462,44 @@
     "401872968": {
       "awayScore": 17,
       "awayTeamId": "9",
-      "checkedAt": "2026-10-04T21:59:13Z",
+      "checkedAt": "2026-10-04T23:40:27Z",
       "error": null,
       "eventId": "401872968",
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4572680",
+            "name": "Tucker Kraft",
+            "points": 16.5,
+            "statLine": "3 rush yds, 6 rec, 42 rec yds, 1 rec TD",
+            "teamId": "9"
+          },
+          {
+            "athleteId": "4036378",
+            "name": "Jordan Love",
+            "points": 13.08,
+            "statLine": "197 pass yds, 2 pass TD, 1 INT, -8 rush yds",
+            "teamId": "9"
+          },
+          {
+            "athleteId": "4701936",
+            "name": "Matthew Golden",
+            "points": 11.7,
+            "statLine": "6 rush yds, 3 rec, 21 rec yds, 1 rec TD",
+            "teamId": "9"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872968"
+      },
       "firstFinalAt": "2026-10-04T21:59:13Z",
       "hasStarted": true,
       "homeScore": 14,
       "homeTeamId": "27",
-      "lastAttemptAt": "2026-10-04T21:59:13Z",
+      "lastAttemptAt": "2026-10-04T23:40:27Z",
       "pickAssessmentId": null,
       "pickCutoffAt": "2026-10-04T17:00:00Z",
       "pickEffectiveAt": "2026-10-01T19:23:00Z",
@@ -59059,17 +60533,44 @@
     "401872969": {
       "awayScore": 22,
       "awayTeamId": "30",
-      "checkedAt": "2026-10-04T21:59:13Z",
+      "checkedAt": "2026-10-04T23:40:27Z",
       "error": null,
       "eventId": "401872969",
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4239993",
+            "name": "Tee Higgins",
+            "points": 26.7,
+            "statLine": "11 rec, 157 rec yds",
+            "teamId": "4"
+          },
+          {
+            "athleteId": "3915511",
+            "name": "Joe Burrow",
+            "points": 23.72,
+            "statLine": "428 pass yds, 1 pass TD, 2 INT, 6 rush yds, 1 rush TD",
+            "teamId": "4"
+          },
+          {
+            "athleteId": "4362238",
+            "name": "Chase Brown",
+            "points": 19.1,
+            "statLine": "10 rush yds, 11 rec, 71 rec yds",
+            "teamId": "4"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872969"
+      },
       "firstFinalAt": "2026-10-04T21:59:13Z",
       "hasStarted": true,
       "homeScore": 17,
       "homeTeamId": "4",
-      "lastAttemptAt": "2026-10-04T21:59:13Z",
+      "lastAttemptAt": "2026-10-04T23:40:27Z",
       "pickAssessmentId": null,
       "pickCutoffAt": "2026-10-04T17:00:00Z",
       "pickEffectiveAt": "2026-10-01T19:23:00Z",
@@ -59103,17 +60604,44 @@
     "401872970": {
       "awayScore": 24,
       "awayTeamId": "14",
-      "checkedAt": "2026-10-04T21:59:13Z",
+      "checkedAt": "2026-10-04T23:40:27Z",
       "error": null,
       "eventId": "401872970",
       "explanationPhase": "incorrect-final",
       "explanationRevisionId": "explanation-c9154ecb6d5d5d5a4d15df15",
       "explanationUpdatedAt": "2026-10-04T22:16:56Z",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4430737",
+            "name": "Kyren Williams",
+            "points": 36.7,
+            "statLine": "80 rush yds, 2 rush TD, 10 rec, 67 rec yds",
+            "teamId": "14"
+          },
+          {
+            "athleteId": "4426515",
+            "name": "Puka Nacua",
+            "points": 27.7,
+            "statLine": "2 rush yds, 1 rush TD, 9 rec, 125 rec yds",
+            "teamId": "14"
+          },
+          {
+            "athleteId": "4715355",
+            "name": "Darius Cooper",
+            "points": 18.3,
+            "statLine": "3 rec, 33 rec yds, 2 rec TD",
+            "teamId": "21"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872970"
+      },
       "firstFinalAt": "2026-10-04T21:59:13Z",
       "hasStarted": true,
       "homeScore": 20,
       "homeTeamId": "21",
-      "lastAttemptAt": "2026-10-04T21:59:13Z",
+      "lastAttemptAt": "2026-10-04T23:40:27Z",
       "pickAssessmentId": null,
       "pickCutoffAt": "2026-10-04T17:00:00Z",
       "pickEffectiveAt": "2026-10-01T19:23:00Z",
@@ -59147,17 +60675,44 @@
     "401872971": {
       "awayScore": 29,
       "awayTeamId": "17",
-      "checkedAt": "2026-10-04T21:59:13Z",
+      "checkedAt": "2026-10-04T23:40:27Z",
       "error": null,
       "eventId": "401872971",
       "explanationPhase": "incorrect-final",
       "explanationRevisionId": "explanation-38720bf215a2257af7487cd5",
       "explanationUpdatedAt": "2026-10-04T22:16:56Z",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4431452",
+            "name": "Drake Maye",
+            "points": 24.16,
+            "statLine": "269 pass yds, 3 pass TD, 1 INT, 54 rush yds, 1 fumble lost",
+            "teamId": "17"
+          },
+          {
+            "athleteId": "4361432",
+            "name": "Romeo Doubs",
+            "points": 23.8,
+            "statLine": "6 rec, 58 rec yds, 2 rec TD",
+            "teamId": "17"
+          },
+          {
+            "athleteId": "4635008",
+            "name": "Keon Coleman",
+            "points": 23.6,
+            "statLine": "6 rec, 116 rec yds, 1 rec TD",
+            "teamId": "2"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872971"
+      },
       "firstFinalAt": "2026-10-04T21:59:13Z",
       "hasStarted": true,
       "homeScore": 26,
       "homeTeamId": "2",
-      "lastAttemptAt": "2026-10-04T21:59:13Z",
+      "lastAttemptAt": "2026-10-04T23:40:27Z",
       "pickAssessmentId": null,
       "pickCutoffAt": "2026-10-04T17:00:00Z",
       "pickEffectiveAt": "2026-10-01T19:23:00Z",
@@ -59191,17 +60746,44 @@
     "401872972": {
       "awayScore": 12,
       "awayTeamId": "20",
-      "checkedAt": "2026-10-04T21:59:13Z",
+      "checkedAt": "2026-10-04T23:40:27Z",
       "error": null,
       "eventId": "401872972",
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4608686",
+            "name": "Kyle Monangai",
+            "points": 28.0,
+            "statLine": "146 rush yds, 2 rush TD, 1 rec, 4 rec yds",
+            "teamId": "3"
+          },
+          {
+            "athleteId": "4431299",
+            "name": "Rome Odunze",
+            "points": 15.4,
+            "statLine": "6 rec, 94 rec yds",
+            "teamId": "3"
+          },
+          {
+            "athleteId": "4569371",
+            "name": "Isaiah Williams",
+            "points": 15.3,
+            "statLine": "2 rec, 73 rec yds, 1 rec TD",
+            "teamId": "20"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872972"
+      },
       "firstFinalAt": "2026-10-04T21:59:13Z",
       "hasStarted": true,
       "homeScore": 23,
       "homeTeamId": "3",
-      "lastAttemptAt": "2026-10-04T21:59:13Z",
+      "lastAttemptAt": "2026-10-04T23:40:27Z",
       "pickAssessmentId": null,
       "pickCutoffAt": "2026-10-04T17:00:00Z",
       "pickEffectiveAt": "2026-10-01T19:23:00Z",
@@ -59235,17 +60817,44 @@
     "401872973": {
       "awayScore": 18,
       "awayTeamId": "10",
-      "checkedAt": "2026-10-04T21:59:13Z",
+      "checkedAt": "2026-10-04T23:40:27Z",
       "error": null,
       "eventId": "401872973",
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4429615",
+            "name": "Zay Flowers",
+            "points": 25.8,
+            "statLine": "8 rec, 118 rec yds, 1 rec TD",
+            "teamId": "33"
+          },
+          {
+            "athleteId": "4871023",
+            "name": "Carnell Tate",
+            "points": 21.5,
+            "statLine": "9 rec, 145 rec yds, 1 fumble lost",
+            "teamId": "10"
+          },
+          {
+            "athleteId": "3916387",
+            "name": "Lamar Jackson",
+            "points": 18.88,
+            "statLine": "222 pass yds, 2 pass TD, 20 rush yds",
+            "teamId": "33"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872973"
+      },
       "firstFinalAt": "2026-10-04T21:59:13Z",
       "hasStarted": true,
       "homeScore": 24,
       "homeTeamId": "33",
-      "lastAttemptAt": "2026-10-04T21:59:13Z",
+      "lastAttemptAt": "2026-10-04T23:40:27Z",
       "pickAssessmentId": null,
       "pickCutoffAt": "2026-10-04T17:00:00Z",
       "pickEffectiveAt": "2026-10-01T19:23:00Z",
@@ -59277,26 +60886,53 @@
       "winnerTeamId": "33"
     },
     "401872974": {
-      "awayScore": null,
+      "awayScore": 10,
       "awayTeamId": "15",
-      "checkedAt": "2026-10-04T22:17:26Z",
+      "checkedAt": "2026-10-04T23:40:27Z",
       "error": null,
       "eventId": "401872974",
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
-      "firstFinalAt": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4036133",
+            "name": "T.J. Hockenson",
+            "points": 24.9,
+            "statLine": "13 rec, 119 rec yds",
+            "teamId": "16"
+          },
+          {
+            "athleteId": "4711533",
+            "name": "Ollie Gordon II",
+            "points": 18.0,
+            "statLine": "100 rush yds, 1 rush TD, 2 rec",
+            "teamId": "15"
+          },
+          {
+            "athleteId": "3042519",
+            "name": "Aaron Jones Sr.",
+            "points": 16.8,
+            "statLine": "94 rush yds, 4 rec, 34 rec yds",
+            "teamId": "16"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872974"
+      },
+      "firstFinalAt": "2026-10-04T23:40:27Z",
       "hasStarted": true,
-      "homeScore": null,
+      "homeScore": 15,
       "homeTeamId": "16",
-      "lastAttemptAt": "2026-10-04T22:17:26Z",
+      "lastAttemptAt": "2026-10-04T23:40:27Z",
       "pickAssessmentId": "assessment-5eb306067a54889f037ac6ed",
       "pickCutoffAt": "2026-10-04T20:05:00Z",
       "pickEffectiveAt": "2026-10-04T19:08:40Z",
       "pickExplanation": "I expect the Minnesota Vikings to beat the Miami Dolphins because Minnesota's defense should make a Miami offense that scored 36 points in its first three games work for every drive. Justin Jefferson is inactive for this matchup, so Minnesota's own scoring ceiling is less certain, but Miami's difficult opening schedule and De'Von Achane's IR absence do not give me enough reason to reverse the pick.",
       "pickLockedAt": "2026-10-04T21:59:13Z",
       "pickReason": "I expect the Minnesota Vikings to beat the Miami Dolphins because Minnesota's defense should make a Miami offense that scored 36 points in its first three games work for every drive. Justin Jefferson is inactive for this matchup, so Minnesota's own scoring ceiling is less certain, but Miami's difficult opening schedule and De'Von Achane's IR absence do not give me enough reason to reverse the pick.",
-      "pickResult": "pending",
+      "pickResult": "correct",
       "pickRevisionId": "assessment-5eb306067a54889f037ac6ed:401872974",
       "pregameExplanation": "I expect the Minnesota Vikings to beat the Miami Dolphins because Minnesota's defense should make a Miami offense that scored 36 points in its first three games work for every drive. Justin Jefferson is inactive for this matchup, so Minnesota's own scoring ceiling is less certain, but Miami's difficult opening schedule and De'Von Achane's IR absence do not give me enough reason to reverse the pick.",
       "projectedScore": {
@@ -59311,36 +60947,63 @@
       },
       "projectedScoreLockedAt": "2026-10-04T21:59:13Z",
       "projectedScoreStatus": "available",
-      "resultUpdatedAt": null,
+      "resultUpdatedAt": "2026-10-04T23:40:27Z",
       "scheduledAt": "2026-10-04T20:05:00Z",
       "scoredPickTeamId": "16",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261004",
-      "status": "in_progress",
-      "statusDetail": "In progress - awaiting final",
+      "status": "final",
+      "statusDetail": "Final",
       "timeConfirmed": true,
-      "winnerTeamId": null
+      "winnerTeamId": "16"
     },
     "401872975": {
-      "awayScore": null,
+      "awayScore": 14,
       "awayTeamId": "7",
-      "checkedAt": "2026-10-04T22:17:26Z",
+      "checkedAt": "2026-10-04T23:40:27Z",
       "error": null,
       "eventId": "401872975",
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
-      "firstFinalAt": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4361741",
+            "name": "Brock Purdy",
+            "points": 19.62,
+            "statLine": "218 pass yds, 2 pass TD, 29 rush yds",
+            "teamId": "25"
+          },
+          {
+            "athleteId": "4568490",
+            "name": "RJ Harvey",
+            "points": 19.3,
+            "statLine": "25 rush yds, 10 rec, 68 rec yds",
+            "teamId": "7"
+          },
+          {
+            "athleteId": "3126486",
+            "name": "Deebo Samuel Sr.",
+            "points": 18.0,
+            "statLine": "44 rush yds, 5 rec, 26 rec yds, 1 rec TD",
+            "teamId": "25"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872975"
+      },
+      "firstFinalAt": "2026-10-04T23:40:27Z",
       "hasStarted": true,
-      "homeScore": null,
+      "homeScore": 24,
       "homeTeamId": "25",
-      "lastAttemptAt": "2026-10-04T22:17:26Z",
+      "lastAttemptAt": "2026-10-04T23:40:27Z",
       "pickAssessmentId": null,
       "pickCutoffAt": "2026-10-04T20:25:00Z",
       "pickEffectiveAt": "2026-10-01T19:23:00Z",
       "pickExplanation": "I expect the San Francisco 49ers to beat the Denver Broncos because Brock Purdy's early efficiency should keep San Francisco's offense productive. The home setting should help, but neither that setting nor the expected advantage will make the result certain.",
       "pickLockedAt": "2026-10-04T21:59:13Z",
       "pickReason": "Purdy's hot start keeps rolling",
-      "pickResult": "pending",
+      "pickResult": "correct",
       "pickRevisionId": "original-401872975",
       "pregameExplanation": "I expect the San Francisco 49ers to beat the Denver Broncos because Brock Purdy's early efficiency should keep San Francisco's offense productive. The home setting should help, but neither that setting nor the expected advantage will make the result certain.",
       "projectedScore": {
@@ -59355,29 +61018,30 @@
       },
       "projectedScoreLockedAt": "2026-10-04T21:59:13Z",
       "projectedScoreStatus": "available",
-      "resultUpdatedAt": null,
+      "resultUpdatedAt": "2026-10-04T23:40:27Z",
       "scheduledAt": "2026-10-04T20:25:00Z",
       "scoredPickTeamId": "25",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261004",
-      "status": "in_progress",
-      "statusDetail": "In progress - awaiting final",
+      "status": "final",
+      "statusDetail": "Final",
       "timeConfirmed": true,
-      "winnerTeamId": null
+      "winnerTeamId": "25"
     },
     "401872976": {
       "awayScore": null,
       "awayTeamId": "12",
-      "checkedAt": "2026-10-04T22:17:26Z",
+      "checkedAt": "2026-10-04T23:40:27Z",
       "error": null,
       "eventId": "401872976",
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": true,
       "homeScore": null,
       "homeTeamId": "13",
-      "lastAttemptAt": "2026-10-04T22:17:26Z",
+      "lastAttemptAt": "2026-10-04T23:40:27Z",
       "pickAssessmentId": null,
       "pickCutoffAt": "2026-10-04T20:25:00Z",
       "pickEffectiveAt": "2026-10-01T19:23:00Z",
@@ -59411,17 +61075,18 @@
     "401872977": {
       "awayScore": null,
       "awayTeamId": "24",
-      "checkedAt": "2026-10-04T22:17:26Z",
+      "checkedAt": "2026-10-04T23:40:27Z",
       "error": null,
       "eventId": "401872977",
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": true,
       "homeScore": null,
       "homeTeamId": "26",
-      "lastAttemptAt": "2026-10-04T22:17:26Z",
+      "lastAttemptAt": "2026-10-04T23:40:27Z",
       "pickAssessmentId": "assessment-5eb306067a54889f037ac6ed",
       "pickCutoffAt": "2026-10-04T20:25:00Z",
       "pickEffectiveAt": "2026-10-04T19:08:40Z",
@@ -59461,6 +61126,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -59505,6 +61171,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -59549,6 +61216,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -59593,6 +61261,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -59637,6 +61306,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -59681,6 +61351,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -59725,6 +61396,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -59769,6 +61441,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -59813,6 +61486,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -59857,6 +61531,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -59901,6 +61576,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -59945,6 +61621,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -59989,6 +61666,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60033,6 +61711,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60077,6 +61756,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60121,6 +61801,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60165,6 +61846,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60209,6 +61891,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60253,6 +61936,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60297,6 +61981,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60341,6 +62026,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60385,6 +62071,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60429,6 +62116,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60473,6 +62161,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60517,6 +62206,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60561,6 +62251,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60605,6 +62296,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60649,6 +62341,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60693,6 +62386,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60737,6 +62431,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60781,6 +62476,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60825,6 +62521,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60869,6 +62566,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60913,6 +62611,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -60957,6 +62656,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61001,6 +62701,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61045,6 +62746,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61089,6 +62791,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61133,6 +62836,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61177,6 +62881,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61221,6 +62926,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61265,6 +62971,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61309,6 +63016,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61353,6 +63061,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61397,6 +63106,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61441,6 +63151,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61485,6 +63196,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61529,6 +63241,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61573,6 +63286,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61617,6 +63331,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61661,6 +63376,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61705,6 +63421,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61749,6 +63466,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61793,6 +63511,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61837,6 +63556,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61881,6 +63601,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61925,6 +63646,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -61969,6 +63691,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62013,6 +63736,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62057,6 +63781,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62101,6 +63826,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62145,6 +63871,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62189,6 +63916,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62233,6 +63961,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62277,6 +64006,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62321,6 +64051,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62365,6 +64096,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62409,6 +64141,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62453,6 +64186,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62497,6 +64231,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62541,6 +64276,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62585,6 +64321,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62629,6 +64366,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62673,6 +64411,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62717,6 +64456,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62761,6 +64501,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62805,6 +64546,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62849,6 +64591,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62893,6 +64636,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62937,6 +64681,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -62981,6 +64726,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63025,6 +64771,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63069,6 +64816,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63113,6 +64861,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63157,6 +64906,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63201,6 +64951,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63245,6 +64996,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63289,6 +65041,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63333,6 +65086,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63377,6 +65131,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63421,6 +65176,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63465,6 +65221,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63509,6 +65266,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63553,6 +65311,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63597,6 +65356,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63641,6 +65401,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63685,6 +65446,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63729,6 +65491,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63773,6 +65536,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63817,6 +65581,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63861,6 +65626,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63905,6 +65671,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63949,6 +65716,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -63993,6 +65761,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64037,6 +65806,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64081,6 +65851,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64125,6 +65896,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64169,6 +65941,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64213,6 +65986,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64257,6 +66031,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64301,6 +66076,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64345,6 +66121,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64389,6 +66166,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64433,6 +66211,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64477,6 +66256,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64521,6 +66301,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64565,6 +66346,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64609,6 +66391,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64653,6 +66436,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64697,6 +66481,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64741,6 +66526,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64785,6 +66571,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64829,6 +66616,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64873,6 +66661,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64917,6 +66706,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -64961,6 +66751,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65005,6 +66796,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65049,6 +66841,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65093,6 +66886,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65137,6 +66931,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65181,6 +66976,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65225,6 +67021,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65269,6 +67066,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65313,6 +67111,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65357,6 +67156,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65401,6 +67201,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65445,6 +67246,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65489,6 +67291,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65533,6 +67336,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65577,6 +67381,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65621,6 +67426,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65665,6 +67471,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65709,6 +67516,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65753,6 +67561,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65797,6 +67606,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65841,6 +67651,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65885,6 +67696,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65929,6 +67741,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -65973,6 +67786,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66017,6 +67831,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66061,6 +67876,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66105,6 +67921,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66149,6 +67966,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66193,6 +68011,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66237,6 +68056,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66281,6 +68101,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66325,6 +68146,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66369,6 +68191,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66413,6 +68236,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66457,6 +68281,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66501,6 +68326,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66545,6 +68371,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66589,6 +68416,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66633,6 +68461,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66677,6 +68506,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66721,6 +68551,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66765,6 +68596,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66809,6 +68641,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66853,6 +68686,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66897,6 +68731,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66941,6 +68776,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -66985,6 +68821,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67029,6 +68866,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67073,6 +68911,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67117,6 +68956,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67161,6 +69001,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67205,6 +69046,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67249,6 +69091,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67293,6 +69136,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67337,6 +69181,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67381,6 +69226,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67425,6 +69271,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67469,6 +69316,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67513,6 +69361,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67557,6 +69406,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67601,6 +69451,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67645,6 +69496,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67689,6 +69541,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67733,6 +69586,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67777,6 +69631,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67821,6 +69676,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67865,6 +69721,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67909,6 +69766,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67953,6 +69811,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -67997,6 +69856,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -68041,6 +69901,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -68085,6 +69946,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -68129,6 +69991,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -68173,6 +70036,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -68217,6 +70081,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -68261,6 +70126,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -68305,6 +70171,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -68349,6 +70216,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -68393,6 +70261,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -68437,6 +70306,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -68481,6 +70351,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -68525,6 +70396,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -68569,6 +70441,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -68613,6 +70486,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -68657,6 +70531,7 @@
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -68701,6 +70576,7 @@
       "explanationPhase": "none",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
+      "fantasyLeaders": null,
       "firstFinalAt": null,
       "hasStarted": false,
       "homeScore": null,
@@ -68728,14 +70604,14 @@
       "winnerTeamId": null
     }
   },
-  "lastAttemptAt": "2026-10-04T22:17:26Z",
-  "lastResultAt": "2026-10-04T21:59:13Z",
-  "lastSuccessfulCheckAt": "2026-10-04T22:17:26Z",
+  "lastAttemptAt": "2026-10-04T23:40:27Z",
+  "lastResultAt": "2026-10-04T23:40:27Z",
+  "lastSuccessfulCheckAt": "2026-10-04T23:40:27Z",
   "monitoringComplete": false,
-  "nextCheckAt": "2026-10-04T22:22:26Z",
+  "nextCheckAt": "2026-10-04T23:45:27Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-10-04T22:17:26Z",
-  "revision": "d60ac2d35a54a4dd61012081451e241615825af20ce364b23cddee1a0717cdbe",
+  "publishedAt": "2026-10-04T23:40:27Z",
+  "revision": "eef340f5693d9c039fc32252a6f70ccd028e5892b1591d280094dd71ba2fe289",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
@@ -68982,6 +70858,24 @@
       const finalScore = (game, result) => result.status === "final" ? `${teamLabel(game.awayId)} ${result.awayScore} - ${teamLabel(game.homeId)} ${result.homeScore}` : "";
       const projectedScoreText = (projection) => projection ?
         `${teamLabel(projection.awayTeamId)} ${projection.awayScore} - ${teamLabel(projection.homeTeamId)} ${projection.homeScore}` : "";
+      const pickState = (result) => result.status !== "final" ? "pending" :
+        ["correct", "incorrect", "tie"].includes(result.pickResult) ? result.pickResult : "pending";
+      const fantasyText = (result) => result && result.fantasyLeaders ? result.fantasyLeaders.players.map((player, index) =>
+        `${index + 1}. ${player.name} (${teamLabel(player.teamId)}) ${player.points.toFixed(2)} pts${player.statLine ? ` - ${player.statLine}` : ""}`).join("; ") : "";
+      function fantasyBlock(result) {
+        if (result.status !== "final" || !result.fantasyLeaders || !Array.isArray(result.fantasyLeaders.players)) return null;
+        const block = element("div", "fantasy-leaders");
+        block.append(element("span", "fantasy-title", `Top fantasy players (${result.fantasyLeaders.scoring})`));
+        const list = element("ol", "");
+        for (const player of result.fantasyLeaders.players.slice(0, 3)) {
+          const item = element("li", "");
+          item.append(`${player.name} (${teamLabel(player.teamId)}) `, element("span", "fantasy-points", `${player.points.toFixed(2)} pts`));
+          if (player.statLine) item.append(element("span", "fantasy-line", player.statLine));
+          list.append(item);
+        }
+        block.append(list);
+        return block;
+      }
       const winnerText = (result) => result.status !== "final" ? "Not final" : result.winnerTeamId === null ? "Tie / no winner" : teamLabel(result.winnerTeamId);
       const timestampText = (value) => value ? `${formatTimestamp.format(new Date(value))} ET` : "Not yet available";
       function displayDateFor(game) {
@@ -69185,7 +71079,8 @@
             projectedScoreText(resultFor(game).projectedScore), resultFor(game).projectedScore ? "predicted projected score forecast" : "",
             resultFor(game).pickExplanation || "", resultFor(game).statusDetail,
             resultFor(game).pickResult || "", finalScore(game, resultFor(game)),
-            winnerText(resultFor(game))].join(" ").toLowerCase().includes(term))
+            winnerText(resultFor(game)), fantasyText(resultFor(game)),
+            game.historical ? "" : `pick ${pickState(resultFor(game))}`].join(" ").toLowerCase().includes(term))
         );
         const winnersOnly = resultView.value === "winners";
         const projectionsOnly = resultView.value === "projections";
@@ -69247,8 +71142,11 @@
           if (game.venue) matchupCell.append(element("span", "venue", `(${game.venue})`));
           const pickCell = element("td", "pick-cell");
           if (!game.historical && !winnersOnly) {
-            const pick = element("span", "pick-name", pickLabel(game));
-            pick.title = teams[result.scoredPickTeamId] ? teams[result.scoredPickTeamId].fullName : "Awaiting a verified pregame pick";
+            const state = result.scoredPickTeamId === null ? "pending" : pickState(result);
+            const pick = element("span", `pick-name pick-${state}`, pickLabel(game));
+            pick.dataset.pickState = state;
+            pick.title = (teams[result.scoredPickTeamId] ? teams[result.scoredPickTeamId].fullName : "Awaiting a verified pregame pick") +
+              (state === "correct" ? " - correct pick" : state === "incorrect" ? " - wrong pick" : state === "tie" ? " - tie" : "");
             pickCell.append(pick);
             if (result.projectedScore) {
               pickCell.append(
@@ -69273,6 +71171,12 @@
           }
           const reasonCell = element("td", "reason-cell");
           if (!game.historical && !winnersOnly && result.pickExplanation) {
+            const state = pickState(result);
+            if (state === "correct" || state === "incorrect") {
+              reasonCell.classList.add(`reason-${state}`);
+              reasonCell.append(element("span", "reason-label", state === "correct" ? "\u2713 Pick was correct" :
+                result.explanationPhase === "incorrect-final" ? "\u2717 Why the pick was wrong" : "\u2717 Pick was wrong - postgame review pending"));
+            }
             reasonCell.append(element("p", "", result.pickExplanation));
           }
           const resultCell = element("td", "result-cell");
@@ -69282,6 +71186,8 @@
               element("span", "final-score", finalScore(game, result)),
               element("span", `actual-winner${historicalWinner ? " historical-winner" : ""}`, result.winnerTeamId === null ? "Tie / no winner" : `Winner: ${winnerText(result)}`)
             );
+            const leaders = fantasyBlock(result);
+            if (leaders) resultCell.append(leaders);
           }
           if (!game.historical && !winnersOnly) {
             const verdict = result.pickResult === "no_pick" ? "No pregame pick" : result.pickResult[0].toUpperCase() + result.pickResult.slice(1);
@@ -69389,18 +71295,19 @@
       byId("empty-reset-button").addEventListener("click", resetView);
 
       exportButton.addEventListener("click", () => {
-        const csvHeaders = resultsOnly ? ["Date", "Day", "Week or round", "Teams", "Winner", "Final score", "Game status", "Kickoff (UTC)", "Source checked (UTC)", "Source", "ESPN event ID"] :
+        const csvHeaders = resultsOnly ? ["Date", "Day", "Week or round", "Teams", "Winner", "Final score", "Game status", "Kickoff (UTC)", "Source checked (UTC)", "Source", "ESPN event ID", "Top fantasy players (PPR)"] :
           [...headers.slice(0, 5), "Game status", "Final score", "Winner", "Pick result", "Current kickoff (UTC)", "Result updated (UTC)", "Source checked (UTC)", "Source issue",
           "Week or round", "Original or initial pick", "Original or initial reason", "Pick effective (UTC)", "Pick locked (UTC)", "Last assessment (UTC)", "Analysis sources", "Revision history", "ESPN event ID", "Archived original wording",
           "Explanation phase", "Pregame explanation", "Explanation updated (UTC)", "Explanation history",
           "Projected away team", "Projected away points", "Projected home team", "Projected home points",
-          "Predicted final score", "Score forecast dated (UTC)", "Score forecast locked (UTC)", "Score forecast status", "Score forecast history"];
+          "Predicted final score", "Score forecast dated (UTC)", "Score forecast locked (UTC)", "Score forecast status", "Score forecast history",
+          "Pick box color", "Top fantasy players (PPR)"];
         const rows = [csvHeaders, ...visibleGames.map((game) => {
           const result = resultFor(game);
           const shownDate = displayDateFor(game);
           if (resultsOnly) {
             return [shownDate.text, shownDate.day, game.groupLabel, matchupText(game), winnerText(result), finalScore(game, result),
-              result.statusDetail, result.scheduledAt, result.checkedAt || "", `https://www.espn.com/nfl/game/_/gameId/${game.eventId}`, game.eventId];
+              result.statusDetail, result.scheduledAt, result.checkedAt || "", `https://www.espn.com/nfl/game/_/gameId/${game.eventId}`, game.eventId, fantasyText(result)];
           }
           const history = historyFor(game);
           const initial = history.find(({ decision }) => decision.applied);
@@ -69435,7 +71342,9 @@
             game.historical || result.scoredPickTeamId === null ? "" : JSON.stringify(scoreHistory(game).map((entry) => ({
               createdAt: entry.createdAt, awayTeam: teamLabel(entry.awayTeamId), awayScore: entry.awayScore,
               homeTeam: teamLabel(entry.homeTeamId), homeScore: entry.homeScore, id: entry.id
-            })))];
+            }))),
+            game.historical ? "" : { pending: "Blue (current)", correct: "Green (correct)", incorrect: "Red (wrong)", tie: "Neutral (tie)" }[pickState(result)],
+            fantasyText(result)];
         })];
         const csv = "\uFEFF" + rows.map((row) => row.map((value) => `"${value.replace(/"/g, '""')}"`).join(",")).join("\r\n") + "\r\n";
         const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8;" }));

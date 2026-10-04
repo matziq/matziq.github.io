@@ -11,8 +11,8 @@ import sys
 
 from nfl_common import (
     API_ROOT, EASTERN, Game, PAGE_PATH, ROOT, SCOREBOARD_URL, SUMMARY_URL, UTC,
-    fetch_json, instant, load_games, read_html, replace_data, script_data, seal,
-    stamp, verify_seal, write_json,
+    fantasy_leaders, fetch_json, instant, load_games, read_html, replace_data, script_data, seal,
+    stamp, validate_fantasy, verify_seal, write_json,
 )
 from nfl_results import observation, summary_event
 from nfl_season import normalize_schedule_event
@@ -36,7 +36,7 @@ def validate_history(payload: dict, html: str) -> None:
         raise ValueError("Expected all 48 regular-season games from Weeks 1-3.")
     for event_id, event in events.items():
         if (
-            set(event) != HISTORY_FIELDS or event_id != event["eventId"] or not event_id.isdigit()
+            set(event) - {"fantasyLeaders"} != HISTORY_FIELDS or event_id != event["eventId"] or not event_id.isdigit()
             or event_id in forecast_ids or event["season"] != 2026 or event["seasonType"] != 2
             or event["week"] not in (1, 2, 3) or event["awayTeamId"] not in known_teams
             or event["homeTeamId"] not in known_teams or event["awayTeamId"] == event["homeTeamId"]
@@ -44,6 +44,7 @@ def validate_history(payload: dict, html: str) -> None:
             raise ValueError("Historical identity is invalid or contains prediction fields.")
         kickoff = instant(event["scheduledAt"])
         instant(event["checkedAt"])
+        validate_fantasy(event.get("fantasyLeaders"), event["awayTeamId"], event["homeTeamId"], event["status"] == "final")
         if kickoff.astimezone(EASTERN).date().isoformat() != event["date"]:
             raise ValueError("Historical game date does not match its verified Eastern kickoff.")
         if event["status"] == "final":
@@ -60,9 +61,16 @@ def validate_history(payload: dict, html: str) -> None:
             raise ValueError("An unfinished historical game cannot have an invented final.")
 
 
-def historical_result(game: Game, event: dict, now: datetime, source: str) -> dict:
+def historical_result(game: Game, event: dict, now: datetime, source: str, fetch=None) -> dict:
     verified = observation(event, game, now)
+    extra = {}
+    if fetch is not None:
+        extra["fantasyLeaders"] = None
+        if verified["status"] == "final":
+            summary_url = f"{SUMMARY_URL}?event={game.event_id}"
+            extra["fantasyLeaders"] = {**fantasy_leaders(fetch(summary_url), game.away_id, game.home_id), "sourceUrl": summary_url}
     return {
+        **extra,
         "eventId": game.event_id, "season": 2026, "seasonType": 2, "week": game.week,
         "date": instant(verified["scheduledAt"]).astimezone(EASTERN).date().isoformat(),
         "awayTeamId": game.away_id, "homeTeamId": game.home_id, "venue": game.venue,
@@ -73,7 +81,7 @@ def historical_result(game: Game, event: dict, now: datetime, source: str) -> di
     }
 
 
-def collect_history(html: str, fetch, now: datetime) -> dict:
+def collect_history(html: str, fetch, now: datetime, *, fantasy: bool = False) -> dict:
     catalog = script_data(html, "catalog-data")
     team_ids = {value[0] for value in catalog["teams"].values()}
     found = {}
@@ -120,7 +128,7 @@ def collect_history(html: str, fetch, now: datetime) -> dict:
         else:
             url = f"{SUMMARY_URL}?event={game.event_id}"
             event = summary_event(fetch(url))
-        results[game.event_id] = historical_result(game, event, now, url)
+        results[game.event_id] = historical_result(game, event, now, url, fetch if fantasy else None)
     payload = seal({
         "schemaVersion": 1, "season": 2026, "purpose": "historical-results-only",
         "checkedAt": stamp(now), "source": SCOREBOARD_URL,
@@ -148,7 +156,7 @@ def main() -> int:
     args = parser.parse_args()
     page = args.root / PAGE_PATH
     html = read_html(page)
-    payload = collect_history(html, fetch_json, datetime.now(UTC))
+    payload = collect_history(html, fetch_json, datetime.now(UTC), fantasy=True)
     write_history(page, html, payload)
     print(json.dumps({
         "historicalGames": len(payload["games"]),

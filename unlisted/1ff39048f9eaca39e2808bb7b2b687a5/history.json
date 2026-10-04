@@ -1,12 +1,39 @@
 {
-  "checkedAt": "2026-10-02T20:09:52Z",
+  "checkedAt": "2026-10-04T23:39:43Z",
   "games": {
     "401872656": {
       "awayScore": 10,
       "awayTeamId": "17",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-09",
       "eventId": "401872656",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4430878",
+            "name": "Jaxon Smith-Njigba",
+            "points": 26.2,
+            "statLine": "8 rec, 122 rec yds, 1 rec TD",
+            "teamId": "26"
+          },
+          {
+            "athleteId": "4569173",
+            "name": "Rhamondre Stevenson",
+            "points": 14.5,
+            "statLine": "51 rush yds, 5 rec, 44 rec yds",
+            "teamId": "17"
+          },
+          {
+            "athleteId": "3924327",
+            "name": "Drew Lock",
+            "points": 12.78,
+            "statLine": "187 pass yds, 1 pass TD, 13 rush yds",
+            "teamId": "26"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872656"
+      },
       "homeScore": 13,
       "homeTeamId": "26",
       "scheduledAt": "2026-09-10T00:20:00Z",
@@ -23,9 +50,36 @@
     "401872657": {
       "awayScore": 27,
       "awayTeamId": "25",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-10",
       "eventId": "401872657",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4361741",
+            "name": "Brock Purdy",
+            "points": 21.1,
+            "statLine": "205 pass yds, 3 pass TD, 1 INT, 29 rush yds",
+            "teamId": "25"
+          },
+          {
+            "athleteId": "3126486",
+            "name": "Deebo Samuel Sr.",
+            "points": 18.0,
+            "statLine": "12 rush yds, 6 rec, 48 rec yds, 1 rec TD",
+            "teamId": "25"
+          },
+          {
+            "athleteId": "16737",
+            "name": "Mike Evans",
+            "points": 16.9,
+            "statLine": "6 rec, 49 rec yds, 1 rec TD",
+            "teamId": "25"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872657"
+      },
       "homeScore": 7,
       "homeTeamId": "14",
       "scheduledAt": "2026-09-11T00:35:00Z",
@@ -42,9 +96,36 @@
     "401872658": {
       "awayScore": 13,
       "awayTeamId": "1",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872658",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4430807",
+            "name": "Bijan Robinson",
+            "points": 31.3,
+            "statLine": "83 rush yds, 8 rec, 90 rec yds, 1 rec TD",
+            "teamId": "1"
+          },
+          {
+            "athleteId": "4361411",
+            "name": "Pat Freiermuth",
+            "points": 15.6,
+            "statLine": "5 rec, 46 rec yds, 1 rec TD",
+            "teamId": "23"
+          },
+          {
+            "athleteId": "8439",
+            "name": "Aaron Rodgers",
+            "points": 12.54,
+            "statLine": "221 pass yds, 1 pass TD, -3 rush yds",
+            "teamId": "23"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872658"
+      },
       "homeScore": 20,
       "homeTeamId": "23",
       "scheduledAt": "2026-09-13T17:00:00Z",
@@ -61,9 +142,36 @@
     "401872659": {
       "awayScore": 41,
       "awayTeamId": "33",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872659",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "3043078",
+            "name": "Derrick Henry",
+            "points": 35.3,
+            "statLine": "144 rush yds, 3 rush TD, 1 rec, 19 rec yds",
+            "teamId": "33"
+          },
+          {
+            "athleteId": "4429615",
+            "name": "Zay Flowers",
+            "points": 26.0,
+            "statLine": "5 rec, 150 rec yds, 1 rec TD",
+            "teamId": "33"
+          },
+          {
+            "athleteId": "4242335",
+            "name": "Jonathan Taylor",
+            "points": 25.1,
+            "statLine": "98 rush yds, 2 rush TD, 3 rec, 23 rec yds, 1 fumble lost",
+            "teamId": "11"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872659"
+      },
       "homeScore": 23,
       "homeTeamId": "11",
       "scheduledAt": "2026-09-13T17:00:00Z",
@@ -80,9 +188,36 @@
     "401872660": {
       "awayScore": 36,
       "awayTeamId": "2",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872660",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "3918298",
+            "name": "Josh Allen",
+            "points": 35.66,
+            "statLine": "334 pass yds, 2 pass TD, 23 rush yds, 2 rush TD",
+            "teamId": "2"
+          },
+          {
+            "athleteId": "4035538",
+            "name": "David Montgomery",
+            "points": 28.9,
+            "statLine": "60 rush yds, 2 rush TD, 3 rec, 19 rec yds, 1 rec TD",
+            "teamId": "34"
+          },
+          {
+            "athleteId": "4258173",
+            "name": "Nico Collins",
+            "points": 21.2,
+            "statLine": "7 rush yds, 7 rec, 75 rec yds, 1 rec TD",
+            "teamId": "34"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872660"
+      },
       "homeScore": 31,
       "homeTeamId": "34",
       "scheduledAt": "2026-09-13T17:00:00Z",
@@ -99,9 +234,36 @@
     "401872661": {
       "awayScore": 59,
       "awayTeamId": "3",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872661",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4431611",
+            "name": "Caleb Williams",
+            "points": 37.26,
+            "statLine": "269 pass yds, 2 pass TD, 65 rush yds, 2 rush TD",
+            "teamId": "3"
+          },
+          {
+            "athleteId": "4695883",
+            "name": "Jalen Coker",
+            "points": 33.8,
+            "statLine": "8 rec, 138 rec yds, 2 rec TD",
+            "teamId": "29"
+          },
+          {
+            "athleteId": "4259545",
+            "name": "D'Andre Swift",
+            "points": 32.4,
+            "statLine": "124 rush yds, 3 rush TD, 1 rec, 10 rec yds",
+            "teamId": "3"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872661"
+      },
       "homeScore": 37,
       "homeTeamId": "29",
       "scheduledAt": "2026-09-13T17:00:00Z",
@@ -118,9 +280,36 @@
     "401872922": {
       "awayScore": 10,
       "awayTeamId": "5",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872922",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4360310",
+            "name": "Trevor Lawrence",
+            "points": 26.1,
+            "statLine": "245 pass yds, 4 pass TD, 3 rush yds",
+            "teamId": "30"
+          },
+          {
+            "athleteId": "4432620",
+            "name": "Parker Washington",
+            "points": 19.3,
+            "statLine": "5 rec, 83 rec yds, 1 rec TD",
+            "teamId": "30"
+          },
+          {
+            "athleteId": "3122840",
+            "name": "Deshaun Watson",
+            "points": 14.0,
+            "statLine": "205 pass yds, 1 pass TD, 1 INT, 38 rush yds",
+            "teamId": "5"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872922"
+      },
       "homeScore": 34,
       "homeTeamId": "30",
       "scheduledAt": "2026-09-13T17:00:00Z",
@@ -137,9 +326,36 @@
     "401872923": {
       "awayScore": 30,
       "awayTeamId": "18",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872923",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4429795",
+            "name": "Jahmyr Gibbs",
+            "points": 33.6,
+            "statLine": "156 rush yds, 2 rush TD, 5 rec, 30 rec yds, 1 fumble lost",
+            "teamId": "8"
+          },
+          {
+            "athleteId": "4374302",
+            "name": "Amon-Ra St. Brown",
+            "points": 28.7,
+            "statLine": "10 rec, 67 rec yds, 2 rec TD",
+            "teamId": "8"
+          },
+          {
+            "athleteId": "4361370",
+            "name": "Chris Olave",
+            "points": 28.2,
+            "statLine": "10 rec, 182 rec yds",
+            "teamId": "18"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872923"
+      },
       "homeScore": 31,
       "homeTeamId": "8",
       "scheduledAt": "2026-09-13T17:00:00Z",
@@ -156,9 +372,36 @@
     "401872924": {
       "awayScore": 23,
       "awayTeamId": "20",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872924",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4427366",
+            "name": "Breece Hall",
+            "points": 19.8,
+            "statLine": "102 rush yds, 1 rush TD, 2 rec, 16 rec yds",
+            "teamId": "20"
+          },
+          {
+            "athleteId": "4569618",
+            "name": "Garrett Wilson",
+            "points": 13.9,
+            "statLine": "6 rec, 79 rec yds",
+            "teamId": "20"
+          },
+          {
+            "athleteId": "4688380",
+            "name": "Cam Ward",
+            "points": 11.7,
+            "statLine": "140 pass yds, 1 pass TD, 21 rush yds",
+            "teamId": "10"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872924"
+      },
       "homeScore": 10,
       "homeTeamId": "10",
       "scheduledAt": "2026-09-13T17:00:00Z",
@@ -175,9 +418,36 @@
     "401872925": {
       "awayScore": 27,
       "awayTeamId": "27",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872925",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4596448",
+            "name": "Bucky Irving",
+            "points": 20.3,
+            "statLine": "45 rush yds, 1 rush TD, 7 rec, 48 rec yds, 1 fumble lost",
+            "teamId": "27"
+          },
+          {
+            "athleteId": "4362238",
+            "name": "Chase Brown",
+            "points": 18.8,
+            "statLine": "56 rush yds, 1 rush TD, 5 rec, 22 rec yds",
+            "teamId": "4"
+          },
+          {
+            "athleteId": "3116164",
+            "name": "Mike Gesicki",
+            "points": 18.8,
+            "statLine": "5 rec, 78 rec yds, 1 rec TD",
+            "teamId": "4"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872925"
+      },
       "homeScore": 33,
       "homeTeamId": "4",
       "scheduledAt": "2026-09-13T17:00:00Z",
@@ -194,9 +464,36 @@
     "401872926": {
       "awayScore": 26,
       "awayTeamId": "22",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872926",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4361307",
+            "name": "Trey McBride",
+            "points": 24.5,
+            "statLine": "9 rec, 95 rec yds, 1 rec TD",
+            "teamId": "22"
+          },
+          {
+            "athleteId": "4612826",
+            "name": "Ladd McConkey",
+            "points": 19.2,
+            "statLine": "5 rec, 82 rec yds, 1 rec TD",
+            "teamId": "24"
+          },
+          {
+            "athleteId": "2578570",
+            "name": "Jacoby Brissett",
+            "points": 16.48,
+            "statLine": "277 pass yds, 1 pass TD, 14 rush yds",
+            "teamId": "22"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872926"
+      },
       "homeScore": 14,
       "homeTeamId": "24",
       "scheduledAt": "2026-09-13T20:25:00Z",
@@ -213,9 +510,36 @@
     "401872927": {
       "awayScore": 22,
       "awayTeamId": "9",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872927",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4248528",
+            "name": "Christian Watson",
+            "points": 32.7,
+            "statLine": "6 rec, 147 rec yds, 2 rec TD",
+            "teamId": "9"
+          },
+          {
+            "athleteId": "4262921",
+            "name": "Justin Jefferson",
+            "points": 29.2,
+            "statLine": "8 rec, 92 rec yds, 2 rec TD",
+            "teamId": "16"
+          },
+          {
+            "athleteId": "4036378",
+            "name": "Jordan Love",
+            "points": 19.48,
+            "statLine": "387 pass yds, 2 pass TD, 1 INT, 1 fumble lost",
+            "teamId": "9"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872927"
+      },
       "homeScore": 39,
       "homeTeamId": "16",
       "scheduledAt": "2026-09-13T20:25:00Z",
@@ -232,9 +556,36 @@
     "401872928": {
       "awayScore": 13,
       "awayTeamId": "15",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872928",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4890973",
+            "name": "Ashton Jeanty",
+            "points": 32.7,
+            "statLine": "102 rush yds, 6 rec, 45 rec yds, 2 rec TD",
+            "teamId": "13"
+          },
+          {
+            "athleteId": "4242512",
+            "name": "Malik Willis",
+            "points": 16.7,
+            "statLine": "220 pass yds, 1 INT, 39 rush yds, 1 rush TD",
+            "teamId": "15"
+          },
+          {
+            "athleteId": "4869645",
+            "name": "Caleb Douglas",
+            "points": 14.4,
+            "statLine": "5 rec, 94 rec yds",
+            "teamId": "15"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872928"
+      },
       "homeScore": 27,
       "homeTeamId": "13",
       "scheduledAt": "2026-09-13T20:25:00Z",
@@ -251,9 +602,36 @@
     "401872929": {
       "awayScore": 22,
       "awayTeamId": "28",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872929",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4040715",
+            "name": "Jalen Hurts",
+            "points": 24.72,
+            "statLine": "203 pass yds, 3 pass TD, 46 rush yds",
+            "teamId": "21"
+          },
+          {
+            "athleteId": "3121023",
+            "name": "Dallas Goedert",
+            "points": 23.7,
+            "statLine": "4 rec, 77 rec yds, 2 rec TD",
+            "teamId": "21"
+          },
+          {
+            "athleteId": "4426348",
+            "name": "Jayden Daniels",
+            "points": 17.66,
+            "statLine": "164 pass yds, 2 pass TD, 31 rush yds",
+            "teamId": "28"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872929"
+      },
       "homeScore": 24,
       "homeTeamId": "21",
       "scheduledAt": "2026-09-13T20:25:00Z",
@@ -270,9 +648,36 @@
     "401872930": {
       "awayScore": 20,
       "awayTeamId": "6",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-13",
       "eventId": "401872930",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4361050",
+            "name": "Isaiah Likely",
+            "points": 27.8,
+            "statLine": "8 rec, 78 rec yds, 2 rec TD",
+            "teamId": "19"
+          },
+          {
+            "athleteId": "4689114",
+            "name": "Jaxson Dart",
+            "points": 26.6,
+            "statLine": "230 pass yds, 3 pass TD, 54 rush yds",
+            "teamId": "19"
+          },
+          {
+            "athleteId": "4361579",
+            "name": "Javonte Williams",
+            "points": 24.2,
+            "statLine": "41 rush yds, 1 rush TD, 5 rec, 31 rec yds, 1 rec TD",
+            "teamId": "6"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872930"
+      },
       "homeScore": 28,
       "homeTeamId": "19",
       "scheduledAt": "2026-09-14T00:20:00Z",
@@ -289,9 +694,36 @@
     "401872931": {
       "awayScore": 10,
       "awayTeamId": "7",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-14",
       "eventId": "401872931",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4567048",
+            "name": "Kenneth Walker III",
+            "points": 34.1,
+            "statLine": "173 rush yds, 1 rush TD, 3 rec, 18 rec yds, 1 rec TD",
+            "teamId": "12"
+          },
+          {
+            "athleteId": "3139477",
+            "name": "Patrick Mahomes",
+            "points": 21.66,
+            "statLine": "184 pass yds, 2 pass TD, 1 INT, 23 rush yds, 1 rush TD",
+            "teamId": "12"
+          },
+          {
+            "athleteId": "3051876",
+            "name": "Evan Engram",
+            "points": 14.3,
+            "statLine": "4 rec, 43 rec yds, 1 rec TD",
+            "teamId": "7"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872931"
+      },
       "homeScore": 31,
       "homeTeamId": "12",
       "scheduledAt": "2026-09-15T00:15:00Z",
@@ -308,9 +740,36 @@
     "401872932": {
       "awayScore": 31,
       "awayTeamId": "8",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-17",
       "eventId": "401872932",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "3918298",
+            "name": "Josh Allen",
+            "points": 40.82,
+            "statLine": "248 pass yds, 3 pass TD, 69 rush yds, 2 rush TD",
+            "teamId": "2"
+          },
+          {
+            "athleteId": "4374302",
+            "name": "Amon-Ra St. Brown",
+            "points": 35.2,
+            "statLine": "9 rec, 142 rec yds, 2 rec TD",
+            "teamId": "8"
+          },
+          {
+            "athleteId": "3046779",
+            "name": "Jared Goff",
+            "points": 29.78,
+            "statLine": "327 pass yds, 4 pass TD, 7 rush yds",
+            "teamId": "8"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872932"
+      },
       "homeScore": 41,
       "homeTeamId": "2",
       "scheduledAt": "2026-09-18T00:15:00Z",
@@ -327,9 +786,36 @@
     "401872933": {
       "awayScore": 34,
       "awayTeamId": "29",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872933",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4685720",
+            "name": "Bryce Young",
+            "points": 24.08,
+            "statLine": "287 pass yds, 3 pass TD, 6 rush yds",
+            "teamId": "29"
+          },
+          {
+            "athleteId": "2576925",
+            "name": "Darren Waller",
+            "points": 18.3,
+            "statLine": "3 rec, 33 rec yds, 2 rec TD",
+            "teamId": "29"
+          },
+          {
+            "athleteId": "4685472",
+            "name": "Tetairoa McMillan",
+            "points": 15.1,
+            "statLine": "5 rec, 101 rec yds",
+            "teamId": "29"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872933"
+      },
       "homeScore": 3,
       "homeTeamId": "1",
       "scheduledAt": "2026-09-20T17:00:00Z",
@@ -346,9 +832,36 @@
     "401872934": {
       "awayScore": 20,
       "awayTeamId": "4",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872934",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4362628",
+            "name": "Ja'Marr Chase",
+            "points": 26.5,
+            "statLine": "7 rec, 75 rec yds, 2 rec TD",
+            "teamId": "4"
+          },
+          {
+            "athleteId": "3117256",
+            "name": "Dalton Schultz",
+            "points": 26.0,
+            "statLine": "12 rec, 140 rec yds",
+            "teamId": "34"
+          },
+          {
+            "athleteId": "4432577",
+            "name": "C.J. Stroud",
+            "points": 17.02,
+            "statLine": "353 pass yds, 29 rush yds",
+            "teamId": "34"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872934"
+      },
       "homeScore": 6,
       "homeTeamId": "34",
       "scheduledAt": "2026-09-20T17:00:00Z",
@@ -365,9 +878,36 @@
     "401872935": {
       "awayScore": 23,
       "awayTeamId": "5",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872935",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4832800",
+            "name": "Denzel Boston",
+            "points": 20.5,
+            "statLine": "5 rec, 95 rec yds, 1 rec TD",
+            "teamId": "5"
+          },
+          {
+            "athleteId": "3122840",
+            "name": "Deshaun Watson",
+            "points": 19.72,
+            "statLine": "238 pass yds, 2 pass TD, 22 rush yds",
+            "teamId": "5"
+          },
+          {
+            "athleteId": "4596448",
+            "name": "Bucky Irving",
+            "points": 13.0,
+            "statLine": "89 rush yds, 4 rec, 1 rec yds",
+            "teamId": "27"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872935"
+      },
       "homeScore": 19,
       "homeTeamId": "27",
       "scheduledAt": "2026-09-20T17:00:00Z",
@@ -384,9 +924,36 @@
     "401872936": {
       "awayScore": 20,
       "awayTeamId": "9",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872936",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4569618",
+            "name": "Garrett Wilson",
+            "points": 16.7,
+            "statLine": "5 rec, 57 rec yds, 1 rec TD",
+            "teamId": "20"
+          },
+          {
+            "athleteId": "15864",
+            "name": "Geno Smith",
+            "points": 15.58,
+            "statLine": "247 pass yds, 1 pass TD, 17 rush yds",
+            "teamId": "20"
+          },
+          {
+            "athleteId": "4427366",
+            "name": "Breece Hall",
+            "points": 14.2,
+            "statLine": "29 rush yds, 5 rec, 63 rec yds",
+            "teamId": "20"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872936"
+      },
       "homeScore": 17,
       "homeTeamId": "20",
       "scheduledAt": "2026-09-20T17:00:00Z",
@@ -403,9 +970,36 @@
     "401872937": {
       "awayScore": 9,
       "awayTeamId": "16",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872937",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4259545",
+            "name": "D'Andre Swift",
+            "points": 12.9,
+            "statLine": "45 rush yds, 5 rec, 54 rec yds, 1 fumble lost",
+            "teamId": "3"
+          },
+          {
+            "athleteId": "3042519",
+            "name": "Aaron Jones Sr.",
+            "points": 10.5,
+            "statLine": "105 rush yds",
+            "teamId": "16"
+          },
+          {
+            "athleteId": "2973405",
+            "name": "Kalif Raymond",
+            "points": 9.0,
+            "statLine": "5 rec, 40 rec yds",
+            "teamId": "3"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872937"
+      },
       "homeScore": 3,
       "homeTeamId": "3",
       "scheduledAt": "2026-09-20T17:00:00Z",
@@ -422,9 +1016,36 @@
     "401872938": {
       "awayScore": 24,
       "awayTeamId": "18",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872938",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4361370",
+            "name": "Chris Olave",
+            "points": 22.6,
+            "statLine": "8 rec, 86 rec yds, 1 rec TD",
+            "teamId": "18"
+          },
+          {
+            "athleteId": "4360689",
+            "name": "Tyler Shough",
+            "points": 22.38,
+            "statLine": "252 pass yds, 1 pass TD, 23 rush yds, 1 rush TD",
+            "teamId": "18"
+          },
+          {
+            "athleteId": "4360939",
+            "name": "Rashod Bateman",
+            "points": 21.8,
+            "statLine": "7 rec, 88 rec yds, 1 rec TD",
+            "teamId": "33"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872938"
+      },
       "homeScore": 17,
       "homeTeamId": "33",
       "scheduledAt": "2026-09-20T17:00:00Z",
@@ -441,9 +1062,36 @@
     "401872939": {
       "awayScore": 24,
       "awayTeamId": "21",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872939",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4241478",
+            "name": "DeVonta Smith",
+            "points": 27.7,
+            "statLine": "10 rec, 117 rec yds, 1 rec TD",
+            "teamId": "21"
+          },
+          {
+            "athleteId": "4688380",
+            "name": "Cam Ward",
+            "points": 20.02,
+            "statLine": "183 pass yds, 7 rush yds, 2 rush TD",
+            "teamId": "10"
+          },
+          {
+            "athleteId": "4040715",
+            "name": "Jalen Hurts",
+            "points": 16.16,
+            "statLine": "264 pass yds, 2 pass TD, 2 INT, 16 rush yds",
+            "teamId": "21"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872939"
+      },
       "homeScore": 20,
       "homeTeamId": "10",
       "scheduledAt": "2026-09-20T17:00:00Z",
@@ -460,9 +1108,36 @@
     "401872940": {
       "awayScore": 13,
       "awayTeamId": "30",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872940",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4372016",
+            "name": "Jaylen Waddle",
+            "points": 21.8,
+            "statLine": "8 rec, 138 rec yds",
+            "teamId": "7"
+          },
+          {
+            "athleteId": "4432620",
+            "name": "Parker Washington",
+            "points": 16.8,
+            "statLine": "7 rec, 98 rec yds",
+            "teamId": "30"
+          },
+          {
+            "athleteId": "4702555",
+            "name": "Jonah Coleman",
+            "points": 14.8,
+            "statLine": "39 rush yds, 1 rush TD, 3 rec, 19 rec yds",
+            "teamId": "7"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872940"
+      },
       "homeScore": 20,
       "homeTeamId": "7",
       "scheduledAt": "2026-09-20T20:05:00Z",
@@ -479,9 +1154,36 @@
     "401872941": {
       "awayScore": 26,
       "awayTeamId": "13",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872941",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4428718",
+            "name": "Tre Tucker",
+            "points": 22.9,
+            "statLine": "5 rec, 119 rec yds, 1 rec TD",
+            "teamId": "13"
+          },
+          {
+            "athleteId": "14880",
+            "name": "Kirk Cousins",
+            "points": 20.22,
+            "statLine": "253 pass yds, 3 pass TD, 1 INT, 1 rush yds",
+            "teamId": "13"
+          },
+          {
+            "athleteId": "4685382",
+            "name": "Omarion Hampton",
+            "points": 17.5,
+            "statLine": "94 rush yds, 1 rush TD, 2 rec, 21 rec yds, 1 fumble lost",
+            "teamId": "24"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872941"
+      },
       "homeScore": 14,
       "homeTeamId": "24",
       "scheduledAt": "2026-09-20T20:05:00Z",
@@ -498,9 +1200,36 @@
     "401872942": {
       "awayScore": 13,
       "awayTeamId": "15",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872942",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4361741",
+            "name": "Brock Purdy",
+            "points": 28.48,
+            "statLine": "287 pass yds, 2 pass TD, 30 rush yds, 1 rush TD",
+            "teamId": "25"
+          },
+          {
+            "athleteId": "3117251",
+            "name": "Christian McCaffrey",
+            "points": 22.6,
+            "statLine": "23 rush yds, 2 rush TD, 4 rec, 43 rec yds",
+            "teamId": "25"
+          },
+          {
+            "athleteId": "3040151",
+            "name": "George Kittle",
+            "points": 18.0,
+            "statLine": "4 rec, 80 rec yds, 1 rec TD",
+            "teamId": "25"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872942"
+      },
       "homeScore": 35,
       "homeTeamId": "25",
       "scheduledAt": "2026-09-20T20:25:00Z",
@@ -517,9 +1246,36 @@
     "401872943": {
       "awayScore": 31,
       "awayTeamId": "26",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872943",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4430878",
+            "name": "Jaxon Smith-Njigba",
+            "points": 42.5,
+            "statLine": "9 rec, 155 rec yds, 3 rec TD",
+            "teamId": "26"
+          },
+          {
+            "athleteId": "3924327",
+            "name": "Drew Lock",
+            "points": 21.4,
+            "statLine": "235 pass yds, 3 pass TD",
+            "teamId": "26"
+          },
+          {
+            "athleteId": "4361307",
+            "name": "Trey McBride",
+            "points": 18.1,
+            "statLine": "8 rec, 41 rec yds, 1 rec TD",
+            "teamId": "22"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872943"
+      },
       "homeScore": 7,
       "homeTeamId": "22",
       "scheduledAt": "2026-09-20T20:25:00Z",
@@ -536,9 +1292,36 @@
     "401872944": {
       "awayScore": 20,
       "awayTeamId": "28",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872944",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4241389",
+            "name": "CeeDee Lamb",
+            "points": 35.3,
+            "statLine": "8 rec, 153 rec yds, 2 rec TD",
+            "teamId": "6"
+          },
+          {
+            "athleteId": "2577417",
+            "name": "Dak Prescott",
+            "points": 29.76,
+            "statLine": "279 pass yds, 4 pass TD, 26 rush yds",
+            "teamId": "6"
+          },
+          {
+            "athleteId": "2976212",
+            "name": "Stefon Diggs",
+            "points": 21.7,
+            "statLine": "5 rec, 47 rec yds, 2 rec TD",
+            "teamId": "28"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872944"
+      },
       "homeScore": 37,
       "homeTeamId": "6",
       "scheduledAt": "2026-09-20T20:25:00Z",
@@ -555,9 +1338,36 @@
     "401872945": {
       "awayScore": 30,
       "awayTeamId": "11",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872945",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4242335",
+            "name": "Jonathan Taylor",
+            "points": 29.2,
+            "statLine": "92 rush yds, 2 rush TD, 4 rec, 40 rec yds",
+            "teamId": "11"
+          },
+          {
+            "athleteId": "3139477",
+            "name": "Patrick Mahomes",
+            "points": 28.98,
+            "statLine": "382 pass yds, 3 pass TD, 17 rush yds",
+            "teamId": "12"
+          },
+          {
+            "athleteId": "15847",
+            "name": "Travis Kelce",
+            "points": 25.1,
+            "statLine": "9 rec, 101 rec yds, 1 rec TD",
+            "teamId": "12"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872945"
+      },
       "homeScore": 33,
       "homeTeamId": "12",
       "scheduledAt": "2026-09-21T00:20:00Z",
@@ -574,9 +1384,36 @@
     "401872946": {
       "awayScore": 3,
       "awayTeamId": "23",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-20",
       "eventId": "401872946",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4432710",
+            "name": "TreVeyon Henderson",
+            "points": 13.6,
+            "statLine": "76 rush yds, 1 rush TD",
+            "teamId": "17"
+          },
+          {
+            "athleteId": "4361432",
+            "name": "Romeo Doubs",
+            "points": 12.6,
+            "statLine": "3 rec, 96 rec yds",
+            "teamId": "17"
+          },
+          {
+            "athleteId": "4569987",
+            "name": "Jaylen Warren",
+            "points": 9.7,
+            "statLine": "43 rush yds, 2 rec, 34 rec yds",
+            "teamId": "23"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872946"
+      },
       "homeScore": 20,
       "homeTeamId": "17",
       "scheduledAt": "2026-09-20T17:00:00Z",
@@ -593,9 +1430,36 @@
     "401872947": {
       "awayScore": 6,
       "awayTeamId": "19",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-21",
       "eventId": "401872947",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "16800",
+            "name": "Davante Adams",
+            "points": 39.5,
+            "statLine": "8 rec, 195 rec yds, 2 rec TD",
+            "teamId": "14"
+          },
+          {
+            "athleteId": "12483",
+            "name": "Matthew Stafford",
+            "points": 26.98,
+            "statLine": "327 pass yds, 4 pass TD, 1 INT, -1 rush yds",
+            "teamId": "14"
+          },
+          {
+            "athleteId": "4570037",
+            "name": "Terrance Ferguson",
+            "points": 17.4,
+            "statLine": "6 rec, 54 rec yds, 1 rec TD",
+            "teamId": "14"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872947"
+      },
       "homeScore": 28,
       "homeTeamId": "14",
       "scheduledAt": "2026-09-22T00:15:00Z",
@@ -612,9 +1476,36 @@
     "401872948": {
       "awayScore": 35,
       "awayTeamId": "1",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-24",
       "eventId": "401872948",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4430807",
+            "name": "Bijan Robinson",
+            "points": 35.3,
+            "statLine": "194 rush yds, 2 rush TD, 2 rec, 19 rec yds",
+            "teamId": "1"
+          },
+          {
+            "athleteId": "4426502",
+            "name": "Drake London",
+            "points": 28.4,
+            "statLine": "9 rec, 194 rec yds",
+            "teamId": "1"
+          },
+          {
+            "athleteId": "4248528",
+            "name": "Christian Watson",
+            "points": 22.6,
+            "statLine": "7 rec, 96 rec yds, 1 rec TD",
+            "teamId": "9"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872948"
+      },
       "homeScore": 14,
       "homeTeamId": "9",
       "scheduledAt": "2026-09-25T00:15:00Z",
@@ -631,9 +1522,36 @@
     "401872949": {
       "awayScore": 18,
       "awayTeamId": "29",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872949",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "5083076",
+            "name": "Harold Fannin Jr.",
+            "points": 24.1,
+            "statLine": "7 rec, 51 rec yds, 2 rec TD",
+            "teamId": "5"
+          },
+          {
+            "athleteId": "3122840",
+            "name": "Deshaun Watson",
+            "points": 18.26,
+            "statLine": "144 pass yds, 2 pass TD, 45 rush yds",
+            "teamId": "5"
+          },
+          {
+            "athleteId": "4241416",
+            "name": "Chuba Hubbard",
+            "points": 15.0,
+            "statLine": "82 rush yds, 4 rec, 28 rec yds",
+            "teamId": "29"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872949"
+      },
       "homeScore": 21,
       "homeTeamId": "5",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -650,9 +1568,36 @@
     "401872950": {
       "awayScore": 27,
       "awayTeamId": "4",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872950",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4362628",
+            "name": "Ja'Marr Chase",
+            "points": 24.8,
+            "statLine": "9 rec, 98 rec yds, 1 rec TD",
+            "teamId": "4"
+          },
+          {
+            "athleteId": "8439",
+            "name": "Aaron Rodgers",
+            "points": 22.68,
+            "statLine": "292 pass yds, 3 pass TD, 1 INT, 10 rush yds",
+            "teamId": "23"
+          },
+          {
+            "athleteId": "3915511",
+            "name": "Joe Burrow",
+            "points": 22.58,
+            "statLine": "282 pass yds, 3 pass TD, 13 rush yds, 1 fumble lost",
+            "teamId": "4"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872950"
+      },
       "homeScore": 30,
       "homeTeamId": "23",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -669,9 +1614,36 @@
     "401872951": {
       "awayScore": 17,
       "awayTeamId": "34",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872951",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "15818",
+            "name": "Keenan Allen",
+            "points": 18.3,
+            "statLine": "6 rec, 63 rec yds, 1 rec TD",
+            "teamId": "11"
+          },
+          {
+            "athleteId": "4431459",
+            "name": "Tyler Warren",
+            "points": 14.7,
+            "statLine": "2 rush yds, 9 rec, 55 rec yds",
+            "teamId": "11"
+          },
+          {
+            "athleteId": "4688813",
+            "name": "Josh Downs",
+            "points": 12.7,
+            "statLine": "5 rec, 77 rec yds",
+            "teamId": "11"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872951"
+      },
       "homeScore": 19,
       "homeTeamId": "11",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -688,9 +1660,36 @@
     "401872952": {
       "awayScore": 24,
       "awayTeamId": "12",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872952",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4567048",
+            "name": "Kenneth Walker III",
+            "points": 21.3,
+            "statLine": "70 rush yds, 1 rush TD, 2 rec, 3 rec yds, 1 rec TD",
+            "teamId": "12"
+          },
+          {
+            "athleteId": "3139477",
+            "name": "Patrick Mahomes",
+            "points": 15.94,
+            "statLine": "246 pass yds, 2 pass TD, 1 INT, 1 rush yds",
+            "teamId": "12"
+          },
+          {
+            "athleteId": "4428331",
+            "name": "Rashee Rice",
+            "points": 15.8,
+            "statLine": "7 rec, 88 rec yds",
+            "teamId": "12"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872952"
+      },
       "homeScore": 10,
       "homeTeamId": "15",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -707,9 +1706,36 @@
     "401872953": {
       "awayScore": 16,
       "awayTeamId": "24",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872953",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4379399",
+            "name": "James Cook III",
+            "points": 19.4,
+            "statLine": "154 rush yds, 1 rush TD, 1 fumble lost",
+            "teamId": "2"
+          },
+          {
+            "athleteId": "3918298",
+            "name": "Josh Allen",
+            "points": 17.46,
+            "statLine": "204 pass yds, 2 INT, 22 rush yds, 2 rush TD, 1 rec, 1 rec yds, 1 fumble lost",
+            "teamId": "2"
+          },
+          {
+            "athleteId": "4596334",
+            "name": "Keaton Mitchell",
+            "points": 13.7,
+            "statLine": "52 rush yds, 3 rec, -5 rec yds, 1 rec TD",
+            "teamId": "24"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872953"
+      },
       "homeScore": 24,
       "homeTeamId": "2",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -726,9 +1752,36 @@
     "401872954": {
       "awayScore": 24,
       "awayTeamId": "20",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872954",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4429795",
+            "name": "Jahmyr Gibbs",
+            "points": 41.4,
+            "statLine": "99 rush yds, 2 rush TD, 7 rec, 65 rec yds, 1 rec TD",
+            "teamId": "8"
+          },
+          {
+            "athleteId": "4569618",
+            "name": "Garrett Wilson",
+            "points": 26.7,
+            "statLine": "10 rec, 107 rec yds, 1 rec TD",
+            "teamId": "20"
+          },
+          {
+            "athleteId": "15864",
+            "name": "Geno Smith",
+            "points": 24.04,
+            "statLine": "321 pass yds, 3 pass TD, 12 rush yds, 1 fumble lost",
+            "teamId": "20"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872954"
+      },
       "homeScore": 31,
       "homeTeamId": "8",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -745,9 +1798,36 @@
     "401872955": {
       "awayScore": 31,
       "awayTeamId": "26",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872955",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4430878",
+            "name": "Jaxon Smith-Njigba",
+            "points": 35.36,
+            "statLine": "14 pass yds, 10 rec, 128 rec yds, 2 rec TD",
+            "teamId": "26"
+          },
+          {
+            "athleteId": "3912547",
+            "name": "Sam Darnold",
+            "points": 27.66,
+            "statLine": "379 pass yds, 4 pass TD, 2 INT, 5 rush yds",
+            "teamId": "26"
+          },
+          {
+            "athleteId": "2576980",
+            "name": "Marcus Mariota",
+            "points": 20.42,
+            "statLine": "183 pass yds, 3 pass TD, 11 rush yds",
+            "teamId": "28"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872955"
+      },
       "homeScore": 33,
       "homeTeamId": "28",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -764,9 +1844,36 @@
     "401872956": {
       "awayScore": 7,
       "awayTeamId": "10",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872956",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4569587",
+            "name": "Wan'Dale Robinson",
+            "points": 18.7,
+            "statLine": "7 rec, 57 rec yds, 1 rec TD",
+            "teamId": "10"
+          },
+          {
+            "athleteId": "3916148",
+            "name": "Tony Pollard",
+            "points": 13.6,
+            "statLine": "74 rush yds, 4 rec, 22 rec yds",
+            "teamId": "10"
+          },
+          {
+            "athleteId": "4696981",
+            "name": "Cam Skattebo",
+            "points": 13.0,
+            "statLine": "60 rush yds, 3 rec, 40 rec yds",
+            "teamId": "19"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872956"
+      },
       "homeScore": 12,
       "homeTeamId": "19",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -783,9 +1890,36 @@
     "401872957": {
       "awayScore": 6,
       "awayTeamId": "17",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872957",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4360310",
+            "name": "Trevor Lawrence",
+            "points": 19.78,
+            "statLine": "182 pass yds, 3 pass TD, 1 INT, 25 rush yds",
+            "teamId": "30"
+          },
+          {
+            "athleteId": "3916433",
+            "name": "Jakobi Meyers",
+            "points": 19.4,
+            "statLine": "7 rec, 64 rec yds, 1 rec TD",
+            "teamId": "30"
+          },
+          {
+            "athleteId": "4882093",
+            "name": "Bhayshul Tuten",
+            "points": 17.0,
+            "statLine": "73 rush yds, 1 rush TD, 2 rec, 17 rec yds",
+            "teamId": "30"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872957"
+      },
       "homeScore": 35,
       "homeTeamId": "30",
       "scheduledAt": "2026-09-27T17:00:00Z",
@@ -802,9 +1936,36 @@
     "401872958": {
       "awayScore": 30,
       "awayTeamId": "22",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872958",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4361741",
+            "name": "Brock Purdy",
+            "points": 31.28,
+            "statLine": "297 pass yds, 4 pass TD, 34 rush yds",
+            "teamId": "25"
+          },
+          {
+            "athleteId": "3040151",
+            "name": "George Kittle",
+            "points": 26.2,
+            "statLine": "6 rec, 82 rec yds, 2 rec TD",
+            "teamId": "25"
+          },
+          {
+            "athleteId": "4360761",
+            "name": "Michael Wilson",
+            "points": 25.9,
+            "statLine": "11 rec, 89 rec yds, 1 rec TD",
+            "teamId": "22"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872958"
+      },
       "homeScore": 36,
       "homeTeamId": "25",
       "scheduledAt": "2026-09-27T20:05:00Z",
@@ -821,9 +1982,36 @@
     "401872959": {
       "awayScore": 23,
       "awayTeamId": "16",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872959",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4429205",
+            "name": "Jordan Addison",
+            "points": 20.0,
+            "statLine": "5 rec, 90 rec yds, 1 rec TD",
+            "teamId": "16"
+          },
+          {
+            "athleteId": "3042519",
+            "name": "Aaron Jones Sr.",
+            "points": 14.2,
+            "statLine": "58 rush yds, 5 rec, 34 rec yds",
+            "teamId": "16"
+          },
+          {
+            "athleteId": "3052587",
+            "name": "Baker Mayfield",
+            "points": 11.28,
+            "statLine": "217 pass yds, 1 pass TD, 1 INT, 6 rush yds",
+            "teamId": "27"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872959"
+      },
       "homeScore": 16,
       "homeTeamId": "27",
       "scheduledAt": "2026-09-27T20:05:00Z",
@@ -840,9 +2028,36 @@
     "401872960": {
       "awayScore": 34,
       "awayTeamId": "33",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872960",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "3043078",
+            "name": "Derrick Henry",
+            "points": 21.9,
+            "statLine": "89 rush yds, 2 rush TD, 1 rec",
+            "teamId": "33"
+          },
+          {
+            "athleteId": "3916387",
+            "name": "Lamar Jackson",
+            "points": 20.44,
+            "statLine": "186 pass yds, 2 pass TD, 50 rush yds",
+            "teamId": "33"
+          },
+          {
+            "athleteId": "4361579",
+            "name": "Javonte Williams",
+            "points": 18.3,
+            "statLine": "98 rush yds, 1 rush TD, 2 rec, 5 rec yds",
+            "teamId": "6"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872960"
+      },
       "homeScore": 31,
       "homeTeamId": "6",
       "scheduledAt": "2026-09-27T20:25:00Z",
@@ -859,9 +2074,36 @@
     "401872961": {
       "awayScore": 35,
       "awayTeamId": "13",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872961",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4432665",
+            "name": "Brock Bowers",
+            "points": 27.6,
+            "statLine": "10 rec, 116 rec yds, 1 rec TD",
+            "teamId": "13"
+          },
+          {
+            "athleteId": "4360689",
+            "name": "Tyler Shough",
+            "points": 23.8,
+            "statLine": "255 pass yds, 4 pass TD, 1 INT, 36 rush yds, 2 fumble lost",
+            "teamId": "18"
+          },
+          {
+            "athleteId": "3929645",
+            "name": "Juwan Johnson",
+            "points": 23.3,
+            "statLine": "8 rec, 53 rec yds, 2 rec TD, 1 fumble lost",
+            "teamId": "18"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872961"
+      },
       "homeScore": 27,
       "homeTeamId": "18",
       "scheduledAt": "2026-09-27T20:25:00Z",
@@ -878,9 +2120,36 @@
     "401872962": {
       "awayScore": 26,
       "awayTeamId": "14",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-27",
       "eventId": "401872962",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4430737",
+            "name": "Kyren Williams",
+            "points": 21.8,
+            "statLine": "88 rush yds, 6 rec, 70 rec yds",
+            "teamId": "14"
+          },
+          {
+            "athleteId": "12483",
+            "name": "Matthew Stafford",
+            "points": 20.9,
+            "statLine": "390 pass yds, 2 pass TD, 2 INT, 13 rush yds",
+            "teamId": "14"
+          },
+          {
+            "athleteId": "16800",
+            "name": "Davante Adams",
+            "points": 20.7,
+            "statLine": "7 rec, 137 rec yds",
+            "teamId": "14"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872962"
+      },
       "homeScore": 30,
       "homeTeamId": "7",
       "scheduledAt": "2026-09-28T00:20:00Z",
@@ -897,9 +2166,36 @@
     "401872963": {
       "awayScore": 7,
       "awayTeamId": "21",
-      "checkedAt": "2026-10-02T20:09:52Z",
+      "checkedAt": "2026-10-04T23:39:43Z",
       "date": "2026-09-28",
       "eventId": "401872963",
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "15168",
+            "name": "Case Keenum",
+            "points": 24.48,
+            "statLine": "247 pass yds, 2 pass TD, 6 rush yds, 1 rush TD",
+            "teamId": "3"
+          },
+          {
+            "athleteId": "2973405",
+            "name": "Kalif Raymond",
+            "points": 21.0,
+            "statLine": "6 rec, 90 rec yds, 1 rec TD",
+            "teamId": "3"
+          },
+          {
+            "athleteId": "4685278",
+            "name": "Luther Burden III",
+            "points": 19.8,
+            "statLine": "7 rush yds, 7 rec, 61 rec yds, 1 rec TD",
+            "teamId": "3"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872963"
+      },
       "homeScore": 27,
       "homeTeamId": "3",
       "scheduledAt": "2026-09-29T00:15:00Z",
@@ -916,7 +2212,7 @@
   },
   "note": "Weeks 1-3 are historical results only. No picks, prediction grading, reassessment triggers, or new-final browser notifications are created.",
   "purpose": "historical-results-only",
-  "revision": "5eb64081f40b2a834e1ce3bd217f8ece546a520dd0fabf938e83844ebd0fef0a",
+  "revision": "a05df510cc123de8c4ab84e0f84bc001926d3d5f3ccf5a8abbbf5dc2f054868f",
   "schemaVersion": 1,
   "season": 2026,
   "source": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard"

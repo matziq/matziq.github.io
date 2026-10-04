@@ -68,7 +68,31 @@ def check(browser, url, artifacts):
     expect(first.locator(".pick-name")).to_have_text("Steelers")
     expect(first.locator(".final-score")).to_have_text("Steelers 24 - Browns 27")
     expect(first.locator(".verdict")).to_have_text("Pick: Incorrect")
-    expect(page.locator("#record-summary")).to_have_text(f"This view: 0 correct / 1 incorrect / 0 tied / {len(GAMES) - 1} pending / 48 historical results excluded")
+    tally = {key: sum(result["pickResult"] == key for result in current_results["games"].values()) for key in ("correct", "incorrect", "tie", "pending")}
+    expect(page.locator("#record-summary")).to_have_text(f"This view: {tally['correct']} correct / {tally['incorrect']} incorrect / {tally['tie']} tied / {tally['pending']} pending / 48 historical results excluded")
+    expect(first.locator(".pick-name")).to_have_class("pick-name pick-incorrect")
+    expect(first.locator(".reason-cell")).to_have_class("reason-cell reason-incorrect")
+    expect(first.locator(".reason-label")).to_have_text("\u2717 Why the pick was wrong")
+    assert first.locator(".reason-cell").evaluate("node => getComputedStyle(node).color") == first.locator(".pick-name").evaluate(
+        "node => getComputedStyle(node).color"), "Wrong-pick reasoning and box must share the red state color."
+    expect(first.locator(".fantasy-leaders li")).to_have_count(3)
+    expect(first.locator(".fantasy-title")).to_have_text("Top fantasy players (PPR)")
+    for event_id, result in current_results["games"].items():
+        row = page.locator(f'[data-event-id="{event_id}"]')
+        if result["scoredPickTeamId"] is None:
+            continue
+        state = result["pickResult"] if result["status"] == "final" else "pending"
+        expect(row.locator(".pick-name")).to_have_attribute("data-pick-state", state)
+        if result["status"] != "final":
+            expect(row.locator(".fantasy-leaders")).to_have_count(0)
+            expect(row.locator(".reason-label")).to_have_count(0)
+        elif state == "correct":
+            expect(row.locator(".reason-cell")).to_have_class("reason-cell reason-correct")
+            expect(row.locator(".reason-cell p")).to_have_text(result["pregameExplanation"])
+    colors = {state: page.locator(f".pick-name.pick-{state}").first.evaluate("node => getComputedStyle(node).color")
+              for state in ("pending", "correct", "incorrect")}
+    assert len(set(colors.values())) == 3, colors
+    assert colors["pending"] == "rgb(29, 78, 216)", colors
 
     names = page.get_by_label("Team names", exact=True)
     names.select_option("location")
@@ -160,7 +184,8 @@ def check(browser, url, artifacts):
     expect(first.locator(".explanation-status")).to_contain_text("postgame review")
     expect(first.locator(".reason-cell p")).to_contain_text("choice was wrong")
     for event_id in ("401872966", "401873037"):
-        forecasts.validate_forecast_paragraph(page.locator(f'[data-event-id="{event_id}"] .reason-cell p').inner_text())
+        if current_results["games"][event_id]["status"] != "final":
+            forecasts.validate_forecast_paragraph(page.locator(f'[data-event-id="{event_id}"] .reason-cell p').inner_text())
     assert final_row["Explanation phase"] == "incorrect-final"
     assert final_row["Pregame explanation"] == current_results["games"]["401872964"]["pregameExplanation"]
     assert "incorrect-final" in final_row["Explanation history"]
@@ -412,8 +437,11 @@ def check_history_and_winners(browser, url, artifacts):
     page.get_by_role("button", name="Reset view", exact=True).first.click()
     page.get_by_label("Week / round", exact=True).select_option("2:4")
     page.get_by_label("Game view", exact=True).select_option("winners")
-    expect(rows).to_have_count(1)
-    expect(rows.locator(".actual-winner")).to_have_text("Winner: Cleveland")
+    week_four = [game.event_id for game in GAMES if game.season_type == 2 and game.week == 4]
+    live = json.loads(page.locator("#results-data").text_content())["games"]
+    expect(rows).to_have_count(sum(live[event_id]["status"] == "final" and live[event_id]["winnerTeamId"] is not None for event_id in week_four))
+    expect(page.locator('[data-event-id="401872964"] .actual-winner')).to_have_text("Winner: Cleveland")
+    expect(page.locator('[data-event-id="401872964"] .fantasy-leaders li')).to_have_count(3)
     expect(rows.locator(".pick-name")).to_have_count(0)
     page.get_by_label("Week / round", exact=True).select_option("2:5")
     expect(rows).to_have_count(0)
@@ -452,34 +480,49 @@ def check_score_projections(browser, url):
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.goto(url, wait_until="networkidle")
-    expect(page.locator("#picks-body .projected-score")).to_have_count(223)
+    current = json.loads(page.locator("#results-data").text_content())["games"]
+    names = {value[0]: {"mascot": mascot, "location": value[1]} for mascot, value in common.script_data(HTML, "catalog-data")["teams"].items()}
+    by_id = {game.event_id: game for game in GAMES}
+
+    def text(score, mode="mascot"):
+        return f"{names[score['awayTeamId']][mode]} {score['awayScore']} - {names[score['homeTeamId']][mode]} {score['homeScore']}"
+
+    projected = [event_id for event_id, result in current.items() if result["projectedScore"]]
+    upcoming = [event_id for event_id in projected if current[event_id]["status"] == "scheduled" and not current[event_id]["pickLockedAt"]]
+    away_id = next(event_id for event_id in upcoming if current[event_id]["scoredPickTeamId"] == current[event_id]["awayTeamId"])
+    home_id = next(event_id for event_id in upcoming if current[event_id]["scoredPickTeamId"] == current[event_id]["homeTeamId"])
+    away_score, home_score = current[away_id]["projectedScore"], current[home_id]["projectedScore"]
+    expect(page.locator("#picks-body .projected-score")).to_have_count(len(projected))
     expect(page.locator(".history-row .projected-score")).to_have_count(0)
     final = page.locator('[data-event-id="401872964"]')
     expect(final.locator(".projected-score")).to_have_count(0)
     expect(final.locator(".projected-score-unavailable")).to_have_text("No score forecast was recorded before kickoff.")
     expect(final.locator(".final-score")).to_have_text("Steelers 24 - Browns 27")
-    away = page.locator('[data-event-id="401872965"]')
-    home = page.locator('[data-event-id="401872971"]')
-    expect(away.locator(".projected-score")).to_have_text("Colts 23 - Commanders 20")
-    expect(home.locator(".projected-score")).to_have_text("Patriots 17 - Bills 30")
+    away = page.locator(f'[data-event-id="{away_id}"]')
+    home = page.locator(f'[data-event-id="{home_id}"]')
+    expect(away.locator(".projected-score")).to_have_text(text(away_score))
+    expect(home.locator(".projected-score")).to_have_text(text(home_score))
+    assert away_score["awayScore"] > away_score["homeScore"] and home_score["homeScore"] > home_score["awayScore"]
     expect(away.locator(".projected-score-label")).to_have_text("Predicted final (away - home)")
     expect(away.locator(".final-score")).to_have_count(0)
-    expect(home.locator(".pick-name")).to_have_text("Bills")
+    expect(away.locator(".pick-name")).to_have_attribute("data-pick-state", "pending")
+    expect(home.locator(".pick-name")).to_have_text(names[current[home_id]["homeTeamId"]]["mascot"])
     away.locator("summary").click()
-    expect(away.locator(".score-history")).to_contain_text("Colts 23 - Commanders 20")
+    expect(away.locator(".score-history").filter(has_text=text(away_score))).not_to_have_count(0)
     page.get_by_label("Team names", exact=True).select_option("location")
-    expect(away.locator(".projected-score")).to_have_text("Indianapolis 23 - Washington 20")
-    expect(home.locator(".projected-score")).to_have_text("New England 17 - Buffalo 30")
+    expect(away.locator(".projected-score")).to_have_text(text(away_score, "location"))
+    expect(home.locator(".projected-score")).to_have_text(text(home_score, "location"))
     page.get_by_label("Game view", exact=True).select_option("projections")
-    expect(page.locator("#picks-body tr")).to_have_count(223)
+    expect(page.locator("#picks-body tr")).to_have_count(len(projected))
     expect(page.locator(".history-row")).to_have_count(0)
     expect(final).to_have_count(0)
-    page.get_by_label("Week / round", exact=True).select_option("2:4")
-    expect(page.locator("#picks-body tr")).to_have_count(15)
-    page.get_by_label("Team", exact=True).select_option("2")
-    page.get_by_label("Day", exact=True).select_option("Sun")
-    page.get_by_label("Search games", exact=True).fill("Buffalo 30")
-    expect(page.locator("#picks-body tr")).to_have_count(1)
+    game = by_id[home_id]
+    page.get_by_label("Week / round", exact=True).select_option(f"{game.season_type}:{game.week}")
+    expect(page.locator("#picks-body tr")).to_have_count(sum(
+        by_id[event_id].season_type == game.season_type and by_id[event_id].week == game.week for event_id in projected))
+    page.get_by_label("Team", exact=True).select_option(current[home_id]["homeTeamId"])
+    page.get_by_label("Search games", exact=True).fill(f"{names[home_score['homeTeamId']]['location']} {home_score['homeScore']}")
+    expect(home).to_be_visible()
     with page.expect_download() as download:
         page.get_by_role("button", name="Export CSV", exact=True).click()
     with tempfile.TemporaryDirectory() as directory:
@@ -487,13 +530,13 @@ def check_score_projections(browser, url):
         download.value.save_as(file)
         with file.open(encoding="utf-8-sig", newline="") as stream:
             exported = list(csv.DictReader(stream))
-    assert len(exported) == 1
-    row = exported[0]
+    row = next(item for item in exported if item["ESPN event ID"] == home_id)
     assert (row["Projected away team"], row["Projected away points"], row["Projected home team"], row["Projected home points"]) == (
-        "New England", "17", "Buffalo", "30",
+        names[home_score["awayTeamId"]]["location"], str(home_score["awayScore"]), names[home_score["homeTeamId"]]["location"], str(home_score["homeScore"]),
     )
-    assert row["Predicted final score"] == "New England 17 - Buffalo 30"
-    assert row["Final score"] == "" and row["Pick result"] == "pending"
+    assert row["Predicted final score"] == text(home_score, "location")
+    assert row["Final score"] == "" and row["Pick result"] == "pending" and row["Pick box color"] == "Blue (current)"
+    assert row["Top fantasy players (PPR)"] == ""
     assert row["Score forecast status"] == "available" and row["Score forecast dated (UTC)"]
     assert row["Score forecast locked (UTC)"] == ""
     page.evaluate("window.dispatchEvent(new Event('beforeprint'))")
@@ -524,7 +567,7 @@ def check_score_projections(browser, url):
     context.close()
 
     invalid = copy.deepcopy(common.script_data(HTML, "results-data"))
-    score = invalid["games"]["401872965"]["projectedScore"]
+    score = invalid["games"][away_id]["projectedScore"]
     score["awayScore"], score["homeScore"] = score["homeScore"], score["awayScore"]
     common.seal(invalid)
     rejected = browser.new_context()
@@ -532,9 +575,9 @@ def check_score_projections(browser, url):
     page = rejected.new_page()
     page.goto(url, wait_until="networkidle")
     expect(page.locator("#source-warning")).to_be_visible()
-    expect(page.locator('[data-event-id="401872965"] .projected-score')).to_have_text("Colts 23 - Commanders 20")
+    expect(page.locator(f'[data-event-id="{away_id}"] .projected-score')).to_have_text(text(away_score))
     rejected.close()
-    print("PASS: 223 score projections, away/home winner mapping, no retrospective score, naming/search/filter/CSV/print/mobile, history/TBD/winner-view exclusion, and invalid-score retention.")
+    print(f"PASS: {len(projected)} score projections, away/home winner mapping, blue pending boxes, no retrospective score, naming/search/filter/CSV/print/mobile, history/TBD/winner-view exclusion, and invalid-score retention.")
 
 
 def main():

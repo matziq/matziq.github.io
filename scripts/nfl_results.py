@@ -18,6 +18,7 @@ from nfl_common import (
     EASTERN, FETCH_ERRORS, FINAL_TYPES, Fetch, Game, LIVE_URL, PAGE_PATH, PICKS_SHA256,
     ROOT, SCOREBOARD_URL, SCOPE_START, SUMMARY_URL, UTC, digest, fetch_json, instant,
     load_games, read_html, replace_data, script_data, stamp, validate_paragraph, write_json,
+    fantasy_leaders, validate_fantasy,
 )
 from nfl_forecasts import apply_pick_snapshots, publication_history, validate_ledger, validate_projected_score
 from nfl_season import coverage_complete, discover
@@ -62,6 +63,7 @@ def validate_results(payload: dict, games: list[Game], *, allow_pending_rebind=F
             if not (allow_pending_rebind and not game.original and result["status"] in {"scheduled", "postponed", "delayed"} and not result.get("pickLockedAt")):
                 raise ValueError(f"Results identity mismatch for {game.event_id}.")
         instant(result["scheduledAt"])
+        validate_fantasy(result.get("fantasyLeaders"), game.away_id, game.home_id, result["status"] == "final")
         picked = result.get("scoredPickTeamId", game.pick_id)
         if picked is not None and picked not in (game.away_id, game.home_id):
             raise ValueError(f"Invalid selected team for {game.event_id}.")
@@ -247,6 +249,7 @@ def semantic_results(results: dict) -> dict:
 def refresh(
     games: list[Game], previous: dict | None, fetch: Fetch, now: datetime, force: bool = False,
     *, fixtures: dict | None = None, forecasts: dict | None = None, publications: dict | None = None,
+    fantasy_fetch: Fetch | None = None, notes: list[str] | None = None,
 ) -> tuple[dict | None, list[str]]:
     if forecasts is not None:
         validate_ledger(forecasts, games)
@@ -306,6 +309,21 @@ def refresh(
         except FETCH_ERRORS as error:
             result["error"] = str(error)
             errors.append(f"{game.event_id}: {error}")
+    due_ids = {game.event_id for game in due}
+    for game in games:
+        result = results[game.event_id]
+        if result["status"] != "final":
+            result["fantasyLeaders"] = None
+            continue
+        result.setdefault("fantasyLeaders", None)
+        if fantasy_fetch is None or (result["fantasyLeaders"] and game.event_id not in due_ids):
+            continue
+        url = f"{SUMMARY_URL}?event={game.event_id}"
+        try:
+            result["fantasyLeaders"] = {**fantasy_leaders(fantasy_fetch(url), game.away_id, game.home_id), "sourceUrl": url}
+        except FETCH_ERRORS as error:
+            if notes is not None:
+                notes.append(f"{game.event_id}: fantasy leaders unavailable; retained the last verified list: {error}")
     apply_pick_snapshots(games, results, forecasts, now, publications)
     complete = coverage_complete(fixtures, results, now) if fixtures else all(next_check(result, now) is None for result in results.values())
     fixture_revision = fixtures["revision"] if fixtures else None
@@ -436,9 +454,11 @@ def main() -> int:
     forecasts = json.loads(forecast_path.read_text(encoding="utf-8")) if forecast_path.exists() else None
     games = load_games(html, fixtures)
     publications = publication_history(arguments.root, forecasts) if forecasts is not None else None
+    notes: list[str] = []
     payload, errors = refresh(
         games, previous, fetch_json, datetime.now(UTC), arguments.force,
         fixtures=fixtures, forecasts=forecasts, publications=publications,
+        fantasy_fetch=fetch_json, notes=notes,
     )
     if payload is not None and payload != previous:
         if fixtures is not None:
@@ -447,6 +467,8 @@ def main() -> int:
         print(f"Results revision {payload['revision']}; last result change {payload['lastResultAt']}.")
     else:
         print("No publishable results change; outside a check window or unchanged since the last published check.")
+    for note in notes:
+        print(f"::warning::{note}", file=sys.stderr)
     for error in errors:
         print(f"::warning::{error}", file=sys.stderr)
     return 2 if errors else 0

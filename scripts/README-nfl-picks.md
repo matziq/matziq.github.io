@@ -101,6 +101,24 @@ if none was published in time. Actual result corrections and mistaken-pick
 explanation reviews cannot alter the frozen projected score. Both initial
 and revised score forecasts remain in the row history and CSV.
 
+## Pick colors and fantasy leaders
+
+The pick box is blue while a game is pending, green when the pick won, and
+red only when the pick lost (ties stay neutral). After a final, a correct
+pick's reasoning is shown in green with its original wording unchanged; a
+wrong pick's reasoning is shown in red with the postgame explanation of why
+the pick was wrong (labeled as pending until that review is published).
+
+Each final game, current or historical, stores `fantasyLeaders`: the three
+players with the most PPR fantasy points in that matchup, computed by
+`nfl_common.fantasy_leaders` from the ESPN game summary box score (0.04 per
+passing yard, 4 per passing TD, -2 per interception, 0.1 per rushing or
+receiving yard, 1 per reception, 6 per rushing/receiving/return TD, -2 per
+fumble lost; defense and kickers are excluded). Unfinished games always have
+`null`. If a summary fetch fails, the prior list is kept and the workflow logs
+a warning instead of failing, then retries on the next run. The leaders appear
+under the final score and are included in search and both CSV exports.
+
 ## Historical games and weekly winners
 
 Weeks 1-3 (48 games, September 9-28, 2026) are stored in a separate

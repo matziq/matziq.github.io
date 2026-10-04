@@ -31,6 +31,92 @@ FETCH_ERRORS = (OSError, ValueError, TimeoutError)
 Fetch = Callable[[str], dict]
 ROUND_NAMES = {1: "Wild Card", 2: "Divisional", 3: "Conference championships", 4: "Super Bowl LXI"}
 ROUND_COUNTS = {1: 6, 2: 4, 3: 2, 4: 1}
+FANTASY_SCORING = "PPR"
+FANTASY_SCORING_NOTE = (
+    "Full PPR from the ESPN box score: 0.04 per passing yard, 4 per passing TD, -2 per interception, "
+    "0.1 per rushing or receiving yard, 1 per reception, 6 per rushing, receiving, or return TD, "
+    "and -2 per fumble lost. Two-point conversions are not in the box score and are excluded."
+)
+# Points are accumulated in hundredths so the ranking is exact and repeatable.
+FANTASY_RULES = {
+    "passing": {"passingYards": 4, "passingTouchdowns": 400, "interceptions": -200},
+    "rushing": {"rushingYards": 10, "rushingTouchdowns": 600},
+    "receiving": {"receptions": 100, "receivingYards": 10, "receivingTouchdowns": 600},
+    "fumbles": {"fumblesLost": -200},
+    "kickReturns": {"kickReturnTouchdowns": 600},
+    "puntReturns": {"puntReturnTouchdowns": 600},
+}
+FANTASY_LINE = (
+    ("passingYards", "pass yds"), ("passingTouchdowns", "pass TD"), ("interceptions", "INT"),
+    ("rushingYards", "rush yds"), ("rushingTouchdowns", "rush TD"), ("receptions", "rec"),
+    ("receivingYards", "rec yds"), ("receivingTouchdowns", "rec TD"), ("fumblesLost", "fumble lost"),
+    ("kickReturnTouchdowns", "KR TD"), ("puntReturnTouchdowns", "PR TD"),
+)
+
+
+def _box_number(value: object) -> int:
+    match = re.fullmatch(r"-?\d+", str(value).strip())
+    return int(match.group()) if match else 0
+
+
+def fantasy_leaders(summary: dict, away_id: str, home_id: str, limit: int = 3) -> dict:
+    """Rank the matchup's top fantasy scorers from a verified final box score."""
+    teams = (summary.get("boxscore") or {}).get("players")
+    if not isinstance(teams, list) or sorted(str(team.get("team", {}).get("id")) for team in teams) != sorted((away_id, home_id)):
+        raise ValueError("The ESPN box score is missing or does not match this matchup.")
+    players: dict[str, dict] = {}
+    for team in teams:
+        team_id = str(team["team"]["id"])
+        for group in team.get("statistics", []):
+            rules = FANTASY_RULES.get(group.get("name"))
+            if not rules:
+                continue
+            keys = group.get("keys", [])
+            for entry in group.get("athletes", []):
+                athlete = entry.get("athlete") or {}
+                athlete_id, name = str(athlete.get("id") or ""), str(athlete.get("displayName") or "").strip()
+                if not athlete_id or not name:
+                    continue
+                player = players.setdefault(athlete_id, {"athleteId": athlete_id, "name": name, "teamId": team_id, "hundredths": 0, "stats": {}})
+                if player["teamId"] != team_id:
+                    raise ValueError("A box-score player appears on both teams.")
+                values = dict(zip(keys, entry.get("stats", [])))
+                for key, weight in rules.items():
+                    amount = _box_number(values.get(key, 0))
+                    player["stats"][key] = player["stats"].get(key, 0) + amount
+                    player["hundredths"] += amount * weight
+    if not players:
+        raise ValueError("The ESPN box score has no offensive player statistics.")
+    ranked = sorted(players.values(), key=lambda item: (-item["hundredths"], item["name"], item["athleteId"]))[:limit]
+    return {
+        "scoring": FANTASY_SCORING,
+        "players": [
+            {
+                "athleteId": player["athleteId"], "name": player["name"], "teamId": player["teamId"],
+                "points": round(player["hundredths"] / 100, 2),
+                "statLine": ", ".join(f"{player['stats'][key]} {label}" for key, label in FANTASY_LINE if player["stats"].get(key)),
+            }
+            for player in ranked
+        ],
+    }
+
+
+def validate_fantasy(value: object, away_id: str, home_id: str, final: bool) -> None:
+    if value is None:
+        return
+    if not final:
+        raise ValueError("Fantasy leaders are only published for verified finals.")
+    if not isinstance(value, dict) or value.get("scoring") != FANTASY_SCORING or not str(value.get("sourceUrl", "")).startswith(SUMMARY_URL):
+        raise ValueError("Fantasy leaders need the declared scoring system and ESPN source.")
+    players = value.get("players")
+    if not isinstance(players, list) or not 1 <= len(players) <= 3:
+        raise ValueError("Fantasy leaders must list one to three players.")
+    points = [player.get("points") for player in players]
+    if any(isinstance(point, bool) or not isinstance(point, (int, float)) for point in points) or points != sorted(points, reverse=True):
+        raise ValueError("Fantasy leaders must be ranked by numeric points.")
+    for player in players:
+        if set(player) != {"athleteId", "name", "teamId", "points", "statLine"} or player["teamId"] not in (away_id, home_id) or not player["name"]:
+            raise ValueError("A fantasy leader is not a player from this matchup.")
 
 
 @dataclass(frozen=True)
