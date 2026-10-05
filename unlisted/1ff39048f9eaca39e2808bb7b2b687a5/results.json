@@ -1,13 +1,13 @@
 {
   "analysis": {
-    "assessedAt": "2026-10-04T22:16:56Z",
-    "changedPickCount": 3,
-    "changedScoreCount": 8,
-    "id": "assessment-1623a456fba7f4044de838bc",
+    "assessedAt": "2026-10-05T00:05:18Z",
+    "changedPickCount": 0,
+    "changedScoreCount": 0,
+    "id": "assessment-97454a694a9cf1e1ff7707a9",
     "initialPickCount": 0,
-    "retainedCount": 207,
+    "retainedCount": 210,
     "skippedLockedCount": 0,
-    "summary": "Reassessed all 210 known games still eligible after eight newly verified Sunday finals. Changed three future winners: Giants at Washington to Giants 23-20, Buffalo at the Rams to Rams 27-24, and Dallas at Philadelphia to Cowboys 27-24. Retained the other 207 winners and their exact paragraphs; made five score-only revisions for Jaguars-Eagles, Bengals-Dolphins, Raiders-Patriots, Ravens-Falcons and Saints-Giants while preserving their winner/explanation identities. Appended exactly three sourced mistaken-pick reviews for Cardinals-Giants, Rams-Eagles and Patriots-Bills. All started-game winner picks, pregame paragraphs, projected scores and grading identities remain frozen; correct finals receive no rewrite."
+    "summary": "Reassessed all 210 known games still eligible after four newly verified late-afternoon finals (Vikings over Dolphins, 49ers over Broncos, Chiefs over Raiders, Seahawks over Chargers), all of which were correct picks and keep their exact pregame paragraphs. Fresh reports added Pat Surtain II and Riley Moss exits for Denver, McConkey, Alt and Slater injuries for the Chargers, Rice and Thornton concerns for Kansas City, and Nailor's concussion for Las Vegas. None warranted a winner or score change: the Denver-Chargers injuries cut both ways, and the Bengals' receiver injuries were already reflected in the prior score revision. All winners, paragraphs and projected scores are retained; no postgame reviews were required."
   },
   "explanationFormat": "paragraph",
   "explanationPolicy": "forecast-until-final",
@@ -24,6 +24,10 @@
     "assessment-9361153b16a65cc2713c7d4f": {
       "commit": "2eacff772da7ba56cb1ba2c1242ed7d7da597ed3",
       "committedAt": "2026-10-02T19:55:10Z"
+    },
+    "assessment-97454a694a9cf1e1ff7707a9": {
+      "commit": "353d3da509db2d4ec9b96a3644d0b999e1fd6270",
+      "committedAt": "2026-10-05T00:05:34Z"
     },
     "score-0041fc927a142bed946ff2d6": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
@@ -958,7 +962,7 @@
       "committedAt": "2026-10-03T01:19:23Z"
     }
   },
-  "forecastRevision": "6d08f070d8164b2c5adcca0789944e4fa0533c9aba60ab4564946b652d82442f",
+  "forecastRevision": "32e63dc771c4c828ce0aa5a5f32bdcdf8c3ee9034f346b978f534afa0e6a1432",
   "games": {
     "401872910": {
       "awayScore": null,
@@ -2380,7 +2384,7 @@
     "401872978": {
       "awayScore": null,
       "awayTeamId": "8",
-      "checkedAt": "2026-10-04T23:52:09Z",
+      "checkedAt": "2026-10-05T00:05:49Z",
       "error": null,
       "eventId": "401872978",
       "explanationPhase": "pregame",
@@ -2391,7 +2395,7 @@
       "hasStarted": false,
       "homeScore": null,
       "homeTeamId": "29",
-      "lastAttemptAt": "2026-10-04T23:52:09Z",
+      "lastAttemptAt": "2026-10-05T00:05:49Z",
       "pickAssessmentId": null,
       "pickCutoffAt": null,
       "pickEffectiveAt": "2026-10-01T19:23:00Z",
@@ -11864,14 +11868,14 @@
       "winnerTeamId": null
     }
   },
-  "lastAttemptAt": "2026-10-04T23:52:09Z",
+  "lastAttemptAt": "2026-10-05T00:05:49Z",
   "lastResultAt": "2026-10-04T23:52:09Z",
-  "lastSuccessfulCheckAt": "2026-10-04T23:52:09Z",
+  "lastSuccessfulCheckAt": "2026-10-05T00:05:49Z",
   "monitoringComplete": false,
-  "nextCheckAt": "2026-10-04T23:57:09Z",
+  "nextCheckAt": "2026-10-05T00:10:49Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-10-04T23:52:09Z",
-  "revision": "ce2959663bfc857ecdd63a008d7f2209cdb6aaacbae822c67c03e967e74d14f1",
+  "publishedAt": "2026-10-05T00:05:49Z",
+  "revision": "d9e71594d96f9820239c3c31557430fd9eb05bc186e2237262981b13374d0879",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
