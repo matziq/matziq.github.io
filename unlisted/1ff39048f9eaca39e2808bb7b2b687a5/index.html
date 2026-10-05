@@ -313,6 +313,8 @@
     .results-summary p { margin: 0; }
     .results-summary p + p { margin-top: 8px; }
     #record-summary { font-weight: 600; }
+    .season-accuracy { margin: 8px 0 0; font-size: 15px; color: var(--cp-text-muted); }
+    .season-accuracy strong { font-size: 22px; color: var(--cp-text); margin-right: 6px; }
     .source-status, .result-detail, .result-issue, .schedule-change { font-size: 12px; color: var(--cp-text-soft); }
     .result-cell span, .result-cell a { display: block; margin-top: 4px; }
     .final-score { font-weight: 600; font-variant-numeric: tabular-nums; }
@@ -421,7 +423,8 @@
       <div>
         <h1>NFL winner picks</h1>
         <p class="date-range">2026 regular season + playoffs <span aria-hidden="true">&middot;</span> History from September 9; picks from October 1; Super Bowl LXI February 14, 2027</p>
-      </div>
+                <p id="season-accuracy" class="season-accuracy" role="status" aria-live="polite"></p>
+              </div>
       <div class="actions">
         <button id="export-button" class="button primary" type="button" title="Download the currently displayed games as CSV" disabled>
           <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>
@@ -102557,6 +102560,14 @@
         const counts = { correct: 0, incorrect: 0, tie: 0, pending: 0, no_pick: 0 };
         visibleGames.filter((game) => !game.historical).forEach((game) => { counts[resultFor(game).pickResult] += 1; });
         const historicalCount = visibleGames.filter((game) => game.historical).length;
+        const season = { correct: 0, incorrect: 0, tie: 0 };
+        games.filter((game) => !game.historical).forEach((game) => { const r = resultFor(game).pickResult; if (r in season) season[r] += 1; });
+        const graded = season.correct + season.incorrect + season.tie;
+        const accuracy = byId("season-accuracy");
+        accuracy.replaceChildren();
+        const pct = document.createElement("strong");
+        pct.textContent = graded ? `${(Math.round((season.correct / graded) * 1000) / 10).toFixed(1)}% correct` : "No graded picks yet";
+        accuracy.append(pct, graded ? `${season.correct} of ${graded} graded picks${season.tie ? ` (${season.tie} tied)` : ""} this season` : "");
         byId("record-summary").textContent = historicalCount && historicalCount === count ?
           `${historicalCount} historical results. No predictions or grading.` :
           `This view: ${counts.correct} correct / ${counts.incorrect} incorrect / ${counts.tie} tied / ${counts.pending} pending${counts.no_pick ? ` / ${counts.no_pick} without a pregame pick` : ""}${historicalCount ? ` / ${historicalCount} historical results excluded` : ""}`;

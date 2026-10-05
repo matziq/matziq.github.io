@@ -70,6 +70,9 @@ def check(browser, url, artifacts):
     expect(first.locator(".verdict")).to_have_text("Pick: Incorrect")
     tally = {key: sum(result["pickResult"] == key for result in current_results["games"].values()) for key in ("correct", "incorrect", "tie", "pending")}
     expect(page.locator("#record-summary")).to_have_text(f"This view: {tally['correct']} correct / {tally['incorrect']} incorrect / {tally['tie']} tied / {tally['pending']} pending / 48 historical results excluded")
+    graded = tally["correct"] + tally["incorrect"] + tally["tie"]
+    expect(page.locator("#season-accuracy strong")).to_have_text(f"{int(tally['correct'] * 1000 / graded + 0.5) / 10:.1f}% correct")
+    expect(page.locator("#season-accuracy")).to_contain_text(f"{tally['correct']} of {graded} graded picks")
     expect(first.locator(".pick-name")).to_have_class("pick-name pick-incorrect")
     expect(first.locator(".reason-cell")).to_have_class("reason-cell reason-incorrect")
     expect(first.locator(".reason-label")).to_have_text("\u2717 Why the pick was wrong")
@@ -304,8 +307,8 @@ def check(browser, url, artifacts):
         audited = browser.new_context()
         page = audited.new_page()
         page.goto(url, wait_until="networkidle")
-        latest = ledger["assessments"][-1]
-        for decision in latest["decisions"]:
+        for latest in reversed(ledger["assessments"]):
+          for decision in latest["decisions"]:
             if decision["applied"] and decision["previousPickTeamId"] is not None and decision["pickTeamId"] != decision["previousPickTeamId"]:
                 row = page.locator(f'[data-event-id="{decision["eventId"]}"]')
                 row.locator("summary").click()
@@ -315,6 +318,8 @@ def check(browser, url, artifacts):
                 common.validate_paragraph(row.locator(".reason-cell").inner_text())
                 changed = decision
                 break
+          if changed:
+            break
         assert changed, "The initial researched revisions were not present."
         expect(page.locator("#analysis-status")).to_contain_text("Last researched assessment")
         audited.close()
@@ -381,8 +386,10 @@ def check_history_and_winners(browser, url, artifacts):
     expect(historical.locator(".pick-name")).to_have_count(0)
     expect(historical.locator(".verdict")).to_have_count(0)
     assert all(not text.strip() for text in historical.locator(".reason-cell").all_text_contents())
+    season_text = page.locator("#season-accuracy").text_content()
     page.locator('#week-nav [data-scope="history"]').click()
     expect(rows).to_have_count(48)
+    expect(page.locator("#season-accuracy")).to_have_text(season_text)
     expect(page.locator("#record-summary")).to_have_text("48 historical results. No predictions or grading.")
     expect(page.locator('[data-sort="pick"]')).to_be_hidden()
     page.get_by_label("Week / round", exact=True).select_option("2:2")
