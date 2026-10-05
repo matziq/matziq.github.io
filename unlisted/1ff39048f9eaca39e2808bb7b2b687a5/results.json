@@ -1,13 +1,13 @@
 {
   "analysis": {
-    "assessedAt": "2026-10-05T00:05:18Z",
+    "assessedAt": "2026-10-05T06:13:35Z",
     "changedPickCount": 0,
     "changedScoreCount": 0,
-    "id": "assessment-97454a694a9cf1e1ff7707a9",
+    "id": "assessment-d7af6c7310833b2f65ef53e0",
     "initialPickCount": 0,
-    "retainedCount": 210,
+    "retainedCount": 209,
     "skippedLockedCount": 0,
-    "summary": "Reassessed all 210 known games still eligible after four newly verified late-afternoon finals (Vikings over Dolphins, 49ers over Broncos, Chiefs over Raiders, Seahawks over Chargers), all of which were correct picks and keep their exact pregame paragraphs. Fresh reports added Pat Surtain II and Riley Moss exits for Denver, McConkey, Alt and Slater injuries for the Chargers, Rice and Thornton concerns for Kansas City, and Nailor's concussion for Las Vegas. None warranted a winner or score change: the Denver-Chargers injuries cut both ways, and the Bengals' receiver injuries were already reflected in the prior score revision. All winners, paragraphs and projected scores are retained; no postgame reviews were required."
+    "summary": "Reassessed all 209 known games still eligible after the newly verified Sunday night final, Carolina's 32-26 home win over Detroit. That was an incorrect pick, so it receives a sourced postgame review; its original pick, grade and 31-23 projected score are preserved. Fresh reports and the recap updated the Detroit and Carolina outlooks, including Gibbs' limited rushing, McMillan's breakout and in-game injuries to Ya-Sin, Phillips and Freeling. None warranted a winner or projected-score change in the remaining Lions or Panthers games or elsewhere, so all eligible winners, paragraphs and scores are retained."
   },
   "explanationFormat": "paragraph",
   "explanationPolicy": "forecast-until-final",
@@ -28,6 +28,10 @@
     "assessment-97454a694a9cf1e1ff7707a9": {
       "commit": "353d3da509db2d4ec9b96a3644d0b999e1fd6270",
       "committedAt": "2026-10-05T00:05:34Z"
+    },
+    "assessment-d7af6c7310833b2f65ef53e0": {
+      "commit": "184ff96862b0a7b3f3081e9dfa14c9126157fcd1",
+      "committedAt": "2026-10-05T06:13:53Z"
     },
     "score-0041fc927a142bed946ff2d6": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
@@ -962,7 +966,7 @@
       "committedAt": "2026-10-03T01:19:23Z"
     }
   },
-  "forecastRevision": "32e63dc771c4c828ce0aa5a5f32bdcdf8c3ee9034f346b978f534afa0e6a1432",
+  "forecastRevision": "bf944deb4344b7a5d0459f96698fce1eb81d676bec3b1dac278a08cfea1d8ea4",
   "games": {
     "401872910": {
       "awayScore": null,
@@ -2387,9 +2391,9 @@
       "checkedAt": "2026-10-05T06:05:52Z",
       "error": null,
       "eventId": "401872978",
-      "explanationPhase": "awaiting-review",
-      "explanationRevisionId": null,
-      "explanationUpdatedAt": null,
+      "explanationPhase": "incorrect-final",
+      "explanationRevisionId": "explanation-08ed8652adf4d2f778a87489",
+      "explanationUpdatedAt": "2026-10-05T06:13:35Z",
       "fantasyLeaders": {
         "players": [
           {
@@ -2425,7 +2429,7 @@
       "pickAssessmentId": null,
       "pickCutoffAt": "2026-10-05T00:20:00Z",
       "pickEffectiveAt": "2026-10-01T19:23:00Z",
-      "pickExplanation": "I expect the Detroit Lions to beat the Carolina Panthers because Jahmyr Gibbs should give Detroit a useful rushing advantage against Carolina. That advantage will still need to hold up on the road, and the opponent could win if the expected matchup edge does not materialize.",
+      "pickExplanation": "I picked Detroit because I expected Jahmyr Gibbs to give the Lions a rushing edge, but Carolina won 32-26 at home and reversed that matchup. Gibbs was held to 46 rushing yards on 15 carries, while Chuba Hubbard ran for 122 yards and two touchdowns and Bryce Young completed 29 of 41 passes for 329 yards, including two touchdowns to Tetairoa McMillan, who caught 14 passes for 192 yards. Carolina scored on six straight possessions after punting on its opening drive, and Detroit's offense often stalled near scoring range, settling for four Jake Bates field goals despite Jared Goff's 412 passing yards.",
       "pickLockedAt": "2026-10-05T00:30:38Z",
       "pickReason": "Gibbs powers Detroit past Carolina",
       "pickResult": "incorrect",
@@ -11900,8 +11904,8 @@
   "monitoringComplete": false,
   "nextCheckAt": "2026-10-05T07:05:52Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-10-05T06:05:52Z",
-  "revision": "1861d34647f17400583a687326d6ef503fe09a149aeaf9dd84f5697f07e3551e",
+  "publishedAt": "2026-10-05T06:14:10Z",
+  "revision": "4ea0e95901521bf9aa0d000a996b1c04d0298b9aa259ff715bfe12e92380d275",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
