@@ -2457,27 +2457,53 @@
       "winnerTeamId": "29"
     },
     "401872979": {
-      "awayScore": null,
+      "awayScore": 45,
       "awayTeamId": "1",
-      "checkedAt": "2026-10-06T01:51:32Z",
+      "checkedAt": "2026-10-06T08:11:12Z",
       "error": null,
       "eventId": "401872979",
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
-      "fantasyLeaders": null,
-      "firstFinalAt": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4430807",
+            "name": "Bijan Robinson",
+            "points": 27.7,
+            "statLine": "145 rush yds, 2 rush TD, 1 rec, 2 rec yds",
+            "teamId": "1"
+          },
+          {
+            "athleteId": "4241474",
+            "name": "Brian Robinson Jr.",
+            "points": 25.7,
+            "statLine": "62 rush yds, 3 rush TD, 1 rec, 5 rec yds",
+            "teamId": "1"
+          },
+          {
+            "athleteId": "3054850",
+            "name": "Alvin Kamara",
+            "points": 22.8,
+            "statLine": "23 rush yds, 2 rush TD, 5 rec, 35 rec yds",
+            "teamId": "18"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401872979"
+      },
+      "firstFinalAt": "2026-10-06T08:11:12Z",
       "hasStarted": true,
-      "homeScore": null,
+      "homeScore": 24,
       "homeTeamId": "18",
-      "lastAttemptAt": "2026-10-06T01:51:32Z",
+      "lastAttemptAt": "2026-10-06T08:11:12Z",
       "pickAssessmentId": "assessment-5eb306067a54889f037ac6ed",
       "pickCutoffAt": "2026-10-06T00:15:00Z",
       "pickEffectiveAt": "2026-10-04T19:08:40Z",
       "pickExplanation": "I now lean toward the Atlanta Falcons to beat the New Orleans Saints because New Orleans' confirmed Monday absences for Kaden Elliss, Carl Granderson and Anfernee Jennings should weaken its front-seven options. Atlanta's 35-14 rebound at Green Bay gives its offense a better case than the earlier home-field tie-breaker suggested, while the Saints also have significant offensive players on IR. New Orleans' home setting and Tyler Shough's competitive early scoring should keep this close.",
       "pickLockedAt": "2026-10-06T01:51:32Z",
       "pickReason": "I now lean toward the Atlanta Falcons to beat the New Orleans Saints because New Orleans' confirmed Monday absences for Kaden Elliss, Carl Granderson and Anfernee Jennings should weaken its front-seven options. Atlanta's 35-14 rebound at Green Bay gives its offense a better case than the earlier home-field tie-breaker suggested, while the Saints also have significant offensive players on IR. New Orleans' home setting and Tyler Shough's competitive early scoring should keep this close.",
-      "pickResult": "pending",
+      "pickResult": "correct",
       "pickRevisionId": "assessment-5eb306067a54889f037ac6ed:401872979",
       "pregameExplanation": "I now lean toward the Atlanta Falcons to beat the New Orleans Saints because New Orleans' confirmed Monday absences for Kaden Elliss, Carl Granderson and Anfernee Jennings should weaken its front-seven options. Atlanta's 35-14 rebound at Green Bay gives its offense a better case than the earlier home-field tie-breaker suggested, while the Saints also have significant offensive players on IR. New Orleans' home setting and Tyler Shough's competitive early scoring should keep this close.",
       "projectedScore": {
@@ -2492,14 +2518,14 @@
       },
       "projectedScoreLockedAt": "2026-10-06T01:51:32Z",
       "projectedScoreStatus": "available",
-      "resultUpdatedAt": null,
+      "resultUpdatedAt": "2026-10-06T08:11:12Z",
       "scheduledAt": "2026-10-06T00:15:00Z",
       "scoredPickTeamId": "1",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261005",
-      "status": "in_progress",
-      "statusDetail": "In progress - awaiting final",
+      "status": "final",
+      "statusDetail": "Final",
       "timeConfirmed": true,
-      "winnerTeamId": null
+      "winnerTeamId": "1"
     },
     "401872980": {
       "awayScore": null,
@@ -11898,14 +11924,14 @@
       "winnerTeamId": null
     }
   },
-  "lastAttemptAt": "2026-10-06T01:51:32Z",
-  "lastResultAt": "2026-10-05T06:05:52Z",
-  "lastSuccessfulCheckAt": "2026-10-06T01:51:32Z",
+  "lastAttemptAt": "2026-10-06T08:11:12Z",
+  "lastResultAt": "2026-10-06T08:11:12Z",
+  "lastSuccessfulCheckAt": "2026-10-06T08:11:12Z",
   "monitoringComplete": false,
-  "nextCheckAt": "2026-10-06T01:56:32Z",
+  "nextCheckAt": "2026-10-06T09:11:12Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-10-06T01:51:32Z",
-  "revision": "9719a8656ad1a6f4aed70c496ea9718fddde00e5161e78bf30c4a5db62150561",
+  "publishedAt": "2026-10-06T08:11:12Z",
+  "revision": "731dfdc382f37dc68d0a826712cda2c5a7cda37662961ab47cbd11fd2786d7f4",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
