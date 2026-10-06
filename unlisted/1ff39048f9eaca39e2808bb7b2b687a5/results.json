@@ -1,13 +1,13 @@
 {
   "analysis": {
-    "assessedAt": "2026-10-05T06:13:35Z",
-    "changedPickCount": 0,
-    "changedScoreCount": 0,
-    "id": "assessment-d7af6c7310833b2f65ef53e0",
+    "assessedAt": "2026-10-06T08:20:55Z",
+    "changedPickCount": 3,
+    "changedScoreCount": 4,
+    "id": "assessment-ddeadc7751f597ea5b178585",
     "initialPickCount": 0,
-    "retainedCount": 209,
+    "retainedCount": 205,
     "skippedLockedCount": 0,
-    "summary": "Reassessed all 209 known games still eligible after the newly verified Sunday night final, Carolina's 32-26 home win over Detroit. That was an incorrect pick, so it receives a sourced postgame review; its original pick, grade and 31-23 projected score are preserved. Fresh reports and the recap updated the Detroit and Carolina outlooks, including Gibbs' limited rushing, McMillan's breakout and in-game injuries to Ya-Sin, Phillips and Freeling. None warranted a winner or projected-score change in the remaining Lions or Panthers games or elsewhere, so all eligible winners, paragraphs and scores are retained."
+    "summary": "Reassessed all 208 eligible known remaining games after Atlanta's verified 45-24 win at New Orleans. That was a correct pick, so its exact pregame explanation, winner record and locked projected score are unchanged and no postgame rewrite is supplied. Fresh Penix-return/run-production evidence and Jackson's unresolved ankle support a narrow Atlanta-over-Baltimore change; Saints defensive regression supports the Giants at home; Atlanta's sustained rebound replaces the Tampa Bay home tie-breaker in Week 8. Those three winner changes have explicit provisional away/home scores. Bagent's confirmed Week 5 start and red-zone/turnover risk support a score-only reduction to Bears 20, Packers 17. All other selected winners, pregame paragraphs and score entries are retained after matchup-specific review."
   },
   "explanationFormat": "paragraph",
   "explanationPolicy": "forecast-until-final",
@@ -32,6 +32,10 @@
     "assessment-d7af6c7310833b2f65ef53e0": {
       "commit": "184ff96862b0a7b3f3081e9dfa14c9126157fcd1",
       "committedAt": "2026-10-05T06:13:53Z"
+    },
+    "assessment-ddeadc7751f597ea5b178585": {
+      "commit": "df3304849612d6241ffa8d1a0677ce2a36dccbdb",
+      "committedAt": "2026-10-06T08:21:14Z"
     },
     "score-0041fc927a142bed946ff2d6": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
@@ -473,6 +477,10 @@
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
     },
+    "score-7bda508a73c656aac7749f34": {
+      "commit": "df3304849612d6241ffa8d1a0677ce2a36dccbdb",
+      "committedAt": "2026-10-06T08:21:14Z"
+    },
     "score-7c5ddf623444a2556db98af2": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
@@ -508,6 +516,10 @@
     "score-824094042748f4c25d581832": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
+    },
+    "score-826987d6c14604e2e45ab48f": {
+      "commit": "df3304849612d6241ffa8d1a0677ce2a36dccbdb",
+      "committedAt": "2026-10-06T08:21:14Z"
     },
     "score-833ff428300345711e3e11cb": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
@@ -769,6 +781,10 @@
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
     },
+    "score-bdb9db08d76cd66253ccbd06": {
+      "commit": "df3304849612d6241ffa8d1a0677ce2a36dccbdb",
+      "committedAt": "2026-10-06T08:21:14Z"
+    },
     "score-be65e916b386fb2213c3f3b4": {
       "commit": "de155c1b56a30bfe2f31868a89edcde25f09b661",
       "committedAt": "2026-10-04T22:17:12Z"
@@ -776,6 +792,10 @@
     "score-be744f4840e4ddec19c85a31": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
+    },
+    "score-c33162c20e401b936bf87e23": {
+      "commit": "df3304849612d6241ffa8d1a0677ce2a36dccbdb",
+      "committedAt": "2026-10-06T08:21:14Z"
     },
     "score-c5a575490d315eb0957e62ac": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
@@ -966,7 +986,7 @@
       "committedAt": "2026-10-03T01:19:23Z"
     }
   },
-  "forecastRevision": "bf944deb4344b7a5d0459f96698fce1eb81d676bec3b1dac278a08cfea1d8ea4",
+  "forecastRevision": "448c07bf017b5b37150739d423625c5378097338dd5c6fee243eaac1ee878f05",
   "games": {
     "401872910": {
       "awayScore": null,
@@ -3002,12 +3022,12 @@
       "pickRevisionId": "original-401872990",
       "pregameExplanation": "I expect the Chicago Bears to beat the Green Bay Packers because Chicago's defense should take advantage of the protection problems identified for Green Bay. That advantage will still need to hold up on the road, and the opponent could win if the expected matchup edge does not materialize.",
       "projectedScore": {
-        "awayScore": 23,
+        "awayScore": 20,
         "awayTeamId": "3",
-        "createdAt": "2026-10-03T01:12:39Z",
-        "homeScore": 20,
+        "createdAt": "2026-10-06T08:20:55Z",
+        "homeScore": 17,
         "homeTeamId": "9",
-        "id": "score-8beaea3365713280a2c7fd9d",
+        "id": "score-7bda508a73c656aac7749f34",
         "pickRevisionId": "original-401872990",
         "pickTeamId": "3"
       },
@@ -3127,30 +3147,30 @@
       "homeScore": null,
       "homeTeamId": "1",
       "lastAttemptAt": "2026-10-06T01:51:32Z",
-      "pickAssessmentId": "assessment-5eb306067a54889f037ac6ed",
+      "pickAssessmentId": "assessment-ddeadc7751f597ea5b178585",
       "pickCutoffAt": null,
-      "pickEffectiveAt": "2026-10-04T19:08:40Z",
-      "pickExplanation": "I lean toward the Baltimore Ravens to beat the Atlanta Falcons because Baltimore's early offensive production should offer more scoring paths than Atlanta's volatile start. Lamar Jackson's newly reported questionable status and Baltimore's interior-line IR moves make that edge conditional, and this forecast does not assume he is cleared for the matchup. Atlanta's rebound at Green Bay is a meaningful counterargument, so quarterback availability could change this pick before kickoff.",
+      "pickEffectiveAt": "2026-10-06T08:20:55Z",
+      "pickExplanation": "I now lean toward the Atlanta Falcons to beat the Baltimore Ravens because Michael Penix Jr.'s return has helped Atlanta produce consecutive 35- and 45-point wins, with more than 200 rushing yards in each. Baltimore's unresolved Lamar Jackson ankle injury and offensive-line concerns should make its scoring advantage less dependable, while Atlanta's home setting could help. Jake Matthews' groin exit, Za'Darius Smith's concussion protocol and the Falcons' shorter turnaround keep this a narrow forecast, and Jackson has not been ruled out.",
       "pickLockedAt": null,
-      "pickReason": "I lean toward the Baltimore Ravens to beat the Atlanta Falcons because Baltimore's early offensive production should offer more scoring paths than Atlanta's volatile start. Lamar Jackson's newly reported questionable status and Baltimore's interior-line IR moves make that edge conditional, and this forecast does not assume he is cleared for the matchup. Atlanta's rebound at Green Bay is a meaningful counterargument, so quarterback availability could change this pick before kickoff.",
+      "pickReason": "I now lean toward the Atlanta Falcons to beat the Baltimore Ravens because Michael Penix Jr.'s return has helped Atlanta produce consecutive 35- and 45-point wins, with more than 200 rushing yards in each. Baltimore's unresolved Lamar Jackson ankle injury and offensive-line concerns should make its scoring advantage less dependable, while Atlanta's home setting could help. Jake Matthews' groin exit, Za'Darius Smith's concussion protocol and the Falcons' shorter turnaround keep this a narrow forecast, and Jackson has not been ruled out.",
       "pickResult": "pending",
-      "pickRevisionId": "assessment-5eb306067a54889f037ac6ed:401872993",
-      "pregameExplanation": "I lean toward the Baltimore Ravens to beat the Atlanta Falcons because Baltimore's early offensive production should offer more scoring paths than Atlanta's volatile start. Lamar Jackson's newly reported questionable status and Baltimore's interior-line IR moves make that edge conditional, and this forecast does not assume he is cleared for the matchup. Atlanta's rebound at Green Bay is a meaningful counterargument, so quarterback availability could change this pick before kickoff.",
+      "pickRevisionId": "assessment-ddeadc7751f597ea5b178585:401872993",
+      "pregameExplanation": "I now lean toward the Atlanta Falcons to beat the Baltimore Ravens because Michael Penix Jr.'s return has helped Atlanta produce consecutive 35- and 45-point wins, with more than 200 rushing yards in each. Baltimore's unresolved Lamar Jackson ankle injury and offensive-line concerns should make its scoring advantage less dependable, while Atlanta's home setting could help. Jake Matthews' groin exit, Za'Darius Smith's concussion protocol and the Falcons' shorter turnaround keep this a narrow forecast, and Jackson has not been ruled out.",
       "projectedScore": {
-        "awayScore": 27,
+        "awayScore": 23,
         "awayTeamId": "33",
-        "createdAt": "2026-10-04T22:16:56Z",
-        "homeScore": 23,
+        "createdAt": "2026-10-06T08:20:55Z",
+        "homeScore": 24,
         "homeTeamId": "1",
-        "id": "score-0d068cb86ed07455f69dd435",
-        "pickRevisionId": "assessment-5eb306067a54889f037ac6ed:401872993",
-        "pickTeamId": "33"
+        "id": "score-c33162c20e401b936bf87e23",
+        "pickRevisionId": "assessment-ddeadc7751f597ea5b178585:401872993",
+        "pickTeamId": "1"
       },
       "projectedScoreLockedAt": null,
       "projectedScoreStatus": "available",
       "resultUpdatedAt": null,
       "scheduledAt": "2026-10-12T00:20:00Z",
-      "scoredPickTeamId": "33",
+      "scoredPickTeamId": "1",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261011",
       "status": "scheduled",
       "statusDetail": "Scheduled",
@@ -3442,30 +3462,30 @@
       "homeScore": null,
       "homeTeamId": "19",
       "lastAttemptAt": "2026-10-06T01:51:32Z",
-      "pickAssessmentId": null,
+      "pickAssessmentId": "assessment-ddeadc7751f597ea5b178585",
       "pickCutoffAt": null,
-      "pickEffectiveAt": "2026-10-01T19:23:00Z",
-      "pickExplanation": "I expect the New Orleans Saints to beat the New York Giants because New Orleans should bring the stronger offense into the Giants matchup. That advantage will still need to hold up on the road, and the opponent could win if the expected matchup edge does not materialize.",
+      "pickEffectiveAt": "2026-10-06T08:20:55Z",
+      "pickExplanation": "I now lean toward the New York Giants to beat the New Orleans Saints because New Orleans' consecutive home losses and the 205 rushing yards it allowed Atlanta should give the Giants a credible path to sustain drives. Jameis Winston's 250-yard, three-touchdown response against Arizona suggests New York could offer more passing offense than the earlier Saints lean allowed, and the Giants should benefit from playing at home. Winston's two interceptions in that game and Tyler Shough's competitive passing keep this provisional, with both teams' availability still needing review.",
       "pickLockedAt": null,
-      "pickReason": "New Orleans brings stronger offense",
+      "pickReason": "I now lean toward the New York Giants to beat the New Orleans Saints because New Orleans' consecutive home losses and the 205 rushing yards it allowed Atlanta should give the Giants a credible path to sustain drives. Jameis Winston's 250-yard, three-touchdown response against Arizona suggests New York could offer more passing offense than the earlier Saints lean allowed, and the Giants should benefit from playing at home. Winston's two interceptions in that game and Tyler Shough's competitive passing keep this provisional, with both teams' availability still needing review.",
       "pickResult": "pending",
-      "pickRevisionId": "original-401873000",
-      "pregameExplanation": "I expect the New Orleans Saints to beat the New York Giants because New Orleans should bring the stronger offense into the Giants matchup. That advantage will still need to hold up on the road, and the opponent could win if the expected matchup edge does not materialize.",
+      "pickRevisionId": "assessment-ddeadc7751f597ea5b178585:401873000",
+      "pregameExplanation": "I now lean toward the New York Giants to beat the New Orleans Saints because New Orleans' consecutive home losses and the 205 rushing yards it allowed Atlanta should give the Giants a credible path to sustain drives. Jameis Winston's 250-yard, three-touchdown response against Arizona suggests New York could offer more passing offense than the earlier Saints lean allowed, and the Giants should benefit from playing at home. Winston's two interceptions in that game and Tyler Shough's competitive passing keep this provisional, with both teams' availability still needing review.",
       "projectedScore": {
-        "awayScore": 24,
+        "awayScore": 23,
         "awayTeamId": "18",
-        "createdAt": "2026-10-04T22:16:56Z",
-        "homeScore": 23,
+        "createdAt": "2026-10-06T08:20:55Z",
+        "homeScore": 27,
         "homeTeamId": "19",
-        "id": "score-0e2b319a46c179f44731f9aa",
-        "pickRevisionId": "original-401873000",
-        "pickTeamId": "18"
+        "id": "score-826987d6c14604e2e45ab48f",
+        "pickRevisionId": "assessment-ddeadc7751f597ea5b178585:401873000",
+        "pickTeamId": "19"
       },
       "projectedScoreLockedAt": null,
       "projectedScoreStatus": "available",
       "resultUpdatedAt": null,
       "scheduledAt": "2026-10-18T17:00:00Z",
-      "scoredPickTeamId": "18",
+      "scoredPickTeamId": "19",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261018",
       "status": "scheduled",
       "statusDetail": "Scheduled",
@@ -4567,30 +4587,30 @@
       "homeScore": null,
       "homeTeamId": "27",
       "lastAttemptAt": "2026-10-06T01:51:32Z",
-      "pickAssessmentId": "assessment-5eb306067a54889f037ac6ed",
+      "pickAssessmentId": "assessment-ddeadc7751f597ea5b178585",
       "pickCutoffAt": null,
-      "pickEffectiveAt": "2026-10-04T19:08:40Z",
-      "pickExplanation": "I lean toward the Tampa Bay Buccaneers at home in what should be a close divisional matchup with the Atlanta Falcons. That edge is provisional because Baker Mayfield's reported three-to-six-week recovery range leaves his availability for November 1 unresolved; the current report is not a promised return date. Atlanta's offensive rebound and Tampa Bay's quarterback situation will need to be weighed again before kickoff.",
+      "pickEffectiveAt": "2026-10-06T08:20:55Z",
+      "pickExplanation": "I now lean toward the Atlanta Falcons to beat the Tampa Bay Buccaneers because Michael Penix Jr.'s actual return and Atlanta's consecutive 35- and 45-point wins suggest a stronger run-pass offense than its opening two games showed. Tampa Bay's winless start and declining scoring should make the earlier home-field tie-breaker less persuasive. The Buccaneers have kept every loss within one score, and player recovery and form could change before this matchup, so I expect only a narrow Atlanta edge.",
       "pickLockedAt": null,
-      "pickReason": "I lean toward the Tampa Bay Buccaneers at home in what should be a close divisional matchup with the Atlanta Falcons. That edge is provisional because Baker Mayfield's reported three-to-six-week recovery range leaves his availability for November 1 unresolved; the current report is not a promised return date. Atlanta's offensive rebound and Tampa Bay's quarterback situation will need to be weighed again before kickoff.",
+      "pickReason": "I now lean toward the Atlanta Falcons to beat the Tampa Bay Buccaneers because Michael Penix Jr.'s actual return and Atlanta's consecutive 35- and 45-point wins suggest a stronger run-pass offense than its opening two games showed. Tampa Bay's winless start and declining scoring should make the earlier home-field tie-breaker less persuasive. The Buccaneers have kept every loss within one score, and player recovery and form could change before this matchup, so I expect only a narrow Atlanta edge.",
       "pickResult": "pending",
-      "pickRevisionId": "assessment-5eb306067a54889f037ac6ed:401873025",
-      "pregameExplanation": "I lean toward the Tampa Bay Buccaneers at home in what should be a close divisional matchup with the Atlanta Falcons. That edge is provisional because Baker Mayfield's reported three-to-six-week recovery range leaves his availability for November 1 unresolved; the current report is not a promised return date. Atlanta's offensive rebound and Tampa Bay's quarterback situation will need to be weighed again before kickoff.",
+      "pickRevisionId": "assessment-ddeadc7751f597ea5b178585:401873025",
+      "pregameExplanation": "I now lean toward the Atlanta Falcons to beat the Tampa Bay Buccaneers because Michael Penix Jr.'s actual return and Atlanta's consecutive 35- and 45-point wins suggest a stronger run-pass offense than its opening two games showed. Tampa Bay's winless start and declining scoring should make the earlier home-field tie-breaker less persuasive. The Buccaneers have kept every loss within one score, and player recovery and form could change before this matchup, so I expect only a narrow Atlanta edge.",
       "projectedScore": {
-        "awayScore": 21,
+        "awayScore": 27,
         "awayTeamId": "1",
-        "createdAt": "2026-10-03T01:12:39Z",
-        "homeScore": 24,
+        "createdAt": "2026-10-06T08:20:55Z",
+        "homeScore": 23,
         "homeTeamId": "27",
-        "id": "score-cebee271f07175bc90dd765d",
-        "pickRevisionId": "original-401873025",
-        "pickTeamId": "27"
+        "id": "score-bdb9db08d76cd66253ccbd06",
+        "pickRevisionId": "assessment-ddeadc7751f597ea5b178585:401873025",
+        "pickTeamId": "1"
       },
       "projectedScoreLockedAt": null,
       "projectedScoreStatus": "available",
       "resultUpdatedAt": null,
       "scheduledAt": "2026-11-01T18:00:00Z",
-      "scoredPickTeamId": "27",
+      "scoredPickTeamId": "1",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261101",
       "status": "scheduled",
       "statusDetail": "Scheduled",
@@ -11930,8 +11950,8 @@
   "monitoringComplete": false,
   "nextCheckAt": "2026-10-06T09:11:12Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-10-06T08:11:12Z",
-  "revision": "731dfdc382f37dc68d0a826712cda2c5a7cda37662961ab47cbd11fd2786d7f4",
+  "publishedAt": "2026-10-06T08:21:29Z",
+  "revision": "78a438478e92d620f73853eeb51774d97397545eb24e46498e93ca1644516fad",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
