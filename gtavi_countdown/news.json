@@ -1,28 +1,28 @@
 {
   "source": "https://www.rockstargames.com/VI",
   "newswire": "https://www.rockstargames.com/newswire",
-  "fetchedAt": "2026-10-08T13:25:39+00:00",
+  "fetchedAt": "2026-10-08T23:19:07+00:00",
   "items": [
+    {
+      "title": "Grand Theft Auto VI Collection Now at the Rockstar Store",
+      "url": "https://www.rockstargames.com/newswire/article/759875393o5253",
+      "date": "October 8, 2026",
+      "isoDate": "2026-10-08",
+      "image": "https://www.rockstargames.com/VI/_next/static/media/759875393o5253.0h0t06-9rye35.jpg?akim=1&imdensity=1&imwidth=640"
+    },
+    {
+      "title": "The Music of Grand Theft Auto VI: In-Game Radio Stations",
+      "url": "https://www.rockstargames.com/newswire/article/o3982oa93a23k4",
+      "date": "October 8, 2026",
+      "isoDate": "2026-10-08",
+      "image": "https://www.rockstargames.com/VI/_next/static/media/o3982oa93a23k4.05jwq4z-sjai_.jpg?akim=1&imdensity=1&imwidth=640"
+    },
     {
       "title": "Pre-Order The Goodtime State \u2013 Vice City Collection Now While Supplies Last",
       "url": "https://www.rockstargames.com/newswire/article/9k2a49ook82o57",
       "date": "September 24, 2026",
       "isoDate": "2026-09-24",
       "image": "https://www.rockstargames.com/VI/_next/static/media/9k2a49ook82o57.0y.tef0ihubh2.jpg?akim=1&imdensity=1&imwidth=640"
-    },
-    {
-      "title": "Announcing Grand Theft Auto VI: The Album, Coming November 19",
-      "url": "https://www.rockstargames.com/newswire/article/7599a881942544",
-      "date": "September 17, 2026",
-      "isoDate": "2026-09-17",
-      "image": "https://www.rockstargames.com/VI/_next/static/media/GTAVI_Soundtrack_Newswire.01z2azm37u9oe.jpg?akim=1&imdensity=1&imwidth=640"
-    },
-    {
-      "title": "Grand Theft Auto VI: An Extended Look \u2014 Now Playing",
-      "url": "https://www.rockstargames.com/newswire/article/4k138k8okkk483",
-      "date": "August 27, 2026",
-      "isoDate": "2026-08-27",
-      "image": "https://www.rockstargames.com/VI/_next/static/media/9k2kaa1o3297k9.0ux_qup1vxl7o.jpg?akim=1&imdensity=1&imwidth=640"
     }
   ]
 }
