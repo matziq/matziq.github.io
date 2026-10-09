@@ -1,13 +1,13 @@
 {
   "analysis": {
-    "assessedAt": "2026-10-06T08:20:55Z",
-    "changedPickCount": 3,
-    "changedScoreCount": 4,
-    "id": "assessment-ddeadc7751f597ea5b178585",
+    "assessedAt": "2026-10-09T06:31:17Z",
+    "changedPickCount": 1,
+    "changedScoreCount": 3,
+    "id": "assessment-396cee94166bbbc993f0f753",
     "initialPickCount": 0,
-    "retainedCount": 205,
+    "retainedCount": 201,
     "skippedLockedCount": 0,
-    "summary": "Reassessed all 208 eligible known remaining games after Atlanta's verified 45-24 win at New Orleans. That was a correct pick, so its exact pregame explanation, winner record and locked projected score are unchanged and no postgame rewrite is supplied. Fresh Penix-return/run-production evidence and Jackson's unresolved ankle support a narrow Atlanta-over-Baltimore change; Saints defensive regression supports the Giants at home; Atlanta's sustained rebound replaces the Tampa Bay home tie-breaker in Week 8. Those three winner changes have explicit provisional away/home scores. Bagent's confirmed Week 5 start and red-zone/turnover risk support a score-only reduction to Bears 20, Packers 17. All other selected winners, pregame paragraphs and score entries are retained after matchup-specific review."
+    "summary": "Reassessed all 207 eligible unstarted matchups after Tampa Bay's 24-16 Dallas win. Flip Pittsburgh at Tampa Bay to Tampa Bay 23-20; retain Dallas at Green Bay but lower its projection to 24-20, and retain Cincinnati at Miami at a lower 21-17. Refresh three other pregame paragraphs for Daniels' expected return and obsolete Dallas/Tampa premises without changing their winners. Preserve every locked pick, original explanation and frozen projected score; append the sourced Dallas incorrect-final review."
   },
   "explanationFormat": "paragraph",
   "explanationPolicy": "forecast-until-final",
@@ -16,6 +16,10 @@
     "assessment-1623a456fba7f4044de838bc": {
       "commit": "de155c1b56a30bfe2f31868a89edcde25f09b661",
       "committedAt": "2026-10-04T22:17:12Z"
+    },
+    "assessment-396cee94166bbbc993f0f753": {
+      "commit": "02acf8b8c5a16dcaf8a9b9c988ce6f12be2ca3eb",
+      "committedAt": "2026-10-09T06:31:41Z"
     },
     "assessment-5eb306067a54889f037ac6ed": {
       "commit": "50030b9229841e3edbdf807596d3d3fc772bdc7b",
@@ -184,6 +188,10 @@
     "score-1e50184d52bceaaa35a40f84": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
+    },
+    "score-1e6eae8f375e111bfa3e5f52": {
+      "commit": "02acf8b8c5a16dcaf8a9b9c988ce6f12be2ca3eb",
+      "committedAt": "2026-10-09T06:31:41Z"
     },
     "score-2224c3e1d5c04b5d5aa19c5b": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
@@ -396,6 +404,10 @@
     "score-58e2623c369a7b9eb911f367": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
+    },
+    "score-596a26f90b9569f804d15227": {
+      "commit": "02acf8b8c5a16dcaf8a9b9c988ce6f12be2ca3eb",
+      "committedAt": "2026-10-09T06:31:41Z"
     },
     "score-5aa86112f7ecae240b891839": {
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
@@ -781,6 +793,10 @@
       "commit": "f2208a400d120eeec57f5ea76050a90954403503",
       "committedAt": "2026-10-03T01:19:23Z"
     },
+    "score-ba4f1b500a9c0558191fec36": {
+      "commit": "02acf8b8c5a16dcaf8a9b9c988ce6f12be2ca3eb",
+      "committedAt": "2026-10-09T06:31:41Z"
+    },
     "score-bdb9db08d76cd66253ccbd06": {
       "commit": "df3304849612d6241ffa8d1a0677ce2a36dccbdb",
       "committedAt": "2026-10-06T08:21:14Z"
@@ -986,7 +1002,7 @@
       "committedAt": "2026-10-03T01:19:23Z"
     }
   },
-  "forecastRevision": "448c07bf017b5b37150739d423625c5378097338dd5c6fee243eaac1ee878f05",
+  "forecastRevision": "e2be193cdc866da3f6f3eef703b49c6e3bceee7447bbae241b05b0f84ef6e2fd",
   "games": {
     "401872910": {
       "awayScore": null,
@@ -2553,9 +2569,9 @@
       "checkedAt": "2026-10-09T06:21:13Z",
       "error": null,
       "eventId": "401872980",
-      "explanationPhase": "awaiting-review",
-      "explanationRevisionId": null,
-      "explanationUpdatedAt": null,
+      "explanationPhase": "incorrect-final",
+      "explanationRevisionId": "explanation-fce3e7a7a1bf1db3bbd6b01a",
+      "explanationUpdatedAt": "2026-10-09T06:31:17Z",
       "fantasyLeaders": {
         "players": [
           {
@@ -2591,7 +2607,7 @@
       "pickAssessmentId": null,
       "pickCutoffAt": "2026-10-09T00:15:00Z",
       "pickEffectiveAt": "2026-10-01T19:23:00Z",
-      "pickExplanation": "I expect the Dallas Cowboys to beat the Tampa Bay Buccaneers because Dallas should be the more dependable scoring option against Tampa Bay. The home setting should help, but neither that setting nor the expected advantage will make the result certain.",
+      "pickExplanation": "My Dallas pick was wrong because the expected scoring reliability and home-field edge did not survive three turnovers and a defense that allowed Tampa Bay 241 rushing yards. Irving ran for 165 yards and scored twice, while rookie Jalon Daniels completed 19 of 25 passes without an interception; Tampa's 17-point third quarter turned Dallas' 10-7 halftime lead into a 24-10 deficit. Prescott's two interceptions and Turpin's lost kickoff fumble helped create that swing, and Dallas managed only 50 rushing yards despite Prescott's 316 passing yards. Lamb's quadriceps exit added an offensive limitation, but the verified turnovers and rushing imbalance, rather than home field or the earlier scoring streak, explain why Tampa won 24-16.",
       "pickLockedAt": "2026-10-09T00:21:21Z",
       "pickReason": "Dallas offers more reliable scoring",
       "pickResult": "incorrect",
@@ -2678,23 +2694,23 @@
       "homeScore": null,
       "homeTeamId": "15",
       "lastAttemptAt": "2026-10-08T07:26:46Z",
-      "pickAssessmentId": null,
+      "pickAssessmentId": "assessment-396cee94166bbbc993f0f753",
       "pickCutoffAt": null,
-      "pickEffectiveAt": "2026-10-01T19:23:00Z",
-      "pickExplanation": "I expect the Cincinnati Bengals to beat the Miami Dolphins because Joe Burrow should create opportunities against the weaknesses identified in Miami's defense. That advantage will still need to hold up on the road, and the opponent could win if the expected matchup edge does not materialize.",
+      "pickEffectiveAt": "2026-10-09T06:31:17Z",
+      "pickExplanation": "I still expect the Cincinnati Bengals to beat the Miami Dolphins because Joe Burrow and Cincinnati's pressure should offer the more dependable scoring path. Ja'Marr Chase's concussion clearance and Tee Higgins' groin remain uncertain, while Miami's defense has improved, so I now project a lower-scoring 21-17 game rather than assuming the Bengals will have both top receivers. The road setting and heat could make this closer still.",
       "pickLockedAt": null,
-      "pickReason": "Burrow exposes Miami's defensive weaknesses",
+      "pickReason": "I still expect the Cincinnati Bengals to beat the Miami Dolphins because Joe Burrow and Cincinnati's pressure should offer the more dependable scoring path. Ja'Marr Chase's concussion clearance and Tee Higgins' groin remain uncertain, while Miami's defense has improved, so I now project a lower-scoring 21-17 game rather than assuming the Bengals will have both top receivers. The road setting and heat could make this closer still.",
       "pickResult": "pending",
-      "pickRevisionId": "original-401872982",
-      "pregameExplanation": "I expect the Cincinnati Bengals to beat the Miami Dolphins because Joe Burrow should create opportunities against the weaknesses identified in Miami's defense. That advantage will still need to hold up on the road, and the opponent could win if the expected matchup edge does not materialize.",
+      "pickRevisionId": "assessment-396cee94166bbbc993f0f753:401872982",
+      "pregameExplanation": "I still expect the Cincinnati Bengals to beat the Miami Dolphins because Joe Burrow and Cincinnati's pressure should offer the more dependable scoring path. Ja'Marr Chase's concussion clearance and Tee Higgins' groin remain uncertain, while Miami's defense has improved, so I now project a lower-scoring 21-17 game rather than assuming the Bengals will have both top receivers. The road setting and heat could make this closer still.",
       "projectedScore": {
-        "awayScore": 24,
+        "awayScore": 21,
         "awayTeamId": "4",
-        "createdAt": "2026-10-04T22:16:56Z",
+        "createdAt": "2026-10-09T06:31:17Z",
         "homeScore": 17,
         "homeTeamId": "15",
-        "id": "score-96546c9c8a0f4882563008e9",
-        "pickRevisionId": "original-401872982",
+        "id": "score-1e6eae8f375e111bfa3e5f52",
+        "pickRevisionId": "assessment-396cee94166bbbc993f0f753:401872982",
         "pickTeamId": "4"
       },
       "projectedScoreLockedAt": null,
@@ -2948,15 +2964,15 @@
       "homeScore": null,
       "homeTeamId": "28",
       "lastAttemptAt": "2026-10-08T07:26:46Z",
-      "pickAssessmentId": "assessment-1623a456fba7f4044de838bc",
+      "pickAssessmentId": "assessment-396cee94166bbbc993f0f753",
       "pickCutoffAt": null,
-      "pickEffectiveAt": "2026-10-04T22:16:56Z",
-      "pickExplanation": "I now lean toward the New York Giants to beat the Washington Commanders because Jameis Winston's 250-yard, three-touchdown response against Arizona should give New York a more credible passing path than the previous forecast allowed. Washington's London execution problems and unresolved quarterback and receiver availability weaken the home-field tie-breaker. Jayden Daniels and Terry McLaurin could return, and Winston still threw two interceptions, so this should remain a close game rather than a comfortable Giants win.",
+      "pickEffectiveAt": "2026-10-09T06:31:17Z",
+      "pickExplanation": "I still lean toward the New York Giants to beat the Washington Commanders because Winston's recent passing response should give New York a viable scoring path against a depleted supporting cast. Jayden Daniels is expected to return, which strengthens Washington's chances, but McLaurin and Diggs remain uncertain and Winston's interception risk should keep the game close. The official fixture places New York on the road, and rain could make either offense less consistent.",
       "pickLockedAt": null,
-      "pickReason": "I now lean toward the New York Giants to beat the Washington Commanders because Jameis Winston's 250-yard, three-touchdown response against Arizona should give New York a more credible passing path than the previous forecast allowed. Washington's London execution problems and unresolved quarterback and receiver availability weaken the home-field tie-breaker. Jayden Daniels and Terry McLaurin could return, and Winston still threw two interceptions, so this should remain a close game rather than a comfortable Giants win.",
+      "pickReason": "I still lean toward the New York Giants to beat the Washington Commanders because Winston's recent passing response should give New York a viable scoring path against a depleted supporting cast. Jayden Daniels is expected to return, which strengthens Washington's chances, but McLaurin and Diggs remain uncertain and Winston's interception risk should keep the game close. The official fixture places New York on the road, and rain could make either offense less consistent.",
       "pickResult": "pending",
-      "pickRevisionId": "assessment-1623a456fba7f4044de838bc:401872988",
-      "pregameExplanation": "I now lean toward the New York Giants to beat the Washington Commanders because Jameis Winston's 250-yard, three-touchdown response against Arizona should give New York a more credible passing path than the previous forecast allowed. Washington's London execution problems and unresolved quarterback and receiver availability weaken the home-field tie-breaker. Jayden Daniels and Terry McLaurin could return, and Winston still threw two interceptions, so this should remain a close game rather than a comfortable Giants win.",
+      "pickRevisionId": "assessment-396cee94166bbbc993f0f753:401872988",
+      "pregameExplanation": "I still lean toward the New York Giants to beat the Washington Commanders because Winston's recent passing response should give New York a viable scoring path against a depleted supporting cast. Jayden Daniels is expected to return, which strengthens Washington's chances, but McLaurin and Diggs remain uncertain and Winston's interception risk should keep the game close. The official fixture places New York on the road, and rain could make either offense less consistent.",
       "projectedScore": {
         "awayScore": 23,
         "awayTeamId": "19",
@@ -3578,30 +3594,30 @@
       "homeScore": null,
       "homeTeamId": "27",
       "lastAttemptAt": "2026-10-08T07:26:46Z",
-      "pickAssessmentId": null,
+      "pickAssessmentId": "assessment-396cee94166bbbc993f0f753",
       "pickCutoffAt": null,
-      "pickEffectiveAt": "2026-10-01T19:23:00Z",
-      "pickExplanation": "I expect the Pittsburgh Steelers to beat the Tampa Bay Buccaneers because Pittsburgh's pass rush should challenge the weaknesses identified in Tampa Bay's offense. That advantage will still need to hold up on the road, and the opponent could win if the expected matchup edge does not materialize.",
+      "pickEffectiveAt": "2026-10-09T06:31:17Z",
+      "pickExplanation": "I now lean toward the Tampa Bay Buccaneers to beat the Pittsburgh Steelers because Irving's rushing and Jalon Daniels' turnover-free Dallas performance should give Tampa a more credible way to sustain drives than the earlier forecast allowed. Pittsburgh's poor road scoring, Pittman's expected multiweek absence and defensive losses could make its pass-rush advantage less decisive, while Tampa should benefit from playing at home after a longer turnaround. Mayfield is expected to miss at least one more game, and one win against Dallas' vulnerable defense does not prove a lasting turnaround, so I project only a 23-20 Tampa edge.",
       "pickLockedAt": null,
-      "pickReason": "Pittsburgh's pass rush attacks weaknesses",
+      "pickReason": "I now lean toward the Tampa Bay Buccaneers to beat the Pittsburgh Steelers because Irving's rushing and Jalon Daniels' turnover-free Dallas performance should give Tampa a more credible way to sustain drives than the earlier forecast allowed. Pittsburgh's poor road scoring, Pittman's expected multiweek absence and defensive losses could make its pass-rush advantage less decisive, while Tampa should benefit from playing at home after a longer turnaround. Mayfield is expected to miss at least one more game, and one win against Dallas' vulnerable defense does not prove a lasting turnaround, so I project only a 23-20 Tampa edge.",
       "pickResult": "pending",
-      "pickRevisionId": "original-401873002",
-      "pregameExplanation": "I expect the Pittsburgh Steelers to beat the Tampa Bay Buccaneers because Pittsburgh's pass rush should challenge the weaknesses identified in Tampa Bay's offense. That advantage will still need to hold up on the road, and the opponent could win if the expected matchup edge does not materialize.",
+      "pickRevisionId": "assessment-396cee94166bbbc993f0f753:401873002",
+      "pregameExplanation": "I now lean toward the Tampa Bay Buccaneers to beat the Pittsburgh Steelers because Irving's rushing and Jalon Daniels' turnover-free Dallas performance should give Tampa a more credible way to sustain drives than the earlier forecast allowed. Pittsburgh's poor road scoring, Pittman's expected multiweek absence and defensive losses could make its pass-rush advantage less decisive, while Tampa should benefit from playing at home after a longer turnaround. Mayfield is expected to miss at least one more game, and one win against Dallas' vulnerable defense does not prove a lasting turnaround, so I project only a 23-20 Tampa edge.",
       "projectedScore": {
-        "awayScore": 23,
+        "awayScore": 20,
         "awayTeamId": "23",
-        "createdAt": "2026-10-03T01:12:39Z",
-        "homeScore": 17,
+        "createdAt": "2026-10-09T06:31:17Z",
+        "homeScore": 23,
         "homeTeamId": "27",
-        "id": "score-a0f30c8fb54c2303a8b7e244",
-        "pickRevisionId": "original-401873002",
-        "pickTeamId": "23"
+        "id": "score-596a26f90b9569f804d15227",
+        "pickRevisionId": "assessment-396cee94166bbbc993f0f753:401873002",
+        "pickTeamId": "27"
       },
       "projectedScoreLockedAt": null,
       "projectedScoreStatus": "available",
       "resultUpdatedAt": null,
       "scheduledAt": "2026-10-18T17:00:00Z",
-      "scoredPickTeamId": "23",
+      "scoredPickTeamId": "27",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261018",
       "status": "scheduled",
       "statusDetail": "Scheduled",
@@ -3803,23 +3819,23 @@
       "homeScore": null,
       "homeTeamId": "9",
       "lastAttemptAt": "2026-10-08T07:26:46Z",
-      "pickAssessmentId": null,
+      "pickAssessmentId": "assessment-396cee94166bbbc993f0f753",
       "pickCutoffAt": null,
-      "pickEffectiveAt": "2026-10-01T19:23:00Z",
-      "pickExplanation": "I expect the Dallas Cowboys to beat the Green Bay Packers because Dallas should take advantage of the struggles identified for Green Bay. That advantage will still need to hold up on the road, and the opponent could win if the expected matchup edge does not materialize.",
+      "pickEffectiveAt": "2026-10-09T06:31:17Z",
+      "pickExplanation": "I still lean toward the Dallas Cowboys to beat the Green Bay Packers because Prescott's passing ceiling should offer a modest advantage over Green Bay's compromised protection and rushing options. Dallas' three turnovers and 241 rushing yards allowed against Tampa weaken the earlier confidence, while Lamb's quadriceps and Guyton's back need fresh checks before kickoff. The road venue and those risks now support a narrower, lower-scoring 24-20 Dallas projection rather than the previous 30-24 forecast.",
       "pickLockedAt": null,
-      "pickReason": "Dallas exploits Green Bay's struggles",
+      "pickReason": "I still lean toward the Dallas Cowboys to beat the Green Bay Packers because Prescott's passing ceiling should offer a modest advantage over Green Bay's compromised protection and rushing options. Dallas' three turnovers and 241 rushing yards allowed against Tampa weaken the earlier confidence, while Lamb's quadriceps and Guyton's back need fresh checks before kickoff. The road venue and those risks now support a narrower, lower-scoring 24-20 Dallas projection rather than the previous 30-24 forecast.",
       "pickResult": "pending",
-      "pickRevisionId": "original-401873007",
-      "pregameExplanation": "I expect the Dallas Cowboys to beat the Green Bay Packers because Dallas should take advantage of the struggles identified for Green Bay. That advantage will still need to hold up on the road, and the opponent could win if the expected matchup edge does not materialize.",
+      "pickRevisionId": "assessment-396cee94166bbbc993f0f753:401873007",
+      "pregameExplanation": "I still lean toward the Dallas Cowboys to beat the Green Bay Packers because Prescott's passing ceiling should offer a modest advantage over Green Bay's compromised protection and rushing options. Dallas' three turnovers and 241 rushing yards allowed against Tampa weaken the earlier confidence, while Lamb's quadriceps and Guyton's back need fresh checks before kickoff. The road venue and those risks now support a narrower, lower-scoring 24-20 Dallas projection rather than the previous 30-24 forecast.",
       "projectedScore": {
-        "awayScore": 30,
+        "awayScore": 24,
         "awayTeamId": "6",
-        "createdAt": "2026-10-03T01:12:39Z",
-        "homeScore": 24,
+        "createdAt": "2026-10-09T06:31:17Z",
+        "homeScore": 20,
         "homeTeamId": "9",
-        "id": "score-32ff45a9222fabe3c95af7e0",
-        "pickRevisionId": "original-401873007",
+        "id": "score-ba4f1b500a9c0558191fec36",
+        "pickRevisionId": "assessment-396cee94166bbbc993f0f753:401873007",
         "pickTeamId": "6"
       },
       "projectedScoreLockedAt": null,
@@ -3893,15 +3909,15 @@
       "homeScore": null,
       "homeTeamId": "21",
       "lastAttemptAt": "2026-10-08T07:26:46Z",
-      "pickAssessmentId": "assessment-1623a456fba7f4044de838bc",
+      "pickAssessmentId": "assessment-396cee94166bbbc993f0f753",
       "pickCutoffAt": null,
-      "pickEffectiveAt": "2026-10-04T22:16:56Z",
-      "pickExplanation": "I now lean toward the Dallas Cowboys to beat the Philadelphia Eagles because Dallas' three straight games with at least 31 points should offer a more dependable scoring path than Philadelphia's recent offense. The Eagles followed their Chicago loss with only 172 yards and no third-down conversions against the Rams, so home field alone no longer supplies the deciding edge. This late-October forecast will need fresh availability checks rather than assuming today's injuries persist, and Dallas' own defensive problems should keep the game close.",
+      "pickEffectiveAt": "2026-10-09T06:31:17Z",
+      "pickExplanation": "I still lean toward the Dallas Cowboys to beat the Philadelphia Eagles because Prescott's passing upside should offer a viable scoring path against Philadelphia's recent offensive inconsistency. Dallas' three straight 31-point games ended with a turnover-heavy loss to Tampa, so that earlier streak is no longer a current-form guarantee. Philadelphia's home setting, Dallas' defensive leakage and both teams' future availability should keep this late-October forecast narrow and provisional.",
       "pickLockedAt": null,
-      "pickReason": "I now lean toward the Dallas Cowboys to beat the Philadelphia Eagles because Dallas' three straight games with at least 31 points should offer a more dependable scoring path than Philadelphia's recent offense. The Eagles followed their Chicago loss with only 172 yards and no third-down conversions against the Rams, so home field alone no longer supplies the deciding edge. This late-October forecast will need fresh availability checks rather than assuming today's injuries persist, and Dallas' own defensive problems should keep the game close.",
+      "pickReason": "I still lean toward the Dallas Cowboys to beat the Philadelphia Eagles because Prescott's passing upside should offer a viable scoring path against Philadelphia's recent offensive inconsistency. Dallas' three straight 31-point games ended with a turnover-heavy loss to Tampa, so that earlier streak is no longer a current-form guarantee. Philadelphia's home setting, Dallas' defensive leakage and both teams' future availability should keep this late-October forecast narrow and provisional.",
       "pickResult": "pending",
-      "pickRevisionId": "assessment-1623a456fba7f4044de838bc:401873009",
-      "pregameExplanation": "I now lean toward the Dallas Cowboys to beat the Philadelphia Eagles because Dallas' three straight games with at least 31 points should offer a more dependable scoring path than Philadelphia's recent offense. The Eagles followed their Chicago loss with only 172 yards and no third-down conversions against the Rams, so home field alone no longer supplies the deciding edge. This late-October forecast will need fresh availability checks rather than assuming today's injuries persist, and Dallas' own defensive problems should keep the game close.",
+      "pickRevisionId": "assessment-396cee94166bbbc993f0f753:401873009",
+      "pregameExplanation": "I still lean toward the Dallas Cowboys to beat the Philadelphia Eagles because Prescott's passing upside should offer a viable scoring path against Philadelphia's recent offensive inconsistency. Dallas' three straight 31-point games ended with a turnover-heavy loss to Tampa, so that earlier streak is no longer a current-form guarantee. Philadelphia's home setting, Dallas' defensive leakage and both teams' future availability should keep this late-October forecast narrow and provisional.",
       "projectedScore": {
         "awayScore": 27,
         "awayTeamId": "6",
@@ -4613,15 +4629,15 @@
       "homeScore": null,
       "homeTeamId": "27",
       "lastAttemptAt": "2026-10-08T07:26:46Z",
-      "pickAssessmentId": "assessment-ddeadc7751f597ea5b178585",
+      "pickAssessmentId": "assessment-396cee94166bbbc993f0f753",
       "pickCutoffAt": null,
-      "pickEffectiveAt": "2026-10-06T08:20:55Z",
-      "pickExplanation": "I now lean toward the Atlanta Falcons to beat the Tampa Bay Buccaneers because Michael Penix Jr.'s actual return and Atlanta's consecutive 35- and 45-point wins suggest a stronger run-pass offense than its opening two games showed. Tampa Bay's winless start and declining scoring should make the earlier home-field tie-breaker less persuasive. The Buccaneers have kept every loss within one score, and player recovery and form could change before this matchup, so I expect only a narrow Atlanta edge.",
+      "pickEffectiveAt": "2026-10-09T06:31:17Z",
+      "pickExplanation": "I still lean toward the Atlanta Falcons to beat the Tampa Bay Buccaneers because Penix's observed return and Atlanta's consecutive 35- and 45-point wins should support a stronger run-pass attack than its opening losses showed. Tampa's first win, powered by Irving and a turnover-free Daniels start, makes the previous winless premise obsolete and gives the Buccaneers a credible home-field response. Dallas' vulnerable defense limits how far I should generalize that performance, and both teams' availability could change before this matchup, so I retain only a narrow Atlanta edge.",
       "pickLockedAt": null,
-      "pickReason": "I now lean toward the Atlanta Falcons to beat the Tampa Bay Buccaneers because Michael Penix Jr.'s actual return and Atlanta's consecutive 35- and 45-point wins suggest a stronger run-pass offense than its opening two games showed. Tampa Bay's winless start and declining scoring should make the earlier home-field tie-breaker less persuasive. The Buccaneers have kept every loss within one score, and player recovery and form could change before this matchup, so I expect only a narrow Atlanta edge.",
+      "pickReason": "I still lean toward the Atlanta Falcons to beat the Tampa Bay Buccaneers because Penix's observed return and Atlanta's consecutive 35- and 45-point wins should support a stronger run-pass attack than its opening losses showed. Tampa's first win, powered by Irving and a turnover-free Daniels start, makes the previous winless premise obsolete and gives the Buccaneers a credible home-field response. Dallas' vulnerable defense limits how far I should generalize that performance, and both teams' availability could change before this matchup, so I retain only a narrow Atlanta edge.",
       "pickResult": "pending",
-      "pickRevisionId": "assessment-ddeadc7751f597ea5b178585:401873025",
-      "pregameExplanation": "I now lean toward the Atlanta Falcons to beat the Tampa Bay Buccaneers because Michael Penix Jr.'s actual return and Atlanta's consecutive 35- and 45-point wins suggest a stronger run-pass offense than its opening two games showed. Tampa Bay's winless start and declining scoring should make the earlier home-field tie-breaker less persuasive. The Buccaneers have kept every loss within one score, and player recovery and form could change before this matchup, so I expect only a narrow Atlanta edge.",
+      "pickRevisionId": "assessment-396cee94166bbbc993f0f753:401873025",
+      "pregameExplanation": "I still lean toward the Atlanta Falcons to beat the Tampa Bay Buccaneers because Penix's observed return and Atlanta's consecutive 35- and 45-point wins should support a stronger run-pass attack than its opening losses showed. Tampa's first win, powered by Irving and a turnover-free Daniels start, makes the previous winless premise obsolete and gives the Buccaneers a credible home-field response. Dallas' vulnerable defense limits how far I should generalize that performance, and both teams' availability could change before this matchup, so I retain only a narrow Atlanta edge.",
       "projectedScore": {
         "awayScore": 27,
         "awayTeamId": "1",
@@ -11976,8 +11992,8 @@
   "monitoringComplete": false,
   "nextCheckAt": "2026-10-09T07:21:13Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-10-09T06:21:13Z",
-  "revision": "52517aa9d3e221331f1f9c26946a5a9139b4b31ca703697ee06b3ff89ad5cd45",
+  "publishedAt": "2026-10-09T06:31:58Z",
+  "revision": "cbd8f63fb5d7647b25cf97bce227e0b359e297d2cceb20c26c0566402bd18935",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
