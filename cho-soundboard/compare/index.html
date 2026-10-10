@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cho voice A/B compare</title>
+<title>Cho soundboard: male TTS comparison</title>
 <style>
 body{font:16px/1.5 system-ui,sans-serif;background:#14161a;color:#e6e6e6;margin:0;padding:1rem;max-width:960px;margin-inline:auto}
 h1{font-size:1.9rem}h2{font-size:1.2rem;margin-top:1.8rem;border-bottom:1px solid #333;padding-bottom:.2rem}
@@ -9,20 +9,20 @@ table{width:100%;border-collapse:collapse}td,th{padding:.4rem;border-bottom:1px 
 .n{font-size:.8rem;color:#9aa}button{background:#2c3e50;color:#fff;border:0;border-radius:6px;padding:.4rem .7rem;cursor:pointer;margin:.1rem}
 button.on{background:#b5651d}.star{color:#7ddc92;font-weight:600}a{color:#8ab4f8}
 </style></head><body>
-<h1>Cho voice A/B compare</h1>
+<h1>Male TTS candidate comparison</h1>
 <p><a href="../">Back to soundboard</a>. Goal: natural, low, dry, laconic, minimal inflection. Not robotic, not emotive. All variants avoid heavy vocoder resynthesis.</p>
-<div class="rec"><b>Recommended: <span class="star">edge-tts Steffan, dry</span></b> (<code>en-US-SteffanNeural</code>, rate -15%, pitch -8Hz, periods only, dry EQ and light compression).
-It is a real neural human voice, so there is no vocoder buzz, it has a low and measured delivery, and its natural pitch movement was among the lowest of the voices tested. Brian and Eric are the closest alternatives. Pitch-contour numbers come from tools/make_audio.py and are rough: please trust your ears.</div>
+<p class="n">Generic neural TTS candidates approximate a dry, restrained delivery; the soundboard also has a generic browser TTS fallback. These are not Cho's actual voice and do not reproduce the actor's voice.</p>
+<div class="rec"><b>Current default: <span class="star">edge-tts Steffan (male), dry</span></b> (<code>en-US-SteffanNeural</code>, rate -15%, pitch -8Hz, periods only, dry EQ and light compression).
+Steffan remains the selected generic TTS voice for a measured delivery, not a match to Cho or the actor. Brian and Eric are alternative male TTS candidates. Pitch-contour numbers come from tools/make_audio.py and describe delivery, not voice similarity.</div>
+<p class="n">Only existing samples with verified male voice metadata are listed. Lessac-low was removed after the voice correction. Piper Ryan and Joe are omitted because their model cards do not specify gender; names and quality tiers are not gender labels. Browser fallback voices depend on the device and are not part of this male-only comparison.</p>
 <div id="root"></div>
 <script>
 const LINES=[[4,"That's a no."],[11,"Witness says she saw nothing. She was very consistent about it."],[17,"I'm not smiling. This is my face."]];
 const V=[
-["A. edge-tts, slow, low pitch, periods only (rate -15%, pitch -8Hz, dry EQ/comp)",[
-["edge-andrew-dry","Andrew"],["edge-christopher-dry","Christopher"],["edge-guy-dry","Guy"],["edge-brian-dry","Brian"],["edge-eric-dry","Eric"],["edge-roger-dry","Roger"],["edge-steffan-dry","Steffan (recommended)",1]]],
-["B. Piper local TTS (length_scale 1.25, noise_scale 0.3, noise_w 0.4, dry EQ/comp)",[
-["piper-ryan-low","ryan-low"],["piper-joe-medium","joe-medium"],["piper-lessac-low","lessac-low"]]],
-["C. edge-tts + mild F0 smoothing (keeps 50% of natural pitch variation, dry EQ/comp)",[
-["edge-guy-f0-50","Guy + 50% F0"],["edge-andrew-f0-50","Andrew + 50% F0"]]]];
+["A. Male edge-tts, slow, low pitch, periods only (rate -15%, pitch -8Hz, dry EQ/comp)",[
+["edge-andrew-dry","Andrew (male)"],["edge-christopher-dry","Christopher (male)"],["edge-guy-dry","Guy (male)"],["edge-brian-dry","Brian (male)"],["edge-eric-dry","Eric (male)"],["edge-roger-dry","Roger (male)"],["edge-steffan-dry","Steffan (male, current default)",1]]],
+["B. Existing male edge-tts + mild F0 smoothing (keeps 50% of natural pitch variation, dry EQ/comp)",[
+["edge-guy-f0-50","Guy (male) + 50% F0"],["edge-andrew-f0-50","Andrew (male) + 50% F0"]]]];
 const root=document.getElementById('root');let cur=null,curBtn=null;
 for(const[title,rows]of V){const h=document.createElement('h2');h.textContent=title;root.append(h);
 const t=document.createElement('table');t.innerHTML='<tr><th>Variant</th>'+LINES.map(l=>'<th class="n">Line '+l[0]+': '+l[1].slice(0,22)+(l[1].length>22?'…':'')+'</th>').join('')+'</tr>';

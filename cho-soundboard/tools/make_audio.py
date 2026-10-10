@@ -1,4 +1,6 @@
-"""Generate Cho soundboard audio: natural, dry, low-emotion voice (no vocoder buzz).
+"""Generate generic TTS approximations of a dry, restrained delivery.
+
+These are not Cho's actual voice and do not reproduce the actor's voice.
 
 Engines
   edge   edge-tts low male neural voice, slowed, pitch lowered, text normalized
@@ -40,20 +42,14 @@ for v, short in [("Andrew", "andrew"), ("Christopher", "christopher"), ("Guy", "
                  ("Steffan", "steffan")]:
     VARIANTS[f"edge-{short}-dry"] = dict(
         group="A", engine="edge", voice=f"en-US-{v}Neural", rate="-15%", pitch="-8Hz",
-        post="dry", label=f"edge-tts {v}", note="rate -15%, pitch -8Hz, periods only, dry EQ/comp")
-for short, f in [("ryan-low", "en_US-ryan-low"), ("joe-medium", "en_US-joe-medium"),
-                 ("lessac-low", "en_US-lessac-low")]:
-    VARIANTS[f"piper-{short}"] = dict(
-        group="B", engine="piper", model=f, length=1.25, noise=0.3, noise_w=0.4,
-        post="dry", label=f"Piper {f.split('-',1)[1]}",
-        note="length_scale 1.25, noise_scale 0.3, noise_w 0.4, dry EQ/comp")
+        post="dry", label=f"edge-tts {v} (male)", note="rate -15%, pitch -8Hz, periods only, dry EQ/comp")
 VARIANTS["edge-guy-f0-50"] = dict(
-    group="C", engine="edge", voice="en-US-GuyNeural", rate="-15%", pitch="-8Hz",
-    post="f0", keep=0.5, label="edge-tts Guy + 50% F0 smoothing",
+    group="B", engine="edge", voice="en-US-GuyNeural", rate="-15%", pitch="-8Hz",
+    post="f0", keep=0.5, label="edge-tts Guy (male) + 50% F0 smoothing",
     note="WORLD F0 kept at 50% of natural variation, then dry EQ/comp")
 VARIANTS["edge-andrew-f0-50"] = dict(
-    group="C", engine="edge", voice="en-US-AndrewNeural", rate="-15%", pitch="-8Hz",
-    post="f0", keep=0.5, label="edge-tts Andrew + 50% F0 smoothing",
+    group="B", engine="edge", voice="en-US-AndrewNeural", rate="-15%", pitch="-8Hz",
+    post="f0", keep=0.5, label="edge-tts Andrew (male) + 50% F0 smoothing",
     note="WORLD F0 kept at 50% of natural variation, then dry EQ/comp")
 
 
