@@ -43,9 +43,7 @@ footer{text-align:center;color:var(--mute);font-size:.78rem;padding:0 16px 30px}
 <main>
   <section class="panel">
     <div class="controls">
-      <div><label for="voice">Voice</label><select id="voice"></select></div>
-      <div><label for="pitch">Pitch <span id="pv"></span></label><input id="pitch" type="range" min="0.1" max="2" step="0.05" value="0.7"></div>
-      <div><label for="rate">Rate <span id="rv"></span></label><input id="rate" type="range" min="0.5" max="2" step="0.05" value="0.9"></div>
+      <div><label for="rate">Playback speed <span id="rv"></span></label><input id="rate" type="range" min="0.5" max="2" step="0.05" value="1"></div>
       <div><label for="vol">Volume <span id="vv"></span></label><input id="vol" type="range" min="0" max="1" step="0.05" value="1"></div>
     </div>
     <div class="row">
@@ -58,7 +56,7 @@ footer{text-align:center;color:var(--mute);font-size:.78rem;padding:0 16px 30px}
   <div id="board"></div>
   <p class="msg hidden" id="empty">No lines match. Cho is not surprised.</p>
 </main>
-<footer>Unofficial fan project, not affiliated with The Mentalist or its creators. Lines are original parodies spoken by your browser's text-to-speech.</footer>
+<footer>Unofficial fan project, not affiliated with The Mentalist or its creators. Lines are original parodies voiced by a synthetic neural voice (deadpan, on purpose). Not show audio.</footer>
 <script>
 const LINES={
 "Reactions":[
@@ -74,9 +72,9 @@ const LINES={
 };
 const KEYS="123456789";
 const board=document.getElementById('board'),msg=document.getElementById('msg'),empty=document.getElementById('empty');
-const voiceSel=document.getElementById('voice'),pitch=document.getElementById('pitch'),rate=document.getElementById('rate'),vol=document.getElementById('vol'),search=document.getElementById('search');
-const pv=document.getElementById('pv'),rv=document.getElementById('rv'),vv=document.getElementById('vv');
-const tts=window.speechSynthesis;let voices=[],all=[];
+const rate=document.getElementById('rate'),vol=document.getElementById('vol'),search=document.getElementById('search');
+const rv=document.getElementById('rv'),vv=document.getElementById('vv');
+const tts=window.speechSynthesis;let all=[],audio=null,current=null;
 
 function build(){
   let i=0;board.innerHTML='';all=[];
@@ -88,35 +86,34 @@ function build(){
     for(const t of arr){
       const b=document.createElement('button');b.className='line';b.textContent=t;b.dataset.text=t.toLowerCase();
       if(i<9){const k=document.createElement('span');k.className='key';k.textContent=KEYS[i];b.append(k)}
-      b.onclick=()=>speak(t,b);
-      g.append(b);all.push({t,b,cat});i++;
+      const n=i+1;
+      b.onclick=()=>speak(t,b,n);
+      g.append(b);all.push({t,b,cat,n});i++;
     }
     board.append(sec);
   }
 }
-function loadVoices(){
-  voices=tts?tts.getVoices().filter(v=>/^en/i.test(v.lang)):[];
-  voiceSel.innerHTML='';
-  if(!voices.length){voiceSel.innerHTML='<option>Default voice</option>';return}
-  const male=/david|mark|guy|alex|daniel|fred|james|george|ryan|male/i;
-  let best=-1;
-  voices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${v.name} (${v.lang})`;voiceSel.append(o);
-    if(best<0&&/en[-_]US/i.test(v.lang)&&male.test(v.name))best=i});
-  if(best<0)best=voices.findIndex(v=>/en[-_]US/i.test(v.lang));
-  voiceSel.value=best<0?0:best;
-}
-function speak(text,btn){
-  if(!tts){msg.textContent='Speech synthesis is not supported in this browser.';return}
-  tts.cancel();
+function clearPlaying(){document.querySelectorAll('.playing').forEach(e=>e.classList.remove('playing'))}
+function fallback(text,btn){
+  if(!tts){msg.textContent='Audio failed to load and speech synthesis is unavailable.';if(btn)btn.classList.remove('playing');return}
   const u=new SpeechSynthesisUtterance(text);
-  const v=voices[voiceSel.value];if(v){u.voice=v;u.lang=v.lang}else u.lang='en-US';
-  u.pitch=+pitch.value;u.rate=+rate.value;u.volume=+vol.value;
-  document.querySelectorAll('.playing').forEach(e=>e.classList.remove('playing'));
-  if(btn)btn.classList.add('playing');
+  u.lang='en-US';u.pitch=0.5;u.rate=Math.min(+rate.value,1)*0.85;u.volume=+vol.value;
   const done=()=>{if(btn)btn.classList.remove('playing')};
   u.onend=done;u.onerror=done;
-  msg.textContent='"'+text+'"';
   tts.speak(u);
+}
+function speak(text,btn,n){
+  stop();
+  clearPlaying();
+  if(btn)btn.classList.add('playing');
+  msg.textContent='"'+text+'"';
+  const a=new Audio('audio/'+String(n).padStart(2,'0')+'.mp3');
+  audio=a;
+  a.volume=+vol.value;a.playbackRate=+rate.value;
+  const done=()=>{if(btn)btn.classList.remove('playing')};
+  a.onended=done;
+  a.onerror=()=>{if(audio===a)fallback(text,btn)};
+  a.play().catch(e=>{if(audio===a&&e.name!=='AbortError')fallback(text,btn)});
 }
 function visible(){return all.filter(x=>!x.b.classList.contains('hidden'))}
 function filter(){
@@ -127,21 +124,20 @@ function filter(){
   });
   empty.classList.toggle('hidden',visible().length>0);
 }
-function stop(){if(tts)tts.cancel();document.querySelectorAll('.playing').forEach(e=>e.classList.remove('playing'));msg.textContent=''}
-function syncLabels(){pv.textContent=pitch.value;rv.textContent=rate.value;vv.textContent=vol.value}
-[pitch,rate,vol].forEach(e=>e.oninput=syncLabels);
+function stop(){if(audio){const a=audio;audio=null;a.pause();a.onended=a.onerror=null}if(tts)tts.cancel();clearPlaying();msg.textContent=''}
+function syncLabels(){rv.textContent=rate.value;vv.textContent=vol.value;if(audio){audio.volume=+vol.value;audio.playbackRate=+rate.value}}
+[rate,vol].forEach(e=>e.oninput=syncLabels);
 search.oninput=filter;
 document.getElementById('stop').onclick=stop;
-document.getElementById('random').onclick=()=>{const v=visible();if(v.length){const x=v[Math.floor(Math.random()*v.length)];speak(x.t,x.b)}};
+document.getElementById('random').onclick=()=>{const v=visible();if(v.length){const x=v[Math.floor(Math.random()*v.length)];speak(x.t,x.b,x.n)}};
 document.addEventListener('keydown',e=>{
   const tag=(e.target.tagName||'').toLowerCase();
   if(tag==='input'||tag==='select')return;
   if(e.code==='Space'){e.preventDefault();stop();return}
   const i=KEYS.indexOf(e.key);
-  if(i>=0&&all[i]&&!e.ctrlKey&&!e.metaKey&&!e.altKey)speak(all[i].t,all[i].b);
-});
-build();syncLabels();loadVoices();
-if(tts){tts.onvoiceschanged=loadVoices}else msg.textContent='Speech synthesis is not supported in this browser.';
+  if(i>=0&&all[i]&&!e.ctrlKey&&!e.metaKey&&!e.altKey)  speak(all[i].t,all[i].b,all[i].n);
+  });
+  build();syncLabels();
 </script>
 </body>
 </html>
