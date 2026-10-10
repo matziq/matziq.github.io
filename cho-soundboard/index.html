@@ -107,7 +107,7 @@ function speak(text,btn,n){
   clearPlaying();
   if(btn)btn.classList.add('playing');
   msg.textContent='"'+text+'"';
-  const a=new Audio('audio/'+String(n).padStart(2,'0')+'.mp3?v=2');
+  const a=new Audio('audio/'+String(n).padStart(2,'0')+'.mp3?v=3');
   audio=a;
   a.volume=+vol.value;a.playbackRate=+rate.value;
   const done=()=>{if(btn)btn.classList.remove('playing')};
