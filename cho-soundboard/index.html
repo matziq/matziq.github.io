@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cho Soundboard</title>
+<style>
+:root{--bg:#0e1116;--panel:#171b22;--line:#262c36;--text:#e6e9ee;--mute:#8b93a1;--accent:#c0392b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.4 system-ui,Segoe UI,Roboto,sans-serif}
+header{padding:28px 16px 8px;text-align:center}
+h1{margin:0;font-size:1.8rem;letter-spacing:.04em}
+h1 span{color:var(--accent)}
+header p{margin:6px 0 0;color:var(--mute)}
+main{max-width:980px;margin:0 auto;padding:12px 16px 40px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:16px}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+label{display:block;font-size:.8rem;color:var(--mute);margin-bottom:4px}
+select,input[type=search]{width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:#0e1116;color:var(--text);font-size:1rem}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.row input[type=search]{flex:1;min-width:160px}
+button{cursor:pointer;font:inherit;color:var(--text)}
+.ctl{padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:#222834}
+.ctl:hover{background:#2b3240}
+.stop{background:var(--accent);border-color:var(--accent)}
+h2{font-size:.85rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mute);margin:22px 0 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.line{position:relative;text-align:left;padding:14px 12px 14px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);min-height:64px}
+.line:hover,.line:focus-visible{border-color:var(--accent);outline:none}
+.line.playing{background:#2a1714;border-color:var(--accent)}
+.key{position:absolute;top:6px;right:8px;font-size:.7rem;color:var(--mute);border:1px solid var(--line);border-radius:4px;padding:0 5px}
+.msg{color:var(--mute);font-size:.85rem;margin-top:10px;min-height:1.2em}
+footer{text-align:center;color:var(--mute);font-size:.78rem;padding:0 16px 30px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<header>
+  <h1><span>CHO</span> SOUNDBOARD</h1>
+  <p>Deadpan. Flat. Mildly unimpressed.</p>
+</header>
+<main>
+  <section class="panel">
+    <div class="controls">
+      <div><label for="voice">Voice</label><select id="voice"></select></div>
+      <div><label for="pitch">Pitch <span id="pv"></span></label><input id="pitch" type="range" min="0.1" max="2" step="0.05" value="0.7"></div>
+      <div><label for="rate">Rate <span id="rv"></span></label><input id="rate" type="range" min="0.5" max="2" step="0.05" value="0.9"></div>
+      <div><label for="vol">Volume <span id="vv"></span></label><input id="vol" type="range" min="0" max="1" step="0.05" value="1"></div>
+    </div>
+    <div class="row">
+      <input id="search" type="search" placeholder="Search lines…" aria-label="Search lines">
+      <button class="ctl" id="random">Random line</button>
+      <button class="ctl stop" id="stop">Stop (Space)</button>
+    </div>
+    <div class="msg" id="msg"></div>
+  </section>
+  <div id="board"></div>
+  <p class="msg hidden" id="empty">No lines match. Cho is not surprised.</p>
+</main>
+<footer>Unofficial fan project, not affiliated with The Mentalist or its creators. Lines are original parodies spoken by your browser's text-to-speech.</footer>
+<script>
+const LINES={
+"Reactions":[
+"Okay.","Noted.","I see.","That's a no.","Not surprised.","Hm.","That happened.","Still no."],
+"Case Work":[
+"Suspect's not home. Neither is his car.","I checked the alibi. It checked out. Annoyingly.","Witness says she saw nothing. She was very consistent about it.","Warrant's signed. Door's locked. Both problems are solved.","Forensics says it's definitely a body.","I pulled the records. There are a lot of records.","Cause of death is confirmed. Cause of drama, unclear.","Stakeout's quiet. I like quiet."],
+"Dry Humor":[
+"I'm not smiling. This is my face.","I don't do small talk. I do silence.","That was my excited voice.","I could explain it. I won't.","Funny. I'll laugh later. Maybe.","Coffee's cold. So is the case.","I have feelings. They're just very quiet."],
+"Jane":[
+"He's in the van again.","Jane is asleep on the couch. Nobody touch anything.","He said he had a plan. That's the problem.","If he's smiling, someone's in trouble.","Don't ask him. He'll answer.","He's not here. I consider that progress."],
+"Lisbon":[
+"Boss says no. I agree.","Lisbon's got the lead. I've got the back door.","If she's calling, it's bad.","I'll cover her. I always do."]
+};
+const KEYS="123456789";
+const board=document.getElementById('board'),msg=document.getElementById('msg'),empty=document.getElementById('empty');
+const voiceSel=document.getElementById('voice'),pitch=document.getElementById('pitch'),rate=document.getElementById('rate'),vol=document.getElementById('vol'),search=document.getElementById('search');
+const pv=document.getElementById('pv'),rv=document.getElementById('rv'),vv=document.getElementById('vv');
+const tts=window.speechSynthesis;let voices=[],all=[];
+
+function build(){
+  let i=0;board.innerHTML='';all=[];
+  for(const[cat,arr]of Object.entries(LINES)){
+    const sec=document.createElement('section');sec.dataset.cat=cat;
+    const h=document.createElement('h2');h.textContent=cat;
+    const g=document.createElement('div');g.className='grid';
+    sec.append(h,g);
+    for(const t of arr){
+      const b=document.createElement('button');b.className='line';b.textContent=t;b.dataset.text=t.toLowerCase();
+      if(i<9){const k=document.createElement('span');k.className='key';k.textContent=KEYS[i];b.append(k)}
+      b.onclick=()=>speak(t,b);
+      g.append(b);all.push({t,b,cat});i++;
+    }
+    board.append(sec);
+  }
+}
+function loadVoices(){
+  voices=tts?tts.getVoices().filter(v=>/^en/i.test(v.lang)):[];
+  voiceSel.innerHTML='';
+  if(!voices.length){voiceSel.innerHTML='<option>Default voice</option>';return}
+  const male=/david|mark|guy|alex|daniel|fred|james|george|ryan|male/i;
+  let best=-1;
+  voices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${v.name} (${v.lang})`;voiceSel.append(o);
+    if(best<0&&/en[-_]US/i.test(v.lang)&&male.test(v.name))best=i});
+  if(best<0)best=voices.findIndex(v=>/en[-_]US/i.test(v.lang));
+  voiceSel.value=best<0?0:best;
+}
+function speak(text,btn){
+  if(!tts){msg.textContent='Speech synthesis is not supported in this browser.';return}
+  tts.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  const v=voices[voiceSel.value];if(v){u.voice=v;u.lang=v.lang}else u.lang='en-US';
+  u.pitch=+pitch.value;u.rate=+rate.value;u.volume=+vol.value;
+  document.querySelectorAll('.playing').forEach(e=>e.classList.remove('playing'));
+  if(btn)btn.classList.add('playing');
+  const done=()=>{if(btn)btn.classList.remove('playing')};
+  u.onend=done;u.onerror=done;
+  msg.textContent='"'+text+'"';
+  tts.speak(u);
+}
+function visible(){return all.filter(x=>!x.b.classList.contains('hidden'))}
+function filter(){
+  const q=search.value.trim().toLowerCase();
+  document.querySelectorAll('#board section').forEach(s=>{
+    let n=0;s.querySelectorAll('.line').forEach(b=>{const m=!q||b.dataset.text.includes(q)||s.dataset.cat.toLowerCase().includes(q);b.classList.toggle('hidden',!m);if(m)n++});
+    s.classList.toggle('hidden',!n);
+  });
+  empty.classList.toggle('hidden',visible().length>0);
+}
+function stop(){if(tts)tts.cancel();document.querySelectorAll('.playing').forEach(e=>e.classList.remove('playing'));msg.textContent=''}
+function syncLabels(){pv.textContent=pitch.value;rv.textContent=rate.value;vv.textContent=vol.value}
+[pitch,rate,vol].forEach(e=>e.oninput=syncLabels);
+search.oninput=filter;
+document.getElementById('stop').onclick=stop;
+document.getElementById('random').onclick=()=>{const v=visible();if(v.length){const x=v[Math.floor(Math.random()*v.length)];speak(x.t,x.b)}};
+document.addEventListener('keydown',e=>{
+  const tag=(e.target.tagName||'').toLowerCase();
+  if(tag==='input'||tag==='select')return;
+  if(e.code==='Space'){e.preventDefault();stop();return}
+  const i=KEYS.indexOf(e.key);
+  if(i>=0&&all[i]&&!e.ctrlKey&&!e.metaKey&&!e.altKey)speak(all[i].t,all[i].b);
+});
+build();syncLabels();loadVoices();
+if(tts){tts.onvoiceschanged=loadVoices}else msg.textContent='Speech synthesis is not supported in this browser.';
+</script>
+</body>
+</html>
