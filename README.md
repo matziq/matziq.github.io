@@ -8,6 +8,10 @@ Public GitHub Pages site, served at https://memconfigmgr.org/
 - Recipe editor: https://memconfigmgr.org/recipes/admin/
 - Fun and games: https://memconfigmgr.org/games/
 - Complete site index: https://memconfigmgr.org/iomenu.html
+- Book of Mormon comparison: https://memconfigmgr.org/religion/book-of-mormon-comparison.html
+
+The Book of Mormon comparison is a standalone page hosted on this site. Existing
+religious-study redirect pages remain unchanged.
 
 ## Content that moved to its own domain
 

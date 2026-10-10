@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A historically grounded comparison of the Book of Mormon as published and understood by The Church of Jesus Christ of Latter-day Saints and Community of Christ.">
+  <title>Two Churches, One Book? — A Book of Mormon Comparison</title>
+  <link rel="icon" href="favicon-book-of-mormon.svg" type="image/svg+xml">
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--cp-bg);
+      color: var(--cp-text);
+      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.55;
+      transition: background 0.2s, color 0.2s;
+    }
+    a { color: var(--cp-link); text-underline-offset: 0.16em; }
+    a:hover { color: var(--cp-accent); }
+    button { font: inherit; }
+    .topline {
+      padding: 8px 24px;
+      background: var(--cp-surface);
+      border-bottom: 1px solid var(--cp-border);
+    }
+    .topline-inner, .header-inner, .container, footer {
+      width: min(1400px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+    .brand {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      color: var(--cp-text);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .brand-mark {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border: 1px solid var(--cp-accent);
+      border-radius: 0.625rem;
+      color: var(--cp-accent);
+      font-family: Georgia, serif;
+    }
+    .brand small {
+      display: block;
+      color: var(--cp-text-muted);
+      font-size: 11px;
+      font-weight: 400;
+    }
+    header {
+      padding: 27px 0 24px;
+      background: var(--cp-bg-elevated);
+      border-bottom: 4px solid var(--cp-accent);
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .header-copy { flex: 1; min-width: 270px; }
+    .eyebrow, .section-kicker {
+      margin: 0 0 7px;
+      color: var(--cp-accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 870px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(30px, 4vw, 46px);
+      font-weight: 600;
+      line-height: 1.12;
+    }
+    .subtitle {
+      max-width: 840px;
+      margin: 10px 0 0;
+      color: var(--cp-text-muted);
+      font-size: 15px;
+    }
+    .header-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 12px;
+      border: 1px solid var(--cp-border-strong);
+      border-radius: 0.625rem;
+      background: var(--cp-surface);
+      color: var(--cp-text);
+      cursor: pointer;
+    }
+    .action-btn:hover { border-color: var(--cp-accent); color: var(--cp-accent); }
+    .container { padding: 24px 0 12px; }
+    .jumpbar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 0 0 18px;
+    }
+    .jumpbar a {
+      padding: 6px 10px;
+      border: 1px solid var(--cp-border);
+      border-radius: 999px;
+      background: var(--cp-surface);
+      color: var(--cp-text-muted);
+      font-size: 12px;
+      text-decoration: none;
+    }
+    .jumpbar a:hover { border-color: var(--cp-accent); color: var(--cp-accent); }
+    .panel, .summary-box, .church-card, .story-card, .source-card {
+      overflow: hidden;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+    }
+    .summary-box { margin-bottom: 18px; border-top: 3px solid var(--cp-accent); }
+    .panel-head {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--cp-border);
+      background: var(--cp-bg-elevated);
+    }
+    .panel-head h2, .panel-head h3 {
+      margin: 0;
+      color: var(--cp-accent);
+      font-size: 16px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .panel-head p { margin: 4px 0 0; color: var(--cp-text-muted); font-size: 13px; }
+    .summary-body { padding: 14px 20px 18px; }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .summary-column h3 {
+      margin: 0 0 8px;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .summary-column.same h3 { color: var(--cp-success); }
+    .summary-column.diff h3 { color: var(--cp-warning); }
+    .summary-item {
+      margin: 0 0 7px;
+      padding: 9px 12px;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-surface-soft);
+      font-size: 13.5px;
+    }
+    .callout {
+      margin-top: 12px;
+      padding: 11px 14px;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-accent-soft);
+      font-size: 13px;
+    }
+    .callout strong { color: var(--cp-accent); }
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .church-card { border-top: 4px solid var(--cp-accent); }
+    .church-card.cofc { border-top-color: var(--cp-border-strong); }
+    .card-header {
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--cp-border);
+      background: var(--cp-bg-elevated);
+    }
+    .card-header h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 21px;
+      line-height: 1.2;
+    }
+    .church-card.lds .card-header h2 { color: var(--cp-accent); }
+    .card-meta { margin-top: 7px; color: var(--cp-text-muted); font-size: 12px; }
+    .card-body { padding: 16px 20px 20px; }
+    .category { margin: 0 0 17px; }
+    .category:last-child { margin-bottom: 0; }
+    .category h3 {
+      margin: 0 0 7px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--cp-border);
+      color: var(--cp-accent);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .cofc .category h3 { color: var(--cp-text-muted); }
+    .category p { margin: 0 0 8px; font-size: 14px; }
+    .category ul { margin: 0; padding-left: 20px; font-size: 14px; }
+    .category li { margin-bottom: 5px; }
+    .badge {
+      display: inline-block;
+      margin: 2px 4px 2px 0;
+      padding: 3px 8px;
+      border: 1px solid var(--cp-border);
+      border-radius: 999px;
+      color: var(--cp-text-muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .level-grid, .facts-grid, .timeline-grid, .source-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .level-card, .fact-card, .timeline-card, .source-card {
+      padding: 15px 16px;
+      border-top: 3px solid var(--cp-accent);
+    }
+    .level-card h3, .fact-card h3, .timeline-card h3 {
+      margin: 0 0 7px;
+      font-size: 15px;
+    }
+    .level-card p, .fact-card p, .timeline-card p { margin: 0; font-size: 13.5px; }
+    .level-card.exact { border-top-color: var(--cp-success); }
+    .level-card.near { border-top-color: var(--cp-link); }
+    .level-card.different { border-top-color: var(--cp-warning); }
+    .level-card.vast { border-top-color: var(--cp-danger); }
+    .timeline-card { border-top-color: var(--cp-border-strong); }
+    .timeline-card.lds-time { border-top-color: var(--cp-accent); }
+    .timeline-card h3 { display: flex; justify-content: space-between; gap: 8px; }
+    .timeline-card h3 span { color: var(--cp-text-muted); font-size: 11px; font-weight: 500; }
+    .fact-card { border-top-color: var(--cp-warning); }
+    .fact-card .fact-label {
+      margin-bottom: 7px;
+      color: var(--cp-accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+    .section { margin: 26px 0; scroll-margin-top: 12px; }
+    .section-title { margin: 0 0 5px; font-family: Georgia, "Times New Roman", serif; font-size: 26px; }
+    .section-intro { max-width: 900px; margin: 0 0 14px; color: var(--cp-text-muted); font-size: 14px; }
+    .table-wrap { overflow-x: auto; margin: 0 0 18px; border: 1px solid var(--cp-border); border-radius: 16px; }
+    table { width: 100%; border-collapse: collapse; background: var(--cp-surface); font-size: 13.5px; }
+    th, td { padding: 11px 13px; border-bottom: 1px solid var(--cp-border); text-align: left; vertical-align: top; }
+    th { background: var(--cp-bg-elevated); color: var(--cp-accent); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    td:first-child { min-width: 130px; font-weight: 700; }
+    details {
+      margin: 8px 0;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-surface);
+    }
+    summary {
+      padding: 11px 14px;
+      color: var(--cp-text);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 650;
+    }
+    details[open] summary { border-bottom: 1px solid var(--cp-border); color: var(--cp-accent); }
+    .details-content { padding: 10px 14px 13px; color: var(--cp-text-muted); font-size: 13.5px; }
+    .details-content p { margin: 0 0 9px; }
+    .details-content p:last-child { margin-bottom: 0; }
+    .source-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .source-card { padding: 12px 14px; border-top-color: var(--cp-border-strong); }
+    .source-card h3 { margin: 0 0 5px; font-size: 14px; }
+    .source-card p { margin: 0; color: var(--cp-text-muted); font-size: 12.5px; }
+    .method-note { padding: 12px 14px; border: 1px solid var(--cp-border); border-radius: 0.625rem; background: var(--cp-surface-soft); color: var(--cp-text-muted); font-size: 12px; }
+    footer {
+      margin-top: 30px;
+      padding: 24px 0 34px;
+      border-top: 1px solid var(--cp-border);
+      color: var(--cp-text-muted);
+      font-size: 12px;
+      text-align: center;
+    }
+    .term {
+      border-bottom: 1px dotted var(--cp-accent);
+      color: var(--cp-accent);
+      cursor: help;
+    }
+    .term:focus { outline: 2px solid var(--cp-accent); outline-offset: 2px; }
+    @media (max-width: 900px) {
+      .comparison-grid, .summary-grid { grid-template-columns: 1fr; }
+      .level-grid, .facts-grid, .timeline-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 600px) {
+      .topline-inner, .header-inner, .container, footer { width: min(100% - 28px, 1400px); }
+      .topline { padding-inline: 14px; }
+      .header-actions { width: 100%; }
+      .level-grid, .facts-grid, .timeline-grid, .source-grid { grid-template-columns: 1fr; }
+      .card-header, .card-body, .summary-body { padding-inline: 15px; }
+      .panel-head { padding-inline: 15px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="topline" aria-label="Site">
+    <div class="topline-inner">
+      <a class="brand" href="https://evidenceoftruth.online/">
+        <span class="brand-mark" aria-hidden="true">E</span>
+        <span>Evidences of the True Church<small>Study resources</small></span>
+      </a>
+    </div>
+  </nav>
+  <header id="top">
+    <div class="header-inner">
+      <div class="header-copy">
+        <p class="eyebrow">Scripture • history • comparison</p>
+        <h1>Two Churches, One Book?</h1>
+        <p class="subtitle">A careful comparison of the Book of Mormon in The Church of Jesus Christ of Latter-day Saints and Community of Christ: what the churches share, where the editions diverge, and why their interpretations grew apart.</p>
+      </div>
+      <div class="header-actions">
+        <button class="action-btn" id="theme-btn" type="button" aria-label="Toggle dark mode">◐ <span id="theme-label">Dark</span></button>
+        <button class="action-btn" id="top-btn" type="button" aria-label="Return to top">↑ Top</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="jumpbar" aria-label="Page sections">
+      <a href="#quick-answer">Quick answer</a>
+      <a href="#churches">Church profiles</a>
+      <a href="#text">Text comparison</a>
+      <a href="#timelines">Timelines</a>
+      <a href="#did-you-know">Did you know?</a>
+      <a href="#why">Why they differ</a>
+      <a href="#sources">Sources</a>
+    </nav>
+
+    <section id="quick-answer" class="summary-box" aria-labelledby="quick-title">
+      <div class="panel-head">
+        <h2 id="quick-title">The short version</h2>
+        <p>Same movement origins and a shared scripture, but not one identical modern edition or one identical theology.</p>
+      </div>
+      <div class="summary-body">
+        <div class="summary-grid">
+          <div class="summary-column same">
+            <h3>✓ Shared / substantially the same</h3>
+            <p class="summary-item"><strong>Common beginning:</strong> Both communities trace their religious roots to the movement Joseph Smith Jr. organized in 1830.</p>
+            <p class="summary-item"><strong>Common book:</strong> Both include the Book of Mormon in their scriptural tradition and inherit its same central narrative, characters, and Christ-centered teachings.</p>
+            <p class="summary-item"><strong>Much shared wording:</strong> The two traditions transmit a common textual lineage. Many passages are the same in substance and can be word-for-word identical; the entire pair of editions should not be treated as a single identical text.</p>
+          </div>
+          <div class="summary-column diff">
+            <h3>↔ Different / sometimes vastly different</h3>
+            <p class="summary-item"><strong>Edition and references:</strong> Their English print traditions diverged; chapter and verse systems do not line up neatly, and some readings, headings, and editorial material differ.</p>
+            <p class="summary-item"><strong>Scripture’s role:</strong> The LDS Church gives the Book of Mormon a central, distinctive role as another witness of Jesus Christ and a foundational Restoration scripture. Community of Christ also regards it as scripture, while explicitly framing the Bible as foundational and scripture as a human, contextual witness interpreted through Christ.</p>
+            <p class="summary-item"><strong>Doctrinal framework:</strong> The churches differ substantially on priesthood, temple practice, authority, and later revelations. Those differences arose through separate histories after 1844—not because one Book of Mormon was newly translated from scratch.</p>
+          </div>
+        </div>
+        <div class="callout"><strong>Precision matters:</strong> “Exactly the same” can mean identical wording in a particular passage, a shared story, or the same overall book. Those are different claims. The careful answer is: the traditions share a common Book of Mormon text and much identical wording, but they do not use identical editions, references, or interpretive frameworks throughout.</div>
+      </div>
+    </section>
+
+    <section id="churches" class="section" aria-labelledby="churches-title">
+      <p class="section-kicker">The two traditions today</p>
+      <h2 class="section-title" id="churches-title">Two church profiles</h2>
+      <p class="section-intro">The names are related because both churches emerged from the nineteenth-century Latter Day Saint movement. They are separate denominations, with distinct leadership structures, canons, practices, and understandings of scripture.</p>
+      <div class="comparison-grid">
+        <article class="church-card lds">
+          <div class="card-header">
+            <h2>The Church of Jesus Christ of Latter-day Saints</h2>
+            <div class="card-meta"><span class="badge">Often called LDS</span><span class="badge">Headquartered in Salt Lake City</span></div>
+          </div>
+          <div class="card-body">
+            <section class="category">
+              <h3>Book of Mormon in the church</h3>
+              <p>One of four standard works, alongside the Bible, Doctrine and Covenants, and Pearl of Great Price. The church teaches that it is scripture and “another testament of Jesus Christ,” and gives it a major place in worship, missionary work, and personal study.</p>
+            </section>
+            <section class="category">
+              <h3>How the text is published</h3>
+              <ul>
+                <li>The current official English edition descends through several revisions from the 1830 publication; the 2013 edition made modest typographical and editorial updates to the 1981 text.</li>
+                <li>The 1879 Orson Pratt edition introduced the shorter chapter and verse arrangement that remains the familiar LDS reference system.</li>
+                <li>Official Church history describes textual revisions openly, including corrections made to spelling, grammar, punctuation, and some readings.</li>
+              </ul>
+            </section>
+            <section class="category">
+              <h3>Historical path</h3>
+              <p>After Joseph Smith Jr.’s death in 1844, Brigham Young led the largest group west; its church became The Church of Jesus Christ of Latter-day Saints. The LDS Church understands its own institutional authority and succession through that history.</p>
+            </section>
+          </div>
+        </article>
+        <article class="church-card cofc">
+          <div class="card-header">
+            <h2>Community of Christ</h2>
+            <div class="card-meta"><span class="badge">Formerly RLDS</span><span class="badge">Headquartered in Independence, Missouri</span></div>
+          </div>
+          <div class="card-body">
+            <section class="category">
+              <h3>Book of Mormon in the church</h3>
+              <p>Part of its scripture alongside the Bible and Doctrine and Covenants. Its official statement says the Bible is foundational; the Book of Mormon and Doctrine and Covenants are used not to replace the Bible but because they confirm its witness to Jesus Christ.</p>
+            </section>
+            <section class="category">
+              <h3>How the text is published</h3>
+              <ul>
+                <li>The RLDS/Community of Christ tradition developed its own editorial and publication line, including the historically important 1908 “Authorized Edition.”</li>
+                <li>Its inherited chapter arrangement follows the older 1830 structure more closely than the LDS layout created in 1879; verse references can therefore be substantially different.</li>
+                <li>The church encourages interpretation informed by faith, experience, tradition, scholarship, and the Holy Spirit; it does not define scriptural authority as inerrancy in every historical or scientific detail.</li>
+              </ul>
+            </section>
+            <section class="category">
+              <h3>Historical path</h3>
+              <p>After the 1844 succession crisis, a distinct Reorganization formed around Joseph Smith III, son of Joseph Smith Jr. It was formally organized in 1860 and later took the name Community of Christ in 2001. This is the Community of Christ’s own institutional history, not a neutral resolution of competing succession claims.</p>
+            </section>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="text" class="section" aria-labelledby="text-title">
+      <p class="section-kicker">The actual Book of Mormon editions</p>
+      <h2 class="section-title" id="text-title">Where are they exactly the same—and where not?</h2>
+      <p class="section-intro">A useful comparison separates the shared literary work from each publisher’s particular edition. Chapter numbers, verse numbers, editorial apparatus, and text itself are related but not interchangeable.</p>
+      <div class="level-grid">
+        <article class="panel level-card exact">
+          <h3>Exactly the same in many passages</h3>
+          <p>When the editions preserve the same wording in a passage, the words are literally the same—not just similar. Both churches’ texts share the same principal books, narrative arc, names, and core episodes. The underlying relationship is textual descent from the early Book of Mormon, not two unrelated books with the same title.</p>
+        </article>
+        <article class="panel level-card near">
+          <h3>Same meaning; different address</h3>
+          <p>The same sentence may be found under different chapter and verse numbers. The first 1830 printing had no verse numbers; later publishers divided and numbered the text differently. A citation copied across traditions can point to the wrong place unless the edition is checked.</p>
+        </article>
+        <article class="panel level-card different">
+          <h3>Small editorial differences</h3>
+          <p>Over time, printings corrected typographical slips and adjusted spelling, grammar, punctuation, wording, headings, and study aids. Some changes were deliberate clarifications; others were restoration of earlier manuscript readings or corrections of typesetting errors.</p>
+        </article>
+        <article class="panel level-card vast">
+          <h3>Vastly different: authority and theology</h3>
+          <p>The most consequential contrast is often not a changed line of the Book of Mormon. It is what a church says the book is, how it should be read, and how it relates to the Bible, continuing revelation, church authority, and later doctrine. On those matters the traditions can differ profoundly.</p>
+        </article>
+        <article class="panel level-card">
+          <h3>What is not different</h3>
+          <p>Community of Christ did not create a new Book of Mormon unrelated to the LDS one. Nor did the LDS Church acquire an entirely different ancient narrative after the split. Both inherit the same founding text and its early publication history.</p>
+        </article>
+        <article class="panel level-card">
+          <h3>What this page does not claim</h3>
+          <p>It does not claim that every verse has been independently collated here or that every current printing contains precisely the same words. For a passage-level answer, compare the named editions side by side and account for the different reference systems.</p>
+        </article>
+      </div>
+
+      <div class="panel" style="margin-bottom:18px">
+        <div class="panel-head">
+          <h3>Comparison by dimension</h3>
+          <p>“Same text” is not the same question as “same status” or “same reading practice.”</p>
+        </div>
+        <div class="table-wrap" style="margin:0;border:0;border-radius:0">
+          <table>
+            <thead><tr><th>Dimension</th><th>The Church of Jesus Christ of Latter-day Saints</th><th>Community of Christ</th><th>Bottom line</th></tr></thead>
+            <tbody>
+              <tr><td>Origin</td><td>Published in 1830 from Joseph Smith Jr.’s translation, as Latter-day Saints understand it.</td><td>The same founding publication and movement are part of its inherited history.</td><td><strong>Shared starting point.</strong></td></tr>
+              <tr><td>Core narrative</td><td>Uses the Book of Mormon as a witness of Jesus Christ and a record of God’s dealings with peoples in the ancient Americas.</td><td>Uses the same Book of Mormon narrative as scripture and a witness to Christ.</td><td><strong>Substantial shared content.</strong></td></tr>
+              <tr><td>English edition lineage</td><td>Current text continues an LDS editorial line that includes the 1837 and 1840 editions and later revisions.</td><td>RLDS/Community of Christ print tradition includes its own editions, notably the 1908 Authorized Edition.</td><td><strong>Related lineages, not one frozen printing.</strong></td></tr>
+              <tr><td>References</td><td>Familiar modern LDS chapter and verse divisions trace to Orson Pratt’s 1879 edition.</td><td>Older chapter structure is retained in its tradition, with a different numbering system.</td><td><strong>Never assume the same reference numbers.</strong></td></tr>
+              <tr><td>Canon</td><td>Four standard works: Bible, Book of Mormon, Doctrine and Covenants, and Pearl of Great Price.</td><td>Bible, Book of Mormon, and Doctrine and Covenants; the Bible is explicitly foundational.</td><td><strong>The surrounding canon differs.</strong></td></tr>
+              <tr><td>Scriptural authority</td><td>Official teaching centers the Book of Mormon as a foundational scripture and witness of the Restoration.</td><td>Official affirmations describe scripture as a humanly mediated, trustworthy witness interpreted through Christ, not inerrant in every detail.</td><td><strong>A deep interpretive difference.</strong></td></tr>
+              <tr><td>Institutional history</td><td>Largest successor body after the 1844 crisis, led west by Brigham Young.</td><td>Reorganized movement formally organized under Joseph Smith III in 1860; name changed in 2001.</td><td><strong>Two successor narratives after a shared origin.</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="callout"><strong>A concrete difference between editions:</strong> In 2 Nephi 30:6, the LDS 1840 edition changed “white and delightsome” to “pure and delightsome.” The correction was absent from later LDS printings based on the 1837 edition and returned in the LDS 1981 edition. The 1908 RLDS Authorized Edition instead reads “white and delightsome”; its committee treated the reading as a restoration to the earlier text. This is a real textual difference—not merely different verse numbering—and the diverging wording reflects different editorial lineages. Because the phrase has also been discussed in relation to race, the textual history should not be mistaken for a full account of its social or theological interpretation. See the <a href="https://www.churchofjesuschrist.org/study/history/topics/changes-to-the-book-of-mormon?lang=eng" target="_blank" rel="noopener">LDS Church’s edition history</a> and a <a href="https://www.dialoguejournal.com/articles/white-of-pure-five-vignettes/" target="_blank" rel="noopener">detailed study of the “white” / “pure” history</a>.</div>
+    </section>
+
+    <section id="timelines" class="section" aria-labelledby="timeline-title">
+      <p class="section-kicker">Two histories, intertwined</p>
+      <h2 class="section-title" id="timeline-title">How one movement became two traditions</h2>
+      <p class="section-intro">The years below highlight the key turning points for the Book of Mormon and the churches’ separate editorial paths.</p>
+      <div class="timeline-grid">
+        <article class="panel timeline-card lds-time">
+          <h3>1827–1829 <span>Translation period</span></h3>
+          <p>Joseph Smith’s scribes produce the English text. Church history accounts report that nearly all of the present text was dictated between April and June 1829, principally with Oliver Cowdery as scribe.</p>
+        </article>
+        <article class="panel timeline-card">
+          <h3>1830 <span>First printing</span></h3>
+          <p>E. B. Grandin prints the Book of Mormon in Palmyra, New York. The large first run was 5,000 copies. The book had long chapters and no verse numbering; printer John Gilbert added punctuation and paragraph divisions.</p>
+        </article>
+        <article class="panel timeline-card lds-time">
+          <h3>1837 <span>Second edition</span></h3>
+          <p>Joseph Smith and Oliver Cowdery oversee more than a thousand corrections, mostly grammatical, along with some clarifications. The LDS Church’s official history details changes such as “mother of God” becoming “mother of the Son of God.”</p>
+        </article>
+        <article class="panel timeline-card lds-time">
+          <h3>1840 <span>Nauvoo edition</span></h3>
+          <p>The last edition supervised by Joseph Smith makes further corrections, including restoring “pure” in the “pure and delightsome” phrase. The text subsequently circulates through printings based on different editions.</p>
+        </article>
+        <article class="panel timeline-card">
+          <h3>1844 <span>Succession crisis</span></h3>
+          <p>Joseph Smith Jr. is killed in Illinois. Disagreement over leadership and authority leads to a succession crisis and multiple Latter Day Saint bodies; there was no single uncontested successor.</p>
+        </article>
+        <article class="panel timeline-card lds-time">
+          <h3>1847 <span>Migration west</span></h3>
+          <p>Brigham Young leads the largest body of Latter-day Saints to the Salt Lake Valley. The LDS Church’s later publishing history follows its western institutional line.</p>
+        </article>
+        <article class="panel timeline-card">
+          <h3>1860 <span>RLDS organization</span></h3>
+          <p>Joseph Smith III becomes president of the Reorganized Church of Jesus Christ of Latter Day Saints, formally organized in Illinois. This community preserves its own succession claim and remains centered in the Midwest.</p>
+        </article>
+        <article class="panel timeline-card lds-time">
+          <h3>1879 <span>New LDS references</span></h3>
+          <p>Orson Pratt’s LDS edition introduces short chapters and numbered verses that become the familiar LDS layout. This makes references unlike the older RLDS/Community of Christ chapter structure.</p>
+        </article>
+        <article class="panel timeline-card">
+          <h3>1908 <span>RLDS edition</span></h3>
+          <p>The RLDS church issues its historically important Authorized Edition. Its editorial tradition is distinct from the LDS 1879 arrangement and helps explain why citations between the two can be difficult to match.</p>
+        </article>
+        <article class="panel timeline-card lds-time">
+          <h3>1920 <span>LDS study edition</span></h3>
+          <p>A revised LDS presentation adds two-column formatting, chapter summaries, a pronunciation guide, and standardized book titles. Editorial apparatus increasingly shapes how readers navigate the book.</p>
+        </article>
+        <article class="panel timeline-card lds-time">
+          <h3>1981 &amp; 2013 <span>Modern LDS editions</span></h3>
+          <p>The 1981 edition updates study helps and incorporates earlier corrections; the 2013 English edition makes further minor typographical and editorial adjustments and supports digital study.</p>
+        </article>
+        <article class="panel timeline-card">
+          <h3>2001 <span>New name</span></h3>
+          <p>The Reorganized Church adopts the name Community of Christ, reflecting a broader contemporary identity while retaining its roots in the Latter Day Saint movement.</p>
+        </article>
+      </div>
+      <div class="method-note">The historical narrative is presented with each church’s own self-understanding distinguished from documented publication dates. “Succession” describes competing religious claims; the timeline does not decide which claim is theologically valid.</div>
+    </section>
+
+    <section id="did-you-know" class="section" aria-labelledby="facts-title">
+      <p class="section-kicker">Small details, big context</p>
+      <h2 class="section-title" id="facts-title">Did you know?</h2>
+      <p class="section-intro">A dozen quick facts about the book’s production and the histories of the two churches.</p>
+      <div class="facts-grid">
+        <article class="panel fact-card"><div class="fact-label">Did you know? • Printing</div><h3>5,000 copies was a bold first run</h3><p>The first printing was planned at 5,000—more than twice the average book run at the time, according to the LDS Church’s history of the publication.</p></article>
+        <article class="panel fact-card"><div class="fact-label">Did you know? • Financing</div><h3>Martin Harris mortgaged his farm</h3><p>Harris provided the collateral that enabled E. B. Grandin to proceed with the printing. After sales disappointed locally, the mortgaged property was eventually sold.</p></article>
+        <article class="panel fact-card"><div class="fact-label">Did you know? • Publishing</div><h3>A printer supplied the punctuation</h3><p>The manuscript sent to the printer had almost no punctuation. Compositor John Gilbert supplied punctuation and paragraph divisions while setting the type.</p></article>
+        <article class="panel fact-card"><div class="fact-label">Did you know? • Lost pages</div><h3>There were 116 manuscript pages lost</h3><p>The earlier loss shaped how the later printing was guarded. Hyrum Smith reportedly delivered printer’s-manuscript pages to the shop in installments to protect them.</p></article>
+        <article class="panel fact-card"><div class="fact-label">Did you know? • Manuscripts</div><h3>One manuscript mostly survived; one did not</h3><p>About 28% of the original manuscript survives. The printer’s manuscript, copied for the 1830 typesetting, survived nearly intact.</p></article>
+        <article class="panel fact-card"><div class="fact-label">Did you know? • Early witness</div><h3>The first edition printed two witness statements</h3><p>The testimonies of the Three Witnesses and Eight Witnesses were included at the end of the 1830 edition. The witnesses describe different kinds of experiences with the plates.</p></article>
+        <article class="panel fact-card"><div class="fact-label">Did you know? • Early editions</div><h3>Joseph Smith personally revised editions</h3><p>The 1837 edition was revised with Oliver Cowdery; the 1840 edition was the last Book of Mormon edition supervised by Joseph Smith.</p></article>
+        <article class="panel fact-card"><div class="fact-label">Did you know? • Navigation</div><h3>The first edition had no verse numbers</h3><p>The numbering people use today is editorial scaffolding added long after the first publication. Later numbering systems are not all alike across church traditions.</p></article>
+        <article class="panel fact-card"><div class="fact-label">Did you know? • Printing tech</div><h3>Stereotype plates changed reprinting</h3><p>For the 1840 edition, stereotype plates made repeated printings easier. This helped stabilize one version, even as other print lines continued from different editions.</p></article>
+        <article class="panel fact-card"><div class="fact-label">Did you know? • Later scholarship</div><h3>Textual criticism became a modern project</h3><p>The Book of Mormon Critical Text Project, launched in 1988, compares manuscripts and editions to track variants and distinguish editorial changes from production errors.</p></article>
+        <article class="panel fact-card"><div class="fact-label">Did you know? • Two editions</div><h3>A phrase took two paths after 1840</h3><p>In 2 Nephi 30:6, the 1908 RLDS edition and modern LDS editions differ: the former retained “white and delightsome,” while the LDS 1981 edition restored “pure and delightsome,” Joseph Smith’s 1840 revision. The 1908 committee explicitly treated its choice as a return to an earlier reading.</p></article>
+        <article class="panel fact-card"><div class="fact-label">Did you know? • Community of Christ</div><h3>“RLDS” became “Community of Christ” in 2001</h3><p>The name changed more than a century after the 1860 organization. Older sources and publications may still use “Reorganized” or “RLDS.”</p></article>
+        <article class="panel fact-card"><div class="fact-label">Did you know? • Succession</div><h3>The split was not a single clean break</h3><p>After 1844, many leaders and groups advanced different claims. Brigham Young’s followers formed the largest body; the Reorganization was organized later, in 1860, under Joseph Smith III.</p></article>
+      </div>
+    </section>
+
+    <section id="why" class="section" aria-labelledby="why-title">
+      <p class="section-kicker">The causes beneath the differences</p>
+      <h2 class="section-title" id="why-title">Why did they become different?</h2>
+      <p class="section-intro">There is no single cause. Separate institutional histories produced different editorship, numbering, canon, and theology. Each church’s approach to the book reflects what it believes scripture and religious authority are for.</p>
+      <details open>
+        <summary>1. The 1844 leadership crisis created separate institutions</summary>
+        <div class="details-content"><p>Joseph Smith Jr.’s death left competing ideas about who could lead and how authority should pass. The LDS Church developed under Brigham Young and the westward migration; the Reorganization gathered around Joseph Smith III and was formally organized in 1860. Once the churches were institutionally separate, they produced and authorized their own editions and references.</p><p>Neither church’s claim about succession is a neutral historical fact; this page reports the outline and each body’s distinct trajectory without adjudicating religious legitimacy.</p></div>
+      </details>
+      <details>
+        <summary>2. Printers and editors made real changes across editions</summary>
+        <div class="details-content"><p>The 1830 typesetting introduced punctuation and paragraphing; the 1837 revision corrected many problems; the 1840 edition restored some readings; and later editions followed different source printings. Changes can be routine copyediting, restoration from a manuscript, a correction of an error, a modernization, or a doctrinally meaningful clarification. Those categories should not be collapsed into “the book was rewritten” or “nothing ever changed.”</p></div>
+      </details>
+      <details>
+        <summary>3. The two publishers organized references differently</summary>
+        <div class="details-content"><p>Orson Pratt’s 1879 LDS edition divided the text into shorter chapters and verses. The Community of Christ tradition retained an older chapter framework. A verse number is a locator created by editors, not part of the original manuscript. Similar text can therefore have different labels and be hard to compare by citation alone.</p></div>
+      </details>
+      <details>
+        <summary>4. Their views of scripture and revelation developed in different directions</summary>
+        <div class="details-content"><p>The LDS Church treats the Book of Mormon as a foundational standard work and a central witness of the Restoration. Community of Christ’s official scripture affirmations describe the Bible as foundational and the other scriptures as witnesses to Christ, interpreted responsibly through the church’s experience, tradition, scholarship, and the Spirit. The statement explicitly rejects inerrancy as a requirement for every historical or scientific detail.</p><p>Those are differing theological frameworks—not simply two opinions about punctuation.</p></div>
+      </details>
+      <details>
+        <summary>5. A shared ancestor does not guarantee identical modern copies</summary>
+        <div class="details-content"><p>Think of two branches of a book’s publication history. Both may preserve large, overlapping stretches from an ancestor text; each branch can then adopt different corrections, chapter breaks, verse numbers, headings, and study material. That is why “they have the same Book of Mormon” is broadly true about shared scripture and misleading if taken to mean every edition is a page-for-page or word-for-word match.</p></div>
+      </details>
+    </section>
+
+    <section id="sources" class="section" aria-labelledby="sources-title">
+      <p class="section-kicker">Read further</p>
+      <h2 class="section-title" id="sources-title">Sources and comparison tools</h2>
+      <p class="section-intro">Official church histories are cited for each church’s own teachings and institutional accounts. Edition details can be checked against digitized historical texts and textual-comparison resources.</p>
+      <div class="source-grid">
+        <article class="panel source-card">
+          <h3><a href="https://cofchrist.org/scripture/" target="_blank" rel="noopener">Community of Christ: Scripture</a></h3>
+          <p>Official nine-part statement on scripture: its role, interpretation, relationship to Christ, and the place of the Bible, Book of Mormon, and Doctrine and Covenants.</p>
+        </article>
+        <article class="panel source-card">
+          <h3><a href="https://cofchrist.org/history/" target="_blank" rel="noopener">Community of Christ: History</a></h3>
+          <p>Official history resources. Useful for understanding the church’s own institutional account and historical eras.</p>
+        </article>
+        <article class="panel source-card">
+          <h3><a href="https://www.churchofjesuschrist.org/study/history/topics/changes-to-the-book-of-mormon?lang=eng" target="_blank" rel="noopener">LDS Church: Changes to the Book of Mormon</a></h3>
+          <p>Official history of printing, editions, textual corrections, and changes in study apparatus from 1830 through the modern editions.</p>
+        </article>
+        <article class="panel source-card">
+          <h3><a href="https://www.churchofjesuschrist.org/study/history/topics/printing-and-publishing-the-book-of-mormon?lang=eng" target="_blank" rel="noopener">LDS Church: Printing and Publishing</a></h3>
+          <p>Official account of Grandin’s printing, the first print run, Martin Harris’s mortgage, the lost manuscript, and preservation of the surviving manuscripts.</p>
+        </article>
+        <article class="panel source-card">
+          <h3><a href="https://www.churchofjesuschrist.org/study/history/topics/book-of-mormon-translation?lang=eng" target="_blank" rel="noopener">LDS Church: Book of Mormon Translation</a></h3>
+          <p>Official account of the translation process, scribes, surviving original manuscript, interpreters, and seer stone.</p>
+        </article>
+        <article class="panel source-card">
+          <h3><a href="https://www.churchofjesuschrist.org/study/history/topics/witnesses-of-the-book-of-mormon?lang=eng" target="_blank" rel="noopener">LDS Church: Witnesses of the Book of Mormon</a></h3>
+          <p>Official historical overview of the Three and Eight Witnesses, including the different testimony statements and later accounts.</p>
+        </article>
+        <article class="panel source-card">
+          <h3><a href="https://bofm.scripturecompare.org/versions" target="_blank" rel="noopener">Book of Mormon Compare: Versions</a></h3>
+          <p>Textual-comparison project describing surviving manuscripts and early LDS editions. Helpful for exploring transmission and word-level variants.</p>
+        </article>
+        <article class="panel source-card">
+          <h3><a href="https://bookofmormon.online/fax/1908r" target="_blank" rel="noopener">1908 RLDS Authorized Edition: Facsimile</a></h3>
+          <p>Digitized edition for direct inspection of the historical RLDS print tradition. Compare with a specific LDS edition and account for reference-system differences.</p>
+        </article>
+        <article class="panel source-card">
+          <h3><a href="https://www.dialoguejournal.com/articles/white-of-pure-five-vignettes/" target="_blank" rel="noopener">Dialogue: “White” or “Pure”</a></h3>
+          <p>Edition-by-edition account of the 2 Nephi 30:6 wording, the RLDS 1908 restoration, and the different publication histories behind the variant.</p>
+        </article>
+      </div>
+      <div class="method-note"><strong>Reading note:</strong> Belief claims are labeled as teachings or as a church’s own account, not presented as independently proven historical conclusions. For a strict word-by-word comparison, specify the editions (for example, 1908 RLDS and 2013 LDS), align the passages, and check the underlying manuscripts where needed. A quick citation match alone is not enough.</div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Prepared as a comparative study resource. The aim is to describe shared history fairly and distinguish textual variation from theological difference.</p>
+    <p>Use <a href="?scoutTheme=light">light</a> or <a href="?scoutTheme=dark">dark</a> in the URL to select a theme.</p>
+  </footer>
+  <script>
+    const themeButton = document.getElementById("theme-btn");
+    const themeLabel = document.getElementById("theme-label");
+    const topButton = document.getElementById("top-btn");
+
+    const updateThemeLabel = () => {
+      themeLabel.textContent = document.documentElement.getAttribute("data-theme") === "dark" ? "Light" : "Dark";
+    };
+    updateThemeLabel();
+    themeButton.addEventListener("click", () => {
+      const nextTheme = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", nextTheme);
+      updateThemeLabel();
+    });
+    topButton.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+  </script>
+</body>
+</html>
