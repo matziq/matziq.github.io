@@ -1,8 +1,15 @@
 {
   "source": "https://www.rockstargames.com/VI",
   "newswire": "https://www.rockstargames.com/newswire",
-  "fetchedAt": "2026-10-15T11:25:14+00:00",
+  "fetchedAt": "2026-10-15T16:58:14+00:00",
   "items": [
+    {
+      "title": "Watch the Grand Theft Auto VI Launch Trailer",
+      "url": "https://www.rockstargames.com/newswire/article/517572321a549a",
+      "date": "October 15, 2026",
+      "isoDate": "2026-10-15",
+      "image": "https://www.rockstargames.com/VI/_next/static/media/517572321a549a.0y668_yrgy9s_.jpg?akim=1&imdensity=1&imwidth=640"
+    },
     {
       "title": "Grand Theft Auto VI Collection Now at the Rockstar Store",
       "url": "https://www.rockstargames.com/newswire/article/759875393o5253",
@@ -16,13 +23,6 @@
       "date": "October 8, 2026",
       "isoDate": "2026-10-08",
       "image": "https://www.rockstargames.com/VI/_next/static/media/o3982oa93a23k4.05jwq4z-sjai_.jpg?akim=1&imdensity=1&imwidth=640"
-    },
-    {
-      "title": "Pre-Order The Goodtime State \u2013 Vice City Collection Now While Supplies Last",
-      "url": "https://www.rockstargames.com/newswire/article/9k2a49ook82o57",
-      "date": "September 24, 2026",
-      "isoDate": "2026-09-24",
-      "image": "https://www.rockstargames.com/VI/_next/static/media/9k2a49ook82o57.0y.tef0ihubh2.jpg?akim=1&imdensity=1&imwidth=640"
     }
   ]
 }
