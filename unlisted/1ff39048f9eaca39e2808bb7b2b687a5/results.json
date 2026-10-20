@@ -4615,7 +4615,7 @@
     "401873007": {
       "awayScore": 13,
       "awayTeamId": "6",
-      "checkedAt": "2026-10-20T00:33:38Z",
+      "checkedAt": "2026-10-20T05:11:45Z",
       "error": null,
       "eventId": "401873007",
       "explanationPhase": "pregame",
@@ -4652,7 +4652,7 @@
       "hasStarted": true,
       "homeScore": 23,
       "homeTeamId": "9",
-      "lastAttemptAt": "2026-10-20T00:33:38Z",
+      "lastAttemptAt": "2026-10-20T05:11:45Z",
       "pickAssessmentId": "assessment-09a030d4a64d7a49c5e9aed7",
       "pickCutoffAt": "2026-10-19T00:20:00Z",
       "pickEffectiveAt": "2026-10-18T18:49:43Z",
@@ -4684,27 +4684,53 @@
       "winnerTeamId": "9"
     },
     "401873008": {
-      "awayScore": null,
+      "awayScore": 17,
       "awayTeamId": "28",
-      "checkedAt": "2026-10-20T00:33:38Z",
+      "checkedAt": "2026-10-20T05:11:45Z",
       "error": null,
       "eventId": "401873008",
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
-      "fantasyLeaders": null,
-      "firstFinalAt": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "3117251",
+            "name": "Christian McCaffrey",
+            "points": 30.7,
+            "statLine": "64 rush yds, 2 rush TD, 9 rec, 53 rec yds, 1 fumble lost",
+            "teamId": "25"
+          },
+          {
+            "athleteId": "4426348",
+            "name": "Jayden Daniels",
+            "points": 21.0,
+            "statLine": "300 pass yds, 2 pass TD, 10 rush yds",
+            "teamId": "28"
+          },
+          {
+            "athleteId": "3040151",
+            "name": "George Kittle",
+            "points": 17.9,
+            "statLine": "5 rec, 69 rec yds, 1 rec TD",
+            "teamId": "25"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401873008"
+      },
+      "firstFinalAt": "2026-10-20T05:11:45Z",
       "hasStarted": true,
-      "homeScore": null,
+      "homeScore": 23,
       "homeTeamId": "25",
-      "lastAttemptAt": "2026-10-20T00:33:38Z",
+      "lastAttemptAt": "2026-10-20T05:11:45Z",
       "pickAssessmentId": "assessment-ef161b9a2f703349e62c7d7f",
       "pickCutoffAt": "2026-10-20T00:15:00Z",
       "pickEffectiveAt": "2026-10-19T00:44:21Z",
       "pickExplanation": "I expect the San Francisco 49ers to beat the Washington Commanders because Purdy and McCaffrey should challenge Washington's specific red-zone and second-half defensive problems. Daniels' dynamic running could test a San Francisco defense missing Bosa and suspended Greenlaw, while the 49ers' receiving availability remains uncertain. The home setting and stronger demonstrated efficiency support the existing projection without making Washington's running threat or San Francisco's kicking errors disappear.",
       "pickLockedAt": "2026-10-20T00:33:38Z",
       "pickReason": "I expect the San Francisco 49ers to beat the Washington Commanders because Purdy and McCaffrey should challenge Washington's specific red-zone and second-half defensive problems. Daniels' dynamic running could test a San Francisco defense missing Bosa and suspended Greenlaw, while the 49ers' receiving availability remains uncertain. The home setting and stronger demonstrated efficiency support the existing projection without making Washington's running threat or San Francisco's kicking errors disappear.",
-      "pickResult": "pending",
+      "pickResult": "correct",
       "pickRevisionId": "assessment-ef161b9a2f703349e62c7d7f:401873008",
       "pregameExplanation": "I expect the San Francisco 49ers to beat the Washington Commanders because Purdy and McCaffrey should challenge Washington's specific red-zone and second-half defensive problems. Daniels' dynamic running could test a San Francisco defense missing Bosa and suspended Greenlaw, while the 49ers' receiving availability remains uncertain. The home setting and stronger demonstrated efficiency support the existing projection without making Washington's running threat or San Francisco's kicking errors disappear.",
       "projectedScore": {
@@ -4719,14 +4745,14 @@
       },
       "projectedScoreLockedAt": "2026-10-20T00:33:38Z",
       "projectedScoreStatus": "available",
-      "resultUpdatedAt": null,
+      "resultUpdatedAt": "2026-10-20T05:11:45Z",
       "scheduledAt": "2026-10-20T00:15:00Z",
       "scoredPickTeamId": "25",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261019",
-      "status": "in_progress",
-      "statusDetail": "In progress - awaiting final",
+      "status": "final",
+      "statusDetail": "Final",
       "timeConfirmed": true,
-      "winnerTeamId": null
+      "winnerTeamId": "25"
     },
     "401873009": {
       "awayScore": null,
@@ -12820,14 +12846,14 @@
       "winnerTeamId": null
     }
   },
-  "lastAttemptAt": "2026-10-20T00:33:38Z",
-  "lastResultAt": "2026-10-19T05:12:39Z",
-  "lastSuccessfulCheckAt": "2026-10-20T00:33:38Z",
+  "lastAttemptAt": "2026-10-20T05:11:45Z",
+  "lastResultAt": "2026-10-20T05:11:45Z",
+  "lastSuccessfulCheckAt": "2026-10-20T05:11:45Z",
   "monitoringComplete": false,
-  "nextCheckAt": "2026-10-20T00:38:38Z",
+  "nextCheckAt": "2026-10-20T06:11:45Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-10-20T00:33:38Z",
-  "revision": "7089e1aedfcf55a4ad1b70701cb04e509c0c0e1f0b3e0bb200e7fc14a0109636",
+  "publishedAt": "2026-10-20T05:11:45Z",
+  "revision": "c80d68cc5c8967de192698f2f4d7fb928b8c04cfeeb19e905b8cd2ca774a6db6",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
