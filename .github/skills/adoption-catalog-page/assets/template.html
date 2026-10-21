@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>{{TITLE}}</title>
+<style>
+body{font-family:Segoe UI,Arial,sans-serif;margin:0;background:#f5f6f8;color:#1b1b1b}
+header{background:#0f3d6e;color:#fff;padding:28px 40px}header h1{margin:0 0 6px;font-size:26px}header p{margin:0;opacity:.85}
+main{padding:24px 40px;max-width:1300px;margin:auto}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.legend span{padding:4px 12px;border-radius:14px;font-size:13px;color:#fff}
+.grid{display:grid;grid-template-columns:130px repeat(5,1fr);gap:6px}
+.hd{font-weight:600;text-align:center;color:#555;padding:4px}
+.wk{background:#e3e9f1;border-radius:6px;padding:10px;font-weight:600;font-size:13px;display:flex;align-items:center}
+.cell{background:#fff;border-radius:6px;min-height:96px;padding:6px;border:1px solid #e0e3e8}
+.dow{display:none}
+.ev{border-radius:5px;padding:7px 8px;color:#fff;font-size:12.5px;height:100%;box-sizing:border-box}
+.ev b{display:block;margin-bottom:3px}.ev span{display:block;opacity:.95}.ev em{display:block;margin-top:4px;font-style:normal;font-weight:600}
+.launch{background:#0078d4}.train{background:#107c10}.web{background:#8764b8}.hands{background:#d83b01}.agent{background:#005b70}.exec{background:#5c2d91}.champ{background:#986f0b}
+h2{margin-top:36px}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:6px;overflow:hidden}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid #e6e8ec;font-size:14px}th{background:#e3e9f1}
+.note{font-size:12.5px;color:#666;margin-top:14px}
+@media print{body{background:#fff}}
+h3{margin:26px 0 6px;color:#0f3d6e}.sub{color:#555;font-size:14px;margin:0 0 10px}
+.detail td:first-child{width:26%;font-weight:600}.detail td:nth-child(2){width:14%}.detail td:nth-child(3){width:14%;white-space:nowrap}.detail td:nth-child(4){width:10%;white-space:nowrap}
+.tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:10px;background:#e3e9f1;color:#0f3d6e;margin-left:6px;font-weight:600}
+.callout{background:#fff;border-left:4px solid #8764b8;padding:10px 14px;margin:14px 0;font-size:14px;border-radius:4px}
+</style></head><body>
+<header><h1>{{TITLE}}</h1><p>{{SUBTITLE}}</p></header>
+<main>
+<h2>Activity Overview</h2>
+<table><tr><th>Activity</th><th>Audience</th><th>Audience size</th><th>Length</th></tr>
+<!-- one row per activity: <tr><td>Name</td><td>Audience</td><td>No limit<sup>*</sup></td><td>60 min</td></tr> -->
+</table>
+<p class="note">* "No limit" indicates there is no fixed attendance cap. For very large groups, live Q&amp;A may need to be time-boxed or moderated.</p>
+
+<!-- Repeat per activity that needs a breakdown -->
+<h2>{{ACTIVITY_NAME}}</h2>
+<p class="sub">{{ONE_PARAGRAPH_DESCRIPTION}}</p>
+<table class="detail"><tr><th>Session</th><th>Audience</th><th>Audience size</th><th>Length</th><th>What it covers</th></tr>
+<!-- <tr><td>Session</td><td>Audience</td><td>Size</td><td>Length</td><td>Coverage</td></tr> -->
+</table>
+<p class="callout"><b>Delivery options:</b> {{OPTIONAL_CALLOUT}}</p>
+
+<p class="note">Durations and audiences are typical and are confirmed during planning.</p>
+</main></body></html>
