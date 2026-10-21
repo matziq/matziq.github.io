@@ -1,0 +1,24 @@
+{
+  "title": "Team Enablement Activity Catalog",
+  "subtitle": "A menu of activities with audience and length.",
+  "brand": "#0f3d6e",
+  "accent": "#8764b8",
+  "activities": [
+    {"name": "Intro Webinar Series", "audience": "All end users", "size": "No limit*", "length": "30-90 min", "detail": true},
+    {"name": "Hands-On Lab", "audience": "End users, champions", "size": "Up to 40", "length": "1 hr"}
+  ],
+  "notes": ["* \"No limit\" means no fixed attendance cap; time-box live Q&A for very large groups."],
+  "sections": [
+    {
+      "activity": "Intro Webinar Series",
+      "title": "Intro Webinar Series",
+      "intro": "Foundational sessions for every audience.",
+      "rows": [
+        ["Quick Start", "All end users", "No limit*", "30-60 min", "What the tool is and first prompts"],
+        ["Prompting Basics", "End users", "No limit*", "60 min", "Anatomy of an effective prompt & refining results"]
+      ],
+      "callout": {"label": "Delivery options", "text": "A lighter 30-minute format works well for pilots."}
+    }
+  ],
+  "footer": "Durations and audiences are typical and are confirmed during planning."
+}

@@ -1,0 +1,8 @@
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.legend span{padding:4px 12px;border-radius:14px;font-size:13px;color:#fff}
+.grid{display:grid;grid-template-columns:130px repeat(5,1fr);gap:6px}
+.hd{font-weight:600;text-align:center;color:#555;padding:4px}
+.wk{background:#e3e9f1;border-radius:6px;padding:10px;font-weight:600;font-size:13px;display:flex;align-items:center}
+.cell{background:#fff;border-radius:6px;min-height:96px;padding:6px;border:1px solid #e0e3e8}
+.ev{border-radius:5px;padding:7px 8px;color:#fff;font-size:12.5px;height:100%;box-sizing:border-box}
+.ev b{display:block;margin-bottom:3px}.ev span{display:block;opacity:.95}.ev em{display:block;margin-top:4px;font-style:normal;font-weight:600}
+.launch{background:#0078d4}.train{background:#107c10}.web{background:#8764b8}.hands{background:#d83b01}.agent{background:#005b70}.exec{background:#5c2d91}.champ{background:#986f0b}
