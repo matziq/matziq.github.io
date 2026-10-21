@@ -36,6 +36,7 @@ Output location and naming: write to the folder the user names, otherwise the re
 {
   "title": "string (required)",
   "subtitle": "string",
+  "allow_html": "false (default). true = cells, intros, callouts, notes are trusted raw HTML",
   "brand": "#rrggbb (default #0f3d6e)",
   "accent": "#rrggbb (default #8764b8)",
   "activities": [
@@ -46,17 +47,19 @@ Output location and naming: write to the folder the user names, otherwise the re
     {
       "activity": "must match an activities[].name",
       "title": "heading",
+      "level": "2 (default) or 3 for a subheading (h3, excluded from the TOC)",
       "intro": "optional paragraph",
       "columns": ["optional; default Session, Audience, Audience size, Length, What it covers"],
       "rows": [["5 cells each: name, audience, size, length, details"]],
-      "callout": {"label": "Delivery options", "text": "optional"}
+      "callout": {"label": "Delivery options", "text": "optional"},
+      "notes": ["optional notes shown after this section's table"]
     }
   ],
   "footer": "closing note"
 }
 ```
 
-All text is HTML-escaped by the script, so `&` and `<` are safe. A trailing `*` in any cell becomes a superscript footnote marker.
+By default all text is HTML-escaped, so `&` and `<` are safe. Any `*` becomes a superscript footnote marker, and `{tag:Label}` becomes a small badge. Set `"allow_html": true` only for trusted input.
 
 ## Validation performed by render.py
 
@@ -66,6 +69,10 @@ All text is HTML-escaped by the script, so `&` and `<` are safe. A trailing `*` 
 - Size values match `Up to N`, `No limit`, or a number (optional `*`); length contains a duration, `Flexible`, or `Recurring`.
 - Any `*` used has a footnote note starting with `*`.
 - Colors are `#rrggbb`.
+
+## Testing
+
+`python3 .github/skills/adoption-catalog-page/scripts/test_render.py` runs regression tests, including a check that `examples/copilot-adoption-catalog.json` renders to the same visible text as the original `examples/copilot-adoption-catalog.html`. Markup differs by design (semantic tables, CSS variables); text and structure match.
 
 ## Design notes
 

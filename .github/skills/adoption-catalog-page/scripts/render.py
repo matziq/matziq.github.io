@@ -14,12 +14,26 @@ LENGTH_RE = re.compile(r"\d|Flexible|Recurring", re.I)
 COLOR_RE = re.compile(r"^#[0-9a-fA-F]{6}$")
 
 
+RAW = False  # set from the input's "allow_html" flag
+TAG_RE = re.compile(r"\{tag:([^}]+)\}")
+
+
 def cell(text):
-    """Escape text; a trailing '*' becomes a superscript footnote marker."""
+    """Escape text ('*' becomes a superscript marker, '{tag:X}' a badge).
+
+    With "allow_html": true in the input, text is trusted and emitted as-is.
+    """
     text = str(text)
-    m = re.match(r"^(.*?)\*$", text)
-    if m:
-        return escape(m.group(1)) + "<sup>*</sup>"
+    if RAW:
+        return text
+    out, pos = "", 0
+    for m in TAG_RE.finditer(text):
+        out += _plain(text[pos:m.start()]) + f'<span class="tag">{escape(m.group(1))}</span>'
+        pos = m.end()
+    return out + _plain(text[pos:])
+
+
+def _plain(text):
     return escape(text).replace("*", "<sup>*</sup>")
 
 
@@ -73,7 +87,9 @@ def main():
     p.add_argument("--toc", action="store_true")
     p.add_argument("--brand"); p.add_argument("--accent")
     a = p.parse_args()
+    global RAW
     data = json.loads(Path(a.input).read_text(encoding="utf-8"))
+    RAW = bool(data.get("allow_html"))
     brand = a.brand or data.get("brand", "#0f3d6e")
     accent = a.accent or data.get("accent", "#8764b8")
     for c in (brand, accent):
@@ -87,16 +103,21 @@ def main():
     body += [f'<p class="note">{cell(n) if not n.startswith("*") else "*" + escape(n[1:])}</p>' for n in data.get("notes", [])]
     heads = [("overview", "Activity Overview")]
     for s in data.get("sections", []):
-        sid = slug(s["title"]); heads.append((sid, s["title"]))
-        body.append(f'<h2 id="{sid}">{escape(s["title"])}</h2>')
+        sid = slug(s["title"])
+        if s.get("level") != 3:
+            heads.append((sid, s["title"]))
+        lvl = 3 if s.get("level") == 3 else 2
+        body.append(f'<h{lvl} id="{sid}">{escape(s["title"])}</h{lvl}>')
         if s.get("intro"):
-            body.append(f'<p class="sub">{escape(s["intro"])}</p>')
+            body.append(f'<p class="sub">{cell(s["intro"])}</p>')
         body.append(table(s.get("columns", ["Session", "Audience", "Audience size", "Length", "What it covers"]),
                           s["rows"], s["title"], "detail"))
         if s.get("callout"):
-            body.append(f'<p class="callout"><b>{escape(s["callout"].get("label", "Note"))}:</b> {escape(s["callout"]["text"])}</p>')
+            body.append(f'<p class="callout"><b>{escape(s["callout"].get("label", "Note"))}:</b> {cell(s["callout"]["text"])}</p>')
+        for n in s.get("notes", []):
+            body.append(f'<p class="note">{cell(n)}</p>')
     if data.get("footer"):
-        body.append(f'<p class="note">{escape(data["footer"])}</p>')
+        body.append(f'<p class="note">{cell(data["footer"])}</p>')
 
     toc = ""
     if a.toc:

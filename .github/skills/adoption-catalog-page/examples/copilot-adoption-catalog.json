@@ -1,0 +1,296 @@
+{
+ "title": "Copilot Adoption Activity Catalog",
+ "subtitle": "A menu of adoption activities with audience and length. Mix and sequencing are tailored to your organization.",
+ "activities": [
+  {
+   "name": "Excite Day",
+   "audience": "End users, champions, sponsors",
+   "size": "No limit*",
+   "length": "2+ hrs"
+  },
+  {
+   "name": "Excite Day Breakouts (PowerPoint, Excel, Agent Builder, Notebooks, Agents, Mini Prompt-a-thon)",
+   "audience": "Topic-specific user groups",
+   "size": "Up to 100",
+   "length": "60-90 min"
+  },
+  {
+   "name": "Copilot Webinar or Series (Intro Track)",
+   "audience": "End users, champions, leaders",
+   "size": "No limit*",
+   "length": "30-90 min",
+   "detail": true
+  },
+  {
+   "name": "BU / Function Training",
+   "audience": "End users in one function",
+   "size": "Up to 250",
+   "length": "1-2 hrs",
+   "detail": true
+  },
+  {
+   "name": "Advanced Webinar or Series",
+   "audience": "Function teams and power users who completed intro training",
+   "size": "No limit*",
+   "length": "60-90 min",
+   "detail": true
+  },
+  {
+   "name": "Role-Based Scenario Prioritization Workshop",
+   "audience": "BDMs, ITDMs, BU leads",
+   "size": "Up to 25*",
+   "length": "2-3 hrs"
+  },
+  {
+   "name": "Cowork End-User Training",
+   "audience": "End users, champions",
+   "size": "No limit*",
+   "length": "60-90 min"
+  },
+  {
+   "name": "Cowork Leader Session",
+   "audience": "AI leaders, governance owners",
+   "size": "Up to 25",
+   "length": "60 min"
+  },
+  {
+   "name": "Champions Program (Essentials, Community, Tips Sessions)",
+   "audience": "Champions, sponsors",
+   "size": "No limit*",
+   "length": "1-2 hrs kickoff; 20 min tips"
+  },
+  {
+   "name": "Copilot Office Hours",
+   "audience": "End users, early adopters",
+   "size": "No limit*; formal topic submission for large groups",
+   "length": "Recurring, 30-60 min"
+  },
+  {
+   "name": "Hands-On Copilot Lab (Basic / Advanced)",
+   "audience": "End users, champions",
+   "size": "Up to 40",
+   "length": "1 hr"
+  },
+  {
+   "name": "Lunch-and-Learns, Demo Days and Team Huddles",
+   "audience": "End users, managers and their teams",
+   "size": "Up to 40",
+   "length": "Flexible"
+  },
+  {
+   "name": "Executive Immersive Experience",
+   "audience": "Executives, senior leaders",
+   "size": "Up to 25",
+   "length": "2 hrs"
+  },
+  {
+   "name": "Prompt-a-thon Lite",
+   "audience": "Business users by function",
+   "size": "Up to 40",
+   "length": "3-4 hrs"
+  },
+  {
+   "name": "Agent Builder Session",
+   "audience": "Analysts, ops leads, power users",
+   "size": "No limit*",
+   "length": "60 min"
+  },
+  {
+   "name": "Copilot Studio Introduction",
+   "audience": "IT, architects, technical makers",
+   "size": "No limit*",
+   "length": "60 min"
+  },
+  {
+   "name": "Agent Build-a-thon",
+   "audience": "Makers and business teams (20+ participants)",
+   "size": "Up to 40",
+   "length": "1 day, in person"
+  },
+  {
+   "name": "AI Agents Hackathon",
+   "audience": "Makers and developers (up to 16 per CSA)",
+   "size": "Up to 40",
+   "length": "1-2 days"
+  },
+  {
+   "name": "Business Scenario Discovery",
+   "audience": "C-suite, BDMs",
+   "size": "Up to 25",
+   "length": "2 hrs"
+  },
+  {
+   "name": "AI Agents Hero Demos",
+   "audience": "C-suite, BDMs",
+   "size": "Up to 25",
+   "length": "1-2 hrs"
+  }
+ ],
+ "notes": [
+  "Subsection audience sizes follow the parent activity. *Role-Based Scenario Prioritization Workshop is extrapolated at up to 25 participants based on its small-group format; confirm during planning.",
+  "* “No limit” indicates there is no fixed attendance cap. For very large groups, live Q&A may need to be time-boxed or moderated to keep the session manageable."
+ ],
+ "sections": [
+  {
+   "activity": "Copilot Webinar or Series (Intro Track)",
+   "title": "Copilot Webinar or Series: Intro Track",
+   "rows": [
+    [
+     "Intro to Microsoft 365 Copilot (QuickStart)",
+     "All end users",
+     "No limit*",
+     "30-60 min",
+     "What Copilot is and how it uses your work data; finding Copilot Chat and the app on web, desktop and mobile; first prompts; a \"top 10 things to try\" checklist"
+    ],
+    [
+     "Copilot in the Microsoft 365 Apps",
+     "End users",
+     "No limit*",
+     "60 min",
+     "Drafting, summarizing and analysis in Teams, Outlook, Word, Excel and PowerPoint, with hands-on prompts in each app"
+    ],
+    [
+     "Prompting Best Practices",
+     "End users, champions",
+     "No limit*",
+     "60 min",
+     "Anatomy of an effective prompt, the Prompt Gallery, guided exercises and refining results"
+    ],
+    [
+     "Train-the-Trainer for Champions",
+     "Champions, change leads",
+     "No limit*",
+     "60 min",
+     "Teaching tips and prompting guidance so champions can coach peers and lead by example"
+    ],
+    [
+     "Leader Series",
+     "Officers, senior leaders",
+     "No limit*",
+     "90 min",
+     "Why now, fundamentals, hands-on leader workflows, advanced possibilities and next steps"
+    ]
+   ],
+   "intro": "Five foundational sessions for every audience. Run them as single webinars or as a four-week series. All are live, hands-on and recorded.",
+   "callout": {
+    "label": "Delivery options",
+    "text": "a lighter 30-minute modular format works well for pilots, and recurring office hours keep support going between sessions. Role-specific versions of these sessions are covered under BU / Function Training."
+   }
+  },
+  {
+   "activity": "BU / Function Training",
+   "title": "BU / Function Training",
+   "rows": [
+    [
+     "Human Resources",
+     "HR generalists, partners, employee relations",
+     "Up to 250",
+     "60-90 min",
+     "Grounded agent to draft manager-ready performance plans; attrition and risk analysis with Analyst; survey comments to action plan; investigation questions and case summaries; case pre-visit analysis; labor and employment news briefing"
+    ],
+    [
+     "Finance",
+     "Finance analysts, stakeholders",
+     "Up to 250",
+     "60-90 min",
+     "Over/short commentary analysis and follow-up drafts; data quality checks and exception reports; contract review for terms, risks and expirations"
+    ],
+    [
+     "Supply Chain",
+     "Analysts, leaders",
+     "Up to 250",
+     "60-90 min",
+     "Weekly sales, inventory and stockout analysis in Excel; recurring report automation; executive weekly summary"
+    ],
+    [
+     "Legal",
+     "Legal and government relations",
+     "Up to 250",
+     "60-90 min",
+     "Matter tracking and status updates; legislative and compliance monitoring briefs; clause-based drafting and version comparison for attorney review"
+    ],
+    [
+     "Operations (Stores / Field)",
+     "Operations and field-facing teams",
+     "Up to 250",
+     "60-90 min",
+     "Repeatable Excel reports with trend and outlier checks; project status, risks and tasks; recurring insight newsletters"
+    ],
+    [
+     "Executive Assistants",
+     "Executive admins, executive support",
+     "Up to 250",
+     "60-90 min",
+     "Triage missed requests; goal alignment; meeting and trip preparation; meeting notes and follow-ups; morning briefings with draft replies"
+    ],
+    [
+     "Merchandising",
+     "Merchandising teams",
+     "Up to 250",
+     "60-90 min",
+     "Weekly performance recap with drivers; insight synthesis from unstructured inputs; work-request intake and prioritization"
+    ],
+    [
+     "Marketing",
+     "Marketing teams",
+     "Up to 250",
+     "60-90 min",
+     "Process mapping and SOP generation; monthly industry point-of-view briefs; stakeholder alignment; natural-language reporting"
+    ],
+    [
+     "Customer Experience / E-commerce",
+     "CX and online teams",
+     "Up to 250",
+     "60-90 min",
+     "Voice-of-customer themes and actions; category health reporting; stakeholder storytelling"
+    ]
+   ],
+   "intro": "Function-specific sessions built around the real workflows of one team. Each opens with a short foundations recap, walks through function use cases with live demos, and closes with next steps. Typical length is 60-90 minutes, and a function leader or champion validates scenarios in advance. The same pattern extends to other teams such as Sales and IT.",
+   "columns": [
+    "Function",
+    "Audience",
+    "Audience size",
+    "Length",
+    "Function-specific use cases"
+   ]
+  },
+  {
+   "activity": "Advanced Webinar or Series",
+   "title": "Advanced Webinar or Series",
+   "rows": [
+    [
+     "Function Advanced Follow-Ups",
+     "Function teams who completed BU / Function Training",
+     "No limit*",
+     "60-90 min",
+     "Deeper versions of each function's use cases: agents grounded in team data, Analyst, and multi-step recurring reporting"
+    ],
+    [
+     "Cross-Functional Learning Series",
+     "Cross-functional leaders and skilled users",
+     "No limit*",
+     "90 min",
+     "15 min foundations reminder, 25 min app examples, 35 min department demos using connected enterprise systems, 15 min Q&A"
+    ],
+    [
+     "Research, Analysis and Content Power Techniques",
+     "Analysts, power users",
+     "No limit*",
+     "60 min",
+     "Researcher and Analyst deep dive, multi-step Excel analysis, turning source documents into decks"
+    ],
+    [
+     "Notebooks and Prompt Libraries",
+     "Teams with recurring reports",
+     "No limit*",
+     "60 min",
+     "Grounding on a body of files and reusable prompt packs for weekly and monthly reporting"
+    ]
+   ],
+   "intro": "For users who have completed intro training. Advanced agent and Cowork content is covered by the Agent Builder, Copilot Studio and Cowork sessions in the catalog above.",
+   "notes": [
+    "Durations and audiences are typical and are confirmed during planning."
+   ]
+  }
+ ]
+}
