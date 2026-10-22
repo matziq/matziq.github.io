@@ -587,6 +587,54 @@ def check_score_projections(browser, url):
     print(f"PASS: {len(projected)} score projections, away/home winner mapping, blue pending boxes, no retrospective score, naming/search/filter/CSV/print/mobile, history/TBD/winner-view exclusion, and invalid-score retention.")
 
 
+def check_team_colors(browser, url):
+    context = browser.new_context(viewport={"width": 1440, "height": 1100})
+    page = context.new_page()
+    errors = []
+    page.on("pageerror", lambda error: errors.append(str(error)))
+    page.goto(url, wait_until="networkidle")
+    html, switch = page.locator("html"), page.locator("#team-switch")
+    expect(html).to_have_attribute("data-team", "cowboys")
+    expect(switch).to_have_attribute("aria-checked", "false")
+    contrast = """() => {
+      const probe = document.createElement("span");
+      document.body.append(probe);
+      const rgb = name => {
+        probe.style.color = `var(${name})`;
+        return getComputedStyle(probe).color.match(/[\\d.]+/g).slice(0, 3).map(Number);
+      };
+      const lum = channels => {
+        const c = channels.map(v => { v /= 255; return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; });
+        return c[0] * 0.2126 + c[1] * 0.7152 + c[2] * 0.0722;
+      };
+      const ratio = (a, b) => (Math.max(lum(rgb(a)), lum(rgb(b))) + 0.05) / (Math.min(lum(rgb(a)), lum(rgb(b))) + 0.05);
+      const result = [ratio("--cp-text", "--cp-bg"), ratio("--cp-text-muted", "--cp-bg"), ratio("--cp-text-soft", "--cp-surface"),
+        ratio("--cp-accent-fg", "--cp-accent"), ratio("--cp-link", "--cp-surface")];
+      probe.remove();
+      return result;
+    }"""
+    seen = {}
+    for theme in ("light", "dark"):
+        page.evaluate("theme => { document.documentElement.dataset.theme = theme; }", theme)
+        for team in ("cowboys", "rams"):
+            if html.get_attribute("data-team") != team:
+                switch.click()
+            expect(html).to_have_attribute("data-team", team)
+            expect(switch).to_have_attribute("aria-checked", "true" if team == "rams" else "false")
+            stored = page.evaluate("key => localStorage.getItem(key)", "nfl-team-colors")
+            assert stored in (team, None), stored
+            values = page.evaluate(contrast)
+            assert min(values) >= 4.5, (theme, team, values)
+            seen[(theme, team)] = page.evaluate("() => getComputedStyle(document.body).backgroundColor + getComputedStyle(document.documentElement).getPropertyValue('--cp-accent')")
+            expect(page.locator(".pick-name").first).to_be_visible()
+    assert len(set(seen.values())) == 4, seen
+    page.reload(wait_until="networkidle")
+    expect(html).to_have_attribute("data-team", "rams")
+    expect(switch).to_have_attribute("aria-checked", "true")
+    assert not errors, errors
+    context.close()
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--url", help="Use a deployed page instead of the bounded local test server.")
@@ -610,6 +658,7 @@ def main():
                 check(browser, url, args.artifacts)
                 check_history_and_winners(browser, url, args.artifacts)
                 check_score_projections(browser, url)
+                check_team_colors(browser, url)
             finally:
                 browser.close()
     finally:

@@ -13,6 +13,9 @@
       const theme =
         param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
       document.documentElement.setAttribute("data-theme", theme);
+      let team = "cowboys";
+      try { if (localStorage.getItem("nfl-team-colors") === "rams") team = "rams"; } catch (error) {}
+      document.documentElement.setAttribute("data-team", team);
     })();
   </script>
   <!--
@@ -88,6 +91,114 @@
       --cp-sheen: rgba(255, 255, 255, 0.04);
       --cp-highlight: rgba(253, 142, 161, 0.12);
     }
+
+    /* Team palettes: Dallas Cowboys (navy and silver) and Los Angeles Rams (royal and gold). */
+    html[data-team="cowboys"] {
+      --cp-team-1: #003594;
+      --cp-team-2: #869397;
+      --cp-bg: #edf0f3;
+      --cp-bg-elevated: #f6f8fa;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #e6eaee;
+      --cp-border: #c8d0d6;
+      --cp-border-strong: #7b8a94;
+      --cp-text: #0f1b2a;
+      --cp-text-muted: #45545f;
+      --cp-text-soft: #52616c;
+      --cp-accent: #041e42;
+      --cp-accent-hover: #0a2f66;
+      --cp-accent-soft: rgba(4, 30, 66, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-link: #0b4ea2;
+      --cp-highlight: rgba(134, 147, 151, 0.22);
+    }
+    html[data-team="cowboys"][data-theme="dark"] {
+      --cp-bg: #0a1626;
+      --cp-bg-elevated: #07101c;
+      --cp-surface: #0f1f33;
+      --cp-surface-soft: #14283f;
+      --cp-border: #27405a;
+      --cp-border-strong: #4a6178;
+      --cp-text: #e8edf2;
+      --cp-text-muted: #9fb0bf;
+      --cp-text-soft: #b5c2ce;
+      --cp-accent: #b7c1c8;
+      --cp-accent-hover: #d0d8dd;
+      --cp-accent-soft: rgba(183, 193, 200, 0.14);
+      --cp-accent-fg: #041e42;
+      --cp-link: #7fb0f0;
+      --cp-highlight: rgba(183, 193, 200, 0.14);
+    }
+    html[data-team="rams"] {
+      --cp-team-1: #003594;
+      --cp-team-2: #ffa300;
+      --cp-bg: #f6f3ea;
+      --cp-bg-elevated: #fbf9f3;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #efeadb;
+      --cp-border: #dcd6c4;
+      --cp-border-strong: #8d8671;
+      --cp-text: #14182b;
+      --cp-text-muted: #4f5568;
+      --cp-text-soft: #5a6074;
+      --cp-accent: #003594;
+      --cp-accent-hover: #002a76;
+      --cp-accent-soft: rgba(0, 53, 148, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-link: #0b4ea2;
+      --cp-highlight: rgba(255, 163, 0, 0.2);
+    }
+    html[data-team="rams"][data-theme="dark"] {
+      --cp-bg: #0a1631;
+      --cp-bg-elevated: #07112a;
+      --cp-surface: #0f1e42;
+      --cp-surface-soft: #14264f;
+      --cp-border: #263a68;
+      --cp-border-strong: #46598a;
+      --cp-text: #eef1fa;
+      --cp-text-muted: #a3aecb;
+      --cp-text-soft: #b9c2dc;
+      --cp-accent: #ffa300;
+      --cp-accent-hover: #ffb524;
+      --cp-accent-soft: rgba(255, 163, 0, 0.14);
+      --cp-accent-fg: #0a1631;
+      --cp-link: #8fb4ff;
+      --cp-highlight: rgba(255, 163, 0, 0.14);
+    }
+    body::before {
+      content: "";
+      display: block;
+      height: 6px;
+      background: linear-gradient(90deg, var(--cp-team-1) 0 50%, var(--cp-team-2) 50% 100%);
+    }
+    .team-switch { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 14px; font-weight: 600; color: var(--cp-text-soft); }
+    .team-switch .team-name { transition: color 140ms ease-out; }
+    html[data-team="cowboys"] .team-switch .team-cowboys, html[data-team="rams"] .team-switch .team-rams { color: var(--cp-text); }
+    .switch-track {
+      position: relative;
+      width: 52px;
+      height: 28px;
+      flex: none;
+      border: 1px solid var(--cp-border-strong);
+      border-radius: 14px;
+      padding: 0;
+      background: linear-gradient(90deg, var(--cp-team-1) 0 50%, var(--cp-team-2) 50% 100%);
+      cursor: pointer;
+    }
+    .switch-track::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--cp-surface);
+      border: 1px solid var(--cp-border-strong);
+      transition: transform 140ms ease-out;
+    }
+    .switch-track[aria-checked="true"]::after { transform: translateX(24px); }
+    .switch-track:focus-visible { outline: 3px solid var(--cp-link); outline-offset: 2px; }
 
     * { box-sizing: border-box; }
     [hidden] { display: none !important; }
@@ -434,6 +545,11 @@
           <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V3h10v5M7 17H4V9h16v8h-3M7 14h10v7H7zM17 11h.01"/></svg>
           Print view
         </button>
+        <div class="team-switch" role="group" aria-label="Team colors">
+          <span class="team-name team-cowboys">Cowboys</span>
+          <button id="team-switch" class="switch-track" type="button" role="switch" aria-checked="false" aria-label="Rams colors" title="Switch between Dallas Cowboys and Los Angeles Rams colors"></button>
+          <span class="team-name team-rams">Rams</span>
+        </div>
         <button id="theme-button" class="button theme-button" type="button" aria-label="Switch color theme" title="Switch color theme">
           <svg class="icon moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg>
           <svg class="icon sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
@@ -198834,6 +198950,19 @@
         document.documentElement.dataset.theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
         updateThemeButton();
       });
+      const teamSwitch = byId("team-switch");
+      function updateTeamSwitch() {
+        const rams = document.documentElement.dataset.team === "rams";
+        teamSwitch.setAttribute("aria-checked", String(rams));
+        teamSwitch.setAttribute("aria-label", rams ? "Rams colors on; switch to Cowboys" : "Cowboys colors on; switch to Rams");
+      }
+      teamSwitch.addEventListener("click", () => {
+        const next = document.documentElement.dataset.team === "rams" ? "cowboys" : "rams";
+        document.documentElement.dataset.team = next;
+        try { localStorage.setItem("nfl-team-colors", next); } catch (error) {}
+        updateTeamSwitch();
+      });
+      updateTeamSwitch();
       let themeBeforePrint = null;
       window.addEventListener("beforeprint", () => {
         if (themeBeforePrint === null) themeBeforePrint = document.documentElement.dataset.theme;
