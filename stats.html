@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Alina Rea's Fall 2026 varsity flag football statistics and Arizona sack rankings, sourced from MaxPreps on October 22, 2026.">
+  <meta name="referrer" content="no-referrer">
+  <title>Alina Rea | Flag football stats &amp; rankings</title>
+  <link rel="canonical" href="https://memconfigmgr.org/stats.html">
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-padding-top: 24px; }
+    body {
+      margin: 0;
+      background: var(--cp-bg);
+      color: var(--cp-text);
+      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: var(--cp-accent); text-underline-offset: 4px; }
+    a:hover { text-decoration-thickness: 2px; }
+    :focus-visible { outline: 3px solid var(--cp-accent); outline-offset: 4px; }
+    button { font: inherit; cursor: pointer; }
+    .shell { width: min(1080px, calc(100% - 40px)); margin-inline: auto; }
+    .skip-link { position: absolute; top: 12px; left: -10000px; }
+    .skip-link:focus { left: 12px; z-index: 2; padding: 8px 16px; background: var(--cp-surface); }
+    .site-header { border-bottom: 1px solid var(--cp-border); background: var(--cp-bg-elevated); }
+    .header-inner { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; min-height: 76px; padding-block: 16px; }
+    .brand { color: var(--cp-text); font-weight: 700; text-decoration: none; }
+    .brand span { margin-left: 12px; color: var(--cp-text-soft); font-weight: 400; }
+    .actions { display: flex; gap: 8px; }
+    .button { min-height: 44px; padding: 8px 16px; border: 1px solid var(--cp-border); border-radius: 0.625rem; background: var(--cp-surface); color: var(--cp-text); }
+    .button:hover { border-color: var(--cp-accent); color: var(--cp-accent); }
+    .hero { display: grid; grid-template-columns: minmax(0, 1fr) 248px; gap: 40px; align-items: center; padding-block: 56px 40px; }
+    .eyebrow { margin: 0 0 12px; color: var(--cp-accent); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(44px, 7vw, 76px); font-weight: 750; letter-spacing: -.05em; line-height: 1.08; }
+    .team { margin: 16px 0 4px; font-size: 20px; font-weight: 600; }
+    .location, .note { color: var(--cp-text-soft); }
+    .location { margin: 0; }
+    .player-details { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 0; padding: 0; list-style: none; }
+    .player-details li { padding: 4px 12px; border: 1px solid var(--cp-border); border-radius: 0.625rem; font-size: 14px; }
+    .headline-stat { padding: 24px; border-radius: 16px; background: var(--cp-accent-soft); border: 1px solid var(--cp-border); }
+    .headline-stat .label { font-size: 14px; font-weight: 600; }
+    .headline-stat strong { display: block; color: var(--cp-accent); font-size: 80px; line-height: 1.2; letter-spacing: -.06em; font-variant-numeric: tabular-nums; }
+    .headline-stat p { margin: 8px 0 0; font-size: 14px; color: var(--cp-text); }
+    .snapshot { display: flex; flex-wrap: wrap; gap: 4px 24px; padding-block: 16px; border-block: 1px solid var(--cp-border); font-size: 14px; color: var(--cp-text-soft); }
+    .snapshot p { margin: 0; }
+    .snapshot strong { color: var(--cp-text); }
+    section { margin-block: 40px; }
+    h2 { margin: 0; font-size: 28px; letter-spacing: -.025em; line-height: 1.25; }
+    .section-heading { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; align-items: baseline; margin-bottom: 20px; }
+    .section-heading p { margin: 0; font-size: 14px; color: var(--cp-text-soft); }
+    .rankings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .rank-card { display: flex; flex-direction: column; padding: 24px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-surface); box-shadow: 0 0 2px var(--cp-border), 0 1px 2px var(--cp-border); }
+    .rank-card h3 { margin: 0; font-size: 18px; font-weight: 600; }
+    .rank-card .scope { margin: 4px 0 16px; font-size: 14px; color: var(--cp-text-muted); }
+    .rank { margin: 0 0 16px; color: var(--cp-accent); font-size: 52px; font-weight: 700; line-height: 1; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+    .rank-card a { margin-top: auto; font-size: 14px; }
+    .note { margin: 16px 0 0; font-size: 14px; max-width: 88ch; }
+    .season-summary { display: flex; flex-wrap: wrap; gap: 16px 40px; padding: 20px 0; margin: 0 0 24px; border-block: 1px solid var(--cp-border); }
+    .season-summary div { display: flex; align-items: baseline; gap: 12px; }
+    .season-summary dt { color: var(--cp-text-soft); font-size: 14px; }
+    .season-summary dd { order: -1; margin: 0; font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; }
+    caption { margin-bottom: 12px; text-align: left; font-size: 18px; font-weight: 600; }
+    th, td { padding: 12px 0; border-bottom: 1px solid var(--cp-border); vertical-align: top; }
+    th { text-align: left; font-weight: 400; }
+    td { padding-left: 16px; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .sources { padding-top: 32px; border-top: 1px solid var(--cp-border); }
+    .sources ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 32px; margin: 20px 0; padding-left: 20px; }
+    .sources li { padding-left: 4px; }
+    .sources small { display: block; color: var(--cp-text-soft); }
+    footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-block: 24px 40px; border-top: 1px solid var(--cp-border); font-size: 13px; color: var(--cp-text-soft); }
+    footer p { margin: 0; }
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: minmax(0, 1fr) 196px; gap: 24px; }
+      .headline-stat strong { font-size: 64px; }
+      .rank-card { padding: 20px; }
+      .stats-grid { grid-template-columns: 1fr; gap: 28px; }
+    }
+    @media (max-width: 560px) {
+      .hero { grid-template-columns: 1fr; padding-top: 32px; gap: 24px; }
+      .headline-stat { display: grid; grid-template-columns: 1fr auto; gap: 0 16px; align-items: center; }
+      .headline-stat strong { grid-column: 2; grid-row: 1 / 3; }
+      .headline-stat p { grid-column: 1; grid-row: 2; }
+      .rankings, .sources ul { grid-template-columns: 1fr; }
+      .rank-card { display: grid; grid-template-columns: 1fr auto; column-gap: 12px; }
+      .rank-card .scope { margin-bottom: 12px; }
+      .rank { grid-column: 2; grid-row: 1 / 3; align-self: center; margin: 0; }
+      .rank-card a { grid-column: 1 / -1; }
+      .brand span { margin-left: 8px; }
+      h2 { font-size: 26px; }
+      section { margin-block: 32px; }
+    }
+    @media print {
+      :root, html[data-theme="dark"] {
+        color-scheme: light;
+        --cp-bg: #ffffff;
+        --cp-bg-elevated: #ffffff;
+        --cp-surface: #ffffff;
+        --cp-border: #dedede;
+        --cp-text: #242424;
+        --cp-text-muted: #5c5c5c;
+        --cp-text-soft: #6f6f6f;
+        --cp-accent: #b11f4b;
+        --cp-accent-soft: rgba(177, 31, 75, 0.08);
+        --cp-link: #0078d4;
+      }
+      @page { margin: 12mm; }
+      body { font-size: 11px; }
+      .shell { width: 100%; }
+      .site-header, .skip-link { display: none; }
+      .hero { grid-template-columns: minmax(0, 1fr) 200px; padding-block: 0 16px; gap: 24px; }
+      h1 { font-size: 40px; }
+      h2 { font-size: 22px; }
+      .headline-stat strong { font-size: 48px; }
+      .team { margin-top: 8px; font-size: 16px; }
+      .player-details { margin-top: 12px; }
+      .rankings, .stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+      .rank-card { display: flex; padding: 16px; box-shadow: none; }
+      .rank { font-size: 36px; margin: 0 0 12px; }
+      .rank-card h3 { font-size: 15px; }
+      .rank-card .scope, .rank-card a, .note, .snapshot, .player-details li { font-size: 11px; }
+      .headline-stat, .rank-card, table, .sources { break-inside: avoid; }
+      section { margin-block: 20px; }
+      .season-summary { margin-bottom: 16px; padding-block: 12px; }
+      table { font-size: 12px; }
+      caption { font-size: 15px; }
+      th, td { padding-block: 8px; }
+      .sources { padding-top: 16px; }
+      .sources ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 24px; }
+      footer { padding-block: 16px 0; font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to stats</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="./">MemConfigMgr<span>Athlete stats</span></a>
+      <div class="actions">
+        <button class="button" id="print-button" type="button" hidden>Print stats</button>
+        <button class="button" id="theme-button" type="button" hidden>Dark mode</button>
+      </div>
+    </div>
+  </header>
+  <main id="main" class="shell" tabindex="-1">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">Girls varsity flag football / Fall 2026</p>
+        <h1>Alina Rea</h1>
+        <p class="team">ALA - West Foothills Guardians</p>
+        <p class="location">Waddell, Arizona</p>
+        <ul class="player-details" aria-label="Player details">
+          <li>Jersey #5</li>
+          <li>Senior / Class of 2027</li>
+          <li>Position: R</li>
+        </ul>
+      </div>
+      <div class="headline-stat">
+        <span class="label">Total sacks</span>
+        <strong data-stat="sacks">13.0</strong>
+        <p>Across 9 games played</p>
+      </div>
+    </div>
+    <div class="snapshot" aria-label="Data freshness">
+      <p><strong>Snapshot:</strong> <time datetime="2026-10-22">October 22, 2026</time></p>
+      <p>Player stats updated on MaxPreps: <time datetime="2026-10-22T08:51:00-07:00">Oct. 22, 2026, 8:51 a.m. PT</time></p>
+    </div>
+
+    <section aria-labelledby="rankings-title">
+      <div class="section-heading">
+        <h2 id="rankings-title">Sack rankings</h2>
+        <p>Arizona / Fall 2026 / Total sacks</p>
+      </div>
+      <div class="rankings">
+        <article class="rank-card" aria-labelledby="senior-rank-title">
+          <h3 id="senior-rank-title">4A seniors</h3>
+          <p class="scope">Division 4A / Grade 12 only</p>
+          <p class="rank" data-rank="4a-seniors" aria-label="Rank 4">#4</p>
+          <a href="https://www.maxpreps.com/az/flag-football/girls/fall/26-27/division/division-4a/stat-leaders/defense/sacks/tot-sacks/?classyear=12&amp;statedivisionid=cbd49688-adf7-46ba-b1a5-7b8b39798ee6">View 4A senior leaderboard &rarr;</a>
+        </article>
+        <article class="rank-card" aria-labelledby="division-rank-title">
+          <h3 id="division-rank-title">4A overall</h3>
+          <p class="scope">Division 4A / All class years</p>
+          <p class="rank" data-rank="4a" aria-label="Rank 11">#11</p>
+          <a href="https://www.maxpreps.com/az/flag-football/girls/fall/26-27/division/division-4a/stat-leaders/defense/sacks/tot-sacks/?statedivisionid=cbd49688-adf7-46ba-b1a5-7b8b39798ee6">View 4A overall leaderboard &rarr;</a>
+        </article>
+        <article class="rank-card" aria-labelledby="state-rank-title">
+          <h3 id="state-rank-title">Arizona statewide</h3>
+          <p class="scope">All divisions / All class years</p>
+          <p class="rank" data-rank="arizona" aria-label="Rank 30">#30</p>
+          <a href="https://www.maxpreps.com/az/flag-football/girls/fall/stat-leaders/defense/sacks/tot-sacks/">View Arizona leaderboard &rarr;</a>
+        </article>
+      </div>
+      <p class="note">These are the positions displayed on MaxPreps' total-sacks leaderboards for qualifying, reported players, not team or recruiting rankings. Players with the same sack total can appear in different positions. MaxPreps updates its leaderboards nightly.</p>
+    </section>
+
+    <section aria-labelledby="defense-title">
+      <div class="section-heading">
+        <h2 id="defense-title">The defensive stat sheet</h2>
+        <p>2026-27 varsity season</p>
+      </div>
+      <dl class="season-summary">
+        <div><dt>Games played</dt><dd data-stat="games">9</dd></div>
+        <div><dt>Total flag pulls</dt><dd data-stat="flag-pulls">31</dd></div>
+        <div><dt>Interceptions</dt><dd data-stat="interceptions">1</dd></div>
+      </dl>
+      <div class="stats-grid">
+        <table>
+          <caption>Flag pulls</caption>
+          <tbody>
+            <tr><th scope="row">Solo flag pulls</th><td data-stat="solo">31</td></tr>
+            <tr><th scope="row">Assisted flag pulls</th><td data-stat="assists">0</td></tr>
+            <tr><th scope="row">Total flag pulls</th><td data-stat="flag-pulls">31</td></tr>
+            <tr><th scope="row">Flag pulls for loss</th><td data-stat="flag-pulls-loss">13.0</td></tr>
+            <tr><th scope="row">Flag pulls per game</th><td data-stat="flag-pulls-per-game">3.4</td></tr>
+          </tbody>
+        </table>
+        <table>
+          <caption>Sacks &amp; pressure</caption>
+          <tbody>
+            <tr><th scope="row">Total sacks</th><td data-stat="sacks">13.0</td></tr>
+            <tr><th scope="row">Sacks per game</th><td data-stat="sacks-per-game">1.4</td></tr>
+            <tr><th scope="row">Sack yards lost</th><td data-stat="sack-yards-lost">1</td></tr>
+            <tr><th scope="row">Quarterback hurries</th><td data-stat="hurries">0</td></tr>
+          </tbody>
+        </table>
+        <table>
+          <caption>Pass defense</caption>
+          <tbody>
+            <tr><th scope="row">Interceptions</th><td data-stat="interceptions">1</td></tr>
+            <tr><th scope="row">Interception yards</th><td data-stat="interception-yards">0</td></tr>
+            <tr><th scope="row">Passes defended</th><td data-stat="passes-defended">1</td></tr>
+            <tr><th scope="row">Interceptions per game</th><td data-stat="interceptions-per-game">0.1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">All three categories cover 9 games. MaxPreps currently lists one varsity season, so its career totals match these season totals. Values, including zeros and rounded per-game averages, are shown as reported on the player profile.</p>
+    </section>
+
+    <section class="sources" aria-labelledby="sources-title">
+      <h2 id="sources-title">Sources &amp; freshness</h2>
+      <p class="note">This is a saved snapshot retrieved on October 22, 2026, not an automatically refreshing feed. MaxPreps identifies the player stats as coach-entered. Use the source links for subsequent updates; the statewide link follows MaxPreps' current fall season.</p>
+      <ul>
+        <li><a href="https://www.maxpreps.com/az/waddell/ala-west-foothills-guardians/athletes/alina-rea/flag-football/girls/stats/?careerid=vpdje03j8tml5">Alina Rea's player stats</a><small>2026-27 season and varsity career totals</small></li>
+        <li><a href="https://www.maxpreps.com/az/flag-football/girls/fall/26-27/division/division-4a/stat-leaders/defense/sacks/tot-sacks/?classyear=12&amp;statedivisionid=cbd49688-adf7-46ba-b1a5-7b8b39798ee6">Division 4A senior sack leaders</a><small>Grade 12 / Fall 2026</small></li>
+        <li><a href="https://www.maxpreps.com/az/flag-football/girls/fall/26-27/division/division-4a/stat-leaders/defense/sacks/tot-sacks/?statedivisionid=cbd49688-adf7-46ba-b1a5-7b8b39798ee6">Division 4A overall sack leaders</a><small>All class years / Fall 2026</small></li>
+        <li><a href="https://www.maxpreps.com/az/flag-football/girls/fall/stat-leaders/defense/sacks/tot-sacks/">Arizona statewide sack leaders</a><small>All divisions and class years / Current fall season</small></li>
+      </ul>
+    </section>
+  </main>
+  <footer class="shell">
+    <p>Alina Rea / Fall 2026 varsity flag football</p>
+    <p>Statistics sourced from MaxPreps. Not affiliated with MaxPreps.</p>
+  </footer>
+  <script>
+    (() => {
+      const themeButton = document.getElementById("theme-button");
+      const printButton = document.getElementById("print-button");
+      function updateThemeButton() {
+        const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        themeButton.textContent = next === "dark" ? "Dark mode" : "Light mode";
+        themeButton.setAttribute("aria-label", `Switch to ${next} mode`);
+      }
+      themeButton.addEventListener("click", () => {
+        document.documentElement.dataset.theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        updateThemeButton();
+      });
+      printButton.addEventListener("click", () => window.print());
+      updateThemeButton();
+      themeButton.hidden = false;
+      printButton.hidden = false;
+    })();
+  </script>
+</body>
+</html>

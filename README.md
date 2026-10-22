@@ -13,6 +13,15 @@ Public GitHub Pages site, served at https://memconfigmgr.org/
 The Book of Mormon comparison is a standalone page hosted on this site. Existing
 religious-study redirect pages remain unchanged.
 
+## Alina Rea stats
+
+https://memconfigmgr.org/stats.html is a root-level, self-contained snapshot of
+Alina Rea's Fall 2026 MaxPreps player statistics and total-sacks rankings for
+Division 4A seniors, Division 4A overall, and Arizona statewide. The page links
+to all four sources and identifies its retrieval date and the player profile's
+last update. It does not refresh automatically; verify all four sources and
+update the values and timestamps together when refreshing the snapshot.
+
 ## Content that moved to its own domain
 
 Ward mission and religious-study content now lives on dedicated domains. The
