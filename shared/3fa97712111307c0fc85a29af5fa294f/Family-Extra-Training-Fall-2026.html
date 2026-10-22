@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
 THESIS: Useful family skill practice that fits around two-hour early school practices.
-OWN-WORLD: The existing Clawpilot fall notebook, with Segoe type and route-line drawings.
+OWN-WORLD: Guardians navy, red, white and silver; angular shield details; Segoe type and route lines.
 STORY: Check recovery, choose one small skill, finish early, protect the next school practice.
 FIRST VIEWPORT: Early-practice context, a direct session link, and a family route sketch.
 FORM: Read-mode field guide with a non-persistent session chooser and printable routines.
@@ -12,6 +12,7 @@ FORM: Read-mode field guide with a non-persistent session chooser and printable 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
 <meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#1f3160">
 <meta name="description" content="Optional after-school and weekend family flag football skill practice around 5:30-7:30 a.m. school practices.">
 <title>Family Extra Training | Fall 2026</title>
 <script>
@@ -75,6 +76,19 @@ html[data-theme="dark"] {
   --cp-sheen: rgba(255, 255, 255, 0.04);
   --cp-highlight: rgba(253, 142, 161, 0.12);
 }
+:root {
+  --cp-guardian-navy: #1f3160;
+  --cp-guardian-navy-strong: #162445;
+  --cp-guardian-red: #c32233;
+  --cp-guardian-red-hover: #a91c2b;
+  --cp-guardian-red-bright: #ff7180;
+  --cp-guardian-white: #fefefe;
+  --cp-guardian-silver: #8f9293;
+  --cp-guardian-navy-soft: rgba(31, 49, 96, 0.08);
+  --cp-guardian-red-soft: rgba(195, 34, 51, 0.1);
+  --cp-guardian-white-soft: rgba(254, 254, 254, 0.72);
+  --cp-guardian-shadow: 0 0 2px rgba(31, 49, 96, 0.18), 0 2px 6px rgba(31, 49, 96, 0.12);
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:24px}
 body{margin:0;background:var(--cp-bg);color:var(--cp-text);font-family:"Segoe UI",Aptos,Calibri,-apple-system,BlinkMacSystemFont,sans-serif;font-size:17px;line-height:1.65}
@@ -108,6 +122,38 @@ table{border-collapse:collapse;width:100%;text-align:left;font-size:.95rem}capti
 th,td{padding:14px 16px;border-bottom:1px solid var(--cp-border);vertical-align:top}th{background:var(--cp-surface-soft);font-weight:650}tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
 .drill{padding:24px 0;border-top:1px solid var(--cp-border)}.drill h3{margin-top:0}.drill p:last-child{margin-bottom:0}
 .source-list{font-size:.92rem}footer{border-top:1px solid var(--cp-border);padding-top:24px;padding-bottom:24px}footer p:last-child{margin:0}
+body{background:linear-gradient(180deg,var(--cp-guardian-navy-soft),var(--cp-bg) 360px)}
+a{color:var(--cp-guardian-navy)}a:hover{color:var(--cp-guardian-red)}
+.topbar{max-width:none;background:var(--cp-guardian-navy);color:var(--cp-guardian-white);border-bottom:4px solid var(--cp-guardian-red);box-shadow:var(--cp-guardian-shadow)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand:before{content:"G";display:grid;place-items:center;width:36px;height:40px;background:var(--cp-guardian-red);color:var(--cp-guardian-white);font-weight:800;clip-path:polygon(50% 0,100% 18%,88% 74%,50% 100%,12% 74%,0 18%)}
+.season{display:inline-block;background:var(--cp-guardian-red);color:var(--cp-guardian-white);padding:2px 8px;border-radius:4px}
+.topbar button,.topbar .button{background:transparent;color:var(--cp-guardian-white);border-color:var(--cp-guardian-white-soft)}
+.topbar button:hover,.topbar .button:hover{background:var(--cp-guardian-white);color:var(--cp-guardian-navy);border-color:var(--cp-guardian-white)}
+.primary{background:var(--cp-guardian-red);color:var(--cp-guardian-white);border-color:var(--cp-guardian-red)}.primary:hover{background:var(--cp-guardian-red-hover);color:var(--cp-guardian-white)}
+h1,h2,aside strong{color:var(--cp-guardian-navy)}
+h1:after{content:"";display:block;width:88px;height:6px;margin-top:20px;background:var(--cp-guardian-red)}
+section h2{position:relative;padding-bottom:12px}
+section h2:after{content:"";position:absolute;left:0;bottom:0;width:64px;height:4px;background:var(--cp-guardian-red)}
+.hero-art{border-color:var(--cp-guardian-navy);box-shadow:var(--cp-guardian-shadow)}
+.line{stroke:var(--cp-guardian-navy)}.route{stroke:var(--cp-guardian-red)}.dot{fill:var(--cp-guardian-red)}.soft{fill:var(--cp-guardian-navy-soft)}
+aside a:hover{color:var(--cp-guardian-red)}
+.note{background:var(--cp-guardian-navy-soft);border-color:var(--cp-guardian-navy);border-top:4px solid var(--cp-guardian-red)}
+.choice{border-bottom-color:var(--cp-guardian-navy)}
+select{border-color:var(--cp-guardian-navy)}
+.table-wrap{border-color:var(--cp-guardian-navy)}
+th{background:var(--cp-guardian-navy);color:var(--cp-guardian-white)}
+caption{border-bottom:3px solid var(--cp-guardian-red)}
+footer{border-top:4px solid var(--cp-guardian-navy)}
+html[data-theme="dark"] body{background:linear-gradient(180deg,var(--cp-guardian-navy-soft),var(--cp-bg) 360px)}
+html[data-theme="dark"] h1,html[data-theme="dark"] h2,html[data-theme="dark"] aside strong{color:var(--cp-guardian-white)}
+html[data-theme="dark"] a{color:var(--cp-guardian-white)}
+html[data-theme="dark"] a:hover,html[data-theme="dark"] aside a:hover{color:var(--cp-guardian-red-bright)}
+html[data-theme="dark"] th{background:var(--cp-guardian-navy-strong)}
+html[data-theme="dark"] .hero-art{border-color:var(--cp-guardian-silver)}
+html[data-theme="dark"] .line{stroke:var(--cp-guardian-silver)}
+html[data-theme="dark"] .route{stroke:var(--cp-guardian-red-bright)}
+html[data-theme="dark"] .dot{fill:var(--cp-guardian-red-bright)}
 @media(max-width:950px){.layout{grid-template-columns:1fr;gap:0}aside{position:static;display:flex;flex-wrap:wrap;gap:8px 20px;padding:0 0 24px}aside strong{flex-basis:100%;margin:0}.hero{gap:24px}}
 @media(max-width:640px){body{font-size:16px}.topbar,.hero,.layout,footer{padding-left:20px;padding-right:20px}.topbar{align-items:flex-start}.actions button,.actions a{font-size:.88rem}.hero{grid-template-columns:1fr;padding-top:32px}.hero-art{max-width:500px;padding:16px}h1{max-width:none}.split{grid-template-columns:1fr;gap:12px}.note{padding:16px}th,td{padding:12px}section{padding:28px 0}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -126,7 +172,7 @@ th,td{padding:14px 16px;border-bottom:1px solid var(--cp-border);vertical-align:
 <body>
 <a class="skip" href="#main">Skip to family training</a>
 <header class="topbar">
- <div class="brand">THE FALL FOOTBALL NOTEBOOK <span class="season">/ 2026</span></div>
+ <div class="brand">GUARDIANS FOOTBALL NOTEBOOK <span class="season">FALL 2026</span></div>
  <div class="actions"><a class="button" href="index.html">Back to menu</a><button type="button" id="theme">Switch theme</button><button type="button" id="print">Print / Save PDF</button></div>
 </header>
 <div class="hero">

@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
 THESIS: A usable in-season football notebook: quality reps, legal technique, enough food and recovery.
-OWN-WORLD: Clawpilot crimson and warm paper; fall leaf and route-line motifs; readable Segoe type.
+OWN-WORLD: Guardians navy, red, white and silver; angular shield and route-line motifs; readable Segoe type.
 STORY: Check readiness, fit work around games, practice one skill, fuel, recover, review with the coach.
 FIRST VIEWPORT: Alina's name and three position goals opposite a route diagram; schedule link prominent.
 FORM: Read/operate hybrid, weekly training table plus drill library and meals; brief-pinned fall theme.
@@ -12,6 +12,7 @@ FORM: Read/operate hybrid, weekly training table plus drill library and meals; b
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
 <meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#1f3160">
 <meta name="description" content="Alina's age-appropriate Fall 2026 flag football plan: legal pass rushing, speed, agility, receiving, flag pulls, recovery, and a seven-day fueling schedule.">
 <title>Alina's Flag Football Training &amp; Fueling | Fall 2026</title>
 <script>
@@ -75,6 +76,19 @@ html[data-theme="dark"] {
   --cp-sheen: rgba(255, 255, 255, 0.04);
   --cp-highlight: rgba(253, 142, 161, 0.12);
 }
+:root {
+  --cp-guardian-navy: #1f3160;
+  --cp-guardian-navy-strong: #162445;
+  --cp-guardian-red: #c32233;
+  --cp-guardian-red-hover: #a91c2b;
+  --cp-guardian-red-bright: #ff7180;
+  --cp-guardian-white: #fefefe;
+  --cp-guardian-silver: #8f9293;
+  --cp-guardian-navy-soft: rgba(31, 49, 96, 0.08);
+  --cp-guardian-red-soft: rgba(195, 34, 51, 0.1);
+  --cp-guardian-white-soft: rgba(254, 254, 254, 0.72);
+  --cp-guardian-shadow: 0 0 2px rgba(31, 49, 96, 0.18), 0 2px 6px rgba(31, 49, 96, 0.12);
+}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}
 body{margin:0;background:var(--cp-bg);color:var(--cp-text);font-family:"Segoe UI",Aptos,Calibri,-apple-system,BlinkMacSystemFont,sans-serif;font-size:17px;line-height:1.65}
 a{color:var(--cp-link);text-underline-offset:3px;overflow-wrap:anywhere}a:hover{color:var(--cp-accent)}
@@ -100,6 +114,39 @@ p{margin:0 0 16px;max-width:76ch}ul,ol{padding-left:24px;margin:12px 0 20px}li{m
 .checks{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px}.checks label{display:flex;gap:12px;align-items:flex-start;padding:12px 0;cursor:pointer}.checks input{width:20px;height:20px;flex:0 0 20px;margin-top:4px;accent-color:var(--cp-accent)}
 .status{font-size:.86rem;color:var(--cp-text-soft);min-height:1.6em}.source-list{font-size:.9rem}.source-list li{margin-bottom:16px}.quote{font-size:1.12rem;padding:20px 24px;background:var(--cp-surface);border:1px solid var(--cp-border);border-radius:.625rem;margin:16px 0}
 footer{border-top:1px solid var(--cp-border);padding:24px 32px;max-width:1280px;margin:auto;color:var(--cp-text-soft);font-size:.9rem}
+body{background:linear-gradient(180deg,var(--cp-guardian-navy-soft),var(--cp-bg) 360px)}
+a{color:var(--cp-guardian-navy)}a:hover{color:var(--cp-guardian-red)}
+.topbar{max-width:none;background:var(--cp-guardian-navy);color:var(--cp-guardian-white);border-bottom:4px solid var(--cp-guardian-red);box-shadow:var(--cp-guardian-shadow)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand:before{content:"G";display:grid;place-items:center;width:36px;height:40px;background:var(--cp-guardian-red);color:var(--cp-guardian-white);font-weight:800;clip-path:polygon(50% 0,100% 18%,88% 74%,50% 100%,12% 74%,0 18%)}
+.season{display:inline-block;background:var(--cp-guardian-red);color:var(--cp-guardian-white);padding:2px 8px;border-radius:4px}
+.topbar button,.topbar .button{background:transparent;color:var(--cp-guardian-white);border-color:var(--cp-guardian-white-soft)}
+.topbar button:hover,.topbar .button:hover{background:var(--cp-guardian-white);color:var(--cp-guardian-navy);border-color:var(--cp-guardian-white)}
+.primary{background:var(--cp-guardian-red);color:var(--cp-guardian-white);border-color:var(--cp-guardian-red)}.primary:hover{background:var(--cp-guardian-red-hover);color:var(--cp-guardian-white)}
+h1,h2,aside strong{color:var(--cp-guardian-navy)}
+h1:after{content:"";display:block;width:88px;height:6px;margin-top:20px;background:var(--cp-guardian-red)}
+section h2{position:relative;padding-bottom:12px}
+section h2:after{content:"";position:absolute;left:0;bottom:0;width:64px;height:4px;background:var(--cp-guardian-red)}
+.hero-art,.diagram{border-color:var(--cp-guardian-navy);box-shadow:var(--cp-guardian-shadow)}
+.line{stroke:var(--cp-guardian-navy)}.route{stroke:var(--cp-guardian-red)}.dot{fill:var(--cp-guardian-red)}.soft{fill:var(--cp-guardian-navy-soft)}
+aside a:hover{color:var(--cp-guardian-red)}
+.note{background:var(--cp-guardian-navy-soft);border-color:var(--cp-guardian-navy);border-top:4px solid var(--cp-guardian-red)}
+.tag{background:var(--cp-guardian-navy);color:var(--cp-guardian-white)}
+.game-row{background:var(--cp-guardian-red-soft)}
+.controls,.quote{border-color:var(--cp-guardian-navy);box-shadow:var(--cp-guardian-shadow)}
+.table-wrap{border-color:var(--cp-guardian-navy)}
+th{background:var(--cp-guardian-navy);color:var(--cp-guardian-white)}
+caption{border-bottom:3px solid var(--cp-guardian-red)}
+footer{border-top:4px solid var(--cp-guardian-navy)}
+html[data-theme="dark"] body{background:linear-gradient(180deg,var(--cp-guardian-navy-soft),var(--cp-bg) 360px)}
+html[data-theme="dark"] h1,html[data-theme="dark"] h2,html[data-theme="dark"] aside strong{color:var(--cp-guardian-white)}
+html[data-theme="dark"] a{color:var(--cp-guardian-white)}
+html[data-theme="dark"] a:hover,html[data-theme="dark"] aside a:hover{color:var(--cp-guardian-red-bright)}
+html[data-theme="dark"] th{background:var(--cp-guardian-navy-strong)}
+html[data-theme="dark"] .hero-art,html[data-theme="dark"] .diagram{border-color:var(--cp-guardian-silver)}
+html[data-theme="dark"] .line{stroke:var(--cp-guardian-silver)}
+html[data-theme="dark"] .route{stroke:var(--cp-guardian-red-bright)}
+html[data-theme="dark"] .dot{fill:var(--cp-guardian-red-bright)}
 @media(max-width:950px){.layout{grid-template-columns:1fr;gap:8px}aside{position:static;padding:0 0 24px;display:flex;gap:8px 20px;flex-wrap:wrap}aside strong{flex-basis:100%;margin:0}aside a{padding:4px 0}.hero{gap:24px}.hero-art{padding:16px}}
 @media(max-width:640px){body{font-size:16px}.topbar{padding:16px 20px;align-items:flex-start;flex-direction:column}.hero{grid-template-columns:1fr;padding:32px 20px}.hero-art{max-width:500px}.layout{padding:0 20px 40px}.split,.meal-list,.checks{grid-template-columns:1fr;gap:12px}h1{max-width:none}th,td{padding:12px}.note,.quote{padding:16px}.actions button,.actions a{font-size:.88rem}section{padding:28px 0}.controls{padding:16px}.control{width:100%}.meal-day dl{grid-template-columns:80px 1fr}footer{padding:20px}}
 @media screen and (max-width:640px){
@@ -126,7 +173,7 @@ footer{border-top:1px solid var(--cp-border);padding:24px 32px;max-width:1280px;
 </head>
 <body>
 <a class="skip" href="#main">Skip to the training plan</a>
-<header class="topbar"><div class="brand">THE FALL FOOTBALL NOTEBOOK <span class="season">/ 2026</span></div><div class="actions"><a class="button" href="index.html">Back to menu</a><a class="button" href="Arizona-Flag-Football-Rules-Fall-2026.html">Arizona rules</a><button type="button" id="theme">Switch theme</button><button type="button" id="print">Print / Save PDF</button></div></header>
+<header class="topbar"><div class="brand">GUARDIANS FOOTBALL NOTEBOOK <span class="season">FALL 2026</span></div><div class="actions"><a class="button" href="index.html">Back to menu</a><a class="button" href="Arizona-Flag-Football-Rules-Fall-2026.html">Arizona rules</a><button type="button" id="theme">Switch theme</button><button type="button" id="print">Print / Save PDF</button></div></header>
 <div class="hero">
  <div><h1>Alina's next-level season.</h1><p class="lead">Quicker off the snap. Sharper in space. Ready for a receiver opportunity.</p><p>A fall 2026 training and fueling notebook for a <strong>17-year-old pass rusher at American Leadership Academy West Foothills</strong>.</p><p class="meta">Four-week starter block: October 5&ndash;November 1, 2026<br>Built October 2, 2026 &bull; In-season, non-contact skill development</p><a class="button primary" href="#schedule">Open the weekly schedule</a></div>
  <figure class="hero-art"><svg viewBox="0 0 460 288" role="img" aria-labelledby="hero-title hero-desc">

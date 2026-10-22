@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
 THESIS: A sideline field guide that separates Arizona rules from recreational flag assumptions.
-OWN-WORLD: Clawpilot crimson, warm paper, clear Segoe typography, field lines and fall foliage.
+OWN-WORLD: Guardians navy, red, white and silver; angular shield details; clear Segoe type and field lines.
 STORY: Learn the game, recognize legal contact, apply the rules, consult the official sources.
 FIRST VIEWPORT: Large title beside an original field diagram; current-season scope immediately below.
 FORM: Read-mode football notebook, pinned fall-season theme; no external assets or dependencies.
@@ -12,6 +12,7 @@ FORM: Read-mode football notebook, pinned fall-season theme; no external assets 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
 <meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#1f3160">
 <meta name="description" content="A practical Fall 2026 Arizona high school girls flag football guide, with AIA requirements, NFHS updates, legal screen blocking and flag pulls.">
 <title>Arizona Flag Football Rules | Fall 2026</title>
 <script>
@@ -75,6 +76,19 @@ html[data-theme="dark"] {
   --cp-sheen: rgba(255, 255, 255, 0.04);
   --cp-highlight: rgba(253, 142, 161, 0.12);
 }
+:root {
+  --cp-guardian-navy: #1f3160;
+  --cp-guardian-navy-strong: #162445;
+  --cp-guardian-red: #c32233;
+  --cp-guardian-red-hover: #a91c2b;
+  --cp-guardian-red-bright: #ff7180;
+  --cp-guardian-white: #fefefe;
+  --cp-guardian-silver: #8f9293;
+  --cp-guardian-navy-soft: rgba(31, 49, 96, 0.08);
+  --cp-guardian-red-soft: rgba(195, 34, 51, 0.1);
+  --cp-guardian-white-soft: rgba(254, 254, 254, 0.72);
+  --cp-guardian-shadow: 0 0 2px rgba(31, 49, 96, 0.18), 0 2px 6px rgba(31, 49, 96, 0.12);
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:24px}
 body{margin:0;background:var(--cp-bg);color:var(--cp-text);font-family:"Segoe UI",Aptos,Calibri,-apple-system,BlinkMacSystemFont,sans-serif;font-size:17px;line-height:1.65}
@@ -113,6 +127,36 @@ details{border-top:1px solid var(--cp-border);padding:16px 0}summary{cursor:poin
 .tag{display:inline-block;padding:2px 8px;background:var(--cp-accent-soft);color:var(--cp-accent);font-size:.82rem;border-radius:4px;font-weight:650}
 .checklist{list-style:none;padding:0}.checklist li{padding:12px 0;border-bottom:1px solid var(--cp-border)}.checklist li:before{content:"[ ]";font-family:Consolas,"Courier New",Courier,monospace;margin-right:12px;color:var(--cp-accent)}
 footer{border-top:1px solid var(--cp-border);padding:24px 32px;max-width:1264px;margin:auto;color:var(--cp-text-soft);font-size:.9rem}
+body{background:linear-gradient(180deg,var(--cp-guardian-navy-soft),var(--cp-bg) 360px)}
+a{color:var(--cp-guardian-navy)}a:hover{color:var(--cp-guardian-red)}
+.topbar{max-width:none;background:var(--cp-guardian-navy);color:var(--cp-guardian-white);border-bottom:4px solid var(--cp-guardian-red);box-shadow:var(--cp-guardian-shadow)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand:before{content:"G";display:grid;place-items:center;width:36px;height:40px;background:var(--cp-guardian-red);color:var(--cp-guardian-white);font-weight:800;clip-path:polygon(50% 0,100% 18%,88% 74%,50% 100%,12% 74%,0 18%)}
+.season{display:inline-block;background:var(--cp-guardian-red);color:var(--cp-guardian-white);padding:2px 8px;border-radius:4px}
+.topbar button,.topbar .button{background:transparent;color:var(--cp-guardian-white);border-color:var(--cp-guardian-white-soft)}
+.topbar button:hover,.topbar .button:hover{background:var(--cp-guardian-white);color:var(--cp-guardian-navy);border-color:var(--cp-guardian-white)}
+h1,h2,aside strong{color:var(--cp-guardian-navy)}
+h1:after{content:"";display:block;width:88px;height:6px;margin-top:20px;background:var(--cp-guardian-red)}
+section h2{position:relative;padding-bottom:12px}
+section h2:after{content:"";position:absolute;left:0;bottom:0;width:64px;height:4px;background:var(--cp-guardian-red)}
+.hero-art,.diagram{border-color:var(--cp-guardian-navy);box-shadow:var(--cp-guardian-shadow)}
+.field-line{stroke:var(--cp-guardian-navy)}.field-accent{stroke:var(--cp-guardian-red)}.field-fill{fill:var(--cp-guardian-navy-soft)}.field-dot{fill:var(--cp-guardian-red)}
+aside a:hover{color:var(--cp-guardian-red)}
+.note{background:var(--cp-guardian-navy-soft);border-color:var(--cp-guardian-navy);border-top:4px solid var(--cp-guardian-red)}
+.rule-line,.tag{color:var(--cp-guardian-red)}
+.table-wrap{border-color:var(--cp-guardian-navy)}
+th{background:var(--cp-guardian-navy);color:var(--cp-guardian-white)}
+caption{border-bottom:3px solid var(--cp-guardian-red)}
+footer{border-top:4px solid var(--cp-guardian-navy)}
+html[data-theme="dark"] body{background:linear-gradient(180deg,var(--cp-guardian-navy-soft),var(--cp-bg) 360px)}
+html[data-theme="dark"] h1,html[data-theme="dark"] h2,html[data-theme="dark"] aside strong{color:var(--cp-guardian-white)}
+html[data-theme="dark"] a{color:var(--cp-guardian-white)}
+html[data-theme="dark"] a:hover,html[data-theme="dark"] aside a:hover{color:var(--cp-guardian-red-bright)}
+html[data-theme="dark"] th{background:var(--cp-guardian-navy-strong)}
+html[data-theme="dark"] .hero-art,html[data-theme="dark"] .diagram{border-color:var(--cp-guardian-silver)}
+html[data-theme="dark"] .field-line{stroke:var(--cp-guardian-silver)}
+html[data-theme="dark"] .field-accent{stroke:var(--cp-guardian-red-bright)}
+html[data-theme="dark"] .field-dot{fill:var(--cp-guardian-red-bright)}
 @media(max-width:900px){.layout{grid-template-columns:1fr;gap:8px}aside{position:static;padding:0 0 24px;display:flex;gap:8px 20px;flex-wrap:wrap}aside strong{flex-basis:100%;margin:0}aside a{padding:4px 0}.hero{gap:24px}.hero-art{padding:16px}}
 @media(max-width:640px){body{font-size:16px}.topbar{padding:16px 20px;align-items:flex-start;flex-direction:column}.hero{grid-template-columns:1fr;padding:32px 20px}.hero-art{max-width:500px}.layout{padding:0 20px 40px}.split{grid-template-columns:1fr;gap:12px}h1{max-width:none}th,td{padding:12px}.note{padding:16px}.actions button,.actions a{font-size:.88rem}section{padding:28px 0}footer{padding:20px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -131,7 +175,7 @@ footer{border-top:1px solid var(--cp-border);padding:24px 32px;max-width:1264px;
 <body>
 <a class="skip" href="#main">Skip to rules</a>
 <header class="topbar">
- <div class="brand">THE FALL FOOTBALL NOTEBOOK <span class="season">/ 2026</span></div>
+ <div class="brand">GUARDIANS FOOTBALL NOTEBOOK <span class="season">FALL 2026</span></div>
  <div class="actions"><a class="button" href="index.html">Back to menu</a><a class="button" href="Flag-Football-Training-and-Fueling-Fall-2026.html">Alina's training plan</a><button type="button" id="theme">Switch theme</button><button type="button" id="print">Print / Save PDF</button></div>
 </header>
 <div class="hero">
