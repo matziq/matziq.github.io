@@ -1,13 +1,13 @@
 {
   "analysis": {
-    "assessedAt": "2026-10-20T05:26:25Z",
-    "changedPickCount": 7,
-    "changedScoreCount": 12,
-    "id": "assessment-0277ad39b4305fe7b3b42670",
+    "assessedAt": "2026-10-23T05:28:08Z",
+    "changedPickCount": 0,
+    "changedScoreCount": 0,
+    "id": "assessment-8fd87568b66b172d6aaaa293",
     "initialPickCount": 0,
-    "retainedCount": 131,
+    "retainedCount": 178,
     "skippedLockedCount": 0,
-    "summary": "Verified San Francisco's 23-17 final over Washington, full dated recap, box score and scoring plays; preserved the correct frozen pick, paragraph and 30-23 projected score. Individually reassessed all 179 eligible unstarted matchups using fresh all-32-team evidence and 35 dated news descriptions. Changed seven future winners: Washington over LA Rams, Arizona over LA Rams, Green Bay over LA Rams, Arizona/Indianapolis/Houston/NY Giants over Philadelphia, based on newly reported extended Rams losses and the expected season-long Hurts absence. Revised 12 projected pairs including those seven flips and five near-term retained-winner adjustments; every other pair is explicitly retained. Refreshed directly affected future paragraphs; no mistaken-final review is required."
+    "summary": "Verified Chicago's 30-24 final over New England: the frozen Bears pick was correct, so its pregame paragraph and 24-23 projected score stay unchanged. Reassessed all 178 unstarted matchups against fresh all-32-team performance, depth, availability and conditions evidence plus dated news (Nacua calf, Kmet knee, Simmons IR, Gardner-Johnson suspension, Mayfield expected return); none justified a winner flip, so winners and projected scores are retained."
   },
   "explanationFormat": "paragraph",
   "explanationPolicy": "forecast-until-final",
@@ -40,6 +40,10 @@
     "assessment-85fd1a383d837d96283dad50": {
       "commit": "54a8800d906fd340bcf8f5f26c4a325c977166f2",
       "committedAt": "2026-10-16T18:49:03Z"
+    },
+    "assessment-8fd87568b66b172d6aaaa293": {
+      "commit": "a37284ac3af613c83315bc28834dbadbee443acf",
+      "committedAt": "2026-10-23T05:28:25Z"
     },
     "assessment-9361153b16a65cc2713c7d4f": {
       "commit": "2eacff772da7ba56cb1ba2c1242ed7d7da597ed3",
@@ -1186,7 +1190,7 @@
       "committedAt": "2026-10-03T01:19:23Z"
     }
   },
-  "forecastRevision": "445cffa6e478d46381c3af701f120d4980da60e262709737933007ad2a146f7e",
+  "forecastRevision": "bb49f3542abc9784146673814be3e9c526fd2535b758bbf5cc36b58dfbd74b26",
   "games": {
     "401872910": {
       "awayScore": null,
@@ -12930,8 +12934,8 @@
   "monitoringComplete": false,
   "nextCheckAt": "2026-10-23T06:25:18Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-10-23T05:25:18Z",
-  "revision": "07dad228d7b91465599ff17016941b788c716e33fa18d603619aa2accb825ebc",
+  "publishedAt": "2026-10-23T05:28:47Z",
+  "revision": "0d960efc224ba762378dc6e0c63d7fb194310d857e5dc09cbe4347139d3692cf",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
