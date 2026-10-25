@@ -4858,7 +4858,7 @@
     "401873010": {
       "awayScore": 24,
       "awayTeamId": "17",
-      "checkedAt": "2026-10-24T04:58:04Z",
+      "checkedAt": "2026-10-25T06:40:08Z",
       "error": null,
       "eventId": "401873010",
       "explanationPhase": "pregame",
@@ -4895,7 +4895,7 @@
       "hasStarted": true,
       "homeScore": 30,
       "homeTeamId": "3",
-      "lastAttemptAt": "2026-10-24T04:58:04Z",
+      "lastAttemptAt": "2026-10-25T06:40:08Z",
       "pickAssessmentId": "assessment-0277ad39b4305fe7b3b42670",
       "pickCutoffAt": "2026-10-23T00:15:00Z",
       "pickEffectiveAt": "2026-10-20T05:26:25Z",
@@ -12928,14 +12928,14 @@
       "winnerTeamId": null
     }
   },
-  "lastAttemptAt": "2026-10-25T01:31:16Z",
+  "lastAttemptAt": "2026-10-25T06:40:08Z",
   "lastResultAt": "2026-10-23T05:25:18Z",
-  "lastSuccessfulCheckAt": "2026-10-25T01:31:16Z",
+  "lastSuccessfulCheckAt": "2026-10-25T06:40:08Z",
   "monitoringComplete": false,
-  "nextCheckAt": "2026-10-25T04:58:04Z",
+  "nextCheckAt": "2026-10-25T09:18:02Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-10-25T01:31:16Z",
-  "revision": "a23ee783850e1eed26aed31111f509cd761b3573f3d2526474efb3d2cb1da5ef",
+  "publishedAt": "2026-10-25T06:40:08Z",
+  "revision": "88c73f9e864e152021be3c0de31335b66a11c7f2f13b6b8b63944b53904e09cc",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
