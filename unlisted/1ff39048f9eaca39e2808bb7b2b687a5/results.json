@@ -4847,27 +4847,53 @@
       "winnerTeamId": "25"
     },
     "401873009": {
-      "awayScore": null,
+      "awayScore": 38,
       "awayTeamId": "6",
-      "checkedAt": "2026-10-27T01:42:59Z",
+      "checkedAt": "2026-10-27T06:50:55Z",
       "error": null,
       "eventId": "401873009",
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
-      "fantasyLeaders": null,
-      "firstFinalAt": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4241389",
+            "name": "CeeDee Lamb",
+            "points": 24.4,
+            "statLine": "5 rec, 74 rec yds, 2 rec TD",
+            "teamId": "6"
+          },
+          {
+            "athleteId": "4361579",
+            "name": "Javonte Williams",
+            "points": 21.5,
+            "statLine": "155 rush yds, 1 rush TD",
+            "teamId": "6"
+          },
+          {
+            "athleteId": "2577417",
+            "name": "Dak Prescott",
+            "points": 21.28,
+            "statLine": "212 pass yds, 3 pass TD, 8 rush yds",
+            "teamId": "6"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401873009"
+      },
+      "firstFinalAt": "2026-10-27T06:50:55Z",
       "hasStarted": true,
-      "homeScore": null,
+      "homeScore": 21,
       "homeTeamId": "21",
-      "lastAttemptAt": "2026-10-27T01:42:59Z",
+      "lastAttemptAt": "2026-10-27T06:50:55Z",
       "pickAssessmentId": "assessment-66f7a273f4bfd1551042ed33",
       "pickCutoffAt": "2026-10-27T00:15:00Z",
       "pickEffectiveAt": "2026-10-25T21:09:19Z",
       "pickExplanation": "I expect the Dallas Cowboys to beat the Philadelphia Eagles. Dallas' receiving options should offer more TD paths than Philadelphia's depleted offense, which now lacks DeVonta Smith and Wicks as well as facing an expected season-long Hurts absence. Prescott's recent interceptions and 48-yard team rushing effort, Turpin's and Shelton's ruled-out status, the late ruling out of defenders Locke and Liufau, and the Eagles' home defense make the reduced 24-17 projection provisional.",
       "pickLockedAt": "2026-10-27T01:42:59Z",
       "pickReason": "I expect the Dallas Cowboys to beat the Philadelphia Eagles. Dallas' receiving options should offer more TD paths than Philadelphia's depleted offense, which now lacks DeVonta Smith and Wicks as well as facing an expected season-long Hurts absence. Prescott's recent interceptions and 48-yard team rushing effort, Turpin's and Shelton's ruled-out status, the late ruling out of defenders Locke and Liufau, and the Eagles' home defense make the reduced 24-17 projection provisional.",
-      "pickResult": "pending",
+      "pickResult": "correct",
       "pickRevisionId": "assessment-66f7a273f4bfd1551042ed33:401873009",
       "pregameExplanation": "I expect the Dallas Cowboys to beat the Philadelphia Eagles. Dallas' receiving options should offer more TD paths than Philadelphia's depleted offense, which now lacks DeVonta Smith and Wicks as well as facing an expected season-long Hurts absence. Prescott's recent interceptions and 48-yard team rushing effort, Turpin's and Shelton's ruled-out status, the late ruling out of defenders Locke and Liufau, and the Eagles' home defense make the reduced 24-17 projection provisional.",
       "projectedScore": {
@@ -4882,14 +4908,14 @@
       },
       "projectedScoreLockedAt": "2026-10-27T01:42:59Z",
       "projectedScoreStatus": "available",
-      "resultUpdatedAt": null,
+      "resultUpdatedAt": "2026-10-27T06:50:55Z",
       "scheduledAt": "2026-10-27T00:15:00Z",
       "scoredPickTeamId": "6",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261026",
-      "status": "in_progress",
-      "statusDetail": "In progress - awaiting final",
+      "status": "final",
+      "statusDetail": "Final",
       "timeConfirmed": true,
-      "winnerTeamId": null
+      "winnerTeamId": "6"
     },
     "401873010": {
       "awayScore": 24,
@@ -13276,14 +13302,14 @@
       "winnerTeamId": null
     }
   },
-  "lastAttemptAt": "2026-10-27T01:42:59Z",
-  "lastResultAt": "2026-10-26T03:26:21Z",
-  "lastSuccessfulCheckAt": "2026-10-27T01:42:59Z",
+  "lastAttemptAt": "2026-10-27T06:50:55Z",
+  "lastResultAt": "2026-10-27T06:50:55Z",
+  "lastSuccessfulCheckAt": "2026-10-27T06:50:55Z",
   "monitoringComplete": false,
-  "nextCheckAt": "2026-10-27T01:47:59Z",
+  "nextCheckAt": "2026-10-27T07:50:55Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-10-27T01:42:59Z",
-  "revision": "7d2038a5564adba8a90c5f3fcb0e07f775f96185c3d4c1f288ad563ae929fc7f",
+  "publishedAt": "2026-10-27T06:50:55Z",
+  "revision": "0bf9985c0e06a06c3fcef39b9a58e98053511536c842e0fd2a721c7d769b1bac",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
