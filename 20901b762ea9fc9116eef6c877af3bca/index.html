@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SEA4 | Copilot Skills Student Guide</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23163b61'/%3E%3Cpath d='M7 9h8c1.7 0 3 1.3 3 3v13c0-1.7-1.3-3-3-3H7zM25 9h-5c-1.1 0-2 .9-2 2v14c0-1.7 1.3-3 3-3h4z' fill='none' stroke='%23e4c380' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{color-scheme:light;--bg:#f4f3f0;--paper:#fff;--ink:#17263d;--muted:#526174;--line:#cbd2db;--accent:#163b61;--soft:#eaf1f7;--gold:#886629;--note:#f7f1e4}
+html[data-theme=dark]{color-scheme:dark;--bg:#101820;--paper:#192531;--ink:#edf2f8;--muted:#b9c6d6;--line:#435366;--accent:#aacff4;--soft:#21374d;--gold:#e4c380;--note:#343025}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:20px}body{margin:0;font:17px/1.65 "Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink)}a{color:var(--accent);text-underline-offset:3px}button{font:inherit;cursor:pointer;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 13px}button:hover{background:var(--soft)}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:4px}aside{width:274px;position:fixed;inset:0 auto 0 0;padding:27px 22px;background:var(--paper);border-right:1px solid var(--line);overflow:auto}aside strong{display:block;letter-spacing:.13em;font-size:13px;color:var(--gold)}aside nav a{display:block;margin:10px 0;padding:5px 8px;text-decoration:none;border-left:3px solid transparent}aside nav a[aria-current=true]{border-color:var(--gold);background:var(--soft);font-weight:600}aside p{font-size:14px;color:var(--muted)}main{max-width:1190px;margin-left:274px;padding:36px 44px 70px}.eyebrow{text-transform:uppercase;letter-spacing:.14em;color:var(--gold);font-size:13px;font-weight:700}h1{font-size:clamp(30px,4vw,47px);line-height:1.13;max-width:760px;margin:12px 0 20px}h2{font-size:24px;line-height:1.3;margin:0}h3{font-size:20px;margin:20px 0 9px}h4{margin:12px 0 7px;font-size:17px}.lead{font-size:20px;color:var(--muted);max-width:770px}.meta{display:flex;flex-wrap:wrap;gap:8px}.pill{padding:4px 11px;background:var(--soft);border:1px solid var(--line);border-radius:20px;font-size:14px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:23px 0}.section{border:1px solid var(--line);background:var(--paper);border-radius:13px;margin:20px 0;overflow:hidden}.section>summary{cursor:pointer;list-style:none;padding:22px 24px;display:flex;gap:12px;align-items:center;background:var(--paper)}.section>summary::-webkit-details-marker{display:none}.section>summary:before{content:"+";font-size:23px;font-weight:600;color:var(--gold);width:20px;flex-shrink:0}.section[open]>summary:before{content:"−"}.content{padding:0 25px 26px}.muted{color:var(--muted)}.callout{background:var(--soft);border-left:1px solid var(--accent);padding:14px 18px;margin:16px 0}.note{background:var(--note);border-left:1px solid var(--gold);padding:13px 17px;margin:16px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.card{padding:18px;border:1px solid var(--line);border-radius:9px}.card h3{margin-top:0}.prompt{margin:18px 0;padding:18px;border:1px solid var(--line);border-radius:10px}.prompt header{display:flex;align-items:center;justify-content:space-between;gap:12px}.prompt h4{margin:0}.prompt pre,pre.source{tab-size:4;white-space:pre-wrap;overflow-wrap:anywhere;font:16px/1.6 "Segoe UI",Arial,sans-serif;background:var(--bg);padding:16px;border-radius:7px}.prompt p{margin:10px 0}.did{font-size:15px;color:var(--muted)}table{border-collapse:collapse;width:100%;margin:16px 0}th,td{text-align:left;vertical-align:top;padding:11px 9px;border-bottom:1px solid var(--line)}th{background:var(--soft)}ul,ol{padding-left:24px}.between{display:flex;justify-content:space-between;gap:15px;margin-top:24px}.between a{padding:8px 12px;border:1px solid var(--line);border-radius:8px;text-decoration:none}footer{font-size:14px;color:var(--muted);margin-top:30px}.skip{position:absolute;left:300px;top:-100px;background:var(--paper);padding:12px;z-index:5}.skip:focus{top:8px}#status{position:fixed;right:20px;bottom:20px;background:var(--ink);color:var(--paper);padding:10px 17px;border-radius:8px;max-width:360px;z-index:10}#status:empty{display:none}.copy-dialog{max-width:740px;width:90%;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:12px}.copy-dialog textarea{display:block;width:100%;height:230px;font:16px/1.5 "Segoe UI",Arial,sans-serif;margin:12px 0}
+@media(max-width:900px){aside{position:static;width:auto;border-right:0;border-bottom:1px solid var(--line)}aside nav{display:flex;flex-wrap:wrap;gap:4px 12px}aside nav a{margin:2px 0}aside p{margin-bottom:0}main{margin:0;padding:25px 19px}.grid{grid-template-columns:1fr}.skip{left:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{aside,.toolbar,.copy,.between,#status,.skip{display:none}main{margin:0;padding:0;max-width:none}.section{break-inside:avoid}body{background:white;color:black}.section,.prompt{border-color:#bbb}a{color:black}pre{white-space:pre-wrap}}
+code{background:var(--soft);padding:1px 6px;border-radius:5px;font-size:15px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to guide</a>
+<aside aria-label="Guide navigation">
+<strong>ESTÉE LAUDER · SEA4</strong>
+<p>Student quick guide<br>October 28, 2026</p>
+<nav aria-label="Table of contents">
+<a href="#start">01 · What a skill is</a>
+<a href="#anatomy">02 · Anatomy of a skill</a>
+<a href="#create">03 · Create a skill</a>
+<a href="#excel">04 · Skills in Excel</a>
+<a href="#ppt">05 · Skills in PowerPoint</a>
+<a href="#word">06 · Skills and Word</a>
+<a href="#tips">07 · Tips and tricks</a>
+</nav>
+<p>Branding identifies the audience only. All provided business examples are fictional.</p>
+</aside>
+<main id="main">
+<header>
+<div class="eyebrow">Copilot skills · student edition</div>
+<h1>Teach Copilot once.<br>Reuse it every time.</h1>
+<p class="lead">Create custom Copilot skills and use them in Excel and PowerPoint, with a practical approach for Word.</p>
+<div class="meta"><span class="pill">Quick practice</span><span class="pill">Copy-ready skills and prompts</span><span class="pill">Fictional practice data</span></div>
+</header>
+<div class="toolbar" role="group" aria-label="Guide controls">
+<button id="theme" type="button" aria-pressed="false">Night mode</button>
+<button id="expand" type="button">Expand All</button>
+<button id="collapse" type="button">Collapse All</button>
+</div>
+
+<details class="section" id="start" open>
+<summary><h2>01 · What a skill is</h2></summary>
+<div class="content">
+<p>A <strong>skill</strong> is a reusable set of instructions that tells Copilot how to complete a repeatable task. If you ask Copilot for the same thing often, turn that request into a skill.</p>
+<div class="grid">
+<article class="card"><h3>Prompt</h3><p>One request, typed each time. Good for one-off work.</p></article>
+<article class="card"><h3>Skill</h3><p>Saved steps Copilot reuses on demand, or automatically when your request matches the skill’s description.</p></article>
+</div>
+<h3>Where skills come from</h3>
+<ul>
+<li><strong>Built-in skills</strong> provided by Microsoft, such as <code>@clean-data</code> and <code>@chart-design</code> in Excel.</li>
+<li><strong>Custom skills</strong> you create. They are saved to a Skills folder in your OneDrive and are for your personal use.</li>
+<li><strong>Organization skills</strong> your IT team deploys.</li>
+</ul>
+<div class="callout"><strong>Before you start:</strong> sign in with your work account and save practice files to OneDrive. Skills are still rolling out, so menu names and built-in skills may differ in your apps. If you do not see them, your organization may not have them enabled yet.</div>
+<nav class="between" aria-label="Section navigation"><span></span><a href="#anatomy">Anatomy →</a></nav>
+</div></details>
+
+<details class="section" id="anatomy">
+<summary><h2>02 · Anatomy of a skill</h2></summary>
+<div class="content">
+<p>Each custom skill is a folder that contains one file named <code>SKILL.md</code>. The file has two parts:</p>
+<ol>
+<li><strong>Frontmatter</strong> between two <code>---</code> lines. It holds the <code>name</code> and a <code>description</code> that tells Copilot <em>when</em> to use the skill. Required.</li>
+<li><strong>Body</strong> with your instructions: the steps and what a good result looks like. No formatting rules.</li>
+</ol>
+<div class="note"><strong>The rule people miss:</strong> the folder name must exactly match the <code>name</code> in the file. A skill named <code>store-results-review</code> lives in a folder named <code>store-results-review</code>. Use lowercase words joined with hyphens.</div>
+<nav class="between" aria-label="Section navigation"><a href="#start">← What a skill is</a><a href="#create">Create →</a></nav>
+</div></details>
+
+<details class="section" id="create">
+<summary><h2>03 · Create a skill</h2></summary>
+<div class="content">
+<table>
+<thead><tr><th>Method</th><th>Best for</th><th>How</th></tr></thead>
+<tbody>
+<tr><td><strong>Describe it</strong></td><td>Excel; fastest start</td><td>Type <code>@skill-builder</code> and describe the task. Copilot drafts the skill, lets you preview and refine it, then saves it to OneDrive.</td></tr>
+<tr><td><strong>Record it</strong></td><td>PowerPoint; repeated formatting tasks</td><td>Select <strong>+</strong> › <strong>Choose skills</strong> › <strong>Manage plugins &amp; skills</strong> › <strong>Add skill</strong> › <strong>Record Skill</strong>. Do the task, select <strong>Stop</strong>, review the draft, and select <strong>Upload</strong>.</td></tr>
+<tr><td><strong>Paste it</strong></td><td>A skill you already wrote</td><td>In PowerPoint, select <strong>Add skill</strong> and paste the <code>SKILL.md</code> text into the form, or upload a skill file.</td></tr>
+<tr><td><strong>Save to OneDrive</strong></td><td>Any app that supports skills</td><td>In the Copilot pane, select <strong>…</strong> › <strong>Manage plugins &amp; skills</strong> › <strong>Custom skills</strong> › <strong>Create OneDrive folder</strong> › <strong>Open skills folder</strong>. Add a folder with a <code>SKILL.md</code> file, then select <strong>Refresh</strong>.</td></tr>
+</tbody></table>
+<div class="callout"><strong>Write a great description.</strong> Start with “Use when I ask…” and name both the trigger and the result. Copilot reads the description to decide when the skill applies.</div>
+<nav class="between" aria-label="Section navigation"><a href="#anatomy">← Anatomy</a><a href="#excel">Excel →</a></nav>
+</div></details>
+
+<details class="section" id="excel">
+<summary><h2>04 · Skills in Excel</h2></summary>
+<div class="content">
+<p><strong>Use a skill:</strong> in the Copilot prompt box, select the <strong>Add</strong> menu › <strong>Choose plugins and skills</strong>, or type <code>@</code> and the skill name.</p>
+<h3>Set up the practice workbook</h3>
+<ol><li>Create a blank workbook and save it to OneDrive.</li><li>Click cell <strong>A1</strong>, then copy and paste the data below. It splits into five columns.</li><li>Press <strong>Ctrl+T</strong>, confirm “My table has headers,” and select <strong>OK</strong>.</li></ol>
+<div class="prompt"><header><h4>Practice data · Q3 store results (fictional)</h4><button class="copy" data-copy="xlData" type="button">Copy source</button></header>
+<pre class="source" id="xlData">Region	Store	Q3 Sales	Q3 Target	Returns
+North	Store 101	48200	45000	38
+North	Store 102	39100	42000	51
+South	Store 201	36400	40000	44
+South	Store 202	44900	43000	33
+West	Store 301	55600	52000	36
+West	Store 302	33800	38000	57
+East	Store 401	42300	44000	47
+East	Store 402	50900	48000	30</pre></div>
+<div class="prompt"><header><h4>Step 1 · Try a built-in skill</h4><button class="copy" data-copy="x1" type="button">Copy prompt</button></header>
+<p><strong>What and why:</strong> shows how a built-in skill works before you build your own.</p>
+<pre id="x1">@clean-data Check this table for blank cells, duplicate rows, and numbers stored as text. List what you find before changing anything.</pre>
+<p class="did"><strong>Tip:</strong> Built-in skills to try next: <code>@chart-design</code>, <code>@theme-design</code>, and <code>@brandkit</code>.</p></div>
+
+<div class="prompt"><header><h4>Step 2 · Build a custom skill with skill-builder</h4><button class="copy" data-copy="x2" type="button">Copy prompt</button></header>
+<p><strong>What and why:</strong> creates a reusable skill from a plain-language description.</p>
+<pre id="x2">@skill-builder Create a custom skill named store-results-review. Use it when I ask to review store results. Steps: add a column named Percent of Target that divides Q3 Sales by Q3 Target, formatted as a percentage with no decimals; highlight rows below 100% of target in light red; sort by Percent of Target from lowest to highest; then summarize the results in three bullets that describe patterns only, without claiming causes. Show me the draft before saving.</pre>
+<p class="did"><strong>Tip:</strong> Review the preview and tighten the description if it is vague, then save. If skill-builder is not available yet, use the ready-made SKILL.md below.</p></div>
+
+<div class="prompt"><header><h4>Alternative · Ready-made SKILL.md</h4><button class="copy" data-copy="x3" type="button">Copy skill</button></header>
+<p><strong>What and why:</strong> the same skill, ready to save in a folder named <code>store-results-review</code> inside your OneDrive skills folder.</p>
+<pre id="x3">---
+name: store-results-review
+description: Use when I ask to review store results. Adds a Percent of Target column, highlights stores below target, and sorts from lowest to highest.
+---
+# Review store results
+
+## Steps
+1. Make sure the data is formatted as an Excel table.
+2. Add a column named Percent of Target that divides Q3 Sales by Q3 Target. Format it as a percentage with no decimals.
+3. Highlight rows below 100% of target in light red.
+4. Sort the table by Percent of Target from lowest to highest.
+5. Summarize the results in three bullets. Describe patterns only; do not claim causes.</pre>
+<p class="did"><strong>Tip:</strong> Save it as a plain-text file named exactly <code>SKILL.md</code>, then select <strong>Refresh</strong> in Custom skills.</p></div>
+
+<div class="prompt"><header><h4>Step 3 · Use your skill</h4><button class="copy" data-copy="x4" type="button">Copy prompt</button></header>
+<p><strong>What and why:</strong> runs your saved steps with one short request.</p>
+<pre id="x4">@store-results-review Review the store results in this table.</pre>
+<p class="did"><strong>Tip:</strong> Undo (Ctrl+Z) reverses Copilot edits like any other change. Run the skill again on next quarter’s data to see the payoff.</p></div>
+
+<nav class="between" aria-label="Section navigation"><a href="#create">← Create</a><a href="#ppt">PowerPoint →</a></nav>
+</div></details>
+
+<details class="section" id="ppt">
+<summary><h2>05 · Skills in PowerPoint</h2></summary>
+<div class="content">
+<p><strong>Use a skill:</strong> in the Copilot prompt box, select <strong>+</strong> › <strong>Choose skills</strong>, or type <code>@</code> and the skill name.</p>
+<h3>Set up the practice deck</h3>
+<p>Create a blank presentation, save it to OneDrive, open Copilot, and send this prompt.</p>
+<div class="prompt"><header><h4>Step 1 · Create a practice deck</h4><button class="copy" data-copy="p1" type="button">Copy prompt</button></header>
+<p><strong>What and why:</strong> gives you a deck to test your skill on.</p>
+<pre id="p1">Create a five-slide presentation titled Holiday Readiness Update for store leaders, using only these fictional facts:
+- 8 of 12 practice stores met or beat their Q3 sales target.
+- Return rates were highest at the 4 stores that have not completed training.
+- Focus areas: finish training at the 4 remaining stores, share weekly product tips, and review return reasons weekly.
+- Next step: store leaders confirm team training plans by Friday.
+- Not decided yet: launch dates, staffing changes, and budget changes.
+Keep each slide to four bullets or fewer.</pre>
+<p class="did"><strong>Tip:</strong> Review the draft. A few slides are enough for practice.</p></div>
+
+<div class="prompt"><header><h4>Step 2 · Add a custom skill</h4><button class="copy" data-copy="p2" type="button">Copy skill</button></header>
+<p><strong>What and why:</strong> adds a skill by pasting it into the Add skill form.</p>
+<pre id="p2">---
+name: leadership-takeaways-slide
+description: Use when I ask for leadership takeaways. Adds one slide at the end of the deck with three key takeaways and one clear ask, matching the existing design.
+---
+# Add a leadership takeaways slide
+
+## Steps
+1. Read the whole presentation.
+2. Add one new slide at the end titled Leadership Takeaways.
+3. Write exactly three takeaways, each 12 words or fewer, using only facts already in the deck.
+4. Add one line at the bottom that starts with &quot;Our ask:&quot; and states the next step from the deck.
+5. Match the fonts, colors, and layout of the existing slides.
+6. If the deck does not state a next step, write &quot;Our ask: not stated in this deck&quot; instead of guessing.</pre>
+<p class="did"><strong>Tip:</strong> Select <strong>+</strong> › <strong>Choose skills</strong> › <strong>Manage plugins &amp; skills</strong> › <strong>Add skill</strong>, paste this text, and select <strong>Add</strong>.</p></div>
+
+<div class="prompt"><header><h4>Step 3 · Use your skill</h4><button class="copy" data-copy="p3" type="button">Copy prompt</button></header>
+<p><strong>What and why:</strong> runs the skill on your deck.</p>
+<pre id="p3">@leadership-takeaways-slide Add leadership takeaways to this presentation.</pre>
+<p class="did"><strong>Tip:</strong> If the skill does not appear, select <strong>Refresh</strong> in Custom skills and confirm the folder name matches the skill name.</p></div>
+
+<div class="note"><strong>Try recording:</strong> select <strong>Add skill</strong> › <strong>Record Skill</strong>, then restyle a slide title and a bullet list by hand. Select <strong>Stop</strong> once the changes appear, review the draft, and upload it. Recordings must be under 10 minutes, and actions in other apps are not captured.</div>
+<nav class="between" aria-label="Section navigation"><a href="#excel">← Excel</a><a href="#word">Word →</a></nav>
+</div></details>
+
+<details class="section" id="word">
+<summary><h2>06 · Skills and Word</h2></summary>
+<div class="content">
+<p>As of October 2026, Microsoft has documented the skills picker for Excel and PowerPoint, but not yet for Word. Check your Word Copilot pane: if you see <strong>Choose skills</strong>, the steps above apply. If not, reuse your skill as a step-by-step prompt with <strong>Edit with Copilot</strong>.</p>
+<ol><li>Open a Word document saved to OneDrive.</li><li>Open Copilot, select <strong>Tools</strong> › <strong>Edit with Copilot</strong>, and send the prompt below.</li><li>Review the suggested changes before keeping them.</li></ol>
+<div class="prompt"><header><h4>Skill-style prompt for Word</h4><button class="copy" data-copy="w1" type="button">Copy prompt</button></header>
+<p><strong>What and why:</strong> applies the same “steps plus result” structure that a skill uses.</p>
+<pre id="w1">Follow these steps on this document: 1. Add a section at the top titled Executive Summary. 2. Summarize the document in one short paragraph and no more than five bullets. 3. Use only facts already in the document. 4. Add a final line that starts with &quot;Open questions:&quot; and lists anything the document leaves undecided, or write &quot;Open questions: none stated.&quot; Do not change the rest of the document.</pre>
+<p class="did"><strong>Tip:</strong> Keep prompts you reuse in a note so they are ready to become skills when Word supports them.</p></div>
+
+<nav class="between" aria-label="Section navigation"><a href="#ppt">← PowerPoint</a><a href="#tips">Tips →</a></nav>
+</div></details>
+
+<details class="section" id="tips">
+<summary><h2>07 · Tips and tricks</h2></summary>
+<div class="content">
+<div class="grid">
+<article class="card"><h3>Build better skills</h3><ul>
+<li>One skill, one repeatable outcome.</li>
+<li>Write numbered steps and describe what “done” looks like.</li>
+<li>Tell the skill what to do when information is missing, such as “write not stated.”</li>
+<li>Test it on fresh data, then tighten the wording.</li>
+</ul></article>
+<article class="card"><h3>Manage them well</h3><ul>
+<li>Turn a skill off in <strong>Manage plugins &amp; skills</strong> to stop automatic use. In Excel, you can still call it with <code>@</code>.</li>
+<li>Rename the folder to hide a skill without deleting it.</li>
+<li>Select <strong>Refresh</strong> after changing files in OneDrive.</li>
+<li>Never put passwords or confidential data in a skill file.</li>
+</ul></article>
+</div>
+<div class="prompt"><header><h4>Copy-ready follow-up · “Are you sure?”</h4><button class="copy" data-copy="sure" type="button">Copy prompt</button></header>
+<p><strong>What and why:</strong> after a skill runs, asks Copilot to confirm it followed every step.</p>
+<pre id="sure">Are you sure? Check your last result against every step in the skill you used. List each step as done or not done, show any number or statement that is not supported by this file, and fix anything you missed. Do not guess.</pre>
+<p class="did"><strong>Tip:</strong> A self-check can still miss errors. Spot-check key numbers yourself.</p></div>
+<h3>Microsoft reference library</h3>
+<ul>
+<li><a href="https://support.microsoft.com/en-us/excel/copilot/copilot-in-excel-skills" target="_blank" rel="noopener noreferrer">Use skills with Copilot in Excel</a></li>
+<li><a href="https://support.microsoft.com/en-us/powerpoint/copilot/copilot-in-powerpoint-skills" target="_blank" rel="noopener noreferrer">Use custom skills with Copilot in PowerPoint</a></li>
+<li><a href="https://support.microsoft.com/en-us/powerpoint/copilot/record-skill-copilot-powerpoint" target="_blank" rel="noopener noreferrer">Record a skill in Copilot in PowerPoint</a></li>
+<li><a href="https://agentskills.io/specification" target="_blank" rel="noopener noreferrer">Agent skills specification</a></li>
+</ul>
+<nav class="between" aria-label="Section navigation"><a href="#word">← Word</a><span></span></nav>
+</div></details>
+<footer>SEA4 Copilot skills student guide · October 28, 2026 · Examples are synthetic. Customer identity is used for session branding only. Feature names may change as skills roll out.</footer>
+</main>
+<div id="status" role="status" aria-live="polite"></div>
+<dialog id="copyDialog" class="copy-dialog" aria-labelledby="copyTitle"><h2 id="copyTitle">Copy manually</h2><p>Your browser did not allow automatic copying. Select the text below and use your usual copy command.</p><textarea id="copyText" readonly aria-label="Prompt text"></textarea><button id="closeDialog" type="button">Close</button></dialog>
+<script>
+(() => {
+  const sections = [...document.querySelectorAll('details.section')];
+  const theme = document.getElementById('theme');
+  const status = document.getElementById('status');
+  let statusTimer;
+  function announce(message) { status.textContent = message; clearTimeout(statusTimer); statusTimer = setTimeout(() => { status.textContent = ''; }, 5000); }
+  theme.addEventListener('click', () => {
+    const dark = document.documentElement.dataset.theme !== 'dark';
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    theme.textContent = dark ? 'Day mode' : 'Night mode';
+    theme.setAttribute('aria-pressed', String(dark));
+  });
+  document.getElementById('expand').addEventListener('click', () => sections.forEach(section => { section.open = true; }));
+  document.getElementById('collapse').addEventListener('click', () => sections.forEach(section => { section.open = false; }));
+  function revealHash() {
+    const id = location.hash.slice(1);
+    const target = document.getElementById(id);
+    if (target && target.matches('details.section')) target.open = true;
+    document.querySelectorAll('aside nav a').forEach(link => link.setAttribute('aria-current', String(link.hash === location.hash)));
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(link => link.addEventListener('click', () => {
+    const target = document.getElementById(link.hash.slice(1));
+    if (target && target.matches('details.section')) target.open = true;
+  }));
+  addEventListener('hashchange', revealHash);
+  revealHash();
+  const dialog = document.getElementById('copyDialog');
+  const copyText = document.getElementById('copyText');
+  document.getElementById('closeDialog').addEventListener('click', () => dialog.close());
+  document.querySelectorAll('[data-copy]').forEach(button => button.addEventListener('click', async () => {
+    const text = document.getElementById(button.dataset.copy).textContent.trim();
+    try {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(text);
+      announce('Copied. Paste into the same Copilot Chat conversation and submit as-is.');
+    } catch (error) {
+      copyText.value = text;
+      dialog.showModal();
+      copyText.focus();
+      copyText.select();
+      announce('Automatic copying was unavailable. Manual copy is ready.');
+    }
+  }));
+  let printState;
+  addEventListener('beforeprint', () => { printState = sections.map(section => section.open); sections.forEach(section => { section.open = true; }); });
+  addEventListener('afterprint', () => { if (printState) sections.forEach((section, index) => { section.open = printState[index]; }); });
+})();
+</script>
+</body>
+</html>
