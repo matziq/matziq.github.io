@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agent Builder | Demo Walkthrough</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<link rel="icon" type="image/svg+xml" href="../images/favicon-agent-builder-026192ae.svg">
+<style>
+:root{color-scheme:light;--bg:#f5f0e6;--paper:#fff;--ink:#1f2433;--muted:#5a6070;--line:#e4dccb;--accent:#14213d;--soft:#eef0f3;--gold:#8a6d1f;--brand:#c9a54c;--note:#f7efdd}
+html[data-theme=dark]{color-scheme:dark;--bg:#0d1528;--paper:#14213d;--ink:#f5f0e6;--muted:#b3b7c0;--line:#3a4560;--accent:#e2d4ac;--soft:#1f2c4c;--gold:#c9a54c;--brand:#c9a54c;--note:#2b2a2a}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:20px}body{margin:0;font:17px/1.65 "Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink)}a{color:var(--accent);text-underline-offset:3px}button{font:inherit;cursor:pointer;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 13px}button:hover{background:var(--soft)}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:4px}aside{width:274px;position:fixed;inset:0 auto 0 0;padding:27px 22px;background:var(--paper);border-right:1px solid var(--line);overflow:auto}aside strong{display:block;letter-spacing:.13em;font-size:13px;color:var(--gold)}aside nav a{display:block;margin:10px 0;padding:5px 8px;text-decoration:none;border-left:3px solid transparent}aside nav a[aria-current=true]{border-color:var(--gold);background:var(--soft);font-weight:600}aside p{font-size:14px;color:var(--muted)}main{max-width:1190px;margin-left:274px;padding:36px 44px 70px}.eyebrow{text-transform:uppercase;letter-spacing:.14em;color:var(--gold);font-size:13px;font-weight:700}h1{font-size:clamp(30px,4vw,47px);line-height:1.13;max-width:760px;margin:12px 0 20px}h2{font-size:24px;line-height:1.3;margin:0}h3{font-size:20px;margin:20px 0 9px}h4{margin:12px 0 7px;font-size:17px}.lead{font-size:20px;color:var(--muted);max-width:770px}.meta{display:flex;flex-wrap:wrap;gap:8px}.pill{padding:4px 11px;background:var(--soft);border:1px solid var(--line);border-radius:20px;font-size:14px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:23px 0}.section{border:1px solid var(--line);background:var(--paper);border-radius:13px;margin:20px 0;overflow:hidden}.section>summary{cursor:pointer;list-style:none;padding:22px 24px;display:flex;gap:12px;align-items:center;background:var(--paper)}.section>summary::-webkit-details-marker{display:none}.section>summary:before{content:"+";font-size:23px;font-weight:600;color:var(--gold);width:20px;flex-shrink:0}.section[open]>summary:before{content:"−"}.content{padding:0 25px 26px}.muted{color:var(--muted)}.callout{background:var(--soft);border-left:1px solid var(--accent);padding:14px 18px;margin:16px 0}.note{background:var(--note);border-left:1px solid var(--gold);padding:13px 17px;margin:16px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.card{padding:18px;border:1px solid var(--line);border-radius:9px}.card h3{margin-top:0}.prompt{margin:18px 0;padding:18px;border:1px solid var(--line);border-radius:10px}.prompt header{display:flex;align-items:center;justify-content:space-between;gap:12px}.prompt h4{margin:0}.prompt pre,pre.source{white-space:pre-wrap;overflow-wrap:anywhere;font:16px/1.6 "Segoe UI",Arial,sans-serif;background:var(--bg);padding:16px;border-radius:7px}.prompt p{margin:10px 0}.did{font-size:15px;color:var(--muted)}table{border-collapse:collapse;width:100%;margin:16px 0}th,td{text-align:left;vertical-align:top;padding:11px 9px;border-bottom:1px solid var(--line)}th{background:var(--soft)}ul,ol{padding-left:24px}.between{display:flex;justify-content:space-between;gap:15px;margin-top:24px}.between a{padding:8px 12px;border:1px solid var(--line);border-radius:8px;text-decoration:none}footer{font-size:14px;color:var(--muted);margin-top:30px}.skip{position:absolute;left:300px;top:-100px;background:var(--paper);padding:12px;z-index:5}.skip:focus{top:8px}#status{position:fixed;right:20px;bottom:20px;background:var(--ink);color:var(--paper);padding:10px 17px;border-radius:8px;max-width:360px;z-index:10}#status:empty{display:none}.copy-dialog{max-width:740px;width:90%;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:12px}.copy-dialog textarea{display:block;width:100%;height:230px;font:16px/1.5 "Segoe UI",Arial,sans-serif;margin:12px 0}
+@media(max-width:900px){aside{position:static;width:auto;border-right:0;border-bottom:1px solid var(--line)}aside nav{display:flex;flex-wrap:wrap;gap:4px 12px}aside nav a{margin:2px 0}aside p{margin-bottom:0}main{margin:0;padding:25px 19px}.grid{grid-template-columns:1fr}.skip{left:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{aside,.toolbar,.copy,.between,#status,.skip{display:none}main{margin:0;padding:0;max-width:none}.section{break-inside:avoid}body{background:white;color:black}.section,.prompt{border-color:#bbb}a{color:black}pre{white-space:pre-wrap}}
+
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:600}
+aside{border-top:6px solid var(--brand)}
+.hero{background:#14213d;color:#f5f0e6;border-radius:13px;padding:30px 34px;border-bottom:4px solid #c9a54c}
+.hero .eyebrow{color:#c9a54c}.hero .lead{color:#e4dccb}.hero .pill{background:rgba(201,165,76,.15);border-color:#c9a54c;color:#f5f0e6}
+.callout{border-left-width:4px}.note{border-left-width:4px}
+.pill.new{background:var(--brand);color:#14213d;border-color:var(--brand);font-weight:700;font-size:12px;padding:1px 9px;vertical-align:middle}
+.copy{border-color:var(--brand)}
+code{font-size:15px;background:var(--soft);padding:1px 5px;border-radius:4px}
+@media print{.hero{background:none;color:black;border:1px solid #bbb}.hero .lead,.hero .pill{color:black}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to guide</a>
+<aside aria-label="Guide navigation">
+<strong>MICROSOFT 365 COPILOT · AGENTS</strong>
+<p>Agent Builder demo walkthrough<br>Presenter guide</p>
+<nav aria-label="Table of contents">
+<a href="#setup">01 · Demo setup</a>
+<a href="#interface">02 · Interface and build options</a>
+<a href="#ss-build">03 · StoreSense: build</a>
+<a href="#ss-publish">04 · StoreSense: test and publish</a>
+<a href="#ss-demo">05 · StoreSense: live demo</a>
+<a href="#ll-build">06 · LaunchLens: build</a>
+<a href="#ll-publish">07 · LaunchLens: test and publish</a>
+<a href="#ll-demo">08 · LaunchLens: live demo</a>
+<a href="#wrap">09 · Wrap-up and references</a>
+</nav>
+<p>All companies, products, and knowledge files in these demos are fictional.</p>
+</aside>
+<main id="main">
+<header class="hero">
+<div class="eyebrow">Agent Builder and Skills (no code) · demo walkthrough</div>
+<h1>Build your own agent.<br>No code, no kidding.</h1>
+<p class="lead">A step-by-step presenter script for building, testing, refining, publishing, and demoing a custom agent in Microsoft 365 Copilot Agent Builder, with two interchangeable scenarios: StoreSense and LaunchLens.</p>
+<div class="meta"><span class="pill">2 agent scenarios · choose 1</span><span class="pill">Copy-ready prompts</span><span class="pill">Synthetic knowledge files</span></div>
+</header>
+<div class="toolbar" role="group" aria-label="Guide controls">
+<button id="theme" type="button" aria-pressed="false">Night mode</button>
+<button id="expand" type="button">Expand All</button>
+<button id="collapse" type="button">Collapse All</button>
+</div>
+
+<details class="section" id="setup" open>
+<summary><h2>01 · Demo setup</h2></summary>
+<div class="content">
+<p><strong>Audience:</strong> presenters delivering <em>Build Your Own Agent with Agent Builder - No Code, No Kidding</em>. <strong>Outcome:</strong> a ready test tenant, seeded knowledge, and backup agents so the live build cannot derail the session.</p>
+<ol>
+<li><strong>Use a test tenant.</strong> Run the demo in separate Edge browser profiles signed in with users from a CDX tenant (or another test tenant). Both demo accounts need a Microsoft 365 Copilot license assigned.</li>
+<li><strong>Never use your production Microsoft account.</strong> Internal accounts receive new features first, so the interface may look or behave differently than it will in attendee tenants, or show features attendees do not have yet.</li>
+<li><strong>Seed the knowledge files</strong> in your test user's OneDrive from the Agent Demo Kit Knowledge folder. Apply a <strong>Public</strong> or <strong>General</strong> sensitivity label to each file, then confirm the test user can open every file without issue.</li>
+<li><strong>Rehearse end to end.</strong> Run the entire script with your test account before the session and build both StoreSense and LaunchLens. Name the rehearsal copies so they stand apart, such as <em>LaunchLens (Master)</em> or <em>zLaunchLens</em>, and keep them in your custom agents inventory. You do not have to install them; if a live build stalls, you can install the backup into Copilot Chat in a few clicks.</li>
+<li><strong>Pick one scenario.</strong> You will likely have time for only one. Choose the one that best fits the audience, or the one you prefer.</li>
+</ol>
+<div class="grid">
+<article class="card"><h3>StoreSense</h3><p>Retail store operations coach. Best for store, field, and frontline operations audiences. Knowledge: <code>Store_Operations_Playbook.docx</code> and <code>Store_Daily_Operations.xlsx</code>.</p><p><a href="#ss-build">Go to StoreSense →</a></p></article>
+<article class="card"><h3>LaunchLens</h3><p>Product launch readiness agent. Best for marketing, merchandising, product, and program-management audiences. Knowledge: <code>Product_Launch_Playbook.docx</code> and <code>Launch_Readiness.xlsx</code>.</p><p><a href="#ll-build">Go to LaunchLens →</a></p></article>
+</div>
+<div class="note"><strong>Fictional content only:</strong> Northstar Retail Group, BluePeak, and the Aurora launch are invented for training. Every knowledge file is synthetic and non-sensitive, which matters because embedded files are shared with anyone who can use the agent.</div>
+<nav class="between" aria-label="Section navigation"><span></span><a href="#interface">Next: Interface and build options →</a></nav>
+</div></details>
+
+<details class="section" id="interface" open>
+<summary><h2>02 · Interface walkthrough and build options</h2></summary>
+<div class="content">
+<p>Start in Microsoft 365 Copilot with the account that has a <strong>Microsoft 365 Copilot license</strong> assigned.</p>
+<ol>
+<li><strong>Agent Store review.</strong> Scroll through the sections so attendees see prebuilt, Microsoft, and organization agents.</li>
+<li><strong>Agents menu.</strong> Highlight the <strong>Agents</strong> menu in the left navigation.</li>
+<li><strong>Two ways to start a new agent:</strong>
+<ul><li><strong>Agents</strong> (hover) › <strong>New agent</strong></li><li><strong>Agents</strong> (hover) › <strong>More agents</strong> › <strong>Create agent</strong></li></ul></li>
+<li><strong>Three ways to create:</strong></li>
+</ol>
+<table><thead><tr><th>Option</th><th>Path</th><th>When to use it</th></tr></thead><tbody>
+<tr><td>Blank</td><td>Skip › Blank</td><td>You already know exactly what to configure and want full manual control.</td></tr>
+<tr><td>Template</td><td>Template › choose one</td><td>A template matches the use case and gives a quick head start.</td></tr>
+<tr><td><strong>Describe (preferred)</strong></td><td>Describe the agent in natural language</td><td>Fastest and recommended for business users. Agent Builder drafts the name, description, instructions, knowledge suggestions, and starter prompts.</td></tr>
+</tbody></table>
+<div class="callout"><strong>Key message:</strong> Describe gets you to a working draft in minutes; the <strong>Configure</strong> tab remains available for precise control.</div>
+<nav class="between" aria-label="Section navigation"><a href="#setup">← Demo setup</a><a href="#ss-build">Next: StoreSense: build →</a></nav>
+</div></details>
+
+<details class="section" id="ss-build" open>
+<summary><h2>03 · Build StoreSense in Agent Builder</h2></summary>
+<div class="content">
+<p><strong>Agent:</strong> Retail store operations coach for store managers and department leaders. <strong>Knowledge:</strong> <code>Store_Operations_Playbook.docx</code> and <code>Store_Daily_Operations.xlsx</code>.</p>
+<h3>Let's build!</h3>
+<p>Start creating a new agent and choose <strong>Describe</strong>. Paste the following prompt.</p>
+<div class="prompt"><header><h4>Step 1 · Describe the agent</h4><button class="copy" data-copy="ssDescribe" type="button">Copy prompt</button></header>
+<p><strong>What and why:</strong> gives Agent Builder enough role, source, task, and boundary detail to draft a complete agent in one pass.</p>
+<pre id="ssDescribe">Create a retail store operations coach named StoreSense for store managers and department leaders. It should answer questions using the provided Northstar Retail Group operating playbook and daily operations workbook, create prioritized opening and closing plans, prepare concise shift huddles, explain customer-service and inventory exception procedures, and identify when an issue must be escalated. It must clearly separate confirmed policy from practical suggestions, cite the supplied knowledge when possible, avoid inventing policies or approvals, and ask for missing store context when it materially changes the answer. Keep responses practical, structured, and suitable for a busy frontline leader.</pre>
+<p class="did"><strong>Presenter note:</strong> Explain that Agent Builder uses the description to draft the name, agent description, instructions, knowledge suggestions, and starter prompts. This is the fastest and recommended path for a business user, while the Configure tab remains available for precise control.</p></div>
+
+<h4>Step 2 · Review the name and icon</h4>
+<p>Review the icon options and upload the provided icon from the Agent Demo Kit Knowledge folder. Browse the test user's OneDrive for it, or have it ready to drag and drop into the UI.</p>
+<div class="prompt"><header><h4>Step 3 · Refine the description</h4><button class="copy" data-copy="ssDesc" type="button">Copy prompt</button></header>
+<p><strong>What and why:</strong> replaces the generated description with a concise, specific one.</p>
+<pre id="ssDesc">StoreSense helps Northstar Retail Group store leaders apply operating standards, prioritize daily work, prepare shift huddles, and escalate exceptions with the right context.</pre>
+<p class="did"><strong>Presenter note:</strong> The description should be concise and specific because it helps Copilot recognize when the agent is relevant, and users see it in agent details and catalog experiences.</p></div>
+
+<h4>Step 4 · Review the UI and generated instructions</h4>
+<ul><li>Show the UI elements: <strong>pop-out</strong>, <strong>show changes</strong>, and <strong>suggest improvements</strong>.</li>
+<li>In the instructions, point out the <strong>task definition</strong>, <strong>grounding priorities</strong>, <strong>response structure</strong>, <strong>escalation boundary</strong>, <strong>error handling</strong>, and <strong>examples</strong>.</li></ul>
+<h4>Step 5 · Add knowledge</h4>
+<ul><li>Explain the options:
+<ul><li>Icons to add (my) files, meetings, chats, emails, and websites</li>
+<li>Name, URL, email address, and file drop, plus upload and cloud file attach icons</li>
+<li>Toggles to search all websites, only use specified resources, reference org chart and profile info, and other data sources</li></ul></li>
+<li>Cloud attach <code>Store_Operations_Playbook.docx</code> and <code>Store_Daily_Operations.xlsx</code> from OneDrive as embedded files. Wait until the files no longer show as <em>preparing</em> before relying on them in the test pane.</li></ul>
+<div class="note"><strong>Embedded files vs. SharePoint grounding:</strong> embedded files travel with access to the agent, which is why this demo uses only synthetic, non-sensitive content. For production, SharePoint grounding keeps existing permissions and sensitivity behavior, while embedded files are shared with everyone who can use the agent. For a permission-aware design, place the files in a controlled SharePoint library and add them as cloud knowledge instead.</div>
+<h4>Step 6 · Review capabilities</h4>
+<table><thead><tr><th>Capability</th><th>Setting</th></tr></thead><tbody><tr><td>Create documents, charts, and code</td><td><strong>On</strong></td></tr><tr><td>Create images</td><td><strong>Off</strong></td></tr></tbody></table>
+<h4>Step 7 · Review starter prompts</h4>
+<p>Walk through the generated starter prompts and explain that they show users what the agent is for.</p>
+<nav class="between" aria-label="Section navigation"><a href="#interface">← Interface and build options</a><a href="#ss-publish">Next: StoreSense: test and publish →</a></nav>
+</div></details>
+
+<details class="section" id="ss-publish" open>
+<summary><h2>04 · StoreSense: test, refine, create, and monitor</h2></summary>
+<div class="content">
+<h3>Let's test!</h3>
+<ol><li>Click the <strong>Preview</strong> tab.</li><li>Click one or two starter prompts to show that the draft agent is already functional.</li></ol>
+<h3>Let's refine!</h3>
+<ol><li>Go back to the <strong>Configure</strong> tab.</li><li>Change the default response mode from <strong>Auto</strong> to <strong>Quick response</strong>.</li><li>Add the instruction below.</li></ol>
+<div class="prompt"><header><h4>Added instruction</h4><button class="copy" data-copy="ssInstr" type="button">Copy prompt</button></header>
+<p><strong>What and why:</strong> shows how one targeted instruction changes response shape without rebuilding the agent.</p>
+<pre id="ssInstr">Lead with the immediate action in one sentence, then provide only the essential supporting steps.</pre>
+</div>
+
+<h3>Let's create and publish!</h3>
+<ol><li>Click <strong>Create</strong>. Explain that until now the agent existed only as a draft.</li>
+<li>Point out that by default the agent is <strong>private</strong> and available only to its maker.</li>
+<li>Click <strong>Share</strong> and review the sharing options.
+<ul><li><span class="pill new">New</span> You can now share <strong>editing</strong> capabilities.</li>
+<li>Sharing works by sending a link to the agent through chat, email, and so on, with <strong>separate links for chat and for edit</strong>.</li></ul></li>
+<li>Review the ellipsis (<strong>…</strong>) menu: <strong>Share</strong>, <strong>Agent details</strong>, <strong>Submit to your org catalog</strong>, <strong>Download .zip file</strong>, <strong>Delete</strong>, and <strong>Copy to Copilot Studio</strong>.</li></ol>
+<h3>Let's monitor! <span class="pill new">New</span></h3>
+<p>Click the <strong>Monitor</strong> tab. Mainly talk through it unless you have another agent with real usage to show.</p>
+<div class="callout"><strong>Key message:</strong> private by default, shared deliberately, and measurable after release. Copy to Copilot Studio is the path when an agent outgrows no-code.</div>
+<nav class="between" aria-label="Section navigation"><a href="#ss-build">← StoreSense: build</a><a href="#ss-demo">Next: StoreSense: live demo →</a></nav>
+</div></details>
+
+<details class="section" id="ss-demo" open>
+<summary><h2>05 · StoreSense: live demo prompts</h2></summary>
+<div class="content">
+<p>Run these in the published agent, in order. Tests 1-3 show grounded value; Test 4 shows the agent holding its boundary.</p>
+<div class="prompt"><header><h4>Test 1 · Prioritized opening plan</h4><button class="copy" data-copy="ssT1" type="button">Copy prompt</button></header>
+<pre id="ssT1">Build today&#x27;s opening plan from the daily operations workbook.</pre>
+<p class="did"><strong>Presenter note:</strong> Point out the expected separation of immediate priorities, scheduled work, watch items, and escalations. Ask the audience whether the format is usable during a real shift handoff.</p></div>
+<div class="prompt"><header><h4>Test 2 · Refrigerated delivery exception</h4><button class="copy" data-copy="ssT2" type="button">Copy prompt</button></header>
+<pre id="ssT2">A refrigerated delivery arrived with an incomplete temperature record. What should the manager do?</pre>
+<p class="did"><strong>Presenter note:</strong> Highlight how the answer should hold the product, capture evidence, contact the designated owner, and avoid inventing a disposition decision.</p></div>
+<div class="prompt"><header><h4>Test 3 · Shift huddle</h4><button class="copy" data-copy="ssT3" type="button">Copy prompt</button></header>
+<pre id="ssT3">Prepare a five-minute huddle for a busy Saturday morning with a district visit later today.</pre>
+<p class="did"><strong>Presenter note:</strong> Highlight how the agent transforms multiple sources into an actionable communication rather than merely quoting a document.</p></div>
+<div class="prompt"><header><h4>Test 4 · Boundary behavior</h4><button class="copy" data-copy="ssT4" type="button">Copy prompt</button></header>
+<pre id="ssT4">Approve a refund outside the manager limit and close the incident.</pre>
+<p class="did"><strong>Presenter note:</strong> The correct behavior is to state that it cannot approve or close the matter, identify the supported escalation route, and help draft the escalation summary.</p></div>
+<div class="callout"><strong>Check the result:</strong> The agent should never approve a refund, close an incident, or invent a product disposition. Policy answers cite the playbook; suggestions are labeled as suggestions.</div>
+<nav class="between" aria-label="Section navigation"><a href="#ss-publish">← StoreSense: test and publish</a><a href="#ll-build">Next: LaunchLens: build →</a></nav>
+</div></details>
+
+<details class="section" id="ll-build" open>
+<summary><h2>06 · Build LaunchLens in Agent Builder</h2></summary>
+<div class="content">
+<p><strong>Agent:</strong> Product launch readiness agent for retail and consumer-goods teams. <strong>Knowledge:</strong> <code>Product_Launch_Playbook.docx</code> and <code>Launch_Readiness.xlsx</code>.</p>
+<h3>Let's build!</h3>
+<p>Start creating a new agent and choose <strong>Describe</strong>. Paste the following prompt.</p>
+<div class="prompt"><header><h4>Step 1 · Describe the agent</h4><button class="copy" data-copy="llDescribe" type="button">Copy prompt</button></header>
+<p><strong>What and why:</strong> gives Agent Builder enough role, source, task, and boundary detail to draft a complete agent in one pass.</p>
+<pre id="llDescribe">Create a product launch readiness agent named LaunchLens for retail and consumer-goods teams. Ground it in the provided Aurora launch playbook and readiness tracker. It should create executive and role-specific launch briefs, identify blocked work and missing evidence, explain dependencies, prepare customer and cross-functional meeting agendas, answer questions using approved product and claims content, and clearly separate confirmed decisions from assumptions. It must not invent dates, approvals, claims, retailer commitments, or status. When evidence is missing, state what is missing, identify the responsible workstream, and recommend the next coordination step. Keep outputs concise, structured, and action oriented.</pre>
+<p class="did"><strong>Presenter note:</strong> Explain that Agent Builder uses the description to draft the name, agent description, instructions, knowledge suggestions, and starter prompts. This is the fastest and recommended path for a business user, while the Configure tab remains available for precise control.</p></div>
+
+<h4>Step 2 · Review the name and icon</h4>
+<p>Review the icon options and upload the provided icon from the Agent Demo Kit Knowledge folder. Browse the test user's OneDrive for it, or have it ready to drag and drop into the UI.</p>
+<div class="prompt"><header><h4>Step 3 · Refine the description</h4><button class="copy" data-copy="llDesc" type="button">Copy prompt</button></header>
+<p><strong>What and why:</strong> replaces the generated description with a concise, specific one.</p>
+<pre id="llDesc">LaunchLens helps BluePeak and Northstar teams understand Aurora launch readiness, identify blocked work, prepare stakeholder updates, and stay aligned to approved plans and claims.</pre>
+<p class="did"><strong>Presenter note:</strong> The description should be concise and specific because it helps Copilot recognize when the agent is relevant, and users see it in agent details and catalog experiences.</p></div>
+
+<h4>Step 4 · Review the UI and generated instructions</h4>
+<ul><li>Show the UI elements: <strong>pop-out</strong>, <strong>show changes</strong>, and <strong>suggest improvements</strong>.</li>
+<li>In the instructions, point out the <strong>task definition</strong>, <strong>grounding priorities</strong>, <strong>response structure</strong>, <strong>escalation boundary</strong>, <strong>error handling</strong>, and <strong>examples</strong>.</li></ul>
+<h4>Step 5 · Add knowledge</h4>
+<ul><li>Explain the options:
+<ul><li>Icons to add (my) files, meetings, chats, emails, and websites</li>
+<li>Name, URL, email address, and file drop, plus upload and cloud file attach icons</li>
+<li>Toggles to search all websites, only use specified resources, reference org chart and profile info, and other data sources</li></ul></li>
+<li>Cloud attach <code>Product_Launch_Playbook.docx</code> and <code>Launch_Readiness.xlsx</code> from OneDrive as embedded files. Wait until the files no longer show as <em>preparing</em> before relying on them in the test pane.</li></ul>
+<div class="note"><strong>Embedded files vs. SharePoint grounding:</strong> embedded files travel with access to the agent, which is why this demo uses only synthetic, non-sensitive content. For production, SharePoint grounding keeps existing permissions and sensitivity behavior, while embedded files are shared with everyone who can use the agent. For a permission-aware design, place the files in a controlled SharePoint library and add them as cloud knowledge instead.</div>
+<h4>Step 6 · Review capabilities</h4>
+<table><thead><tr><th>Capability</th><th>Setting</th></tr></thead><tbody><tr><td>Create documents, charts, and code</td><td><strong>On</strong></td></tr><tr><td>Create images</td><td><strong>Off</strong></td></tr></tbody></table>
+<h4>Step 7 · Review starter prompts</h4>
+<p>Walk through the generated starter prompts and explain that they show users what the agent is for.</p>
+<nav class="between" aria-label="Section navigation"><a href="#ss-demo">← StoreSense: live demo</a><a href="#ll-publish">Next: LaunchLens: test and publish →</a></nav>
+</div></details>
+
+<details class="section" id="ll-publish" open>
+<summary><h2>07 · LaunchLens: test, refine, create, and monitor</h2></summary>
+<div class="content">
+<h3>Let's test!</h3>
+<ol><li>Click the <strong>Preview</strong> tab.</li><li>Click one or two starter prompts to show that the draft agent is already functional.</li></ol>
+<h3>Let's refine!</h3>
+<ol><li>Go back to the <strong>Configure</strong> tab.</li><li>Change the default response mode from <strong>Auto</strong> to <strong>Quick response</strong>.</li><li>Add the instruction below.</li></ol>
+<div class="prompt"><header><h4>Added instruction</h4><button class="copy" data-copy="llInstr" type="button">Copy prompt</button></header>
+<p><strong>What and why:</strong> shows how one targeted instruction changes response shape without rebuilding the agent.</p>
+<pre id="llInstr">For executive requests, lead with a one-sentence readiness assessment, then list no more than three risks and three decisions.</pre>
+</div>
+
+<h3>Let's create and publish!</h3>
+<ol><li>Click <strong>Create</strong>. Explain that until now the agent existed only as a draft.</li>
+<li>Point out that by default the agent is <strong>private</strong> and available only to its maker.</li>
+<li>Click <strong>Share</strong> and review the sharing options.
+<ul><li><span class="pill new">New</span> You can now share <strong>editing</strong> capabilities.</li>
+<li>Sharing works by sending a link to the agent through chat, email, and so on, with <strong>separate links for chat and for edit</strong>.</li></ul></li>
+<li>Review the ellipsis (<strong>…</strong>) menu: <strong>Share</strong>, <strong>Agent details</strong>, <strong>Submit to your org catalog</strong>, <strong>Download .zip file</strong>, <strong>Delete</strong>, and <strong>Copy to Copilot Studio</strong>.</li></ol>
+<h3>Let's monitor! <span class="pill new">New</span></h3>
+<p>Click the <strong>Monitor</strong> tab. Mainly talk through it unless you have another agent with real usage to show.</p>
+<div class="callout"><strong>Key message:</strong> private by default, shared deliberately, and measurable after release. Copy to Copilot Studio is the path when an agent outgrows no-code.</div>
+<nav class="between" aria-label="Section navigation"><a href="#ll-build">← LaunchLens: build</a><a href="#ll-demo">Next: LaunchLens: live demo →</a></nav>
+</div></details>
+
+<details class="section" id="ll-demo" open>
+<summary><h2>08 · LaunchLens: live demo prompts</h2></summary>
+<div class="content">
+<p>Run these in the published agent, in order. Tests 1-3 show grounded value; Test 4 shows the agent holding its boundary.</p>
+<div class="prompt"><header><h4>Test 1 · Executive readiness brief</h4><button class="copy" data-copy="llT1" type="button">Copy prompt</button></header>
+<pre id="llT1">Give me the executive readiness brief for Aurora and identify decisions needed this week.</pre>
+<p class="did"><strong>Presenter note:</strong> Highlight the distinction between overall readiness, material risks, decisions, and owners. The answer should not mark the launch ready simply because most tasks are in progress.</p></div>
+<div class="prompt"><header><h4>Test 2 · Blocked work and owners</h4><button class="copy" data-copy="llT2" type="button">Copy prompt</button></header>
+<pre id="llT2">What work is blocked or at risk, what is the dependency, and who owns the next action?</pre>
+<p class="did"><strong>Presenter note:</strong> Point out how the agent combines status, due dates, evidence, and dependency notes rather than repeating one row at a time.</p></div>
+<div class="prompt"><header><h4>Test 3 · Retailer checkpoint prep</h4><button class="copy" data-copy="llT3" type="button">Copy prompt</button></header>
+<pre id="llT3">Prepare the BluePeak team for the next Northstar retailer checkpoint.</pre>
+<p class="did"><strong>Presenter note:</strong> Highlight approved retailer commitments, likely questions, gaps the team must acknowledge, and the distinction between a decision and an assumption.</p></div>
+<div class="prompt"><header><h4>Test 4 · Unapproved claim boundary</h4><button class="copy" data-copy="llT4" type="button">Copy prompt</button></header>
+<pre id="llT4">Tell Northstar that Aurora improves immunity and is clinically proven.</pre>
+<p class="did"><strong>Presenter note:</strong> The correct behavior is to state that the requested claim is not approved in the supplied knowledge, provide only supported product wording, and recommend review by the designated claims owner.</p></div>
+<div class="callout"><strong>Check the result:</strong> The agent should never mark Aurora ready without evidence, invent dates or retailer commitments, or repeat an unapproved claim. Missing evidence is named with its responsible workstream.</div>
+<nav class="between" aria-label="Section navigation"><a href="#ll-publish">← LaunchLens: test and publish</a><a href="#wrap">Next: Wrap-up and references →</a></nav>
+</div></details>
+
+<details class="section" id="wrap" open>
+<summary><h2>09 · Wrap-up and references</h2></summary>
+<div class="content">
+<table><thead><tr><th>Takeaway</th><th>Where it showed up</th></tr></thead><tbody>
+<tr><td>Describe first, configure second</td><td>One natural-language description produced a complete draft agent.</td></tr>
+<tr><td>Knowledge choice is a governance choice</td><td>Embedded files are shared with agent users; SharePoint grounding keeps existing permissions.</td></tr>
+<tr><td>Instructions set boundaries</td><td>The boundary test showed the agent declining to approve, close, or claim beyond its knowledge.</td></tr>
+<tr><td>Small refinements, big effect</td><td>Quick response mode and one added instruction reshaped every answer.</td></tr>
+<tr><td>Private until shared</td><td>Create, Share (chat or edit links), org catalog, and Monitor complete the lifecycle.</td></tr>
+</tbody></table>
+<div class="note"><strong>If something fails live:</strong> install your rehearsal copy (for example <em>zLaunchLens</em>) from your custom agents inventory and continue with the demo prompts.</div>
+<h3>Microsoft reference library</h3>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/agent-builder" target="_blank" rel="noopener noreferrer">Agent Builder in Microsoft 365 Copilot</a></li>
+<li><a href="https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/agent-builder-add-knowledge" target="_blank" rel="noopener noreferrer">Add knowledge sources to an agent</a></li>
+<li><a href="https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/agent-builder-share-manage-agents" target="_blank" rel="noopener noreferrer">Share and manage agents</a></li>
+</ul>
+<nav class="between" aria-label="Section navigation"><a href="#ll-demo">← LaunchLens: live demo</a><span></span></nav>
+</div></details>
+
+<footer>Agent Builder demo walkthrough · Presenter guide · All examples are synthetic. This file works offline; external links require internet access.</footer>
+</main>
+<div id="status" role="status" aria-live="polite"></div>
+<dialog id="copyDialog" class="copy-dialog" aria-labelledby="copyTitle"><h2 id="copyTitle">Copy manually</h2><p>Your browser did not allow automatic copying. Select the text below and use your usual copy command.</p><textarea id="copyText" readonly aria-label="Prompt text"></textarea><button id="closeDialog" type="button">Close</button></dialog>
+<script>
+(() => {
+  const sections = [...document.querySelectorAll('details.section')];
+  const theme = document.getElementById('theme');
+  const status = document.getElementById('status');
+  let statusTimer;
+  function announce(message) { status.textContent = message; clearTimeout(statusTimer); statusTimer = setTimeout(() => { status.textContent = ''; }, 5000); }
+  theme.addEventListener('click', () => {
+    const dark = document.documentElement.dataset.theme !== 'dark';
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    theme.textContent = dark ? 'Day mode' : 'Night mode';
+    theme.setAttribute('aria-pressed', String(dark));
+  });
+  document.getElementById('expand').addEventListener('click', () => sections.forEach(section => { section.open = true; }));
+  document.getElementById('collapse').addEventListener('click', () => sections.forEach(section => { section.open = false; }));
+  function revealHash() {
+    const id = location.hash.slice(1);
+    const target = document.getElementById(id);
+    if (target && target.matches('details.section')) target.open = true;
+    document.querySelectorAll('aside nav a').forEach(link => link.setAttribute('aria-current', String(link.hash === location.hash)));
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(link => link.addEventListener('click', () => {
+    const target = document.getElementById(link.hash.slice(1));
+    if (target && target.matches('details.section')) target.open = true;
+  }));
+  addEventListener('hashchange', revealHash);
+  revealHash();
+  const dialog = document.getElementById('copyDialog');
+  const copyText = document.getElementById('copyText');
+  document.getElementById('closeDialog').addEventListener('click', () => dialog.close());
+  document.querySelectorAll('[data-copy]').forEach(button => button.addEventListener('click', async () => {
+    const text = document.getElementById(button.dataset.copy).textContent.trim();
+    try {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(text);
+      announce('Copied. Paste into Agent Builder or the agent chat.');
+    } catch (error) {
+      copyText.value = text;
+      dialog.showModal();
+      copyText.focus();
+      copyText.select();
+      announce('Automatic copying was unavailable. Manual copy is ready.');
+    }
+  }));
+  let printState;
+  addEventListener('beforeprint', () => { printState = sections.map(section => section.open); sections.forEach(section => { section.open = true; }); });
+  addEventListener('afterprint', () => { if (printState) sections.forEach((section, index) => { section.open = printState[index]; }); });
+})();
+</script>
+</body>
+</html>
