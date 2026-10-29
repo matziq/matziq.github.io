@@ -1,8 +1,15 @@
 {
   "source": "https://www.rockstargames.com/VI",
   "newswire": "https://www.rockstargames.com/newswire",
-  "fetchedAt": "2026-10-29T05:44:10+00:00",
+  "fetchedAt": "2026-10-29T12:57:00+00:00",
   "items": [
+    {
+      "title": "Grand Theft Auto VI: Original Score by Justice",
+      "url": "https://www.rockstargames.com/newswire/article/39ak8a12395591",
+      "date": "October 29, 2026",
+      "isoDate": "2026-10-29",
+      "image": "https://www.rockstargames.com/VI/_next/static/media/39ak8a12395591.0ybs2pkm~3732.jpg?akim=1&imdensity=1&imwidth=640"
+    },
     {
       "title": "Watch the Grand Theft Auto VI Launch Trailer",
       "url": "https://www.rockstargames.com/newswire/article/517572321a549a",
@@ -16,13 +23,6 @@
       "date": "October 8, 2026",
       "isoDate": "2026-10-08",
       "image": "https://www.rockstargames.com/VI/_next/static/media/759875393o5253.0h0t06-9rye35.jpg?akim=1&imdensity=1&imwidth=640"
-    },
-    {
-      "title": "The Music of Grand Theft Auto VI: In-Game Radio Stations",
-      "url": "https://www.rockstargames.com/newswire/article/o3982oa93a23k4",
-      "date": "October 8, 2026",
-      "isoDate": "2026-10-08",
-      "image": "https://www.rockstargames.com/VI/_next/static/media/o3982oa93a23k4.05jwq4z-sjai_.jpg?akim=1&imdensity=1&imwidth=640"
     }
   ]
 }
