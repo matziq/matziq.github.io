@@ -4849,7 +4849,7 @@
     "401873009": {
       "awayScore": 38,
       "awayTeamId": "6",
-      "checkedAt": "2026-10-29T02:32:37Z",
+      "checkedAt": "2026-10-30T05:50:43Z",
       "error": null,
       "eventId": "401873009",
       "explanationPhase": "pregame",
@@ -4886,7 +4886,7 @@
       "hasStarted": true,
       "homeScore": 21,
       "homeTeamId": "21",
-      "lastAttemptAt": "2026-10-29T02:32:37Z",
+      "lastAttemptAt": "2026-10-30T05:50:43Z",
       "pickAssessmentId": "assessment-66f7a273f4bfd1551042ed33",
       "pickCutoffAt": "2026-10-27T00:15:00Z",
       "pickEffectiveAt": "2026-10-25T21:09:19Z",
@@ -5559,7 +5559,7 @@
     "401873019": {
       "awayScore": 30,
       "awayTeamId": "7",
-      "checkedAt": "2026-10-29T02:32:37Z",
+      "checkedAt": "2026-10-30T05:50:43Z",
       "error": null,
       "eventId": "401873019",
       "explanationPhase": "incorrect-final",
@@ -5596,7 +5596,7 @@
       "hasStarted": true,
       "homeScore": 16,
       "homeTeamId": "22",
-      "lastAttemptAt": "2026-10-29T02:32:37Z",
+      "lastAttemptAt": "2026-10-30T05:50:43Z",
       "pickAssessmentId": "assessment-f75b729d1902de025cda98bd",
       "pickCutoffAt": "2026-10-25T20:05:00Z",
       "pickEffectiveAt": "2026-10-25T18:53:08Z",
@@ -5630,7 +5630,7 @@
     "401873020": {
       "awayScore": 17,
       "awayTeamId": "9",
-      "checkedAt": "2026-10-29T02:32:37Z",
+      "checkedAt": "2026-10-30T05:50:43Z",
       "error": null,
       "eventId": "401873020",
       "explanationPhase": "pregame",
@@ -5667,7 +5667,7 @@
       "hasStarted": true,
       "homeScore": 20,
       "homeTeamId": "8",
-      "lastAttemptAt": "2026-10-29T02:32:37Z",
+      "lastAttemptAt": "2026-10-30T05:50:43Z",
       "pickAssessmentId": "assessment-f75b729d1902de025cda98bd",
       "pickCutoffAt": "2026-10-25T20:25:00Z",
       "pickEffectiveAt": "2026-10-25T18:53:08Z",
@@ -5701,7 +5701,7 @@
     "401873021": {
       "awayScore": 35,
       "awayTeamId": "14",
-      "checkedAt": "2026-10-29T02:32:37Z",
+      "checkedAt": "2026-10-30T05:50:43Z",
       "error": null,
       "eventId": "401873021",
       "explanationPhase": "incorrect-final",
@@ -5738,7 +5738,7 @@
       "hasStarted": true,
       "homeScore": 21,
       "homeTeamId": "13",
-      "lastAttemptAt": "2026-10-29T02:32:37Z",
+      "lastAttemptAt": "2026-10-30T05:50:43Z",
       "pickAssessmentId": "assessment-0277ad39b4305fe7b3b42670",
       "pickCutoffAt": "2026-10-25T20:25:00Z",
       "pickEffectiveAt": "2026-10-20T05:26:25Z",
@@ -5841,27 +5841,53 @@
       "winnerTeamId": "26"
     },
     "401873023": {
-      "awayScore": null,
+      "awayScore": 19,
       "awayTeamId": "29",
-      "checkedAt": "2026-10-30T00:14:12Z",
+      "checkedAt": "2026-10-30T05:50:43Z",
       "error": null,
       "eventId": "401873023",
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
-      "fantasyLeaders": null,
-      "firstFinalAt": null,
-      "hasStarted": false,
-      "homeScore": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4241416",
+            "name": "Chuba Hubbard",
+            "points": 24.9,
+            "statLine": "81 rush yds, 1 rush TD, 7 rec, 38 rec yds",
+            "teamId": "29"
+          },
+          {
+            "athleteId": "4047365",
+            "name": "Josh Jacobs",
+            "points": 23.2,
+            "statLine": "39 rush yds, 1 rush TD, 6 rec, 13 rec yds, 1 rec TD",
+            "teamId": "9"
+          },
+          {
+            "athleteId": "4036378",
+            "name": "Jordan Love",
+            "points": 21.52,
+            "statLine": "288 pass yds, 3 pass TD, 1 INT",
+            "teamId": "9"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401873023"
+      },
+      "firstFinalAt": "2026-10-30T05:50:43Z",
+      "hasStarted": true,
+      "homeScore": 27,
       "homeTeamId": "9",
-      "lastAttemptAt": "2026-10-30T00:14:12Z",
+      "lastAttemptAt": "2026-10-30T05:50:43Z",
       "pickAssessmentId": "assessment-1e4b42f8825b19d2dbeb42c4",
-      "pickCutoffAt": null,
+      "pickCutoffAt": "2026-10-30T00:15:00Z",
       "pickEffectiveAt": "2026-10-25T23:52:14Z",
       "pickExplanation": "I now lean toward the Green Bay Packers to beat the Carolina Panthers because Carolina's 43-13 home loss to Tampa Bay exposed turnover and protection problems that the Panthers may struggle to fix on a short Thursday turnaround away from home. Carolina committed four turnovers, was sacked five times and allowed 258 rushing yards, and right tackle Taylor Moton left with a reported fractured fibula that has no confirmed timetable. Green Bay's three straight wins before its 20-17 overtime loss at Detroit, Love's third-down passing, the defense's 48-yard rushing limit against Dallas and Jacobs' activation for his 2026 debut support the home side, while Young and Hubbard's offensive balance, the short Thursday turnaround both teams face, Parsons' uncertain Week 8 clearance, guard Sean Rhyan's ankle injury, center Jacob Monk's questionable quadriceps and Green Bay's later rushing availability keep this a narrow 27-23 Packers forecast.",
-      "pickLockedAt": null,
+      "pickLockedAt": "2026-10-30T05:50:43Z",
       "pickReason": "I now lean toward the Green Bay Packers to beat the Carolina Panthers because Carolina's 43-13 home loss to Tampa Bay exposed turnover and protection problems that the Panthers may struggle to fix on a short Thursday turnaround away from home. Carolina committed four turnovers, was sacked five times and allowed 258 rushing yards, and right tackle Taylor Moton left with a reported fractured fibula that has no confirmed timetable. Green Bay's three straight wins before its 20-17 overtime loss at Detroit, Love's third-down passing, the defense's 48-yard rushing limit against Dallas and Jacobs' activation for his 2026 debut support the home side, while Young and Hubbard's offensive balance, the short Thursday turnaround both teams face, Parsons' uncertain Week 8 clearance, guard Sean Rhyan's ankle injury, center Jacob Monk's questionable quadriceps and Green Bay's later rushing availability keep this a narrow 27-23 Packers forecast.",
-      "pickResult": "pending",
+      "pickResult": "correct",
       "pickRevisionId": "assessment-1e4b42f8825b19d2dbeb42c4:401873023",
       "pregameExplanation": "I now lean toward the Green Bay Packers to beat the Carolina Panthers because Carolina's 43-13 home loss to Tampa Bay exposed turnover and protection problems that the Panthers may struggle to fix on a short Thursday turnaround away from home. Carolina committed four turnovers, was sacked five times and allowed 258 rushing yards, and right tackle Taylor Moton left with a reported fractured fibula that has no confirmed timetable. Green Bay's three straight wins before its 20-17 overtime loss at Detroit, Love's third-down passing, the defense's 48-yard rushing limit against Dallas and Jacobs' activation for his 2026 debut support the home side, while Young and Hubbard's offensive balance, the short Thursday turnaround both teams face, Parsons' uncertain Week 8 clearance, guard Sean Rhyan's ankle injury, center Jacob Monk's questionable quadriceps and Green Bay's later rushing availability keep this a narrow 27-23 Packers forecast.",
       "projectedScore": {
@@ -5874,16 +5900,16 @@
         "pickRevisionId": "assessment-66f7a273f4bfd1551042ed33:401873023",
         "pickTeamId": "9"
       },
-      "projectedScoreLockedAt": null,
+      "projectedScoreLockedAt": "2026-10-30T05:50:43Z",
       "projectedScoreStatus": "available",
-      "resultUpdatedAt": null,
+      "resultUpdatedAt": "2026-10-30T05:50:43Z",
       "scheduledAt": "2026-10-30T00:15:00Z",
       "scoredPickTeamId": "9",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261029",
-      "status": "scheduled",
-      "statusDetail": "Scheduled",
+      "status": "final",
+      "statusDetail": "Final",
       "timeConfirmed": true,
-      "winnerTeamId": null
+      "winnerTeamId": "9"
     },
     "401873024": {
       "awayScore": null,
@@ -13302,14 +13328,14 @@
       "winnerTeamId": null
     }
   },
-  "lastAttemptAt": "2026-10-30T00:14:12Z",
-  "lastResultAt": "2026-10-27T06:50:55Z",
-  "lastSuccessfulCheckAt": "2026-10-30T00:14:12Z",
+  "lastAttemptAt": "2026-10-30T05:50:43Z",
+  "lastResultAt": "2026-10-30T05:50:43Z",
+  "lastSuccessfulCheckAt": "2026-10-30T05:50:43Z",
   "monitoringComplete": false,
-  "nextCheckAt": "2026-10-30T00:19:12Z",
+  "nextCheckAt": "2026-10-30T06:50:43Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-10-30T00:14:12Z",
-  "revision": "ebac02f229cb2f0f2181cf08480e1d1054178cd155f17c745a83dc1fa1648062",
+  "publishedAt": "2026-10-30T05:50:43Z",
+  "revision": "babb78957fe49808124613a6a0e0d8d6be3b3961afe7c8118d1370c6233a44b1",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
