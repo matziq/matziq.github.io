@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AB-620 + AB-100 Exam Prep &mdash; Study Plan to Pass Before March 30, 2027</title>
+<meta name="description" content="A date-driven study plan, calendar, study guides, original practice exams, drills, and flashcards for Microsoft exams AB-620 and AB-100, finishing before March 30, 2027.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Two exams &middot; one plan &middot; hard deadline</div>
+    <h1>Pass AB-620 and AB-100 before March 30, 2027</h1>
+    <p>Take AB-620 (AI Agent Builder Associate) first, then AB-100 (Agentic AI Business Solutions Architect Expert). This site builds a dated study plan from your exam dates and study hours, then gives you study guides, labs, drills, flashcards, and timed practice exams for each one.</p>
+    <div class="hero-stats" id="heroStats"></div>
+  </div>
+</section>
+
+<main id="main"><div class="wrap">
+
+  <div class="grid grid-2" style="margin-bottom:1.5rem">
+    <div class="card">
+      <h3 style="margin-top:0">Next up</h3>
+      <div id="nextUp"></div>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Progress</h3>
+      <div id="progressBox"></div>
+    </div>
+  </div>
+
+  <div id="dykHost"></div>
+
+  <div data-fold-tools></div>
+
+  <details class="acc fold" id="dates" open>
+    <summary>Your exam dates and study settings</summary>
+    <div class="acc-body">
+      <p>Pick dates you can actually book. Change them here at any time and the plan, calendar, and countdown rebuild immediately. Dates are stored as plain calendar days, so they do not shift with time zones.</p>
+      <div id="settingsHost"></div>
+      <div class="timeline" id="timeline" aria-label="Key dates"></div>
+    </div>
+  </details>
+
+  <details class="acc fold" id="why-order">
+    <summary>Why AB-620 first, then AB-100</summary>
+    <div class="acc-body">
+      <ul>
+        <li><strong>The credential math.</strong> The Agentic AI Business Solutions Architect Expert certification requires passing AB-100 <em>and</em> holding at least one qualifying associate certification. AB-620 (Microsoft Certified: AI Agent Builder Associate) is one of the qualifying associates listed on the AB-100 page &mdash; along with others such as PL-200, PL-400, MB-280, and AI-103. If you do not already hold one, passing AB-620 first means the expert credential can be granted as soon as you pass AB-100.</li>
+        <li><strong>Builder before architect.</strong> AB-620 is hands-on Copilot Studio: agent flows, topics, knowledge, tools, MCP, multi-agent, evaluation, and ALM. AB-100 asks you to <em>choose between</em> those same capabilities (and Dynamics 365, Microsoft 365 Copilot, and Foundry options) as an architect. Building first makes architect trade-offs concrete.</li>
+        <li><strong>Retake room.</strong> Microsoft&rsquo;s retake policy requires 24 hours after a first failed attempt and 14 days between later attempts. Putting the harder, expert-level exam last with a buffer before March 30 leaves room to recover.</li>
+      </ul>
+      <div class="callout warn"><span class="callout-title">Exam vs credential</span><p>Passing an exam and earning the credential are different. You can sit AB-100 before you hold a qualifying associate, but the Expert certification is only awarded once both requirements are met. Check the <a href="https://learn.microsoft.com/en-us/credentials/certifications/agentic-ai-business-solutions-architect/" rel="noopener">certification page</a> for the current list.</p></div>
+    </div>
+  </details>
+
+  <details class="acc fold" id="facts">
+    <summary>Exam facts at a glance (verified on Microsoft Learn, October 31, 2026)</summary>
+    <div class="acc-body">
+      <div class="table-scroll"><table class="data-table">
+        <thead><tr><th></th><th>AB-620</th><th>AB-100</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Exam title</strong></td><td>Designing and Building Integrated AI Solutions in Copilot Studio</td><td>Agentic AI Business Solutions Architect</td></tr>
+          <tr><td><strong>Credential</strong></td><td>Microsoft Certified: AI Agent Builder Associate (Intermediate)</td><td>Agentic AI Business Solutions Architect Expert (also needs one qualifying associate)</td></tr>
+          <tr><td><strong>Domains</strong></td><td>Plan and configure agent solutions 30&ndash;35%<br>Integrate and extend agents in Copilot Studio 40&ndash;45%<br>Test and manage agents 20&ndash;25%</td><td>Plan AI-powered business solutions 35&ndash;40%<br>Design AI-powered business solutions 30&ndash;35%<br>Deploy AI-powered business solutions 20&ndash;25%<br><span class="faint">Skills measured as of November 16, 2026</span></td></tr>
+          <tr><td><strong>Time</strong></td><td>120 minutes (certification page); may include interactive components</td><td>Not published on the AB-100 exam page. Microsoft&rsquo;s exam-duration guidance is 100 minutes for role-based exams without labs and 120 minutes when labs may appear &mdash; confirm when you register.</td></tr>
+          <tr><td><strong>Passing score</strong></td><td colspan="2">700 on a scaled 1&ndash;1,000 score. Microsoft states a scaled score may not equal 70% of the points.</td></tr>
+          <tr><td><strong>Number of questions</strong></td><td colspan="2">Not published for either exam. Microsoft says most exams contain 40&ndash;60 questions.</td></tr>
+          <tr><td><strong>Price</strong></td><td colspan="2">Varies by country or region; shown when you schedule.</td></tr>
+          <tr><td><strong>Official practice</strong></td><td colspan="2">Free practice assessments are linked from each exam&rsquo;s Microsoft Learn page.</td></tr>
+          <tr><td><strong>Renewal</strong></td><td colspan="2">Free annual online renewal assessment, available during a six-month window before expiration.</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout trap"><span class="callout-title">700 is not 70%</span><p>The practice exams on this site report <strong>percent correct only</strong>. There is no published formula that converts percent correct into a Microsoft scaled score, so this site does not invent one. The site uses 80% on its own original questions as a personal readiness target &mdash; a study habit, not a prediction.</p></div>
+    </div>
+  </details>
+
+  <details class="acc fold" id="retake">
+    <summary>Deadline, retake policy, and your buffer</summary>
+    <div class="acc-body">
+      <p>Your goal is both exams passed <strong>before March 30, 2027</strong>, so the last usable exam day is <strong>Monday, March 29, 2027</strong>.</p>
+      <ul>
+        <li>First failed attempt: wait at least <strong>24 hours</strong> before retaking.</li>
+        <li>After that: wait at least <strong>14 days</strong> between attempts.</li>
+        <li>No more than <strong>five attempts</strong> of the same exam in 12 months. Each retake is paid unless you have a voucher or offer that covers it.</li>
+      </ul>
+      <p>With the default AB-100 date of March 9, an immediate retake could happen March 10 and a second retake as early as March 24 &mdash; both before the deadline. The settings panel above recalculates this for your dates and warns you when the buffer gets thin.</p>
+      <div class="callout tip"><span class="callout-title">Plan for availability, not just policy</span><p>Policy minimums are not seat availability. Test center and online proctoring slots can fill up, so book your first attempt early and check retake slots the week before your exam.</p></div>
+    </div>
+  </details>
+
+  <details class="acc fold" id="how">
+    <summary>How to use this site</summary>
+    <div class="acc-body">
+      <div class="grid grid-3">
+        <a class="card card-link" href="plan.html"><h3 style="margin-top:0">1. Follow the plan</h3><p>Each study day has 2&ndash;4 tasks linked to the right guide section, lab, drill, or practice exam. Check them off; progress saves in this browser.</p></a>
+        <a class="card card-link" href="ab620.html"><h3 style="margin-top:0">2. Study by objective</h3><p>The AB-620 and AB-100 guides follow the official skills outlines, with labs, exam tips, traps, and Microsoft Learn links.</p></a>
+        <a class="card card-link" href="drills.html"><h3 style="margin-top:0">3. Drill weak spots</h3><p>Short, timed, objective-specific drills and flashcards. Every answer has an explanation.</p></a>
+        <a class="card card-link" href="exams.html"><h3 style="margin-top:0">4. Rehearse</h3><p>Three timed practice exams per certification, with flagging, a question palette, review, and history.</p></a>
+        <a class="card card-link" href="tools.html"><h3 style="margin-top:0">5. Track mistakes</h3><p>Write the rule you missed in the error log and re-drill it. Your score history shows trends by domain.</p></a>
+        <a class="card card-link" href="tips.html"><h3 style="margin-top:0">6. Learn the exam</h3><p>Question types, pacing, using Microsoft Learn during the exam, and a collection of did-you-know facts.</p></a>
+      </div>
+    </div>
+  </details>
+
+  <details class="acc fold" id="checklists">
+    <summary>Booking and exam-day checklists</summary>
+    <div class="acc-body">
+      <p class="muted">Checkmarks save in this browser.</p>
+      <div class="grid grid-2">
+        <div>
+          <h3 style="margin-top:0">Booking (do this early)</h3>
+          <ul class="checklist">
+            <li class="task"><input type="checkbox" id="bk1" data-key="bk1"><label for="bk1">Sign in to Microsoft Learn with a <strong>personal</strong> Microsoft account and complete your certification profile (legal name must match your ID).</label></li>
+            <li class="task"><input type="checkbox" id="bk2" data-key="bk2"><label for="bk2">Schedule AB-620 from the AI Agent Builder Associate certification page through Pearson VUE.</label></li>
+            <li class="task"><input type="checkbox" id="bk3" data-key="bk3"><label for="bk3">Choose test center or online proctored; note the exact time limit shown at registration.</label></li>
+            <li class="task"><input type="checkbox" id="bk4" data-key="bk4"><label for="bk4">Check for vouchers, employer benefits, or offers before paying.</label></li>
+            <li class="task"><input type="checkbox" id="bk5" data-key="bk5"><label for="bk5">Request accommodations (for example, extra time for non-native language) well in advance if needed.</label></li>
+            <li class="task"><input type="checkbox" id="bk6" data-key="bk6"><label for="bk6">Schedule AB-100 from its exam page, leaving a retake buffer before March 29, 2027.</label></li>
+            <li class="task"><input type="checkbox" id="bk7" data-key="bk7"><label for="bk7">Enter both dates in the settings above and import the calendar file.</label></li>
+            <li class="task"><input type="checkbox" id="bk8" data-key="bk8"><label for="bk8">Try the exam interface in the Microsoft exam sandbox (aka.ms/examdemo).</label></li>
+            <li class="task"><input type="checkbox" id="bk9" data-key="bk9"><label for="bk9">Take the free official practice assessment for each exam.</label></li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="margin-top:0">Exam day</h3>
+          <ul class="checklist">
+            <li class="task"><input type="checkbox" id="ed1" data-key="ed1"><label for="ed1">Valid, unexpired government ID whose name matches your profile.</label></li>
+            <li class="task"><input type="checkbox" id="ed2" data-key="ed2"><label for="ed2">Online: run the Pearson VUE system test on the same computer and network you will use.</label></li>
+            <li class="task"><input type="checkbox" id="ed3" data-key="ed3"><label for="ed3">Online: clear desk and room, close other apps, phone out of reach, check in early.</label></li>
+            <li class="task"><input type="checkbox" id="ed4" data-key="ed4"><label for="ed4">Test center: arrive early with your ID and confirmation.</label></li>
+            <li class="task"><input type="checkbox" id="ed5" data-key="ed5"><label for="ed5">Read the last line of each question first; watch for BEST, FIRST, LEAST, and MOST cost-effective.</label></li>
+            <li class="task"><input type="checkbox" id="ed6" data-key="ed6"><label for="ed6">Answer every question &mdash; there is no penalty for guessing. Flag and move on.</label></li>
+            <li class="task"><input type="checkbox" id="ed7" data-key="ed7"><label for="ed7">Use Microsoft Learn during the exam only for a quick fact check; the clock keeps running.</label></li>
+            <li class="task"><input type="checkbox" id="ed8" data-key="ed8"><label for="ed8">Before any break or section change, review flagged items &mdash; you may not be able to go back.</label></li>
+            <li class="task"><input type="checkbox" id="ed9" data-key="ed9"><label for="ed9">Afterward: save your score report and note weak areas, even if you passed.</label></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="acc fold" id="sources">
+    <summary>Official sources</summary>
+    <div class="acc-body">
+      <p>Every exam fact on this site came from these Microsoft Learn pages, checked October 31, 2026. Microsoft can update them at any time &mdash; always confirm before you test.</p>
+      <ul class="source-list">
+        <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ab-620" rel="noopener">Study guide for Exam AB-620</a> &mdash; skills measured, domain weights, audience profile.</li>
+        <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/ai-agent-builder-associate/" rel="noopener">Microsoft Certified: AI Agent Builder Associate</a> &mdash; scheduling, time, practice assessment, renewal.</li>
+        <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/exams/ab-100/" rel="noopener">Exam AB-100: Agentic AI Business Solutions Architect</a> &mdash; scheduling and qualifying prerequisites.</li>
+        <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ab-100" rel="noopener">Study guide for Exam AB-100</a> &mdash; skills measured as of November 16, 2026.</li>
+        <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/agentic-ai-business-solutions-architect/" rel="noopener">Agentic AI Business Solutions Architect Expert certification</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/credentials/support/exam-duration-exam-experience" rel="noopener">Exam duration and exam experience</a> &mdash; question counts, breaks, Microsoft Learn access.</li>
+        <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/exam-scoring-reports" rel="noopener">Exam scoring and score reports</a> &mdash; 700 scaled passing score, no guessing penalty.</li>
+        <li><a href="https://learn.microsoft.com/en-us/credentials/support/retake-policy" rel="noopener">Exam retake policy</a> &mdash; 24 hours, 14 days, five attempts in 12 months.</li>
+        <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/renew-your-microsoft-certification" rel="noopener">Renew your Microsoft Certification</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/request-accommodations" rel="noopener">Request exam accommodations</a></li>
+        <li><a href="https://aka.ms/examdemo" rel="noopener">Exam sandbox (try the exam interface)</a></li>
+      </ul>
+    </div>
+  </details>
+
+</div></main>
+<footer id="footer"></footer>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    function refresh() {
+        var s = ABX.settings(), today = ABX.todayYmd(), plan = ABX.buildPlan(s);
+        var d1 = ABX.daysBetween(today, s.ab620), d2 = ABX.daysBetween(today, s.ab100), d3 = ABX.daysBetween(today, ABX.LAST_OK);
+        document.getElementById("heroStats").innerHTML =
+            '<div class="hero-stat"><div class="n">' + Math.max(0, d1) + '</div><div class="l">days to AB-620 &middot; ' + ABX.fmtShort(s.ab620) + "</div></div>" +
+            '<div class="hero-stat"><div class="n">' + Math.max(0, d2) + '</div><div class="l">days to AB-100 &middot; ' + ABX.fmtShort(s.ab100) + "</div></div>" +
+            '<div class="hero-stat"><div class="n">' + Math.max(0, d3) + '</div><div class="l">days to last allowable day &middot; Mon Mar 29</div></div>' +
+            '<div class="hero-stat"><div class="n">' + plan.sessions.length + '</div><div class="l">study sessions &middot; ' + s.hours + " h/week</div></div>";
+        var nx = ABX.nextSession(), ov = ABX.overdueCount(), h = "";
+        if (nx) {
+            h += '<p style="margin-bottom:.3rem"><span class="badge ' + (nx.exam === "ab620" ? "tag-ab620" : "tag-ab100") + '">' + ABX.examLabel(nx.exam) + "</span> <strong>" + ABX.fmtLong(nx.date) + "</strong></p>" +
+                "<p style=\"margin-bottom:.5rem\">" + ABX.escapeHtml(nx.title) + "</p><ul>";
+            for (var i = 0; i < nx.tasks.length; i++) h += "<li>" + (nx.tasks[i].href ? '<a href="' + nx.tasks[i].href + '">' + nx.tasks[i].t + "</a>" : nx.tasks[i].t) + "</li>";
+            h += '</ul><a class="btn sm" href="plan.html#s-' + nx.date + '">Open in plan</a>';
+        } else h = "<p>No remaining sessions. Check your dates in the settings below.</p>";
+        if (ov) h += '<p class="faint" style="margin:.6rem 0 0">' + ov + " earlier session" + (ov === 1 ? " is" : "s are") + " not fully checked off.</p>";
+        document.getElementById("nextUp").innerHTML = h;
+        var a = ABX.progress("ab620"), b = ABX.progress("ab100");
+        var hist = ABX.store.get("history", {}), best = { ab620: null, ab100: null };
+        for (var k in hist) { var r = hist[k]; if (r && best[r.core] !== undefined && (best[r.core] === null || r.pct > best[r.core])) best[r.core] = r.pct; }
+        document.getElementById("progressBox").innerHTML =
+            '<div class="meter-row"><span class="mlabel">AB-620 plan tasks</span><span class="meter"><i class="good" data-pct="' + a.pct + '"></i></span><span class="mval">' + a.done + "/" + a.total + "</span></div>" +
+            '<div class="meter-row"><span class="mlabel">AB-100 plan tasks</span><span class="meter"><i class="good" data-pct="' + b.pct + '"></i></span><span class="mval">' + b.done + "/" + b.total + "</span></div>" +
+            '<p class="faint" style="font-size:.85rem;margin:.6rem 0 0">Best practice exam: AB-620 ' + (best.ab620 === null ? "not taken" : best.ab620 + "%") +
+            " &middot; AB-100 " + (best.ab100 === null ? "not taken" : best.ab100 + "%") + ' (percent correct). <a href="tools.html#history">History</a></p>';
+        ABX.autoFillMeters(document.getElementById("progressBox"));
+        var ms = ABX.milestones(s), t = "";
+        for (var m = 0; m < ms.length; m++) {
+            var cls = ms[m].type === "deadline" ? " dead" : (ms[m].title.indexOf("AB-100") >= 0 ? " ab100" : "");
+            t += '<div class="tl-row' + cls + '"><span class="tl-date">' + ABX.fmtShort(ms[m].date) + ", " + ms[m].date.slice(0, 4) + "</span><span>" + ms[m].title + "</span></div>";
+        }
+        document.getElementById("timeline").innerHTML = t;
+    }
+    ABX.renderSettings(document.getElementById("settingsHost"), refresh);
+    ABX.renderDyk(document.getElementById("dykHost"));
+    ABX.bindPersistentChecks("checklist");
+    refresh();
+});
+</script>
+</body>
+</html>

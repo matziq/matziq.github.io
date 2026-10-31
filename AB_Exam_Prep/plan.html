@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Study Plan &amp; Calendar &mdash; AB-620 + AB-100 Exam Prep</title>
+<meta name="description" content="Date-driven AB-620 and AB-100 study plan with a month calendar, checkable tasks, and calendar export.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+<main id="main"><div class="wrap">
+  <h1 style="margin-top:1.5rem">Study plan and calendar</h1>
+  <p class="lede">Built from your exam dates, study days, and weekly hours. About 70% of sessions teach the official objectives in proportion to domain weight; the rest are timed practice exams, review, and a final taper before each exam.</p>
+
+  <div data-fold-tools></div>
+
+  <details class="acc fold" id="settings">
+    <summary>Dates, hours, and study days</summary>
+    <div class="acc-body"><div id="settingsHost"></div></div>
+  </details>
+
+  <details class="acc fold" id="calendar" open>
+    <summary>Month calendar</summary>
+    <div class="acc-body">
+      <div id="calHost"></div>
+      <p class="faint" style="font-size:.85rem;margin-top:.8rem">The .ics file contains all-day events for every study session and milestone, so it imports cleanly into Outlook, Google Calendar, or Apple Calendar without time-zone shifts. Re-download it after you change dates.</p>
+    </div>
+  </details>
+
+  <details class="acc fold" id="howplan">
+    <summary>How the plan is built</summary>
+    <div class="acc-body">
+      <ul>
+        <li><strong>Window A (AB-620):</strong> from your plan start date to the day before AB-620. <strong>Window B (AB-100):</strong> from the day after AB-620 to the day before AB-100.</li>
+        <li>Each objective group gets at least one session; extra sessions go to groups in proportion to the midpoint of the official domain weight. Multi-session groups move through learn &rarr; lab &rarr; drill.</li>
+        <li>When there is room, a domain review session follows each domain. Each window then ends with three timed practice exams, review sessions, and a taper day.</li>
+        <li>Session length is your weekly hours divided by your study days. If a window is too short, groups are combined, and the settings panel warns you.</li>
+        <li>Checkmarks are stored by date and exam. If you move dates, some checked work may move to different days &mdash; that is expected.</li>
+      </ul>
+      <div class="callout tip"><span class="callout-title">Missed a day?</span><p>Do not try to double up. Do the oldest unchecked session next, and if you fall more than a week behind, add a study day in the settings or push the exam date (keeping the retake buffer).</p></div>
+    </div>
+  </details>
+
+  <div class="btn-row" style="margin:1.5rem 0 .5rem">
+    <button class="btn sm secondary" type="button" id="jumpToday">Jump to next session</button>
+    <label class="faint" style="display:inline-flex;align-items:center;gap:.4rem;font-size:.88rem"><input type="checkbox" id="hidePast" style="width:auto"> Hide completed weeks</label>
+  </div>
+  <div id="planHost"></div>
+</div></main>
+<footer id="footer"></footer>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var host = document.getElementById("planHost");
+    function weekStart(ymd) { var d = ABX.parseYmd(ymd); return ABX.toYmd(ABX.addDays(d, -((d.getDay() + 6) % 7))); }
+    function render() {
+        var s = ABX.settings(), p = ABX.buildPlan(s), map = ABX.doneMap(), today = ABX.todayYmd();
+        var hide = document.getElementById("hidePast").checked, hrs = Math.round(p.perSessionHours * 10) / 10;
+        var weeks = {}, order = [];
+        for (var i = 0; i < p.sessions.length; i++) {
+            var w = weekStart(p.sessions[i].date);
+            if (!weeks[w]) { weeks[w] = []; order.push(w); }
+            weeks[w].push(p.sessions[i]);
+        }
+        var ms = ABX.milestones(s), msBy = {};
+        for (var m = 0; m < ms.length; m++) { var mw = weekStart(ms[m].date); (msBy[mw] = msBy[mw] || []).push(ms[m]); if (!weeks[mw]) { weeks[mw] = []; order.push(mw); } }
+        order.sort();
+        var h = "";
+        for (var wi = 0; wi < order.length; wi++) {
+            var wk = order[wi], list = weeks[wk], allDone = list.length > 0;
+            for (var a = 0; a < list.length; a++) if (!ABX.sessionDone(list[a], map)) allDone = false;
+            if (hide && allDone && !msBy[wk]) continue;
+            var exams = {};
+            for (a = 0; a < list.length; a++) exams[list[a].exam] = 1;
+            h += '<details class="acc fold" id="w-' + wk + '"' + (ABX.daysBetween(wk, today) >= 0 && ABX.daysBetween(today, ABX.addYmd(wk, 6)) >= 0 ? " open" : (ABX.daysBetween(today, wk) > 0 && ABX.daysBetween(today, wk) <= 7 ? " open" : "")) + ">" +
+                "<summary>Week of " + ABX.fmtShort(wk) + ", " + wk.slice(0, 4) + " &nbsp;" +
+                Object.keys(exams).map(function (e) { return '<span class="badge tag-' + e + '">' + ABX.examLabel(e) + "</span>"; }).join(" ") +
+                (allDone ? ' <span class="badge good">Done</span>' : "") + "</summary><div class=\"acc-body\">";
+            var mm = msBy[wk] || [];
+            for (var x = 0; x < mm.length; x++) h += '<div class="callout ' + (mm[x].type === "deadline" || mm[x].type.indexOf("exam") === 0 ? "trap" : "warn") + '"><span class="callout-title">' + ABX.fmtLong(mm[x].date) + "</span><p>" + mm[x].title + "</p></div>";
+            for (a = 0; a < list.length; a++) {
+                var se = list[a], done = ABX.sessionDone(se, map), past = ABX.daysBetween(se.date, today) > 0;
+                var tag = se.kind.indexOf("pe") === 0 ? "tag-pe" : (/rev|taper/.test(se.kind) ? "tag-review" : "tag-" + se.exam);
+                h += '<div class="day-card' + (se.date === today ? " is-today" : "") + (past ? " is-past" : "") + (done ? " all-done" : "") + '" id="s-' + se.date + '">' +
+                    '<div class="day-head"><span class="day-chip">' + ABX.fmtShort(se.date) + '</span><span class="day-focus">' + ABX.escapeHtml(se.title) + '</span>' +
+                    '<span class="badge ' + tag + '">' + ABX.examLabel(se.exam) + '</span><span class="day-time">~' + hrs + " h</span></div>";
+                for (var t = 0; t < se.tasks.length; t++) {
+                    var id = "t-" + se.key.replace(/\W/g, "") + "-" + t,                     k = ABX.taskKey(se, t);
+                                        h += '<div class="task"><input type="checkbox" id="' + id + '" data-tk="' + k + '"' + (map[k] ? " checked" : "") + '><label for="' + id + '">' +
+                        se.tasks[t].t + (se.tasks[t].href ? ' &nbsp;<a href="' + se.tasks[t].href + '">Open &rarr;</a>' : "") + "</label></div>";
+                }
+                h += "</div>";
+            }
+            h += "</div></details>";
+        }
+        host.innerHTML = h || '<div class="card"><p>No sessions. Check your dates and study days.</p></div>';
+        ABX.renderCalendar(document.getElementById("calHost"));
+    }
+    host.addEventListener("change", function (e) {
+        var b = e.target;
+        if (!b.getAttribute || !b.getAttribute("data-tk")) return;
+        if (!ABX.setDone(b.getAttribute("data-tk"), b.checked)) { b.checked = !b.checked; ABX.toast("Could not save that checkmark: local storage is blocked or full.", 5000); return; }
+        var card = b.closest(".day-card"), boxes = card.querySelectorAll("input[type=checkbox]"), all = true;
+        for (var i = 0; i < boxes.length; i++) if (!boxes[i].checked) all = false;
+        card.classList.toggle("all-done", all);
+        ABX.renderCalendar(document.getElementById("calHost"));
+    });
+    document.getElementById("hidePast").addEventListener("change", render);
+    document.getElementById("jumpToday").addEventListener("click", function () {
+        var nx = ABX.nextSession();
+        if (!nx) { ABX.toast("No upcoming sessions."); return; }
+        var el = document.getElementById("s-" + nx.date);
+        if (el) { var d = el.closest("details"); if (d) d.open = true; el.scrollIntoView({ block: "center" }); }
+    });
+    ABX.renderSettings(document.getElementById("settingsHost"), render);
+    render();
+    if (location.hash.indexOf("#s-") === 0) {
+        var t = document.getElementById(location.hash.slice(1));
+        if (t) { var dd = t.closest("details"); if (dd) dd.open = true; setTimeout(function () { t.scrollIntoView({ block: "center" }); }, 50); }
+    }
+});
+</script>
+</body>
+</html>

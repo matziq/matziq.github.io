@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AB-620 Practice Exam 1 &mdash; AB-620 + AB-100 Exam Prep</title>
+<meta name="description" content="AB-620 Practice Exam 1: 40 original, unofficial timed practice questions with explanations and review.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+<main id="main"><div class="wrap">
+    <p class="no-print" style="margin:1rem 0 0"><a href="exams.html">&larr; All practice exams</a></p>
+    <h1 class="no-print">AB-620 Practice Exam 1</h1>
+    <p class="unofficial no-print">Original, unofficial practice questions. Not real exam content; not affiliated with Microsoft. Scores are percent correct only.</p>
+    <div id="app"></div>
+</div></main>
+<footer id="footer"></footer>
+<script src="assets/data/exam1.js"></script>
+<script src="assets/test-engine.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    ABX.Test.mount({
+        el: document.getElementById("app"),
+        testId: "exam1",
+        core: "ab620",
+        title: "AB-620 Practice Exam 1",
+        blurb: "Your first full AB-620 rehearsal, taken after you finish studying all three domains. Forty original questions weighted to the published domain ranges, at about two minutes each.",
+        sections: ["exam1"]
+    });
+});
+</script>
+</body>
+</html>

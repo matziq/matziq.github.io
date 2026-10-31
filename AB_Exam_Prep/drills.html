@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Topic Drills &mdash; AB-620 + AB-100 Exam Prep</title>
+<meta name="description" content="Short, timed, objective-by-objective drills for AB-620 and AB-100 with explanations.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+<main id="main"><div class="wrap">
+  <div id="listView">
+    <h1 style="margin-top:1.5rem">Topic drills</h1>
+    <p class="lede">One drill per official objective group: six original questions, eight minutes, full explanations. Use them right after studying a section and again whenever a practice exam flags that objective.</p>
+    <p class="unofficial">Original, unofficial practice questions. Not real exam content; not affiliated with or endorsed by Microsoft.</p>
+    <div data-fold-tools></div>
+    <div id="drillList"></div>
+  </div>
+  <div id="drillView" hidden>
+    <p style="margin:1rem 0 0"><a href="drills.html">&larr; All drills</a></p>
+    <div id="app"></div>
+  </div>
+</div></main>
+<footer id="footer"></footer>
+<script src="assets/data/drills-ab620.js"></script>
+<script src="assets/data/drills-ab100.js"></script>
+<script src="assets/test-engine.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var m = /[?&]set=([\w-]+)/.exec(location.search);
+    if (m) {
+        document.getElementById("listView").hidden = true;
+        document.getElementById("drillView").hidden = false;
+        ABX.Test.mountDrill({ el: document.getElementById("app"), drillId: m[1] });
+        return;
+    }
+    var all = (window.ABX_DATA && ABX_DATA.drills) || [], scores = ABX.store.get("drillScores", {}), h = "";
+    ["ab620", "ab100"].forEach(function (ex) {
+        var info = ABX.EXAMS[ex];
+        h += '<details class="acc fold" id="d-' + ex + '" open><summary>' + info.code + " &mdash; " + info.name + "</summary><div class=\"acc-body\">";
+        info.domains.forEach(function (dom, di) {
+            h += "<h3>" + dom.name + ' <span class="badge">' + dom.weight + "%</span></h3><div class=\"grid grid-3\">";
+            info.groups.filter(function (g) { return g.d === di; }).forEach(function (g) {
+                var id = ex + "-" + g.id, set = null;
+                for (var i = 0; i < all.length; i++) if (all[i].id === id) set = all[i];
+                var sc = scores[id];
+                h += '<a class="card card-link" href="drills.html?set=' + id + '"><span class="badge tag-' + ex + '">' + info.code + " " + g.id.replace("-", ".") + "</span>" +
+                    '<h3 style="margin:.5rem 0 .3rem">' + g.name + "</h3>" +
+                    '<p class="muted" style="font-size:.9rem">' + (set ? ABX.escapeHtml(set.blurb || "") : "Drill content not loaded.") + "</p>" +
+                    '<p class="faint" style="font-size:.82rem;margin:0">' + (set ? set.questions.length + " questions &middot; " + (set.timeMinutes || 8) + " min" : "") +
+                    (sc ? ' &middot; best <strong>' + sc.pct + "%</strong>" : " &middot; not tried") + "</p></a>";
+            });
+            h += "</div>";
+        });
+        h += "</div></details>";
+    });
+    document.getElementById("drillList").innerHTML = h;
+});
+</script>
+</body>
+</html>

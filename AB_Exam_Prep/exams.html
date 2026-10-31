@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice Exams &mdash; AB-620 + AB-100 Exam Prep</title>
+<meta name="description" content="Three timed, original practice exams each for AB-620 and AB-100, with review and score history.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+<main id="main"><div class="wrap">
+  <h1 style="margin-top:1.5rem">Practice exams</h1>
+  <p class="lede">Six full-length rehearsals: three for AB-620 and three for AB-100. Each has 40 original questions weighted to the published domain ranges, an 80-minute timer you can turn off, flagging, a question palette, and per-question explanations.</p>
+  <p class="unofficial">Original, unofficial practice questions written for this site. They do not reproduce real exam content, are not affiliated with Microsoft, and cannot guarantee a passing result.</p>
+  <div data-fold-tools></div>
+
+  <details class="acc fold" id="scoring" open>
+    <summary>How scoring works here (read once)</summary>
+    <div class="acc-body">
+      <ul>
+        <li>Results show <strong>percent correct</strong>, by domain and by objective group. Nothing on this site converts that to a Microsoft scaled score &mdash; Microsoft does not publish a conversion, and 700 on its 1&ndash;1,000 scale is not the same as 70%.</li>
+        <li>The <strong>80% readiness target</strong> is this site&rsquo;s study heuristic for original questions. It is a signal to book or keep your date, not a prediction.</li>
+        <li>Real exams can include case studies, drag-and-drop, build-list, and other formats. These practice sets use single-answer multiple choice so you can drill the decisions behind those formats.</li>
+        <li>Take the official free practice assessment on Microsoft Learn too &mdash; it is the best guide to the real question style.</li>
+      </ul>
+    </div>
+  </details>
+
+  <div id="examList"></div>
+</div></main>
+<footer id="footer"></footer>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var hist = ABX.store.get("history", {}), h = "", blurbs = ["After you finish studying all domains", "After reviewing set 1", "Dress rehearsal near exam day"];
+    ["ab620", "ab100"].forEach(function (ex) {
+        var info = ABX.EXAMS[ex];
+        h += '<details class="acc fold" id="pe-' + ex + '" open><summary>' + info.code + " practice exams</summary><div class=\"acc-body\"><div class=\"grid grid-3\">";
+        info.exams.forEach(function (id, i) {
+            var p = ABX.PRACTICE[id], r = hist[id], run = ABX.store.get("run:" + id, null);
+            var status = r ? '<span class="badge ' + (r.pct >= ABX.READY_PCT ? "good" : r.pct >= ABX.READY_PCT - 15 ? "amber" : "bad") + '">Last: ' + r.pct + "% correct</span>"
+                : (run && run.startedAt && !run.finishedAt ? '<span class="badge amber">In progress</span>' : '<span class="badge">Not taken</span>');
+            h += '<a class="card card-link" href="' + p.file + '"><span class="badge tag-' + ex + '">' + info.code + " &middot; Set " + (i + 1) + "</span>" +
+                '<h3 style="margin:.5rem 0 .3rem">' + p.label + '</h3><p class="muted" style="font-size:.9rem">40 questions &middot; 80 minutes &middot; ' + blurbs[i] + "</p>" + status + "</a>";
+        });
+        h += "</div></div></details>";
+    });
+    document.getElementById("examList").innerHTML = h;
+});
+</script>
+</body>
+</html>
