@@ -655,7 +655,7 @@
         "After a first failed attempt you wait 24 hours to retake; after that, each retake requires a 14-day wait, and you get at most five attempts in 12 months.",
         "Role-based certifications renew free each year with an online, unproctored, open-book assessment during a six-month window.",
         "AB-620 is one of several associate certifications that satisfy the prerequisite for the Agentic AI Business Solutions Architect Expert.",
-        "The AB-100 skills outline changed effective November 16, 2026 \u2014 make sure you study the new version.",
+        "This site follows the AB-100 skills outline version effective November 16, 2026 \u2014 check the official study guide for the version that applies to your exam date.",
         "You can try the exam interface ahead of time in Microsoft\u2019s exam sandbox at aka.ms/examdemo.",
         "If an exam is not offered in your preferred language, you can request 30 extra minutes as an accommodation.",
         "Multi-part questions can earn partial credit, so answer every part you are confident about.",
