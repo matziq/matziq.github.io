@@ -5843,7 +5843,7 @@
     "401873023": {
       "awayScore": 19,
       "awayTeamId": "29",
-      "checkedAt": "2026-11-02T02:49:24Z",
+      "checkedAt": "2026-11-03T09:44:06Z",
       "error": null,
       "eventId": "401873023",
       "explanationPhase": "pregame",
@@ -5880,7 +5880,7 @@
       "hasStarted": true,
       "homeScore": 27,
       "homeTeamId": "9",
-      "lastAttemptAt": "2026-11-02T02:49:24Z",
+      "lastAttemptAt": "2026-11-03T09:44:06Z",
       "pickAssessmentId": "assessment-1e4b42f8825b19d2dbeb42c4",
       "pickCutoffAt": "2026-10-30T00:15:00Z",
       "pickEffectiveAt": "2026-10-25T23:52:14Z",
@@ -6695,7 +6695,7 @@
     "401873035": {
       "awayScore": 10,
       "awayTeamId": "21",
-      "checkedAt": "2026-11-03T02:22:59Z",
+      "checkedAt": "2026-11-03T09:44:06Z",
       "error": null,
       "eventId": "401873035",
       "explanationPhase": "pregame",
@@ -6732,7 +6732,7 @@
       "hasStarted": true,
       "homeScore": 27,
       "homeTeamId": "28",
-      "lastAttemptAt": "2026-11-03T02:22:59Z",
+      "lastAttemptAt": "2026-11-03T09:44:06Z",
       "pickAssessmentId": "assessment-f75b729d1902de025cda98bd",
       "pickCutoffAt": "2026-11-02T01:20:00Z",
       "pickEffectiveAt": "2026-10-25T18:53:08Z",
@@ -6764,27 +6764,53 @@
       "winnerTeamId": "28"
     },
     "401873036": {
-      "awayScore": null,
+      "awayScore": 34,
       "awayTeamId": "3",
-      "checkedAt": "2026-11-03T02:22:59Z",
+      "checkedAt": "2026-11-03T09:44:06Z",
       "error": null,
       "eventId": "401873036",
-      "explanationPhase": "pregame",
+      "explanationPhase": "awaiting-review",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
-      "fantasyLeaders": null,
-      "firstFinalAt": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4259545",
+            "name": "D'Andre Swift",
+            "points": 27.9,
+            "statLine": "69 rush yds, 3 rush TD, 2 rec, 10 rec yds",
+            "teamId": "3"
+          },
+          {
+            "athleteId": "4430878",
+            "name": "Jaxon Smith-Njigba",
+            "points": 23.8,
+            "statLine": "6 rec, 118 rec yds, 1 rec TD",
+            "teamId": "26"
+          },
+          {
+            "athleteId": "4685278",
+            "name": "Luther Burden III",
+            "points": 18.6,
+            "statLine": "7 rec, 56 rec yds, 1 rec TD",
+            "teamId": "3"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401873036"
+      },
+      "firstFinalAt": "2026-11-03T09:44:06Z",
       "hasStarted": true,
-      "homeScore": null,
+      "homeScore": 17,
       "homeTeamId": "26",
-      "lastAttemptAt": "2026-11-03T02:22:59Z",
+      "lastAttemptAt": "2026-11-03T09:44:06Z",
       "pickAssessmentId": "assessment-48e3ab7fc81e010a9e9fb742",
       "pickCutoffAt": "2026-11-03T01:15:00Z",
       "pickEffectiveAt": "2026-10-26T03:58:04Z",
       "pickExplanation": "I expect the Seattle Seahawks to beat the Chicago Bears because Seattle's defense and home crowd should combine for an edge against Chicago, whose 5-2 record keeps it a credible opponent, and the Seahawks' 20-3 Sunday-night win over Kansas City (213 yards allowed and no red-zone trip for the Chiefs) supports the defensive case. The home setting should help, but neither that setting nor the expected advantage will make the result certain, especially with Jones' hamstring, Shaheed's knee and Cross' ankle injuries from the Kansas City game still unresolved.",
       "pickLockedAt": "2026-11-03T02:22:59Z",
       "pickReason": "I expect the Seattle Seahawks to beat the Chicago Bears because Seattle's defense and home crowd should combine for an edge against Chicago, whose 5-2 record keeps it a credible opponent, and the Seahawks' 20-3 Sunday-night win over Kansas City (213 yards allowed and no red-zone trip for the Chiefs) supports the defensive case. The home setting should help, but neither that setting nor the expected advantage will make the result certain, especially with Jones' hamstring, Shaheed's knee and Cross' ankle injuries from the Kansas City game still unresolved.",
-      "pickResult": "pending",
+      "pickResult": "incorrect",
       "pickRevisionId": "assessment-48e3ab7fc81e010a9e9fb742:401873036",
       "pregameExplanation": "I expect the Seattle Seahawks to beat the Chicago Bears because Seattle's defense and home crowd should combine for an edge against Chicago, whose 5-2 record keeps it a credible opponent, and the Seahawks' 20-3 Sunday-night win over Kansas City (213 yards allowed and no red-zone trip for the Chiefs) supports the defensive case. The home setting should help, but neither that setting nor the expected advantage will make the result certain, especially with Jones' hamstring, Shaheed's knee and Cross' ankle injuries from the Kansas City game still unresolved.",
       "projectedScore": {
@@ -6799,14 +6825,14 @@
       },
       "projectedScoreLockedAt": "2026-11-03T02:22:59Z",
       "projectedScoreStatus": "available",
-      "resultUpdatedAt": null,
+      "resultUpdatedAt": "2026-11-03T09:44:06Z",
       "scheduledAt": "2026-11-03T01:15:00Z",
       "scoredPickTeamId": "26",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261102",
-      "status": "in_progress",
-      "statusDetail": "In progress - awaiting final",
+      "status": "final",
+      "statusDetail": "Final",
       "timeConfirmed": true,
-      "winnerTeamId": null
+      "winnerTeamId": "3"
     },
     "401873037": {
       "awayScore": null,
@@ -13640,14 +13666,14 @@
       "winnerTeamId": null
     }
   },
-  "lastAttemptAt": "2026-11-03T02:22:59Z",
-  "lastResultAt": "2026-11-02T10:04:56Z",
-  "lastSuccessfulCheckAt": "2026-11-03T02:22:59Z",
+  "lastAttemptAt": "2026-11-03T09:44:06Z",
+  "lastResultAt": "2026-11-03T09:44:06Z",
+  "lastSuccessfulCheckAt": "2026-11-03T09:44:06Z",
   "monitoringComplete": false,
-  "nextCheckAt": "2026-11-03T02:27:59Z",
+  "nextCheckAt": "2026-11-03T10:44:06Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-11-03T02:22:59Z",
-  "revision": "df95af38627f8b1ddd75ef2ecc4202e1695e8dd1746841ec78a1e611ba40ea4e",
+  "publishedAt": "2026-11-03T09:44:06Z",
+  "revision": "ec277ae80b1a3f5e1a22b841b7bb33c8c78a6ad7ff8aaef853077e83f5ea50ba",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
