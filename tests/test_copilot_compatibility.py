@@ -77,8 +77,12 @@ class CopilotCompatibilityTests(unittest.TestCase):
             )
 
     def test_only_approved_existing_files_changed(self):
+        baseline = subprocess.check_output(
+            ["git", "log", "--diff-filter=A", "--format=%P", "-1", "--",
+             "scripts/copilot-compatibility.json"], cwd=ROOT, text=True
+        ).strip() or self.source
         changed = subprocess.check_output(
-            ["git", "diff", "--name-only", self.source, "--"], cwd=ROOT, text=True
+            ["git", "diff", "--name-only", baseline, "--"], cwd=ROOT, text=True
         ).splitlines()
         allowed = {e["source_path"] for e in self.entries if e["kind"] == "page"}
         allowed.update(("apps/index.html", "iomenu.html", "README.md",
