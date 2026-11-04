@@ -1,0 +1,506 @@
+{
+  "main_site": {
+    "repo": "matziq/matziq.github.io",
+    "source_sha": "708a21c7e5853dedcdb844b63795b8e1bcf0228c",
+    "candidates": [
+      "Copilot_Adoption_Activity_Catalog-1.html",
+      "GH-300_exam_prep",
+      "elc_copilot_training",
+      "mac-copilot-session-q7m4v8",
+      "elc-student-fb7ed91b834e1690917159b8b48546db",
+      "mcbc-student-3b7ac36db1fab0fccfccba2714232db9",
+      "026192ae374a3439bbed72afe1507cc6",
+      "20901b762ea9fc9116eef6c877af3bca",
+      "314158474651607767",
+      "acdaeb237a16bab74f80d063fba665de"
+    ],
+    "file_count": 53,
+    "excluded": "AI-900, AI-901, AB-100, AB-620 prep and all other non-Copilot content"
+  },
+  "training": {
+    "repo": "matziq/copilot-training-docs",
+    "source_sha": "025efa67f3a7e4f98b33f660e91b45975d6d2af6",
+    "file_count": 515,
+    "note": "Old project subtree handled by native Pages project-domain redirect; no parent shadow subtree."
+  },
+  "collisions": [],
+  "main_site_entries": [
+    {
+      "source_path": "026192ae374a3439bbed72afe1507cc6/index.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/026192ae374a3439bbed72afe1507cc6/",
+      "new_url": "https://copilotdocs.org/026192ae374a3439bbed72afe1507cc6/",
+      "compatibility": "redirect stub",
+      "source_sha256": "7a72823c0fdffab96adb84f68631ce941cacf405fc8f769f8e72cb4171677b37",
+      "source_clean_blob": "e0f38009f61a1751fa07b404865410e5a13027d1"
+    },
+    {
+      "source_path": "20901b762ea9fc9116eef6c877af3bca/index.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/20901b762ea9fc9116eef6c877af3bca/",
+      "new_url": "https://copilotdocs.org/20901b762ea9fc9116eef6c877af3bca/",
+      "compatibility": "redirect stub",
+      "source_sha256": "3bb19e68d4dc738ed6206589878ce9e40bef2ab4017d9d68bec773e79715b883",
+      "source_clean_blob": "c5b21a4af8fa4bf9f437aabb2e1d3d44557f3bc2"
+    },
+    {
+      "source_path": "314158474651607767/favicon.svg",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/314158474651607767/favicon.svg",
+      "new_url": "https://copilotdocs.org/314158474651607767/favicon.svg",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "b119dd2c1df297785c6a51de1170a6a03d8713a8fa2f7d57d3b136c56047c19f",
+      "source_clean_blob": "527680c9566dbbf2fdae384c22dc97037348049b"
+    },
+    {
+      "source_path": "314158474651607767/index.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/314158474651607767/",
+      "new_url": "https://copilotdocs.org/314158474651607767/",
+      "compatibility": "redirect stub",
+      "source_sha256": "43757ee5486c8e5357cb2c3ddb2ecbcd7feb23054f195c9b2d754786c070936f",
+      "source_clean_blob": "5192eaeb5010298e30b2acce40c63ef8f1a9c749"
+    },
+    {
+      "source_path": "Copilot_Adoption_Activity_Catalog-1.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/Copilot_Adoption_Activity_Catalog-1.html",
+      "new_url": "https://copilotdocs.org/Copilot_Adoption_Activity_Catalog-1.html",
+      "compatibility": "redirect stub",
+      "source_sha256": "fef6bc33b6df1f6d20c32056cbf611dc45f634f62b52b81fe768233454484d02",
+      "source_clean_blob": "1dc2aeb4f08b0648785ef0df59dae38ec3c23bcc"
+    },
+    {
+      "source_path": "GH-300_exam_prep/assets/app.js",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/assets/app.js",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/assets/app.js",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "2f531332f673be83d62104f1a1b3ffdbc755d59c3bd18e937f28e1c53b1cd415",
+      "source_clean_blob": "8c5d48cdb93f26938f069ac8d421f70d8571b24a"
+    },
+    {
+      "source_path": "GH-300_exam_prep/assets/data/drills.js",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/assets/data/drills.js",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/assets/data/drills.js",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "4ba39c3438a28191dcc866b6a0abc56f4ed73e0962b701b4eb43de8a935457cb",
+      "source_clean_blob": "231d73aa1ec18586e75351a2115b436df72d9ead"
+    },
+    {
+      "source_path": "GH-300_exam_prep/assets/data/exam1.js",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/assets/data/exam1.js",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/assets/data/exam1.js",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "732aae395abcf01f0b9bdc484a787262b45ff30a8d893c72fc5b29974ccf1e21",
+      "source_clean_blob": "fd99d1aff0ae238ee1f989f7f064e72518c86a66"
+    },
+    {
+      "source_path": "GH-300_exam_prep/assets/data/exam2.js",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/assets/data/exam2.js",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/assets/data/exam2.js",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "4bb8c9516cb0bff6c1b5a20922db5579c03b9f2b09ab0ed93674b6adb18b206b",
+      "source_clean_blob": "dfb2e07cee3c5ae393adeea70dd761b471b0147d"
+    },
+    {
+      "source_path": "GH-300_exam_prep/assets/data/exam3.js",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/assets/data/exam3.js",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/assets/data/exam3.js",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "5ec43b7d2105f3f0ead9e6f64bd191833b40f8c035499ce2bea8e8ec68c29e59",
+      "source_clean_blob": "44171323465166acebeeb2a2d21195f9c18232b4"
+    },
+    {
+      "source_path": "GH-300_exam_prep/assets/data/flashcards.js",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/assets/data/flashcards.js",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/assets/data/flashcards.js",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "ee858d63fa3437ab9aae536a495cc85fd853cc3cb469322d15058564cd835b25",
+      "source_clean_blob": "894099f2a876c00c9489564db0f87f988ec240bd"
+    },
+    {
+      "source_path": "GH-300_exam_prep/assets/favicon.svg",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/assets/favicon.svg",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/assets/favicon.svg",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "0433694406acd1c58cb91cd89b6bd330d66feb7633fadb8ce74e621d4c93a56e",
+      "source_clean_blob": "93e40fc1a295ffae98fbb1b50ed9f8f63a746b7c"
+    },
+    {
+      "source_path": "GH-300_exam_prep/assets/styles.css",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/assets/styles.css",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/assets/styles.css",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "d9af7820ac8e8aa3ac4763001cc6b9dca861f36cb081c10eebd8e26908553135",
+      "source_clean_blob": "9d91378534ff71d9055151898884e6b47b858d43"
+    },
+    {
+      "source_path": "GH-300_exam_prep/assets/test-engine.js",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/assets/test-engine.js",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/assets/test-engine.js",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "fa25cfd5ea6b83e855778f67e5c6a92880b45533232e1fa7ab175fb84ef9f348",
+      "source_clean_blob": "be3aeb4d67baf9a65c3730f4a338edb41347d5b4"
+    },
+    {
+      "source_path": "GH-300_exam_prep/data-architecture.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/data-architecture.html",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/data-architecture.html",
+      "compatibility": "redirect stub",
+      "source_sha256": "87e9fdbd79a645b915a59b3a51e774ce9300bd7a623ea0de0ade4490e985b0d1",
+      "source_clean_blob": "aa4e2ca561a8bb0f7c653ff1065387229d58d5dd"
+    },
+    {
+      "source_path": "GH-300_exam_prep/drills.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/drills.html",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/drills.html",
+      "compatibility": "redirect stub",
+      "source_sha256": "3760db5282261cd1538fe1eda9184d74849f60aa6836427e6b5ec7a073a1cbfb",
+      "source_clean_blob": "42cd05172098063d1fc2027b2e581cd85cbb7dc0"
+    },
+    {
+      "source_path": "GH-300_exam_prep/exams.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/exams.html",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/exams.html",
+      "compatibility": "redirect stub",
+      "source_sha256": "c90ed58d84bf25c4aa1e2830360b78548fceab0ea2265978474ce3fcfd09dbf7",
+      "source_clean_blob": "19c930049cfb642835fcf6b105bcd6dbcdc4eda3"
+    },
+    {
+      "source_path": "GH-300_exam_prep/features-ide.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/features-ide.html",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/features-ide.html",
+      "compatibility": "redirect stub",
+      "source_sha256": "bebcbd7bf2e42c44b0c68bf69dc140df2595b33b8a406d7155c94155c031281f",
+      "source_clean_blob": "3938d4388ef072553437a30391fefffdb9763ecb"
+    },
+    {
+      "source_path": "GH-300_exam_prep/features-platform.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/features-platform.html",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/features-platform.html",
+      "compatibility": "redirect stub",
+      "source_sha256": "9714ef879246406d7b0e91273ed376fc8ebb62ed59d53f9dc4ec0a086d07e6e4",
+      "source_clean_blob": "59cfb0242a9303ccef27a5ee6ce8508f0fa6dfe0"
+    },
+    {
+      "source_path": "GH-300_exam_prep/index.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/",
+      "compatibility": "redirect stub",
+      "source_sha256": "b282b6d6fb84493ba42344bd0fdf4f8b54126627c504e7dd38af0e074f29d686",
+      "source_clean_blob": "3688b305bdf62bf4329933102fd1db834baa1fe5"
+    },
+    {
+      "source_path": "GH-300_exam_prep/plan.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/plan.html",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/plan.html",
+      "compatibility": "redirect stub",
+      "source_sha256": "14a543a19628753aaa461a1d8c01f6f3a94b45e8ff7715886b290d62939c94fe",
+      "source_clean_blob": "dff772c80438204f4c2ee4b16691246ae8d7a7f3"
+    },
+    {
+      "source_path": "GH-300_exam_prep/practice-exam-1.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/practice-exam-1.html",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/practice-exam-1.html",
+      "compatibility": "redirect stub",
+      "source_sha256": "b79ef41a6bb7eae2918310f132ed38266c3c02a9f80a14dceae8f64f39b80c5a",
+      "source_clean_blob": "7fa37fdd4c8655d2cff3920f9c539f63cbd49e2b"
+    },
+    {
+      "source_path": "GH-300_exam_prep/practice-exam-2.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/practice-exam-2.html",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/practice-exam-2.html",
+      "compatibility": "redirect stub",
+      "source_sha256": "22ab3c836d9dee0b5aea2a4530310550959de176f09c8257001de81c0a7cad3a",
+      "source_clean_blob": "fc2fa8de4b69258bde76d114f52e4c97d61ac004"
+    },
+    {
+      "source_path": "GH-300_exam_prep/practice-exam-3.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/practice-exam-3.html",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/practice-exam-3.html",
+      "compatibility": "redirect stub",
+      "source_sha256": "8de52e052410d329d9443a6c6c0828c8fcc213800b0c366290785c9dcb73ec50",
+      "source_clean_blob": "e0f1c4d27ea17a1f37e8e10933f5c237f2e91117"
+    },
+    {
+      "source_path": "GH-300_exam_prep/privacy.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/privacy.html",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/privacy.html",
+      "compatibility": "redirect stub",
+      "source_sha256": "27a3c5d0595407895ad2758e2aea1fd833e5fcef2847099e3d8236aab5f0da51",
+      "source_clean_blob": "facfc7a57ad21b811996dc53cf9f61e2eedc6e44"
+    },
+    {
+      "source_path": "GH-300_exam_prep/productivity.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/productivity.html",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/productivity.html",
+      "compatibility": "redirect stub",
+      "source_sha256": "f97b9832cf635736c7c721535ae894e2566a2ae9720a3f511faa0b58caffaf83",
+      "source_clean_blob": "6d5097fb8ac747e306e2583758a8b6399c70a765"
+    },
+    {
+      "source_path": "GH-300_exam_prep/prompting.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/prompting.html",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/prompting.html",
+      "compatibility": "redirect stub",
+      "source_sha256": "756abdeda4974aa572bae27e6efc9a534d8c6ddb68268ab39cbc915397060f10",
+      "source_clean_blob": "086911b1dfafe116afd2d2af60ae801fe15a8ec8"
+    },
+    {
+      "source_path": "GH-300_exam_prep/responsible.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/responsible.html",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/responsible.html",
+      "compatibility": "redirect stub",
+      "source_sha256": "7a017ee80f7dfe4934e77a0fad4399b30244e14efd866de7fef142353092e8ae",
+      "source_clean_blob": "ceb023ef6b0f8fdbe3f32a39fd433681decaa031"
+    },
+    {
+      "source_path": "GH-300_exam_prep/tools.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/GH-300_exam_prep/tools.html",
+      "new_url": "https://copilotdocs.org/GH-300_exam_prep/tools.html",
+      "compatibility": "redirect stub",
+      "source_sha256": "27f894bc6a8b3e6d41889e256752ca8294f96484c9c9c20e1a519521bfcc5947",
+      "source_clean_blob": "23788df17ab8114fedb8b9d15af3ba5906224281"
+    },
+    {
+      "source_path": "acdaeb237a16bab74f80d063fba665de/index.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/acdaeb237a16bab74f80d063fba665de/",
+      "new_url": "https://copilotdocs.org/acdaeb237a16bab74f80d063fba665de/",
+      "compatibility": "redirect stub",
+      "source_sha256": "eb9286ac0525bde2a7bb4b2ddd5c89e6316aa7cfed930e82376c6a04cf08d6fb",
+      "source_clean_blob": "b6e11496e53c539c85b74c6e6100f4674556e347"
+    },
+    {
+      "source_path": "elc-student-fb7ed91b834e1690917159b8b48546db/index.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/elc-student-fb7ed91b834e1690917159b8b48546db/",
+      "new_url": "https://copilotdocs.org/elc-student-fb7ed91b834e1690917159b8b48546db/",
+      "compatibility": "redirect stub",
+      "source_sha256": "310a6f503ebed5b98f8a75ffa6fcfd2431cd1e756ff95e416d03aeb684b2b4d8",
+      "source_clean_blob": "cdcf394f8a66bf0f9ee1cda62be6de53259e8b6d"
+    },
+    {
+      "source_path": "elc_copilot_training/Demo-Files/01-Quality-Topic-Update.txt",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/elc_copilot_training/Demo-Files/01-Quality-Topic-Update.txt",
+      "new_url": "https://copilotdocs.org/elc_copilot_training/Demo-Files/01-Quality-Topic-Update.txt",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "dc5c274d0fa07d866b69ce706dd48212cd1f2b23d9d9d7b92b49d9301afae145",
+      "source_clean_blob": "c22f9c1ef98d63dedde7c1fee88ffe248ec75386"
+    },
+    {
+      "source_path": "elc_copilot_training/Demo-Files/02-Quality-Procedure-Change.txt",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/elc_copilot_training/Demo-Files/02-Quality-Procedure-Change.txt",
+      "new_url": "https://copilotdocs.org/elc_copilot_training/Demo-Files/02-Quality-Procedure-Change.txt",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "62a5d8e62ff695c94d0bf721d91988183eb6098ca3c2d88f3bffab8c20ce2388",
+      "source_clean_blob": "39eaeed397b0b012b6ab9dab41c00681ce50697a"
+    },
+    {
+      "source_path": "elc_copilot_training/Demo-Files/03-External-Guidance-Excerpt.txt",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/elc_copilot_training/Demo-Files/03-External-Guidance-Excerpt.txt",
+      "new_url": "https://copilotdocs.org/elc_copilot_training/Demo-Files/03-External-Guidance-Excerpt.txt",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "a5b144130558462d04e8d6bbf12734129dc116c7582797a035112f9d89ca933e",
+      "source_clean_blob": "c97f239d53d9cf43a335e8d3ac3eb944d6f31850"
+    },
+    {
+      "source_path": "elc_copilot_training/Demo-Files/04-Weak-Prompt-Practice.txt",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/elc_copilot_training/Demo-Files/04-Weak-Prompt-Practice.txt",
+      "new_url": "https://copilotdocs.org/elc_copilot_training/Demo-Files/04-Weak-Prompt-Practice.txt",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "a8a150fab473596d7167f5d2b6bf0b15ddc543ad7aa52252b275371b1a7bc67a",
+      "source_clean_blob": "97c0bbeb4c3f6e4be7c7e59f7be5c6ff40f5f5fb"
+    },
+    {
+      "source_path": "elc_copilot_training/Demo-Files/05-Fictional-Nonconformance-Data.csv",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/elc_copilot_training/Demo-Files/05-Fictional-Nonconformance-Data.csv",
+      "new_url": "https://copilotdocs.org/elc_copilot_training/Demo-Files/05-Fictional-Nonconformance-Data.csv",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "ed1d43ac330bb274971b89b1191505891af5da60cfd8d7098e29a7ceac56dbd7",
+      "source_clean_blob": "921c1fb64b5f6369f478183bc5399feca3874be1"
+    },
+    {
+      "source_path": "elc_copilot_training/Demo-Files/06-Packaging-Investigation-Brief.pdf",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/elc_copilot_training/Demo-Files/06-Packaging-Investigation-Brief.pdf",
+      "new_url": "https://copilotdocs.org/elc_copilot_training/Demo-Files/06-Packaging-Investigation-Brief.pdf",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "a4f8215b58d1dae508d9f8b1e6623d04db1f1cd0d503b596848ce51d3616f5b7",
+      "source_clean_blob": "009e5e1ea0f05c9abc75803ce5620629ff759da1"
+    },
+    {
+      "source_path": "elc_copilot_training/Demo-Files/README.txt",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/elc_copilot_training/Demo-Files/README.txt",
+      "new_url": "https://copilotdocs.org/elc_copilot_training/Demo-Files/README.txt",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "289da7b01da3f875c294cb627e125d345368cb71f6a98f5d8da8941ed0157710",
+      "source_clean_blob": "26f09e492621cfe48e9cc54b0f7dba92957d0b10"
+    },
+    {
+      "source_path": "elc_copilot_training/Estee-Lauder-Digital-Atelier-Copilot-Quality-Prompt-Guide.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/elc_copilot_training/Estee-Lauder-Digital-Atelier-Copilot-Quality-Prompt-Guide.html",
+      "new_url": "https://copilotdocs.org/elc_copilot_training/Estee-Lauder-Digital-Atelier-Copilot-Quality-Prompt-Guide.html",
+      "compatibility": "redirect stub",
+      "source_sha256": "74ff3baf5d637f3350c933f0156a7c1aa3c6446f5a20dd49d771130f23ee9650",
+      "source_clean_blob": "949acc846aa46703d2c99d3623e063091fea0f33"
+    },
+    {
+      "source_path": "elc_copilot_training/favicon-elc-copilot-training.svg",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/elc_copilot_training/favicon-elc-copilot-training.svg",
+      "new_url": "https://copilotdocs.org/elc_copilot_training/favicon-elc-copilot-training.svg",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "5f4c94907cc05dd75b83d981e9b2d15347bb1d41dfa5c5a3e31eb2174d0e07cd",
+      "source_clean_blob": "019467c3f67ecb13b5be5147f05fcbdbf5e3abf7"
+    },
+    {
+      "source_path": "elc_copilot_training/index.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/elc_copilot_training/",
+      "new_url": "https://copilotdocs.org/elc_copilot_training/",
+      "compatibility": "redirect stub",
+      "source_sha256": "74ff3baf5d637f3350c933f0156a7c1aa3c6446f5a20dd49d771130f23ee9650",
+      "source_clean_blob": "949acc846aa46703d2c99d3623e063091fea0f33"
+    },
+    {
+      "source_path": "mac-copilot-session-q7m4v8/index.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/mac-copilot-session-q7m4v8/",
+      "new_url": "https://copilotdocs.org/mac-copilot-session-q7m4v8/",
+      "compatibility": "redirect stub",
+      "source_sha256": "438765543b3cf323b4c3c8d7442e30bd1046aa0d8230ac9884e92246cfd8dba5",
+      "source_clean_blob": "a8746dd7cbcb194d22155ebff3a38df1b2b85128"
+    },
+    {
+      "source_path": "mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d01-weekly-status-brief.txt",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d01-weekly-status-brief.txt",
+      "new_url": "https://copilotdocs.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d01-weekly-status-brief.txt",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "2523af185fb7c30f5a95b9e649fdf0328b71280a1958d073f66d506ecbc8e554",
+      "source_clean_blob": "6aaf860fb9732870d04ac4880fc27117ff6f2ae2"
+    },
+    {
+      "source_path": "mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d02-formula-and-policy.txt",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d02-formula-and-policy.txt",
+      "new_url": "https://copilotdocs.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d02-formula-and-policy.txt",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "392e9b2ed9ad62f6b4b1dbb52db4f6817796d42746e942dfcf8c454774528383",
+      "source_clean_blob": "2dfda362a8d20be12a30ceff81e793d65cf81062"
+    },
+    {
+      "source_path": "mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d03-bank-and-ledger.html",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d03-bank-and-ledger.html",
+      "new_url": "https://copilotdocs.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d03-bank-and-ledger.html",
+      "compatibility": "retain byte-for-byte at old path; no redirect stub",
+      "source_sha256": "d40faa00c5251a0625078cb23de1ee6d0fb2e32d6ec94d10d2d98212e23e949b",
+      "source_clean_blob": "2011ddbd5be6d26d94d38ca7d308ad707f002973"
+    },
+    {
+      "source_path": "mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d04-vendor-extract.csv",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d04-vendor-extract.csv",
+      "new_url": "https://copilotdocs.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d04-vendor-extract.csv",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "ac84a43d55762c9ea6e1fea515bba8e7abd5e6465259e87b11d6c0a9abbf1f67",
+      "source_clean_blob": "338021a4b7b490b8ed133f38878ba362738df838"
+    },
+    {
+      "source_path": "mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d05-blocked-invoices.csv",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d05-blocked-invoices.csv",
+      "new_url": "https://copilotdocs.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d05-blocked-invoices.csv",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "575b62b66faa24f609d35478b2879267f8f7cc91e691ae8147cfb7422470d601",
+      "source_clean_blob": "9e14033a11e6770274d95c679ca4757ccbbf4245"
+    },
+    {
+      "source_path": "mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d06-erp-error.txt",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d06-erp-error.txt",
+      "new_url": "https://copilotdocs.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d06-erp-error.txt",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "0d12f927f29d801a04de2768dcbf6a6ceefc9a64b51a5181019c6ffb6f5e30f1",
+      "source_clean_blob": "e63dcae2ad3e4e5ec09b094c6f67413019886d50"
+    },
+    {
+      "source_path": "mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d07-credit-block-notes.pdf",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d07-credit-block-notes.pdf",
+      "new_url": "https://copilotdocs.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d07-credit-block-notes.pdf",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "001a03ce8afe4ba14ff8aeb320dda499c237d55c24c452977eb674c3dda1aa1b",
+      "source_clean_blob": "d210afe83d2c2fa51272c46b4b4dbcc4c0562bce"
+    },
+    {
+      "source_path": "mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d08-process-change-brief.pdf",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d08-process-change-brief.pdf",
+      "new_url": "https://copilotdocs.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d08-process-change-brief.pdf",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "b60c4aa8b8f0af2f3bed3535c4a1cd2d6a5d4d3a90b82f9e2c40780fed3fd615",
+      "source_clean_blob": "17398e4c317147a81be91c9529d69d01a2f76a45"
+    },
+    {
+      "source_path": "mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d09-vendor-inquiry-mail.html",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d09-vendor-inquiry-mail.html",
+      "new_url": "https://copilotdocs.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d09-vendor-inquiry-mail.html",
+      "compatibility": "retain byte-for-byte at old path; no redirect stub",
+      "source_sha256": "0f9c00274ff9e046f6033158c3317e416ec592bc1e3ba952f2cbe06c3f430f42",
+      "source_clean_blob": "a7036e87ab8dc41c9db950a214a1d83003686eba"
+    },
+    {
+      "source_path": "mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d10-public-source-pack.pdf",
+      "kind": "asset",
+      "old_url": "https://memconfigmgr.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d10-public-source-pack.pdf",
+      "new_url": "https://copilotdocs.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/MCBC_practice_sources/d10-public-source-pack.pdf",
+      "compatibility": "retain byte-for-byte at old path",
+      "source_sha256": "49d851d01c7dff6fd346abc8027cda1712805aa98e48be0078536db6b8f14c35",
+      "source_clean_blob": "e995fd9fe612b0da79216c310c81962ed18ab65f"
+    },
+    {
+      "source_path": "mcbc-student-3b7ac36db1fab0fccfccba2714232db9/index.html",
+      "kind": "page",
+      "old_url": "https://memconfigmgr.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/",
+      "new_url": "https://copilotdocs.org/mcbc-student-3b7ac36db1fab0fccfccba2714232db9/",
+      "compatibility": "redirect stub",
+      "source_sha256": "6042393ce4c23eb90d90f5afd7c1bbb56b6023da5f69cba94458caabf489e93e",
+      "source_clean_blob": "47f93a3c1020c766f433641eee060965f99f6a2d"
+    }
+  ]
+}

@@ -1,295 +1,35 @@
 <!DOCTYPE html>
-<html lang="en-US" dir="ltr">
+<html lang="en-US">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="dark light">
-<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
-<link rel="icon" type="image/svg+xml" href="../images/favicon-mac-copilot-session-q7m4v8.svg">
-<title>MAC | Copilot hands-on working session | Open it. Run it. Check it.</title>
+<title>Moved &mdash; Copilot documentation</title>
+<link rel="canonical" href="https://copilotdocs.org/mac-copilot-session-q7m4v8/">
+<meta name="robots" content="noindex, follow">
+<meta http-equiv="refresh" content="0; url=https://copilotdocs.org/mac-copilot-session-q7m4v8/">
+<script>
+  (function () {
+    var target = "https://copilotdocs.org/mac-copilot-session-q7m4v8/";
+    location.replace(target + window.location.search + window.location.hash);
+  })();
+</script>
 <style>
-:root{--bg:#000;--card:#141414;--ink:#fff;--muted:#E7E6E6;--line:#44546A;--accent:#E0A8DE;--accent-ink:#E0A8DE;--red:#C01511;--cream:#F2E7DA;--blue:#BDD7EF;--green:#DAE398;--chartreuse:#C1D054;--neutral:#E7E6E6;--slate:#44546A;--soft:#1c1c1c;--code:#F2E7DA;--code-ink:#0c0c0d;--code-line:#E7E6E6;--on-fill:#0c0c0d;--head:#000;--head-ink:#fff;--head-muted:#E7E6E6;--head-eyebrow:#fff;--focus:#E0A8DE;--link-underline:#E0A8DE}
-body{color-scheme:dark}
-body.light{color-scheme:light;--bg:#fff;--card:#fff;--ink:#0c0c0d;--muted:#44546A;--line:#E7E6E6;--accent-ink:#0c0c0d;--soft:#F2E7DA;--head:#fff;--head-ink:#0c0c0d;--head-muted:#44546A;--focus:#0c0c0d}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:30px}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 'Ano Regular','Segoe UI',Arial,sans-serif}
-h1,h2,h3,h4,summary,.brand{font-family:'Oswald','Oswald Medium','Segoe UI Semibold',Arial,sans-serif;font-weight:600;letter-spacing:.5px}
-a{color:var(--accent-ink);text-decoration-color:var(--link-underline);text-decoration-thickness:2px;text-underline-offset:3px}a:hover{text-decoration-thickness:3px}
-button,input{font:inherit}
-button{cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:6px}
-button:hover{border-color:var(--accent);background:var(--accent);color:var(--on-fill)}
-:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
-.skip{position:absolute;inset-inline-start:-10000px}
-.skip:focus{inset-inline-start:10px;top:10px;z-index:10;background:var(--card);padding:12px}
-header{background:var(--head);color:var(--head-ink);padding:42px max(28px,5vw);border-bottom:1px solid var(--accent);text-align:center}
-header .brand{font-size:30px;letter-spacing:6px;text-transform:uppercase;line-height:1}
-header h1{font-size:clamp(34px,5vw,64px);line-height:1.05;max-width:950px;margin:22px auto 18px;text-transform:uppercase;letter-spacing:1px}
-header p{max-width:900px;color:var(--head-muted);margin:8px auto}
-header .sub{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--head-muted);margin-top:12px}
-header .line{font-size:18px;color:var(--head-ink)}
-.eyebrow{display:inline-block;text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:700;color:#fff;background:var(--red);padding:3px 9px;border-radius:3px;line-height:1.4;margin:0 0 8px}
-header .eyebrow{color:var(--head-eyebrow)}
-.badge{display:inline-block;margin-top:18px;padding:6px 14px;border:1px solid var(--accent);border-radius:30px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--head-ink)}
-.shell{display:grid;grid-template-columns:270px minmax(0,1fr);max-width:1500px;margin:auto}
-aside{padding:25px 20px;position:sticky;top:0;height:100vh;overflow:auto;border-inline-end:1px solid var(--line)}
-aside nav a{display:block;padding:7px 9px;text-decoration:none;color:var(--muted);border-inline-start:3px solid transparent;font-size:14px}
-aside nav a:hover{color:var(--accent-ink);border-color:var(--accent)}
-aside nav a.active{color:var(--on-fill);border-color:var(--accent);background:var(--accent)}
-main{padding:28px;min-width:0;max-width:1150px}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
-.section{margin-bottom:20px;border:1px solid var(--line);border-radius:10px;background:var(--card);overflow:hidden;scroll-margin-top:20px}
-.section>summary{cursor:pointer;font-size:22px;padding:22px;line-height:1.3;text-transform:uppercase;letter-spacing:1px}
-.section>summary:hover{background:var(--soft)}
-.content{padding:0 25px 26px}
-.content h3{font-size:19px;margin-top:28px;text-transform:uppercase;letter-spacing:1px}
-.big{font-size:19px;line-height:1.5}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-.card,.callout{padding:19px;border:1px solid var(--line);border-radius:8px}
-.callout{border-inline-start:4px solid var(--accent);background:var(--soft);margin:18px 0}
-.callout p:last-child,.card p:last-child,.card ul:last-child,.callout ul:last-child{margin-bottom:0}
-.card h3{margin-top:0}
-.card.tips{margin:18px 0}
-.tags{margin:6px 0 10px}
-.tag{display:inline-block;padding:3px 10px;border:1px solid var(--line);border-radius:30px;font-size:12px;margin:0 6px 8px 0}
-.tag.core{background:var(--red);color:#fff;border-color:var(--red)}
-.tag.deep{background:var(--chartreuse);color:var(--on-fill);border-color:var(--chartreuse)}
-.tag.synthetic{letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--ink);border-color:var(--red);font-size:11px}
-.rhythm{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:6px}
-.rhythm span:nth-child(odd){padding:3px 10px;border:1px solid var(--line);border-radius:4px}
-.prompt{background:var(--code);color:var(--code-ink);padding:20px;border-radius:8px;border:1px solid var(--code-line);margin:20px 0}
-.prompt.mini{padding:12px 16px;margin:10px 0}
-.prompt.mini pre{margin:6px 0 0}
-.prompt.mini h4{font-size:15px}
-.prompt-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.prompt h4{margin:0;font-size:18px;color:var(--code-ink)}
-.prompt button{background:#fff;color:var(--code-ink);border-color:var(--slate)}
-.prompt button:hover{background:var(--accent);border-color:var(--accent)}
-.prompt :focus-visible{outline-color:var(--code-ink)}
-.lead{color:var(--muted);margin:10px 0 0;font-size:15px}
-.prompt .lead{color:var(--slate)}
-pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,'Courier New',monospace;margin:14px 0 0;tab-size:12}
-.callout.success{border-inline-start-color:var(--green)}
-.callout.fallback{background:var(--card);border-inline-start-color:var(--blue)}
-.cue{border-inline-start:3px solid var(--accent);padding-inline-start:16px;margin:16px 0;color:var(--muted)}
-.show{list-style:none;padding:0;margin:0}
-.show li{display:flex;gap:16px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
-.show li:last-child{border-bottom:0}
-.num{flex:0 0 46px;font-size:26px;font-weight:600;font-family:'Oswald','Oswald Medium','Segoe UI Semibold',Arial,sans-serif;color:var(--accent-ink);line-height:1.2}
-.checklist{list-style:none;padding:0;margin:0}
-.checklist li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
-.checklist li:last-child{border-bottom:0}
-.checklist input{width:20px;height:20px;margin-top:4px;accent-color:var(--accent);flex:0 0 auto}
-.compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin:20px 0}
-.compare>div{padding:19px;border-radius:8px;border:1px solid var(--line)}
-.compare .weak p:last-child{text-decoration:line-through;color:var(--muted);margin:0}
-.compare .strong{border-inline-start:4px solid var(--green);background:var(--soft)}
-.compare .strong p:last-child{margin:0}
-.table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px}
-th,td{text-align:start;padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
-th{background:var(--accent);color:var(--on-fill);text-transform:uppercase;letter-spacing:1px;font-size:12px}
-.sources li{margin-bottom:8px}
-.section-nav{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding-top:18px;margin-top:24px}
-.muted{color:var(--muted)}
-#status{position:fixed;bottom:18px;inset-inline-end:18px;max-width:90vw;background:var(--accent);color:var(--on-fill);padding:0 18px;border-radius:8px;z-index:10}
-#status:not(:empty){padding:12px 18px}
-footer{padding:25px;color:var(--muted);font-size:14px;text-align:center;border-top:1px solid var(--accent)}
-footer p{margin:0 0 8px}
-footer .strip{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink)}
-@media(max-width:850px){.shell{display:block}aside{position:relative;height:auto;border-inline-end:0;border-bottom:1px solid var(--line)}aside nav{columns:2}main{padding:15px}.content{padding:0 18px 20px}.section>summary{font-size:19px}header{padding:30px 22px}header h1{font-size:clamp(30px,9vw,44px)}}
-@media(max-width:560px){aside nav{columns:1}.prompt-head button{width:100%}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-@media print{aside,.toolbar,button,.section-nav,#status,.skip{display:none!important}.shell{display:block}header{background:white;color:black;border-bottom:1px solid black;padding:20px}header p,header .badge,header .line,header .brand{color:black;border-color:black}.eyebrow{background:none;color:#000;padding:0}main{max-width:none;padding:0}.section{break-inside:auto}.prompt,.card,.callout{break-inside:avoid}body,body.light{color-scheme:light;--bg:#fff;--card:#fff;--ink:#111;--muted:#444;--line:#bbb;--accent:#000;--accent-ink:#000;--red:#000;--soft:#fff;--code:#fff;--code-line:#000;--code-ink:#000;--on-fill:#fff;--green:#000;--blue:#000;--chartreuse:#fff}footer{color:#000}details>summary{list-style:none}.content{display:block!important}.tag.core{color:#000;background:#fff;border-color:#000}.tag.deep{color:#000;border-color:#000}th{background:#fff;color:#000;border-bottom:2px solid #000}}
+  body{margin:0;min-height:100vh;box-sizing:border-box;display:grid;place-items:center;
+       font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+       background:#f3f0e6;color:#0f2d45;padding:2rem;text-align:center}
+  main{max-width:42rem;overflow-wrap:anywhere}
+  a{color:#14557d}
+  h1{font-size:1.4rem;margin:0 0 .75rem}
+  p{margin:.75rem 0}
+  @media (prefers-color-scheme:dark){body{background:#071b2b;color:#f2efe6}a{color:#82c7ec}}
 </style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<header id="top">
-<div class="brand">M·A·C</div>
-<p class="sub">MAC COSMETICS / THE ESTÉE LAUDER COMPANIES</p>
-<p class="eyebrow">Microsoft 365 Copilot · Hands-on working session</p>
-<h1>Open it. Run it. Check it.</h1>
-<p class="line">30-minute hands-on working session · Outlook · Excel + Analyst · Word + Researcher · PowerPoint</p>
-<span class="badge">MICROSOFT 365 COPILOT WORKING SESSION — SYNTHETIC TRAINING CONTENT — SEPTEMBER 2026</span>
-</header>
-<div class="shell">
-<aside>
-<p class="eyebrow">Participant guide</p>
-<nav aria-label="Table of contents"><a href="#before">Before you start</a><a href="#kit">Synthetic practice kit</a><a href="#researcher">00 / Researcher — start it now</a><a href="#outlook">01 / Outlook</a><a href="#excel">02 / Excel</a><a href="#analyst">03 / Analyst</a><a href="#word">04 / Word + Researcher</a><a href="#powerpoint">05 / PowerPoint</a></nav>
-</aside>
-<main id="main">
-<div class="toolbar">
-<button aria-pressed="false" id="theme" type="button">Light mode</button>
-<button id="collapse" type="button">Collapse all</button>
-<button id="expand" type="button">Expand all</button>
-<button id="print" type="button">Print guide</button>
-</div>
-<details class="section" id="before" open><summary>Before you start</summary><div class="content">
-<ul class="checklist">
-<li><input type="checkbox" id="chk1"><label for="chk1">Signed in with your <strong>work account</strong> in the Microsoft 365 Copilot app, Outlook, Excel, Word, PowerPoint.</label></li>
-<li><input type="checkbox" id="chk2"><label for="chk2">A <strong>blank workbook</strong> and a <strong>blank Word document</strong> saved to your OneDrive.</label></li>
-<li><input type="checkbox" id="chk3"><label for="chk3">This guide open in a browser — the copy buttons work.</label></li>
-<li><input type="checkbox" id="chk4"><label for="chk4">Everything below is synthetic — <strong>never put real MAC/ELC content on a shared screen</strong>.</label></li>
-</ul>
-<p>Every prompt below follows Goal · Context · Source · Expectation. Run it, check it against the success check, then run the second prompt.</p>
-<nav aria-label="Section navigation" class="section-nav"><span></span><a href="#kit">Next section</a></nav></div></details><details class="section" id="kit" open><summary>Synthetic practice kit</summary><div class="content">
-<p class="big"><span class="tag synthetic">SYNTHETIC TRAINING CONTENT · SEPTEMBER 2026</span></p>
-<p>All business content below is fictional and created for this session. MAC / ELC appears only as training branding and audience framing. Every lab points back to these five blocks — copy them from here.</p>
-<div class="prompt"><div class="prompt-head"><h4>Studio Launch brief</h4><button aria-label="Copy Studio Launch brief" data-copy="copy-5" type="button">Copy</button></div><p class="lead">Paste into the Word prompt (04). The Word lab's starting prompt already includes it.</p><pre id="copy-5">SYNTHETIC TRAINING BRIEF - not actual company information.
-Project: Studio Launch, a fictional beauty campaign.
-Purpose: decide what to test next, not approve a launch or make product claims.
-Audience: a cross-functional planning team.
-The test compared two four-week periods, P1 and P2, with equal duration.
-Revenue and media spend are USD. Revenue is gross, not profit.
-There is no margin, inventory, conversion, or attribution evidence.
-The proposed next-test spending ceiling is USD 8,000; it is not approved.
-Use the results table to describe changes, not to claim media caused sales.
-A creative revision and vendor delivery estimate remain unresolved.
-The output should separate verified observations, assumptions, and decisions needed.
-All people are role placeholders. No real contacts or confidential data are included.</pre></div>
-<div class="prompt"><div class="prompt-head"><h4>Synthetic email thread</h4><button aria-label="Copy Synthetic email thread" data-copy="copy-6" type="button">Copy</button></div><p class="lead">Paste into the Outlook prompt (01). The Outlook lab's starting prompt already includes it.</p><pre id="copy-6">SYNTHETIC EMAIL THREAD - fictional roles, not actual correspondence.
-Subject: Studio Launch - next test review
-September 14, 2026 / Campaign Lead:
-Please prepare a recommendation for the next four-week test. USD 8,000 is a proposed spending ceiling, not an approval. Use the P1/P2 results.
-September 15, 2026 / Creative Lead:
-The revised visual concept is not ready. I will provide a status update on September 18, not a final delivery commitment.
-September 16, 2026 / Analytics Lead:
-P2 revenue is higher, but spend also increased. We have no margin or attribution data and cannot infer causation. Please show spend alongside revenue.
-September 17, 2026 / Operations Lead:
-The vendor delivery date is unconfirmed. Please request a delivery estimate before setting the test start date.
-September 17, 2026 / Campaign Lead:
-Bring a short decision brief to our September 21 review. Do not announce a start date or send external communications until approval.</pre></div>
-<div class="prompt"><div class="prompt-head"><h4>Excel data (tab-separated)</h4><button aria-label="Copy Excel data (tab-separated)" data-copy="copy-7" type="button">Copy</button></div><p class="lead">Paste into cell A1 of your OneDrive-saved workbook. Select A1:E9, format as a table with headers, and name it CampaignResults. If your locale pastes everything into one column, use text-to-columns with Tab as the delimiter. Revenue_USD and Spend_USD must be numbers, not currency text.</p><pre id="copy-7">Period	Channel	Category	Revenue_USD	Spend_USD
-P1	Online	Lip	4800	1200
-P1	Online	Face	7200	1800
-P1	Retail event	Lip	3600	900
-P1	Retail event	Face	5400	1350
-P2	Online	Lip	6000	1500
-P2	Online	Face	8100	1800
-P2	Retail event	Lip	3300	1100
-P2	Retail event	Face	6600	1650</pre></div>
-<div class="prompt"><div class="prompt-head"><h4>Verified synthetic results</h4><button aria-label="Copy Verified synthetic results" data-copy="copy-8" type="button">Copy</button></div><p class="lead">Your answer key for Excel (02) and Analyst (03), and a source block for the Word brief (04).</p><pre id="copy-8">VERIFIED SYNTHETIC RESULTS (computed and checked)
-P1 revenue: USD 21,000; spend: USD 5,250.
-P2 revenue: USD 24,000; spend: USD 6,050.
-Revenue change: USD 3,000 (+14.29%).
-Spend change: USD 800 (+15.24%).
-Revenue/spend ratio: 4.0000x in P1; 3.9669x in P2.
-By channel — Online: revenue USD 12,000 → 14,100, spend USD 3,000 → 3,300, ratio 4.0000x → 4.2727x.
-By channel — Retail event: revenue USD 9,000 → 9,900, spend USD 2,250 → 2,750, ratio 4.0000x → 3.6000x.
-Retail event / Lip revenue: USD 3,600 to USD 3,300 (-8.33%); spend: USD 900 to USD 1,100 (+22.22%). This is the ONLY Channel/Category combination where spend growth exceeded revenue growth (Online/Lip +25%/+25%; Online/Face +12.5%/0%; Retail event/Face +22.22%/+22.22%).
-The ratio is gross revenue divided by media spend, not profit or incremental return.
-No causal attribution, margin, inventory, or customer-level conclusions are supported.</pre></div>
-<div class="prompt"><div class="prompt-head"><h4>Manual Excel fallback</h4><button aria-label="Copy Manual Excel fallback" data-copy="copy-9" type="button">Copy</button></div><p class="lead">Use when Copilot in Excel cannot edit the workbook. A chat description is not a completed workbook.</p><pre id="copy-9">MANUAL EXCEL FALLBACK
-On a Summary sheet, put P1 in A2 and P2 in A3.
-B2: =SUMIF(CampaignResults[Period],A2,CampaignResults[Revenue_USD])
-C2: same pattern with Spend_USD; fill down.
-D2: =IF(C2=0,NA(),B2/C2)
-Revenue change: =B3-B2
-Percentage change: =IF(B2=0,NA(),(B3-B2)/B2); repeat for spend.
-Insert a clustered column chart from Period, Revenue, Spend.
-Function names/separators vary by locale.</pre></div>
-<nav aria-label="Section navigation" class="section-nav"><a href="#before">Previous section</a><a href="#researcher">Next section</a></nav></div></details><details class="section" id="researcher" open><summary>00 / Researcher — start it now</summary><div class="content"><h3>Where to run it</h3><p>Microsoft 365 Copilot app → <strong>Agents</strong> → <strong>Researcher</strong>. Researcher takes longer by design; it may ask a clarifying question — answer it or say "Go ahead", then move on to Outlook. Scope it to the web only so no work content appears on a shared screen.</p><div class="prompt"><div class="prompt-head"><h4>Starting prompt (GCSE)</h4><button aria-label="Copy Starting prompt (GCSE)" data-copy="copy-10" type="button">Copy</button></div><pre id="copy-10">Goal: Build a short measurement checklist for evaluating a small beauty-retail marketing test.
-
-Context: I am practicing evidence-based planning for a fictional campaign called Studio Launch. I need a checklist I can drop into a one-page decision brief, not claims about any real company.
-
-Source: Public web sources only, preferably published in the past 12 months. Do not use my work files, email, meetings, or chats.
-
-Expectation: A report under 500 words with three parts: (1) five metrics to check before recommending a next test, each with a one-line definition and the data it requires; (2) what a revenue-and-spend table alone can and cannot tell you; (3) a source list with title, publisher, date, and link. Distinguish evidence from advice. Do not invent citations.</pre></div><div class="prompt"><div class="prompt-head"><h4>Second prompt (when you return)</h4><button aria-label="Copy Second prompt (when you return)" data-copy="copy-11" type="button">Copy</button></div><pre id="copy-11">For each of the five metrics, mark whether it can be calculated from a table containing only Period, Channel, Category, Revenue and Spend. Flag anything that is your inference rather than a source statement.</pre></div><div class="callout success"><p class="eyebrow">Success check</p><p>Five metrics, each with a definition and required data; every citation opens and matches; the report says plainly what revenue and spend alone cannot answer.</p></div><nav aria-label="Section navigation" class="section-nav"><a href="#kit">Previous section</a><a href="#outlook">Next section</a></nav></div></details><details class="section" id="outlook" open><summary>01 / Outlook</summary><div class="content"><h3>Where to run it</h3><p>Outlook → <strong>Copilot</strong> (Draft with Copilot / Copilot pane). Paste the synthetic thread into the prompt — the starting prompt below already contains it. <strong>Do not send anything.</strong></p><div class="prompt"><div class="prompt-head"><h4>Starting prompt (GCSE)</h4><button aria-label="Copy Starting prompt (GCSE)" data-copy="copy-12" type="button">Copy</button></div><pre id="copy-12">Goal: Summarize this email thread and prepare a reply I can review.
-
-Context: I am coordinating the fictional Studio Launch review. I need to preserve uncertainty and avoid promising dates or approvals.
-
-Source: SYNTHETIC EMAIL THREAD - fictional roles, not actual correspondence.
-Subject: Studio Launch - next test review
-September 14, 2026 / Campaign Lead:
-Please prepare a recommendation for the next four-week test. USD 8,000 is a proposed spending ceiling, not an approval. Use the P1/P2 results.
-September 15, 2026 / Creative Lead:
-The revised visual concept is not ready. I will provide a status update on September 18, not a final delivery commitment.
-September 16, 2026 / Analytics Lead:
-P2 revenue is higher, but spend also increased. We have no margin or attribution data and cannot infer causation. Please show spend alongside revenue.
-September 17, 2026 / Operations Lead:
-The vendor delivery date is unconfirmed. Please request a delivery estimate before setting the test start date.
-September 17, 2026 / Campaign Lead:
-Bring a short decision brief to our September 21 review. Do not announce a start date or send external communications until approval.
-
-Expectation: Return decisions, open questions, and an action table with role, action, and explicitly stated due date. Use &#x27;not specified&#x27; for missing dates. Then draft a reply under 150 words requesting the vendor estimate and creative status. Do not send anything or imply approval.</pre></div><div class="prompt"><div class="prompt-head"><h4>Second prompt</h4><button aria-label="Copy Second prompt" data-copy="copy-13" type="button">Copy</button></div><pre id="copy-13">Audit your action table against the messages. Distinguish the September 18 status update from a creative delivery deadline, and separate the proposed USD 8,000 ceiling from approved spending. Correct any overstatement.</pre></div><div class="prompt"><div class="prompt-head"><h4>Third prompt</h4><button aria-label="Copy Third prompt" data-copy="copy-14" type="button">Copy</button></div><pre id="copy-14">Rewrite the draft in 100 words or fewer with two numbered requests and a final sentence that leaves the test start date unconfirmed. Keep the tone clear and collaborative. Do not send it.</pre></div><div class="callout success"><p class="eyebrow">Success check</p><ul><li>September 18 is a <strong>status update only</strong>.</li><li>Vendor delivery and start date are <strong>unconfirmed</strong>.</li><li>The USD 8,000 ceiling is <strong>not approved</strong>.</li><li><strong>Nothing sent.</strong></li></ul></div><nav aria-label="Section navigation" class="section-nav"><a href="#researcher">Previous section</a><a href="#excel">Next section</a></nav></div></details><details class="section" id="excel" open><summary>02 / Excel</summary><div class="content"><h3>Where to run it</h3><p>Paste the TSV from the practice kit into <strong>A1</strong> of your OneDrive-saved workbook, format <strong>A1:E9</strong> as a table with headers, name it <strong>CampaignResults</strong>, then open <strong>Copilot</strong> in Excel.</p><div class="prompt"><div class="prompt-head"><h4>Starting prompt (GCSE)</h4><button aria-label="Copy Starting prompt (GCSE)" data-copy="copy-15" type="button">Copy</button></div><pre id="copy-15">Goal: Compare P1 and P2 campaign performance and create a small summary with a chart in this workbook.
-
-Context: These are synthetic, equal-length test periods. I need a cautious recommendation, not a claim that media caused revenue.
-
-Source: Use only the CampaignResults table in this workbook, with columns Period, Channel, Category, Revenue_USD, and Spend_USD. Do not use other sheets or outside information.
-
-Expectation: Validate eight rows, numeric amounts, and period labels. Create a Summary sheet with total revenue, total spend, and revenue divided by spend for each period. Calculate P2-versus-P1 dollar and percentage changes. Show formulas, define percentage denominators, and handle division by zero explicitly. Add a revenue-and-spend column chart. Preserve the source table and explain all changes.</pre></div><div class="prompt"><div class="prompt-head"><h4>Second prompt</h4><button aria-label="Copy Second prompt" data-copy="copy-16" type="button">Copy</button></div><pre id="copy-16">Reconcile each total to the source rows and list the formulas or cell references used. Identify which Channel/Category combination has declining revenue despite increased spend. Do not average row-level ratios to calculate the overall revenue/spend ratio.</pre></div><div class="callout success"><p class="eyebrow">Success check</p><ul><li>P1 <strong>21,000 / 5,250</strong>; P2 <strong>24,000 / 6,050</strong>.</li><li><strong>+14.29%</strong> revenue vs <strong>+15.24%</strong> spend.</li><li>Ratio <strong>4.0000x → 3.9669x</strong>.</li><li><strong>Retail event / Lip</strong> is the exception.</li><li>Source cells unchanged.</li></ul></div><nav aria-label="Section navigation" class="section-nav"><a href="#outlook">Previous section</a><a href="#analyst">Next section</a></nav></div></details><details class="section" id="analyst" open><summary>03 / Analyst</summary><div class="content"><h3>Where to run it</h3><p><strong>Save the workbook.</strong> Microsoft 365 Copilot app → <strong>Agents</strong> → <strong>Analyst</strong> → <strong>+</strong> → <strong>Attach content</strong> → pick the Studio Launch workbook from OneDrive.</p><div class="prompt"><div class="prompt-head"><h4>Starting prompt (GCSE)</h4><button aria-label="Copy Starting prompt (GCSE)" data-copy="copy-17" type="button">Copy</button></div><pre id="copy-17">Goal: Challenge the headline that Studio Launch P2 outperformed P1.
-
-Context: Synthetic test data for two equal four-week periods. Before I write a decision brief I want to know where spend grew faster than revenue.
-
-Source: Only the attached workbook, table CampaignResults (Period, Channel, Category, Revenue_USD, Spend_USD; 8 rows). Do not use other files or outside information.
-
-Expectation: (1) Totals by Period. (2) Revenue/spend ratio by Period and by Period and Channel, calculated from totals, not averaged row ratios. (3) Every Channel/Category combination where the percentage change in spend exceeded the percentage change in revenue. (4) One chart comparing revenue change and spend change by Channel/Category. Show your calculation steps. State clearly that this data cannot show profit, incremental return, or causation.</pre></div><div class="prompt"><div class="prompt-head"><h4>Second prompt</h4><button aria-label="Copy Second prompt" data-copy="copy-18" type="button">Copy</button></div><pre id="copy-18">List the data this file does not contain that I would need before claiming profit, incremental return, or that media drove revenue. Then write two cautious findings and two open questions, each with exact values and baselines.</pre></div><div class="callout success"><p class="eyebrow">Success check</p><ul><li>Overall <strong>4.0000x → 3.9669x</strong>; Online <strong>4.0000x → 4.2727x</strong>; Retail event <strong>4.0000x → 3.6000x</strong>.</li><li>Exactly one combination flagged — <strong>Retail event / Lip</strong> (revenue <strong>-8.33%</strong>, spend <strong>+22.22%</strong>).</li><li>The calculation steps are visible.</li></ul></div><nav aria-label="Section navigation" class="section-nav"><a href="#excel">Previous section</a><a href="#word">Next section</a></nav></div></details><details class="section" id="word" open><summary>04 / Word + Researcher</summary><div class="content"><h3>Where to run it</h3><p>Open your blank OneDrive Word document → <strong>Draft with Copilot</strong>. Paste the brief and verified results into the prompt — the starting prompt below already includes both blocks — or reference the saved workbook with <strong>/</strong> where supported.</p><div class="prompt"><div class="prompt-head"><h4>Starting prompt (GCSE)</h4><button aria-label="Copy Starting prompt (GCSE)" data-copy="copy-19" type="button">Copy</button></div><pre id="copy-19">Goal: Draft a one-page decision brief for the fictional Studio Launch next-test review.
-
-Context: The audience is a cross-functional planning team meeting on September 21. They need to choose what to test next, not approve spend. Revenue is gross, not profit.
-
-Source: Only the SYNTHETIC TRAINING BRIEF and VERIFIED SYNTHETIC RESULTS pasted below.
-
-SYNTHETIC TRAINING BRIEF - not actual company information.
-Project: Studio Launch, a fictional beauty campaign.
-Purpose: decide what to test next, not approve a launch or make product claims.
-Audience: a cross-functional planning team.
-The test compared two four-week periods, P1 and P2, with equal duration.
-Revenue and media spend are USD. Revenue is gross, not profit.
-There is no margin, inventory, conversion, or attribution evidence.
-The proposed next-test spending ceiling is USD 8,000; it is not approved.
-Use the results table to describe changes, not to claim media caused sales.
-A creative revision and vendor delivery estimate remain unresolved.
-The output should separate verified observations, assumptions, and decisions needed.
-All people are role placeholders. No real contacts or confidential data are included.
-
-VERIFIED SYNTHETIC RESULTS (computed and checked)
-P1 revenue: USD 21,000; spend: USD 5,250.
-P2 revenue: USD 24,000; spend: USD 6,050.
-Revenue change: USD 3,000 (+14.29%).
-Spend change: USD 800 (+15.24%).
-Revenue/spend ratio: 4.0000x in P1; 3.9669x in P2.
-By channel — Online: revenue USD 12,000 → 14,100, spend USD 3,000 → 3,300, ratio 4.0000x → 4.2727x.
-By channel — Retail event: revenue USD 9,000 → 9,900, spend USD 2,250 → 2,750, ratio 4.0000x → 3.6000x.
-Retail event / Lip revenue: USD 3,600 to USD 3,300 (-8.33%); spend: USD 900 to USD 1,100 (+22.22%). This is the ONLY Channel/Category combination where spend growth exceeded revenue growth (Online/Lip +25%/+25%; Online/Face +12.5%/0%; Retail event/Face +22.22%/+22.22%).
-The ratio is gross revenue divided by media spend, not profit or incremental return.
-No causal attribution, margin, inventory, or customer-level conclusions are supported.
-
-Expectation: Under 350 words with exactly these headings: Decision needed; What we observed; What this data cannot tell us; Requests before approval. Every number shows its baseline and unit. Keep the USD 8,000 ceiling labeled as proposed, not approved. Label the document synthetic. Do not invent a start date, an approval, or a product claim.</pre></div><div class="prompt"><div class="prompt-head"><h4>Second prompt (Researcher handoff)</h4><button aria-label="Copy Second prompt (Researcher handoff)" data-copy="copy-20" type="button">Copy</button></div><p class="lead">Go back to Researcher, copy its five-metric checklist, and replace the bracketed placeholder before you run this.</p><pre id="copy-20">Add a fifth section, &quot;How we will measure the next test&quot;, using the five metrics from this report: [paste the Researcher checklist]. For each metric, note whether our current table (Period, Channel, Category, Revenue, Spend) can calculate it. Keep the rest of the document unchanged.</pre></div><div class="prompt"><div class="prompt-head"><h4>Third prompt</h4><button aria-label="Copy Third prompt" data-copy="copy-21" type="button">Copy</button></div><pre id="copy-21">Rewrite &quot;What we observed&quot; so it separates facts from assumptions, keeps every baseline visible, and fits in five sentences.</pre></div><div class="callout success"><p class="eyebrow">Success check</p><ul><li>Four (then five) headings exactly as specified.</li><li><strong>14.29%</strong> vs <strong>15.24%</strong> with baselines.</li><li>No profit, causation, approval or start-date claim.</li><li>Researcher metrics marked <strong>calculable / not calculable</strong>.</li></ul></div><nav aria-label="Section navigation" class="section-nav"><a href="#analyst">Previous section</a><a href="#powerpoint">Next section</a></nav></div></details><details class="section" id="powerpoint" open><summary>05 / PowerPoint</summary><div class="content"><h3>Where to run it</h3><p>PowerPoint → <strong>Copilot</strong> → <strong>Create a presentation from a file</strong> → select the Word brief you just saved (or paste the brief and results into the prompt if file selection is unavailable).</p><div class="prompt"><div class="prompt-head"><h4>Starting prompt (GCSE)</h4><button aria-label="Copy Starting prompt (GCSE)" data-copy="copy-22" type="button">Copy</button></div><pre id="copy-22">Goal: Create a five-slide decision brief for the next fictional Studio Launch test from the selected Word document.
-
-Context: The audience is a cross-functional planning team. The goal is to choose the next question to test, not authorize launch spending.
-
-Source: Use only the selected Word document. Do not add outside facts.
-
-Expectation: Five slides: decision needed; results; the underperforming segment; what the data cannot tell us; next-test proposal and requests. One message per slide, at most three short points, and speaker notes that distinguish facts from assumptions. Label all data synthetic. Do not invent a launch date, product claim, or approval.</pre></div><div class="prompt"><div class="prompt-head"><h4>Second prompt</h4><button aria-label="Copy Second prompt" data-copy="copy-23" type="button">Copy</button></div><pre id="copy-23">Revise the results slide to emphasize that revenue rose 14.29% while spend rose 15.24%. Keep both baselines visible (USD 21,000 → 24,000; USD 5,250 → 6,050). Add a note that revenue/spend is not profit, and remove any claim that the campaign caused the change.</pre></div><div class="prompt"><div class="prompt-head"><h4>Third prompt</h4><button aria-label="Copy Third prompt" data-copy="copy-24" type="button">Copy</button></div><pre id="copy-24">Tighten the final slide to one decision question and two possible next-test directions. Label both as hypotheses, preserve the unapproved USD 8,000 ceiling, and add a speaker note listing the information required before approval.</pre></div><div class="callout success"><p class="eyebrow">Success check</p><ul><li>Five slides; synthetic label.</li><li><strong>14.29%</strong> vs <strong>15.24%</strong> with baselines.</li><li>No causal or profit claim.</li><li>No approved budget or start date.</li><li>Speaker notes present.</li></ul></div><nav aria-label="Section navigation" class="section-nav"><a href="#word">Previous section</a><a href="#top">Back to top</a></nav></div></details>
-<footer><p class="strip">MICROSOFT 365 COPILOT WORKING SESSION — SYNTHETIC TRAINING CONTENT — SEPTEMBER 2026</p></footer>
-</main>
-</div>
-<div aria-live="polite" id="status" role="status"></div>
-<script>
-const sections=[...document.querySelectorAll('details.section')];
-const status=document.querySelector('#status');
-let statusTimeout;
-function announce(message){status.textContent=message;clearTimeout(statusTimeout);statusTimeout=setTimeout(()=>{status.textContent='';},7000);}
-const themeBtn=document.querySelector('#theme');
-function isLight(){return document.body.classList.contains('light');}
-function paintTheme(){const light=isLight();themeBtn.textContent=light?'Dark mode':'Light mode';themeBtn.setAttribute('aria-pressed',String(light));}
-themeBtn.addEventListener('click',()=>{document.body.classList.toggle('light');paintTheme();});
-paintTheme();
-document.querySelector('#expand').addEventListener('click',()=>sections.forEach(s=>{s.open=true;}));
-document.querySelector('#collapse').addEventListener('click',()=>sections.forEach(s=>{s.open=false;}));
-document.querySelector('#print').addEventListener('click',()=>{sections.forEach(s=>{s.open=true;});window.print();});
-function revealHash(){const id=decodeURIComponent(location.hash.slice(1));if(!id)return;const el=document.getElementById(id);if(!el)return;const host=el.closest('details.section');if(host)host.open=true;requestAnimationFrame(()=>el.scrollIntoView());}
-window.addEventListener('hashchange',revealHash);
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',()=>{const el=document.getElementById(a.hash.slice(1));const host=el?el.closest('details.section'):null;if(host)host.open=true;}));
-revealHash();
-document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',async()=>{const el=document.getElementById(button.dataset.copy);if(!el)return;const text=el.textContent;const original=button.textContent;try{if(!navigator.clipboard||!navigator.clipboard.writeText)throw new Error('Clipboard unavailable');await navigator.clipboard.writeText(text);button.textContent='Copied';setTimeout(()=>{button.textContent=original;},1800);announce('Copied to clipboard.');}catch(error){const selection=window.getSelection();const range=document.createRange();range.selectNodeContents(el);selection.removeAllRanges();selection.addRange(range);announce('Clipboard access is unavailable. Text selected: press Ctrl+C (Command+C on Mac).');}}));
-let scrollPending=false;
-function highlightSection(){let current=sections[0];for(const s of sections){if(s.getBoundingClientRect().top<=180)current=s;else break;}document.querySelectorAll('aside nav a').forEach(a=>{const selected=a.hash==='#'+current.id;a.classList.toggle('active',selected);if(selected)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});scrollPending=false;}
-window.addEventListener('scroll',()=>{if(!scrollPending){scrollPending=true;requestAnimationFrame(highlightSection);}},{passive:true});
-sections.forEach(s=>s.addEventListener('toggle',highlightSection));
-highlightSection();
-</script>
+  <main>
+    <h1>This page has moved</h1>
+    <p>Copilot documentation now has its own home.</p>
+    <p><a href="https://copilotdocs.org/mac-copilot-session-q7m4v8/">Continue to this page on copilotdocs.org</a></p>
+    <p><small>Redirecting you automatically&hellip;</small></p>
+  </main>
 </body>
 </html>
