@@ -1,0 +1,44 @@
+﻿FICTIONAL BLOCKED-INVOICE TRAINING EXTRACT
+Analyst: Avery Patel. Values are already in EUR. Escalate items blocked 30 days or more for human review.
+
+InvoiceID,Vendor,CompanyCode,Country,BlockReason,Amount_EUR,DaysBlocked,BuyerTeam
+INV-27332,Tailspin Packaging,CB30,UK,Tax code mismatch,2649.22,15,P2P Team A
+INV-26481,Tailspin Packaging,CB40,RO,Missing goods receipt,7090.80,32,P2P Team C
+INV-26962,Fabrikam Labels SRL,CB20,CA,Quantity variance,8508.96,26,P2P Team A
+INV-27036,Fabrikam Labels SRL,CB10,US,Quantity variance,3875.60,27,P2P Team A
+INV-26555,Adatum Malt Supplies,CB20,CA,Price variance,14921.17,36,P2P Team C
+INV-26148,Northwind Glass Ltd,CB30,UK,Missing goods receipt,2594.56,43,P2P Team C
+INV-26259,Fabrikam Labels SRL,CB20,CA,Missing goods receipt,1310.45,32,P2P Team C
+INV-26296,Woodgrove Utilities SA,CB30,UK,Missing goods receipt,900.02,36,P2P Team A
+INV-26518,Tailspin Packaging,CB30,UK,Price variance,22438.38,5,P2P Team A
+INV-26037,Fabrikam Labels SRL,CB10,US,Missing goods receipt,3060.50,10,P2P Team A
+INV-26814,Fourth Coffee Vending,CB50,DE,Price variance,14081.89,27,P2P Team B
+INV-26925,Alpine Ski House Catering,CB50,DE,Quantity variance,7317.82,4,P2P Team A
+INV-26185,Fourth Coffee Vending,CB20,CA,Missing goods receipt,1153.19,34,P2P Team A
+INV-26222,Coho Winery Supplies,CB30,UK,Missing goods receipt,3206.91,8,P2P Team A
+INV-26629,Fabrikam Labels SRL,CB40,RO,Price variance,26522.62,43,P2P Team A
+INV-26407,Fabrikam Labels SRL,CB30,UK,Missing goods receipt,8691.90,35,P2P Team C
+INV-27369,Wide World Importers,CB40,RO,Tax code mismatch,3668.77,5,P2P Team C
+INV-27147,Litware Logistics GmbH,CB20,CA,Missing PO reference,4408.19,29,P2P Team B
+INV-27443,Wide World Importers,CB40,RO,Possible duplicate,5601.39,20,P2P Team A
+INV-26703,Lucerne Office Supply,CB40,RO,Price variance,12480.71,22,P2P Team B
+INV-26777,Fabrikam Labels SRL,CB50,DE,Price variance,27403.42,21,P2P Team B
+INV-27184,Fabrikam Labels SRL,CB30,UK,Missing PO reference,5171.07,53,P2P Team A
+INV-26851,Coho Winery Supplies,CB20,CA,Quantity variance,4252.16,14,P2P Team C
+INV-27073,Lucerne Office Supply,CB10,US,Quantity variance,7996.62,30,P2P Team C
+INV-26074,Lucerne Office Supply,CB20,CA,Missing goods receipt,2610.39,35,P2P Team B
+INV-26333,Northwind Glass Ltd,CB10,US,Missing goods receipt,6248.32,43,P2P Team C
+INV-26888,Alpine Ski House Catering,CB20,CA,Quantity variance,2629.63,20,P2P Team B
+INV-27295,Proseware Cleaning Services,CB10,US,Tax code mismatch,2828.65,1,P2P Team B
+INV-27221,Alpine Ski House Catering,CB30,UK,Missing PO reference,936.85,38,P2P Team C
+INV-26740,Lucerne Office Supply,CB40,RO,Price variance,18625.84,20,P2P Team A
+INV-26370,Adatum Malt Supplies,CB10,US,Missing goods receipt,2695.57,37,P2P Team B
+INV-26592,Lucerne Office Supply,CB50,DE,Price variance,26203.77,23,P2P Team A
+INV-26444,Coho Winery Supplies,CB10,US,Missing goods receipt,5653.09,34,P2P Team A
+INV-26999,Woodgrove Utilities SA,CB30,UK,Quantity variance,6867.87,17,P2P Team C
+INV-27110,Wide World Importers,CB40,RO,Missing PO reference,5268.93,24,P2P Team A
+INV-27258,Fabrikam Labels SRL,CB50,DE,Missing PO reference,3090.58,22,P2P Team B
+INV-27406,Northwind Glass Ltd,CB30,UK,Tax code mismatch,6913.34,6,P2P Team B
+INV-26666,Fourth Coffee Vending,CB50,DE,Price variance,6652.72,11,P2P Team B
+INV-26111,Fourth Coffee Vending,CB40,RO,Missing goods receipt,4049.38,12,P2P Team A
+INV-27480,Woodgrove Utilities SA,CB30,UK,Possible duplicate,10596.23,16,P2P Team B

@@ -1,0 +1,6 @@
+FICTIONAL TRAINING BRIEF - WEEKLY STATUS
+My name is Avery Patel. I lead a fictional Contoso Bottling Company Procure-to-Pay team.
+The audience is finance controllers in four countries. I send an update every Monday.
+This week's snapshot: 412 open invoices; the count is down 9% from last week; 63 have price-variance blocks; 18 are more than 30 days old; the oldest is 47 days old and belongs to fictional supplier Northwind Glass.
+I want a subject line and a six-line, plain-English email. If a number, owner, or action is missing, use [GAP] instead of guessing.
+For the interview, my answers are: output shape = a subject line and six lines; missing information = mark it [GAP].

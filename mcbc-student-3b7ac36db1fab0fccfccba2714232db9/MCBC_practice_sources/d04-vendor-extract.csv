@@ -1,0 +1,18 @@
+﻿FICTIONAL VENDOR TRAINING EXTRACT
+Analyst: Avery Patel. As-of date: 11/03/2026. All organizations and people are fictional.
+"VAT and bank values are invented TEST tokens, not valid identifiers. Similar tokens are used only to teach matching."
+"For this exercise only, a record is dormant if its last payment was more than 24 months before the as-of date. A blank last-payment date is unknown, not evidence of dormancy."
+
+VendorID,Name,Street,City,Country,VAT_ID,IBAN,Created,LastPayment
+V100231,Northwind Glass Ltd,12 Harbour Road,Leeds,GB,TEST-VAT-001,TEST-IBAN-001,03/14/2019,10/12/2026
+V100877,Northwind Glass Limited,12 Harbour Rd,Leeds,GB,TEST-VAT-001,TEST-IBAN-001,07/02/2024,09/30/2026
+V100412,Fabrikam Labels SRL,Str. Fabricii 8,Cluj-Napoca,RO,TEST-VAT-002,TEST-IBAN-002,11/05/2020,10/20/2026
+V101036,Fabrikam Label S.R.L.,Strada Fabricii nr. 8,Cluj Napoca,RO,,TEST-IBAN-002,02/18/2025,10/02/2026
+V100519,Litware Logistics GmbH,Hafenstrasse 4,Hamburg,DE,TEST-VAT-003,TEST-IBAN-003,06/21/2018,10/15/2026
+V100520,Litware Logistik GmbH,Hafenstraße 4,Hamburg,DE,TEST-VAT-003,TEST-IBAN-003,06/21/2018,01/09/2023
+V100733,Adatum Malt Supplies,Rua do Porto 77,Porto,PT,TEST-VAT-004,TEST-IBAN-004,04/11/2022,10/07/2026
+V101188,Adatum Malt Supply Lda,Rua do Porto 77,Porto,PT,TEST-VAT-004,TEST-IBAN-005,10/19/2026,
+V100958,Proseware Cleaning Services,22 Elm Avenue,Dublin,IE,TEST-VAT-005,TEST-IBAN-006,05/30/2023,10/01/2026
+V101210,Proseware Consulting Ltd,5 Dock Street,Dublin,IE,TEST-VAT-006,TEST-IBAN-007,08/14/2025,09/22/2026
+V100388,Woodgrove Utilities SA,Bd. Unirii 15,Bucharest,RO,TEST-VAT-007,TEST-IBAN-008,01/09/2017,10/25/2026
+V100902,Coho Winery Supplies,Via Roma 3,Verona,IT,TEST-VAT-008,TEST-IBAN-009,02/02/2021,03/15/2024

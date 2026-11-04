@@ -1,0 +1,6 @@
+FICTIONAL FORMULA AND TRAINING POLICY
+My name is Avery Patel. Column D is the due date, column F is the open amount, and B1 is the reporting date.
+Apply the fictional training policy in this order: If F is blank or nonnumeric, return Check amount. Otherwise, if F is negative, return Credit; if F is zero, return Zero balance. For positive amounts only, if the due date in D or reporting date in B1 is missing or invalid, return Check date. Otherwise, calculate calendar days overdue using date-only values: 0 or fewer days is Current; 1-30 days is 1-30; 31-60 days is 31-60; 61-90 days is 61-90; 91 or more days is 91+.
+For this exercise, amounts must be numeric values, not numeric-looking text. Assume Excel uses its 1900 date system. Accept date-only values from 01/01/2000 through 12/31/9999, inclusive: whole-number numeric date serials in Excel and date-typed values in Power Query. Treat text dates and dates outside that range as invalid rather than guessing or converting them.
+Legacy formula:
+=IF(F2<=0,"Credit",IF(D2="","Check",IF($B$1-D2<=0,"Current",IF($B$1-D2<=30,"1-30",IF($B$1-D2<=60,"31-60",IF($B$1-D2<90,"61-90","90+"))))))
