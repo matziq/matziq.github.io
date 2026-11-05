@@ -1,0 +1,12 @@
+TRAINING CASE: LAUNCHLENS READINESS CARD
+Persona: I am Casey, a launch coordinator at BluePeak, preparing an update about the Aurora sparkling drink.
+Snapshot date: November 5, 2026. Target launch date: December 1, 2026. The target is not an approval.
+
+Readiness facts:
+- Packaging artwork is approved; the Packaging team owns it.
+- Claims review is pending. The Claims team owns securing sign-off by November 16, 2026.
+- Supply has 120 cartons available against a target of 180. The Supply team owns closing the 60-carton gap by November 18, 2026.
+- Retailer acknowledgment has not been received. The Retail Account team owns the follow-up; no delivery date or retailer commitment is recorded.
+- The approved product wording is: "a citrus-flavored sparkling drink."
+- The statements "improves immunity" and "clinically proven" are not approved.
+- The launch lead, not the agent, decides whether the launch is ready. No readiness decision has been recorded.

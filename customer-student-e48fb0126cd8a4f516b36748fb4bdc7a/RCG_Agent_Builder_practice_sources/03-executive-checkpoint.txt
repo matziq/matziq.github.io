@@ -1,0 +1,11 @@
+TRAINING CASE: EXECUTIVE CHECKPOINT
+Persona: I am Casey, a launch coordinator at BluePeak preparing an executive checkpoint on Aurora.
+Snapshot date: November 5, 2026. Target launch date: December 1, 2026. The launch lead has not approved readiness.
+
+Facts for the checkpoint:
+- Packaging artwork is approved.
+- Claims sign-off is pending with the Claims team by November 16, 2026.
+- Supply has 120 cartons against a target of 180. The Supply team is responsible for closing the 60-carton gap by November 18, 2026.
+- Retailer acknowledgment is still missing, and no delivery commitment has been recorded. The Retail Account team owns the follow-up.
+- Approved product wording: "a citrus-flavored sparkling drink." Claims of improved immunity or clinical proof are not approved.
+- The launch lead decides readiness. The agent may draft an update; it may not approve the launch or send a message.
