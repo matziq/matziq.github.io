@@ -1,0 +1,13 @@
+Practice source: synthetic campaign data for keyboard practice only. Currency: USD. Reporting period: October 1-31, 2026.
+
+Campaign | Spend | Platform-attributed revenue | Attributed orders
+Email - Evening ritual | 1200 | 7800 | 156
+Paid social - Evening ritual | 3600 | 12600 | 210
+Search - Branded routine | 2400 | 10800 | 180
+Creator sampling | 1800 | 4500 | 90
+
+Definitions and limitations:
+ROAS = platform-attributed revenue divided by spend.
+The revenue values use last-click attribution and are not an estimate of incremental revenue.
+Production costs, product margin, returns, audience overlap, and customer acquisition cost are not provided.
+The data is fictional; do not recommend a real budget change from it.

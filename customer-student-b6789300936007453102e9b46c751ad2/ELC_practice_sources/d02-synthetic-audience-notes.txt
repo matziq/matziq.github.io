@@ -1,0 +1,14 @@
+Practice source: synthetic qualitative notes for keyboard practice only. These are not real customer comments, ELC research, or a representative sample. The file contains no demographic or market-size data.
+
+Product context: a fictional evening skincare routine called Project Luminara. No product benefits, price, or launch date are established by these notes.
+
+R01: "I want a short routine after work."
+R02: "Tell me plainly what each product does; I do not want a complicated ritual."
+R03: "I ignore claims like 'overnight transformation'; tell me what is actually in it."
+R04: "I forget steps when I travel; a compact routine matters."
+R05: "I am not looking for a new routine; a clear one-step addition feels manageable."
+R06: "I want a gift that feels thoughtful, but I need to know what is in the box."
+R07: "Refill options are interesting only if I can find refills where I shop."
+R08: "I pay attention to scent; fragrance-free options are easier for me."
+
+Limitations: eight fictional notes are not a population estimate, preference ranking, or proof of purchase intent. Do not infer age, gender, income, ethnicity, skin condition, location, or other demographics.
