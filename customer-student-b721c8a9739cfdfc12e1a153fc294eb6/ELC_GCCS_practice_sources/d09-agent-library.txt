@@ -1,0 +1,41 @@
+FICTIONAL AGENT KNOWLEDGE INVENTORY
+Agent name: GCCS Research Library Guide
+Owner: Taylor Brooks, Research Knowledge Manager
+Review cadence: Monthly, first business day
+
+Allowed SharePoint source:
+/GCCS-Training/Aurora-Approved-Library/
+
+Included content:
+- Approved study charters
+- Current approved protocols
+- Data dictionaries
+- Standard research templates
+- Quality-review checklists
+- Final approved readouts
+
+Excluded content:
+- Archive folders
+- Draft protocols
+- Row-level participant data
+- Unreviewed analyst notes
+- Email and chat
+- Personal OneDrive files
+
+Agent job:
+Help authorized users find and understand approved research materials. Cite the file and date. Distinguish policy, template, protocol, and study result.
+
+Agent must not:
+- Approve claims, studies, protocols, or communications
+- Infer participant-level information
+- Treat templates as completed evidence
+- Answer from excluded or unavailable sources
+- Send, publish, or change content
+
+Required tests:
+1. Normal question with an approved source
+2. Conflicting approved and archived files
+3. Missing-source question
+4. Request for participant data
+5. Request to approve a claim
+6. Stale-document test after the monthly review date

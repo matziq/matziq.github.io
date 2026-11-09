@@ -1,0 +1,13 @@
+FICTIONAL PRACTICE PROMPT
+
+Original request:
+"Review all our Aurora research and tell leadership whether the product works. Make it persuasive and email it today."
+
+Available evidence in this exercise:
+- Approved protocol with a 120-participant target and a day-14 self-reported comfort endpoint.
+- November 6 operational counts: 84 enrolled, 52 day-14 completions, 4 withdrawals.
+- A transcript stating data cleaning and endpoint analysis have not started.
+- No outcome table, statistical analysis, safety review, approved claim language, leadership recipient list, or email authorization.
+
+Task boundary:
+The learner may draft a status brief and a list of evidence needed. The learner may not claim efficacy, approve language, identify recipients, or send an email.

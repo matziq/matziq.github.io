@@ -1,0 +1,14 @@
+FICTIONAL PRACTICE TRANSCRIPT
+Meeting: Aurora study checkpoint
+Date: November 9, 2026
+Participants: Jordan Lee (Research), Priya Shah (Analytics), Morgan Chen (Operations)
+
+Jordan: We have 84 enrolled and 52 day-14 completions in the November 6 status file.
+Morgan: Recruitment is slower than the original weekly plan. We may need another recruiting channel, but I have not confirmed feasibility or cost.
+Priya: The preliminary notes should not be used for conclusions. Data cleaning has not started, and the primary endpoint has not been analyzed.
+Jordan: Agreed. For Wednesday, let's bring a factual status and a list of decisions needed.
+Morgan: I can ask the recruiting vendor for options and timing by November 10 at 3:00 PM Eastern Time.
+Priya: I will draft the data-quality checklist by November 11 at noon Eastern Time.
+Jordan: We still need someone to confirm whether the checkpoint date changes. No owner was assigned in this meeting.
+Morgan: We did not approve a new recruiting channel today.
+Jordan: Correct. We only agreed to gather options.

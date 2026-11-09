@@ -1,0 +1,24 @@
+WORKFLOW COMMITMENT CANVAS
+
+My recurring task:
+Who receives the output:
+Current inputs and where they live:
+Current time or friction:
+What Copilot may draft, summarize, compare, or organize:
+What Copilot must not decide or do:
+Evidence I will verify:
+Human reviewer:
+Success measure for the next two weeks:
+Smallest first test:
+What I will bring to office hours:
+
+Good first-test examples:
+- Turn one approved research packet into a cited status brief.
+- Convert one transcript into decisions, actions, and unknowns.
+- Compare two approved protocol versions and list changed sections.
+- Draft an evidence plan before starting a Researcher investigation.
+
+Avoid as a first test:
+- Unbounded access to sensitive participant data.
+- Automatic approval, sending, publishing, or record changes.
+- A workflow with no source owner or review step.

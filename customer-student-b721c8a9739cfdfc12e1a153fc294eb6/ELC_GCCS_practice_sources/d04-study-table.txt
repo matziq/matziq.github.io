@@ -1,0 +1,17 @@
+FICTIONAL PRACTICE DATA
+Aurora Skin Comfort Study operational snapshot
+Snapshot date: November 6, 2026
+
+Region | Enrolled | Day-14 completed | Withdrawn
+North | 24 | 16 | 1
+South | 22 | 13 | 2
+East  | 20 | 12 | 1
+West  | 18 | 11 | 0
+
+Approved target sample: 120
+Important limitations:
+- These are operational counts, not efficacy results.
+- Day-14 completion rate should use enrolled as the denominator unless the user specifies another denominator.
+- Counts have not completed data cleaning or quality review.
+- Regional differences must not be interpreted as product performance.
+- No demographic or outcome data is included.

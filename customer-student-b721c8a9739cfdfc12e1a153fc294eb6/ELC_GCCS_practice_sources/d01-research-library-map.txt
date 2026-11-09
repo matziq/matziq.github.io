@@ -1,0 +1,25 @@
+FICTIONAL PRACTICE SCENARIO
+Persona: Jordan Lee, consumer insights researcher.
+Practice date: November 9, 2026.
+
+SharePoint library: Aurora Skin Comfort Study
+
+1. /01_Governance/Aurora_Study_Charter_APPROVED_2026-10-12.docx
+Status: Approved. Defines the study objective, population, decision owners, and allowed claims.
+
+2. /02_Protocol/Aurora_Protocol_v3_APPROVED_2026-10-20.docx
+Status: Current approved protocol. Primary endpoint: change in self-reported skin comfort after 14 days. Target sample: 120 participants.
+
+3. /02_Protocol/Archive/Aurora_Protocol_v2_DRAFT_2026-10-04.docx
+Status: Superseded draft. Target sample: 90 participants. Do not use for current study decisions.
+
+4. /03_Fieldwork/Aurora_Fieldwork_Status_2026-11-06.xlsx
+Status: Current operational snapshot. Enrolled: 84. Completed day 14: 52. Withdrawn: 4. Data cleaning has not started.
+
+5. /04_Analysis/Aurora_Preliminary_Notes_2026-11-07.docx
+Status: Analyst working notes, not quality checked. Contains an unsupported sentence: "The formula clearly improves comfort for all users."
+
+6. /05_Readouts/Aurora_Final_Readout_TEMPLATE.pptx
+Status: Blank template. No study results.
+
+Library rule: Prefer approved and current documents. Treat operational snapshots as dated. Do not use superseded drafts, templates, or unverified analyst notes as final evidence.

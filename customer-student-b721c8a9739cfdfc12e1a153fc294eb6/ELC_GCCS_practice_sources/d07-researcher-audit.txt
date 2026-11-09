@@ -1,0 +1,22 @@
+FICTIONAL DRAFT SYNTHESIS FOR AUDIT
+
+Claim 1: "The Aurora study is on track because 84 participants are enrolled."
+Support noted: November 6 operational snapshot.
+
+Claim 2: "A 14-day self-reported endpoint is sufficient to prove durable product efficacy."
+Support noted: No citation recorded.
+
+Claim 3: "Four withdrawals demonstrate a low withdrawal rate."
+Support noted: 4 withdrawals and 84 enrolled; no benchmark or reason-for-withdrawal data.
+
+Claim 4: "The product improves skin comfort for all users."
+Support noted: Preliminary analyst note; endpoint analysis has not started.
+
+Claim 5: "Public literature can help assess measurement validity and common study limitations."
+Support noted: Public methods literature, to be cited and evaluated for population and design fit.
+
+Known internal constraints:
+- Approved target is 120.
+- 52 participants completed day 14.
+- Data cleaning and endpoint analysis have not started.
+- No subgroup results, adverse-event summary, statistical results, or approved claims language are in the packet.

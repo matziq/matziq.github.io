@@ -1,0 +1,25 @@
+FICTIONAL AGENT CANDIDATES
+
+A. Study Library Navigator
+Answers recurring questions about approved protocols, templates, and study-status files in one governed SharePoint library. Must cite files and respect permissions. No actions.
+
+B. Final Claims Approver
+Reads draft study results and automatically approves consumer-facing product claims. Would require scientific, legal, regulatory, and brand authority.
+
+C. Weekly Evidence Briefing Assistant
+Creates a draft weekly summary from a defined SharePoint folder. Separates new documents, changed decisions, risks, and missing evidence. Human reviews before distribution.
+
+D. One-Time Meeting Recap
+Summarizes a single supplied transcript for one project checkpoint.
+
+E. Participant Data Explorer
+Answers unrestricted questions across row-level participant records, including sensitive data, without a defined access model or approved purpose.
+
+Scoring criteria:
+- Repeats often
+- Has a stable audience and job
+- Has a bounded, maintained knowledge source
+- Can cite evidence
+- Has clear human review
+- Avoids authority it should not have
+- Has an owner who can test and maintain it

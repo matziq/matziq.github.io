@@ -1,0 +1,22 @@
+FICTIONAL RESEARCHER BRIEF
+Project: Aurora skin comfort evidence scan
+Requester: Jordan Lee, Consumer Insights
+Decision date: November 18, 2026
+
+Research question:
+What evidence should the team examine before interpreting a 14-day self-reported skin-comfort endpoint, and which internal gaps prevent a conclusion today?
+
+Internal facts available:
+- Approved protocol: 120-participant target; primary endpoint is change in self-reported skin comfort after 14 days.
+- November 6 snapshot: 84 enrolled; 52 completed day 14; 4 withdrawn.
+- Data cleaning and endpoint analysis have not started.
+- No outcome table, statistical analysis plan excerpt, adverse-event summary, subgroup plan, or approved claims language is available in this packet.
+
+Requested public-source scope:
+- Prefer peer-reviewed reviews, standards, regulator guidance, and primary research.
+- Focus on patient/consumer-reported outcomes, short-duration cosmetic studies, missing data, measurement validity, and overgeneralization.
+- Record publication date, source type, population, method, and limitations.
+- Do not use public evidence to invent Aurora results.
+
+Output boundary:
+This is an evidence-planning exercise, not medical advice, regulatory approval, or a product claim.
