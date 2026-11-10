@@ -1,8 +1,15 @@
 {
   "source": "https://www.rockstargames.com/VI",
   "newswire": "https://www.rockstargames.com/newswire",
-  "fetchedAt": "2026-11-10T07:13:48+00:00",
+  "fetchedAt": "2026-11-10T19:41:31+00:00",
   "items": [
+    {
+      "title": "Pre-Load Grand Theft Auto VI Now",
+      "url": "https://www.rockstargames.com/newswire/article/89834o94713o21",
+      "date": "November 10, 2026",
+      "isoDate": "2026-11-10",
+      "image": "https://www.rockstargames.com/VI/_next/static/media/89834o94713o21.04n287k6o2lh9.jpg?akim=1&imdensity=1&imwidth=640"
+    },
     {
       "title": "Explore the Grand Theft Auto VI Launch Gallery",
       "url": "https://www.rockstargames.com/newswire/article/39ak81277255o9",
@@ -16,13 +23,6 @@
       "date": "November 3, 2026",
       "isoDate": "2026-11-03",
       "image": "https://www.rockstargames.com/VI/_next/static/media/k4ak9okk485712.0cj_8hoskvfgy.jpg?akim=1&imdensity=1&imwidth=640"
-    },
-    {
-      "title": "Grand Theft Auto VI: Original Score by Justice",
-      "url": "https://www.rockstargames.com/newswire/article/39ak8a12395591",
-      "date": "October 29, 2026",
-      "isoDate": "2026-10-29",
-      "image": "https://www.rockstargames.com/VI/_next/static/media/39ak8a12395591.0ybs2pkm~3732.jpg?akim=1&imdensity=1&imwidth=640"
     }
   ]
 }
