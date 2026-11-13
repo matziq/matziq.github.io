@@ -7900,27 +7900,53 @@
       "winnerTeamId": "2"
     },
     "401873052": {
-      "awayScore": null,
+      "awayScore": 24,
       "awayTeamId": "28",
-      "checkedAt": "2026-11-13T01:18:23Z",
+      "checkedAt": "2026-11-13T08:07:57Z",
       "error": null,
       "eventId": "401873052",
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
-      "fantasyLeaders": null,
-      "firstFinalAt": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4361050",
+            "name": "Isaiah Likely",
+            "points": 27.7,
+            "statLine": "9 rec, 127 rec yds, 1 rec TD",
+            "teamId": "19"
+          },
+          {
+            "athleteId": "4696981",
+            "name": "Cam Skattebo",
+            "points": 27.2,
+            "statLine": "78 rush yds, 2 rush TD, 3 rec, 44 rec yds",
+            "teamId": "19"
+          },
+          {
+            "athleteId": "4426348",
+            "name": "Jayden Daniels",
+            "points": 20.76,
+            "statLine": "249 pass yds, 3 pass TD, 2 INT, 28 rush yds",
+            "teamId": "28"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401873052"
+      },
+      "firstFinalAt": "2026-11-13T08:07:57Z",
       "hasStarted": true,
-      "homeScore": null,
+      "homeScore": 21,
       "homeTeamId": "19",
-      "lastAttemptAt": "2026-11-13T01:18:23Z",
+      "lastAttemptAt": "2026-11-13T08:07:57Z",
       "pickAssessmentId": "assessment-f75b729d1902de025cda98bd",
       "pickCutoffAt": "2026-11-13T01:15:00Z",
       "pickEffectiveAt": "2026-10-25T18:53:08Z",
       "pickExplanation": "I expect the Washington Commanders to beat the New York Giants. Daniels' 300-yard response and alternative receivers should leave Washington a narrow road route after the tied first meeting. McLaurin's announced season-ending patellar tendon tear, Washington's slow starts and the Giants' receiving options keep the retained 23-20 pair uncertain rather than assuming full health.",
       "pickLockedAt": "2026-11-13T01:18:23Z",
       "pickReason": "I expect the Washington Commanders to beat the New York Giants. Daniels' 300-yard response and alternative receivers should leave Washington a narrow road route after the tied first meeting. McLaurin's announced season-ending patellar tendon tear, Washington's slow starts and the Giants' receiving options keep the retained 23-20 pair uncertain rather than assuming full health.",
-      "pickResult": "pending",
+      "pickResult": "correct",
       "pickRevisionId": "assessment-f75b729d1902de025cda98bd:401873052",
       "pregameExplanation": "I expect the Washington Commanders to beat the New York Giants. Daniels' 300-yard response and alternative receivers should leave Washington a narrow road route after the tied first meeting. McLaurin's announced season-ending patellar tendon tear, Washington's slow starts and the Giants' receiving options keep the retained 23-20 pair uncertain rather than assuming full health.",
       "projectedScore": {
@@ -7935,14 +7961,14 @@
       },
       "projectedScoreLockedAt": "2026-11-13T01:18:23Z",
       "projectedScoreStatus": "available",
-      "resultUpdatedAt": null,
+      "resultUpdatedAt": "2026-11-13T08:07:57Z",
       "scheduledAt": "2026-11-13T01:15:00Z",
       "scoredPickTeamId": "28",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261112",
-      "status": "in_progress",
-      "statusDetail": "In progress - awaiting final",
+      "status": "final",
+      "statusDetail": "Final",
       "timeConfirmed": true,
-      "winnerTeamId": null
+      "winnerTeamId": "28"
     },
     "401873053": {
       "awayScore": null,
@@ -14056,14 +14082,14 @@
       "winnerTeamId": null
     }
   },
-  "lastAttemptAt": "2026-11-13T01:18:23Z",
-  "lastResultAt": "2026-11-10T10:38:33Z",
-  "lastSuccessfulCheckAt": "2026-11-13T01:18:23Z",
+  "lastAttemptAt": "2026-11-13T08:07:57Z",
+  "lastResultAt": "2026-11-13T08:07:57Z",
+  "lastSuccessfulCheckAt": "2026-11-13T08:07:57Z",
   "monitoringComplete": false,
-  "nextCheckAt": "2026-11-13T01:23:23Z",
+  "nextCheckAt": "2026-11-13T09:07:57Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-11-13T01:18:23Z",
-  "revision": "3a92cadfe9767c5e10b1045dcd2ebfb640fdbd477d1e3f6a851623e19b8aac21",
+  "publishedAt": "2026-11-13T08:07:57Z",
+  "revision": "67b1304895a64eeaa8e375ee34ff9ac1b895a7c420ff60f937b7df831240176e",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
