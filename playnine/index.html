@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="googlebot" content="noindex, nofollow, noarchive">
+  <meta name="description" content="An unofficial, mobile-friendly Play Nine scorecard and quick rules reference.">
+  <meta name="theme-color" content="#f7f4ef">
+  <title>Play Nine Scorecard</title>
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      background: var(--cp-bg);
+      color: var(--cp-text);
+      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    button,
+    input {
+      font: inherit;
+    }
+    button {
+      min-height: 44px;
+      border: 1px solid var(--cp-border-strong);
+      border-radius: 0.625rem;
+      padding: 0.55rem 0.9rem;
+      background: var(--cp-surface);
+      color: var(--cp-text);
+      font-weight: 650;
+      cursor: pointer;
+    }
+    button:hover:not(:disabled) {
+      border-color: var(--cp-accent);
+    }
+    button:focus-visible,
+    input:focus-visible,
+    summary:focus-visible {
+      outline: 3px solid var(--cp-link);
+      outline-offset: 2px;
+    }
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+    .page-shell {
+      width: min(100% - 1.25rem, 920px);
+      margin: 0 auto;
+      padding: 1rem 0 3rem;
+    }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--cp-border);
+      border-top: 5px solid var(--cp-success);
+      border-radius: 16px;
+      padding: 1.25rem;
+      background: var(--cp-surface);
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.14);
+    }
+    .eyebrow {
+      margin: 0 0 0.25rem;
+      color: var(--cp-success);
+      font-size: 0.78rem;
+      font-weight: 750;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+    h1 {
+      margin-bottom: 0.35rem;
+      font-size: clamp(2rem, 8vw, 3rem);
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+    }
+    .hero-copy {
+      max-width: 46rem;
+      margin-bottom: 0;
+      color: var(--cp-text-muted);
+    }
+    .hero-mark {
+      position: absolute;
+      top: 0.8rem;
+      right: 1rem;
+      color: var(--cp-warning);
+      font-size: 2rem;
+    }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      clip-path: inset(50%);
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin: 1rem 0;
+    }
+    .button-primary {
+      border-color: var(--cp-accent);
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+    }
+    .button-primary:hover:not(:disabled) {
+      border-color: var(--cp-accent-hover);
+      background: var(--cp-accent-hover);
+    }
+    .summary-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 0.75rem;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      padding: 1rem;
+      background: var(--cp-surface);
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.14);
+    }
+    .summary-label {
+      margin: 0;
+      color: var(--cp-text-muted);
+      font-size: 0.76rem;
+      font-weight: 750;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .summary-message {
+      margin: 0.1rem 0 0;
+      font-size: 1.12rem;
+      font-weight: 750;
+      line-height: 1.3;
+    }
+    .summary-progress {
+      min-width: 4.5rem;
+      color: var(--cp-success);
+      font-size: 1.4rem;
+      font-weight: 800;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .storage-note {
+      min-height: 1.45rem;
+      margin: 0.4rem 0 0;
+      color: var(--cp-text-muted);
+      font-size: 0.82rem;
+    }
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 1.8rem 0 0.8rem;
+    }
+    .section-heading h2 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+    .section-note {
+      margin: 0;
+      color: var(--cp-text-muted);
+      font-size: 0.9rem;
+      text-align: right;
+    }
+    .player-list {
+      display: grid;
+      gap: 0.9rem;
+    }
+    .player-card {
+      min-width: 0;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      padding: 0.9rem;
+      background: var(--cp-surface);
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.14);
+    }
+    .player-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 0.8rem;
+    }
+    .player-name {
+      width: 100%;
+      min-width: 0;
+      min-height: 44px;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      padding: 0.55rem 0.7rem;
+      background: var(--cp-bg-elevated);
+      color: var(--cp-text);
+      font-weight: 750;
+    }
+    .player-total {
+      display: grid;
+      justify-items: end;
+      line-height: 1.15;
+    }
+    .player-total-label {
+      color: var(--cp-text-muted);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .player-total-value {
+      font-size: 1.35rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+    .remove-player {
+      grid-column: 1 / -1;
+      justify-self: start;
+      min-height: 38px;
+      padding: 0.3rem 0.65rem;
+      color: var(--cp-text-muted);
+      font-size: 0.84rem;
+    }
+    .hole-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+    .hole-cell {
+      min-width: 0;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      padding: 0.42rem;
+      background: var(--cp-bg-elevated);
+    }
+    .hole-label {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--cp-text-muted);
+      font-size: 0.72rem;
+      font-weight: 750;
+    }
+    .hole-entry {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .score-input {
+      width: 100%;
+      min-width: 0;
+      min-height: 42px;
+      border: 1px solid var(--cp-border-strong);
+      border-radius: 0.5rem;
+      padding: 0.3rem 0.2rem;
+      background: var(--cp-surface);
+      color: var(--cp-text);
+      font-size: 1rem;
+      font-variant-numeric: tabular-nums;
+      text-align: center;
+    }
+    .score-input[aria-invalid="true"] {
+      border-color: var(--cp-danger);
+      background: var(--cp-accent-soft);
+    }
+    .sign-toggle {
+      flex: 0 0 36px;
+      width: 36px;
+      min-height: 42px;
+      border-color: var(--cp-border);
+      padding: 0;
+      color: var(--cp-text-muted);
+      font-weight: 800;
+    }
+    .sign-toggle[aria-pressed="true"] {
+      border-color: var(--cp-warning);
+      background: var(--cp-warning);
+      color: var(--cp-text);
+    }
+    .player-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 0.9rem;
+    }
+    .rules-section {
+      margin-top: 2rem;
+    }
+    .rules-intro {
+      margin: 0.3rem 0 0.8rem;
+      color: var(--cp-text-muted);
+    }
+    .search-label {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-weight: 700;
+    }
+    .rules-search {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid var(--cp-border-strong);
+      border-radius: 0.625rem;
+      padding: 0.65rem 0.8rem;
+      background: var(--cp-surface);
+      color: var(--cp-text);
+    }
+    .rules-count {
+      min-height: 1.5rem;
+      margin: 0.4rem 0;
+      color: var(--cp-text-muted);
+      font-size: 0.85rem;
+    }
+    .rule-list {
+      display: grid;
+      gap: 0.5rem;
+    }
+    .rule-card {
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-surface);
+    }
+    .rule-card[hidden] {
+      display: none;
+    }
+    .rule-card summary {
+      min-height: 48px;
+      padding: 0.78rem 2.4rem 0.78rem 0.9rem;
+      color: var(--cp-text);
+      font-weight: 750;
+      cursor: pointer;
+    }
+    .rule-content {
+      padding: 0 0.95rem 0.8rem;
+      color: var(--cp-text-muted);
+    }
+    .rule-content p:last-child,
+    .rule-content ul:last-child,
+    .rule-content ol:last-child {
+      margin-bottom: 0;
+    }
+    .rule-content li + li {
+      margin-top: 0.35rem;
+    }
+    .empty-rules {
+      display: none;
+      border: 1px dashed var(--cp-border-strong);
+      border-radius: 0.625rem;
+      padding: 1rem;
+      color: var(--cp-text-muted);
+      text-align: center;
+    }
+    .empty-rules.visible {
+      display: block;
+    }
+    footer {
+      margin-top: 2rem;
+      border-top: 1px solid var(--cp-border);
+      padding-top: 0.9rem;
+      color: var(--cp-text-muted);
+      font-size: 0.82rem;
+      text-align: center;
+    }
+    dialog {
+      width: min(100% - 2rem, 420px);
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      padding: 1.2rem;
+      background: var(--cp-surface);
+      color: var(--cp-text);
+      box-shadow: var(--cp-shadow);
+    }
+    dialog::backdrop {
+      background: var(--cp-overlay);
+    }
+    dialog h2 {
+      margin-bottom: 0.45rem;
+      font-size: 1.3rem;
+    }
+    dialog p {
+      color: var(--cp-text-muted);
+    }
+    .dialog-actions {
+      display: grid;
+      gap: 0.5rem;
+    }
+    .dialog-cancel {
+      margin-top: 0.6rem;
+      width: 100%;
+    }
+    @media (min-width: 620px) {
+      .page-shell {
+        width: min(100% - 2rem, 920px);
+        padding-top: 1.5rem;
+      }
+      .hero {
+        padding: 1.6rem 1.8rem;
+      }
+      .player-card {
+        padding: 1rem;
+      }
+      .hole-grid {
+        grid-template-columns: repeat(9, minmax(0, 1fr));
+      }
+      .hole-cell {
+        padding: 0.45rem 0.32rem;
+      }
+      .hole-entry {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+      .sign-toggle {
+        width: 100%;
+        min-height: 30px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="hero">
+      <span class="hero-mark" aria-hidden="true">⛳</span>
+      <p class="eyebrow">Nine holes. Lowest score wins.</p>
+      <h1>Play Nine</h1>
+      <p class="hero-copy">A quick scorecard and rules reference for game night. Scores save on this device as you play.</p>
+    </header>
+
+    <div class="toolbar" aria-label="Game controls">
+      <button class="button-primary" id="add-player" type="button">Add player</button>
+      <button id="new-game" type="button">New game</button>
+    </div>
+
+    <section class="summary-card" aria-labelledby="leader-label">
+      <div>
+        <p class="summary-label" id="leader-label">Current lead</p>
+        <p class="summary-message" id="leader-message" aria-live="polite">Enter scores to see the lead.</p>
+      </div>
+      <div class="summary-progress" id="score-progress" aria-label="Scored holes">0/18</div>
+    </section>
+    <p class="storage-note" id="storage-note" role="status"></p>
+
+    <section aria-labelledby="scorecard-title">
+      <div class="section-heading">
+        <h2 id="scorecard-title">Scorecard</h2>
+        <p class="section-note">Lower is better · 9 holes</p>
+      </div>
+      <div class="player-list" id="player-list"></div>
+      <div class="player-actions">
+        <button id="add-player-bottom" class="button-primary" type="button">Add player</button>
+      </div>
+    </section>
+
+    <section class="rules-section" aria-labelledby="rules-title">
+      <div class="section-heading">
+        <h2 id="rules-title">Rules, at a glance</h2>
+      </div>
+      <p class="rules-intro">A quick reference in original wording. Check your game’s official instructions if a table question comes up.</p>
+      <label class="search-label" for="rules-search">Find a rule</label>
+      <input class="rules-search" id="rules-search" type="search" inputmode="search" autocomplete="off" placeholder="Try “dealer,” “matching,” or “last turn”">
+      <p class="rules-count" id="rules-count" aria-live="polite"></p>
+      <div class="rule-list" id="rule-list">
+        <details class="rule-card" data-search="object goal players nine holes lowest score 2 6">
+          <summary>Object of the game</summary>
+          <div class="rule-content">
+            <p>Play with 2 to 6 people. Each hand is one hole, and the game lasts nine holes. Add each player’s hole scores; the lowest final total wins.</p>
+          </div>
+        </details>
+        <details class="rule-card" data-search="deck cards values mulligan out of bounds hole in one">
+          <summary>Cards and values</summary>
+          <div class="rule-content">
+            <p>The 108-card deck has eight cards of each value from 0 through 12, plus four Hole-in-One cards worth -5. The 0 card is called Mulligan, and 12 is Out of Bounds.</p>
+          </div>
+        </details>
+        <details class="rule-card" data-search="choose dealer draw tie redraw clockwise first player left">
+          <summary>Choose a dealer and set up</summary>
+          <div class="rule-content">
+            <p>Everyone draws a card to choose the first dealer. The lowest value deals; redraw tied draws. Deal eight cards face down to each player, who lays them out in two rows of four. Put the rest in a draw pile and turn its top card face up to start the discard pile. The dealer’s left-hand neighbor takes the first turn; play moves clockwise.</p>
+          </div>
+        </details>
+        <details class="rule-card" data-search="tee off flip two cards starting setup">
+          <summary>Teeing off</summary>
+          <div class="rule-content">
+            <p>Before play begins, each player turns over any two of their own cards. This is the only time a player turns over two cards at once.</p>
+          </div>
+        </details>
+        <details class="rule-card" data-search="turn draw pile discard replace discard flip face down card">
+          <summary>Take a turn</summary>
+          <div class="rule-content">
+            <p>Choose the top card from either pile:</p>
+            <ul>
+              <li><strong>Draw pile:</strong> swap the drawn card with any one of your eight cards, face up or down, and discard the card you replaced; or discard the drawn card, then turn one of your face-down cards face up.</li>
+              <li><strong>Discard pile:</strong> use that card to replace one of your cards, face up or down, then discard the replaced card.</li>
+            </ul>
+            <p>Usually you must replace a card or turn over a face-down card. You can keep swapping face-up cards while at least one of your cards is still face down.</p>
+          </div>
+        </details>
+        <details class="rule-card" data-search="last face down card skip draw discard putt">
+          <summary>When one card remains face down</summary>
+          <div class="rule-content">
+            <p>Once you have only one face-down card left, you may choose to draw and discard without swapping or turning over that last card. You can repeat this skip on later turns while it stays face down.</p>
+          </div>
+        </details>
+        <details class="rule-card" data-search="putting out final card last turn each player score hand">
+          <summary>Putting out and finishing a hole</summary>
+          <div class="rule-content">
+            <p>When someone turns over or replaces their final face-down card, every other player takes exactly one more turn. Then reveal any remaining face-down cards and score all eight cards in each layout.</p>
+          </div>
+        </details>
+        <details class="rule-card" data-search="score add face values pairs vertical columns cancel zero bonus hole in one -5">
+          <summary>Score cards and matched columns</summary>
+          <div class="rule-content">
+            <p>Add the eight face values. A vertical pair (the top card directly above the bottom card) with matching values cancels to zero. A matched Hole-in-One pair is the exception: both cards still count -5, for -10 total.</p>
+            <ul>
+              <li>Two vertical pairs of the same value: those four cards score 0, plus a -10 bonus.</li>
+              <li>Three pairs of the same value: those six cards score 0, plus a -15 bonus.</li>
+              <li>Four pairs of the same value: all eight cards score 0, plus a -20 bonus.</li>
+              <li>Four Hole-in-Ones arranged as two matching columns score -20 for the cards, then receive the -10 bonus, for -30.</li>
+            </ul>
+            <p>Tip: turn matched sets face down while adding the remaining values so you don’t count them twice.</p>
+          </div>
+        </details>
+        <details class="rule-card" data-search="next hole dealer shuffle deal player left">
+          <summary>Start the next hole</summary>
+          <div class="rule-content">
+            <p>The player to the left of the previous dealer shuffles and deals the next hand. Everyone tees off again, and the player to the new dealer’s left starts.</p>
+          </div>
+        </details>
+        <details class="rule-card" data-search="end game ninth hole winner lowest total tie playoff sudden death">
+          <summary>End of the game and ties</summary>
+          <div class="rule-content">
+            <p>After the ninth hole, compare the totals for all nine holes. The lowest total wins. Players tied for the lowest score may settle it with a sudden-death playoff.</p>
+          </div>
+        </details>
+      </div>
+      <p class="empty-rules" id="empty-rules">No rule sections match that search.</p>
+    </section>
+
+    <footer>Unofficial fan-made scorecard and rules reference. Not affiliated with the game’s publisher. Scores stay in this browser on this device.</footer>
+  </main>
+
+  <dialog id="new-game-dialog" aria-labelledby="dialog-title">
+    <h2 id="dialog-title">Start a new game?</h2>
+    <p>This clears every hole score. Choose whether to keep the current player names or start with two fresh players.</p>
+    <div class="dialog-actions">
+      <button class="button-primary" type="button" data-reset="keep">Keep players, clear scores</button>
+      <button type="button" data-reset="fresh">Start fresh with two players</button>
+    </div>
+    <button class="dialog-cancel" type="button" id="cancel-new-game">Cancel</button>
+  </dialog>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const STORAGE_KEY = "playnine-scorecard-v1";
+      const MIN_PLAYERS = 2;
+      const MAX_PLAYERS = 6;
+      const HOLES = 9;
+      const playerList = document.getElementById("player-list");
+      const leaderMessage = document.getElementById("leader-message");
+      const scoreProgress = document.getElementById("score-progress");
+      const storageNote = document.getElementById("storage-note");
+      const addButtons = [
+        document.getElementById("add-player"),
+        document.getElementById("add-player-bottom")
+      ];
+      const newGameDialog = document.getElementById("new-game-dialog");
+      const rulesSearch = document.getElementById("rules-search");
+      const ruleCards = Array.from(document.querySelectorAll(".rule-card"));
+      let storageMessage = "";
+      let playerSequence = 0;
+
+      function newPlayer(name) {
+        playerSequence += 1;
+        return { id: `player-${playerSequence}`, name, scores: Array(HOLES).fill(null) };
+      }
+
+      function freshGame() {
+        return { players: [newPlayer("Player 1"), newPlayer("Player 2")] };
+      }
+
+      function normalizeGame(value) {
+        if (!value || !Array.isArray(value.players) ||
+            value.players.length < MIN_PLAYERS || value.players.length > MAX_PLAYERS) {
+          return null;
+        }
+        const players = value.players.map((player, index) => {
+          const scores = Array.isArray(player.scores) ? player.scores : [];
+          return {
+            id: `player-${index + 1}`,
+            name: typeof player.name === "string" ? player.name.slice(0, 24) : "",
+            scores: Array.from({ length: HOLES }, (_, hole) => {
+              const score = scores[hole];
+              return Number.isSafeInteger(score) ? score : null;
+            })
+          };
+        });
+        return { players };
+      }
+
+      let game = freshGame();
+      try {
+        const saved = window.localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          try {
+            const restored = normalizeGame(JSON.parse(saved));
+            if (restored) {
+              game = restored;
+              playerSequence = restored.players.length;
+            } else {
+              storageMessage = "The saved game could not be read. A fresh scorecard is ready.";
+            }
+          } catch (error) {
+            storageMessage = "The saved game could not be read. A fresh scorecard is ready.";
+          }
+        }
+      } catch (error) {
+        storageMessage = "This browser blocked local storage; scores may not survive a refresh.";
+      }
+
+      function playerName(player, index) {
+        return player.name.trim() || `Player ${index + 1}`;
+      }
+
+      function persistGame() {
+        try {
+          window.localStorage.setItem(STORAGE_KEY, JSON.stringify(game));
+          storageMessage = "Saved on this device.";
+        } catch (error) {
+          storageMessage = "This browser could not save the game; scores may not survive a refresh.";
+        }
+        storageNote.textContent = storageMessage;
+      }
+
+      function renderPlayers() {
+        playerList.innerHTML = "";
+        game.players.forEach((player, playerIndex) => {
+          const card = document.createElement("article");
+          card.className = "player-card";
+          card.innerHTML = `
+            <div class="player-head">
+              <label class="player-name-label">
+                <span class="visually-hidden">Player ${playerIndex + 1} name</span>
+                <input class="player-name" type="text" maxlength="24" autocomplete="off"
+                  placeholder="Player ${playerIndex + 1}" data-player-index="${playerIndex}">
+              </label>
+              <div class="player-total">
+                <span class="player-total-label">Total</span>
+                <span class="player-total-value" data-total-index="${playerIndex}">0</span>
+              </div>
+              <button class="remove-player" type="button" data-remove-player="${playerIndex}"
+                ${game.players.length <= MIN_PLAYERS ? "disabled" : ""}>Remove player</button>
+            </div>
+            <div class="hole-grid" role="group" aria-label="Hole scores for player ${playerIndex + 1}">
+              ${Array.from({ length: HOLES }, (_, hole) => `
+                <div class="hole-cell">
+                  <label class="hole-label" for="score-${playerIndex}-${hole}">Hole ${hole + 1}</label>
+                  <div class="hole-entry">
+                    <button class="sign-toggle" type="button" data-sign-player="${playerIndex}"
+                      data-sign-hole="${hole}" aria-pressed="${player.scores[hole] !== null && player.scores[hole] < 0}"
+                      aria-label="Toggle negative score for player ${playerIndex + 1}, hole ${hole + 1}">±</button>
+                    <input class="score-input" type="text" inputmode="numeric" pattern="-?[0-9]*"
+                      autocomplete="off" id="score-${playerIndex}-${hole}" data-score-player="${playerIndex}"
+                      data-score-hole="${hole}" aria-label="Score for player ${playerIndex + 1}, hole ${hole + 1}"
+                      value="${player.scores[hole] === null ? "" : player.scores[hole]}"
+                      data-negative="${player.scores[hole] !== null && player.scores[hole] < 0}">
+                  </div>
+                </div>
+              `).join("")}
+            </div>`;
+          const nameInput = card.querySelector(".player-name");
+          nameInput.value = player.name;
+          playerList.appendChild(card);
+        });
+        addButtons.forEach((button) => {
+          button.disabled = game.players.length >= MAX_PLAYERS;
+        });
+        updateSummary();
+      }
+
+      function updateSummary() {
+        const scoredCount = game.players.reduce(
+          (count, player) => count + player.scores.filter((score) => score !== null).length,
+          0
+        );
+        const totalSlots = game.players.length * HOLES;
+        scoreProgress.textContent = `${scoredCount}/${totalSlots}`;
+        scoreProgress.setAttribute("aria-label", `${scoredCount} of ${totalSlots} scores entered`);
+
+        const standings = game.players.map((player, index) => ({
+          name: playerName(player, index),
+          total: player.scores.reduce((sum, score) => sum + (score === null ? 0 : score), 0),
+          completed: player.scores.every((score) => score !== null),
+          hasScores: player.scores.some((score) => score !== null)
+        }));
+        standings.forEach((standing, index) => {
+          const total = playerList.querySelector(`[data-total-index="${index}"]`);
+          if (total) total.textContent = String(standing.total);
+        });
+
+        const finished = standings.every((standing) => standing.completed);
+        if (finished) {
+          const lowest = Math.min(...standings.map((standing) => standing.total));
+          const winners = standings.filter((standing) => standing.total === lowest);
+          leaderMessage.textContent = winners.length === 1
+            ? `${winners[0].name} wins with ${lowest}.`
+            : `Tie at ${lowest}: ${winners.map((winner) => winner.name).join(" and ")}. Sudden-death playoff.`;
+          document.getElementById("leader-label").textContent = "Game complete";
+          return;
+        }
+
+        document.getElementById("leader-label").textContent = "Current lead";
+        const active = standings.filter((standing) => standing.hasScores);
+        if (active.length === 0) {
+          leaderMessage.textContent = "Enter scores to see the lead.";
+          return;
+        }
+        const lowest = Math.min(...active.map((standing) => standing.total));
+        const leaders = active.filter((standing) => standing.total === lowest);
+        leaderMessage.textContent = leaders.length === 1
+          ? `${leaders[0].name} is ahead at ${lowest}.`
+          : `Tied for the lead at ${lowest}: ${leaders.map((leader) => leader.name).join(" and ")}.`;
+      }
+
+      function saveScore(input) {
+        const playerIndex = Number(input.dataset.scorePlayer);
+        const holeIndex = Number(input.dataset.scoreHole);
+        let value = input.value.trim();
+        if (input.dataset.negative === "true" && /^\d+$/.test(value)) {
+          value = `-${value}`;
+          input.value = value;
+        }
+        if (value === "") {
+          input.setAttribute("aria-invalid", "false");
+          game.players[playerIndex].scores[holeIndex] = null;
+        } else if (/^-?\d+$/.test(value) && Number.isSafeInteger(Number(value))) {
+          input.setAttribute("aria-invalid", "false");
+          input.dataset.negative = value.startsWith("-");
+          game.players[playerIndex].scores[holeIndex] = Number(value);
+        } else {
+          input.setAttribute("aria-invalid", "true");
+          game.players[playerIndex].scores[holeIndex] = null;
+        }
+        persistGame();
+        updateSummary();
+      }
+
+      playerList.addEventListener("input", (event) => {
+        const target = event.target;
+        if (target.matches(".player-name")) {
+          const index = Number(target.dataset.playerIndex);
+          game.players[index].name = target.value.slice(0, 24);
+          persistGame();
+          updateSummary();
+        } else if (target.matches(".score-input")) {
+          saveScore(target);
+        }
+      });
+
+      playerList.addEventListener("click", (event) => {
+        const removeButton = event.target.closest("[data-remove-player]");
+        if (removeButton && game.players.length > MIN_PLAYERS) {
+          const index = Number(removeButton.dataset.removePlayer);
+          game.players.splice(index, 1);
+          persistGame();
+          renderPlayers();
+          return;
+        }
+
+        const signButton = event.target.closest("[data-sign-player]");
+        if (signButton) {
+          const input = playerList.querySelector(
+            `[data-score-player="${signButton.dataset.signPlayer}"][data-score-hole="${signButton.dataset.signHole}"]`
+          );
+          const value = input.value.trim();
+          if (/^-?\d+$/.test(value)) {
+            input.value = value.startsWith("-") ? value.slice(1) : `-${value}`;
+            input.dataset.negative = input.value.startsWith("-");
+          } else {
+            input.dataset.negative = input.dataset.negative !== "true";
+          }
+          signButton.setAttribute("aria-pressed", input.dataset.negative);
+          saveScore(input);
+        }
+      });
+
+      function addPlayer() {
+        if (game.players.length >= MAX_PLAYERS) return;
+        game.players.push(newPlayer(`Player ${game.players.length + 1}`));
+        persistGame();
+        renderPlayers();
+        const names = playerList.querySelectorAll(".player-name");
+        names[names.length - 1].focus();
+      }
+
+      addButtons.forEach((button) => button.addEventListener("click", addPlayer));
+      document.getElementById("new-game").addEventListener("click", () => newGameDialog.showModal());
+      document.getElementById("cancel-new-game").addEventListener("click", () => newGameDialog.close());
+      newGameDialog.addEventListener("click", (event) => {
+        if (event.target === newGameDialog) newGameDialog.close();
+        const resetButton = event.target.closest("[data-reset]");
+        if (!resetButton) return;
+        if (resetButton.dataset.reset === "keep") {
+          game.players = game.players.map((player) => ({
+            ...player,
+            scores: Array(HOLES).fill(null)
+          }));
+        } else {
+          game = freshGame();
+        }
+        persistGame();
+        renderPlayers();
+        newGameDialog.close();
+      });
+
+      function filterRules() {
+        const query = rulesSearch.value.trim().toLocaleLowerCase();
+        let visible = 0;
+        ruleCards.forEach((card) => {
+          const matches = !query ||
+            `${card.dataset.search} ${card.textContent}`.toLocaleLowerCase().includes(query);
+          card.hidden = !matches;
+          if (matches) visible += 1;
+        });
+        document.getElementById("rules-count").textContent =
+          `${visible} of ${ruleCards.length} rule sections`;
+        document.getElementById("empty-rules").classList.toggle("visible", visible === 0);
+      }
+
+      rulesSearch.addEventListener("input", filterRules);
+      storageNote.textContent = storageMessage;
+      renderPlayers();
+      filterRules();
+    })();
+  </script>
+</body>
+</html>
