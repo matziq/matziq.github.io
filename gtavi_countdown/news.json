@@ -1,8 +1,15 @@
 {
   "source": "https://www.rockstargames.com/VI",
   "newswire": "https://www.rockstargames.com/newswire",
-  "fetchedAt": "2026-11-19T07:20:18+00:00",
+  "fetchedAt": "2026-11-19T20:31:50+00:00",
   "items": [
+    {
+      "title": "Grand Theft Auto VI Now Available",
+      "url": "https://www.rockstargames.com/newswire/article/39akk424a9oo53",
+      "date": "November 19, 2026",
+      "isoDate": "2026-11-19",
+      "image": "https://www.rockstargames.com/VI/_next/static/media/39akk424a9oo53.0sses._-mhxod.jpg?akim=1&imdensity=1&imwidth=640"
+    },
     {
       "title": "Pre-Load Grand Theft Auto VI Now",
       "url": "https://www.rockstargames.com/newswire/article/89834o94713o21",
@@ -16,13 +23,6 @@
       "date": "November 5, 2026",
       "isoDate": "2026-11-05",
       "image": "https://www.rockstargames.com/VI/_next/static/media/39ak81277255o9.0lmk9f~r~10.x.jpg?akim=1&imdensity=1&imwidth=640"
-    },
-    {
-      "title": "Grand Theft Auto VI Pre-Load Begins on November 10",
-      "url": "https://www.rockstargames.com/newswire/article/k4ak9okk485712",
-      "date": "November 3, 2026",
-      "isoDate": "2026-11-03",
-      "image": "https://www.rockstargames.com/VI/_next/static/media/k4ak9okk485712.0cj_8hoskvfgy.jpg?akim=1&imdensity=1&imwidth=640"
     }
   ]
 }
