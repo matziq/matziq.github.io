@@ -80,6 +80,9 @@
   :focus-visible { outline: 3px solid var(--cp-accent); outline-offset: 4px; }
   .experience { position: relative; overflow: hidden; min-height: 100svh; isolation: isolate; background: var(--cp-bg); }
   .experience::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .22; background: repeating-linear-gradient(0deg, transparent 0 31px, var(--cp-border) 31px 32px), repeating-linear-gradient(90deg, transparent 0 63px, var(--cp-border) 63px 64px); }
+  .games-nav { position: relative; z-index: 3; width: min(1540px, calc(100% - 64px)); margin: auto; padding-top: 16px; }
+  .games-nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 12px; border: 2px solid var(--cp-border-strong); background: var(--cp-surface); color: var(--cp-text); font-size: 13px; font-weight: 700; text-decoration: none; }
+  .games-nav a:hover { border-color: var(--cp-accent); text-decoration: underline; }
   header { width: min(1540px, calc(100% - 64px)); margin: auto; min-height: 88px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 3; border-bottom: 4px solid var(--cp-border-strong); }
   .brand { display: flex; align-items: center; gap: 12px; }
   .brand-mark { width: 42px; height: 42px; display: grid; place-items: center; border: 3px solid var(--cp-border-strong); background: var(--cp-surface); box-shadow: 4px 4px 0 var(--cp-soot); color: var(--cp-accent); font: 700 20px Consolas, "Courier New", Courier, monospace; }
@@ -177,7 +180,7 @@
     .controls { grid-column: 1 / -1; width: min(540px, 100%); justify-self: center; }
   }
   @media (max-width: 640px) {
-    header, main { width: calc(100% - 32px); }
+    .games-nav, header, main { width: calc(100% - 32px); }
     header { height: 76px; }
     .winter-status { display: none; }
     main { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-top: 32px; }
@@ -198,6 +201,7 @@
 <body>
 <div class="experience" id="experience" style="--heat:68">
   <div class="snowfield" id="snowfield" aria-hidden="true"></div>
+  <nav class="games-nav" aria-label="Game navigation"><a href="https://memconfigmgr.org/games/index.html">&larr; Games Menu</a></nav>
   <header>
     <div class="brand"><div class="brand-mark" aria-hidden="true">{ }</div><div><b>Token Hearth</b><small>Compute, made cozy.</small></div></div>
     <div class="winter-status">Winter outside. Warmth within.</div>
