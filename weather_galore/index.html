@@ -47,6 +47,10 @@
 
   html { -webkit-text-size-adjust: 100%; }
 
+  .app-menu { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 12px; border: 1px solid var(--border-strong); border-radius: 8px; background: var(--surface); color: var(--text); font-weight: 700; text-decoration: none; }
+  .app-menu:hover { text-decoration: underline; }
+  .app-menu:focus-visible { outline: 3px solid var(--accent-ink); outline-offset: 3px; }
+
   body {
     margin: 0;
     padding: 28px 18px 44px;
@@ -370,6 +374,7 @@
 </style>
 </head>
 <body>
+<nav aria-label="App navigation"><a class="app-menu" href="https://memconfigmgr.org/apps/">&larr; App Menu</a></nav>
 <div class="wrap">
 
   <header>

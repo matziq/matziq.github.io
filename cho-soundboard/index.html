@@ -8,6 +8,9 @@
 :root{--bg:#0e1116;--panel:#171b22;--line:#262c36;--text:#e6e9ee;--mute:#8b93a1;--accent:#c0392b}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font:16px/1.4 system-ui,Segoe UI,Roboto,sans-serif}
+.app-menu{display:inline-flex;align-items:center;min-height:44px;margin:16px 16px 0;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text);font-weight:700;text-decoration:none}
+.app-menu:hover{text-decoration:underline}
+.app-menu:focus-visible{outline:3px solid #fff;outline-offset:3px}
 header{padding:28px 16px 8px;text-align:center}
 h1{margin:0;font-size:1.8rem;letter-spacing:.04em}
 h1 span{color:var(--accent)}
@@ -36,6 +39,7 @@ footer{text-align:center;color:var(--mute);font-size:.78rem;padding:0 16px 30px}
 </style>
 </head>
 <body>
+<nav aria-label="App navigation"><a class="app-menu" href="https://memconfigmgr.org/apps/">&larr; App Menu</a></nav>
 <header>
   <h1><span>CHO</span> SOUNDBOARD</h1>
   <p>Deadpan. Flat. Mildly unimpressed.</p>
