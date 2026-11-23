@@ -1,8 +1,15 @@
 {
   "source": "https://www.rockstargames.com/VI",
   "newswire": "https://www.rockstargames.com/newswire",
-  "fetchedAt": "2026-11-23T07:32:01+00:00",
+  "fetchedAt": "2026-11-23T23:50:46+00:00",
   "items": [
+    {
+      "title": "Grand Theft Auto VI: The Album (Deluxe Edition)",
+      "url": "https://www.rockstargames.com/newswire/article/178ok8411a55o5",
+      "date": "November 23, 2026",
+      "isoDate": "2026-11-23",
+      "image": "https://www.rockstargames.com/VI/_next/static/media/178ok8411a55o5.0bzs42.6~szfb.jpg?akim=1&imdensity=1&imwidth=640"
+    },
     {
       "title": "Grand Theft Auto VI Now Available",
       "url": "https://www.rockstargames.com/newswire/article/39akk424a9oo53",
@@ -16,13 +23,6 @@
       "date": "November 10, 2026",
       "isoDate": "2026-11-10",
       "image": "https://www.rockstargames.com/VI/_next/static/media/89834o94713o21.04n287k6o2lh9.jpg?akim=1&imdensity=1&imwidth=640"
-    },
-    {
-      "title": "Explore the Grand Theft Auto VI Launch Gallery",
-      "url": "https://www.rockstargames.com/newswire/article/39ak81277255o9",
-      "date": "November 5, 2026",
-      "isoDate": "2026-11-05",
-      "image": "https://www.rockstargames.com/VI/_next/static/media/39ak81277255o9.0lmk9f~r~10.x.jpg?akim=1&imdensity=1&imwidth=640"
     }
   ]
 }
