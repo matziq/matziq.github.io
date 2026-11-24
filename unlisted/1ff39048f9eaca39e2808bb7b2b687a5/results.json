@@ -9677,7 +9677,7 @@
     "401873077": {
       "awayScore": 10,
       "awayTeamId": "16",
-      "checkedAt": "2026-11-23T22:21:49Z",
+      "checkedAt": "2026-11-24T06:10:10Z",
       "error": null,
       "eventId": "401873077",
       "explanationPhase": "pregame",
@@ -9714,7 +9714,7 @@
       "hasStarted": true,
       "homeScore": 35,
       "homeTeamId": "25",
-      "lastAttemptAt": "2026-11-23T22:21:49Z",
+      "lastAttemptAt": "2026-11-24T06:10:10Z",
       "pickAssessmentId": "assessment-0277ad39b4305fe7b3b42670",
       "pickCutoffAt": "2026-11-23T01:20:00Z",
       "pickEffectiveAt": "2026-10-20T05:26:25Z",
@@ -9746,27 +9746,53 @@
       "winnerTeamId": "25"
     },
     "401873078": {
-      "awayScore": null,
+      "awayScore": 20,
       "awayTeamId": "4",
-      "checkedAt": "2026-11-23T22:21:49Z",
+      "checkedAt": "2026-11-24T06:10:10Z",
       "error": null,
       "eventId": "401873078",
-      "explanationPhase": "pregame",
+      "explanationPhase": "awaiting-review",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
-      "fantasyLeaders": null,
-      "firstFinalAt": null,
-      "hasStarted": false,
-      "homeScore": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "5081432",
+            "name": "Antonio Williams",
+            "points": 21.2,
+            "statLine": "9 rec, 122 rec yds",
+            "teamId": "28"
+          },
+          {
+            "athleteId": "3915511",
+            "name": "Joe Burrow",
+            "points": 19.9,
+            "statLine": "300 pass yds, 2 pass TD, -1 rush yds",
+            "teamId": "4"
+          },
+          {
+            "athleteId": "4426348",
+            "name": "Jayden Daniels",
+            "points": 17.06,
+            "statLine": "289 pass yds, 55 rush yds",
+            "teamId": "28"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401873078"
+      },
+      "firstFinalAt": "2026-11-24T06:10:10Z",
+      "hasStarted": true,
+      "homeScore": 22,
       "homeTeamId": "28",
-      "lastAttemptAt": "2026-11-23T22:21:49Z",
+      "lastAttemptAt": "2026-11-24T06:10:10Z",
       "pickAssessmentId": "assessment-f75b729d1902de025cda98bd",
-      "pickCutoffAt": null,
+      "pickCutoffAt": "2026-11-24T01:15:00Z",
       "pickEffectiveAt": "2026-10-25T18:53:08Z",
       "pickExplanation": "I expect the Cincinnati Bengals to beat the Washington Commanders. Burrow's steadier passing should challenge Washington's concessions even on the road. Daniels' 300-yard comeback, alternative receivers and the home venue provide a response, though McLaurin's announced season-ending patellar tendon tear removes a key receiver.",
-      "pickLockedAt": null,
+      "pickLockedAt": "2026-11-24T06:10:10Z",
       "pickReason": "I expect the Cincinnati Bengals to beat the Washington Commanders. Burrow's steadier passing should challenge Washington's concessions even on the road. Daniels' 300-yard comeback, alternative receivers and the home venue provide a response, though McLaurin's announced season-ending patellar tendon tear removes a key receiver.",
-      "pickResult": "pending",
+      "pickResult": "incorrect",
       "pickRevisionId": "assessment-f75b729d1902de025cda98bd:401873078",
       "pregameExplanation": "I expect the Cincinnati Bengals to beat the Washington Commanders. Burrow's steadier passing should challenge Washington's concessions even on the road. Daniels' 300-yard comeback, alternative receivers and the home venue provide a response, though McLaurin's announced season-ending patellar tendon tear removes a key receiver.",
       "projectedScore": {
@@ -9779,16 +9805,16 @@
         "pickRevisionId": "assessment-9361153b16a65cc2713c7d4f:401873078",
         "pickTeamId": "4"
       },
-      "projectedScoreLockedAt": null,
+      "projectedScoreLockedAt": "2026-11-24T06:10:10Z",
       "projectedScoreStatus": "available",
-      "resultUpdatedAt": null,
+      "resultUpdatedAt": "2026-11-24T06:10:10Z",
       "scheduledAt": "2026-11-24T01:15:00Z",
       "scoredPickTeamId": "4",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261123",
-      "status": "scheduled",
-      "statusDetail": "Scheduled",
+      "status": "final",
+      "statusDetail": "Final",
       "timeConfirmed": true,
-      "winnerTeamId": null
+      "winnerTeamId": "28"
     },
     "401873079": {
       "awayScore": null,
@@ -14732,14 +14758,14 @@
       "winnerTeamId": null
     }
   },
-  "lastAttemptAt": "2026-11-23T22:21:49Z",
-  "lastResultAt": "2026-11-23T10:56:02Z",
-  "lastSuccessfulCheckAt": "2026-11-23T22:21:49Z",
+  "lastAttemptAt": "2026-11-24T06:10:10Z",
+  "lastResultAt": "2026-11-24T06:10:10Z",
+  "lastSuccessfulCheckAt": "2026-11-24T06:10:10Z",
   "monitoringComplete": false,
-  "nextCheckAt": "2026-11-23T23:21:49Z",
+  "nextCheckAt": "2026-11-24T07:10:10Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-11-23T22:21:49Z",
-  "revision": "cc78b15d692eddaa0ee518b4d7092ab25730574f874c97c74dcbe27da34c0f3e",
+  "publishedAt": "2026-11-24T06:10:10Z",
+  "revision": "60a7f2b020319b408d683139b31aca762a8753cf6fb811857eae745c3612df9b",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
