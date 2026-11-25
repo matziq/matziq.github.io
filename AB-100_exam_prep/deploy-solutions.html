@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Domain 3: Deploy AI-powered business solutions &mdash; AB-100 Exam Prep</title>
+<meta name="description" content="AB-100 Domain 3 study guide: monitor and tune, test AI solutions, application lifecycle management, and responsible AI, security, and governance.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Domain 3 &mdash; Deploy AI-powered business solutions</h1>
+<p class="lede">Domain 3 is 20&ndash;25% of AB-100. It covers what happens after design: watching agents in production, testing them properly, moving them safely between environments, and keeping them secure, responsible, and compliant.</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#monitor">Monitor</a>
+    <a class="btn secondary sm" href="#testing">Testing</a>
+    <a class="btn secondary sm" href="#alm">ALM</a>
+    <a class="btn secondary sm" href="#governance">Governance</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="monitor">
+  <h2>3.1 Analyze, monitor, and tune AI solutions</h2>
+  <ul>
+    <li>Use <strong>telemetry</strong> (for example Application Insights) and built-in <strong>analytics</strong> in Copilot Studio to track sessions, resolution, escalation, abandonment, and errors.</li>
+    <li>Collect user <strong>feedback</strong> (ratings, comments) and turn it into a prioritized <strong>backlog</strong> of tuning work.</li>
+    <li>Tune instructions, topics, tool descriptions, and knowledge sources; review cost and model usage.</li>
+  </ul>
+  <div class="callout trap"><span class="callout-title">Exam trap</span><p style="margin-bottom:0">A spike in escalations or unanswered questions usually points to missing knowledge or poor topic/tool descriptions &mdash; measure first, then tune the specific gap.</p></div>
+</section>
+
+<section id="testing">
+  <h2>3.2 Manage testing of AI solutions</h2>
+  <div class="table-scroll"><table class="data-table">
+    <thead><tr><th>Test</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Defined metrics</strong></td><td>Agree on groundedness, relevance, accuracy, and task success targets before testing</td></tr>
+      <tr><td><strong>Test sets / evaluations</strong></td><td>Run representative and adversarial prompts repeatedly; compare versions</td></tr>
+      <tr><td><strong>Custom model validation</strong></td><td>Evaluate fine-tuned or custom models against a held-out dataset and baseline</td></tr>
+      <tr><td><strong>End-to-end scenarios</strong></td><td>Exercise the full process across apps, agents, flows, and data</td></tr>
+      <tr><td><strong>User acceptance</strong></td><td>Business users confirm the solution meets the requirement</td></tr>
+    </tbody>
+  </table></div>
+  <p>Generative output is non-deterministic, so test with many cases and score with metrics rather than expecting identical text.</p>
+</section>
+
+<section id="alm">
+  <h2>3.3 Design ALM for AI solutions</h2>
+  <ul>
+    <li>Package Copilot Studio agents and related components in <strong>solutions</strong>; use separate <strong>dev, test, and production environments</strong>.</li>
+    <li>Use <strong>managed solutions</strong> downstream; use <strong>environment variables</strong> and <strong>connection references</strong> so settings change per environment without editing the agent.</li>
+    <li>Automate deployment with <strong>Power Platform pipelines</strong> or Azure DevOps / GitHub Actions; keep source control and versioning.</li>
+    <li>Apply the same discipline to Foundry Agent Service, custom models, data, and Dynamics 365 AI features: version, evaluate, promote, and be able to roll back.</li>
+  </ul>
+  <div class="callout key"><span class="callout-title">Rule of thumb</span><p style="margin-bottom:0">Never edit directly in production. Build in dev, validate in test, promote a managed artifact.</p></div>
+</section>
+
+<section id="governance">
+  <h2>3.4 Responsible AI, security, and governance</h2>
+  <div class="grid grid-2">
+    <div class="card"><h3 style="margin-top:0">Security</h3><ul style="margin-bottom:0">
+      <li>Least-privilege access for agents, connectors, and service identities</li>
+      <li>Defend against <strong>prompt injection</strong> (direct and indirect) with content filters, input validation, and limited tool permissions</li>
+      <li>Data loss prevention (DLP) policies on connectors</li>
+      <li>Authentication on agents and channels</li>
+    </ul></div>
+    <div class="card"><h3 style="margin-top:0">Governance and compliance</h3><ul style="margin-bottom:0">
+      <li>Environment strategy and managed environments</li>
+      <li>Data residency and retention requirements</li>
+      <li>Audit trails and activity logging</li>
+      <li>Sensitivity labels and Microsoft Purview controls</li>
+    </ul></div>
+  </div>
+  <h3>Microsoft&rsquo;s six responsible AI principles</h3>
+  <p>Fairness &middot; Reliability and safety &middot; Privacy and security &middot; Inclusiveness &middot; Transparency &middot; Accountability. Expect scenario questions asking which principle a control supports (for example, disclosing that users are talking to AI supports transparency).</p>
+</section>
+
+<section id="cheatsheet">
+  <h2>Cheat sheet</h2>
+  <div class="grid grid-3">
+    <div class="card"><h3 style="margin-top:0">Monitor</h3><p style="margin-bottom:0">Telemetry + analytics + feedback &rarr; backlog &rarr; tune.</p></div>
+    <div class="card"><h3 style="margin-top:0">Ship</h3><p style="margin-bottom:0">Solutions, environments, variables, pipelines, managed in prod.</p></div>
+    <div class="card"><h3 style="margin-top:0">Protect</h3><p style="margin-bottom:0">Least privilege, DLP, injection defenses, audit, six principles.</p></div>
+  </div>
+  <p style="margin-top:1rem"><a href="drills.html">Practice Domain 3 drills &rarr;</a> &nbsp; <a href="https://learn.microsoft.com/credentials/certifications/resources/study-guides/ab-100" rel="noopener">Official study guide</a></p>
+</section>
+
+</div></main>
+<footer id="footer"></footer>
+</body>
+</html>

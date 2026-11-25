@@ -20,10 +20,24 @@
 (function () {
     function param(k) { var m = new RegExp("[?&]" + k + "=([^&]*)").exec(window.location.search); return m ? decodeURIComponent(m[1]) : null; }
     var FALLBACK = [
-        {id:"d1-principles",title:"Responsible AI Principles",domain:"responsibly"},{id:"d1-limitations",title:"Limitations and Risks",domain:"responsibly"},{id:"d1-bias",title:"Bias, Fairness, and Mitigation",domain:"responsibly"},{id:"d1-verification",title:"Verification and Human Oversight",domain:"responsibly"},
-        {id:"d2-completions",title:"Completions and Next Edit Suggestions",domain:"features"},{id:"d2-modes",title:"Ask, Edit, and Agent Mode",domain:"features"},{id:"d2-chat",title:"Chat Interfaces and Commands",domain:"features"},{id:"d2-cloud-agent",title:"Cloud Agent and Code Review",domain:"features"},{id:"d2-platform",title:"Platform Features and Replacements",domain:"features"},{id:"d2-mcp",title:"MCP and Extensibility",domain:"features"},
-        {id:"d3-dataflow",title:"The Seven-Step Request Lifecycle",domain:"architecture"},{id:"d3-retention",title:"Retention and Training Data",domain:"architecture"},{id:"d4-fundamentals",title:"Prompt Fundamentals and the 4 Ss",domain:"prompting"},{id:"d4-context",title:"Context Crafting and Custom Instructions",domain:"prompting"},
-        {id:"d5-workflow",title:"Copilot Across the SDLC",domain:"productivity"},{id:"d5-metrics",title:"Metrics and Measuring Impact",domain:"productivity"},{id:"d6-exclusions",title:"Content Exclusions and Public Code Matching",domain:"privacy"},{id:"d6-policies",title:"Plans, Policies, and Indemnity",domain:"privacy"}
+        {id:"d1-requirements",title:"Requirements and Grounding Data",domain:"plan"},
+        {id:"d1-adoption",title:"Adoption Strategy and the AI CoE",domain:"plan"},
+        {id:"d1-multiagent",title:"Multi-Agent and Extend-or-Build",domain:"plan"},
+        {id:"d1-knowledge",title:"Knowledge, Rules, and Custom Models",domain:"plan"},
+        {id:"d1-prompts",title:"Prompt Libraries and Small Models",domain:"plan"},
+        {id:"d1-roi",title:"ROI and Total Cost of Ownership",domain:"plan"},
+        {id:"d1-build-buy",title:"Build, Buy, Extend, and Model Routing",domain:"plan"},
+        {id:"d2-dynamics-cx",title:"Copilot in Dynamics 365 CX and Service",domain:"design"},
+        {id:"d2-agent-types",title:"Agent Types, Topics, and Orchestration",domain:"design"},
+        {id:"d2-apps-data",title:"Foundry Tools, Apps, and Grounding Data",domain:"design"},
+        {id:"d2-studio-ext",title:"MCP, Computer Use, and Agent Behaviors",domain:"design"},
+        {id:"d2-m365-foundry",title:"Microsoft 365 Agents and Foundry Models",domain:"design"},
+        {id:"d2-prebuilt",title:"Prebuilt Agents and Dynamics 365 AI",domain:"design"},
+        {id:"d3-monitor",title:"Monitoring, Telemetry, and Tuning",domain:"deploy"},
+        {id:"d3-testing",title:"Testing and Validation",domain:"deploy"},
+        {id:"d3-alm",title:"ALM for Agents, Models, and Data",domain:"deploy"},
+        {id:"d3-security",title:"Agent and Model Security",domain:"deploy"},
+        {id:"d3-governance",title:"Governance, Compliance, and Responsible AI",domain:"deploy"},{id:"d6-policies",title:"Plans, Policies, and Indemnity",domain:"privacy"}
     ];
     function sets() { var s = (window.AB1_DATA && window.AB1_DATA.drills) || []; return s.length ? s : FALLBACK; }
     function bestFor(id) { return AB1.store.get("drillScores", {})[id] || null; }

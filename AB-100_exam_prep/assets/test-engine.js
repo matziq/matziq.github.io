@@ -140,7 +140,7 @@
         return {
             right: right, wrong: wrong, blank: blank, total: list.length,
             pct: Math.round(pct),
-            scaled: this.isDrill() ? null : AB1.rawToScaled(right, list.length),
+            scaled: null,
             topics: topics, objectives: objectives
         };
     };
@@ -240,9 +240,12 @@
                 : '<div class="callout warn"><span class="callout-title">Before you start</span>' +
                   "<p>Phone in another room, no notes, no tabs open. The clock runs down and submits itself when it " +
                   "hits zero, exactly like the real proctored exam. Microsoft does not penalize a wrong answer, so " +
-                  "every question gets an answer even if it is a pure guess.</p>" +
-                  "<p style=\"margin-bottom:0\">Passing is <strong>" + pass + " on a 1\u20131000 scale</strong>, which lands " +
-                  "near <strong>" + needed + " of " + totalQ + " correct</strong> here.</p></div>") +
+                  "every question gets an answer even if it is a pure guess. (The real exam also lets you open " +
+                  "Microsoft Learn, but the clock keeps running, so practice without it.)</p>" +
+                  "<p style=\"margin-bottom:0\">The real exam passes at <strong>700 on a scaled 1\u20131000 range</strong>, " +
+                  "which Microsoft says may not equal 70% and does not convert. This site does not estimate a scaled " +
+                  "score. Its own study target is <strong>" + pass + "% correct</strong> &mdash; about <strong>" + needed +
+                  " of " + totalQ + "</strong> here &mdash; as a safety margin, not an official cut score.</p></div>") +
             '<div class="field" style="max-width:340px">' +
             '<label><input type="checkbox" id="timedBox"' + (this.state.timed ? " checked" : "") +
             ' style="width:auto;margin-right:.5rem"> Timed mode (strongly recommended)</label></div>' +
@@ -295,7 +298,7 @@
 
         var tip = this.isDrill()
             ? "One skill, on the clock. Do not look anything up until the whole set is submitted \u2014 the value is in finding out what you actually know."
-            : "Read the last line of the question first: BEST, FIRST, and MOST change the answer. If a question passes 75 seconds, flag it, answer it anyway, and move on.";
+            : "Read the last line of the question first: BEST, FIRST, and MOST change the answer. If a question passes two minutes, flag it, answer it anyway, and move on.";
 
         var wrap = el("div", "wrap-narrow");
         wrap.innerHTML =
@@ -597,7 +600,6 @@
         }
         var pct = total ? Math.round(right / total * 100) : 0;
         var isDrill = this.isDrill();
-        var scaled = isDrill ? null : AB1.rawToScaled(right, total);
         var pass = AB1.passMark();
 
         var wrap = el("div");
@@ -606,25 +608,22 @@
             wrap.appendChild(el("div", "score-hero",
                 '<div class="composite-label">Drill score</div>' +
                 '<div class="composite">' + pct + "%</div>" +
-                '<div class="delta">' + right + " of " + total + " correct. A drill is too short to scale \u2014 " +
+                '<div class="delta">' + right + " of " + total + " correct. A drill is too short to predict your exam result \u2014 " +
                 "read every explanation below, including the ones you got right.</div>"));
         } else {
-            var v = AB1.verdict(scaled);
-            var gap = scaled - pass;
-            var shortBy = Math.max(1, AB1.correctNeeded(total) - right);
-            var deltaTxt = gap > 0
-                ? "That clears the " + pass + " passing mark by " + gap + " point" + (gap === 1 ? "" : "s") + "."
-                : gap === 0
-                ? "That lands exactly on the " + pass + " passing mark \u2014 a pass with no margin at all."
-                : "That is " + Math.abs(gap) + " point" + (Math.abs(gap) === 1 ? "" : "s") +
-                  " short of the " + pass + " passing mark \u2014 about " +
-                  shortBy + " more correct answer" + (shortBy === 1 ? "" : "s") + " on this exam.";
+            var v = AB1.verdict(pct);
+            var shortBy = Math.max(0, AB1.correctNeeded(total) - right);
+            var deltaTxt = shortBy === 0
+                ? "That meets this site&rsquo;s " + pass + "% readiness target."
+                : "That is " + shortBy + " correct answer" + (shortBy === 1 ? "" : "s") +
+                  " short of this site&rsquo;s " + pass + "% readiness target.";
             wrap.appendChild(el("div", "score-hero",
-                '<div class="composite-label">Estimated scaled score \u00b7 AB-100</div>' +
-                '<div class="composite">' + scaled + "</div>" +
+                '<div class="composite-label">Practice score \u00b7 percent correct</div>' +
+                '<div class="composite">' + pct + "%</div>" +
                 '<div class="delta"><span class="badge ' + v.cls + '">' + v.label + "</span> &nbsp;" + deltaTxt + "</div>" +
                 '<div class="delta" style="font-size:.8rem;opacity:.85;margin-top:.5rem">' +
-                right + " of " + total + " correct (" + pct + "%). Scale runs 1\u20131000; passing is " + pass + ".</div>"));
+                right + " of " + total + " correct. This is not a scaled score: the real exam reports 1\u20131000 with 700 " +
+                "to pass, and Microsoft does not publish how raw points convert.</div>"));
         }
 
         /* ---- domain tiles ---- */
@@ -798,7 +797,7 @@
             hist[this.o.testId] = {
                 title: this.o.title, at: this.state.finishedAt || Date.now(),
                 core: this.core, right: right, total: total, pct: pct,
-                scaled: scaled, pass: pass, passed: scaled >= pass,
+                scaled: null, target: pass, passed: pct >= pass,
                 domains: domainSnapshot
             };
             AB1.store.set("history", hist);
@@ -833,8 +832,7 @@
         head.innerHTML =
             '<h2 style="margin-top:0">Review</h2>' +
             "<p class=\"muted\">" + r.right + " right &middot; " + r.wrong + " wrong &middot; " + r.blank +
-            " blank &middot; " + r.pct + "% correct" +
-            (r.scaled == null ? "" : " &middot; estimated scaled score <strong>" + r.scaled + "</strong>") + "</p>" +
+            " blank &middot; <strong>" + r.pct + "% correct</strong></p>" +
             (tabs ? '<div class="btn-row" style="margin-bottom:.8rem" id="secTabs">' + tabs + "</div>" : "") +
             '<div class="btn-row" id="filters">' +
             '<button class="btn sm ghost" data-f="wrong">Missed and blank only</button>' +

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Domain 2: Design AI-powered business solutions &mdash; AB-100 Exam Prep</title>
+<meta name="description" content="AB-100 Domain 2 study guide: design agents and orchestration, agents in apps and data, extensibility with Copilot Studio, Microsoft 365 Copilot, Foundry, and MCP, plus prebuilt agents and apps.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Domain 2 &mdash; Design AI-powered business solutions</h1>
+<p class="lede">Domain 2 is 30&ndash;35% of AB-100. Planning chose <em>what</em> to build; design decides <em>how</em>: which agent type, how it understands and routes requests, how it reaches data and other systems, and when a prebuilt capability beats custom work.</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#agents">Agents</a>
+    <a class="btn secondary sm" href="#orchestration">Orchestration</a>
+    <a class="btn secondary sm" href="#appsdata">Apps &amp; data</a>
+    <a class="btn secondary sm" href="#extensibility">Extensibility</a>
+    <a class="btn secondary sm" href="#m365">M365 &amp; Foundry</a>
+    <a class="btn secondary sm" href="#prebuilt">Prebuilt</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="agents">
+  <h2>2.1 Design AI and agents</h2>
+  <div class="table-scroll"><table class="data-table">
+    <thead><tr><th>Agent style</th><th>Behavior</th><th>Good for</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Prompt-and-response</strong></td><td>Answers when a user asks; grounded Q&amp;A</td><td>Help desks, policy lookup, knowledge assistants</td></tr>
+      <tr><td><strong>Task agent</strong></td><td>Completes a defined task with actions when asked</td><td>Create a case, book time off, update a record</td></tr>
+      <tr><td><strong>Autonomous agent</strong></td><td>Runs from triggers (events, schedules) and acts within guardrails without a user prompt</td><td>Triage incoming email, monitor and respond to events</td></tr>
+    </tbody>
+  </table></div>
+  <p>In Copilot Studio, <strong>topics</strong> define conversation paths; <strong>fallback</strong> handles what no topic matches; <strong>actions/tools</strong> call connectors, flows, prompts, or APIs. Design Dynamics 365 Copilot and customer-experience scenarios (sales, service, contact center) around the data already in Dataverse.</p>
+  <div class="callout trap"><span class="callout-title">Exam trap</span><p style="margin-bottom:0">Autonomous agents need triggers, clear instructions, and guardrails &mdash; plus monitoring and human escalation. &ldquo;Fully autonomous with no oversight&rdquo; is rarely the right answer.</p></div>
+</section>
+
+<section id="orchestration">
+  <h2>Understanding and orchestration</h2>
+  <div class="table-scroll"><table class="data-table">
+    <thead><tr><th>Approach</th><th>How it routes</th><th>Choose it when</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Classic NLU / trigger phrases</strong></td><td>Matches user input to topics</td><td>Small, predictable, scripted conversations</td></tr>
+      <tr><td><strong>Conversational language understanding (CLU)</strong></td><td>A trained Azure AI Language model maps intents and entities</td><td>You already have or need a custom-trained intent model</td></tr>
+      <tr><td><strong>Generative orchestration</strong></td><td>The LLM chooses topics, actions, knowledge, and connected agents from their descriptions</td><td>Multi-step requests, many tools, natural phrasing</td></tr>
+    </tbody>
+  </table></div>
+  <p>With generative orchestration, <strong>descriptions matter</strong>: clear names and descriptions for topics, tools, and agents are how the planner picks them. <strong>Agent flows</strong> add deterministic, repeatable steps where you don&rsquo;t want the model improvising. <strong>Prompt actions</strong> wrap a reusable prompt as a tool.</p>
+</section>
+
+<section id="appsdata">
+  <h2>Agents in apps and data processing</h2>
+  <ul>
+    <li>Embed agents in Power Apps, Dynamics 365, Teams, and websites where users already work.</li>
+    <li>Use AI for document and data processing &mdash; extraction, classification, summarization &mdash; with Foundry Tools (formerly Azure AI services) and AI Builder.</li>
+    <li>Keep humans in the loop for low-confidence results and high-impact decisions.</li>
+  </ul>
+</section>
+
+<section id="extensibility">
+  <h2>2.2 Design extensibility of AI solutions</h2>
+  <div class="grid grid-2">
+    <div class="card"><h3 style="margin-top:0">Copilot Studio</h3><ul style="margin-bottom:0">
+      <li><strong>Connectors</strong> and custom connectors for systems with APIs</li>
+      <li><strong>Model Context Protocol (MCP) servers</strong> expose tools and resources in a standard way that agents can discover and reuse</li>
+      <li><strong>Computer Use</strong> lets an agent operate a website or desktop app UI when there is no API</li>
+      <li>Reasoning models and voice for richer interactions</li>
+    </ul></div>
+    <div class="card"><h3 style="margin-top:0">Choosing a path</h3><ul style="margin-bottom:0">
+      <li>API available &rarr; connector or MCP</li>
+      <li>Same tools needed by many agents &rarr; MCP server</li>
+      <li>No API, only a UI &rarr; Computer Use (with oversight)</li>
+      <li>Deterministic multi-step logic &rarr; agent flow</li>
+    </ul></div>
+  </div>
+</section>
+
+<section id="m365">
+  <h2>Microsoft 365 Copilot and Foundry extensibility</h2>
+  <ul>
+    <li><strong>Agents in Microsoft 365 Copilot</strong>: declarative agents customize instructions, knowledge, and actions on the Copilot orchestrator; custom engine agents bring their own orchestration and models.</li>
+    <li>Publish agents to <strong>Teams and SharePoint</strong> so they meet users in context.</li>
+    <li><strong>Microsoft Foundry</strong> provides model catalog, fine-tuning and custom models, Foundry Agent Service, and evaluation for pro-code builds.</li>
+  </ul>
+  <div class="callout key"><span class="callout-title">Rule of thumb</span><p style="margin-bottom:0">Low-code makers and Microsoft 365 users &rarr; Copilot Studio or declarative agents. Developers needing model control &rarr; Foundry.</p></div>
+</section>
+
+<section id="prebuilt">
+  <h2>2.3 Design prebuilt agents and apps</h2>
+  <div class="table-scroll"><table class="data-table">
+    <thead><tr><th>Area</th><th>Examples of what to know</th></tr></thead>
+    <tbody>
+      <tr><td>Dynamics 365 Finance and Supply Chain</td><td>Copilot capabilities and agents for finance and operations processes</td></tr>
+      <tr><td>Dynamics 365 Customer Experience</td><td>Sales and Customer Service Copilot features and agents</td></tr>
+      <tr><td>Microsoft 365 Copilot for Sales / for Service</td><td>CRM data inside Outlook and Teams</td></tr>
+      <tr><td>Power Platform AI hub</td><td>Central place for AI capabilities such as prompts and AI models</td></tr>
+      <tr><td>In-app help</td><td>Add your own knowledge so in-app Copilot answers with company-specific guidance</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout trap"><span class="callout-title">Exam trap</span><p style="margin-bottom:0">If a prebuilt capability meets the requirement, configure it rather than building a custom agent &mdash; less cost, faster delivery, and Microsoft maintains it.</p></div>
+</section>
+
+<section id="cheatsheet">
+  <h2>Cheat sheet</h2>
+  <div class="grid grid-3">
+    <div class="card"><h3 style="margin-top:0">Agent type</h3><p style="margin-bottom:0">User asks &rarr; prompt-and-response or task. Event triggers &rarr; autonomous.</p></div>
+    <div class="card"><h3 style="margin-top:0">Routing</h3><p style="margin-bottom:0">Many tools and messy phrasing &rarr; generative orchestration with good descriptions.</p></div>
+    <div class="card"><h3 style="margin-top:0">Reach</h3><p style="margin-bottom:0">API &rarr; connector/MCP. UI only &rarr; Computer Use. Prebuilt first.</p></div>
+  </div>
+  <p style="margin-top:1rem"><a href="drills.html">Practice Domain 2 drills &rarr;</a> &nbsp; <a href="https://learn.microsoft.com/credentials/certifications/resources/study-guides/ab-100" rel="noopener">Official study guide</a></p>
+</section>
+
+</div></main>
+<footer id="footer"></footer>
+</body>
+</html>

@@ -10,88 +10,83 @@
 
     var AB1 = global.AB1 = global.AB1 || {};
 
-    /* ---------- core facts about the exam ---------- */
+    /* ---------- core facts about the exam ----------
+       Verified against Microsoft Learn on November 25, 2026:
+       exam page, study guide (skills measured as of November 16, 2026),
+       exam duration page, scoring page, and retake policy. */
     AB1.EXAM_CODE = "AB-100";
     AB1.EXAM_NAME = "Agentic AI Business Solutions Architect";
+    AB1.CERT_NAME = "Microsoft Certified: Agentic AI Business Solutions Architect Expert";
     AB1.VENDOR = "Microsoft";
     AB1.DELIVERED_BY = "Pearson VUE";
     AB1.PASS_SCORE = 700;
     AB1.SCALE_MIN = 1;
     AB1.SCALE_MAX = 1000;
+    /* Microsoft lists 100 minutes of exam time (120 seat time) for role-based
+       exams without labs, and 120 minutes (140 seat) when labs may appear. It does
+       not say per exam which applies; your registration shows the real figure. */
     AB1.EXAM_MINUTES = 100;
     AB1.SEAT_MINUTES = 120;
     /* Microsoft does not publish a question count for AB-100, so the site never
        claims one. These two numbers describe this site's practice exams only. */
     AB1.PRACTICE_QUESTIONS = 60;
     AB1.PRACTICE_MINUTES = 100;
-    AB1.SKILLS_DATE = "August 7, 2026";
+    AB1.SKILLS_DATE = "November 16, 2026";
+    AB1.VERIFIED_DATE = "November 25, 2026";
+    AB1.LINKS = {
+        exam: "https://learn.microsoft.com/credentials/certifications/exams/ab-100/",
+        guide: "https://learn.microsoft.com/credentials/certifications/resources/study-guides/ab-100",
+        duration: "https://learn.microsoft.com/credentials/support/exam-duration-exam-experience",
+        scoring: "https://learn.microsoft.com/credentials/certifications/exam-scoring-reports",
+        retake: "https://learn.microsoft.com/credentials/support/retake-policy",
+        renewal: "https://learn.microsoft.com/credentials/certifications/renew-your-microsoft-certification",
+        assessment: "https://aka.ms/AB100-PA",
+        sandbox: "https://aka.ms/examdemo"
+    };
 
-    /* The six skill areas, worded exactly as Microsoft words them, with the
+    /* The three skill areas, worded exactly as Microsoft words them, with the
        published weight ranges and the question counts this site uses on a
-       60-question practice exam. Every count lands inside its published range.
-
-       Note: Microsoft's own "skills at a glance" list shows seven bullets
-       because "Use Agentic AI Business Solutions Architect features" is printed twice. There are six
-       domains; the duplicate is a documentation error on their side. */
+       60-question practice exam. The three ranges only reach 100% at their
+       maximums (40 + 35 + 25), so 24 / 21 / 15 is the one 60-question split
+       that sits inside every published range. */
     AB1.DOMAINS = [
-        { id: "responsibly", num: "1", short: "Responsible Use",
-          name: "Use Agentic AI Business Solutions Architect responsibly",
-          full: "Use Agentic AI Business Solutions Architect responsibly",
-          weight: "15\u201320%", pct: 18, q: 11, page: "responsible.html", cls: "teal" },
-        { id: "features", num: "2", short: "Copilot Features",
-          name: "Use Agentic AI Business Solutions Architect features",
-          full: "Use Agentic AI Business Solutions Architect features",
-          weight: "25\u201330%", pct: 28, q: 17, page: "features-ide.html", cls: "bad" },
-        { id: "architecture", num: "3", short: "Data & Architecture",
-          name: "Understand Agentic AI Business Solutions Architect data and architecture",
-          full: "Understand Agentic AI Business Solutions Architect data and architecture",
-          weight: "10\u201315%", pct: 13, q: 8, page: "data-architecture.html", cls: "amber" },
-        { id: "prompting", num: "4", short: "Prompt Engineering",
-          name: "Apply prompt engineering and context crafting",
-          full: "Apply prompt engineering and context crafting",
-          weight: "10\u201315%", pct: 13, q: 8, page: "prompting.html", cls: "good" },
-        { id: "productivity", num: "5", short: "Productivity",
-          name: "Improve developer productivity with Agentic AI Business Solutions Architect",
-          full: "Improve developer productivity with Agentic AI Business Solutions Architect",
-          weight: "10\u201315%", pct: 13, q: 8, page: "productivity.html", cls: "teal" },
-        { id: "privacy", num: "6", short: "Privacy & Safeguards",
-          name: "Configure privacy, content exclusions, and safeguards",
-          full: "Configure privacy, content exclusions, and safeguards",
-          weight: "10\u201315%", pct: 13, q: 8, page: "privacy.html", cls: "" }
+        { id: "plan", num: "1", short: "Plan",
+          name: "Plan AI-powered business solutions",
+          full: "Plan AI-powered business solutions",
+          weight: "35\u201340%", pct: 40, q: 24, page: "plan-solutions.html", cls: "teal" },
+        { id: "design", num: "2", short: "Design",
+          name: "Design AI-powered business solutions",
+          full: "Design AI-powered business solutions",
+          weight: "30\u201335%", pct: 35, q: 21, page: "design-solutions.html", cls: "amber" },
+        { id: "deploy", num: "3", short: "Deploy",
+          name: "Deploy AI-powered business solutions",
+          full: "Deploy AI-powered business solutions",
+          weight: "20\u201325%", pct: 25, q: 15, page: "deploy-solutions.html", cls: "good" }
     ];
 
-    /* The sub-areas inside each skill area. These are what the site tags
-       questions with, because "28% of the exam" is too coarse to study from.
+    /* The sub-areas inside each skill area, one per study-guide objective group.
        Counts sum to 60 per practice exam. */
     AB1.TOPICS = [
-        { id: "principles", name: "Responsible AI Principles", domain: "responsibly",
-          obj: ["1.1"], q: 6, weight: "15\u201320%", page: "responsible.html", cls: "teal" },
-        { id: "validate", name: "Validating AI Output", domain: "responsibly",
-          obj: ["1.2"], q: 5, weight: "15\u201320%", page: "responsible.html", cls: "teal" },
-        { id: "ide", name: "Copilot in the IDE", domain: "features",
-          obj: ["2.1"], q: 5, weight: "25\u201330%", page: "features-ide.html", cls: "bad" },
-        { id: "cli", name: "Copilot CLI", domain: "features",
-          obj: ["2.2"], q: 4, weight: "25\u201330%", page: "features-ide.html", cls: "bad" },
-        { id: "capabilities", name: "Copilot Features and Capabilities", domain: "features",
-          obj: ["2.3"], q: 5, weight: "25\u201330%", page: "features-platform.html", cls: "bad" },
-        { id: "orgpolicy", name: "Organization Settings and Policies", domain: "features",
-          obj: ["2.4"], q: 3, weight: "25\u201330%", page: "features-platform.html", cls: "bad" },
-        { id: "dataflow", name: "Data Handling and Flow", domain: "architecture",
-          obj: ["3.1"], q: 5, weight: "10\u201315%", page: "data-architecture.html", cls: "amber" },
-        { id: "lifecycle", name: "Lifecycle and Limitations", domain: "architecture",
-          obj: ["3.2"], q: 3, weight: "10\u201315%", page: "data-architecture.html", cls: "amber" },
-        { id: "crafting", name: "Crafting Effective Prompts", domain: "prompting",
-          obj: ["4.1"], q: 4, weight: "10\u201315%", page: "prompting.html", cls: "good" },
-        { id: "performance", name: "Prompt Engineering for Performance", domain: "prompting",
-          obj: ["4.2"], q: 4, weight: "10\u201315%", page: "prompting.html", cls: "good" },
-        { id: "quality", name: "Productivity and Code Quality", domain: "productivity",
-          obj: ["5.1"], q: 4, weight: "10\u201315%", page: "productivity.html", cls: "teal" },
-        { id: "testing", name: "Testing and Security", domain: "productivity",
-          obj: ["5.2"], q: 4, weight: "10\u201315%", page: "productivity.html", cls: "teal" },
-        { id: "exclusions", name: "Privacy Settings and Exclusions", domain: "privacy",
-          obj: ["6.1"], q: 4, weight: "10\u201315%", page: "privacy.html", cls: "" },
-        { id: "safeguards", name: "Safeguards and Troubleshooting", domain: "privacy",
-          obj: ["6.2"], q: 4, weight: "10\u201315%", page: "privacy.html", cls: "" }
+        { id: "requirements", name: "Analyze Requirements", domain: "plan",
+          obj: ["1.1"], q: 6, weight: "35\u201340%", page: "plan-solutions.html#requirements", cls: "teal" },
+        { id: "strategy", name: "AI Strategy and Agent Design", domain: "plan",
+          obj: ["1.2"], q: 12, weight: "35\u201340%", page: "plan-solutions.html#strategy", cls: "teal" },
+        { id: "roi", name: "Costs, Benefits, and ROI", domain: "plan",
+          obj: ["1.3"], q: 6, weight: "35\u201340%", page: "plan-solutions.html#roi", cls: "teal" },
+        { id: "agents", name: "Design AI and Agents", domain: "design",
+          obj: ["2.1"], q: 9, weight: "30\u201335%", page: "design-solutions.html#agents", cls: "amber" },
+        { id: "extensibility", name: "Extensibility of AI Solutions", domain: "design",
+          obj: ["2.2"], q: 6, weight: "30\u201335%", page: "design-solutions.html#extensibility", cls: "amber" },
+        { id: "prebuilt", name: "Prebuilt Agents and Apps", domain: "design",
+          obj: ["2.3"], q: 6, weight: "30\u201335%", page: "design-solutions.html#prebuilt", cls: "amber" },
+        { id: "monitor", name: "Monitor and Tune", domain: "deploy",
+          obj: ["3.1"], q: 4, weight: "20\u201325%", page: "deploy-solutions.html#monitor", cls: "good" },
+        { id: "testing", name: "Testing AI Solutions", domain: "deploy",
+          obj: ["3.2"], q: 3, weight: "20\u201325%", page: "deploy-solutions.html#testing", cls: "good" },
+        { id: "alm", name: "ALM for AI Solutions", domain: "deploy",
+          obj: ["3.3"], q: 4, weight: "20\u201325%", page: "deploy-solutions.html#alm", cls: "good" },
+        { id: "governance", name: "Responsible AI, Security, and Governance", domain: "deploy",
+          obj: ["3.4"], q: 4, weight: "20\u201325%", page: "deploy-solutions.html#governance", cls: "good" }
     ];
 
     AB1.topicByName = function (name) {
@@ -110,65 +105,45 @@
 
     /* The objective codes used to tag every question on the site. */
     AB1.OBJECTIVES = {
-        "1.1": "Understand responsible AI principles",
-        "1.2": "Validate and operate AI tools",
-        "2.1": "Use Agentic AI Business Solutions Architect in the IDE",
-        "2.2": "Use Agentic AI Business Solutions Architect CLI",
-        "2.3": "Use Agentic AI Business Solutions Architect features and capabilities",
-        "2.4": "Manage organization-wide settings and policies",
-        "3.1": "Describe data handling and flow",
-        "3.2": "Understand lifecycle and limitations",
-        "4.1": "Craft effective prompts",
-        "4.2": "Engineer prompts for performance",
-        "5.1": "Enhance productivity and code quality",
-        "5.2": "Support testing and security",
-        "6.1": "Manage privacy settings and exclusions",
-        "6.2": "Apply safeguards and troubleshoot"
+        "1.1": "Analyze requirements for AI-powered business solutions",
+        "1.2": "Design the overall AI strategy for business solutions",
+        "1.3": "Evaluate costs and benefits of an AI-powered business solution",
+        "2.1": "Design AI and agents",
+        "2.2": "Design extensibility of AI solutions",
+        "2.3": "Orchestrate the configuration of prebuilt agents and apps",
+        "3.1": "Analyze, monitor, and tune AI-powered business solutions",
+        "3.2": "Manage the testing of AI-powered business solutions",
+        "3.3": "Design ALM processes for AI-powered business solutions",
+        "3.4": "Design responsible AI, security, governance, risk management, and compliance"
     };
 
-    /* ---------- raw percent -> scaled score ----------
-       Microsoft reports AB-100 on a 1-1000 scale and passes at 700, but has
-       never published the raw-to-scaled conversion, and the live exam weights
-       questions by difficulty. This curve is anchored on the two public facts:
-       the range and the 700 pass mark, with 70% correct landing exactly on 700.
-       Treat the output as a readiness signal, not an official score.        */
-    var CURVE = [
-        [0, 100], [10, 180], [20, 260], [30, 340], [40, 420], [50, 500],
-        [60, 600], [65, 650], [70, 700], [75, 750], [80, 800],
-        [85, 850], [90, 900], [95, 950], [100, 1000]
-    ];
+    /* ---------- practice scoring ----------
+       The real exam is reported on a scaled 1-1000 range with 700 to pass.
+       Microsoft says plainly that 700 "may not equal 70%" of the points, does
+       not publish the conversion, and includes unscored items. So this site
+       never converts a practice result into a scaled score. It reports percent
+       correct against its own readiness targets, which are study heuristics. */
+    AB1.READY_PCT = 80;     // site heuristic: comfortable margin
+    AB1.BORDER_PCT = 70;    // site heuristic: below this, keep studying
+    AB1.PASS_PCT = AB1.READY_PCT;
 
-    AB1.PASS_PCT = 70;
-
-    AB1.pctToScaled = function (pct) {
-        var p = Math.max(0, Math.min(100, pct));
-        for (var i = 1; i < CURVE.length; i++) {
-            if (p <= CURVE[i][0]) {
-                var lo = CURVE[i - 1], hi = CURVE[i];
-                var span = hi[0] - lo[0];
-                var t = span === 0 ? 0 : (p - lo[0]) / span;
-                return Math.round(lo[1] + t * (hi[1] - lo[1]));
-            }
-        }
-        return AB1.SCALE_MAX;
+    AB1.pctOf = function (right, total) {
+        return total ? Math.round((right / total) * 100) : 0;
     };
 
-    AB1.rawToScaled = function (right, total) {
-        if (!total) return AB1.SCALE_MIN;
-        return AB1.pctToScaled((right / total) * 100);
-    };
+    /* No scaled-score helpers: the site reports percent correct only. */
 
-    AB1.passMark = function () { return AB1.PASS_SCORE; };
-    AB1.passPct = function () { return AB1.PASS_PCT; };
+    AB1.passMark = function () { return AB1.READY_PCT; };
+    AB1.passPct = function () { return AB1.READY_PCT; };
     AB1.correctNeeded = function (total) {
-        return Math.ceil(total * AB1.PASS_PCT / 100);
+        return Math.ceil(total * AB1.READY_PCT / 100);
     };
 
-    AB1.verdict = function (scaled) {
-        if (scaled >= 800) return { label: "Comfortably passing", cls: "good" };
-        if (scaled >= AB1.PASS_SCORE) return { label: "Passing", cls: "good" };
-        if (scaled >= 620) return { label: "Just short", cls: "amber" };
-        return { label: "Not there yet", cls: "bad" };
+    AB1.verdict = function (pct) {
+        if (pct >= 90) return { label: "Strong", cls: "good" };
+        if (pct >= AB1.READY_PCT) return { label: "Ready range", cls: "good" };
+        if (pct >= AB1.BORDER_PCT) return { label: "Borderline", cls: "amber" };
+        return { label: "Keep studying", cls: "bad" };
     };
 
     /* ---------- storage ---------- */
@@ -326,119 +301,128 @@
     /* tag: exam | review | study | drill | cards | lab | logistics */
     var HEAD = [
         { id: "orient", focus: "Learn the exam before you learn the content", min: 45, tasks: [
-            { tag: "study", pri: 1, text: "Read the home page: the six domains, how they are weighted, and the one fact that trips up more candidates than any other \u2014 <strong>700 is a scaled score, not 70% correct</strong>. Ten minutes here changes how you read every question after it.", href: "index.html" },
-            { tag: "logistics", pri: 2, text: "Confirm your booking. AB-100 is a <strong>Microsoft</strong> certification delivered by <strong>Pearson VUE</strong> \u2014 not a GitHub or PSI exam anymore. If you are testing online, run the system check <em>today</em>, not the night before.", href: "" },
-            { tag: "lab", pri: 1, text: "Open VS Code with Agentic AI Business Solutions Architect enabled and confirm you can reach Ask, Edit, and Agent mode. Domain 2 is the largest on the exam and it is about features you should be touching, not reading about.", href: "features-ide.html#modes" }
+            { tag: "study", pri: 1, text: "Read the home page: the three domains, how they are weighted, and the one fact that trips up more candidates than any other \u2014 <strong>700 is a scaled score, not 70% correct</strong>. Ten minutes here changes how you read every result after it.", href: "index.html" },
+            { tag: "logistics", pri: 1, text: "Check your eligibility. Passing AB-100 alone does not award the Expert certification \u2014 you also need one of the qualifying Associate certifications Microsoft lists on the exam page.", href: "index.html#facts" },
+            { tag: "logistics", pri: 2, text: "Confirm your booking. AB-100 is a <strong>Microsoft</strong> exam delivered by <strong>Pearson VUE</strong>. Note the exam time shown at registration, and if you test online, run the system check <em>today</em>, not the night before.", href: "" }
         ]},
         { id: "baseline", focus: "Practice Exam 1, cold", min: 100, isExam: true, tasks: [
             { tag: "exam", pri: 1, text: "<strong>Practice Exam 1</strong> \u2014 60 questions, 100 minutes, timed, phone in another room. Take it <em>before</em> you read a single guide.", href: "practice-exam-1.html" },
-            { tag: "logistics", pri: 1, text: "Write down your scaled score and all six domain percentages. That table is the map for the rest of the plan.", href: "tools.html#errorlog" },
+            { tag: "logistics", pri: 1, text: "Write down your percent correct and all three domain percentages. That table is the map for the rest of the plan.", href: "tools.html#errorlog" },
             { tag: "exam", pri: 2, text: "Do <em>not</em> review it today. Close the laptop. You will see twice as much tomorrow morning.", href: "" }
         ]},
         { id: "repair1", focus: "Review Exam 1 and start the error log", min: 75, isReview: true, tasks: [
             { tag: "review", pri: 1, text: "Review every missed question from Exam 1, and read the explanation on the ones you guessed right too. A lucky guess is not knowledge.", href: "practice-exam-1.html" },
-            { tag: "logistics", pri: 1, text: "Log every miss and tag its cause: never knew the fact, knew it and read past it, or misread the question. Three causes, three different fixes.", href: "tools.html#errorlog" },
-            { tag: "logistics", pri: 2, text: "Write your two weakest domains at the top of the error log. The next few days are built around them.", href: "tools.html#errorlog" }
+            { tag: "logistics", pri: 1, text: "Log every miss and tag its cause: never knew the fact, knew it and read past it, or misread the scenario. Three causes, three different fixes.", href: "tools.html#errorlog" },
+            { tag: "logistics", pri: 2, text: "Write your weakest domain and weakest two objectives at the top of the error log. The next few days are built around them.", href: "tools.html#errorlog" }
         ]}
     ];
 
     var MID = [
-        { id: "m-principles", focus: "Responsible AI \u2014 the principles behind the questions", min: 65, tasks: [
-            { tag: "study", pri: 1, text: "Read the Responsible Use guide through the principles section. Microsoft names six \u2014 fairness, reliability and safety, privacy and security, inclusiveness, transparency, and accountability \u2014 and the exam gives you a scenario and asks which one applies.", href: "responsible.html" },
-            { tag: "drill", pri: 1, text: "Drill: Responsible AI Principles", href: "drills.html?set=d1-principles" },
-            { tag: "cards", pri: 2, text: "Flashcards: the Responsible Use deck. These are free points and people still lose them.", href: "tools.html#flashcards" }
+        { id: "m-requirements", focus: "Requirements \u2014 where agents fit and whether the data is ready", min: 70, tasks: [
+            { tag: "study", pri: 1, text: "Read the Plan guide through objective 1.1: when an agent fits task automation, analytics, or decision support, and the five grounding-data checks \u2014 <strong>accuracy, relevance, timeliness, cleanliness, availability</strong>.", href: "plan-solutions.html#requirements" },
+            { tag: "drill", pri: 1, text: "Drill: Requirements and Grounding Data", href: "drills.html?set=d1-requirements" },
+            { tag: "cards", pri: 2, text: "Flashcards: the Plan deck, first pass.", href: "tools.html#flashcards" }
         ]},
-        { id: "m-limitations", focus: "What Copilot cannot do \u2014 the four limitation categories", min: 65, tasks: [
-            { tag: "study", pri: 1, text: "Read the limitations section. Four named categories: code quality and correctness, language and framework specificity, dependency on training data, and complex problem solving. Learn the category names, not just the idea.", href: "responsible.html#limitations" },
-            { tag: "drill", pri: 1, text: "Drill: Limitations and Risks", href: "drills.html?set=d1-limitations" },
-            { tag: "lab", pri: 2, text: "Ask Copilot for something in a niche framework you know well. Note exactly where it goes wrong. That is the &ldquo;language and framework specificity&rdquo; limitation in one experiment.", href: "" }
+        { id: "m-adoption", focus: "AI adoption strategy and the AI Center of Excellence", min: 70, tasks: [
+            { tag: "study", pri: 1, text: "Read the strategy section: the Cloud Adoption Framework AI adoption journey, what an AI Center of Excellence owns, and how a solution spans multiple Dynamics 365 apps.", href: "plan-solutions.html#strategy" },
+            { tag: "drill", pri: 1, text: "Drill: Adoption Strategy and the AI CoE", href: "drills.html?set=d1-adoption" },
+            { tag: "lab", pri: 2, text: "Sketch an AI adoption one-pager for an organization you know: business outcomes, a first use case, a governance owner, and a success metric.", href: "" }
         ]},
-        { id: "m-bias", focus: "Bias, fairness, and mitigation", min: 60, tasks: [
-            { tag: "study", pri: 1, text: "Read the bias and fairness section: where bias enters through training data, what it looks like in generated code, and the mitigations you are expected to name.", href: "responsible.html#bias" },
-            { tag: "drill", pri: 1, text: "Drill: Bias, Fairness, and Mitigation", href: "drills.html?set=d1-bias" },
-            { tag: "cards", pri: 2, text: "Flashcards: the rest of the Responsible Use deck.", href: "tools.html#flashcards" }
+        { id: "m-multiagent", focus: "Multi-agent design \u2014 extend Microsoft 365 Copilot or build custom", min: 75, tasks: [
+            { tag: "study", pri: 1, text: "Read the multi-agent section: when Microsoft 365 Copilot, Copilot Studio, and Microsoft Foundry each own a piece of the solution, and the <strong>extend vs build custom</strong> decision.", href: "plan-solutions.html#multiagent" },
+            { tag: "drill", pri: 1, text: "Drill: Multi-Agent and Extend-or-Build", href: "drills.html?set=d1-multiagent" },
+            { tag: "lab", pri: 2, text: "Draw one business process as a multi-agent diagram: an orchestrator, two specialist agents, the knowledge each one uses, and where a human approves.", href: "" }
         ]},
-        { id: "m-verification", focus: "Human oversight \u2014 validating what Copilot gives you", min: 65, tasks: [
-            { tag: "study", pri: 1, text: "Read the verification section. The exam rewards the answer that keeps a human accountable: review, test, scan. Never the answer that trusts output because it compiled.", href: "responsible.html#verification" },
-            { tag: "drill", pri: 1, text: "Drill: Verification and Human Oversight", href: "drills.html?set=d1-verification" },
-            { tag: "lab", pri: 2, text: "Take a Copilot suggestion of twenty lines or more and review it as if it came from a stranger in a pull request. Write down what you would have missed on a fast read.", href: "" }
+        { id: "m-knowledge", focus: "Knowledge sources, rules, and custom models", min: 70, tasks: [
+            { tag: "study", pri: 1, text: "Read the knowledge section: generative answers and knowledge sources in Copilot Studio, solution rules and constraints, and when a <strong>custom model</strong> is justified instead of grounding or prompting.", href: "plan-solutions.html#knowledge" },
+            { tag: "drill", pri: 1, text: "Drill: Knowledge, Rules, and Custom Models", href: "drills.html?set=d1-knowledge" },
+            { tag: "cards", pri: 2, text: "Flashcards: the Plan deck.", href: "tools.html#flashcards" }
         ]},
-        { id: "m-completions", focus: "Code completions and next edit suggestions", min: 70, tasks: [
-            { tag: "study", pri: 1, text: "Read the IDE guide through completions: inline suggestions, next edit suggestions, and the <strong>Fill-in-the-Middle</strong> technique that lets Copilot use code on <em>both</em> sides of your cursor.", href: "features-ide.html" },
-            { tag: "drill", pri: 1, text: "Drill: Completions and Next Edit Suggestions", href: "drills.html?set=d2-completions" },
-            { tag: "cards", pri: 2, text: "Flashcards: the Copilot in the IDE deck.", href: "tools.html#flashcards" }
+        { id: "m-prompts", focus: "Prompt libraries, prompt engineering, and small language models", min: 65, tasks: [
+            { tag: "study", pri: 1, text: "Read the prompting section: what a governed prompt library contains, the prompt-engineering guidelines an architect sets, and the use cases where a customized <strong>small language model</strong> wins.", href: "plan-solutions.html#prompts" },
+            { tag: "drill", pri: 1, text: "Drill: Prompt Libraries and Small Models", href: "drills.html?set=d1-prompts" },
+            { tag: "lab", pri: 2, text: "Write three reusable prompts for one business role, each with a goal, context, expected output format, and source to ground on.", href: "" }
         ]},
-        { id: "m-modes", focus: "Ask, Edit, and Agent mode \u2014 the distinction the exam loves", min: 75, tasks: [
-            { tag: "study", pri: 1, text: "Read the modes section carefully. Ask answers, Edit changes files you scope, Agent decides the scope itself and can run tools. Note that <strong>Copilot Edits was renamed Edit mode</strong> \u2014 the study guide still uses the old name, so learn both.", href: "features-ide.html#modes" },
-            { tag: "drill", pri: 1, text: "Drill: Ask, Edit, and Agent Mode", href: "drills.html?set=d2-modes" },
-            { tag: "lab", pri: 1, text: "Run the same small refactor three times \u2014 once in each mode. Nothing on this page teaches the difference as fast as doing it once.", href: "features-ide.html#modes" }
+        { id: "m-roi", focus: "ROI and total cost of ownership", min: 65, tasks: [
+            { tag: "study", pri: 1, text: "Read the ROI section: benefits you can measure, every cost that belongs in <strong>total cost of ownership</strong>, and how to frame an ROI analysis for one business process.", href: "plan-solutions.html#roi" },
+            { tag: "drill", pri: 1, text: "Drill: ROI and Total Cost of Ownership", href: "drills.html?set=d1-roi" },
+            { tag: "review", pri: 2, text: "Reread your error log. Mark anything from the Plan domain you now know cold.", href: "tools.html#errorlog" }
         ]},
-        { id: "m-chat", focus: "Chat everywhere \u2014 IDE, GitHub.com, mobile, and the CLI", min: 70, tasks: [
-            { tag: "study", pri: 1, text: "Read the chat section: slash commands, chat participants, and chat variables in the IDE, plus what changes when you use Copilot on GitHub.com, on mobile, or in the <strong>Agentic AI Business Solutions Architect CLI</strong> \u2014 which is now standalone, not a <code>gh</code> extension.", href: "features-ide.html#chat" },
-            { tag: "drill", pri: 1, text: "Drill: Chat Interfaces and Commands", href: "drills.html?set=d2-chat" },
-            { tag: "lab", pri: 2, text: "Install the Agentic AI Business Solutions Architect CLI and ask it to explain a command you half know. Note that this surface retains prompts for 28 days, unlike editor completions.", href: "data-architecture.html#retention" }
+        { id: "m-buildbuy", focus: "Build, buy, or extend \u2014 and model routing", min: 65, tasks: [
+            { tag: "study", pri: 1, text: "Read the build/buy/extend section and the model router section: why routing each request to the most suitable model balances quality, latency, and cost.", href: "plan-solutions.html#buildbuy" },
+            { tag: "drill", pri: 1, text: "Drill: Build, Buy, Extend, and Model Routing", href: "drills.html?set=d1-build-buy" },
+            { tag: "cards", pri: 1, text: "Flashcards: finish the Plan deck. Domain 1 is the biggest slice of the exam.", href: "tools.html#flashcards" }
         ]},
-        { id: "m-cloud-agent", focus: "The Copilot cloud agent and code review", min: 70, tasks: [
-            { tag: "study", pri: 1, text: "Read the platform guide through the agent section. <strong>Copilot coding agent was renamed Copilot cloud agent</strong> in April 2026. Know what it does end to end: assigned an issue, works in its own environment, opens a pull request.", href: "features-platform.html" },
-            { tag: "drill", pri: 1, text: "Drill: Cloud Agent and Code Review", href: "drills.html?set=d2-cloud-agent" },
-            { tag: "cards", pri: 2, text: "Flashcards: the Copilot on the Platform deck.", href: "tools.html#flashcards" }
+        { id: "m-dynamics", focus: "Copilot in Dynamics 365 customer experience and service", min: 70, tasks: [
+            { tag: "study", pri: 1, text: "Read the Design guide through Dynamics 365: business terms, Copilot customizations, connectors for Copilot in Dynamics 365 Sales, and agents on Contact Center channels.", href: "design-solutions.html#agents" },
+            { tag: "drill", pri: 1, text: "Drill: Copilot in Dynamics 365 CX and Service", href: "drills.html?set=d2-dynamics-cx" },
+            { tag: "cards", pri: 2, text: "Flashcards: the Design deck, first pass.", href: "tools.html#flashcards" }
         ]},
-        { id: "m-platform", focus: "Platform features \u2014 summaries, Spaces, and custom agents", min: 70, tasks: [
-            { tag: "study", pri: 1, text: "Read the rest of the platform guide: pull request summaries, <strong>Copilot Spaces</strong> (which replaced knowledge bases), and custom agents. Note which features are retired \u2014 the study guide still lists some that are gone.", href: "features-platform.html#spaces" },
-            { tag: "drill", pri: 1, text: "Drill: Platform Features and What Replaced What", href: "drills.html?set=d2-platform" },
-            { tag: "lab", pri: 2, text: "Open a pull request in a repo you own and generate a Copilot summary. Then read what it missed.", href: "features-platform.html#pr" }
+        { id: "exam2", focus: "Practice Exam 2 \u2014 midpoint check", min: 100, isExam: true, tasks: [
+            { tag: "exam", pri: 1, text: "<strong>Practice Exam 2</strong> \u2014 60 new questions, 100 minutes, timed. Compare each domain percentage with Exam 1.", href: "practice-exam-2.html" },
+            { tag: "logistics", pri: 1, text: "Record the percent correct and the three domain percentages next to your Exam 1 numbers.", href: "tools.html#errorlog" }
         ]},
-        { id: "m-mcp", focus: "MCP servers and extensibility", min: 70, tasks: [
-            { tag: "study", pri: 1, text: "Read the extensibility section. <strong>Copilot Extensions were retired in November 2025 and replaced by MCP servers.</strong> Critically: client-side VS Code extensions are a different thing and are unaffected. The exam can test that distinction.", href: "features-platform.html#mcp" },
-            { tag: "drill", pri: 1, text: "Drill: MCP and Extensibility", href: "drills.html?set=d2-mcp" },
-            { tag: "lab", pri: 2, text: "Configure one MCP server in VS Code and call a tool from Agent mode. Seeing the tool call once makes the whole architecture concrete.", href: "features-platform.html#mcp" }
+        { id: "repair2", focus: "Review Exam 2 and retarget the plan", min: 75, isReview: true, tasks: [
+            { tag: "review", pri: 1, text: "Review every miss on Exam 2. Look for the same objective showing up twice \u2014 that is a real gap, not bad luck.", href: "practice-exam-2.html" },
+            { tag: "drill", pri: 1, text: "Re-drill the single weakest set so far.", href: "drills.html" },
+            { tag: "logistics", pri: 2, text: "Add every miss to the error log with its cause.", href: "tools.html#errorlog" }
         ]},
-        { id: "m-dataflow", focus: "The seven-step request lifecycle", min: 80, tasks: [
-            { tag: "study", pri: 1, text: "Read the Data &amp; Architecture guide end to end. This is the densest testable material on the exam: context gathering, the <strong>proxy in a GitHub-owned Azure tenant</strong>, toxicity filtering, generation, and post-processing. Learn which steps are inbound and which are outbound.", href: "data-architecture.html" },
-            { tag: "drill", pri: 1, text: "Drill: The Seven-Step Request Lifecycle", href: "drills.html?set=d3-dataflow" },
-            { tag: "cards", pri: 1, text: "Flashcards: the Data &amp; Architecture deck. Order-of-operations facts are exactly what flashcards are for.", href: "tools.html#flashcards" }
+        { id: "m-agenttypes", focus: "Agent types, topics, and orchestration choices", min: 75, tasks: [
+            { tag: "study", pri: 1, text: "Read the agent design section: <strong>task, autonomous, and prompt-and-response</strong> agents, topics and the fallback topic, agent flows, prompt actions, and when to use standard NLP, CLU, or generative orchestration.", href: "design-solutions.html#orchestration" },
+            { tag: "drill", pri: 1, text: "Drill: Agent Types, Topics, and Orchestration", href: "drills.html?set=d2-agent-types" },
+            { tag: "lab", pri: 1, text: "In a Copilot Studio trial, build one agent with a topic, a fallback, a knowledge source, and one agent flow. Doing it once makes the vocabulary stick.", href: "" }
         ]},
-        { id: "m-retention", focus: "Retention, training data, and plan differences", min: 70, tasks: [
-            { tag: "study", pri: 1, text: "Read the retention section. Editor completions discard prompts once a suggestion returns; chat <em>outside</em> the editor is typically retained <strong>28 days</strong>. Business and Enterprise are excluded from training by default; Free and Pro are not.", href: "data-architecture.html#retention" },
-            { tag: "drill", pri: 1, text: "Drill: Retention and Training Data", href: "drills.html?set=d3-retention" },
-            { tag: "review", pri: 2, text: "Reread your error log. By now the repeat offenders should be obvious.", href: "tools.html#errorlog" }
+        { id: "m-appsdata", focus: "Foundry Tools, apps, and grounding data", min: 70, tasks: [
+            { tag: "study", pri: 1, text: "Read the apps and data section: matching Foundry Tools to a requirement, generative pages and agent feed, AI in a Power Apps canvas app, the Power Platform Well-Architected pillars, and preparing data for grounding.", href: "design-solutions.html#appsdata" },
+            { tag: "drill", pri: 1, text: "Drill: Foundry Tools, Apps, and Grounding Data", href: "drills.html?set=d2-apps-data" },
+            { tag: "cards", pri: 2, text: "Flashcards: the Design deck.", href: "tools.html#flashcards" }
         ]},
-        { id: "m-prompt-fundamentals", focus: "Prompt engineering \u2014 the 4 Ss and shot patterns", min: 70, tasks: [
-            { tag: "study", pri: 1, text: "Read the Prompt Engineering guide through the fundamentals. The <strong>4 Ss</strong> \u2014 Single, Specific, Short, Surround \u2014 are a named framework and are very likely on the exam. So are zero-shot, one-shot, and few-shot prompting.", href: "prompting.html" },
-            { tag: "drill", pri: 1, text: "Drill: Prompt Fundamentals and the 4 Ss", href: "drills.html?set=d4-fundamentals" },
-            { tag: "cards", pri: 2, text: "Flashcards: the Prompt Engineering deck.", href: "tools.html#flashcards" }
+        { id: "m-extend", focus: "Extensibility \u2014 MCP, Computer Use, and agent behaviors", min: 70, tasks: [
+            { tag: "study", pri: 1, text: "Read the extensibility section: Copilot Studio extensibility options, <strong>Model Context Protocol</strong> servers, Computer Use for apps and websites without APIs, and reasoning and voice behaviors.", href: "design-solutions.html#extensibility" },
+            { tag: "drill", pri: 1, text: "Drill: MCP, Computer Use, and Agent Behaviors", href: "drills.html?set=d2-studio-ext" },
+            { tag: "lab", pri: 2, text: "List three systems in your organization and decide for each: connector, MCP server, or Computer Use. Write one sentence of justification each.", href: "" }
         ]},
-        { id: "m-context", focus: "Context crafting and custom instructions", min: 75, tasks: [
-            { tag: "study", pri: 1, text: "Read the context section, and pay attention to <strong>precedence</strong>: personal instructions win, then repository, then organization. Organization ranks lowest for <em>instructions</em> even though it wins for <em>policies</em>. Candidates get this backwards constantly.", href: "prompting.html#instructions" },
-            { tag: "drill", pri: 1, text: "Drill: Context Crafting and Custom Instructions", href: "drills.html?set=d4-context" },
-            { tag: "lab", pri: 1, text: "Add a <code>.github/copilot-instructions.md</code> to a repo and watch a suggestion change. Then add a path-specific instructions file and see which one wins.", href: "prompting.html#instructions" }
+        { id: "m-m365", focus: "Microsoft 365 agents and custom models in Foundry", min: 65, tasks: [
+            { tag: "study", pri: 1, text: "Read the Microsoft 365 section: agents in Microsoft 365 Copilot, Teams and SharePoint agents, and when a custom or fine-tuned model in Microsoft Foundry belongs in the design.", href: "design-solutions.html#m365" },
+            { tag: "drill", pri: 1, text: "Drill: Microsoft 365 Agents and Foundry Models", href: "drills.html?set=d2-m365-foundry" },
+            { tag: "review", pri: 2, text: "Reread your error log from the top.", href: "tools.html#errorlog" }
         ]},
-        { id: "m-workflow", focus: "Copilot across the development lifecycle", min: 70, tasks: [
-            { tag: "study", pri: 1, text: "Read the Productivity guide: where Copilot fits in the SDLC, from writing tests and documentation to debugging and modernization. Expect scenario questions that ask for the <em>best</em> fit, not the only fit.", href: "productivity.html" },
-            { tag: "drill", pri: 1, text: "Drill: Copilot Across the SDLC", href: "drills.html?set=d5-workflow" },
-            { tag: "cards", pri: 2, text: "Flashcards: the Productivity deck.", href: "tools.html#flashcards" }
+        { id: "m-prebuilt", focus: "Prebuilt agents and Dynamics 365 AI features", min: 70, tasks: [
+            { tag: "study", pri: 1, text: "Read the prebuilt section: AI in Dynamics 365 finance and supply chain apps, Microsoft 365 Copilot for Sales and for Service, Power Platform AI hub, and extra knowledge sources for finance and operations agent chat and in-app help.", href: "design-solutions.html#prebuilt" },
+            { tag: "drill", pri: 1, text: "Drill: Prebuilt Agents and Dynamics 365 AI", href: "drills.html?set=d2-prebuilt" },
+            { tag: "cards", pri: 1, text: "Flashcards: finish the Design deck.", href: "tools.html#flashcards" }
         ]},
-        { id: "m-metrics", focus: "Measuring impact and adoption", min: 65, tasks: [
-            { tag: "study", pri: 1, text: "Read the metrics section. Named metrics: <strong>average daily active users, total acceptance rate, lines of code accepted</strong>. Named stages: evaluation, adoption, optimization, sustained efficiency. Data comes from the usage metrics REST API and the developer survey.", href: "productivity.html#metrics" },
-            { tag: "drill", pri: 1, text: "Drill: Metrics and Measuring Impact", href: "drills.html?set=d5-metrics" },
-            { tag: "review", pri: 2, text: "Re-drill your single weakest set so far.", href: "drills.html" }
+        { id: "m-monitor", focus: "Monitoring, telemetry, and tuning", min: 65, tasks: [
+            { tag: "study", pri: 1, text: "Read the Deploy guide through objective 3.1: the monitoring process, analytics and telemetry, user feedback and backlog triage, and how metrics drive tuning.", href: "deploy-solutions.html#monitor" },
+            { tag: "drill", pri: 1, text: "Drill: Monitoring, Telemetry, and Tuning", href: "drills.html?set=d3-monitor" },
+            { tag: "cards", pri: 2, text: "Flashcards: the Deploy deck, first pass.", href: "tools.html#flashcards" }
         ]},
-        { id: "m-exclusions", focus: "Content exclusions and public code matching", min: 75, tasks: [
-            { tag: "study", pri: 1, text: "Read the Privacy &amp; Safeguards guide through content exclusions. Know the limits cold: <strong>Business and Enterprise only</strong>, they do not apply in Edit or Agent mode, and they do not stop semantic leakage through IDE type information.", href: "privacy.html" },
-            { tag: "drill", pri: 1, text: "Drill: Content Exclusions and Public Code Matching", href: "drills.html?set=d6-exclusions" },
-            { tag: "lab", pri: 2, text: "Open your organization&rsquo;s Copilot policy page and find &ldquo;Suggestions matching public code.&rdquo; Note whether it is Allow or Block, and whether it is locked.", href: "privacy.html#matching" }
+        { id: "m-testing", focus: "Testing and validation", min: 65, tasks: [
+            { tag: "study", pri: 1, text: "Read the testing section: agent test process and metrics, validation criteria for custom models, end-to-end tests across Dynamics 365 apps, and using Copilot to draft test cases.", href: "deploy-solutions.html#testing" },
+            { tag: "drill", pri: 1, text: "Drill: Testing and Validation", href: "drills.html?set=d3-testing" },
+            { tag: "lab", pri: 2, text: "Write ten test utterances for one agent: happy path, ambiguous, out of scope, and one adversarial prompt.", href: "" }
         ]},
-        { id: "m-policies", focus: "Plans, policies, indemnity, and audit logs", min: 80, tasks: [
-            { tag: "study", pri: 1, text: "Read the policy section. Two rules people reverse: within one enterprise the <strong>least restrictive</strong> policy wins; across enterprises the <strong>most restrictive</strong> wins. And IP indemnity requires Business or Enterprise <em>and</em> public code matching set to <strong>Block</strong>.", href: "privacy.html#policies" },
-            { tag: "drill", pri: 1, text: "Drill: Plans, Policies, and Indemnity", href: "drills.html?set=d6-policies" },
-            { tag: "cards", pri: 1, text: "Flashcards: the Privacy &amp; Safeguards deck. Plan-by-feature tables are pure recall.", href: "tools.html#flashcards" }
+        { id: "m-alm", focus: "ALM for agents, models, and data", min: 70, tasks: [
+            { tag: "study", pri: 1, text: "Read the ALM section: solutions and environments for Copilot Studio agents, connectors, and actions, plus ALM for Foundry Agent Service, custom models, grounding data, and Dynamics 365 AI features.", href: "deploy-solutions.html#alm" },
+            { tag: "drill", pri: 1, text: "Drill: ALM for Agents, Models, and Data", href: "drills.html?set=d3-alm" },
+            { tag: "cards", pri: 2, text: "Flashcards: the Deploy deck.", href: "tools.html#flashcards" }
+        ]},
+        { id: "m-security", focus: "Agent and model security", min: 70, tasks: [
+            { tag: "study", pri: 1, text: "Read the security section: agent identity and least privilege, model security, <strong>direct and indirect prompt injection</strong>, and access controls on grounding data and model tuning.", href: "deploy-solutions.html#governance" },
+            { tag: "drill", pri: 1, text: "Drill: Agent and Model Security", href: "drills.html?set=d3-security" },
+            { tag: "review", pri: 2, text: "Re-drill your weakest Design set.", href: "drills.html" }
+        ]},
+        { id: "m-governance", focus: "Governance, compliance, and responsible AI", min: 70, tasks: [
+            { tag: "study", pri: 1, text: "Read the governance section: agent governance, the six responsible AI principles, data residency and movement, and audit trails for changes to models and data.", href: "deploy-solutions.html#governance" },
+            { tag: "drill", pri: 1, text: "Drill: Governance, Compliance, and Responsible AI", href: "drills.html?set=d3-governance" },
+            { tag: "cards", pri: 1, text: "Flashcards: finish the Deploy deck.", href: "tools.html#flashcards" }
         ]}
     ];
 
     var TAIL = [
         { id: "exam3", focus: "Practice Exam 3 \u2014 dress rehearsal", min: 100, isExam: true, tasks: [
             { tag: "exam", pri: 1, text: "<strong>Practice Exam 3</strong> \u2014 the hardest of the three. Start at the exact clock time your real exam starts. Same room, same chair, same breakfast.", href: "practice-exam-3.html" },
-            { tag: "logistics", pri: 1, text: "Record the scaled score. Above 780 and you are in range. 700 to 779 and a focused repair day closes it. Below 660 and the domain breakdown is the whole plan for tomorrow.", href: "tools.html#errorlog" },
+            { tag: "logistics", pri: 1, text: "Record the percent correct. On this site, 80% or more is the ready range, 70\u201379% means a focused repair day, and under 70% means the domain breakdown is tomorrow&rsquo;s whole plan. These are study targets, not Microsoft&rsquo;s scale.", href: "tools.html#errorlog" },
             { tag: "exam", pri: 2, text: "No review today. Rest tonight.", href: "" }
         ]},
         { id: "repair3", focus: "Final repair \u2014 nothing new after today", min: 90, isReview: true, tasks: [
@@ -448,8 +432,8 @@
             { tag: "logistics", pri: 2, text: "Confirm the appointment one last time: time, location or online setup, ID, and the exam code AB-100. Do this today, not tomorrow night.", href: "" }
         ]},
         { id: "taper", focus: "Taper \u2014 do not cram", min: 45, isRest: true, tasks: [
-            { tag: "cards", pri: 1, text: "One relaxed sweep through all seven flashcard decks. Speed, not depth. You are keeping the machinery warm, not learning.", href: "tools.html#flashcards" },
-            { tag: "study", pri: 1, text: "Read the night-before cheat sheets once each. Once. Not twice.", href: "index.html#everything" },
+            { tag: "cards", pri: 1, text: "One relaxed sweep through all three flashcard decks. Speed, not depth. You are keeping the machinery warm, not learning.", href: "tools.html#flashcards" },
+            { tag: "study", pri: 1, text: "Read the cheat sheets once each. Once. Not twice.", href: "index.html#everything" },
             { tag: "logistics", pri: 2, text: "Read the top of your error log one final time. Then close it.", href: "tools.html#errorlog" },
             { tag: "exam", pri: 1, text: "No practice questions today. None. Cramming the day before a certification exam reliably lowers scores.", href: "" },
             { tag: "logistics", pri: 2, text: "Lay out your ID. Set two alarms. Stop everything by 8:00 pm.", href: "" }
@@ -458,13 +442,13 @@
 
     /* Extra days get reinforcement, not more new content. */
     var REINFORCE = [
-        { id: "rf-drills", focus: "Reinforcement \u2014 re-drill your two weakest domains", min: 45, isExtra: true, tasks: [
+        { id: "rf-drills", focus: "Reinforcement \u2014 re-drill your two weakest objectives", min: 45, isExtra: true, tasks: [
             { tag: "drill", pri: 1, text: "Pick the two drill sets you scored lowest on and run them again. Repeat drills beat new ones.", href: "drills.html" },
             { tag: "logistics", pri: 2, text: "Add anything you miss to the error log, then reread yesterday&rsquo;s entries.", href: "tools.html#errorlog" }
         ]},
-        { id: "rf-lab", focus: "Reinforcement \u2014 hands-on with Copilot", min: 50, isExtra: true, tasks: [
-            { tag: "lab", pri: 1, text: "Go back into VS Code and rebuild something from memory: a custom instructions file, an MCP server config, or the same task run through all three modes. Domain 2 is the largest on the exam, so hands-on time is study time.", href: "features-ide.html" },
-            { tag: "cards", pri: 2, text: "Flashcards: whichever deck matches what you just built.", href: "tools.html#flashcards" }
+        { id: "rf-lab", focus: "Reinforcement \u2014 hands-on design practice", min: 50, isExtra: true, tasks: [
+            { tag: "lab", pri: 1, text: "Pick one business process and write a one-page architecture: the agents, their knowledge and tools, the platform for each (Microsoft 365 Copilot, Copilot Studio, or Foundry), ALM path, and governance controls.", href: "design-solutions.html" },
+            { tag: "cards", pri: 2, text: "Flashcards: whichever deck matches what you just designed.", href: "tools.html#flashcards" }
         ]},
         { id: "rf-cards", focus: "Reinforcement \u2014 flashcard sweep", min: 35, isExtra: true, tasks: [
             { tag: "cards", pri: 1, text: "Run the &ldquo;only cards I have missed&rdquo; filter across every deck until the missed list is empty.", href: "tools.html#flashcards" },
@@ -479,21 +463,21 @@
     /* A dedicated sequence for when there is almost no time left. */
     var CRAM = [
         { id: "cram1", focus: "Triage \u2014 exam shape, then a cold Practice Exam 1", min: 110, isExam: true, tasks: [
-            { tag: "study", pri: 1, text: "Read the home page: the six domains and their weights, and the fact that 700 is scaled, not 70%. Ten minutes, no more.", href: "index.html" },
+            { tag: "study", pri: 1, text: "Read the home page: the three domains and their weights, and the fact that 700 is scaled, not 70%. Ten minutes, no more.", href: "index.html" },
             { tag: "exam", pri: 1, text: "<strong>Practice Exam 1</strong> \u2014 timed, 100 minutes. You need the domain breakdown more than you need the score.", href: "practice-exam-1.html" },
             { tag: "review", pri: 1, text: "Review it immediately. There is no time to sleep on it.", href: "practice-exam-1.html" },
-            { tag: "logistics", pri: 1, text: "Write down your two weakest domains. Everything left goes there.", href: "tools.html#errorlog" }
+            { tag: "logistics", pri: 1, text: "Write down your weakest domain. Everything left goes there.", href: "tools.html#errorlog" }
         ]},
-        { id: "cram2", focus: "Attack features and architecture first", min: 130, tasks: [
-            { tag: "study", pri: 1, text: "Read both Features guides no matter what your scores said. Domain 2 is up to 30% of the exam on its own and it is where unprepared candidates lose.", href: "features-ide.html" },
-            { tag: "study", pri: 1, text: "Read the Data &amp; Architecture guide. The seven-step lifecycle is dense, testable, and almost impossible to guess.", href: "data-architecture.html" },
+        { id: "cram2", focus: "Attack Plan and Design first", min: 130, tasks: [
+            { tag: "study", pri: 1, text: "Read the Plan guide no matter what your scores said. Domain 1 is up to 40% of the exam on its own.", href: "plan-solutions.html" },
+            { tag: "study", pri: 1, text: "Read the Design guide. Agent types, orchestration, and extensibility choices are dense and hard to guess.", href: "design-solutions.html" },
             { tag: "drill", pri: 1, text: "Run one drill from each of your two weakest domains.", href: "drills.html" },
-            { tag: "cards", pri: 2, text: "Flashcards: the Copilot in the IDE and Data &amp; Architecture decks.", href: "tools.html#flashcards" }
+            { tag: "cards", pri: 2, text: "Flashcards: the Plan and Design decks.", href: "tools.html#flashcards" }
         ]},
         { id: "cram3", focus: "One rehearsal, one repair, then stop", min: 120, isExam: true, tasks: [
             { tag: "exam", pri: 1, text: "<strong>Practice Exam 3</strong> \u2014 timed, under real conditions.", href: "practice-exam-3.html" },
             { tag: "review", pri: 1, text: "Review every miss and read every explanation.", href: "practice-exam-3.html" },
-            { tag: "cards", pri: 2, text: "One fast sweep through all seven flashcard decks.", href: "tools.html#flashcards" },
+            { tag: "cards", pri: 2, text: "One fast sweep through all three flashcard decks.", href: "tools.html#flashcards" },
             { tag: "logistics", pri: 1, text: "Stop studying by 8:00 pm. Lay out your ID. Set two alarms.", href: "" }
         ]}
     ];
@@ -672,13 +656,9 @@
     var NAV = [
         { href: "index.html", label: "Home" },
         { href: "plan.html", label: "Plan" },
-        { href: "responsible.html", label: "Responsible AI" },
-        { href: "features-ide.html", label: "IDE &amp; CLI" },
-        { href: "features-platform.html", label: "Features" },
-        { href: "data-architecture.html", label: "Data" },
-        { href: "prompting.html", label: "Prompting" },
-        { href: "productivity.html", label: "Productivity" },
-        { href: "privacy.html", label: "Privacy" },
+        { href: "plan-solutions.html", label: "1 &middot; Plan" },
+        { href: "design-solutions.html", label: "2 &middot; Design" },
+        { href: "deploy-solutions.html", label: "3 &middot; Deploy" },
         { href: "drills.html", label: "Drills" },
         { href: "exams.html", label: "Exams" },
         { href: "tools.html", label: "Tools" }
@@ -746,14 +726,14 @@
         host.className = "footer";
         host.innerHTML = '<div class="wrap">' +
             "<p>An independent study site for Microsoft Exam AB-100, Agentic AI Business Solutions Architect, built to the " +
-            AB1.SKILLS_DATE + " skills-measured objectives. Every question, explanation, and flashcard here " +
-            "is original practice material and is not affiliated with or endorsed by Microsoft or GitHub.</p>" +
-            '<p class="faint">The real exam is scored on a scaled 1\u20131000 range with 700 to pass. That is ' +
-            "<strong>not</strong> the same as answering 70% of questions correctly \u2014 Microsoft weights questions " +
-            "by difficulty and has never published the conversion, so scores shown here are readiness estimates " +
-            "only. Agentic AI Business Solutions Architect changes quickly \u2014 always check the current " +
-            "<a href=\"https://learn.microsoft.com/credentials/certifications/resources/study-guides/ab-100\" " +
-            "rel=\"noopener\">official study guide</a> before your exam. Your exam date, progress, and notes are " +
+            AB1.SKILLS_DATE + " skills-measured objectives (facts checked " + AB1.VERIFIED_DATE + "). Every question, " +
+            "explanation, and flashcard here is original practice material and is not affiliated with or endorsed by Microsoft.</p>" +
+            '<p class="faint">The real exam is scored on a scaled 1\u20131000 range with 700 to pass. Microsoft states that 700 ' +
+            "<strong>may not equal 70%</strong> of the points and does not publish the conversion, so this site never " +
+            "estimates a scaled score. Practice results are shown as percent correct against this site&rsquo;s own study " +
+            "targets. Always check the current " +
+            '<a href="' + AB1.LINKS.guide + '" rel="noopener">official study guide</a> and ' +
+            '<a href="' + AB1.LINKS.exam + '" rel="noopener">exam page</a> before your exam. Your exam date, progress, and notes are ' +
             "saved in this browser only.</p>" +
             "</div>";
     };

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Domain 1: Plan AI-powered business solutions &mdash; AB-100 Exam Prep</title>
+<meta name="description" content="AB-100 Domain 1 study guide: analyze requirements, design an AI strategy and multi-agent solution, knowledge and prompt planning, and evaluate costs, benefits, and ROI.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header id="topbar"></header>
+
+<main id="main"><div class="wrap">
+
+<h1>Domain 1 &mdash; Plan AI-powered business solutions</h1>
+<p class="lede">Domain 1 is 35&ndash;40% of AB-100, the largest share. It tests whether you can turn a business problem into the right kind of AI solution: what the task really is, whether the data is ready, how agents divide the work, and whether the investment pays off.</p>
+
+<div class="btn-row" style="margin:1.25rem 0 2rem">
+    <a class="btn secondary sm" href="#requirements">Requirements</a>
+    <a class="btn secondary sm" href="#strategy">Strategy</a>
+    <a class="btn secondary sm" href="#multiagent">Multi-agent</a>
+    <a class="btn secondary sm" href="#knowledge">Knowledge</a>
+    <a class="btn secondary sm" href="#prompts">Prompts &amp; models</a>
+    <a class="btn secondary sm" href="#roi">ROI</a>
+    <a class="btn secondary sm" href="#buildbuy">Build / buy / extend</a>
+    <a class="btn secondary sm" href="#cheatsheet">Cheat sheet</a>
+</div>
+
+<section id="requirements">
+  <h2>1.1 Analyze requirements for AI-powered business solutions</h2>
+  <p>Before choosing a product, classify the business need. The study guide asks you to tell apart tasks that need <strong>generative AI, task automation, analytics, or decision support</strong>, and to judge whether the data behind them is fit for AI.</p>
+  <div class="table-scroll"><table class="data-table">
+    <thead><tr><th>Need</th><th>What it looks like</th><th>Typical direction</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Task automation</strong></td><td>Repeatable, rules-based steps across systems (approve, route, copy data)</td><td>Power Automate, agent flows, Copilot Studio actions</td></tr>
+      <tr><td><strong>Generative content / reasoning</strong></td><td>Drafting, summarizing, answering grounded questions, conversation</td><td>Microsoft 365 Copilot, Copilot Studio agents, Foundry models</td></tr>
+      <tr><td><strong>Analytics</strong></td><td>Trends, KPIs, what happened and why</td><td>Power BI, Fabric, Copilot in analytics tools</td></tr>
+      <tr><td><strong>Decision support</strong></td><td>Recommendations a human approves (next best action, forecast)</td><td>Dynamics 365 Copilot features, custom models, human-in-the-loop agents</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Data readiness</h3>
+  <p>Grounding quality caps answer quality. Assess data for being <strong>accurate, relevant, timely, clean, and available</strong>, and decide whether the same data should be reusable by other AI systems (for example, exposed once through Dataverse, Fabric, or a shared knowledge source rather than copied into each agent).</p>
+  <div class="callout trap"><span class="callout-title">Exam trap</span><p style="margin-bottom:0">If the scenario says answers are wrong or outdated, the fix is usually the data or grounding (freshness, permissions, duplicates), not a bigger model.</p></div>
+</section>
+
+<section id="strategy">
+  <h2>1.2 Design an AI strategy and agent approach</h2>
+  <p>The strategy objective is the heaviest single topic on this site&rsquo;s blueprint. It mixes organizational adoption with technical design choices.</p>
+  <div class="grid grid-2">
+    <div class="card"><h3 style="margin-top:0">Adoption</h3><ul style="margin-bottom:0">
+      <li>Use the <strong>Cloud Adoption Framework (CAF) AI adoption</strong> guidance: strategy, plan, ready, govern, manage, secure.</li>
+      <li>An <strong>AI Center of Excellence</strong> sets standards, reusable assets, governance, and enablement so teams don&rsquo;t reinvent agents.</li>
+      <li>Start with prioritized, measurable use cases; pilot, measure, scale.</li>
+    </ul></div>
+    <div class="card"><h3 style="margin-top:0">Design choices</h3><ul style="margin-bottom:0">
+      <li><strong>Extend</strong> Microsoft 365 Copilot when users already work in Microsoft 365 and need grounded productivity help.</li>
+      <li><strong>Build</strong> in Copilot Studio for low-code custom agents with topics, actions, and connectors.</li>
+      <li><strong>Build</strong> in Microsoft Foundry when you need pro-code control, custom or fine-tuned models, or complex orchestration.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section id="multiagent">
+  <h2>Multi-agent solutions</h2>
+  <p>Large processes are easier to secure, test, and evolve when split across focused agents. The study guide expects you to design multi-agent solutions that span Microsoft 365 Copilot, Copilot Studio, and Foundry.</p>
+  <ul>
+    <li><strong>Orchestrator (parent) agent</strong> routes the request; <strong>child or connected agents</strong> each own a narrow job and its tools.</li>
+    <li>Give each agent least-privilege access to only the data and actions it needs.</li>
+    <li>Define hand-offs, including when a human takes over.</li>
+    <li>Reuse agents across channels instead of duplicating logic.</li>
+  </ul>
+  <div class="callout key"><span class="callout-title">Rule of thumb</span><p style="margin-bottom:0">Split when responsibilities, data permissions, or owners differ. Keep one agent when the task is small and shares one knowledge set.</p></div>
+</section>
+
+<section id="knowledge">
+  <h2>Knowledge sources and grounding</h2>
+  <p>Agents answer from knowledge sources such as SharePoint, Dataverse, websites, uploaded files, Microsoft Graph connectors, and Azure AI Search indexes. Plan which sources are authoritative, how they stay current, and how existing permissions are honored so users only see what they are allowed to see.</p>
+  <div class="table-scroll"><table class="data-table">
+    <thead><tr><th>Concern</th><th>Plan for</th></tr></thead>
+    <tbody>
+      <tr><td>Authority</td><td>One source of truth per fact; retire stale copies</td></tr>
+      <tr><td>Freshness</td><td>Sync or index refresh cadence that matches how fast the data changes</td></tr>
+      <tr><td>Security</td><td>Permission-trimmed retrieval; sensitivity labels; no oversharing</td></tr>
+      <tr><td>Retrieval quality</td><td>Chunking, metadata, and search configuration (retrieval-augmented generation)</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="prompts">
+  <h2>Prompt libraries, custom models, and small language models</h2>
+  <ul>
+    <li><strong>Prompt libraries</strong> capture tested prompts so teams reuse what works and outputs stay consistent.</li>
+    <li><strong>Prompt engineering first</strong>, then retrieval grounding, then fine-tuning only when behavior or format still falls short.</li>
+    <li><strong>Small language models (SLMs)</strong> fit narrow, high-volume, low-latency, cost-sensitive, or on-device scenarios.</li>
+    <li><strong>Custom models</strong> in Foundry fit specialized domains or tasks a general model handles poorly.</li>
+  </ul>
+</section>
+
+<section id="roi">
+  <h2>1.3 Evaluate costs, benefits, and ROI</h2>
+  <p>Architects must justify the solution. Build an ROI and <strong>total cost of ownership (TCO)</strong> view that includes more than licenses.</p>
+  <div class="grid grid-2">
+    <div class="card"><h3 style="margin-top:0">Costs</h3><ul style="margin-bottom:0"><li>Licensing and consumption (messages, tokens, capacity)</li><li>Build, integration, and data preparation</li><li>Ongoing monitoring, tuning, and support</li><li>Governance, security, and change management</li></ul></div>
+    <div class="card"><h3 style="margin-top:0">Benefits</h3><ul style="margin-bottom:0"><li>Time saved and throughput gained</li><li>Quality, accuracy, and customer satisfaction</li><li>Revenue impact and risk reduction</li><li>Measured against a baseline captured <em>before</em> rollout</li></ul></div>
+  </div>
+</section>
+
+<section id="buildbuy">
+  <h2>Build, buy, or extend &mdash; and model routing</h2>
+  <div class="table-scroll"><table class="data-table">
+    <thead><tr><th>Choice</th><th>Pick it when</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Buy</strong> (prebuilt agent / Dynamics 365 Copilot feature)</td><td>The scenario is common and a Microsoft capability already covers it; fastest value, least maintenance</td></tr>
+      <tr><td><strong>Extend</strong> (Microsoft 365 Copilot agents, connectors, plugins)</td><td>Users live in Microsoft 365 and need their business data or actions inside Copilot</td></tr>
+      <tr><td><strong>Build</strong> (Copilot Studio or Foundry)</td><td>The process is differentiating or needs custom logic, models, or orchestration</td></tr>
+    </tbody>
+  </table></div>
+  <p>A <strong>model router</strong> sends each request to the most suitable model, balancing quality, latency, and cost &mdash; simple requests go to cheaper models, hard ones to more capable models.</p>
+</section>
+
+<section id="cheatsheet">
+  <h2>Cheat sheet</h2>
+  <div class="grid grid-3">
+    <div class="card"><h3 style="margin-top:0">Classify first</h3><p style="margin-bottom:0">Automation, generative, analytics, or decision support decides the tool.</p></div>
+    <div class="card"><h3 style="margin-top:0">Data before models</h3><p style="margin-bottom:0">Accurate, relevant, timely, clean, available, reusable.</p></div>
+    <div class="card"><h3 style="margin-top:0">Cheapest fit wins</h3><p style="margin-bottom:0">Buy before extend before build, unless the process differentiates you.</p></div>
+  </div>
+  <p style="margin-top:1rem"><a href="drills.html">Practice Domain 1 drills &rarr;</a> &nbsp; <a href="https://learn.microsoft.com/credentials/certifications/resources/study-guides/ab-100" rel="noopener">Official study guide</a></p>
+</section>
+
+</div></main>
+<footer id="footer"></footer>
+</body>
+</html>

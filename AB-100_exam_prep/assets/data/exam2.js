@@ -1,609 +1,914 @@
 window.AB1_DATA = window.AB1_DATA || {};
-
 window.AB1_DATA.exam2 = {
-  id: "exam2",
-  name: "AB-100 \u2014 Practice Exam 2",
-  timeMinutes: 100,
-  units: [ { title: "", html: "", questions: [
+ "id": "exam2",
+ "name": "AB-100 — Practice Exam 2",
+ "timeMinutes": 100,
+ "units": [
+  {
+   "title": "",
+   "html": "",
+   "questions": [
     {
-      n: 1,
-      prompt: "<p>A team is adopting Agentic AI Business Solutions Architect for code reviews and asks who remains responsible when Copilot suggests a change that later causes a production issue. Which responsible AI principle MOST directly addresses this concern?</p>",
-      choices: ["Accountability", "Inclusiveness", "Transparency", "Fairness"],
-      answer: 0,
-      topic: "Responsible AI Principles",
-      objective: "1.1",
-      difficulty: "easy",
-      explanation: "<p>Accountability means people and organizations remain answerable for how AI systems are used and for the outcomes of their decisions. Copilot can assist with review, but the team still owns validation, approval, and deployment choices.</p><p>Inclusiveness focuses on making tools usable by people with different abilities and backgrounds. Transparency focuses on explaining AI behavior and limitations. Fairness focuses on equitable treatment and avoiding harmful bias, not assigning operational responsibility.</p>"
+     "n": 1,
+     "prompt": "<p>A utility company wants a Copilot Studio agent to answer questions using asset records in an on-premises SQL Server database that sits behind the corporate firewall. Pilot users report that the agent cannot retrieve any asset data. Which requirement must you address?</p>",
+     "choices": [
+      "Publish the SQL Server database directly to the internet so the agent can reach it",
+      "Provide access through an on-premises data gateway and a supported connector",
+      "Copy the asset tables into a personal OneDrive folder owned by the agent maker",
+      "Disable authentication on the database so that connection attempts never fail"
+     ],
+     "answer": 1,
+     "topic": "Analyze Requirements",
+     "objective": "1.1",
+     "difficulty": "medium",
+     "explanation": "<p>The issue is availability: the agent cannot reach the data. An on-premises data gateway lets cloud services such as Copilot Studio and Power Platform connectors securely access on-premises sources.</p><p>Exposing the database to the internet or disabling authentication creates serious security risk. Copying data to a personal OneDrive creates stale, ungoverned copies tied to one person.</p>"
     },
     {
-      n: 2,
-      prompt: "<p>Copilot generates a migration script that looks correct, but it will run against customer data. What is the MOST responsible next step before using it?</p>",
-      choices: ["Run it directly because generated code has already passed Copilot filters", "Review, test, and validate the script in a safe environment before applying it", "Accept the script only if Suggestions matching public code is set to Allow", "Rewrite the script manually and avoid Copilot for database work"],
-      answer: 1,
-      topic: "Validating AI Output",
-      objective: "1.2",
-      difficulty: "medium",
-      explanation: "<p>Responsible operation requires validating AI output before relying on it, especially when data integrity or production systems are involved. A safe review and test path catches logic errors, destructive statements, and context misunderstandings before customer data is affected.</p><p>Copilot filters are safeguards, not a guarantee of correctness. Suggestions matching public code controls whether matching public suggestions are shown; it does not validate database safety. Avoiding Copilot entirely is unnecessary when the team uses human review, tests, and appropriate controls.</p>"
+     "n": 2,
+     "prompt": "<p>A medical-device company uses Copilot in Dynamics 365 Sales. Sales managers want Copilot opportunity summaries to always highlight two custom columns, Contract Renewal Date and Clinical Champion, that the company added to the opportunity table. What should you recommend?</p>",
+     "choices": [
+      "Create a Copilot Studio topic that reads the two columns when a seller asks",
+      "Fine-tune a model in Microsoft Foundry to recognize the two custom columns",
+      "Move the two columns into the opportunity description so Copilot reads them",
+      "Add the custom columns to the opportunity summary settings"
+     ],
+     "answer": 3,
+     "topic": "Design AI and Agents",
+     "objective": "2.1",
+     "difficulty": "medium",
+     "explanation": "<p>Copilot in Dynamics 365 Sales lets administrators customize which fields are used in lead and opportunity summaries, including custom columns, so key business data appears consistently.</p><p>A topic would answer only when explicitly asked and would not change the summary. Fine-tuning is unnecessary for selecting fields. Merging data into a free-text description loses structure and breaks reporting.</p>"
     },
     {
-      n: 3,
-      prompt: "<p>A developer sees faint suggested code at the cursor while typing in an IDE. Which Copilot feature is being displayed?</p>",
-      choices: ["Next edit suggestions", "Edit mode", "Inline suggestions rendered as ghost text", "Copilot cloud agent"],
-      answer: 2,
-      topic: "Copilot in the IDE",
-      objective: "2.1",
-      difficulty: "easy",
-      explanation: "<p>Inline suggestions appear in the IDE at the current cursor position and are commonly rendered as ghost text. They complete the code where the developer is already working.</p><p>Next edit suggestions predict where the developer may edit next, not just what appears at the cursor. Edit mode performs broader requested changes in supported editors. Copilot cloud agent is an autonomous GitHub-hosted agent and is not the ghost-text inline completion feature.</p>"
+     "n": 3,
+     "prompt": "<p>An agent receives thousands of thumbs-down reactions and comments each month. The product owner wants a repeatable process that turns this feedback into improvements. What should you recommend?</p>",
+     "choices": [
+      "Cluster feedback into themes, prioritize by impact, and track fixes in a backlog",
+      "Fix whichever comment arrived most recently at the start of each day",
+      "Ignore negative reactions that do not include a written comment",
+      "Retrain the model automatically each week on all feedback received"
+     ],
+     "answer": 0,
+     "topic": "Monitor and Tune",
+     "objective": "3.1",
+     "difficulty": "medium",
+     "explanation": "<p>A sound feedback process groups feedback into themes, ranks them by frequency and business impact, assigns owners through a backlog, and re-measures after each change to confirm improvement.</p><p><em>Most recent first</em> chases noise rather than the most important issues. <em>Ignoring uncommented reactions</em> discards a large, useful quality signal. <em>Automatic weekly retraining</em> on unvetted feedback can introduce errors and is rarely how agents are tuned.</p>"
     },
     {
-      n: 4,
-      prompt: "<p>A Windows developer wants to use Agentic AI Business Solutions Architect from PowerShell to ask for a command, iterate interactively, and sometimes pass a prompt non-interactively from scripts. Which tool best fits this workflow?</p>",
-      choices: ["Copilot Chat only on GitHub.com", "Copilot code review", "A repository prompt file", "The standalone Agentic AI Business Solutions Architect CLI"],
-      answer: 3,
-      topic: "Copilot CLI",
-      objective: "2.2",
-      difficulty: "medium",
-      explanation: "<p>The standalone Agentic AI Business Solutions Architect CLI supports Linux, macOS, and Windows, including PowerShell and WSL. It can be used interactively and programmatically with prompt flags, making it the best match for command-line assistance and scripted use.</p><p>Copilot Chat on GitHub.com is not a shell tool. Copilot code review reviews changes rather than managing terminal workflows. Prompt files help reuse prompts in supported IDEs, but they are not supported in the CLI and do not provide an interactive shell experience.</p>"
+     "n": 4,
+     "prompt": "<p>A telecom company's CRM contains duplicate customer records, inconsistent phone number formats, and free-text fields with typos. An agent will use this data to personalize service responses. Which preparation step addresses the cleanliness of the grounding data?</p>",
+     "choices": [
+      "Add more records from additional systems so that errors are statistically diluted",
+      "Increase the agent's response length so it can explain any conflicting records",
+      "Refresh the index more frequently so that duplicates are replaced sooner",
+      "Deduplicate records and standardize formats before the data is used for grounding"
+     ],
+     "answer": 3,
+     "topic": "Analyze Requirements",
+     "objective": "1.1",
+     "difficulty": "medium",
+     "explanation": "<p>Cleanliness covers duplicates, inconsistent formats, and invalid values. Cleansing the data before grounding reduces conflicting or wrong personalization.</p><p>Adding more data does not fix existing duplicates and may add more. Longer responses do not resolve which record is correct. Refreshing more often improves timeliness but simply re-indexes the same dirty data.</p>"
     },
     {
-      n: 5,
-      prompt: "<p>A product team wants an AI assistant to work autonomously on an issue in GitHub while developers continue in their IDE. Which current Copilot capability should they consider?</p>",
-      choices: ["Copilot cloud agent", "Next edit suggestions", "Suggestions matching public code", "Retired Copilot Spark app builder"],
-      answer: 0,
-      topic: "Copilot Features and Capabilities",
-      objective: "2.3",
-      difficulty: "easy",
-      explanation: "<p>Copilot cloud agent is the current name for the autonomous GitHub-hosted agent that can work on tasks in GitHub. It is distinct from agent mode in an IDE and from assistive suggestion features.</p><p>Next edit suggestions help predict a developer's next edit location in supported IDEs. Suggestions matching public code is a privacy and safeguard setting, not an autonomous worker. Copilot Spark is retired and should be treated only as history, not as a live capability.</p>"
+     "n": 5,
+     "prompt": "<p>A bank's Copilot Studio agent handles authentication and intent capture on the voice channel of Dynamics 365 Contact Center. When calls escalate, representatives complain that customers must repeat their account number and reason for calling. What should you change?</p>",
+     "choices": [
+      "Pass the collected values as context variables on escalation",
+      "Ask the customer to repeat the information once the representative joins",
+      "Store the values in an Excel file that representatives check during calls",
+      "Create a new case manually after each call with the collected information"
+     ],
+     "answer": 0,
+     "topic": "Design AI and Agents",
+     "objective": "2.1",
+     "difficulty": "medium",
+     "explanation": "<p>When a Copilot Studio agent escalates to Dynamics 365 Contact Center, it can pass context variables so that routing and the representative's workspace receive the authenticated identity and captured intent.</p><p>Asking customers to repeat themselves is the problem being solved. Spreadsheets are insecure and not real time. Manual case creation after the call does not help the representative during the conversation.</p>"
     },
     {
-      n: 6,
-      prompt: "<p>A user belongs to two organizations within the same enterprise. One organization enables a Copilot feature and the other disables it. What policy outcome usually applies?</p>",
-      choices: ["The feature is always disabled because the most restrictive setting wins", "The least restrictive policy within the same enterprise usually applies", "The enterprise audit log decides based on recent usage", "The user's personal setting overrides both organizations"],
-      answer: 1,
-      topic: "Organization Settings and Policies",
-      objective: "2.4",
-      difficulty: "hard",
-      explanation: "<p>When multiple organizations are in the same enterprise, the least restrictive Copilot policy usually applies. This is a common conflict-resolution trap because the direction changes when different enterprises are involved.</p><p>The most restrictive policy almost always applies across different enterprises, not within the same enterprise. Personal settings do not override organization or enterprise policy controls for organization-assigned seats. Audit logs record events; they do not resolve policy conflicts.</p>"
+     "n": 6,
+     "prompt": "<p>After a scheduled refresh of the search index used by a Microsoft Foundry retrieval agent, the groundedness score in evaluations dropped sharply while relevance stayed stable. What should you do FIRST?</p>",
+     "choices": [
+      "Fine-tune the model on the newly indexed documents right away",
+      "Raise the model temperature to encourage more complete answers",
+      "Inspect traces of failing queries to check the chunks being retrieved",
+      "Replace AI-assisted evaluators with occasional manual spot checks"
+     ],
+     "answer": 2,
+     "topic": "Monitor and Tune",
+     "objective": "3.1",
+     "difficulty": "hard",
+     "explanation": "<p>A groundedness drop that coincides with an index refresh suggests that retrieval or chunking changed, so the model is answering without adequate support. Traces show which chunks were retrieved for failing queries and reveal the root cause before any tuning.</p><p><em>Fine-tuning</em> is costly and does not address a retrieval regression. <em>Higher temperature</em> tends to increase unsupported content and lowers groundedness further. <em>Removing evaluators</em> hides the signal instead of diagnosing it.</p>"
     },
     {
-      n: 7,
-      prompt: "<p>During prompt construction for an inline suggestion, Copilot considers code before and after the cursor. Which named technique describes this preprocessing approach?</p>",
-      choices: ["LoRA adaptation", "Code referencing", "Fill-in-the-Middle", "Prompt file reuse"],
-      answer: 2,
-      topic: "Data Handling and Flow",
-      objective: "3.1",
-      difficulty: "easy",
-      explanation: "<p>Fill-in-the-Middle, or FIM, considers both preceding and following code around the cursor as part of prompt preprocessing. It helps translate the user's editing location and surrounding context into a concrete coding task.</p><p>LoRA is a fine-tuning method, not the cursor-context preprocessing technique. Code referencing relates to attribution for matching public code. Prompt file reuse is a customization method for consistent prompts, not the inbound prompt-building process.</p>"
+     "n": 7,
+     "prompt": "<p>An IT help desk agent is grounded on the entire corporate intranet, including cafeteria menus, event photos, and old project sites. Users complain that answers include unrelated content. What should you recommend?</p>",
+     "choices": [
+      "Increase the number of search results the agent retrieves for each question",
+      "Switch to a larger model so that it ignores irrelevant content automatically",
+      "Turn on general knowledge so the model can answer without the intranet",
+      "Scope the knowledge sources to curated IT support content"
+     ],
+     "answer": 3,
+     "topic": "Analyze Requirements",
+     "objective": "1.1",
+     "difficulty": "medium",
+     "explanation": "<p>This is a relevance problem. Narrowing the knowledge sources to content that matches the agent's purpose improves retrieval precision and answer quality.</p><p>Retrieving more results surfaces even more irrelevant content. A larger model still grounds on what it retrieves. General knowledge does not reflect company-specific IT procedures.</p>"
     },
     {
-      n: 8,
-      prompt: "<p>A training module says Copilot Chat has a much smaller context window than current product documentation suggests. How should an exam-prep question handle that mismatch?</p>",
-      choices: ["Ask candidates to choose between the training value and current product value", "Ignore the mismatch and state both values as simultaneously current", "Use only current product claims because the study guide is outdated", "Use one framing and explain that the official study material and current product differ"],
-      answer: 3,
-      topic: "Lifecycle and Limitations",
-      objective: "3.2",
-      difficulty: "hard",
-      explanation: "<p>When official study material and the current product differ, a fair item should use one framing and explain the discrepancy. This avoids making the correct answer depend on two conflicting authorities in the same question.</p><p>Putting both readings in the choices makes the item ambiguous. Stating both as current is misleading. Using only current product claims can be appropriate for many items, but the exam-prep site must also note where the exam source differs from today's product.</p>"
+     "n": 8,
+     "prompt": "<p>Employees at a consulting firm want to ask an agent to 'book my trip to Chicago next Tuesday within policy'. The agent must check the travel policy, search approved vendors, and create the booking when the employee confirms. Which agent type BEST fits?</p>",
+     "choices": [
+      "A prompt-and-response agent that returns the policy text only",
+      "An autonomous agent that books travel on a nightly schedule",
+      "A task agent that performs actions when a user requests them",
+      "A SharePoint agent scoped to the travel policy library"
+     ],
+     "answer": 2,
+     "topic": "Design AI and Agents",
+     "objective": "2.1",
+     "difficulty": "medium",
+     "explanation": "<p>Task agents carry out multi-step actions on behalf of a user when asked, combining knowledge (policy) with tools (vendor search and booking) and confirming with the user.</p><p>A prompt-and-response agent answers questions but does not complete bookings. A scheduled autonomous agent would not respond to an individual request with confirmation. A SharePoint agent answers from documents but cannot book travel.</p>"
     },
     {
-      n: 9,
-      prompt: "<p>A developer writes, <code>Fix this</code>, and Copilot returns an unhelpful answer. Which revised prompt best follows the 4 Ss framework?</p>",
-      choices: ["Refactor this JavaScript function to remove duplicate branches while preserving its return values", "Act as a compiler and think about all possible future errors in this repository", "Please inspect everything and make whatever changes you think are appropriate", "Can you help with code quality?"],
-      answer: 0,
-      topic: "Crafting Effective Prompts",
-      objective: "4.1",
-      difficulty: "easy",
-      explanation: "<p>The JavaScript refactoring request is single, specific, and short, and it can be strengthened by surrounding context such as keeping the related file open. It gives Copilot a clear task and a constraint to preserve behavior.</p><p>The compiler-role prompt is broad and not focused on a single task. Asking Copilot to inspect everything is vague and open-ended. Asking for help with code quality lacks the specificity needed for a useful coding response.</p>"
+     "n": 9,
+     "prompt": "<p>A finance team proposes three agent capabilities: summarizing monthly variance reports, drafting collection reminder emails for review, and automatically raising customer credit limits based on payment history. Which capability requires the strongest human oversight controls?</p>",
+     "choices": [
+      "Summarizing monthly variance reports",
+      "Drafting collection reminder emails for review",
+      "All three capabilities require identical oversight",
+      "Automatically raising customer credit limits"
+     ],
+     "answer": 3,
+     "topic": "Analyze Requirements",
+     "objective": "1.1",
+     "difficulty": "hard",
+     "explanation": "<p>Autonomous actions that change financial exposure are high impact and hard to reverse. They need approval steps, thresholds, logging, and monitoring proportional to the risk.</p><p>Summaries are informational and reviewed by people. Drafts that a person reviews already include a human checkpoint. Oversight should be proportional to risk, so the three capabilities do not need identical controls.</p>"
     },
     {
-      n: 10,
-      prompt: "<p>A developer wants Copilot Chat to keep improving a solution across several turns but notices old assumptions are polluting the answer. Which prompt-engineering action is BEST?</p>",
-      choices: ["Increase randomness by asking for more creative answers", "Manage the chat history by restating the current goal and constraints", "Switch from few-shot prompting to code referencing", "Disable HTTPS prompt transmission"],
-      answer: 1,
-      topic: "Prompt Engineering for Performance",
-      objective: "4.2",
-      difficulty: "medium",
-      explanation: "<p>Chat history affects later responses, so restating the current goal and constraints helps Copilot focus on the latest intent. This is a practical use of chat history management and chain prompting across turns.</p><p>Asking for more creative answers does not remove stale assumptions. Code referencing is related to matching public code and attribution, not few-shot prompting. HTTPS prompt transmission is part of secure data flow and is not something to disable for prompt quality.</p>"
+     "n": 10,
+     "prompt": "<p>Customers often send messages such as 'Update my address and tell me when my next bill is due' to a retail bank's Copilot Studio agent. The agent must handle both requests in one turn and decide dynamically which topics, tools, and knowledge to use. Which orchestration approach should you recommend?</p>",
+     "choices": [
+      "Classic orchestration with standard NLU",
+      "Generative orchestration",
+      "Conversational language understanding only",
+      "Keyword matching in the Fallback topic"
+     ],
+     "answer": 1,
+     "topic": "Design AI and Agents",
+     "objective": "2.1",
+     "difficulty": "medium",
+     "explanation": "<p>Generative orchestration uses a language model to interpret the request, handle multiple intents, and select and chain topics, tools, and knowledge sources based on their descriptions.</p><p>Classic orchestration triggers a single best-matching topic per turn. CLU recognizes intents and entities but does not plan multi-step chaining on its own. Keyword matching in Fallback is brittle and only runs when nothing else matches.</p>"
     },
     {
-      n: 11,
-      prompt: "<p>A developer is new to a legacy repository and wants to reduce context switching while learning unfamiliar framework patterns. Which Copilot use best supports that productivity goal?</p>",
-      choices: ["Disable all inline suggestions until the developer knows the codebase", "Use Copilot only after writing complete implementations", "Ask Copilot to explain nearby code and suggest idiomatic refactors in context", "Use organization policy settings as a code learning tool"],
-      answer: 2,
-      topic: "Productivity and Code Quality",
-      objective: "5.1",
-      difficulty: "easy",
-      explanation: "<p>Copilot can accelerate learning and reduce context switching by explaining code, suggesting refactors, and helping the developer understand unfamiliar patterns without leaving the IDE workflow.</p><p>Disabling suggestions removes useful assistance rather than improving learning. Waiting until implementations are complete misses Copilot's value during exploration and iteration. Organization policy settings control feature availability and safeguards; they are not a code-understanding workflow.</p>"
+     "n": 11,
+     "prompt": "<p>A team wants ongoing quality scores for its production Foundry agent, not just a one-time evaluation before release. Which approach should you recommend?</p>",
+     "choices": [
+      "Run continuous evaluation on sampled production traffic with alerts",
+      "Run a batch evaluation once before each major release only",
+      "Rely solely on end-user satisfaction survey results each quarter",
+      "Write raw prompts to a storage account for future reference"
+     ],
+     "answer": 0,
+     "topic": "Monitor and Tune",
+     "objective": "3.1",
+     "difficulty": "medium",
+     "explanation": "<p>Continuous (online) evaluation scores a sample of real production interactions over time, so quality drift is detected quickly. Alerts in Azure Monitor notify the team when scores fall below thresholds.</p><p><em>Pre-release batch evaluation only</em> misses drift that happens after deployment. <em>Quarterly surveys</em> are slow and low-response, and they do not measure groundedness or safety. <em>Storing raw prompts</em> without analysis provides no quality signal and adds privacy risk.</p>"
     },
     {
-      n: 12,
-      prompt: "<p>A pull request triggers CodeQL alerts. The maintainer wants AI-generated fix suggestions with explanations but does not want to require every contributor to have a Copilot license. Which feature matches that need?</p>",
-      choices: ["Copilot code review with custom instructions", "Copilot cloud agent assigned to the pull request", "GitHub AI Credits for every contributor", "Copilot Autofix for code scanning"],
-      answer: 3,
-      topic: "Testing and Security",
-      objective: "5.2",
-      difficulty: "medium",
-      explanation: "<p>Copilot Autofix for code scanning generates fix suggestions and natural-language explanations for CodeQL alerts on pull requests and the default branch. It is available for CodeQL analysis and does not require a Agentic AI Business Solutions Architect subscription.</p><p>Copilot code review and Copilot cloud agent are Copilot capabilities, but the CodeQL alert autofix scenario maps specifically to Copilot Autofix. GitHub AI Credits govern plan usage allowances and are not a requirement for this CodeQL autofix capability.</p>"
+     "n": 12,
+     "prompt": "<p>A distributor wants its inventory and order data to be usable by agents in Copilot Studio, Microsoft Foundry, and partner AI systems, with consistent operations and centralized authentication. What should you recommend?</p>",
+     "choices": [
+      "Give each AI system direct read access to the production database tables",
+      "Expose the data through a governed MCP server or API with documented schemas",
+      "Publish nightly CSV extracts to a public storage container for partners",
+      "Ask each agent team to describe the data's meaning in its own agent instructions"
+     ],
+     "answer": 1,
+     "topic": "Analyze Requirements",
+     "objective": "1.1",
+     "difficulty": "hard",
+     "explanation": "<p>Exposing business data through a governed interface with documented schemas, authentication, and consistent operations lets many AI systems reuse it safely. Model Context Protocol is an open standard that agents across platforms can consume.</p><p>Direct database access bypasses business logic and broadens attack surface. Public CSV extracts are stale and insecure. Describing data in instructions does not make it accessible or consistent.</p>"
     },
     {
-      n: 13,
-      prompt: "<p>An organization needs Copilot to ignore a directory containing generated source and vendor snapshots. Which plan family supports configuring content exclusions for this purpose?</p>",
-      choices: ["Copilot Business and Copilot Enterprise", "Copilot Free and Copilot Student", "Copilot Pro, Pro+, and Max only", "Any individual plan with a personal setting"],
-      answer: 0,
-      topic: "Privacy Settings and Exclusions",
-      objective: "6.1",
-      difficulty: "medium",
-      explanation: "<p>Content exclusion is available for Copilot Business and Copilot Enterprise. Repository administrators, organization owners, and enterprise owners can use it to exclude specific files, paths, or repositories from Copilot context and review.</p><p>Copilot Free and Student do not provide content exclusion. Individual paid plans such as Pro, Pro+, and Max are not the plan family for this organization-level exclusion feature. A personal setting cannot create organization content exclusions.</p>"
+     "n": 13,
+     "prompt": "<p>A pharmaceutical company's Copilot Studio agent must submit sample requests that follow a fixed sequence: validate the requester's license, request manager approval, and write an auditable record. The sequence must run the same way every time. What should you design?</p>",
+     "choices": [
+      "Agent instructions that describe the steps for the model to follow",
+      "A prompt action that generates the approval decision from the request",
+      "An agent flow that the agent calls to run the deterministic steps",
+      "A knowledge source that documents the sample request procedure"
+     ],
+     "answer": 2,
+     "topic": "Design AI and Agents",
+     "objective": "2.1",
+     "difficulty": "medium",
+     "explanation": "<p>Agent flows in Copilot Studio provide deterministic, rule-based automation (including approvals and data writes) that agents can invoke, which suits processes that require consistency and auditability.</p><p>Instructions guide a model but do not guarantee identical execution. A prompt action produces generative output, which is inappropriate for an approval decision. A knowledge source informs answers but does not execute steps.</p>"
     },
     {
-      n: 14,
-      prompt: "<p>A developer says content exclusions are configured, but Copilot still seems influenced by type information from an excluded file inside the IDE. What is the BEST explanation?</p>",
-      choices: ["Content exclusions never affect chat responses", "The IDE may indirectly provide semantic information such as types or hover definitions", "Suggestions matching public code must be set to Allow", "The excluded file must be on GitHub Enterprise Server"],
-      answer: 1,
-      topic: "Safeguards and Troubleshooting",
-      objective: "6.2",
-      difficulty: "hard",
-      explanation: "<p>Content exclusions prevent excluded file content from informing inline suggestions, chat responses, and Copilot code review, but the IDE may still provide semantic information indirectly. Examples include type information, hover-over definitions, and build configuration.</p><p>Content exclusions do affect chat responses in supported contexts. Suggestions matching public code is a separate setting and does not explain semantic leakage from the IDE. Copilot is not currently available for GitHub Enterprise Server, so that cannot be the correct explanation.</p>"
+     "n": 14,
+     "prompt": "<p>During requirements analysis for a Microsoft 365 Copilot rollout, you find that SharePoint sites containing salary data are shared with 'Everyone except external users'. What should you recommend before enabling grounding on this content?</p>",
+     "choices": [
+      "Proceed, because Microsoft 365 Copilot never returns content from sensitive sites",
+      "Move the salary files to a public website so access is managed in one place",
+      "Turn off auditing so the sensitive file access is not recorded in logs",
+      "Remediate oversharing with corrected permissions and Purview sensitivity labels"
+     ],
+     "answer": 3,
+     "topic": "Analyze Requirements",
+     "objective": "1.1",
+     "difficulty": "hard",
+     "explanation": "<p>Microsoft 365 Copilot respects existing permissions, so overshared content becomes discoverable. Fixing permissions and labeling sensitive data is a prerequisite for safe grounding.</p><p>Copilot honors permissions; it does not automatically exclude content users can already access. A public website makes the problem worse. Turning off auditing removes accountability and does not reduce exposure.</p>"
     },
     {
-      n: 15,
-      prompt: "<p>A team designing an internal Copilot rollout makes sure employees with screen readers and varied skill levels can use the training and workflows. Which responsible AI principle is MOST directly reflected?</p>",
-      choices: ["Privacy and security", "Accountability", "Inclusiveness", "Reliability and safety"],
-      answer: 2,
-      topic: "Responsible AI Principles",
-      objective: "1.1",
-      difficulty: "easy",
-      explanation: "<p>Inclusiveness means AI systems and related experiences should empower and engage everyone, including people with different abilities, backgrounds, and levels of expertise. Accessible training and workflows directly support this principle.</p><p>Privacy and security focuses on protecting data and systems. Accountability focuses on human ownership and governance. Reliability and safety focuses on consistent, safe operation rather than accessibility and broad participation.</p>"
+     "n": 15,
+     "prompt": "<p>Telemetry for a Copilot Studio agent shows that most generative answer calls are for about twenty frequently asked questions whose answers never change. Capacity consumption is rising quickly. What is the BEST tuning action?</p>",
+     "choices": [
+      "Add more knowledge sources so generative answers become faster",
+      "Move the agent to a larger capacity plan without other changes",
+      "Disable analytics collection so sessions consume fewer resources",
+      "Author topics with fixed responses for the frequent questions"
+     ],
+     "answer": 3,
+     "topic": "Monitor and Tune",
+     "objective": "3.1",
+     "difficulty": "hard",
+     "explanation": "<p>Telemetry shows a stable set of high-volume questions with deterministic answers. Authored topics answer them predictably without a generative answers call, reserving generative AI for long-tail questions and reducing consumption.</p><p><em>More knowledge sources</em> do not reduce the number of generative calls and may slow retrieval. <em>Buying more capacity</em> treats the symptom without improving efficiency. <em>Disabling analytics</em> removes visibility and does not reduce generative consumption.</p>"
     },
     {
-      n: 16,
-      prompt: "<p>Copilot suggests an authentication helper that uses outdated hashing parameters. What should the developer do FIRST?</p>",
-      choices: ["Accept it because Copilot has learned from public repositories", "Change the model picker and accept the same code", "Turn on Copilot Memory to make the code secure", "Compare it against current security guidance and revise or reject it"],
-      answer: 3,
-      topic: "Validating AI Output",
-      objective: "1.2",
-      difficulty: "medium",
-      explanation: "<p>Copilot output can reflect outdated practices or misunderstand context, so the developer should validate the suggestion against current security guidance and revise or reject it as needed. Human review is essential for security-sensitive code.</p><p>Learning from public repositories does not guarantee current or safe practices. Changing the model picker does not validate the same code. Copilot Memory is a customization feature in preview, not a substitute for security review.</p>"
+     "n": 16,
+     "prompt": "<p>A field services firm uses a model-driven Power Apps app. Business analysts want to describe a new page, such as an interactive technician utilization view, in natural language and have it generated, while professional developers can then refine the underlying code. Which capability should you recommend?</p>",
+     "choices": [
+      "A Power BI report embedded in a dashboard",
+      "Generative pages in the model-driven app",
+      "A Power Pages site with Liquid templates",
+      "A classic canvas app built from a blank screen"
+     ],
+     "answer": 1,
+     "topic": "Design AI and Agents",
+     "objective": "2.1",
+     "difficulty": "hard",
+     "explanation": "<p>Generative pages let makers describe a page in natural language and have the platform generate a code-first page for a model-driven app, which developers can then refine.</p><p>Embedded Power BI provides analytics, not generated app pages. Power Pages targets external websites. A blank canvas app requires manual low-code design rather than natural-language generation of code.</p>"
     },
     {
-      n: 17,
-      prompt: "<p>A developer changes the model selection for Copilot Chat and expects inline suggestions and next edit suggestions to use the same model automatically. What should they understand?</p>",
-      choices: ["Chat, inline suggestions, and next edit suggestions have independent model selections", "Inline suggestions always inherit the Chat model", "Next edit suggestions cannot use model selection", "Changing models disables content filters"],
-      answer: 0,
-      topic: "Copilot in the IDE",
-      objective: "2.1",
-      difficulty: "easy",
-      explanation: "<p>The model picker treats Chat, inline suggestions, and next edit suggestions as independent selections. Changing one does not automatically change the others.</p><p>Inline suggestions do not always inherit the Chat selection. Next edit suggestions are one of the separately selected feature areas. Content filters continue to apply regardless of which model is selected.</p>"
+     "n": 17,
+     "prompt": "<p>An organization has completed its AI strategy using the Cloud Adoption Framework. It now needs to assess skills gaps, prioritize use cases, and run a proof of concept. Which CAF AI adoption phase is next?</p>",
+     "choices": [
+      "AI plan",
+      "AI ready",
+      "Secure AI",
+      "Manage AI"
+     ],
+     "answer": 0,
+     "topic": "AI Strategy and Agent Design",
+     "objective": "1.2",
+     "difficulty": "medium",
+     "explanation": "<p>The AI plan phase follows strategy. It covers assessing skills, acquiring talent or partners, prioritizing use cases, and creating proofs of concept.</p><p>AI ready focuses on preparing environments and landing zones. Secure AI focuses on protecting AI workloads. Manage AI covers operating AI workloads in production.</p>"
     },
     {
-      n: 18,
-      prompt: "<p>While using Agentic AI Business Solutions Architect CLI, a developer wants to switch into a mode that plans the work before making changes. Which interaction is supported?</p>",
-      choices: ["Create a prompt file under .github/prompts for the CLI", "Use Shift+Tab to cycle modes, including plan mode", "Open retired Copilot Spark and export the command", "Configure a Copilot code review policy"],
-      answer: 1,
-      topic: "Copilot CLI",
-      objective: "2.2",
-      difficulty: "medium",
-      explanation: "<p>Agentic AI Business Solutions Architect CLI includes a plan mode, and Shift+Tab cycles modes. This supports interactive command-line sessions where the assistant can plan before proceeding.</p><p>Prompt files are not supported in the CLI. Copilot Spark is retired and not a live path for command generation. Copilot code review policy settings govern review availability and do not switch CLI modes.</p>"
+     "n": 18,
+     "prompt": "<p>A data science team fine-tuned a model in Microsoft Foundry to classify warranty claims. Before approving it for production, you must define validation criteria. Which criteria are MOST appropriate?</p>",
+     "choices": [
+      "Per-class precision and recall on a held-out set compared to a baseline",
+      "Accuracy measured on the same data that was used for training",
+      "A training loss value that is lower than in the previous run",
+      "A successful live demonstration to the executive sponsor"
+     ],
+     "answer": 0,
+     "topic": "Testing AI Solutions",
+     "objective": "3.2",
+     "difficulty": "medium",
+     "explanation": "<p>Custom models should be validated on data they have not seen that represents production, using metrics suited to the task, such as per-class precision and recall, and compared against agreed thresholds and a baseline, along with safety checks.</p><p><em>Training-set accuracy</em> overstates performance and hides overfitting. <em>Lower training loss</em> does not prove better generalization. A <em>demo</em> is anecdotal and not a measurable acceptance criterion.</p>"
     },
     {
-      n: 19,
-      prompt: "<p>A repository wants reusable instructions for common tasks in VS Code and Visual Studio, stored as files under the repository. Which location matches current prompt file support?</p>",
-      choices: ["AGENTS.md only", ".github/hooks/*.json", ".github/prompts/*.prompt.md", "A retired Copilot knowledge base"],
-      answer: 2,
-      topic: "Copilot Features and Capabilities",
-      objective: "2.3",
-      difficulty: "medium",
-      explanation: "<p>Prompt files live at .github/prompts/*.prompt.md and are supported in VS Code and Visual Studio. They help teams reuse consistent prompts for recurring workflows.</p><p>AGENTS.md contains agent instructions, not reusable prompt files. Hooks live under .github/hooks/*.json. Copilot knowledge bases have been retired and replaced by Copilot Spaces for shared context.</p>"
+     "n": 19,
+     "prompt": "<p>An insurer deploys several agents that pre-assess claims inside a model-driven app. Claims handlers need one place in the app to see what agents have done, what needs their review, and to approve or correct agent output. What should you include in the design?</p>",
+     "choices": [
+      "A Power Automate run history export shared weekly",
+      "An agent feed in the app for reviewing agent activity",
+      "A Teams channel where each agent posts raw logs",
+      "A Dataverse audit log report viewed by administrators"
+     ],
+     "answer": 1,
+     "topic": "Design AI and Agents",
+     "objective": "2.1",
+     "difficulty": "medium",
+     "explanation": "<p>An agent feed surfaces agent activities and items that require human attention within the business app, supporting human-in-the-loop review and approval.</p><p>Weekly exports are not timely and are not in the app. Raw logs in Teams are noisy and not actionable for handlers. Audit logs serve administrators and compliance rather than day-to-day review.</p>"
     },
     {
-      n: 20,
-      prompt: "<p>An enterprise admin wants to allow the Copilot app but block Agentic AI Business Solutions Architect CLI for managed users. What should the admin know?</p>",
-      choices: ["The app and CLI share one inseparable client policy", "Blocking the CLI also blocks inline suggestions", "Only repository administrators can control client policies", "The Copilot app and Copilot CLI are governed by separate client policies"],
-      answer: 3,
-      topic: "Organization Settings and Policies",
-      objective: "2.4",
-      difficulty: "hard",
-      explanation: "<p>The Copilot app and Agentic AI Business Solutions Architect CLI are controlled by separate, independent client policies. An enterprise can allow one client while blocking the other.</p><p>The app and CLI do not share a single inseparable policy. Blocking the CLI is not the same as blocking inline suggestions. Enterprise owners, or users with the Manage enterprise AI controls custom role permission, can manage enterprise AI controls.</p>"
+     "n": 20,
+     "prompt": "<p>A healthcare organization wants to define policies for AI risk assessment, responsible AI review, and regulatory compliance before scaling agents. Which CAF AI adoption area addresses this?</p>",
+     "choices": [
+      "Govern AI",
+      "AI strategy",
+      "AI ready",
+      "Manage AI"
+     ],
+     "answer": 0,
+     "topic": "AI Strategy and Agent Design",
+     "objective": "1.2",
+     "difficulty": "medium",
+     "explanation": "<p>Govern AI establishes policies, risk assessment, and compliance controls for AI use, including responsible AI review.</p><p>AI strategy defines use cases and direction. AI ready prepares infrastructure. Manage AI handles ongoing operations such as monitoring and model lifecycle.</p>"
     },
     {
-      n: 21,
-      prompt: "<p>In the seven-step Copilot prompt flow, a proxy server blocks prompt injection and jailbreak attempts before the request reaches the model. Where does this occur?</p>",
-      choices: ["Inbound, during the proxy filter step before toxicity filtering", "Outbound, during suggestion delivery after acceptance", "Outbound, only after matching public code is checked", "Inbound, after code generation by the LLM"],
-      answer: 0,
-      topic: "Data Handling and Flow",
-      objective: "3.1",
-      difficulty: "hard",
-      explanation: "<p>The proxy filter is an inbound step. It runs before toxicity filtering and is specifically described as blocking prompt injection and jailbreak attempts that try to manipulate the system.</p><p>Suggestion delivery is an outbound step after responses pass filters. Matching public code is an optional outbound check, not the inbound jailbreak defense. Code generation by the LLM occurs after the inbound proxy and toxicity filtering steps.</p>"
+     "n": 21,
+     "prompt": "<p>Employees must use an agent inside Microsoft Teams. The agent must use a fine-tuned model deployed in Microsoft Foundry and custom multi-step orchestration logic that the team controls. What should you recommend?</p>",
+     "choices": [
+      "A declarative agent for Microsoft 365 Copilot with detailed instructions",
+      "A custom engine agent using the Foundry model, published to Teams",
+      "A SharePoint agent scoped to the team's document library",
+      "A prompt saved in the organization's prompt library for Copilot Chat"
+     ],
+     "answer": 1,
+     "topic": "AI Strategy and Agent Design",
+     "objective": "1.2",
+     "difficulty": "hard",
+     "explanation": "<p>When you need your own model or orchestration, you build a custom engine agent rather than extending Microsoft 365 Copilot. Custom engine agents can still be published to Teams.</p><p>Declarative agents and SharePoint agents use the Microsoft 365 Copilot orchestrator and models, so they cannot use a custom fine-tuned model or custom orchestration. A saved prompt is not an agent and has no custom logic.</p>"
     },
     {
-      n: 22,
-      prompt: "<p>A team expects Copilot to solve a broad architecture problem with minimal context and no human review. Which limitation category is most relevant?</p>",
-      choices: ["Language and framework specificity", "Complex problem solving", "Secure HTTPS transmission", "Audit log retention"],
-      answer: 1,
-      topic: "Lifecycle and Limitations",
-      objective: "3.2",
-      difficulty: "medium",
-      explanation: "<p>Complex problem solving is one of the named limitation categories for LLMs and Copilot. Copilot can help with implementation and reasoning, but high-level design and creativity still need careful human direction and validation.</p><p>Language and framework specificity concerns uneven performance across technologies, not broad architecture ownership. Secure HTTPS transmission is part of data flow rather than a limitation category. Audit log retention is an administrative logging fact, not a model limitation.</p>"
+     "n": 22,
+     "prompt": "<p>A Copilot Studio agent is grounded on hundreds of long engineering PDFs that contain complex tables. Users report that answers miss table values and cite the wrong sections. Which data processing approach should you recommend?</p>",
+     "choices": [
+      "Extract tables with layout, chunk by section, and index for hybrid search",
+      "Merge all PDFs into one large file so the model sees the complete context",
+      "Convert the PDFs to scanned images to preserve the original table layout",
+      "Increase the agent's response length so that it includes more of each document"
+     ],
+     "answer": 0,
+     "topic": "Design AI and Agents",
+     "objective": "2.1",
+     "difficulty": "hard",
+     "explanation": "<p>Layout-aware extraction (for example with Document Intelligence), semantically meaningful chunking with metadata, and hybrid (keyword and vector) indexing in Azure AI Search improve retrieval precision and citation accuracy.</p><p>One huge file makes retrieval less precise. Images remove machine-readable text. Longer responses do not fix the retrieval of the wrong passages.</p>"
     },
     {
-      n: 23,
-      prompt: "<p>A developer gives Copilot one example of the desired output format before asking it to transform a second function. What prompting pattern is this?</p>",
-      choices: ["Zero-shot prompting", "Role prompting", "One-shot prompting", "Chain prompting"],
-      answer: 2,
-      topic: "Crafting Effective Prompts",
-      objective: "4.1",
-      difficulty: "easy",
-      explanation: "<p>One-shot prompting provides exactly one example before asking the model to perform the task. The example anchors the desired structure or style for the next output.</p><p>Zero-shot prompting gives no examples. Role prompting asks Copilot to act in a particular role, such as a security expert. Chain prompting breaks work into a sequence of linked prompts rather than providing a single example.</p>"
+     "n": 23,
+     "prompt": "<p>A company uses Dynamics 365 Sales, Dynamics 365 Customer Service, and Dynamics 365 Finance. A Copilot-assisted quote-to-cash process spans all three apps. How should you design testing?</p>",
+     "choices": [
+      "Test each app's Copilot features in isolation and assume integration works",
+      "Run the scenarios in production with real customers during a quiet period",
+      "Build end-to-end business scenarios in integrated sandboxes that verify handoffs",
+      "Depend on Microsoft's release validation for the cross-app process"
+     ],
+     "answer": 2,
+     "topic": "Testing AI Solutions",
+     "objective": "3.2",
+     "difficulty": "hard",
+     "explanation": "<p>End-to-end tests should follow the real business process across apps, using representative data in connected nonproduction environments, and verify data handoffs between apps as well as the quality of AI-generated outputs at each step.</p><p><em>Isolated testing</em> misses integration defects where processes cross app boundaries. <em>Testing in production</em> risks real customer impact and data. <em>Microsoft's release validation</em> cannot cover your configuration, data, and integrations.</p>"
     },
     {
-      n: 24,
-      prompt: "<p>A developer wants Copilot to first identify edge cases, then generate tests, then refactor the implementation based on failures. Which prompt-engineering approach best fits?</p>",
-      choices: ["A single vague prompt asking Copilot to improve everything", "Disabling chat history between each step", "Relying only on inline suggestions", "Chain prompting across a sequence of focused steps"],
-      answer: 3,
-      topic: "Prompt Engineering for Performance",
-      objective: "4.2",
-      difficulty: "medium",
-      explanation: "<p>Chain prompting breaks a larger task into sequential, focused prompts whose outputs build on each other. Identifying edge cases, generating tests, and refactoring from failures is a natural chain.</p><p>A vague improve-everything prompt violates the single and specific prompt guidance. Disabling or ignoring useful chat history can remove context needed for later steps. Inline suggestions can help with code completion, but the described multi-step reasoning workflow is a chat prompting pattern.</p>"
+     "n": 24,
+     "prompt": "<p>A partner hosts a logistics agent on another vendor's platform and exposes it through the Agent2Agent (A2A) protocol. Your Copilot Studio agent must delegate shipment-tracking conversations to it. What should you recommend?</p>",
+     "choices": [
+      "Index the partner agent's conversation logs with a Copilot connector",
+      "Connect the partner agent to your agent by using the A2A protocol",
+      "Rebuild the partner agent's logic as topics inside your Copilot Studio agent",
+      "Use computer use to operate the partner's website on behalf of each user"
+     ],
+     "answer": 1,
+     "topic": "AI Strategy and Agent Design",
+     "objective": "1.2",
+     "difficulty": "hard",
+     "explanation": "<p>A2A is designed for agent-to-agent communication and delegation across platforms, letting your agent hand work to the partner agent while each keeps its own logic.</p><p>Indexing logs provides searchable content, not live delegation. Rebuilding the logic duplicates and diverges from the partner's agent. Computer use automates user interfaces and is fragile for this scenario.</p>"
     },
     {
-      n: 25,
-      prompt: "<p>A maintainer wants to modernize repetitive legacy code while preserving behavior. Which Copilot workflow is most appropriate?</p>",
-      choices: ["Ask Copilot to refactor a focused section and review the diff against tests", "Let Copilot replace the whole repository without constraints", "Use audit logs to generate the new implementation", "Enable Suggestions matching public code Allow to modernize automatically"],
-      answer: 0,
-      topic: "Productivity and Code Quality",
-      objective: "5.1",
-      difficulty: "easy",
-      explanation: "<p>Copilot is useful for refactoring and modernizing legacy code when the task is focused and the developer validates the resulting diff with tests. This improves productivity while preserving human control over correctness.</p><p>Replacing an entire repository without constraints is unsafe and unlikely to preserve behavior. Audit logs record administrative and agent activity, not implementation logic. Suggestions matching public code controls matching public suggestions and does not modernize code automatically.</p>"
+     "n": 25,
+     "prompt": "<p>Utility inspectors use a Power Apps canvas app on tablets. They photograph pole equipment, and the app must flag visible damage, record the result, and start a repair work order when damage is detected. Which design should you recommend?</p>",
+     "choices": [
+      "A prompt action in Copilot Studio that reads the photo file name",
+      "A Power BI visual that highlights damaged equipment after each upload",
+      "An AI Builder object detection model in the app that triggers a flow",
+      "A CLU model that classifies the inspector's spoken notes only"
+     ],
+     "answer": 2,
+     "topic": "Design AI and Agents",
+     "objective": "2.1",
+     "difficulty": "medium",
+     "explanation": "<p>An AI Builder object detection model trained on labeled images can be called from a canvas app to detect damage in photos, and the result can trigger a Power Automate flow to create the work order.</p><p>A file name does not reveal damage. Power BI reports on data after the fact and cannot trigger in-app processing. CLU interprets text, not images.</p>"
     },
     {
-      n: 26,
-      prompt: "<p>A service has tests for happy paths only. The team asks Copilot to identify boundary values, invalid inputs, and assertions for failure cases. Which productivity objective does this best support?</p>",
-      choices: ["Managing organization subscriptions", "Supporting testing and security", "Configuring content exclusions", "Selecting an LTS model"],
-      answer: 1,
-      topic: "Testing and Security",
-      objective: "5.2",
-      difficulty: "medium",
-      explanation: "<p>Generating tests, identifying edge cases, and writing assertions map directly to supporting testing and security. Copilot can help broaden coverage beyond happy paths.</p><p>Subscription management is an administrator task. Content exclusions control what files Copilot can use as context in supported environments. Selecting an LTS model is a model availability concept, not the objective for test generation and edge-case analysis.</p>"
+     "n": 26,
+     "prompt": "<p>You are reviewing prompts for an organization's prompt library. One entry reads: 'Summarize this.' Which revision BEST aligns with Copilot prompt best practices?</p>",
+     "choices": [
+      "Shorten the prompt to a single word so it is easier to reuse",
+      "State the goal, add context, name the source, and set the expected format",
+      "Append 'be accurate' and leave the rest of the prompt unchanged",
+      "Rewrite the prompt in capital letters to stress its importance"
+     ],
+     "answer": 1,
+     "topic": "Testing AI Solutions",
+     "objective": "3.2",
+     "difficulty": "medium",
+     "explanation": "<p>Effective Copilot prompts state the goal, provide context such as audience and purpose, reference the sources to use, and set expectations for format and length. Validating library prompts against these elements improves consistency.</p><p>A <em>single word</em> removes the information the model needs. <em>'Be accurate'</em> is vague and does not supply goal, context, or format. <em>Capital letters</em> add emphasis but no useful information.</p>"
     },
     {
-      n: 27,
-      prompt: "<p>A repository administrator excludes a secrets folder. Which effect should they expect in supported contexts?</p>",
-      choices: ["Excluded files will still be reviewed in Copilot code review", "Excluded files will continue informing inline suggestions in other files", "Inline suggestions will not be available in affected files", "The exclusion will apply to symlinks and remote filesystems"],
-      answer: 2,
-      topic: "Privacy Settings and Exclusions",
-      objective: "6.1",
-      difficulty: "hard",
-      explanation: "<p>Content exclusion means inline suggestions will not be available in affected files. The content in affected files also will not inform inline suggestions in other files, will not inform Copilot responses, and will not be reviewed in Copilot code review.</p><p>Excluded files are not reviewed by Copilot code review in supported contexts. Their content should not inform inline suggestions in other files. Content exclusions do not apply to symlinks or repositories on remote filesystems.</p>"
+     "n": 27,
+     "prompt": "<p>A sales organization uses Dynamics 365 Sales and receives thousands of inbound leads. It wants an agent that researches leads, qualifies them, and engages prospects with minimal build effort. What should you recommend?</p>",
+     "choices": [
+      "The Customer Intent Agent in Dynamics 365 Customer Service",
+      "The Supplier Communications Agent in Dynamics 365 Supply Chain Management",
+      "The prebuilt Sales Qualification Agent in Dynamics 365 Sales",
+      "A custom Foundry agent built from scratch for lead qualification"
+     ],
+     "answer": 2,
+     "topic": "AI Strategy and Agent Design",
+     "objective": "1.2",
+     "difficulty": "medium",
+     "explanation": "<p>The Sales Qualification Agent is a prebuilt agent designed to research, qualify, and engage leads inside Dynamics 365 Sales, matching the requirement with low effort.</p><p>The Customer Intent Agent discovers service intents from conversations. The Supplier Communications Agent follows up with vendors on purchase orders. A custom Foundry agent adds build effort when a prebuilt agent fits.</p>"
     },
     {
-      n: 28,
-      prompt: "<p>A user with a Copilot seat assigned by an organization cannot change Suggestions matching public code in personal settings. Why?</p>",
-      choices: ["The setting is available only in Xcode", "The setting applies only to manually written code", "The setting was retired with Copilot Spark", "The setting is inherited from the organization or enterprise"],
-      answer: 3,
-      topic: "Safeguards and Troubleshooting",
-      objective: "6.2",
-      difficulty: "medium",
-      explanation: "<p>When a user receives a Copilot seat through an organization, Suggestions matching public code is inherited from organization or enterprise policy. The personal toggle is locked and reflects that policy.</p><p>The setting is not limited to Xcode; code referencing is not available in Xcode. It checks accepted, unmodified Copilot suggestions, not all manually written code. Suggestions matching public code is current terminology and was not retired with Copilot Spark.</p>"
+     "n": 28,
+     "prompt": "<p>A global retailer wants a shopping assistant that runs in Microsoft Teams and on its public website. It must use the retailer's own orchestration logic and a model selected from Microsoft Foundry, and integrate with proprietary recommendation services. Which approach should you recommend?</p>",
+     "choices": [
+      "A custom engine agent built with the Microsoft 365 Agents SDK",
+      "A declarative agent created with Agent Builder",
+      "A SharePoint agent shared across the organization",
+      "A prompt action added to the existing Copilot Studio support agent"
+     ],
+     "answer": 0,
+     "topic": "Extensibility of AI Solutions",
+     "objective": "2.2",
+     "difficulty": "hard",
+     "explanation": "<p>Custom engine agents use their own orchestrator and models (for example from Microsoft Foundry) and can be delivered to multiple channels, including Teams and websites, through the Microsoft 365 Agents SDK.</p><p>Declarative agents run on Microsoft 365 Copilot's orchestrator and are not designed for public websites. SharePoint agents are internal and content-scoped. A prompt action is a component, not a multi-channel agent with custom orchestration.</p>"
     },
     {
-      n: 29,
-      prompt: "<p>A generated response includes confident claims about an API that no longer exists. Which responsible AI risk is MOST directly illustrated?</p>",
-      choices: ["Generative AI tools can produce incorrect or outdated output", "Copilot always uses private repository code for training", "All AI output is legally owned by GitHub", "Content filters are disabled for legacy languages"],
-      answer: 0,
-      topic: "Responsible AI Principles",
-      objective: "1.1",
-      difficulty: "medium",
-      explanation: "<p>Generative AI tools can produce plausible but incorrect or outdated output because they depend on training data and available context. Responsible use requires recognizing this limitation and validating important claims.</p><p>Business and Enterprise data is excluded from training by default, and the statement about always using private repository code is wrong. GitHub does not claim ownership of all AI output. Content filters apply regardless of model selection and are not disabled for legacy languages.</p>"
+     "n": 29,
+     "prompt": "<p>An agent built in Foundry Agent Service must block hateful and violent content and detect jailbreak attempts in user prompts. Which solution constraint should you configure?</p>",
+     "choices": [
+      "A higher temperature setting so that the model avoids unsafe completions",
+      "A longer maximum response length so that the model can add safety disclaimers",
+      "Guardrails with content filters and prompt shields",
+      "An instruction asking users to promise that they will not misuse the agent"
+     ],
+     "answer": 2,
+     "topic": "AI Strategy and Agent Design",
+     "objective": "1.2",
+     "difficulty": "medium",
+     "explanation": "<p>Microsoft Foundry provides configurable guardrails, including content filters for harm categories and prompt shields that detect jailbreak and prompt injection attempts.</p><p>Temperature affects randomness, not safety. Longer responses do not prevent harmful content. User promises are not a technical control.</p>"
     },
     {
-      n: 30,
-      prompt: "<p>Copilot proposes a regex for parsing account identifiers that may include personal data. Which validation practice is BEST?</p>",
-      choices: ["Assume toxicity filtering guarantees privacy compliance", "Test against representative safe samples and review privacy implications before use", "Commit it if it appears in ghost text", "Switch to a different IDE to bypass the concern"],
-      answer: 1,
-      topic: "Validating AI Output",
-      objective: "1.2",
-      difficulty: "hard",
-      explanation: "<p>Responsible validation includes testing generated code against representative examples and checking privacy implications before using it with personal data. Copilot can assist, but the developer must verify behavior and compliance.</p><p>Toxicity filtering is a safeguard but not a privacy-compliance guarantee. Ghost text is simply how inline suggestions are rendered, not proof of safety. Changing IDEs does not remove the need to validate code that handles personal data.</p>"
+     "n": 30,
+     "prompt": "<p>A grants agency's Copilot Studio agent must determine applicant eligibility by working through many interdependent rules and exceptions before answering. Accuracy matters more than speed. Which agent behavior should you enable?</p>",
+     "choices": [
+      "Voice mode so applicants can speak their answers",
+      "A higher temperature setting for more creative and varied answers",
+      "Conversation Start greetings that list the eligibility rules",
+      "Reasoning with a deep reasoning model for the eligibility step"
+     ],
+     "answer": 3,
+     "topic": "Extensibility of AI Solutions",
+     "objective": "2.2",
+     "difficulty": "medium",
+     "explanation": "<p>Reasoning models are designed for complex, multi-step problem solving and can be applied in Copilot Studio where accuracy on complicated logic matters more than latency.</p><p>Voice mode changes the input modality, not the analysis quality. Higher temperature increases variability and can reduce accuracy. Listing rules in a greeting does not evaluate them.</p>"
     },
     {
-      n: 31,
-      prompt: "<p>A developer accepts an inline suggestion, then wants Copilot to predict where the next related change should happen in the file. Which feature addresses the location of the next edit?</p>",
-      choices: ["Ghost text", "Copilot code review", "Next edit suggestions", "Copilot cloud agent"],
-      answer: 2,
-      topic: "Copilot in the IDE",
-      objective: "2.1",
-      difficulty: "easy",
-      explanation: "<p>Next edit suggestions predict the location of the developer's next edit. They are separate from inline suggestions, which complete code at the current cursor location.</p><p>Ghost text is the rendering of inline suggestions. Copilot code review reviews changes rather than predicting the next edit location. Copilot cloud agent works autonomously on GitHub and is not the IDE next-edit feature.</p>"
+     "n": 31,
+     "prompt": "<p>Makers in a utility company want to deploy Copilot Studio agents from development to production without learning Azure DevOps, but IT requires approvals and a consistent process. What should you recommend?</p>",
+     "choices": [
+      "Manual solution exports by each maker sent to IT by email",
+      "Pipelines in Power Platform with approvals in a Managed Environment",
+      "Azure Site Recovery to replicate the development environment",
+      "Dataverse backup in dev and restore into the production environment"
+     ],
+     "answer": 1,
+     "topic": "ALM for AI Solutions",
+     "objective": "3.3",
+     "difficulty": "medium",
+     "explanation": "<p>Pipelines in Power Platform provide in-product, admin-governed deployments of solutions between environments, with support for approvals, so makers can deploy without building their own CI/CD.</p><p><em>Emailed exports</em> are manual, inconsistent, and hard to audit. <em>Azure Site Recovery</em> is for disaster recovery of infrastructure, not application lifecycle. <em>Backup and restore</em> overwrites the whole environment rather than deploying specific components.</p>"
     },
     {
-      n: 32,
-      prompt: "<p>A developer wants to use Agentic AI Business Solutions Architect CLI in a build script by sending a prompt directly rather than entering an interactive session. Which capability should they use?</p>",
-      choices: ["A Copilot Space attached to the terminal", "A GitHub Mobile chat session", "A .github/instructions file", "The CLI prompt flag for programmatic use"],
-      answer: 3,
-      topic: "Copilot CLI",
-      objective: "2.2",
-      difficulty: "medium",
-      explanation: "<p>Agentic AI Business Solutions Architect CLI can be used programmatically with prompt flags such as -p or --prompt. That matches a build-script scenario where the prompt is passed directly.</p><p>Copilot Spaces provide shared context, not a terminal prompt flag. GitHub Mobile is not the build-script interface. Repository instruction files influence Copilot behavior in supported contexts but are not the CLI mechanism for non-interactive prompts.</p>"
+     "n": 32,
+     "prompt": "<p>A retailer's Copilot Studio agent must never discuss competitor pricing and must hand refund requests above a set amount to a human. Which design BEST enforces these rules?</p>",
+     "choices": [
+      "Add competitor websites as knowledge sources so the agent knows what not to say",
+      "Rely on the default model behavior because it never discusses competitors",
+      "Restrict it in the instructions and use a topic that escalates large refunds",
+      "Disable all topics so generative answers handle every refund decision"
+     ],
+     "answer": 2,
+     "topic": "AI Strategy and Agent Design",
+     "objective": "1.2",
+     "difficulty": "medium",
+     "explanation": "<p>Instructions shape generative behavior and boundaries, while a topic provides a deterministic path for rules that must always be enforced, such as escalation above a threshold.</p><p>Adding competitor sites increases the chance of discussing them. Default model behavior does not know your business rules. Removing topics removes the deterministic control you need for escalation.</p>"
     },
     {
-      n: 33,
-      prompt: "<p>A team wants organization-wide documentation context for Copilot after the retirement of Copilot knowledge bases. Which current capability should they use?</p>",
-      choices: ["Copilot Spaces", "Retired Copilot Spark", "Retired GitHub Models", "A retired GitHub App-based Copilot Extension"],
-      answer: 0,
-      topic: "Copilot Features and Capabilities",
-      objective: "2.3",
-      difficulty: "medium",
-      explanation: "<p>Copilot Spaces are the current replacement for retired Copilot knowledge bases when teams need shared context and documentation for Copilot workflows.</p><p>Copilot Spark is retired and should not be treated as a live app-building feature. GitHub Models, the inference service behind Spark's llm() function, is retired. GitHub App-based Copilot Extensions were sunset and replaced by MCP servers.</p>"
+     "n": 33,
+     "prompt": "<p>A Power Platform administrator wants to control which Model Context Protocol (MCP) servers makers can add to Copilot Studio agents in production environments. What should you recommend?</p>",
+     "choices": [
+      "Disable generative orchestration in all of the production agents",
+      "Govern the MCP connectors with Power Platform data policies",
+      "Ask makers to document MCP servers in a SharePoint list",
+      "Block Computer Use in the Microsoft 365 admin center"
+     ],
+     "answer": 1,
+     "topic": "Extensibility of AI Solutions",
+     "objective": "2.2",
+     "difficulty": "medium",
+     "explanation": "<p>MCP servers are added to Copilot Studio through connectors, so Power Platform data policies (DLP) can allow or block those connectors per environment.</p><p>Disabling generative orchestration cripples agents rather than governing MCP specifically. Documentation is not an enforceable control. Computer Use is unrelated to MCP server access.</p>"
     },
     {
-      n: 34,
-      prompt: "<p>An auditor wants to find Copilot plan changes, policy changes, and license grants. Which audit log query pattern is appropriate?</p>",
-      choices: ["actor:Developer for every local prompt", "action:copilot for Copilot events", "filename:copilot for repository content", "model:copilot for selected models"],
-      answer: 1,
-      topic: "Organization Settings and Policies",
-      objective: "2.4",
-      difficulty: "hard",
-      explanation: "<p>Audit logs record Copilot plan changes, settings, policies, license grants, removals, and agent activity on the GitHub website. Querying action:copilot is the appropriate pattern for Copilot audit events.</p><p>The audit log does not include local client session prompts. Searching repository filenames is code search, not audit-log querying. Model selection is not queried with a model:copilot audit-log pattern.</p>"
+     "n": 34,
+     "prompt": "<p>A Copilot Studio agent uses SharePoint as a knowledge source with user authentication. A manager and an intern ask the same question. What should you expect?</p>",
+     "choices": [
+      "Both users receive identical answers based on the agent maker's permissions",
+      "Each user gets answers based only on content that user can access",
+      "The intern receives an error because knowledge sources require administrator rights",
+      "Both users see all content because the agent bypasses SharePoint permissions"
+     ],
+     "answer": 1,
+     "topic": "AI Strategy and Agent Design",
+     "objective": "1.2",
+     "difficulty": "medium",
+     "explanation": "<p>With user authentication, SharePoint knowledge retrieval respects the signed-in user's permissions, so answers can differ based on access.</p><p>Answers are not based on the maker's permissions in this configuration. Knowledge sources do not require administrator rights. The agent does not bypass SharePoint permissions.</p>"
     },
     {
-      n: 35,
-      prompt: "<p>In Copilot's outbound flow, a generated response fails a code-quality check for a common vulnerability. What happens according to the canonical process?</p>",
-      choices: ["It is always delivered with a warning banner", "It is sent back to the user for manual filtering", "It is truncated or discarded if it fails the checks", "It bypasses checks when a premium model is selected"],
-      answer: 2,
-      topic: "Data Handling and Flow",
-      objective: "3.1",
-      difficulty: "hard",
-      explanation: "<p>During post-processing and response validation, the proxy checks output for toxicity, code quality, common vulnerabilities, and optional matching public code. If any part fails, it is either truncated or discarded.</p><p>The canonical flow does not say unsafe output is always delivered with a warning or sent to users for manual filtering. Content filters apply regardless of model selection, so choosing a different model does not bypass the checks.</p>"
+     "n": 35,
+     "prompt": "<p>Auditors ask a lender to show exactly which training data produced each version of its credit-risk model built in Microsoft Foundry. Today, data scientists overwrite the training files in place. What should you recommend?</p>",
+     "choices": [
+      "Keep overwriting the files but add the date to each folder name",
+      "Register versioned data assets and record their lineage with each model version",
+      "Retain only the most recent dataset to reduce storage costs",
+      "Email a copy of each dataset to the compliance team after training"
+     ],
+     "answer": 1,
+     "topic": "ALM for AI Solutions",
+     "objective": "3.3",
+     "difficulty": "hard",
+     "explanation": "<p>ALM for model data requires immutable, versioned datasets and lineage that links each registered model version to the exact data version, code, and parameters that produced it. This enables reproducibility and audit.</p><p><em>Dated folders over overwritten files</em> still lose earlier content and lack formal lineage. <em>Keeping only the latest</em> makes earlier model versions impossible to reproduce. <em>Emailing datasets</em> spreads sensitive data and provides no reliable lineage.</p>"
     },
     {
-      n: 36,
-      prompt: "<p>A team is deciding whether to trust Copilot equally for a mainstream web framework and a niche proprietary language. Which limitation category should guide their expectations?</p>",
-      choices: ["Prompt transmission", "Feedback loop delivery", "IP indemnity", "Language and framework specificity"],
-      answer: 3,
-      topic: "Lifecycle and Limitations",
-      objective: "3.2",
-      difficulty: "hard",
-      explanation: "<p>Language and framework specificity is a named limitation category. Copilot performance can vary across languages and frameworks, and it may be weaker on niche technologies.</p><p>Prompt transmission describes secure HTTPS data flow, not uneven language support. Feedback loop delivery is part of the suggestion lifecycle. IP indemnity is a contractual protection for Business and Enterprise under conditions, not a model capability limitation.</p>"
+     "n": 36,
+     "prompt": "<p>A hospital wants a Copilot Studio agent to use Computer Use to enter referrals into a desktop scheduling application that runs only on machines inside the hospital network. Which design should you recommend?</p>",
+     "choices": [
+      "Run Computer Use on a registered machine inside the network",
+      "Use the hosted browser that Microsoft provides for Computer Use",
+      "Expose the scheduling database directly through a public endpoint",
+      "Replace Computer Use with a SharePoint agent for referrals"
+     ],
+     "answer": 0,
+     "topic": "Extensibility of AI Solutions",
+     "objective": "2.2",
+     "difficulty": "hard",
+     "explanation": "<p>Computer Use can run on machines that you register and manage, which allows automation of desktop applications that are reachable only from the internal network.</p><p>A Microsoft-hosted browser cannot reach an on-premises desktop application. Publishing the database to the internet creates serious security risk. A SharePoint agent answers questions and cannot operate the scheduling application.</p>"
     },
     {
-      n: 37,
-      prompt: "<p>A developer wants Copilot to review code from a security perspective. Which prompt best uses role prompting?</p>",
-      choices: ["Act as a security expert and identify injection risks in this function", "Make this better", "Use the longest possible context before answering", "Accept the next suggestion if it compiles"],
-      answer: 0,
-      topic: "Crafting Effective Prompts",
-      objective: "4.1",
-      difficulty: "medium",
-      explanation: "<p>Role prompting asks Copilot to act from a specific perspective, such as a security expert. The prompt also gives a focused task by asking for injection risks in a function.</p><p>Make this better is too vague. Asking for the longest possible context does not define the role or task and may waste context. Accepting a suggestion if it compiles is a validation shortcut, not a role prompt.</p>"
+     "n": 37,
+     "prompt": "<p>A marketing team wants to fine-tune a large language model so that generated copy follows the brand voice. They have not yet tried detailed instructions or examples. What should you recommend?</p>",
+     "choices": [
+      "Start with prompting and examples, and fine-tune only if results fall short",
+      "Fine-tune immediately, because fine-tuning is always cheaper than prompting",
+      "Train a new foundation model, because brand voice cannot be taught by examples",
+      "Avoid AI for marketing copy, because models cannot follow a style guide"
+     ],
+     "answer": 0,
+     "topic": "AI Strategy and Agent Design",
+     "objective": "1.2",
+     "difficulty": "hard",
+     "explanation": "<p>Custom models should be created when simpler techniques such as prompt engineering, few-shot examples, and grounding cannot meet measurable requirements. Fine-tuning adds data, training, hosting, and maintenance costs.</p><p>Fine-tuning is not always cheaper and adds lifecycle overhead. Training a foundation model is far beyond the need. Models can follow style guidance well with good prompts and examples.</p>"
     },
     {
-      n: 38,
-      prompt: "<p>A prompt includes a concise task, relevant file context, and a few examples of expected output. Which performance principle is being applied?</p>",
-      choices: ["Using audit logs to steer completions", "Providing focused context and examples to guide the model", "Disabling all filters for faster output", "Relying on legacy usage counters"],
-      answer: 1,
-      topic: "Prompt Engineering for Performance",
-      objective: "4.2",
-      difficulty: "medium",
-      explanation: "<p>Focused context and examples improve prompt performance by helping Copilot infer the desired task, constraints, and output pattern. This aligns with prompt engineering guidance around specificity, surrounding context, and example-based prompting.</p><p>Audit logs do not steer completions. Filters are safeguards and should not be disabled to improve prompt quality. Legacy usage counters are not the official current term; the current term is GitHub AI Credits.</p>"
+     "n": 38,
+     "prompt": "<p>A team extended Copilot in Dynamics 365 Sales with custom prompts and an agent built in Copilot Studio. How should these components be promoted from development to production?</p>",
+     "choices": [
+      "Edit the production environment directly to keep the versions in sync",
+      "Package them as a deployable package in Lifecycle Services",
+      "Re-create the prompts and agent in production from a checklist",
+      "Include them in a Dataverse solution and deploy it as managed"
+     ],
+     "answer": 3,
+     "topic": "ALM for AI Solutions",
+     "objective": "3.3",
+     "difficulty": "medium",
+     "explanation": "<p>Customizations built on Dataverse and Copilot Studio are solution-aware. Packaging them in a solution and deploying managed solutions through a pipeline provides consistent, reversible promotion, after which feature settings are configured in the target environment.</p><p><em>Direct production edits</em> bypass testing and create unmanaged layers. <em>Lifecycle Services deployable packages</em> are used for finance and operations code, not Dataverse-based Sales customizations. <em>Re-creating from a checklist</em> is manual and error-prone.</p>"
     },
     {
-      n: 39,
-      prompt: "<p>An engineering manager wants to measure whether Copilot adoption is improving over time. Which metric source is specifically supported?</p>",
-      choices: ["Local prompt text from the audit log", "A fixed real-exam raw score", "The REST API for Copilot usage metrics", "The Suggestions matching public code index"],
-      answer: 2,
-      topic: "Productivity and Code Quality",
-      objective: "5.1",
-      difficulty: "medium",
-      explanation: "<p>The REST API for Copilot usage metrics is a named source for measuring impact. Metrics include Average Daily Active Users, Total Acceptance Rate, and Lines of Code Accepted.</p><p>The audit log does not include local client session prompt text. A real-exam raw score is not a productivity metric, and the official exam question count is not published. The public-code matching index is a safeguard mechanism, not a usage-metrics source.</p>"
+     "n": 39,
+     "prompt": "<p>A product team wants its Copilot Studio project agent available in its Microsoft Teams team so that any member can mention the agent in a channel conversation and get answers from the project knowledge base. What should you recommend?</p>",
+     "choices": [
+      "Share the agent's test-pane link with each individual team member",
+      "Convert the agent into a SharePoint page web part only",
+      "Publish the agent to Teams and add it to the team's channel",
+      "Email a weekly export of the agent's answers to the team"
+     ],
+     "answer": 2,
+     "topic": "Extensibility of AI Solutions",
+     "objective": "2.2",
+     "difficulty": "medium",
+     "explanation": "<p>Publishing a Copilot Studio agent to the Teams channel and installing it in a team allows members to mention it in channel conversations, bringing answers into the collaborative workflow.</p><p>The test pane is for makers, not production use. A SharePoint web part does not provide in-channel mentions. Weekly exports are not interactive.</p>"
     },
     {
-      n: 40,
-      prompt: "<p>A developer asks Copilot to generate integration tests, then reviews the assertions and modifies them to cover an unhandled timeout. What is the BEST characterization of this workflow?</p>",
-      choices: ["Irresponsible because AI should not be used for tests", "A privacy setting rather than a testing workflow", "A replacement for all human code review", "A responsible use of Copilot to accelerate testing with human validation"],
-      answer: 3,
-      topic: "Testing and Security",
-      objective: "5.2",
-      difficulty: "medium",
-      explanation: "<p>Copilot can generate unit and integration tests, identify edge cases, and write assertions. Reviewing and modifying the generated tests is responsible because it preserves human validation.</p><p>Using AI for tests is within Copilot's productivity goals when validated. The workflow is not a privacy setting. It accelerates testing but does not replace human review and judgment.</p>"
+     "n": 40,
+     "prompt": "<p>A service desk must classify millions of tickets per month into a fixed set of 20 categories. Latency and per-request cost are critical, and thousands of labeled examples exist. Which approach is MOST appropriate?</p>",
+     "choices": [
+      "Fine-tune a small language model on the labeled tickets",
+      "Send every ticket to the most capable large reasoning model with a long prompt",
+      "Have a Copilot Studio agent ask each customer to choose a category manually",
+      "Train a new large language model from scratch on all historical tickets"
+     ],
+     "answer": 0,
+     "topic": "AI Strategy and Agent Design",
+     "objective": "1.2",
+     "difficulty": "hard",
+     "explanation": "<p>Small language models fine-tuned for a narrow, high-volume task deliver low latency and lower cost while achieving strong accuracy with good labeled data.</p><p>A large reasoning model is slower and more expensive than necessary for fixed classification. Asking customers to categorize shifts work to users and is error-prone. Training an LLM from scratch is unjustified.</p>"
     },
     {
-      n: 41,
-      prompt: "<p>A developer opens an excluded file while using Edit mode in an editor and expects content exclusion to block all use of that file. What should they know?</p>",
-      choices: ["Content exclusion is currently not supported in Edit and Agent modes in editors", "Content exclusion is supported only in Azure Data Studio", "Content exclusion applies only to public repositories", "Content exclusion makes symlinks safer than regular files"],
-      answer: 0,
-      topic: "Privacy Settings and Exclusions",
-      objective: "6.1",
-      difficulty: "hard",
-      explanation: "<p>Current documentation says content exclusion is not supported in Edit and Agent modes of Copilot Chat in Visual Studio Code and other editors. This is an important current-product caveat for privacy expectations.</p><p>Azure Data Studio is not supported for inline suggestions content exclusion. Content exclusion is not limited to public repositories. Content exclusions do not apply to symlinks, so symlinks are not made safer by the exclusion mechanism.</p>"
+     "n": 41,
+     "prompt": "<p>A policy agent sometimes invents section numbers when the retrieved documents do not contain an answer. Which prompt engineering guideline should you apply?</p>",
+     "choices": [
+      "Instruct the agent to always provide an answer even if it must estimate details",
+      "Remove citations from responses so users are not confused by section numbers",
+      "Instruct it to answer only from sources and to say when no answer is found",
+      "Ask the agent to answer from memory first and check sources only if asked"
+     ],
+     "answer": 2,
+     "topic": "AI Strategy and Agent Design",
+     "objective": "1.2",
+     "difficulty": "medium",
+     "explanation": "<p>Grounding instructions that restrict answers to retrieved content and allow an explicit 'not found' response reduce fabricated details.</p><p>Forcing an answer increases fabrication. Removing citations hides the problem and reduces transparency. Answering from memory first works against grounding.</p>"
     },
     {
-      n: 42,
-      prompt: "<p>A team blocks Suggestions matching public code and asks whether choosing a different model will bypass that safeguard. What is the correct answer?</p>",
-      choices: ["Yes, the safeguard applies only to the default model", "No, the setting applies regardless of which model is selected", "Yes, the safeguard applies only in NeoVim", "No, because it moved to retired Copilot Spark"],
-      answer: 1,
-      topic: "Safeguards and Troubleshooting",
-      objective: "6.2",
-      difficulty: "medium",
-      explanation: "<p>Suggestions matching public code applies regardless of which model is selected. Model selection does not change the data collection and usage policy or bypass content filters.</p><p>The safeguard is not limited to a default model. Code referencing and matching public code are not available in NeoVim. Copilot Spark was retired, but it did not replace this current safeguard.</p>"
+     "n": 42,
+     "prompt": "<p>A data science team fine-tuned a model in Microsoft Foundry for summarizing adverse-event reports. Before a Copilot Studio agent uses it in production, what should the architect require?</p>",
+     "choices": [
+      "Deploy the model immediately and collect user complaints as validation",
+      "Check that the training job finished without errors and then deploy it broadly",
+      "Ask the data scientists to review three sample outputs informally",
+      "Run Foundry evaluations on held-out data and compare with the base model"
+     ],
+     "answer": 3,
+     "topic": "Extensibility of AI Solutions",
+     "objective": "2.2",
+     "difficulty": "hard",
+     "explanation": "<p>Systematic evaluation in Microsoft Foundry, using held-out data and metrics such as groundedness, relevance, and safety, and comparing with the base model, confirms that fine-tuning improved quality before deployment.</p><p>Using production users as testers creates risk in a safety-critical domain. A successful training job says nothing about output quality. Three informal samples are not statistically meaningful.</p>"
     },
     {
-      n: 43,
-      prompt: "<p>An AI coding assistant works well for common patterns but may reproduce bias from training data or suggest outdated practices. Which responsible-use habit addresses this risk?</p>",
-      choices: ["Treat every fluent answer as authoritative", "Disable all organization policies", "Validate outputs against current standards and human judgment", "Use only retired product names in prompts"],
-      answer: 2,
-      topic: "Responsible AI Principles",
-      objective: "1.1",
-      difficulty: "medium",
-      explanation: "<p>Responsible AI use recognizes that generative systems can reflect biases and outdated practices from training data. Validating against current standards and using human judgment mitigates those risks.</p><p>Fluent answers can still be wrong. Disabling organization policies weakens governance and safeguards. Retired product names can confuse context and should be used only when teaching history or mapping old names to current ones.</p>"
+     "n": 43,
+     "prompt": "<p>A retailer has a fine-tuned product-recommendation model in production. A new version scored better offline. The business wants to limit the risk of a bad release. What should you recommend?</p>",
+     "choices": [
+      "Replace the current deployment in place during a maintenance window",
+      "Deploy the new version next to the current one and shift traffic gradually",
+      "Delete the current version immediately to avoid accidental fallback",
+      "Release the new version to all users and review results next quarter"
+     ],
+     "answer": 1,
+     "topic": "ALM for AI Solutions",
+     "objective": "3.3",
+     "difficulty": "hard",
+     "explanation": "<p>A staged rollout keeps the proven version available, routes a small share of traffic to the new version, monitors quality and business metrics, and expands or rolls back based on results.</p><p><em>In-place replacement</em> removes the easy path to roll back. <em>Deleting the current version</em> eliminates rollback entirely. <em>Full release with delayed review</em> exposes everyone to an unproven model for months.</p>"
     },
     {
-      n: 44,
-      prompt: "<p>Copilot writes a function that passes visible tests but uses a library call the team has never approved. Which validation response is BEST?</p>",
-      choices: ["Approve it because visible tests passed", "Trust it if the suggestion does not match public code", "Reject all Copilot output from that point forward", "Check dependency policy, license and security posture, then adjust the implementation"],
-      answer: 3,
-      topic: "Validating AI Output",
-      objective: "1.2",
-      difficulty: "hard",
-      explanation: "<p>Passing visible tests is not enough when generated code introduces a dependency. The team should validate policy fit, license implications, security posture, and maintainability before accepting or revising the implementation.</p><p>Visible tests may not cover dependency risk. A lack of public-code match does not validate license, vulnerability, or policy concerns. Rejecting all future Copilot output is unnecessary when careful review and validation can address the issue.</p>"
+     "n": 44,
+     "prompt": "<p>Business units are submitting many overlapping agent ideas, and several teams have built nearly identical agents. As the AI Center of Excellence lead, what should you establish?</p>",
+     "choices": [
+      "Central intake with value-based prioritization and a reusable agent catalog",
+      "A rule that only the CoE may build agents, with all other teams blocked",
+      "A policy that each business unit independently selects its own platforms and standards",
+      "A quarterly hackathon that replaces the need for any intake process"
+     ],
+     "answer": 0,
+     "topic": "AI Strategy and Agent Design",
+     "objective": "1.2",
+     "difficulty": "hard",
+     "explanation": "<p>An AI CoE reduces duplication by providing intake, prioritization against business value, and discoverable reusable assets, while still enabling business units to build.</p><p>Blocking all other teams creates a bottleneck. Letting each unit pick its own standards increases fragmentation. Hackathons generate ideas but do not provide ongoing governance or reuse.</p>"
     },
     {
-      n: 45,
-      prompt: "<p>A developer wants Copilot Chat skills inside the IDE but is using Copilot Free. What should they expect?</p>",
-      choices: ["Copilot Chat skills in IDEs are not available in Copilot Free", "Copilot Free includes all IDE chat skills with unlimited completions", "The feature works only in NeoVim", "The feature requires GitHub Enterprise Server"],
-      answer: 0,
-      topic: "Copilot in the IDE",
-      objective: "2.1",
-      difficulty: "medium",
-      explanation: "<p>Copilot Chat skills in IDEs are not available in Copilot Free. Copilot Free also has plan limitations such as auto model selection only and a monthly completion cap.</p><p>Copilot Free does not include all IDE chat skills with unlimited completions. Agent mode is not available in NeoVim, and the IDE chat skills statement is not NeoVim-specific. Copilot is not currently available for GitHub Enterprise Server.</p>"
+     "n": 45,
+     "prompt": "<p>A software company's support team uses ServiceNow as its service system and works in Outlook and Teams. Representatives want Copilot to summarize customer emails with case context and draft replies grounded in the company knowledge base. What should you recommend?</p>",
+     "choices": [
+      "Migrate every case to Dynamics 365 Customer Service before enabling Copilot",
+      "Use Microsoft 365 Copilot for Sales and map service cases to opportunities",
+      "Build Power BI reports over ServiceNow cases for representatives to read",
+      "Configure Copilot for Service with ServiceNow and the knowledge base"
+     ],
+     "answer": 3,
+     "topic": "Prebuilt Agents and Apps",
+     "objective": "2.3",
+     "difficulty": "medium",
+     "explanation": "<p>Microsoft 365 Copilot for Service works with third-party service systems as well as Dynamics 365, bringing case context and knowledge-grounded assistance into Outlook and Teams.</p><p>Migration is not required for Copilot for Service. Copilot for Sales targets sellers and CRM opportunities, not service cases. Power BI reports do not provide drafting assistance in the flow of work.</p>"
     },
     {
-      n: 46,
-      prompt: "<p>A developer asks Agentic AI Business Solutions Architect CLI to generate a script that moves files. Which responsible operating practice should accompany this use?</p>",
-      choices: ["Run every generated command without review to preserve speed", "Inspect the generated script and test it on safe sample paths before real files", "Disable organization safeguards because CLI prompts are local", "Assume prompt files will validate the script automatically"],
-      answer: 1,
-      topic: "Copilot CLI",
-      objective: "2.2",
-      difficulty: "medium",
-      explanation: "<p>Agentic AI Business Solutions Architect CLI can generate scripts and manage files, but responsible use requires inspecting commands and testing on safe sample paths before touching real data. This is especially important for destructive file operations.</p><p>Running generated commands without review is unsafe. CLI, Mobile, and Chat on GitHub.com prompts may be retained outside the editor, and safeguards still matter. Prompt files are not supported in the CLI and do not automatically validate generated scripts.</p>"
+     "n": 46,
+     "prompt": "<p>A European manufacturer requires that prompts and completions for its Microsoft Foundry model deployment are processed only within the EU. Which deployment choice should you recommend?</p>",
+     "choices": [
+      "A regional Standard or EU Data Zone deployment instead of Global",
+      "Customer-managed keys on a Global Standard deployment",
+      "A private endpoint on a Global Standard deployment",
+      "An EU-hosted web app that calls a Global Standard deployment"
+     ],
+     "answer": 0,
+     "topic": "Responsible AI, Security, and Governance",
+     "objective": "3.4",
+     "difficulty": "medium",
+     "explanation": "<p>Global deployment types may process requests in any Azure region. Data Zone deployments keep processing within a geographic zone such as the EU, and regional Standard deployments process in the deployment's region, which meets the processing-location requirement.</p><p><em>Customer-managed keys</em> control encryption at rest, not where inference is processed. A <em>private endpoint</em> secures network access but does not limit processing location. An <em>EU-hosted web app</em> does not change where a Global deployment processes data.</p>"
     },
     {
-      n: 47,
-      prompt: "<p>A pull request is opened from a feature branch that contains updated Copilot instructions. Which branch's instructions does Copilot read for the pull request?</p>",
-      choices: ["Only the base branch instructions", "Only organization instructions, never repository files", "The head branch instructions", "Only personal instructions from the reviewer"],
-      answer: 2,
-      topic: "Copilot Features and Capabilities",
-      objective: "2.3",
-      difficulty: "medium",
-      explanation: "<p>On pull requests, Copilot reads instructions and skills from the head branch, not the base branch. This matters when a feature branch changes repository guidance for review or agent behavior.</p><p>The base branch is not the source Copilot reads for pull-request instructions. Organization instructions can apply, but they do not replace all repository files. Personal instructions are limited to Copilot Chat on GitHub.com and are not the only source for pull-request behavior.</p>"
+     "n": 47,
+     "prompt": "<p>A Copilot Studio pilot with 50 users had low costs. Production projections for 20,000 users with autonomous agents running on triggers are much higher than expected. Which TCO component was MOST likely underestimated?</p>",
+     "choices": [
+      "The one-time cost of creating the first version of the agent",
+      "The cost of the Microsoft Entra ID tenant used for sign-in",
+      "The cost of writing and revising the agent's instructions during the pilot",
+      "Usage-based consumption that scales with volume and autonomous runs"
+     ],
+     "answer": 3,
+     "topic": "Costs, Benefits, and ROI",
+     "objective": "1.3",
+     "difficulty": "medium",
+     "explanation": "<p>Agent costs often include consumption billed by usage. Moving from a small pilot to enterprise scale, especially with autonomous triggers, multiplies consumption.</p><p>Initial build and instruction writing are one-time costs that do not scale with users. Identity costs are not the driver of a dramatic increase in agent consumption.</p>"
     },
     {
-      n: 48,
-      prompt: "<p>Which statement correctly distinguishes toxicity filtering from the proxy's inbound prompt-injection defense?</p>",
-      choices: ["Toxicity filtering is only an outbound code-quality check", "Prompt-injection defense scans only accepted suggestions", "Both are the same check with two names", "The proxy blocks jailbreak attempts; toxicity filtering checks hate speech, inappropriate content, and personal data"],
-      answer: 3,
-      topic: "Data Handling and Flow",
-      objective: "3.1",
-      difficulty: "hard",
-      explanation: "<p>The inbound proxy filter blocks prompt injection and jailbreak attempts. Toxicity filtering is a separate step that checks categories such as hate speech, inappropriate content, and personal data, and it runs before intent extraction.</p><p>Toxicity filtering is not only an outbound code-quality check; it appears in both inbound and outbound processing. Prompt-injection defense is not a check on accepted suggestions. The two safeguards have distinct purposes in the canonical flow.</p>"
+     "n": 48,
+     "prompt": "<p>A distributor uses the Copilot chat experience in Dynamics 365 Finance. Controllers want the chat to also answer questions about internal close policies stored in SharePoint and to look up exchange-rate data from an external service. What should you recommend?</p>",
+     "choices": [
+      "Create a separate SharePoint agent and ask controllers to switch between agents",
+      "Extend the finance and operations agent in Copilot Studio",
+      "Write X++ code that copies SharePoint policies into the Finance database",
+      "Replace the Finance Copilot chat with a custom engine agent from scratch"
+     ],
+     "answer": 1,
+     "topic": "Prebuilt Agents and Apps",
+     "objective": "2.3",
+     "difficulty": "hard",
+     "explanation": "<p>The finance and operations Copilot chat is built on Copilot Studio, so you can extend it with additional knowledge sources such as SharePoint and with actions or connectors for external data, keeping one experience for users.</p><p>Separate agents fragment the experience. Copying documents into the database is brittle and duplicates data. Rebuilding from scratch discards built-in app context and adds unnecessary effort.</p>"
     },
     {
-      n: 49,
-      prompt: "<p>A developer keeps related files open and uses descriptive filenames before asking Copilot to generate a helper. Which part of the 4 Ss does this emphasize?</p>",
-      choices: ["Surround", "Short", "Single", "Specific"],
-      answer: 0,
-      topic: "Crafting Effective Prompts",
-      objective: "4.1",
-      difficulty: "medium",
-      explanation: "<p>Surround means using helpful surrounding context, including descriptive filenames and related open files. This gives Copilot better information when building the prompt.</p><p>Short means keeping prompts concise. Single means focusing on one task. Specific means giving explicit, detailed instructions. The described behavior is about context around the prompt, so it maps to Surround.</p>"
+     "n": 49,
+     "prompt": "<p>An agent will save 10 minutes per case on 60,000 cases per year. The fully loaded labor cost is $60 per hour, and the agent's total annual cost is $250,000. What are the annual net benefit and ROI?</p>",
+     "choices": [
+      "$600,000 net benefit and an ROI of 240%",
+      "$350,000 net benefit and an ROI of 140%",
+      "$350,000 net benefit and an ROI of 58%",
+      "$100,000 net benefit and an ROI of 40%"
+     ],
+     "answer": 1,
+     "topic": "Costs, Benefits, and ROI",
+     "objective": "1.3",
+     "difficulty": "hard",
+     "explanation": "<p>Time saved is 10 x 60,000 = 600,000 minutes, or 10,000 hours. At $60 per hour, the gross benefit is $600,000. Net benefit is $600,000 - $250,000 = $350,000, and ROI = $350,000 / $250,000 = 140%.</p><p>$600,000 is the gross benefit, not the net. 58% divides net benefit by gross benefit rather than by cost. $100,000 and 40% come from an incorrect hours calculation.</p>"
     },
     {
-      n: 50,
-      prompt: "<p>A team notices long prompts that include unnecessary history are consuming more plan allowance than expected. Which current term should the team use for that allowance?</p>",
-      choices: ["Monthly prompt credits", "GitHub AI Credits", "Retired Copilot Spark tokens", "Legacy matching credits"],
-      answer: 1,
-      topic: "Prompt Engineering for Performance",
-      objective: "4.2",
-      difficulty: "medium",
-      explanation: "<p>The current term for plan allowance is GitHub AI Credits. The site should use that product name when discussing usage consumed by prompts, models, and Copilot features.</p><p>Monthly prompt credits is not the official current name. Copilot Spark has retired and is not the current usage allowance. Legacy matching credits are not a credits system; the matching safeguard is called Suggestions matching public code.</p>"
+     "n": 50,
+     "prompt": "<p>A customer service director notices that representatives repeatedly solve the same new issues but the knowledge base does not contain articles for them. Which Dynamics 365 Customer Service agent should you recommend?</p>",
+     "choices": [
+      "Customer Intent Agent",
+      "Sales Qualification Agent",
+      "Customer Knowledge Management Agent",
+      "Supplier Communications Agent"
+     ],
+     "answer": 2,
+     "topic": "Prebuilt Agents and Apps",
+     "objective": "2.3",
+     "difficulty": "medium",
+     "explanation": "<p>The Customer Knowledge Management Agent helps keep the knowledge base current by generating and updating knowledge articles from resolved cases and conversations.</p><p>Customer Intent Agent discovers intents to improve self-service and routing, not articles. Sales Qualification handles leads. Supplier Communications handles vendor purchase orders.</p>"
     },
     {
-      n: 51,
-      prompt: "<p>A team wants both quantitative and qualitative feedback about Copilot impact. Which combination aligns with the measured-impact guidance?</p>",
-      choices: ["Only issue counts and repository stars", "Only local prompt transcripts from each developer", "Copilot usage metrics plus the Agentic AI Business Solutions Architect Developer Survey", "Only the number of public-code matches"],
-      answer: 2,
-      topic: "Productivity and Code Quality",
-      objective: "5.1",
-      difficulty: "medium",
-      explanation: "<p>The guidance names the REST API for Copilot usage metrics and the Agentic AI Business Solutions Architect Developer Survey as sources for measuring impact. Together they support quantitative usage data and qualitative developer feedback.</p><p>Issue counts and repository stars do not specifically measure Copilot adoption or effectiveness. Local prompt transcripts are not available from the audit log and raise privacy concerns. Public-code matches are a safeguard signal, not a productivity measurement program.</p>"
+     "n": 51,
+     "prompt": "<p>A company's Power Platform environment is in a region where some generative AI features in Copilot Studio require data to move to another geography. Compliance prohibits data leaving the region. What should the administrator do?</p>",
+     "choices": [
+      "Enable cross-geography data movement and inform users afterward",
+      "Move the environment to another tenant in a different country",
+      "Disable all Copilot Studio agents across the entire tenant",
+      "Keep cross-geography data movement off and document the affected features"
+     ],
+     "answer": 3,
+     "topic": "Responsible AI, Security, and Governance",
+     "objective": "3.4",
+     "difficulty": "hard",
+     "explanation": "<p>Power Platform lets administrators control whether data can move across geographic locations for generative AI features. Leaving it disabled honors the compliance requirement; the architect should confirm which features remain available and document the impact.</p><p><em>Enabling movement</em> directly violates the stated compliance rule. <em>Moving to another tenant</em> is disruptive and does not address the rule. <em>Disabling all agents</em> is excessive when only certain features are affected.</p>"
     },
     {
-      n: 52,
-      prompt: "<p>A security team wants IP indemnity protection for Copilot suggestions under the cited learning path. Which condition is required?</p>",
-      choices: ["Use only Copilot Free with auto model selection", "Enable retired Copilot Spark exports", "Set Suggestions matching public code to Allow", "Use Copilot Business or Enterprise and set Suggestions matching public code to Block"],
-      answer: 3,
-      topic: "Testing and Security",
-      objective: "5.2",
-      difficulty: "hard",
-      explanation: "<p>The cited learning path states that IP indemnity is included with Copilot Business and Enterprise, and GitHub assumes legal responsibility only when Suggestions matching public code is set to Block.</p><p>Copilot Free is not the plan family named for IP indemnity. Copilot Spark is retired and unrelated to indemnity. Setting Suggestions matching public code to Allow fails the stated condition for indemnity in the cited material.</p>"
+     "n": 52,
+     "prompt": "<p>A commodities trader's proprietary pricing logic is its main competitive advantage. It wants AI to generate price recommendations using that logic and its own market data. Which approach should you recommend?</p>",
+     "choices": [
+      "Build a custom solution in Foundry that keeps the logic under its control",
+      "Buy a generic pricing SaaS product and replace the proprietary logic with its defaults",
+      "Use Microsoft 365 Copilot Chat with prompts that describe the pricing rules each time",
+      "Use a prebuilt sales agent and ask it to infer the pricing logic from emails"
+     ],
+     "answer": 0,
+     "topic": "Costs, Benefits, and ROI",
+     "objective": "1.3",
+     "difficulty": "hard",
+     "explanation": "<p>Build is appropriate when the capability is a competitive differentiator that requires full control over logic, data, and models.</p><p>A generic product would discard the differentiator. Re-describing rules in chat prompts is unreliable and ungoverned. A prebuilt sales agent is not designed to implement proprietary pricing algorithms.</p>"
     },
     {
-      n: 53,
-      prompt: "<p>A repository is hosted on a remote filesystem and uses symbolic links to reference sensitive source. What is the safest content-exclusion assumption?</p>",
-      choices: ["Content exclusions do not apply to symlinks or repositories on remote filesystems", "Content exclusions apply more strongly to symlinks than normal files", "Remote filesystems are the only fully supported exclusion target", "Suggestions matching public code replaces content exclusions for symlinks"],
-      answer: 0,
-      topic: "Privacy Settings and Exclusions",
-      objective: "6.1",
-      difficulty: "medium",
-      explanation: "<p>Content exclusions do not apply to symbolic links or repositories located on remote filesystems. Teams should not rely on exclusions alone for those layouts.</p><p>Symlinks do not receive stronger protection from content exclusions. Remote filesystems are not the fully supported target in this limitation. Suggestions matching public code is a separate safeguard and does not replace content exclusions for symlinked sensitive content.</p>"
+     "n": 53,
+     "prompt": "<p>A B2B software company receives hundreds of inbound leads per week. Sales development representatives cannot research each one. Leadership wants an agent that researches leads, prioritizes them, and drafts personalized outreach for sellers to review. What should you recommend?</p>",
+     "choices": [
+      "Sales Qualification Agent in Dynamics 365 Sales",
+      "Customer Knowledge Management Agent in Customer Service",
+      "Analyst agent in Microsoft 365 Copilot",
+      "Facilitator agent in Microsoft Teams"
+     ],
+     "answer": 0,
+     "topic": "Prebuilt Agents and Apps",
+     "objective": "2.3",
+     "difficulty": "medium",
+     "explanation": "<p>The Sales Qualification Agent autonomously researches and qualifies inbound leads and can prepare personalized outreach, so sellers focus on the highest-potential leads.</p><p>Knowledge Management builds service articles. Analyst performs data analysis on files. Facilitator assists with meetings; none of them qualify leads.</p>"
     },
     {
-      n: 54,
-      prompt: "<p>A developer complains that no inline suggestions appear in one file, but Copilot works elsewhere. The repository has content exclusions configured. What is a likely explanation?</p>",
-      choices: ["The audit log retained the local prompt and blocked it", "Inline suggestions are unavailable in affected excluded files", "Copilot Autofix disabled the editor", "The file must be using a model version number"],
-      answer: 1,
-      topic: "Safeguards and Troubleshooting",
-      objective: "6.2",
-      difficulty: "hard",
-      explanation: "<p>When a file is affected by content exclusion, inline suggestions will not be available in that file. If Copilot works elsewhere, an exclusion rule is a plausible cause for missing suggestions in only that path.</p><p>The audit log does not include local client session prompts. Copilot Autofix for code scanning does not disable the editor. Model version numbers are not the right diagnostic path, and content filters apply regardless of model selection.</p>"
+     "n": 54,
+     "prompt": "<p>You deployed a model router in Microsoft Foundry for a customer support solution. What should you monitor to confirm that it is delivering the expected value?</p>",
+     "choices": [
+      "Only the total number of requests, because routing decisions are not observable",
+      "Only latency, because model routers do not affect cost",
+      "Which underlying models handle requests, plus cost and quality metrics",
+      "Nothing, because model routers guarantee the best answer for every request"
+     ],
+     "answer": 2,
+     "topic": "Costs, Benefits, and ROI",
+     "objective": "1.3",
+     "difficulty": "medium",
+     "explanation": "<p>A model router's value is the balance of cost and quality. Monitoring model selection, cost, and quality evaluations confirms the routing performs well on your workload.</p><p>Request counts alone do not show value. Routers are used largely to optimize cost, so cost must be tracked. No routing approach guarantees the best answer, so evaluation is still required.</p>"
     },
     {
-      n: 55,
-      prompt: "<p>A tool clearly labels AI-generated suggestions and explains that developers must review them before use. Which responsible AI principle is MOST directly served by making the AI role visible?</p>",
-      choices: ["Fairness", "Privacy and security", "Transparency", "Language specificity"],
-      answer: 2,
-      topic: "Responsible AI Principles",
-      objective: "1.1",
-      difficulty: "easy",
-      explanation: "<p>Transparency requires people to understand when they are interacting with or using AI and to have insight into how the system should be interpreted. Clear labeling and explanation support that principle.</p><p>Fairness addresses equitable treatment and bias. Privacy and security addresses data and system protection. Language specificity is a limitation category for LLM performance, not one of Microsoft's responsible AI principles.</p>"
+     "n": 55,
+     "prompt": "<p>An HR agent will be grounded on SharePoint sites that contain some overshared salary documents. Employees must only receive answers from content they are permitted to view. What should you recommend?</p>",
+     "choices": [
+      "Have the agent connect with the maker's credentials for every user",
+      "Copy the HR content into a public site that everyone can read",
+      "Use end-user authentication and fix oversharing before launch",
+      "Turn off authentication so the agent responds faster to employees"
+     ],
+     "answer": 2,
+     "topic": "Responsible AI, Security, and Governance",
+     "objective": "3.4",
+     "difficulty": "medium",
+     "explanation": "<p>With user authentication, retrieval respects each user's permissions. Because permissions are only as good as the underlying access, oversharing must be remediated, for example with SharePoint Advanced Management and Purview data security tools, before broad rollout.</p><p><em>Maker credentials</em> expose everything the maker can read to every user. A <em>public site</em> removes access control entirely. <em>No authentication</em> prevents permission trimming and identity-based auditing.</p>"
     },
     {
-      n: 56,
-      prompt: "<p>A developer receives a Copilot explanation for a complex algorithm and plans to include it in design documentation. What should they do before publishing it?</p>",
-      choices: ["Publish it unchanged because explanations are safer than code", "Check only whether it contains non-ASCII characters", "Accept it if it came from Copilot Chat outside the editor", "Verify the explanation against the code and correct any inaccuracies"],
-      answer: 3,
-      topic: "Validating AI Output",
-      objective: "1.2",
-      difficulty: "medium",
-      explanation: "<p>AI-generated explanations can be incomplete or inaccurate, just like generated code. The developer should verify the explanation against the implementation and correct any mistakes before publishing it.</p><p>Explanations are not inherently safe just because they are prose. ASCII formatting is unrelated to technical correctness. The location where Copilot Chat was used does not remove the need to validate the output.</p>"
+     "n": 56,
+     "prompt": "<p>A collections team in Dynamics 365 Finance wants to quickly understand a customer's credit and payment history and send a personalized payment reminder without writing it from scratch. Which capability should you recommend?</p>",
+     "choices": [
+      "Customer Insights - Journeys real-time journeys",
+      "Copilot for Service email summaries in Outlook",
+      "Supply Chain Management demand planning",
+      "Copilot collections summaries and email drafts"
+     ],
+     "answer": 3,
+     "topic": "Prebuilt Agents and Apps",
+     "objective": "2.3",
+     "difficulty": "medium",
+     "explanation": "<p>Copilot in Dynamics 365 Finance supports collections coordinators with customer summaries and generated reminder emails based on payment and credit data.</p><p>Real-time journeys orchestrate marketing campaigns. Copilot for Service targets service representatives. Demand planning forecasts supply needs, not receivables.</p>"
     },
     {
-      n: 57,
-      prompt: "<p>A team wants to use Edit mode for broad code changes in an IDE. Which editor support statement is accurate?</p>",
-      choices: ["Edit mode is supported in VS Code and JetBrains", "Edit mode is supported in NeoVim only", "Edit mode is a retired name for Copilot Spark", "Edit mode is supported only on GitHub.com"],
-      answer: 0,
-      topic: "Copilot in the IDE",
-      objective: "2.1",
-      difficulty: "medium",
-      explanation: "<p>Edit mode is the current name for the feature formerly called Copilot Edits, and it is supported in VS Code and JetBrains. This is the current product framing to use.</p><p>Edit mode is not supported only in NeoVim and is not a retired name for Copilot Spark. It is an editor feature, not something supported only on GitHub.com.</p>"
+     "n": 57,
+     "prompt": "<p>Three months into a Microsoft 365 Copilot rollout, financial savings cannot yet be measured reliably. Which indicators should you track now to show progress toward ROI?</p>",
+     "choices": [
+      "Only the final annual cost savings, ignoring all other measures until year end",
+      "Only the number of licenses purchased, because purchases indicate value",
+      "Only the number of prompts in the prompt library, regardless of their usage",
+      "Leading indicators such as active usage, task completion, and satisfaction"
+     ],
+     "answer": 3,
+     "topic": "Costs, Benefits, and ROI",
+     "objective": "1.3",
+     "difficulty": "medium",
+     "explanation": "<p>Leading indicators such as adoption, engagement, time saved per task, and satisfaction predict later financial outcomes and help course-correct early.</p><p>Waiting a year removes the chance to intervene. License count measures spend, not value. Prompt library size measures content, not adoption or outcomes.</p>"
     },
     {
-      n: 58,
-      prompt: "<p>An organization wants to replace GitHub App-based Copilot Extensions after their sunset. Which current integration approach should they evaluate?</p>",
-      choices: ["Retired Copilot Workspace", "MCP servers", "Retired GitHub Models", "Legacy usage counters"],
-      answer: 1,
-      topic: "Copilot Features and Capabilities",
-      objective: "2.3",
-      difficulty: "medium",
-      explanation: "<p>GitHub App-based Copilot Extensions were fully sunset and replaced by MCP servers. MCP servers are the current integration direction for extending Copilot workflows.</p><p>Copilot Workspace is retired and absent from current docs. GitHub Models is retired as a live service in this context. Legacy usage counters are unrelated; the current term for usage allowance is GitHub AI Credits.</p>"
+     "n": 58,
+     "prompt": "<p>A pharmaceutical company fine-tunes models in Microsoft Foundry using sensitive research data. Only the ML platform team may start fine-tuning jobs or read the training data. Which approach BEST enforces this?</p>",
+     "choices": [
+      "One shared API key distributed to the ML platform team members",
+      "A Conditional Access policy requiring compliant devices only",
+      "Least-privilege Azure RBAC roles with managed identities and no key auth",
+      "Sensitivity labels applied to the training files in storage"
+     ],
+     "answer": 2,
+     "topic": "Responsible AI, Security, and Governance",
+     "objective": "3.4",
+     "difficulty": "hard",
+     "explanation": "<p>Azure role-based access control scoped to the Foundry resources and storage limits who can run tuning and read data. Managed identities and disabling key-based authentication remove shared secrets so every action is tied to an identity and auditable.</p><p>A <em>shared API key</em> cannot distinguish users and is easily leaked. <em>Conditional Access</em> evaluates sign-in conditions but does not grant or restrict specific resource permissions. <em>Sensitivity labels</em> classify content but do not by themselves govern fine-tuning job permissions.</p>"
     },
     {
-      n: 59,
-      prompt: "<p>A user asks what happens to prompts from Copilot Chat used outside the code editor, including CLI and GitHub.com chat. Which retention statement is supported?</p>",
-      choices: ["They are never retained in any Copilot surface", "They are retained forever in the audit log", "They are typically retained for 28 days outside the editor", "They are retained only if Suggestions matching public code is Allow"],
-      answer: 2,
-      topic: "Data Handling and Flow",
-      objective: "3.1",
-      difficulty: "hard",
-      explanation: "<p>For Copilot Chat used outside the code editor, prompts, suggestions, and supporting context are typically retained for 28 days. The same applies to CLI, Mobile, and Chat on GitHub.com, while retention within the editor may vary.</p><p>Prompts are not never retained in every Copilot surface; code editor prompts are discarded once a suggestion is returned, but outside-editor chat has the 28-day retention statement. The audit log does not retain local client session prompts. Suggestions matching public code does not determine chat retention.</p>"
+     "n": 59,
+     "prompt": "<p>A project-based firm wants an agent in Teams meetings that keeps an agenda, takes collaborative notes in real time, and tracks follow-up tasks for participants. Which prebuilt Microsoft 365 agent should you recommend?</p>",
+     "choices": [
+      "Facilitator",
+      "Researcher",
+      "Analyst",
+      "Employee Self-Service"
+     ],
+     "answer": 0,
+     "topic": "Prebuilt Agents and Apps",
+     "objective": "2.3",
+     "difficulty": "medium",
+     "explanation": "<p>Facilitator supports meetings and chats by managing agendas, taking notes collaboratively, and tracking action items.</p><p>Researcher produces in-depth research reports. Analyst analyzes data. Employee Self-Service answers HR and IT policy questions.</p>"
     },
     {
-      n: 60,
-      prompt: "<p>A developer wants to use Copilot responsibly on a safety-critical change. Which behavior best combines reliability and safety with accountability?</p>",
-      choices: ["Accept the fastest answer to reduce context switching", "Rely on public-code matching as the only review step", "Delegate all responsibility to the model after tests pass", "Use Copilot as assistance, then require human review, tests, and documented approval"],
-      answer: 3,
-      topic: "Responsible AI Principles",
-      objective: "1.1",
-      difficulty: "medium",
-      explanation: "<p>Reliability and safety require careful validation under expected and unexpected conditions, and accountability requires people to remain responsible for decisions. Human review, testing, and documented approval are appropriate safeguards for safety-critical work.</p><p>Accepting the fastest answer favors speed over safety. Public-code matching is a limited safeguard and not a complete review process. Passing tests does not transfer responsibility to the model or remove the need for accountable human approval.</p>"
+     "n": 60,
+     "prompt": "<p>A company is deciding whether to build its own employee chat assistant on Foundry models or buy Microsoft 365 Copilot. Which factor MOST strongly favors buying?</p>",
+     "choices": [
+      "The need to own, modify, and version every step of the orchestration algorithm",
+      "The desire to choose and fine-tune a specific model for a niche task",
+      "Broad productivity needs across Microsoft 365 with minimal operations effort",
+      "A strategic goal to differentiate through a proprietary assistant experience"
+     ],
+     "answer": 2,
+     "topic": "Costs, Benefits, and ROI",
+     "objective": "1.3",
+     "difficulty": "medium",
+     "explanation": "<p>Buying fits broad, common needs where a SaaS product already integrates with your apps and data, delivering faster time to value and lower operational burden.</p><p>Owning the orchestration, fine-tuning a specific model, and building a differentiated proprietary experience are all reasons to build rather than buy.</p>"
     }
-  ] } ]
+   ]
+  }
+ ]
 };
