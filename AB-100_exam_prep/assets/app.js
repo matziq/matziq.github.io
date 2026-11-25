@@ -22,13 +22,9 @@
     AB1.PASS_SCORE = 700;
     AB1.SCALE_MIN = 1;
     AB1.SCALE_MAX = 1000;
-    /* Microsoft lists 100 minutes of exam time (120 seat time) for role-based
-       exams without labs, and 120 minutes (140 seat) when labs may appear. It does
-       not say per exam which applies; your registration shows the real figure. */
-    AB1.EXAM_MINUTES = 100;
-    AB1.SEAT_MINUTES = 120;
-    /* Microsoft does not publish a question count for AB-100, so the site never
-       claims one. These two numbers describe this site's practice exams only. */
+    /* Microsoft does not publish an AB-100-specific exam length or question count,
+       so the site never claims either; confirm the length shown at registration.
+       These two numbers describe this site's practice exams only. */
     AB1.PRACTICE_QUESTIONS = 60;
     AB1.PRACTICE_MINUTES = 100;
     AB1.SKILLS_DATE = "November 16, 2026";

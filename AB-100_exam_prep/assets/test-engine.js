@@ -745,8 +745,8 @@
             '<div class="card"><h3 style="margin-top:0">Pacing</h3>' +
             '<div class="table-scroll"><table class="data-table"><thead><tr><th>Section</th><th>Time used</th><th></th></tr></thead><tbody>' +
             paceRows + "</tbody></table></div>" +
-            '<p class="muted" style="margin-bottom:0;font-size:.88rem">The real exam gives you 100 minutes, and ' +
-            "Microsoft does not publish the question count. If you are burning the whole clock here, pacing is a " +
+            '<p class="muted" style="margin-bottom:0;font-size:.88rem">This practice exam uses a 100-minute site timer. ' +
+                        "Microsoft does not publish AB-100&rsquo;s exam length or question count, so confirm the time shown when you register. If you are burning the whole clock here, pacing is a " +
             "separate problem from knowledge and needs its own practice.</p></div>" +
             '<div class="card"><h3 style="margin-top:0">What to fix first</h3>' +
             (weakHtml
