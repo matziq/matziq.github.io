@@ -9677,7 +9677,7 @@
     "401873077": {
       "awayScore": 10,
       "awayTeamId": "16",
-      "checkedAt": "2026-11-25T10:23:16Z",
+      "checkedAt": "2026-11-26T11:29:21Z",
       "error": null,
       "eventId": "401873077",
       "explanationPhase": "pregame",
@@ -9714,7 +9714,7 @@
       "hasStarted": true,
       "homeScore": 35,
       "homeTeamId": "25",
-      "lastAttemptAt": "2026-11-25T10:23:16Z",
+      "lastAttemptAt": "2026-11-26T11:29:21Z",
       "pickAssessmentId": "assessment-0277ad39b4305fe7b3b42670",
       "pickCutoffAt": "2026-11-23T01:20:00Z",
       "pickEffectiveAt": "2026-10-20T05:26:25Z",
@@ -9817,27 +9817,53 @@
       "winnerTeamId": "28"
     },
     "401873079": {
-      "awayScore": null,
+      "awayScore": 13,
       "awayTeamId": "9",
-      "checkedAt": "2026-11-26T02:42:04Z",
+      "checkedAt": "2026-11-26T11:29:21Z",
       "error": null,
       "eventId": "401873079",
-      "explanationPhase": "pregame",
+      "explanationPhase": "awaiting-review",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
-      "fantasyLeaders": null,
-      "firstFinalAt": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4429096",
+            "name": "Blake Corum",
+            "points": 28.5,
+            "statLine": "184 rush yds, 1 rush TD, 2 rec, 21 rec yds",
+            "teamId": "14"
+          },
+          {
+            "athleteId": "4248528",
+            "name": "Christian Watson",
+            "points": 16.5,
+            "statLine": "4 rec, 65 rec yds, 1 rec TD",
+            "teamId": "9"
+          },
+          {
+            "athleteId": "4430737",
+            "name": "Kyren Williams",
+            "points": 16.5,
+            "statLine": "46 rush yds, 1 rush TD, 4 rec, 19 rec yds",
+            "teamId": "14"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401873079"
+      },
+      "firstFinalAt": "2026-11-26T11:29:21Z",
       "hasStarted": true,
-      "homeScore": null,
+      "homeScore": 26,
       "homeTeamId": "14",
-      "lastAttemptAt": "2026-11-26T02:42:04Z",
+      "lastAttemptAt": "2026-11-26T11:29:21Z",
       "pickAssessmentId": "assessment-0277ad39b4305fe7b3b42670",
       "pickCutoffAt": "2026-11-26T01:00:00Z",
       "pickEffectiveAt": "2026-10-20T05:26:25Z",
       "pickExplanation": "I expect the Green Bay Packers to beat the Los Angeles Rams. Love's improved third-down passing and Green Bay's recent defensive response should now give the Packers a 24-21 road route against the Rams. Adams' reported recovery window and LA's confirmed kicking/front losses change the short-week balance, but Stafford/Puka and uncertain future recoveries still matter.",
       "pickLockedAt": "2026-11-26T02:42:04Z",
       "pickReason": "I expect the Green Bay Packers to beat the Los Angeles Rams. Love's improved third-down passing and Green Bay's recent defensive response should now give the Packers a 24-21 road route against the Rams. Adams' reported recovery window and LA's confirmed kicking/front losses change the short-week balance, but Stafford/Puka and uncertain future recoveries still matter.",
-      "pickResult": "pending",
+      "pickResult": "incorrect",
       "pickRevisionId": "assessment-0277ad39b4305fe7b3b42670:401873079",
       "pregameExplanation": "I expect the Green Bay Packers to beat the Los Angeles Rams. Love's improved third-down passing and Green Bay's recent defensive response should now give the Packers a 24-21 road route against the Rams. Adams' reported recovery window and LA's confirmed kicking/front losses change the short-week balance, but Stafford/Puka and uncertain future recoveries still matter.",
       "projectedScore": {
@@ -9852,14 +9878,14 @@
       },
       "projectedScoreLockedAt": "2026-11-26T02:42:04Z",
       "projectedScoreStatus": "available",
-      "resultUpdatedAt": null,
+      "resultUpdatedAt": "2026-11-26T11:29:21Z",
       "scheduledAt": "2026-11-26T01:00:00Z",
       "scoredPickTeamId": "9",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261125",
-      "status": "in_progress",
-      "statusDetail": "In progress - awaiting final",
+      "status": "final",
+      "statusDetail": "Final",
       "timeConfirmed": true,
-      "winnerTeamId": null
+      "winnerTeamId": "14"
     },
     "401873080": {
       "awayScore": null,
@@ -14758,14 +14784,14 @@
       "winnerTeamId": null
     }
   },
-  "lastAttemptAt": "2026-11-26T02:42:04Z",
-  "lastResultAt": "2026-11-24T06:10:10Z",
-  "lastSuccessfulCheckAt": "2026-11-26T02:42:04Z",
+  "lastAttemptAt": "2026-11-26T11:29:21Z",
+  "lastResultAt": "2026-11-26T11:29:21Z",
+  "lastSuccessfulCheckAt": "2026-11-26T11:29:21Z",
   "monitoringComplete": false,
-  "nextCheckAt": "2026-11-26T02:47:04Z",
+  "nextCheckAt": "2026-11-26T12:29:21Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-11-26T02:42:04Z",
-  "revision": "6cb60f5bf4cd5d2ca8a99b353004b3c572db3d7f3b507055a1c73b7ae7567e3f",
+  "publishedAt": "2026-11-26T11:29:21Z",
+  "revision": "18f95ae4a6b811680503be46a5f3ac599a89001795df1952efd86096513e29a3",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
