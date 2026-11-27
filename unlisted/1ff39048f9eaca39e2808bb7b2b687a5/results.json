@@ -9677,7 +9677,7 @@
     "401873077": {
       "awayScore": 10,
       "awayTeamId": "16",
-      "checkedAt": "2026-11-26T11:29:21Z",
+      "checkedAt": "2026-11-27T11:54:50Z",
       "error": null,
       "eventId": "401873077",
       "explanationPhase": "pregame",
@@ -9714,7 +9714,7 @@
       "hasStarted": true,
       "homeScore": 35,
       "homeTeamId": "25",
-      "lastAttemptAt": "2026-11-26T11:29:21Z",
+      "lastAttemptAt": "2026-11-27T11:54:50Z",
       "pickAssessmentId": "assessment-0277ad39b4305fe7b3b42670",
       "pickCutoffAt": "2026-11-23T01:20:00Z",
       "pickEffectiveAt": "2026-10-20T05:26:25Z",
@@ -9890,7 +9890,7 @@
     "401873080": {
       "awayScore": 39,
       "awayTeamId": "21",
-      "checkedAt": "2026-11-27T03:00:27Z",
+      "checkedAt": "2026-11-27T11:54:50Z",
       "error": null,
       "eventId": "401873080",
       "explanationPhase": "awaiting-review",
@@ -9927,7 +9927,7 @@
       "hasStarted": true,
       "homeScore": 38,
       "homeTeamId": "6",
-      "lastAttemptAt": "2026-11-27T03:00:27Z",
+      "lastAttemptAt": "2026-11-27T11:54:50Z",
       "pickAssessmentId": "assessment-0277ad39b4305fe7b3b42670",
       "pickCutoffAt": "2026-11-26T21:30:00Z",
       "pickEffectiveAt": "2026-10-20T05:26:25Z",
@@ -9961,7 +9961,7 @@
     "401873081": {
       "awayScore": 39,
       "awayTeamId": "3",
-      "checkedAt": "2026-11-27T03:00:27Z",
+      "checkedAt": "2026-11-27T11:54:50Z",
       "error": null,
       "eventId": "401873081",
       "explanationPhase": "awaiting-review",
@@ -9998,7 +9998,7 @@
       "hasStarted": true,
       "homeScore": 35,
       "homeTeamId": "8",
-      "lastAttemptAt": "2026-11-27T03:00:27Z",
+      "lastAttemptAt": "2026-11-27T11:54:50Z",
       "pickAssessmentId": "assessment-9361153b16a65cc2713c7d4f",
       "pickCutoffAt": "2026-11-26T18:00:00Z",
       "pickEffectiveAt": "2026-10-02T19:54:57Z",
@@ -10030,27 +10030,53 @@
       "winnerTeamId": "3"
     },
     "401873082": {
-      "awayScore": null,
+      "awayScore": 10,
       "awayTeamId": "12",
-      "checkedAt": "2026-11-27T03:00:27Z",
+      "checkedAt": "2026-11-27T11:54:50Z",
       "error": null,
       "eventId": "401873082",
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
-      "fantasyLeaders": null,
-      "firstFinalAt": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4832955",
+            "name": "Emmett Johnson",
+            "points": 19.6,
+            "statLine": "72 rush yds, 1 rush TD, 4 rec, 24 rec yds",
+            "teamId": "12"
+          },
+          {
+            "athleteId": "4379399",
+            "name": "James Cook III",
+            "points": 19.5,
+            "statLine": "117 rush yds, 1 rush TD, 1 rec, 8 rec yds",
+            "teamId": "2"
+          },
+          {
+            "athleteId": "15847",
+            "name": "Travis Kelce",
+            "points": 11.1,
+            "statLine": "4 rec, 71 rec yds",
+            "teamId": "12"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401873082"
+      },
+      "firstFinalAt": "2026-11-27T11:54:50Z",
       "hasStarted": true,
-      "homeScore": null,
+      "homeScore": 13,
       "homeTeamId": "2",
-      "lastAttemptAt": "2026-11-27T03:00:27Z",
+      "lastAttemptAt": "2026-11-27T11:54:50Z",
       "pickAssessmentId": "assessment-48e3ab7fc81e010a9e9fb742",
       "pickCutoffAt": "2026-11-27T01:20:00Z",
       "pickEffectiveAt": "2026-10-26T03:58:04Z",
       "pickExplanation": "I still lean toward the Buffalo Bills to beat the Kansas City Chiefs because Allen and Cook should provide a narrow scoring route in the home holiday matchup. Kansas City's 422-yard Chargers performance, including Walker's rushing and Mahomes' sack-free passing, supplies strong counterevidence to a home-familiarity-only case, although the Chiefs' 20-3 Sunday-night loss at Seattle (213 yards, 3 of 11 on third down and 36 rushing yards for Walker) tempers that evidence. Short-week preparation, both defenses and later player availability keep the retained projection provisional.",
       "pickLockedAt": "2026-11-27T03:00:27Z",
       "pickReason": "I still lean toward the Buffalo Bills to beat the Kansas City Chiefs because Allen and Cook should provide a narrow scoring route in the home holiday matchup. Kansas City's 422-yard Chargers performance, including Walker's rushing and Mahomes' sack-free passing, supplies strong counterevidence to a home-familiarity-only case, although the Chiefs' 20-3 Sunday-night loss at Seattle (213 yards, 3 of 11 on third down and 36 rushing yards for Walker) tempers that evidence. Short-week preparation, both defenses and later player availability keep the retained projection provisional.",
-      "pickResult": "pending",
+      "pickResult": "correct",
       "pickRevisionId": "assessment-48e3ab7fc81e010a9e9fb742:401873082",
       "pregameExplanation": "I still lean toward the Buffalo Bills to beat the Kansas City Chiefs because Allen and Cook should provide a narrow scoring route in the home holiday matchup. Kansas City's 422-yard Chargers performance, including Walker's rushing and Mahomes' sack-free passing, supplies strong counterevidence to a home-familiarity-only case, although the Chiefs' 20-3 Sunday-night loss at Seattle (213 yards, 3 of 11 on third down and 36 rushing yards for Walker) tempers that evidence. Short-week preparation, both defenses and later player availability keep the retained projection provisional.",
       "projectedScore": {
@@ -10065,14 +10091,14 @@
       },
       "projectedScoreLockedAt": "2026-11-27T03:00:27Z",
       "projectedScoreStatus": "available",
-      "resultUpdatedAt": null,
+      "resultUpdatedAt": "2026-11-27T11:54:50Z",
       "scheduledAt": "2026-11-27T01:20:00Z",
       "scoredPickTeamId": "2",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261126",
-      "status": "in_progress",
-      "statusDetail": "In progress - awaiting final",
+      "status": "final",
+      "statusDetail": "Final",
       "timeConfirmed": true,
-      "winnerTeamId": null
+      "winnerTeamId": "2"
     },
     "401873083": {
       "awayScore": null,
@@ -14836,14 +14862,14 @@
       "winnerTeamId": null
     }
   },
-  "lastAttemptAt": "2026-11-27T03:00:27Z",
-  "lastResultAt": "2026-11-27T03:00:27Z",
-  "lastSuccessfulCheckAt": "2026-11-27T03:00:27Z",
+  "lastAttemptAt": "2026-11-27T11:54:50Z",
+  "lastResultAt": "2026-11-27T11:54:50Z",
+  "lastSuccessfulCheckAt": "2026-11-27T11:54:50Z",
   "monitoringComplete": false,
-  "nextCheckAt": "2026-11-27T03:05:27Z",
+  "nextCheckAt": "2026-11-27T12:05:54Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-11-27T03:00:27Z",
-  "revision": "c8ff09608e0fd150727f8d8a2ffa4e6ce97712db36b153a463c15560a7181e6b",
+  "publishedAt": "2026-11-27T11:54:50Z",
+  "revision": "e8b5a577123a52faca3e9967ba5e58aadaf3fad050d79420f4da6cc7f322ef24",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
