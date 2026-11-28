@@ -9890,7 +9890,7 @@
     "401873080": {
       "awayScore": 39,
       "awayTeamId": "21",
-      "checkedAt": "2026-11-27T20:26:56Z",
+      "checkedAt": "2026-11-28T02:52:42Z",
       "error": null,
       "eventId": "401873080",
       "explanationPhase": "awaiting-review",
@@ -9927,7 +9927,7 @@
       "hasStarted": true,
       "homeScore": 38,
       "homeTeamId": "6",
-      "lastAttemptAt": "2026-11-27T20:26:56Z",
+      "lastAttemptAt": "2026-11-28T02:52:42Z",
       "pickAssessmentId": "assessment-0277ad39b4305fe7b3b42670",
       "pickCutoffAt": "2026-11-26T21:30:00Z",
       "pickEffectiveAt": "2026-10-20T05:26:25Z",
@@ -9961,7 +9961,7 @@
     "401873081": {
       "awayScore": 39,
       "awayTeamId": "3",
-      "checkedAt": "2026-11-27T20:26:56Z",
+      "checkedAt": "2026-11-28T02:52:42Z",
       "error": null,
       "eventId": "401873081",
       "explanationPhase": "awaiting-review",
@@ -9998,7 +9998,7 @@
       "hasStarted": true,
       "homeScore": 35,
       "homeTeamId": "8",
-      "lastAttemptAt": "2026-11-27T20:26:56Z",
+      "lastAttemptAt": "2026-11-28T02:52:42Z",
       "pickAssessmentId": "assessment-9361153b16a65cc2713c7d4f",
       "pickCutoffAt": "2026-11-26T18:00:00Z",
       "pickEffectiveAt": "2026-10-02T19:54:57Z",
@@ -10032,7 +10032,7 @@
     "401873082": {
       "awayScore": 10,
       "awayTeamId": "12",
-      "checkedAt": "2026-11-27T20:26:56Z",
+      "checkedAt": "2026-11-28T02:52:42Z",
       "error": null,
       "eventId": "401873082",
       "explanationPhase": "pregame",
@@ -10069,7 +10069,7 @@
       "hasStarted": true,
       "homeScore": 13,
       "homeTeamId": "2",
-      "lastAttemptAt": "2026-11-27T20:26:56Z",
+      "lastAttemptAt": "2026-11-28T02:52:42Z",
       "pickAssessmentId": "assessment-48e3ab7fc81e010a9e9fb742",
       "pickCutoffAt": "2026-11-27T01:20:00Z",
       "pickEffectiveAt": "2026-10-26T03:58:04Z",
@@ -10101,27 +10101,53 @@
       "winnerTeamId": "2"
     },
     "401873083": {
-      "awayScore": null,
+      "awayScore": 5,
       "awayTeamId": "7",
-      "checkedAt": "2026-11-27T20:26:56Z",
+      "checkedAt": "2026-11-28T02:52:42Z",
       "error": null,
       "eventId": "401873083",
       "explanationPhase": "pregame",
       "explanationRevisionId": null,
       "explanationUpdatedAt": null,
-      "fantasyLeaders": null,
-      "firstFinalAt": null,
+      "fantasyLeaders": {
+        "players": [
+          {
+            "athleteId": "4702555",
+            "name": "Jonah Coleman",
+            "points": 15.2,
+            "statLine": "26 rush yds, 8 rec, 46 rec yds",
+            "teamId": "7"
+          },
+          {
+            "athleteId": "4047650",
+            "name": "DK Metcalf",
+            "points": 12.6,
+            "statLine": "3 rec, 36 rec yds, 1 rec TD",
+            "teamId": "23"
+          },
+          {
+            "athleteId": "4372016",
+            "name": "Jaylen Waddle",
+            "points": 10.3,
+            "statLine": "5 rec, 53 rec yds",
+            "teamId": "7"
+          }
+        ],
+        "scoring": "PPR",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401873083"
+      },
+      "firstFinalAt": "2026-11-28T02:52:42Z",
       "hasStarted": true,
-      "homeScore": null,
+      "homeScore": 27,
       "homeTeamId": "23",
-      "lastAttemptAt": "2026-11-27T20:26:56Z",
+      "lastAttemptAt": "2026-11-28T02:52:42Z",
       "pickAssessmentId": "assessment-9361153b16a65cc2713c7d4f",
       "pickCutoffAt": "2026-11-27T20:00:00Z",
       "pickEffectiveAt": "2026-10-02T19:54:57Z",
       "pickExplanation": "I expect the Pittsburgh Steelers to beat the Denver Broncos. Pittsburgh's home defense challenges Denver. The recorded assessment noted: Pittsburgh is 2-2 with both wins at home and only 27 combined points in its two road losses. The listed home setting should support this choice, without making the outcome certain. Later form or player availability could still change this provisional forecast.",
       "pickLockedAt": "2026-11-27T20:26:56Z",
       "pickReason": "Pittsburgh's home defense challenges Denver",
-      "pickResult": "pending",
+      "pickResult": "correct",
       "pickRevisionId": "assessment-9361153b16a65cc2713c7d4f:401873083",
       "pregameExplanation": "I expect the Pittsburgh Steelers to beat the Denver Broncos. Pittsburgh's home defense challenges Denver. The recorded assessment noted: Pittsburgh is 2-2 with both wins at home and only 27 combined points in its two road losses. The listed home setting should support this choice, without making the outcome certain. Later form or player availability could still change this provisional forecast.",
       "projectedScore": {
@@ -10136,14 +10162,14 @@
       },
       "projectedScoreLockedAt": "2026-11-27T20:26:56Z",
       "projectedScoreStatus": "available",
-      "resultUpdatedAt": null,
+      "resultUpdatedAt": "2026-11-28T02:52:42Z",
       "scheduledAt": "2026-11-27T20:00:00Z",
       "scoredPickTeamId": "23",
       "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20261127",
-      "status": "in_progress",
-      "statusDetail": "In progress - awaiting final",
+      "status": "final",
+      "statusDetail": "Final",
       "timeConfirmed": true,
-      "winnerTeamId": null
+      "winnerTeamId": "23"
     },
     "401873084": {
       "awayScore": null,
@@ -14862,14 +14888,14 @@
       "winnerTeamId": null
     }
   },
-  "lastAttemptAt": "2026-11-27T20:26:56Z",
-  "lastResultAt": "2026-11-27T11:54:50Z",
-  "lastSuccessfulCheckAt": "2026-11-27T20:26:56Z",
+  "lastAttemptAt": "2026-11-28T02:52:42Z",
+  "lastResultAt": "2026-11-28T02:52:42Z",
+  "lastSuccessfulCheckAt": "2026-11-28T02:52:42Z",
   "monitoringComplete": false,
-  "nextCheckAt": "2026-11-27T20:31:56Z",
+  "nextCheckAt": "2026-11-28T03:00:21Z",
   "picksSha256": "5addb302dba2ccf1fc31f6df595fac62b32b002a860c9dcc8841dd4d193fafd2",
-  "publishedAt": "2026-11-27T20:26:56Z",
-  "revision": "f70e1a02fc08d704185479508ed57bb9ab300353535243476a40e9b19551e1e2",
+  "publishedAt": "2026-11-28T02:52:42Z",
+  "revision": "6a78259e683fafbb523b3d47233bc41e29c45e5fd24925dd5771f4d335d0c68c",
   "schemaVersion": 1,
   "scorePolicy": "pregame-only",
   "source": {
